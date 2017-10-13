@@ -832,16 +832,7 @@ namespace Budford
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Filter = Resources.fMainWindow_toolStripButton1_Click_Nintendo_Launch_Files_____rpx_;
-
-                // Show open file dialog box 
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    launcher.LaunchRpx(model, dlg.FileName);
-                }
-            }
+            launcher.Open(model);
         }
 
         /// <summary>
@@ -1525,6 +1516,11 @@ namespace Budford
                     }
                 }
             }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            launcher.Open(model);
         }
     }   
 }

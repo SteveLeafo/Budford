@@ -26,6 +26,23 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        internal void Open(Model.Model model)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = Resources.fMainWindow_toolStripButton1_Click_Nintendo_Launch_Files_____rpx_;
+
+                // Show open file dialog box 
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    LaunchRpx(model, dlg.FileName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="model"></param>
         /// <param name="game"></param>
         /// <param name="getSaveDir"></param>
@@ -277,7 +294,7 @@ namespace Budford.Control
         /// </summary>
         /// <param name="model"></param>
         /// <param name="fileName"></param>
-        internal void LaunchRpx(Model.Model model, string fileName)
+        internal void LaunchRpx(Model.Model model, string fileName, bool forceFullScreen = false)
         {
             string cemu = "";
             var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
@@ -301,13 +318,25 @@ namespace Budford.Control
                         file.Delete();
                     }
                 }
-                CemuSettings cs = new CemuSettings(model, null, null);
+                GameSettings setting = null;
+                GameInformation information = null;
+
+                //foreach (var gd in model.GameData)
+                //{
+                //    if (gd.Value.LaunchFile == fileName)
+                //    {
+                //        setting = gd.Value.GameSetting;
+                //        information = gd.Value;
+                //    }
+                //}
+
+                CemuSettings cs = new CemuSettings(model, setting, information);
                 cs.WriteSettingsBinFile();
 
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo
                 {
-                    Arguments = "-f -g \"" + fileName + "\"",
+                    Arguments = forceFullScreen ? "-f -g \"" + fileName + "\"" : "-g \"" + fileName + "\"",
                     FileName = cemu,
                     CreateNoWindow = true
                 };

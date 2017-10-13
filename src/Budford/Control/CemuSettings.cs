@@ -190,17 +190,31 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        InstalledVersion GetVersion()
+        {
+            InstalledVersion version = null;
+            if (settings != null)
+            {
+                if (settings.PreferedVersion == "Latest")
+                {
+                    version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                }
+                else
+                {
+                    version = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == settings.PreferedVersion);
+                }
+            }
+            return version;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         internal void WriteSettingsBinFile()
         {
-            InstalledVersion version;
-            if (settings.PreferedVersion == "Latest")
-            {
-                version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-            }
-            else
-            {
-                version = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == settings.PreferedVersion);
-            }
+            InstalledVersion version = GetVersion();
+          
 
             if (version != null)
             {
@@ -309,7 +323,6 @@ namespace Budford.Control
                 fn.WriteByte((byte)value);
             }
         }
-
         
         /// <summary>
         /// 
@@ -461,6 +474,11 @@ namespace Budford.Control
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <param name="pack"></param>
         private static void CopyGraphicsPack(string folder, GraphicsPack pack)
         {
             if (!Directory.Exists(folder + "\\graphicPacks\\" + pack.Folder))
