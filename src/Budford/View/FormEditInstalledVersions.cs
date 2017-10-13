@@ -25,8 +25,20 @@ namespace Budford.View
         bool updating;
 
         // Managing save files and folders.
-        readonly string[] uris;
-        readonly string[] filenames;
+        internal static string[] uris = new[]
+            {
+                "http://cemu.info/releases/cemu_1.9.1.zip",
+                "https://files.sshnuke.net/cemuhook_190c_0532.zip",
+                "https://github.com/slashiee/cemu_graphic_packs/archive/master.zip",
+                "https://files.sshnuke.net/sharedFonts.7z"
+            };
+        internal static string[] filenames= new[]
+            {
+                "cemu_1.9.1.zip",
+                "cemu_hook.zip",
+                "graphicsPacks.zip",
+                "sharedFonts.7z"
+            };
 
         bool autoSize = true;
 
@@ -414,26 +426,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadLatestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormMultiFileDownload dl = new FormMultiFileDownload(uris, filenames))
-            {
-                dl.ShowDialog(this);
-            }
-            unpacker.Unpack("cemu_" + model.Settings.CurrentCemuVersion + ".zip", model.Settings.DefaultInstallFolder);
-            unpacker.Unpack("cemu_hook.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-            unpacker.Unpack("sharedFonts.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-            unpacker.Unpack("shaderCache.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-            unpacker.Unpack("controllerProfiles.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-
-            unpacker.ExtractToDirectory("sys.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\", true);
-            unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
-
-            if (Directory.Exists("graphicsPacks"))
-            {
-                FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicsPacks"), model.GraphicsPacks);
-            }
-            FolderScanner.AddGraphicsPacksToGames(model);
-            CemuFeatures.UpdateFeaturesForInstalledVersions(model);
-
+            FileManager.DownloadCemu(this, unpacker, model, uris, filenames);
         }
 
         /// <summary>

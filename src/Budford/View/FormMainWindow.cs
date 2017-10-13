@@ -1456,6 +1456,10 @@ namespace Budford
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchString"></param>
         private void FindMyString(string searchString)
         {
             // Ensure we have a proper string to search for.
@@ -1481,6 +1485,43 @@ namespace Budford
                         listView1.Items[i].Selected = true;
                         listView1.Items[i].EnsureVisible();
                         break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void manageInstalledVersionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(model, unpacker, launcher, fileManager))
+            {
+                installedVersions.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void downloadLatestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormWebpageDownload dlc = new FormWebpageDownload("http://cemu.info/", "Latest Version"))
+            {
+                dlc.ShowDialog(this);
+                foreach (var line in dlc.Result.Split('\n'))
+                {
+                    if (line.Contains("name=\"download\""))
+                    {
+                        string[] toks = line.Split('=');
+                        FormEditInstalledVersions.uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
+                        FormEditInstalledVersions.filenames[0] = FormEditInstalledVersions.uris[0].Substring(1 + FormEditInstalledVersions.uris[0].LastIndexOf('/'));
+                        FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
+                        manageInstalledVersionsToolStripMenuItem_Click(sender, e);
                     }
                 }
             }

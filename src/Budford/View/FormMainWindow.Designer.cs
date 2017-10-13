@@ -53,11 +53,13 @@
             this.takeScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchCemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.downloadLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageInstalledVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadCompatabilityStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateSaveDirDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.installedVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.showStatusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -299,6 +301,10 @@
             // 
             this.cemuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.launchCemuToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.downloadLatestToolStripMenuItem,
+            this.manageInstalledVersionsToolStripMenuItem,
+            this.toolStripSeparator12,
             this.downloadCompatabilityStatusToolStripMenuItem,
             this.updateSaveDirDatabaseToolStripMenuItem});
             this.cemuToolStripMenuItem.Name = "cemuToolStripMenuItem";
@@ -311,6 +317,30 @@
             this.launchCemuToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.launchCemuToolStripMenuItem.Text = "Launch Cemu";
             this.launchCemuToolStripMenuItem.Click += new System.EventHandler(this.launchCemuToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(238, 6);
+            // 
+            // downloadLatestToolStripMenuItem
+            // 
+            this.downloadLatestToolStripMenuItem.Name = "downloadLatestToolStripMenuItem";
+            this.downloadLatestToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.downloadLatestToolStripMenuItem.Text = "Download Latest";
+            this.downloadLatestToolStripMenuItem.Click += new System.EventHandler(this.downloadLatestToolStripMenuItem_Click);
+            // 
+            // manageInstalledVersionsToolStripMenuItem
+            // 
+            this.manageInstalledVersionsToolStripMenuItem.Name = "manageInstalledVersionsToolStripMenuItem";
+            this.manageInstalledVersionsToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.manageInstalledVersionsToolStripMenuItem.Text = "Manage Installed Versions";
+            this.manageInstalledVersionsToolStripMenuItem.Click += new System.EventHandler(this.manageInstalledVersionsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(238, 6);
             // 
             // downloadCompatabilityStatusToolStripMenuItem
             // 
@@ -329,8 +359,6 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.installedVersionsToolStripMenuItem,
-            this.toolStripSeparator10,
             this.showStatusToolStripMenuItem1,
             this.showToolbarToolStripMenuItem,
             this.toolStripSeparator6,
@@ -344,36 +372,24 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // installedVersionsToolStripMenuItem
-            // 
-            this.installedVersionsToolStripMenuItem.Name = "installedVersionsToolStripMenuItem";
-            this.installedVersionsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.installedVersionsToolStripMenuItem.Text = "Installed Versions";
-            this.installedVersionsToolStripMenuItem.Click += new System.EventHandler(this.installedVersionsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(161, 6);
-            // 
             // showStatusToolStripMenuItem1
             // 
             this.showStatusToolStripMenuItem1.Name = "showStatusToolStripMenuItem1";
-            this.showStatusToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.showStatusToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
             this.showStatusToolStripMenuItem1.Text = "Show Status Bar";
             this.showStatusToolStripMenuItem1.Click += new System.EventHandler(this.showStatusToolStripMenuItem1_Click);
             // 
             // showToolbarToolStripMenuItem
             // 
             this.showToolbarToolStripMenuItem.Name = "showToolbarToolStripMenuItem";
-            this.showToolbarToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.showToolbarToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.showToolbarToolStripMenuItem.Text = "Show Toolbar";
             this.showToolbarToolStripMenuItem.Click += new System.EventHandler(this.showToolbarToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(155, 6);
             // 
             // showStatusToolStripMenuItem
             // 
@@ -385,7 +401,7 @@
             this.unplayableToolStripMenuItem,
             this.notSetToolStripMenuItem});
             this.showStatusToolStripMenuItem.Name = "showStatusToolStripMenuItem";
-            this.showStatusToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.showStatusToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.showStatusToolStripMenuItem.Text = "Show Status";
             // 
             // perfectToolStripMenuItem
@@ -431,7 +447,7 @@
             this.europeToolStripMenuItem,
             this.japanToolStripMenuItem});
             this.fixToolStripMenuItem.Name = "fixToolStripMenuItem";
-            this.fixToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.fixToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.fixToolStripMenuItem.Text = "Show Regions";
             // 
             // usaToolStripMenuItem
@@ -460,7 +476,7 @@
             this.channelToolStripMenuItem,
             this.virtualConsoleToolStripMenuItem});
             this.showTypeToolStripMenuItem.Name = "showTypeToolStripMenuItem";
-            this.showTypeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.showTypeToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.showTypeToolStripMenuItem.Text = "Show Type";
             // 
             // wiiUToolStripMenuItem
@@ -490,19 +506,19 @@
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(155, 6);
             // 
             // detailsToolStripMenuItem
             // 
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.detailsToolStripMenuItem.Text = "Detailed View";
             this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
             // 
             // tToolStripMenuItem
             // 
             this.tToolStripMenuItem.Name = "tToolStripMenuItem";
-            this.tToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.tToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.tToolStripMenuItem.Text = "Tiled View";
             this.tToolStripMenuItem.Click += new System.EventHandler(this.tToolStripMenuItem_Click);
             // 
@@ -888,8 +904,6 @@
         private System.Windows.Forms.ToolStripMenuItem dumpSaveDirCodesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem importShaderCacheToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem installedVersionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem emulationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
@@ -915,6 +929,10 @@
         private System.Windows.Forms.ToolStripMenuItem downloadCompatabilityStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateSaveDirDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fixUnityGameSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem downloadLatestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageInstalledVersionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
     }
 }
 

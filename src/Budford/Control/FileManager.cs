@@ -205,5 +205,28 @@ namespace Budford.Control
                 dInfo.SetAccessControl(dSecurity);
             }
         }
+
+        internal static void DownloadCemu(Form parent, Unpacker unpacker, Model.Model model, string[] uris, string[] filenames)
+        {
+            using (FormMultiFileDownload dl = new FormMultiFileDownload(uris, filenames))
+            {
+                dl.ShowDialog(parent);
+            }
+            unpacker.Unpack("cemu_" + model.Settings.CurrentCemuVersion + ".zip", model.Settings.DefaultInstallFolder);
+            unpacker.Unpack("cemu_hook.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
+            unpacker.Unpack("sharedFonts.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
+            unpacker.Unpack("shaderCache.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
+            unpacker.Unpack("controllerProfiles.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
+
+            unpacker.ExtractToDirectory("sys.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\", true);
+            unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
+
+            if (Directory.Exists("graphicsPacks"))
+            {
+                FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicsPacks"), model.GraphicsPacks);
+            }
+            FolderScanner.AddGraphicsPacksToGames(model);
+            CemuFeatures.UpdateFeaturesForInstalledVersions(model);
+        }
     }   
 }
