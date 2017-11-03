@@ -28,27 +28,44 @@ namespace Budford.Control
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <param name="ten80p"></param>
-        internal static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, bool ten80p = false)
+        internal static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, bool ten80p = false, bool overrideit = false)
         {
-            foreach (DirectoryInfo dir in source.GetDirectories())
+            if (source.Exists)
             {
-                if (ten80p)
+                if (target.Exists)
                 {
-                    if (dir.Name.EndsWith("1080p"))
+                    foreach (DirectoryInfo dir in source.GetDirectories())
                     {
-                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), true);
+                        if (ten80p)
+                        {
+                            if (dir.Name.EndsWith("1080p"))
+                            {
+                                CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), true);
+                            }
+                        }
+                        else
+                        {
+                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                        }
                     }
-                }
-                else
-                {
-                    CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
-                }
-            }
-            foreach (FileInfo file in source.GetFiles())
-            {
-                if (!File.Exists(Path.Combine(target.FullName, file.Name)))
-                {
-                    file.CopyTo(Path.Combine(target.FullName, file.Name));
+                    foreach (FileInfo file in source.GetFiles())
+                    {
+                        if (!File.Exists(Path.Combine(target.FullName, file.Name)))
+                        {
+                            file.CopyTo(Path.Combine(target.FullName, file.Name));
+                        }
+                        else
+                        {
+                            if (overrideit)
+                            {
+                                FileInfo dest = new FileInfo(target.FullName);
+                                if (file.LastWriteTime > dest.LastWriteTime)
+                                {
+                                    file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -212,7 +229,7 @@ namespace Budford.Control
             {
                 dl.ShowDialog(parent);
             }
-            unpacker.Unpack("cemu_" + model.Settings.CurrentCemuVersion + ".zip", model.Settings.DefaultInstallFolder);
+            unpacker.Unpack(Path.GetFileName(uris[0]), model.Settings.DefaultInstallFolder);
             unpacker.Unpack("cemu_hook.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
             unpacker.Unpack("sharedFonts.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
             unpacker.Unpack("shaderCache.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");

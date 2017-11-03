@@ -40,9 +40,11 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.importShaderCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lanchCemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,6 +99,7 @@
             this.dumpSaveDirCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkDLCFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixUnityGameSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copySavesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -115,8 +118,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.copyShadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -221,17 +223,17 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // exitToolStripMenuItem
+            // loadToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadToolStripMenuItem.Text = "Open";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
-            // toolStripSeparator9
+            // toolStripSeparator10
             // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(191, 6);
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(191, 6);
             // 
             // importShaderCacheToolStripMenuItem
             // 
@@ -239,6 +241,18 @@
             this.importShaderCacheToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.importShaderCacheToolStripMenuItem.Text = "Import Shader Cache...";
             this.importShaderCacheToolStripMenuItem.Click += new System.EventHandler(this.importShaderCacheToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(191, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // emulationToolStripMenuItem
             // 
@@ -567,7 +581,9 @@
             this.toolStripSeparator8,
             this.dumpSaveDirCodesToolStripMenuItem,
             this.linkDLCFoldersToolStripMenuItem,
-            this.fixUnityGameSettingsToolStripMenuItem});
+            this.fixUnityGameSettingsToolStripMenuItem,
+            this.copySavesToolStripMenuItem,
+            this.copyShadersToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -644,6 +660,13 @@
             this.fixUnityGameSettingsToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.fixUnityGameSettingsToolStripMenuItem.Text = "Fix Unity Game Settings";
             this.fixUnityGameSettingsToolStripMenuItem.Click += new System.EventHandler(this.fixUnityGameSettingsToolStripMenuItem_Click);
+            // 
+            // copySavesToolStripMenuItem
+            // 
+            this.copySavesToolStripMenuItem.Name = "copySavesToolStripMenuItem";
+            this.copySavesToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.copySavesToolStripMenuItem.Text = "Copy Saves";
+            this.copySavesToolStripMenuItem.Click += new System.EventHandler(this.copySavesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -822,17 +845,12 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
-            // loadToolStripMenuItem
+            // copyShadersToolStripMenuItem
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.loadToolStripMenuItem.Text = "Open";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(191, 6);
+            this.copyShadersToolStripMenuItem.Name = "copyShadersToolStripMenuItem";
+            this.copyShadersToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.copyShadersToolStripMenuItem.Text = "Copy Shaders";
+            this.copyShadersToolStripMenuItem.Click += new System.EventHandler(this.copyShadersToolStripMenuItem_Click);
             // 
             // FormMainWindow
             // 
@@ -951,6 +969,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem copySavesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyShadersToolStripMenuItem;
     }
 }
 

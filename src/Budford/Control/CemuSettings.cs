@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Budford.Control
 {
@@ -175,6 +176,7 @@ namespace Budford.Control
         private void SetOffsets(string currentCemuVersion)
         {
             Tuple<int[], int[]> settingsOffsets;
+            currentCemuVersion = Regex.Replace(currentCemuVersion, "[A-Za-z ]", "").Replace("_","");
             if (settingsByVersion.TryGetValue(currentCemuVersion.Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", ""), out settingsOffsets))
             {
                 SettingsFile = settingsOffsets.Item1;
@@ -182,8 +184,20 @@ namespace Budford.Control
             }
             else
             {
-                SettingsFile = V160_Settings;
-                SettingsOffsets = settings_1_6_0_bin;
+                int version;
+                if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_",""), out version))
+                {
+                    if (version > 191)
+                    {
+                        SettingsFile = settings_1_10_0_bin;
+                        SettingsOffsets = V1100_Settings;
+                    }
+                    else
+                    {
+                        SettingsFile = settings_1_6_0_bin;
+                        SettingsOffsets = V160_Settings;
+                    }
+                }
             }
         }
 
@@ -218,7 +232,7 @@ namespace Budford.Control
 
             if (version != null)
             {
-                SetOffsets(version.Version.Replace("cemu_", ""));
+                SetOffsets(version.Version);
                 if (version.Version.Contains("1.10.0"))
                 {
                     settings.Volume = 80;

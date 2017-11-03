@@ -14,6 +14,10 @@ namespace Budford
         [STAThread]
         static void Main()
         {
+            if (!Directory.Exists("C:\\ProgramData\\Budford"))
+            {
+                Directory.CreateDirectory("C:\\ProgramData\\Budford");
+            }
             Directory.SetCurrentDirectory("C:\\ProgramData\\Budford");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

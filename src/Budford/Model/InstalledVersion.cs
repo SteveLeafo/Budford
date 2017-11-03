@@ -1,4 +1,5 @@
-﻿namespace Budford.Model
+﻿using System.Text.RegularExpressions;
+namespace Budford.Model
 {
     public class InstalledVersion
     {
@@ -12,5 +13,19 @@
         public int DlcType ;
         public bool IsLatest;
         internal string DlcSource = "Local";
+
+        internal int VersionNumber
+        {
+            get
+            {
+                string currentCemuVersion = Regex.Replace(Version, "[A-Za-z ]", "").Replace("_", "");
+                int version;
+                if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_", ""), out version))
+                {
+                    return version;
+                }
+                return -1;
+            }
+        }
     }
 }

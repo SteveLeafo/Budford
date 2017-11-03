@@ -82,6 +82,11 @@ namespace Budford.Control
                 return;
             }
 
+            if (!File.Exists(archive))
+            {
+                return;
+            }
+
             ZipArchive zipArchive = ZipFile.OpenRead(archive);
             foreach (ZipArchiveEntry file in zipArchive.Entries)
             {

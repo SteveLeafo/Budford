@@ -95,6 +95,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tools\CopyShaderCache.cs" />
+    <Compile Include="Tools\CopySaves.cs" />
+    <Compile Include="Tools\Tool.cs" />
     <Compile Include="Utilities\CurrentUserSecurity.cs" />
     <Compile Include="Utilities\JunctionPoint.cs" />
     <Compile Include="Utilities\LevenshteinDistance.cs" />

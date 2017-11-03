@@ -10,6 +10,7 @@ using Budford.View;
 using System.Diagnostics;
 using Budford.Properties;
 using Budford.Utilities;
+using Budford.Tools;
 
 namespace Budford
 {
@@ -40,7 +41,18 @@ namespace Budford
 
             UsbNotification.RegisterUsbDeviceNotification(this.Handle);
 
-            model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml");
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford"))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford");
+            }
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml"))
+            {
+                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml"))
+                {
+                    File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml", false);
+                }
+            }
+            model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
            
 
             unpacker = new Unpacker(this);
@@ -1086,7 +1098,7 @@ namespace Budford
         /// <param name="e"></param>
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Persistence.Save(model, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml");
+            Persistence.Save(model, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
         }
 
         /// <summary>
@@ -1435,6 +1447,11 @@ namespace Budford
             foreach (var v in model.GameData)
             {
                 GameInformation gi = v.Value;
+                if (gi.GameSetting.GpuBufferCacheAccuracy == GameSettings.GpuBufferCacheAccuracyType.Medium)
+                {
+                    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
+                }
+
                 if (gi.LaunchFileName.ToLower().StartsWith("unity"))
                 {
                     gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
@@ -1521,6 +1538,18 @@ namespace Budford
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             launcher.Open(model);
+        }
+
+        private void copySavesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopySaves cs = new CopySaves(model);
+            cs.Execute();
+        }
+
+        private void copyShadersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyShaderCache cs = new CopyShaderCache(model);
+            cs.Execute();
         }
     }   
 }

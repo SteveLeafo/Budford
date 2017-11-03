@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Budford.Properties;
+using System.Threading;
 
 namespace Budford.Control
 {
@@ -40,6 +41,9 @@ namespace Budford.Control
             }
         }
 
+        GameInformation runningGame = null;
+        InstalledVersion runningVersion = null;
+
         /// <summary>
         /// 
         /// </summary>
@@ -51,17 +55,30 @@ namespace Budford.Control
         {
             if (game != null &&  !game.Exists)
             {
-                MessageBox.Show(parent, "If you are using a removable storage device check it is plugged in and try again", "Can not find file");
+                if (!parent.InvokeRequired)
+                {
+                    MessageBox.Show(parent, "If you are using a removable storage device check it is plugged in and try again", "Can not find file");
+                }
                 return;
             }            
             string cemu = "";
             string logfile = "";
 
-            SetCemuVersion(model, game, ref cemu, ref logfile);
+            SetCemuVersion(model, game, out runningVersion, ref cemu, ref logfile);
 
             if (File.Exists(cemu))
             {
                 DeleteLogFile(model, logfile);
+
+                FileInfo src = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\post_180.bin");
+                if (src.Exists)
+                {
+                    FileInfo dest = new FileInfo(runningVersion.Folder + "\\shaderCache\\transferable\\" + game.SaveDir + ".bin");
+                    if (!dest.Exists || dest.Length > src.Length)
+                    {
+                        File.Copy(src.FullName, dest.FullName, true);
+                    }
+                }
 
                 if (!getSaveDir)
                 {
@@ -81,6 +98,10 @@ namespace Budford.Control
                 parentProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
 
                 proc = Process.Start(start);
+                proc.EnableRaisingEvents = true;
+                proc.Exited += new EventHandler(proc_Exited);
+
+                runningGame = game;
 
                 parentProcess.PriorityClass = original;
 
@@ -127,6 +148,59 @@ namespace Budford.Control
             {
                 proc.WaitForExit();
             }
+            else
+            {
+                ThreadPool.QueueUserWorkItem(delegate
+                {
+                    proc.WaitForExit();
+                });
+            }
+        }
+
+        void proc_Exited(object sender, EventArgs e)
+        {
+            // Copy saves and shader caches...
+            FileInfo srcFile = new FileInfo(runningVersion.Folder + "\\shaderCache\\transferable\\" + runningGame.SaveDir + ".bin");
+            if (srcFile.Exists)
+            {
+                FileInfo destFile = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + runningGame.SaveDir + "\\post_180.bin");
+                if (!destFile.Exists || destFile.Length > srcFile.Length)
+                {
+                    File.Copy(srcFile.FullName, destFile.FullName, true);
+                }
+            }
+
+            if (runningVersion.VersionNumber < 1110)
+            {
+                string folder = runningGame.Name.Replace(":", "_");
+                folder = runningGame.SaveDir;
+                string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
+
+                DirectoryInfo src = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\emulatorSave\\" + runningGame.SaveDir);
+                DirectoryInfo dest = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\80000001");
+                DirectoryInfo src_255 = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\emulatorSave\\" + runningGame.SaveDir + "_255");
+                DirectoryInfo dest_255 = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
+
+                if (src.Exists)
+                {
+                    if (src.GetFiles().Any() || (src_255.Exists && src_255.GetFiles().Any()))
+                    {
+                        if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\80000001"))
+                        {
+                            Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\80000001");
+                        }
+                        if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common"))
+                        {
+                            Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
+                        }
+
+                        FileManager.CopyFilesRecursively(src, dest, false, true);
+                        FileManager.CopyFilesRecursively(src_255, dest_255, false, true);
+                    }
+                }
+            }
+            runningGame = null;
+            runningVersion = null;
         }
 
         /// <summary>
@@ -252,24 +326,24 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="cemu"></param>
         /// <param name="logfile"></param>
-        private static void SetCemuVersion(Model.Model model, GameInformation game, ref string cemu, ref string logfile)
+        internal static void SetCemuVersion(Model.Model model, GameInformation game, out InstalledVersion latest, ref string cemu, ref string logfile)
         {
             if (game != null)
             {
                 if (game.GameSetting.PreferedVersion != "Latest")
                 {
-                    var version = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == game.GameSetting.PreferedVersion);
-                    PopulateFromVersion(ref cemu, ref logfile, version);
+                    latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == game.GameSetting.PreferedVersion);
+                    PopulateFromVersion(ref cemu, ref logfile, latest);
                 }
                 else
                 {
-                    var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                    latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
                     PopulateFromVersion(ref cemu, ref logfile, latest);
                 }
             }
             else
             {
-                var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
                 PopulateFromVersion(ref cemu, ref logfile, latest);
             }
         }
