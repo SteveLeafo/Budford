@@ -16,7 +16,7 @@ namespace Budford.Model
 
         internal int VersionNumber
         {
-            get
+            get            
             {
                 string currentCemuVersion = Regex.Replace(Version, "[A-Za-z ]", "").Replace("_", "");
                 int version;

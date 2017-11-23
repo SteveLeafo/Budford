@@ -178,7 +178,7 @@ namespace Budford.Control
         {
             if (!PackAdded(game.Value, pack.Title))
             {
-                foreach (var s in GraphicsPack.Lookup)
+                foreach (var s in GraphicsPack.graphicPacks_2_347)
                 {
                     if (s[0] == pack.Folder)
                     {

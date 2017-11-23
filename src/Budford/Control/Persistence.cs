@@ -31,9 +31,6 @@ namespace Budford.Control
                     model = (Model.Model)xsSubmit.Deserialize(writer);
                 }
 
-
-
-
                 SetSaveDirs(model);
 
                 FileManager.SearchForInstalledVersions(model);

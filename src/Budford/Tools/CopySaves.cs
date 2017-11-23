@@ -31,7 +31,7 @@ namespace Budford.Tools
                     foreach (var latest in model.Settings.InstalledVersions)
                     {
                         DirectoryInfo src = new DirectoryInfo(latest.Folder + "\\mlc01\\emulatorSave\\" + game.Value.SaveDir);
-                        DirectoryInfo dest = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\80000001");
+                        DirectoryInfo dest = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
                         DirectoryInfo src_255 = new DirectoryInfo(latest.Folder + "\\mlc01\\emulatorSave\\" + game.Value.SaveDir + "_255");
                         DirectoryInfo dest_255 = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\common");
 
@@ -39,9 +39,9 @@ namespace Budford.Tools
                         {
                             if (src.GetFiles().Any() || (src_255.Exists && src_255.GetFiles().Any()))
                             {
-                                if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\80000001"))
+                                if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\  " + model.CurrentUser))
                                 {
-                                    Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\80000001");
+                                    Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
                                 }
                                 if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + game.Value.TitleId.Replace("00050000", "") + "\\user\\common"))
                                 {

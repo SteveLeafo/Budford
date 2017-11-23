@@ -79,6 +79,12 @@ namespace Budford
         {
             if (Directory.Exists(romFolder))
             {
+
+                if (Directory.Exists(romFolder + "\\code"))
+                {
+                    CheckFolder(romFolder);
+                }
+
                 int currentFolder = 0;
 
                 int folderCount = Directory.EnumerateDirectories(romFolder).Count();

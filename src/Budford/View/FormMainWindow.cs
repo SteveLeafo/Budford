@@ -77,7 +77,7 @@ namespace Budford
                 }
             }
 
-            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicsPacks"), model.GraphicsPacks);
+            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-347"), model.GraphicsPacks);
 
             Persistence.LoadFromXml(model.OldVersions);
 

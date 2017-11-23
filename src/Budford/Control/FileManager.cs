@@ -200,7 +200,18 @@ namespace Budford.Control
 
             if (version == "??")
             {
-                iv.Version = iv.Name.Replace("cemu_", "").Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", "");
+                string name = iv.Name.TrimStart('_').ToLower(); ;
+                if (name.StartsWith("cemu_"))
+                {
+                    iv.Version = name.Replace("cemu_", "").Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", "");
+                }
+                else if (name.StartsWith("cemu"))
+                {
+                    if (iv.Name.Contains("_"))
+                    {
+                        iv.Version = iv.Name.Split('_')[0].Replace("cemu", "");
+                    }
+                }
             }
             else
             {
