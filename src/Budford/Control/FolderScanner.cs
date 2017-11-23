@@ -184,7 +184,7 @@ namespace Budford.Control
                     {
                         pack.Gui = s[1];
                         break;
-                    }
+                    }   
                 }
                 game.Value.GameSetting.graphicsPacks.Add(pack);
                 game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;

@@ -32,37 +32,38 @@ namespace Budford.Control
         {
             if (source.Exists)
             {
-                if (target.Exists)
+                if (!target.Exists)
                 {
-                    foreach (DirectoryInfo dir in source.GetDirectories())
+                    target.Create();
+                }
+                foreach (DirectoryInfo dir in source.GetDirectories())
+                {
+                    if (ten80p)
                     {
-                        if (ten80p)
+                        if (dir.Name.EndsWith("1080p"))
                         {
-                            if (dir.Name.EndsWith("1080p"))
-                            {
-                                CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), true);
-                            }
-                        }
-                        else
-                        {
-                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), true);
                         }
                     }
-                    foreach (FileInfo file in source.GetFiles())
+                    else
                     {
-                        if (!File.Exists(Path.Combine(target.FullName, file.Name)))
+                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                    }
+                }
+                foreach (FileInfo file in source.GetFiles())
+                {
+                    if (!File.Exists(Path.Combine(target.FullName, file.Name)))
+                    {
+                        file.CopyTo(Path.Combine(target.FullName, file.Name));
+                    }
+                    else
+                    {
+                        if (overrideit)
                         {
-                            file.CopyTo(Path.Combine(target.FullName, file.Name));
-                        }
-                        else
-                        {
-                            if (overrideit)
+                            FileInfo dest = new FileInfo(target.FullName);
+                            if (file.LastWriteTime > dest.LastWriteTime)
                             {
-                                FileInfo dest = new FileInfo(target.FullName);
-                                if (file.LastWriteTime > dest.LastWriteTime)
-                                {
-                                    file.CopyTo(Path.Combine(target.FullName, file.Name), true);
-                                }
+                                file.CopyTo(Path.Combine(target.FullName, file.Name), true);
                             }
                         }
                     }
