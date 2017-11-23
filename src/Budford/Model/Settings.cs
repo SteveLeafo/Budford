@@ -16,6 +16,8 @@ namespace Budford.Model
 
         public string CurrentView  = "Detailed";
 
+        public string GraphicsPackRevision = "347";
+
         public bool ShowToolBar  = true;
 
         public bool ShowStausBar  = true;

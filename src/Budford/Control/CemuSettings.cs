@@ -353,7 +353,7 @@ namespace Budford.Control
                 if (pack.Active)
                 {
                     //File.Copy("")
-                    FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicsPacks\\" + pack.Folder), new DirectoryInfo(folder + "\\graphicPacks"));
+                    FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicsPacks_2-" + model.Settings.GraphicsPackRevision + "\\" + pack.Folder), new DirectoryInfo(folder + "\\graphicPacks"));
                     packs++;
                 }
             }
