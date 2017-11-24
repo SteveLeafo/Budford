@@ -334,7 +334,21 @@ namespace Budford
             unplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable;
             unplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             notSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet;
-            notSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;           
+            notSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+
+            officiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect;
+            officiallyPerfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            officiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable;
+            officiallyPlayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            officiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns;
+            officiallyRunsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            officiallyLoadsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusLoads;
+            officiallyLoadsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            officiallyUnplayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusUnplayable;
+            officiallyUnplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            officiallyNotSetToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusNotSet;
+            officiallyNotSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;           
+
         }
 
         /// <summary>
@@ -361,6 +375,13 @@ namespace Budford
             model.Filters.ViewStatusLoads = loadsToolStripMenuItem.Checked;
             model.Filters.ViewStatusUnplayable = unplayableToolStripMenuItem.Checked;
             model.Filters.ViewStatusNotSet = notSetToolStripMenuItem.Checked;
+
+            model.Filters.ViewOfficialStatusPerfect = officiallyPerfectToolStripMenuItem.Checked;
+            model.Filters.ViewOfficialStatusPlayable = officiallyPlayableToolStripMenuItem.Checked;
+            model.Filters.ViewOfficialStatusRuns = officiallyRunsToolStripMenuItem.Checked;
+            model.Filters.ViewOfficialStatusLoads = officiallyLoadsToolStripMenuItem.Checked;
+            model.Filters.ViewOfficialStatusUnplayable = officiallyUnplayableToolStripMenuItem.Checked;
+            model.Filters.ViewOfficialStatusNotSet = officiallyNotSetToolStripMenuItem.Checked;
 
             PopulateListView();
         }           
@@ -616,7 +637,10 @@ namespace Budford
             {
                 if (CheckStatusFilter(game))
                 {
-                    return CheckTypeFilter(game);
+                    if (CheckOfficialStatusFilter(game))
+                    {
+                        return CheckTypeFilter(game);
+                    }
                 }
             }
            
@@ -630,7 +654,7 @@ namespace Budford
         /// <returns></returns>
         private bool CheckStatusFilter(GameInformation game)
         {
-            switch (game.GameSetting.OfficialEmulationState)
+            switch (game.GameSetting.EmulationState)
             {
                 case GameSettings.EmulationStateType.NotSet:
                     if (!model.Filters.ViewStatusNotSet) return false;
@@ -649,6 +673,37 @@ namespace Budford
                     break;
                 case GameSettings.EmulationStateType.Unplayable:
                     if (!model.Filters.ViewStatusUnplayable) return false;
+                    break;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        private bool CheckOfficialStatusFilter(GameInformation game)
+        {
+            switch (game.GameSetting.OfficialEmulationState)
+            {
+                case GameSettings.EmulationStateType.NotSet:
+                    if (!model.Filters.ViewOfficialStatusNotSet) return false;
+                    break;
+                case GameSettings.EmulationStateType.Perfect:
+                    if (!model.Filters.ViewOfficialStatusPerfect) return false;
+                    break;
+                case GameSettings.EmulationStateType.Playable:
+                    if (!model.Filters.ViewOfficialStatusPlayable) return false;
+                    break;
+                case GameSettings.EmulationStateType.Runs:
+                    if (!model.Filters.ViewOfficialStatusRuns) return false;
+                    break;
+                case GameSettings.EmulationStateType.Loads:
+                    if (!model.Filters.ViewOfficialStatusLoads) return false;
+                    break;
+                case GameSettings.EmulationStateType.Unplayable:
+                    if (!model.Filters.ViewOfficialStatusUnplayable) return false;
                     break;
             }
             return true;
@@ -1459,9 +1514,10 @@ namespace Budford
                 }
                 else if (gi.LaunchFileName == "WiiULauncher.rpx")
                 {
-                    gi.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.Unplayable;
+                    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Unplayable;
                 }
             }
+            PopulateListView();
         }
 
         /// <summary>

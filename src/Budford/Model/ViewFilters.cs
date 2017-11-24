@@ -21,5 +21,13 @@
         public bool ViewStatusRuns  = true;
         public bool ViewStatusLoads  = true;
         public bool ViewStatusUnplayable  = true;
+
+        // Official Status
+        public bool ViewOfficialStatusNotSet = true;
+        public bool ViewOfficialStatusPerfect = true;
+        public bool ViewOfficialStatusPlayable = true;
+        public bool ViewOfficialStatusRuns = true;
+        public bool ViewOfficialStatusLoads = true;
+        public bool ViewOfficialStatusUnplayable = true;
     }
 }
