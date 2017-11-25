@@ -1584,13 +1584,34 @@ namespace Budford
                         string[] toks = line.Split('=');
                         FormEditInstalledVersions.uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
                         FormEditInstalledVersions.filenames[0] = FormEditInstalledVersions.uris[0].Substring(1 + FormEditInstalledVersions.uris[0].LastIndexOf('/'));
-                        FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
-                        manageInstalledVersionsToolStripMenuItem_Click(sender, e);
+                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(FormEditInstalledVersions.uris[0]));
+                        if (!IsInstalled(currentVersion))
+                        {
+                            FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
+                            manageInstalledVersionsToolStripMenuItem_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("The latest version of Cemu is already installed.", "Information...");
+                        }
                     }
                 }
             }
         }
 
+        bool IsInstalled(int versionNo)
+        {
+            foreach (var version in model.Settings.InstalledVersions)
+            {
+                if (version.VersionNumber == versionNo)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             launcher.Open(model);

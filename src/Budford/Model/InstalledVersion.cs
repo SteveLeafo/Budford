@@ -27,5 +27,16 @@ namespace Budford.Model
                 return -1;
             }
         }
+
+        static internal int GetVersionNumber(string versionIn)
+        {
+            string currentCemuVersion = Regex.Replace(versionIn, "[A-Za-z ]", "").Replace("_", "");
+            int version;
+            if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_", ""), out version))
+            {
+                return version;
+            }
+            return -1;
+        }
     }
 }
