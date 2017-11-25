@@ -3063,5 +3063,77 @@ for Wii U</GameName>
       <SaveDirId> 9a12f714</SaveDirId>
       <Region>EUR</Region>
     </SaveDir>
+    <SaveDir>
+      <GameName>Call of Duty: Black Ops II</GameName>
+      <GameId>0005000010113500</GameId>
+      <SaveDirId> 2bb2090d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Art Academy: Atelier</GameName>
+      <GameId>000500001017B500</GameId>
+      <SaveDirId> 5dfbe24b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cars 3: Driven to Win</GameName>
+      <GameId>000500001020A400</GameId>
+      <SaveDirId> 4cdaef25</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Disney Epic Mickey 2</GameName>
+      <GameId>000500001011B000</GameId>
+      <SaveDirId> b964eb8e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sonic &amp; All-Stars Racing Transformed</GameName>
+      <GameId>0005000010111F00</GameId>
+      <SaveDirId> 49f7e755</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splatoon Pre-Launch Review</GameName>
+      <GameId>00050000101CDD00</GameId>
+      <SaveDirId> 6da2a0c6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Fox Guard: Special Demo Version</GameName>
+      <GameId>00050000101DCE00</GameId>
+      <SaveDirId> e7c0ed92</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Fox Zero The Battle Begins + Training</GameName>
+      <GameId>0005000010201C00</GameId>
+      <SaveDirId> 10cb6ceb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Project Zero: Maiden of Black Water</GameName>
+      <GameId>00050000101D3F00</GameId>
+      <SaveDirId> cd3c7b9a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ziggurat</GameName>
+      <GameId>00050000101F7800</GameId>
+      <SaveDirId> 33ca209e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MONSTER HUNTER 3 ULTIMATE</GameName>
+      <GameId>0005000010117200</GameId>
+      <SaveDirId> 021e0259</SaveDirId>
+      <Region>??</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ZombiU</GameName>
+      <GameId>000500001011A700</GameId>
+      <SaveDirId> e426355b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
   </AllSaveDirs>
 </SaveDirs>
