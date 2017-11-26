@@ -278,6 +278,35 @@ namespace Budford.Control
                                 }
                             }
                         }
+                        else
+                        {
+                            string folder = runningGame.Name.Replace(":", "_");
+                            folder = runningGame.SaveDir;
+                            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
+
+                            DirectoryInfo src = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\usr\\save\\00050000\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\80000001");
+                            DirectoryInfo dest = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
+                            DirectoryInfo src_255 = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\usr\\save\\00050000\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
+                            DirectoryInfo dest_255 = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
+
+                            if (src.Exists)
+                            {
+                                if (src.GetFiles().Any() || (src_255.Exists && src_255.GetFiles().Any()))
+                                {
+                                    if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser))
+                                    {
+                                        Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
+                                    }
+                                    if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common"))
+                                    {
+                                        Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
+                                    }
+
+                                    FileManager.CopyFilesRecursively(src, dest, false, true);
+                                    FileManager.CopyFilesRecursively(src_255, dest_255, false, true);
+                                }
+                            }
+                        }
                     }
                 }
             }
