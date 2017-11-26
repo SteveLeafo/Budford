@@ -42,12 +42,12 @@ namespace Budford.Control
                     {
                         if (dir.Name.EndsWith("1080p"))
                         {
-                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), true);
+                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), ten80p, overrideit);
                         }
                     }
                     else
                     {
-                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), ten80p, overrideit);
                     }
                 }
                 foreach (FileInfo file in source.GetFiles())
