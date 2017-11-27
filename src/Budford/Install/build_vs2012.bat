@@ -9,7 +9,7 @@ call "c:\Program Files (x86)\NSIS\Bin\makensis.exe" Budford.nsi
 ren "Budford - Setup.exe" "Budford - Setup - V1.0.%Build%.exe" 
 
 set /a Build=%Build%+1
-echo %Build%>ver.txt
+echo %Build% > ver.txt
 
 git commit -m "New release" ver.txt
 git status
