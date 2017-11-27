@@ -1,5 +1,6 @@
-@echo off
 set /p Build=<ver.txt
+
+echo Building version %Build%
 
 fart ..\Properties\AssemblyInfo.cs 1.0.0.0  1.0.%Build%
 "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\DEVENV"   ..\..\Budford.sln /Rebuild Release
