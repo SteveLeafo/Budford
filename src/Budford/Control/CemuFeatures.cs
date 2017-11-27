@@ -122,7 +122,8 @@ namespace Budford.Control
             {
                 if (!v.HasPatch) unpacker.ExtractToDirectory("sys.zip", v.Folder + "\\mlc01\\", true);
                 if (!v.HasFonts) unpacker.Unpack("sharedFonts.zip", v.Folder);
-                if (!v.HasCemuHook) InstallCemuHook(unpacker, v);
+                //if (!v.HasCemuHook) 
+                    InstallCemuHook(unpacker, v);
                 if (!v.HasControllerProfiles) CopyLatestControllerProfiles(model, v);
                 if (!v.HasDlc)
                 {

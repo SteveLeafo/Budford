@@ -459,7 +459,70 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadCemuHookToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            unpacker.DownloadAndUnpack("cemu_hook.zip", "https://files.sshnuke.net/cemuhook_190c_0532.zip", "Downloads", "CEMU Hook");
+            //unpacker.DownloadAndUnpack("cemu_hook.zip", "https://files.sshnuke.net/cemuhook_190c_0532.zip", "Downloads", "CEMU Hook");
+            using (FormWebpageDownload dlc = new FormWebpageDownload("https://sshnuke.net/cemuhook", "Latest Version"))
+            {
+                dlc.ShowDialog(this);
+                foreach (var line in dlc.Result.Split('\n'))
+                {
+                    string s = line.Trim();
+                    if (s.Contains(".zip"))
+                    {
+                        if (s.Length > 20)
+                        {
+                            s = s.Substring(39);
+                            int p = s.IndexOf("\"");
+                            if (p > -1)
+                            {
+                                string cemuHook = s.Substring(0, p);
+                                if (File.Exists("cemu_hook.zip"))
+                                {
+                                    File.Delete("cemu_hook.zip");
+                                }
+                                unpacker.DownloadAndUnpack("cemu_hook.zip", "https://files.sshnuke.net/" + cemuHook, "Downloads", "CEMU Hook");
+                                return ;
+                            }
+                        }
+                    }
+                    //if (line.Contains("name=\"download\""))
+                    //{
+                    //    string[] toks = line.Split('=');
+                    //    FormEditInstalledVersions.uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
+                    //    FormEditInstalledVersions.filenames[0] = FormEditInstalledVersions.uris[0].Substring(1 + FormEditInstalledVersions.uris[0].LastIndexOf('/'));
+                    //    int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(FormEditInstalledVersions.uris[0]));
+                    //    if (!IsInstalled(currentVersion))
+                    //    {
+                    //        FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
+                    //        manageInstalledVersionsToolStripMenuItem_Click(sender, e);
+                    //    }
+                    //    else
+                    //    {
+                    //        MessageBox.Show("The latest version of Cemu is already installed.", "Information...");
+                    //    }
+                    //}
+                }
+            }
+        }
+
+        static string GetCemuLatestHookVersion()
+        {
+            foreach (string str in File.ReadAllLines("C:\\Development\\hook.html"))
+            {
+                string s = str.Trim();
+                if (s.Contains(".zip"))
+                {
+                    if (s.Length > 20)
+                    {
+                        s = s.Substring(39);
+                        int p = s.IndexOf("\"");
+                        if (p > -1)
+                        {
+                            return s.Substring(0, p);
+                        }
+                    }
+                }
+            }
+            return "";
         }
 
         /// <summary>
