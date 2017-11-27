@@ -76,6 +76,7 @@ namespace Budford.Control
                 version.HasCemuHook = HasCemuHookInstalled(version.Folder);
                 version.HasPatch = HasPatchInstalled(version.Folder);
                 version.HasDlc = HasDlcInstalled(version.Folder);
+                version.HasControllerProfiles = HasControllerProfiles(version.Folder);
                 if (version.HasDlc)
                 {
                     version.DlcSource = JunctionPoint.GetTarget(version.Folder + @"\mlc01\usr\title");
@@ -122,6 +123,7 @@ namespace Budford.Control
                 if (!v.HasPatch) unpacker.ExtractToDirectory("sys.zip", v.Folder + "\\mlc01\\", true);
                 if (!v.HasFonts) unpacker.Unpack("sharedFonts.zip", v.Folder);
                 if (!v.HasCemuHook) InstallCemuHook(unpacker, v);
+                if (!v.HasControllerProfiles) CopyLatestControllerProfiles(model, v);
                 if (!v.HasDlc)
                 {
                     if (dlcSource != null)
@@ -277,6 +279,20 @@ namespace Budford.Control
         /// </summary>
         /// <param name="folder"></param>
         /// <returns></returns>
+        static bool HasControllerProfiles(string folder)
+        {
+            if (Directory.Exists(folder + "\\controllerProfiles"))
+            {
+                return Directory.EnumerateFiles(folder + "\\controllerProfiles").Any();
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <returns></returns>
         static bool HasDlcInstalled(string folder)
         {
             if (Directory.Exists(folder + @"\mlc01\usr\title"))
@@ -297,6 +313,34 @@ namespace Budford.Control
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        internal static void CopyLatestControllerProfiles(Model.Model model, InstalledVersion installedVersion)
+        {
+            int latestVersionWithProfiles = -1;
+            InstalledVersion versionWithControllerProfiles = null;
+
+            foreach (var v in model.Settings.InstalledVersions)
+            {
+                if (v.HasControllerProfiles)
+                {
+                    if (v.VersionNumber > latestVersionWithProfiles)
+                    {
+                        latestVersionWithProfiles = v.VersionNumber;
+                        versionWithControllerProfiles = v;
+                    }
+                }
+            }
+
+            if (versionWithControllerProfiles != null)
+            {
+                FileManager.CopyFilesRecursively(
+                    new DirectoryInfo(versionWithControllerProfiles.Folder + "\\controllerProfiles"),
+                    new DirectoryInfo(installedVersion.Folder + "\\controllerProfiles"));
+            }
+        }
 
         /// <summary>
         /// 

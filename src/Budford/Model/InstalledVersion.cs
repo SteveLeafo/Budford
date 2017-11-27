@@ -10,6 +10,7 @@ namespace Budford.Model
         public bool HasCemuHook ;
         public bool HasPatch ;
         public bool HasDlc ;
+        public bool HasControllerProfiles;
         public int DlcType ;
         public bool IsLatest;
         internal string DlcSource = "Local";
