@@ -191,6 +191,50 @@ namespace Budford.Control
             return latest;
         }
 
+        internal static bool DownloadLatestVersion(Form parent, Settings settings)
+        {
+            using (FormWebpageDownload dlc = new FormWebpageDownload("http://cemu.info/", "Latest Version"))
+            {
+                dlc.ShowDialog(parent);
+                foreach (var line in dlc.Result.Split('\n'))
+                {
+                    if (line.Contains("name=\"download\""))
+                    {
+                        string[] toks = line.Split('=');
+                        Budford.View.FormEditInstalledVersions.uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
+                        Budford.View.FormEditInstalledVersions.filenames[0] = Budford.View.FormEditInstalledVersions.uris[0].Substring(1 + Budford.View.FormEditInstalledVersions.uris[0].LastIndexOf('/'));
+                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(Budford.View.FormEditInstalledVersions.uris[0]));
+                        if (!IsInstalled(currentVersion, settings))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("The latest version of Cemu is already installed.", "Information...");
+                            return false;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if requested version is installed
+        /// </summary>
+        /// <param name="versionNo"></param>
+        /// <returns></returns>
+        static bool IsInstalled(int versionNo, Settings settings)
+        {
+            foreach (var version in settings.InstalledVersions)
+            {
+                if (version.VersionNumber == versionNo)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         /// <summary>
         /// 
