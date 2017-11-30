@@ -31,6 +31,7 @@ namespace Budford
         // Used for column sorting when clicking on a header
         private ListViewColumnSorter lvwColumnSorter;
 
+        bool comments = false;
 
         /// <summary>
         /// 
@@ -578,7 +579,7 @@ namespace Budford
             listView1.Columns[0].Width = 36;
             if (model.Settings.AutoSizeColumns)
             {
-                for (int c = 1; c < listView1.Columns.Count; ++c)
+                for (int c = 4; c < listView1.Columns.Count; ++c)
                 {
                     listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.ColumnContent);
                     listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -608,11 +609,18 @@ namespace Budford
         /// <param name="game"></param>
         /// <param name="lvi"></param>
         /// <returns></returns>
-        private static void PopulateSubItems(KeyValuePair<string, GameInformation> game, ListViewItem lvi)
+        private void PopulateSubItems(KeyValuePair<string, GameInformation> game, ListViewItem lvi)
         {
             lvi.SubItems.Add(game.Value.Name);
             lvi.SubItems.Add(game.Value.Region + "     ");
-            lvi.SubItems.Add(game.Value.Publisher);
+            if (comments)
+            {
+                lvi.SubItems.Add(game.Value.Comments);
+            }
+            else
+            {
+                lvi.SubItems.Add(game.Value.Publisher);
+            }
             lvi.SubItems.Add(game.Value.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + game.Value.CompanyCode + "       ");
             lvi.SubItems.Add(game.Value.Size);
             lvi.SubItems.Add(game.Value.LaunchFileName);
@@ -801,7 +809,7 @@ namespace Budford
                 {
                     if (model.Settings.AutoSizeColumns)
                     {
-                        for (int i = 1; i < listView1.Columns.Count; i++)
+                        for (int i = 4; i < listView1.Columns.Count; i++)
                         {
                             listView1.AutoResizeColumn(i, ColumnHeaderAutoResizeStyle.ColumnContent);
                         }
@@ -886,6 +894,13 @@ namespace Budford
             {
                 if (listView1.SelectedItems.Count > 0)
                 {
+                    if (comments)
+                    {
+                        listView1.SelectedItems[0].SubItems[3].Text = game.Comments;
+                    }
+                    listView1.SelectedItems[0].SubItems[7].Text = game.GameSetting.PreferedVersion;
+                    listView1.SelectedItems[0].SubItems[8].Text = game.GameSetting.OfficialEmulationState.ToString();
+                    listView1.SelectedItems[0].SubItems[9].Text = game.GameSetting.EmulationState.ToString();
                     listView1.SelectedItems[0].SubItems[12].Text = game.LastPlayed != DateTime.MinValue ? game.LastPlayed.ToShortDateString() + " " : "                    ";
                     listView1.SelectedItems[0].SubItems[13].Text = game.PlayCount != 0 ? game.PlayCount + "                 " : "                 ";
                 }
@@ -1068,14 +1083,24 @@ namespace Budford
             // Game Properties
             if (listView1.SelectedItems.Count == 1)
             {
-                model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                var game = model.GameData[model.CurrentId];
-                using (FormEditGameSettings aboutBox = new FormEditGameSettings(game, model.Settings.InstalledVersions))
+                if (listView1.SelectedItems.Count == 1)
                 {
-                    aboutBox.ShowDialog(this);
-                    listView1.SelectedItems[0].SubItems[7].Text = game.GameSetting.PreferedVersion;
-                    listView1.SelectedItems[0].SubItems[8].Text = game.GameSetting.OfficialEmulationState.ToString();
-                    listView1.SelectedItems[0].SubItems[9].Text = game.GameSetting.EmulationState.ToString();
+                    model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                    var game = model.GameData[model.CurrentId];
+                    try
+                    {
+                        using (FormEditGameSettings aboutBox = new FormEditGameSettings(game, model.Settings.InstalledVersions))
+                        {
+                            aboutBox.ShowDialog(this);
+                            if (listView1.SelectedItems.Count == 1)
+                            {
+                                RefreshList(game);
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
         }
@@ -1407,19 +1432,23 @@ namespace Budford
         /// <returns></returns>
         InstalledVersion GetCurrentVersion()
         {
-            model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-            var setting = model.GameData[model.CurrentId].GameSetting;
-            InstalledVersion version;
-            if (setting.PreferedVersion != "Latest")
+            if (listView1.SelectedItems.Count == 1)
             {
-                version = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == setting.PreferedVersion);
-            }
-            else
-            {
-                version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-            }
+                model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                var setting = model.GameData[model.CurrentId].GameSetting;
+                InstalledVersion version;
+                if (setting.PreferedVersion != "Latest")
+                {
+                    version = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == setting.PreferedVersion);
+                }
+                else
+                {
+                    version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                }
 
-            return version;
+                return version;
+            }
+            return null;
         }
 
         /// <summary>
@@ -1502,20 +1531,43 @@ namespace Budford
             foreach (var v in model.GameData)
             {
                 GameInformation gi = v.Value;
-                if (gi.GameSetting.GpuBufferCacheAccuracy == GameSettings.GpuBufferCacheAccuracyType.Medium)
-                {
-                    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
-                }
 
-                if (gi.LaunchFileName.ToLower().StartsWith("unity"))
-                {
-                    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
-                    gi.GameSetting.PreferedVersion = "Latest";
-                }
-                else if (gi.LaunchFileName == "WiiULauncher.rpx")
-                {
-                    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Unplayable;
-                }
+                //if (gi.GameSetting.GpuBufferCacheAccuracy == GameSettings.GpuBufferCacheAccuracyType.Medium)
+                //{
+                //    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
+                //}
+
+                //if (gi.LaunchFileName.ToLower().StartsWith("unity"))
+                //{
+                //    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
+                //    gi.GameSetting.PreferedVersion = "Latest";
+                //}
+                
+                //if (gi.LaunchFileName == "WiiULauncher.rpx")
+                //{
+                //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Unplayable;
+                //}
+
+                //if (gi.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.Perfect)
+                //{
+                //    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
+                //    {
+                //        gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Perfect;
+                //    }
+                //}
+
+                //if (gi.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.Playable)
+                //{
+                //    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
+                //    {
+                //        gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Playable;
+                //    }
+                //}
+
+                //if (gi.LaunchFileName == "WiiULauncher.rpx")
+                //{
+                //    gi.Comments = "Game crashes instantly on start up";
+                //}
             }
             PopulateListView();
         }
@@ -1597,6 +1649,105 @@ namespace Budford
         {
             CopyShaderCache cs = new CopyShaderCache(model);
             cs.Execute();
+        }
+
+        private void dumpTestingResultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (StreamWriter sw = new StreamWriter("C:\\Development\\broken.csv"))
+            {
+                sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
+                foreach (var gd in model.GameData)
+                {
+                    GameInformation gi = gd.Value;
+                    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
+                    {
+                        if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
+                        {
+                            if (gi.Comments.Length > 0)
+                            {
+                                sw.Write("\"");
+                                sw.Write(gi.Region); sw.Write("\",\"");
+                                sw.Write(gi.Name); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+                                sw.WriteLine();
+                            }
+                        }
+                    }
+                }
+                sw.WriteLine();
+                foreach (var gd in model.GameData)
+                {
+                    GameInformation gi = gd.Value;
+                    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
+                    {
+
+                        if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
+                        {
+                            if (gi.Comments.Length > 0)
+                            {
+                                sw.Write("\"");
+                                sw.Write(gi.Region); sw.Write("\",\"");
+                                sw.Write(gi.Name); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+                                sw.WriteLine();
+                            }
+                        }
+                    }
+                }
+            }
+            using (StreamWriter sw = new StreamWriter("C:\\Development\\running.csv"))
+            {
+                sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
+                foreach (var gd in model.GameData)
+                {
+                    GameInformation gi = gd.Value;
+                    if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+                    {
+                        if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
+                        {
+                            //if (gi.Comments.Length > 0)
+                            {
+                                sw.Write("\"");
+                                sw.Write(gi.Region); sw.Write("\",\"");
+                                sw.Write(gi.Name); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+                                sw.WriteLine();
+                            }
+                        }
+                    }
+                }
+                sw.WriteLine();
+                foreach (var gd in model.GameData)
+                {
+                    GameInformation gi = gd.Value;
+                    if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+                    {
+                        if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
+                        {
+                            //if (gi.Comments.Length > 0)
+                            {
+                                sw.Write("\"");
+                                sw.Write(gi.Region); sw.Write("\",\"");
+                                sw.Write(gi.Name); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+                                sw.WriteLine();
+                            }
+                        }
+                    }
+                }
+            }
         }
     }   
 }

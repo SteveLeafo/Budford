@@ -108,6 +108,7 @@
             this.fixUnityGameSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copySavesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyShadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpTestingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -287,6 +288,7 @@
             this.downloadStatusToolStripMenuItem.Name = "downloadStatusToolStripMenuItem";
             this.downloadStatusToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.downloadStatusToolStripMenuItem.Text = "Download Status";
+            this.downloadStatusToolStripMenuItem.Visible = false;
             this.downloadStatusToolStripMenuItem.Click += new System.EventHandler(this.downloadStatusToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -433,37 +435,37 @@
             // officiallyPerfectToolStripMenuItem
             // 
             this.officiallyPerfectToolStripMenuItem.Name = "officiallyPerfectToolStripMenuItem";
-            this.officiallyPerfectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.officiallyPerfectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.officiallyPerfectToolStripMenuItem.Text = "Perfect";
             // 
             // officiallyPlayableToolStripMenuItem
             // 
             this.officiallyPlayableToolStripMenuItem.Name = "officiallyPlayableToolStripMenuItem";
-            this.officiallyPlayableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.officiallyPlayableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.officiallyPlayableToolStripMenuItem.Text = "Playable";
             // 
             // officiallyRunsToolStripMenuItem
             // 
             this.officiallyRunsToolStripMenuItem.Name = "officiallyRunsToolStripMenuItem";
-            this.officiallyRunsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.officiallyRunsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.officiallyRunsToolStripMenuItem.Text = "Runs";
             // 
             // officiallyLoadsToolStripMenuItem
             // 
             this.officiallyLoadsToolStripMenuItem.Name = "officiallyLoadsToolStripMenuItem";
-            this.officiallyLoadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.officiallyLoadsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.officiallyLoadsToolStripMenuItem.Text = "Loads";
             // 
             // officiallyUnplayableToolStripMenuItem
             // 
             this.officiallyUnplayableToolStripMenuItem.Name = "officiallyUnplayableToolStripMenuItem";
-            this.officiallyUnplayableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.officiallyUnplayableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.officiallyUnplayableToolStripMenuItem.Text = "Unplayable";
             // 
             // officiallyNotSetToolStripMenuItem
             // 
             this.officiallyNotSetToolStripMenuItem.Name = "officiallyNotSetToolStripMenuItem";
-            this.officiallyNotSetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.officiallyNotSetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.officiallyNotSetToolStripMenuItem.Text = "Not Set";
             // 
             // showStatusToolStripMenuItem
@@ -482,37 +484,37 @@
             // perfectToolStripMenuItem
             // 
             this.perfectToolStripMenuItem.Name = "perfectToolStripMenuItem";
-            this.perfectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.perfectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.perfectToolStripMenuItem.Text = "Perfect";
             // 
             // playableToolStripMenuItem
             // 
             this.playableToolStripMenuItem.Name = "playableToolStripMenuItem";
-            this.playableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.playableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.playableToolStripMenuItem.Text = "Playable";
             // 
             // runsToolStripMenuItem
             // 
             this.runsToolStripMenuItem.Name = "runsToolStripMenuItem";
-            this.runsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.runsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.runsToolStripMenuItem.Text = "Runs";
             // 
             // loadsToolStripMenuItem
             // 
             this.loadsToolStripMenuItem.Name = "loadsToolStripMenuItem";
-            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.loadsToolStripMenuItem.Text = "Loads";
             // 
             // unplayableToolStripMenuItem
             // 
             this.unplayableToolStripMenuItem.Name = "unplayableToolStripMenuItem";
-            this.unplayableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.unplayableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.unplayableToolStripMenuItem.Text = "Unplayable";
             // 
             // notSetToolStripMenuItem
             // 
             this.notSetToolStripMenuItem.Name = "notSetToolStripMenuItem";
-            this.notSetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.notSetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.notSetToolStripMenuItem.Text = "Not Set";
             // 
             // fixToolStripMenuItem
@@ -640,7 +642,8 @@
             this.linkDLCFoldersToolStripMenuItem,
             this.fixUnityGameSettingsToolStripMenuItem,
             this.copySavesToolStripMenuItem,
-            this.copyShadersToolStripMenuItem});
+            this.copyShadersToolStripMenuItem,
+            this.dumpTestingResultsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -702,6 +705,7 @@
             this.dumpSaveDirCodesToolStripMenuItem.Name = "dumpSaveDirCodesToolStripMenuItem";
             this.dumpSaveDirCodesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.dumpSaveDirCodesToolStripMenuItem.Text = "Dump SaveDir Codes";
+            this.dumpSaveDirCodesToolStripMenuItem.Visible = false;
             this.dumpSaveDirCodesToolStripMenuItem.Click += new System.EventHandler(this.dumpSaveDirCodesToolStripMenuItem_Click);
             // 
             // linkDLCFoldersToolStripMenuItem
@@ -709,6 +713,7 @@
             this.linkDLCFoldersToolStripMenuItem.Name = "linkDLCFoldersToolStripMenuItem";
             this.linkDLCFoldersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.linkDLCFoldersToolStripMenuItem.Text = "Link DLC Folders";
+            this.linkDLCFoldersToolStripMenuItem.Visible = false;
             this.linkDLCFoldersToolStripMenuItem.Click += new System.EventHandler(this.linkDLCFoldersToolStripMenuItem_Click);
             // 
             // fixUnityGameSettingsToolStripMenuItem
@@ -716,6 +721,7 @@
             this.fixUnityGameSettingsToolStripMenuItem.Name = "fixUnityGameSettingsToolStripMenuItem";
             this.fixUnityGameSettingsToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.fixUnityGameSettingsToolStripMenuItem.Text = "Fix Wii U Launcher Game Settings";
+            this.fixUnityGameSettingsToolStripMenuItem.Visible = false;
             this.fixUnityGameSettingsToolStripMenuItem.Click += new System.EventHandler(this.fixUnityGameSettingsToolStripMenuItem_Click);
             // 
             // copySavesToolStripMenuItem
@@ -731,6 +737,14 @@
             this.copyShadersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.copyShadersToolStripMenuItem.Text = "Copy Shaders";
             this.copyShadersToolStripMenuItem.Click += new System.EventHandler(this.copyShadersToolStripMenuItem_Click);
+            // 
+            // dumpTestingResultsToolStripMenuItem
+            // 
+            this.dumpTestingResultsToolStripMenuItem.Name = "dumpTestingResultsToolStripMenuItem";
+            this.dumpTestingResultsToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.dumpTestingResultsToolStripMenuItem.Text = "Dump Testing Results";
+            this.dumpTestingResultsToolStripMenuItem.Visible = false;
+            this.dumpTestingResultsToolStripMenuItem.Click += new System.EventHandler(this.dumpTestingResultsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1035,6 +1049,7 @@
         private System.Windows.Forms.ToolStripMenuItem officiallyLoadsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem officiallyUnplayableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem officiallyNotSetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpTestingResultsToolStripMenuItem;
     }
 }
 

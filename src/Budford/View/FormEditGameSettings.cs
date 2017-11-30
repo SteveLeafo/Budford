@@ -53,6 +53,7 @@ namespace Budford.View
             textBox11.Text = information.GameSetting.OfficialEmulationState.ToString();
             textBox12.Text = information.CompanyCode;
             textBox13.Text = information.LaunchFileName;
+            textBox14.Text = information.Comments;
 
             string iconFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code\\", "meta\\iconTex.tga");
             string logoFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code\\", "meta\\bootLogoTex.tga");
@@ -168,6 +169,8 @@ namespace Budford.View
             {
                 ((GraphicsPack)lvi.Tag).Active = lvi.Checked;
             }
+
+            information.Comments = textBox14.Text;
 
             base.OnFormClosed(e);
         }

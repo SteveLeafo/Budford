@@ -10,6 +10,7 @@ namespace Budford.Model
         public string CompanyCode  = "";
         public string LaunchFile  = "";
         public string LaunchFileName  = "";
+        public string Comments = "";
         public string Size  = "";
         public string SaveDir  = "??      ";
         public string TitleId  = "";

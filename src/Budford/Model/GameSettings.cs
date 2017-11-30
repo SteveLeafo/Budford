@@ -15,7 +15,7 @@ namespace Budford.Model
         public byte EnableVSync  = 0;
         public UpscaleFilterType UpscaleFilter  = UpscaleFilterType.Bicubic;
         public FullScreenScalingType FullScreenScaling  = FullScreenScalingType.KeepAspectRatio;
-        public GpuBufferCacheAccuracyType GpuBufferCacheAccuracy  = GpuBufferCacheAccuracyType.Medium;
+        public GpuBufferCacheAccuracyType GpuBufferCacheAccuracy  = GpuBufferCacheAccuracyType.High;
 
         // CPU
         public CpuModeType CpuMode  = CpuModeType.SingleCoreCompiler;
