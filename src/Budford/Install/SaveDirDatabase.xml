@@ -3525,5 +3525,359 @@ for Wii U</GameName>
       <SaveDirId> c780b4c8</SaveDirId>
       <Region>EUR</Region>
     </SaveDir>
+    <SaveDir>
+      <GameName>Call of Duty: Ghosts</GameName>
+      <GameId>0005000010146800</GameId>
+      <SaveDirId> 19709587</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sniper Elite V2</GameName>
+      <GameId>0005000010134E00</GameId>
+      <SaveDirId> 056cec3a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Jewel Quest</GameName>
+      <GameId>00050000101E3200</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Jotun: Valhalla Edition</GameName>
+      <GameId>00050000101F5700</GameId>
+      <SaveDirId> e7e38547</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Journey of a Special Average Balloon</GameName>
+      <GameId>00050000101A8300</GameId>
+      <SaveDirId> fe340aea</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Letter Quest Grimm's Journey Remastered</GameName>
+      <GameId>00050000101F5500</GameId>
+      <SaveDirId> fdc033dd</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Octodad: Dadliest Catch</GameName>
+      <GameId>00050000101C6A00</GameId>
+      <SaveDirId> ef5b05d7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Paparazzi</GameName>
+      <GameId>00050000101AA100</GameId>
+      <SaveDirId> 1e4481f7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pokémon Rumble U</GameName>
+      <GameId>0005000010147700</GameId>
+      <SaveDirId> 40d5a2e9</SaveDirId>
+      <Region>??</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PSIBO</GameName>
+      <GameId>00050000101E1E00</GameId>
+      <SaveDirId> 6f18a7f2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>psyscrolr</GameName>
+      <GameId>00050000101ACB00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Völgarr the Viking</GameName>
+      <GameId>00050000101F6800</GameId>
+      <SaveDirId> f522b3d2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pushmo World</GameName>
+      <GameId>0005000010171F00</GameId>
+      <SaveDirId> 7b16491a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Reptilian Rebellion</GameName>
+      <GameId>00050000101F4C00</GameId>
+      <SaveDirId> b345571a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Retro Road Rumble</GameName>
+      <GameId>0005000010205B00</GameId>
+      <SaveDirId> ab4e5ac4</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rhapsody</GameName>
+      <GameId>00050000101BCB00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SDK Spriter</GameName>
+      <GameId>00050000101AA300</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SHUT THE BOX</GameName>
+      <GameId>000500001018D700</GameId>
+      <SaveDirId> 39f00dec</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shuttle Rush</GameName>
+      <GameId>000500001017B100</GameId>
+      <SaveDirId> 85d62dd1</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SKEASY</GameName>
+      <GameId>00050000101E7800</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Slots - Pharaoh's Riches</GameName>
+      <GameId>00050000101D7600</GameId>
+      <SaveDirId> b22ec4de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Space Hunted</GameName>
+      <GameId>0005000010207600</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SphereZor</GameName>
+      <GameId>00050000101ED600</GameId>
+      <SaveDirId> 8d28ef88</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sportsball</GameName>
+      <GameId>0005000010189200</GameId>
+      <SaveDirId> d2a48f1e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Destronaut</GameName>
+      <GameId>00050000101B9600</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Swap Fire</GameName>
+      <GameId>00050000101DAC00</GameId>
+      <SaveDirId> 62bc1676</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tadpole Treble</GameName>
+      <GameId>00050000101A6000</GameId>
+      <SaveDirId> 1e6b83ca</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tallowmere</GameName>
+      <GameId>00050000101F4900</GameId>
+      <SaveDirId> 786ff9ea</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Teslapunk</GameName>
+      <GameId>000500001018AF00</GameId>
+      <SaveDirId> b43e2626</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Deer God</GameName>
+      <GameId>00050000101E7300</GameId>
+      <SaveDirId> 97dcca0a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The First Skunk Bundle</GameName>
+      <GameId>00050000101FC700</GameId>
+      <SaveDirId> fe50dbfa</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Gem Collector</GameName>
+      <GameId>00050000101E5000</GameId>
+      <SaveDirId> 88ae1287</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Girl and the Robot</GameName>
+      <GameId>00050000101F9D00</GameId>
+      <SaveDirId> 693cc7fe</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Legend of Zelda™:  Hyrule Historia</GameName>
+      <GameId>000500001014CA00</GameId>
+      <SaveDirId> 23dc034d</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Letter</GameName>
+      <GameId>0005000010181700</GameId>
+      <SaveDirId> 9faef941</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Mysterious Cities of Gold: Secret Paths</GameName>
+      <GameId>0005000010156500</GameId>
+      <SaveDirId> a60402ff</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Toby: The Secret Mine</GameName>
+      <GameId>00050000101F8800</GameId>
+      <SaveDirId> 277b9231</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TOSS N GO</GameName>
+      <GameId>000500001018F900</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Underground</GameName>
+      <GameId>00050000101BCD00</GameId>
+      <SaveDirId> a5b5313e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>uWordsmith</GameName>
+      <GameId>00050000101A8000</GameId>
+      <SaveDirId> f2b33358</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Vaccine</GameName>
+      <GameId>000500001020B200</GameId>
+      <SaveDirId> e4f290de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Watchup</GameName>
+      <GameId>0005000010198700</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Woah Dave!</GameName>
+      <GameId>00050000101BCE00</GameId>
+      <SaveDirId> 34aedd38</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Word Puzzles by POWGI</GameName>
+      <GameId>00050000101CFA00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Xeodrifter™</GameName>
+      <GameId>00050000101D1600</GameId>
+      <SaveDirId> ba7b1902</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Y.A.S.G</GameName>
+      <GameId>0005000010207700</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ZaciSa's Last Stand</GameName>
+      <GameId>000500001016E600</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wipeout Create &amp; Crash</GameName>
+      <GameId>0005000010145500</GameId>
+      <SaveDirId> 793f26e5</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Brunswick Pro Bowling</GameName>
+      <GameId>00050000101D4200</GameId>
+      <SaveDirId> b5696309</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ESPN Sports Connection</GameName>
+      <GameId>000500001010B400</GameId>
+      <SaveDirId> 860db5d5</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Family Party 30 Great Games Obstacle Arcade</GameName>
+      <GameId>000500001010F300</GameId>
+      <SaveDirId> d3d4cea6</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Phineas and Ferb : Quest for Cool Stuff</GameName>
+      <GameId>0005000010139400</GameId>
+      <SaveDirId> 57d3f280</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>POKER DICE SOLITAIRE FUTURE</GameName>
+      <GameId>000500001018A400</GameId>
+      <SaveDirId> 39f00dec</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wheel of Fortune</GameName>
+      <GameId>0005000010111200</GameId>
+      <SaveDirId> f404d060</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splinter Cell Blacklist</GameName>
+      <GameId>000500001010E300</GameId>
+      <SaveDirId> 3d62ec2e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Barbie and Her Sisters Puppy Rescue</GameName>
+      <GameId>00050000101D1D00</GameId>
+      <SaveDirId> ddb2affb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Electronic Super Joy: Groove City</GameName>
+      <GameId>0005000010197300</GameId>
+      <SaveDirId> 7a393bc3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>High Strangeness</GameName>
+      <GameId>0005000010199E00</GameId>
+      <SaveDirId> b2cdce6a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tumblestone</GameName>
+      <GameId>00050000101DAD00</GameId>
+      <SaveDirId> 49493e44</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
   </AllSaveDirs>
 </SaveDirs>
