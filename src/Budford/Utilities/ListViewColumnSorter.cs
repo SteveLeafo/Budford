@@ -1,5 +1,6 @@
-﻿    using System.Collections;
-    using System.Windows.Forms;
+﻿using System;
+using System.Collections;
+using System.Windows.Forms;
 
 namespace Budford.Utilities
 {
@@ -21,6 +22,8 @@ namespace Budford.Utilities
         /// Case insensitive comparer object
         /// </summary>
         private readonly CaseInsensitiveComparer ObjectCompare;
+
+        internal int SortType = 0;
 
         /// <summary>
         /// Class constructor.  Initializes various elements
@@ -53,7 +56,37 @@ namespace Budford.Utilities
             listviewY = (ListViewItem)y;
 
             // Compare the two items
-            compareResult = ObjectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+            if (SortType == 1)
+            {
+                int a, b;
+
+                int.TryParse(listviewX.SubItems[ColumnToSort].Text, out a);
+                int.TryParse(listviewY.SubItems[ColumnToSort].Text, out b);
+
+                compareResult = b.CompareTo(a);
+            }
+            else if (SortType == 2)
+            {
+                int a, b;
+
+                int.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",",""), out a);
+                int.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+
+                compareResult = b.CompareTo(a);
+            }
+            else if (SortType == 3)
+            {
+                DateTime a, b;
+
+                DateTime.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
+                DateTime.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+
+                compareResult = b.CompareTo(a);
+            }
+            else
+            {
+                compareResult = ObjectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+            }
 
             // Calculate correct return value based on object comparison
             if (OrderOfSort == SortOrder.Ascending)

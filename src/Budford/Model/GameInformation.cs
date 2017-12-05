@@ -16,6 +16,7 @@ namespace Budford.Model
         public string TitleId  = "";
         public string GroupId  = "";
         public string Type = "";
+        public int Rating = 1;
 
         public DateTime LastPlayed = DateTime.MinValue;
         public int PlayCount = 0;

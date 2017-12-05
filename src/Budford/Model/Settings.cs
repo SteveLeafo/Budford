@@ -18,6 +18,10 @@ namespace Budford.Model
 
         public string GraphicsPackRevision = "347";
 
+        public int CurrentSortColumn = 1;
+
+        public int CurrentSortDirection = 0;
+
         public bool ShowToolBar  = true;
 
         public bool ShowStausBar  = true;

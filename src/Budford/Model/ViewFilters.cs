@@ -29,5 +29,12 @@
         public bool ViewOfficialStatusRuns = true;
         public bool ViewOfficialStatusLoads = true;
         public bool ViewOfficialStatusUnplayable = true;
+
+        // Ratings
+        public bool ViewRating5 = true;
+        public bool ViewRating4 = true;
+        public bool ViewRating3 = true;
+        public bool ViewRating2 = true;
+        public bool ViewRating1 = true;
     }
 }

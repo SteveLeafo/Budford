@@ -180,21 +180,24 @@ namespace Budford
         /// </summary>
         private void HandleRemovedFolder()
         {
-            List<string> keysToRemove = new List<string>();
-            foreach (var game in model.GameData)
+            if (checkBox3.Checked)
             {
-                foreach (var removedFolder in removedFolders)
+                List<string> keysToRemove = new List<string>();
+                foreach (var game in model.GameData)
                 {
-                    if (game.Value.LaunchFile.Contains(removedFolder))
+                    foreach (var removedFolder in removedFolders)
                     {
-                        keysToRemove.Add(game.Key);
+                        if (game.Value.LaunchFile.Contains(removedFolder))
+                        {
+                            keysToRemove.Add(game.Key);
+                        }
                     }
                 }
-            }
 
-            foreach (var key in keysToRemove)
-            {
-                model.GameData.Remove(key);
+                foreach (var key in keysToRemove)
+                {
+                    model.GameData.Remove(key);
+                }
             }
         }
 

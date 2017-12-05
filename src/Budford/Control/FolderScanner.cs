@@ -165,6 +165,23 @@ namespace Budford.Control
             foreach (var game in model.GameData)
             {
                 game.Value.Exists = File.Exists(game.Value.LaunchFile);
+
+                if (!game.Value.Exists)
+                {
+                    string currentRomFolder = game.Value.LaunchFile;
+                    for (int i = 0; i < 3; ++i)
+                    {
+                        currentRomFolder = currentRomFolder.Substring(0, currentRomFolder.LastIndexOf('\\'));
+                    }
+                    foreach (var version in model.Settings.RomFolders)
+                    {
+                        string attempt = game.Value.LaunchFile.Replace(currentRomFolder, version);
+                        if (File.Exists(attempt))
+                        {
+                            game.Value.LaunchFile = attempt;
+                        }
+                    }
+                }
             }
         }
 

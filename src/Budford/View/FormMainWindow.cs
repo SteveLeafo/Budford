@@ -130,6 +130,7 @@ namespace Budford
             // Create an instance of a ListView column sorter and assign it 
             // to the ListView control.
             lvwColumnSorter = new ListViewColumnSorter();
+            lvwColumnSorter.ColumnToSort = -1;
             this.listView1.ListViewItemSorter = lvwColumnSorter;
 
             listView1.DoubleBuffered(true);
@@ -138,6 +139,12 @@ namespace Budford
             listView1.DrawColumnHeader += ListView1_DrawColumnHeader;
             listView1.DrawSubItem += ListView1_DrawSubItem;
             listView1.ColumnClick += ListView1_ColumnClick;
+
+            ListView1_ColumnClick(this, new ColumnClickEventArgs(model.Settings.CurrentSortColumn));
+            if (model.Settings.CurrentSortDirection == 1)
+            {
+                ListView1_ColumnClick(this, new ColumnClickEventArgs(model.Settings.CurrentSortColumn));
+            }
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -173,7 +180,26 @@ namespace Budford
                 // Set the column number that is to be sorted; default to ascending.
                 lvwColumnSorter.ColumnToSort = e.Column;
                 lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
+                if (e.Column == 13 || e.Column == 14 || e.Column == 15)
+                {
+                    lvwColumnSorter.SortType = 1;
+                }
+                else if (e.Column == 5)
+                {
+                    lvwColumnSorter.SortType = 2;
+                }
+                else if (e.Column == 12)
+                {
+                    lvwColumnSorter.SortType = 3;
+                }
+                else
+                {
+                    lvwColumnSorter.SortType = 0;
+                }
             }
+
+            model.Settings.CurrentSortColumn = e.Column;
+            model.Settings.CurrentSortDirection = lvwColumnSorter.OrderOfSort == SortOrder.Ascending ? 0 : 1;
 
             // Perform the sort with these new sort options.
             this.listView1.Sort();
@@ -322,7 +348,18 @@ namespace Budford
             channelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel;
             channelToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc;
-            virtualConsoleToolStripMenuItem.Click += UsaToolStripMenuItem_Click;            
+            virtualConsoleToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+
+            rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5;
+            rating5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4;
+            rating4ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3;
+            rating3ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2;
+            rating2ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1;
+            rating1ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
             perfectToolStripMenuItem.Checked = model.Filters.ViewStatusPerfect;
             perfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
@@ -369,6 +406,12 @@ namespace Budford
             model.Filters.ViewTypeEshop = eShopToolStripMenuItem.Checked;
             model.Filters.ViewTypeChannel = channelToolStripMenuItem.Checked;
             model.Filters.ViewTypeVc = virtualConsoleToolStripMenuItem.Checked;
+
+            model.Filters.ViewRating5 = rating5ToolStripMenuItem.Checked;
+            model.Filters.ViewRating4 = rating4ToolStripMenuItem.Checked;
+            model.Filters.ViewRating3 = rating3ToolStripMenuItem.Checked;
+            model.Filters.ViewRating2 = rating2ToolStripMenuItem.Checked;
+            model.Filters.ViewRating1 = rating1ToolStripMenuItem.Checked;
 
             model.Filters.ViewStatusPerfect = perfectToolStripMenuItem.Checked;
             model.Filters.ViewStatusPlayable = playableToolStripMenuItem.Checked;
@@ -631,7 +674,8 @@ namespace Budford
             lvi.SubItems.Add(game.Value.Type.Trim() + " ");
             lvi.SubItems.Add(game.Value.LastPlayed != DateTime.MinValue ? game.Value.LastPlayed.ToShortDateString() + " " : "                    ");
             lvi.SubItems.Add(game.Value.PlayCount != 0 ? game.Value.PlayCount + "                 " : "                 ");
-            lvi.SubItems.Add(game.Value.GraphicsPacksCount != 0 ? game.Value.GraphicsPacksCount + "                 " : "                 ");
+            lvi.SubItems.Add(game.Value.GraphicsPacksCount != 0 ? game.Value.GraphicsPacksCount + "                    " : "                    ");
+            lvi.SubItems.Add(game.Value.Rating + "                 ");
         }
 
         /// <summary>
@@ -647,7 +691,10 @@ namespace Budford
                 {
                     if (CheckOfficialStatusFilter(game))
                     {
-                        return CheckTypeFilter(game);
+                        if (CheckRatingFilter(game))
+                        {
+                            return CheckTypeFilter(game);
+                        }
                     }
                 }
             }
@@ -770,6 +817,36 @@ namespace Budford
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        private bool CheckRatingFilter(GameInformation game)
+        {
+            switch (game.Rating)
+            {
+                case 5:
+                    if (!model.Filters.ViewRating5) return false;
+                    break;
+                case 4:
+                    if (!model.Filters.ViewRating4) return false;
+                    break;
+                case 3:
+                    if (!model.Filters.ViewRating3) return false;
+                    break;
+                case 2:
+                    if (!model.Filters.ViewRating2) return false;
+                    break;
+                case 1:
+                    if (!model.Filters.ViewRating1) return false;
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitialiseListView()
         {
             listView1.View = System.Windows.Forms.View.Details;
@@ -790,6 +867,7 @@ namespace Budford
             listView1.Columns.Add("Last Played", 50);
             listView1.Columns.Add("Play Count", 50);
             listView1.Columns.Add("Graphics Packs", 50);
+            listView1.Columns.Add("Rating", 50);
             listView1.Columns.Add("", 50);
             listView1.HeaderStyle = ColumnHeaderStyle.Clickable;
 
@@ -903,6 +981,7 @@ namespace Budford
                     listView1.SelectedItems[0].SubItems[9].Text = game.GameSetting.EmulationState.ToString();
                     listView1.SelectedItems[0].SubItems[12].Text = game.LastPlayed != DateTime.MinValue ? game.LastPlayed.ToShortDateString() + " " : "                    ";
                     listView1.SelectedItems[0].SubItems[13].Text = game.PlayCount != 0 ? game.PlayCount + "                 " : "                 ";
+                    listView1.SelectedItems[0].SubItems[15].Text = game.Rating + "                 ";
                 }
             }
         }      
@@ -1117,11 +1196,24 @@ namespace Budford
             {
                 model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
 
-                if (!Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir))
+                if (GetCurrentVersion().VersionNumber < 1110)
                 {
-                    Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir);
+                    if (!Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir))
+                    {
+                        Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir);
+                    }
+                    Process.Start(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir);
                 }
-                Process.Start(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir);
+                else
+                {
+                    string gameId = model.GameData[model.CurrentId].TitleId.Replace("00050000", "");
+
+                    if (!Directory.Exists(GetCurrentVersion().Folder +"\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\"))
+                    {
+                        Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\");
+                    }
+                    Process.Start(GetCurrentVersion().Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\");
+                }
             }
         }
 
@@ -1542,26 +1634,29 @@ namespace Budford
                 //    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
                 //    gi.GameSetting.PreferedVersion = "Latest";
                 //}
-                
+
                 //if (gi.LaunchFileName == "WiiULauncher.rpx")
                 //{
                 //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Unplayable;
                 //}
 
-                //if (gi.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.Perfect)
+
+                //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Perfect)
                 //{
-                //    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
-                //    {
-                //        gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Perfect;
-                //    }
+                    //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
+                    //{
+                    //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Perfect;
+                    //}
+                   // gi.Rating = 3;
                 //}
 
-                //if (gi.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.Playable)
+                //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Playable)
                 //{
-                //    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
-                //    {
-                //        gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Playable;
-                //    }
+                    //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
+                    //{
+                    //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Playable;
+                    //}
+                    //gi.Rating = 3;
                 //}
 
                 //if (gi.LaunchFileName == "WiiULauncher.rpx")
@@ -1748,6 +1843,113 @@ namespace Budford
                     }
                 }
             }
+        }
+
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // All
+            perfectToolStripMenuItem.Checked = model.Filters.ViewStatusPerfect = true;
+            playableToolStripMenuItem.Checked = model.Filters.ViewStatusPlayable = true;
+            runsToolStripMenuItem.Checked = model.Filters.ViewStatusRuns = true;
+            loadsToolStripMenuItem.Checked = model.Filters.ViewStatusLoads = true;
+            unplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable = true;
+            notSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet = true;
+            PopulateListView();
+        }
+
+        private void noneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // None
+            perfectToolStripMenuItem.Checked = model.Filters.ViewStatusPerfect = false;
+            playableToolStripMenuItem.Checked = model.Filters.ViewStatusPlayable = false;
+            runsToolStripMenuItem.Checked = model.Filters.ViewStatusRuns = false;
+            loadsToolStripMenuItem.Checked = model.Filters.ViewStatusLoads = false;
+            unplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable = false;
+            notSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet = false;
+            PopulateListView();
+        }
+
+        private void allToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            // Officially all
+            officiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect = true;
+            officiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable = true;
+            officiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns = true;
+            officiallyLoadsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusLoads = true;
+            officiallyUnplayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusUnplayable = true;
+            officiallyNotSetToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusNotSet = true;
+            PopulateListView();
+        }
+
+        private void noneToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            // Officially none
+            officiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect = false;
+            officiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable = false;
+            officiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns = false;
+            officiallyLoadsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusLoads = false;
+            officiallyUnplayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusUnplayable = false;
+            officiallyNotSetToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusNotSet = false;
+            PopulateListView();
+        }
+
+        private void allToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // All regions
+            usaToolStripMenuItem.Checked = model.Filters.ViewRegionUsa = true;
+            europeToolStripMenuItem.Checked = model.Filters.ViewRegionEur = true;
+            japanToolStripMenuItem.Checked = model.Filters.ViewRegionJap = true;
+            PopulateListView();
+        }
+
+        private void noneToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // No regions
+            usaToolStripMenuItem.Checked = model.Filters.ViewRegionUsa = false;
+            europeToolStripMenuItem.Checked = model.Filters.ViewRegionEur = false;
+            japanToolStripMenuItem.Checked = model.Filters.ViewRegionJap = false;
+            PopulateListView();
+        }
+
+        private void allToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            // All types
+            wiiUToolStripMenuItem.Checked = model.Filters.ViewTypeWiiU = true;
+            eShopToolStripMenuItem.Checked = model.Filters.ViewTypeEshop = true;
+            channelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel = true;
+            virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc = true;
+            PopulateListView();
+        }
+
+        private void noneToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            // No types
+            wiiUToolStripMenuItem.Checked = model.Filters.ViewTypeWiiU = false;
+            eShopToolStripMenuItem.Checked = model.Filters.ViewTypeEshop = false;
+            channelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel = false;
+            virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc = false;
+            PopulateListView();
+        }
+
+        private void allToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+             // No types
+            rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5 = true;
+            rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4 = true;
+            rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3 = true;
+            rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2 = true;
+            rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1 = true;
+            PopulateListView();
+        }
+
+        private void noneToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5 = false;
+            rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4 = false;
+            rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3 = false;
+            rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2 = false;
+            rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1 = false;
+            PopulateListView();
         }
     }   
 }
