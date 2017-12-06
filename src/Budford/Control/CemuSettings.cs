@@ -352,7 +352,14 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    //File.Copy("")
+                    try
+                    {
+                        Directory.Delete(folder + "\\graphicPacks\\" + pack.Folder);
+                    }
+                    catch (Exception)
+                    {
+                        // May be in use 
+                    }
                     FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\" + pack.Folder), new DirectoryInfo(folder + "\\graphicPacks\\" + pack.Folder));
                     packs++;
                 }
