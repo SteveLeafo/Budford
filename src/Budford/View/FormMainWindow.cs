@@ -78,7 +78,7 @@ namespace Budford
                 }
             }
 
-            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-347"), model.GraphicsPacks);
+            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision), model.GraphicsPacks);
 
             Persistence.LoadFromXml(model.OldVersions);
 
@@ -607,6 +607,8 @@ namespace Budford
                 }
 
                 ResizeColumns();
+
+                toolStripStatusLabel3.Text = "Currently showing " + listView1.Items.Count + (listView1.Items.Count == 1 ? " Game" : " Games");
             }
             finally
             {
@@ -1540,7 +1542,7 @@ namespace Budford
 
                 return version;
             }
-            return null;
+            return model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
         }
 
         /// <summary>
@@ -1748,101 +1750,113 @@ namespace Budford
 
         private void dumpTestingResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter("C:\\Development\\broken.csv"))
+            var cv = GetCurrentVersion();
+            if (cv != null)
             {
-                sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
-                foreach (var gd in model.GameData)
+                using (StreamWriter sw = new StreamWriter("C:\\Development\\" + cv.Version + ".txt"))
                 {
-                    GameInformation gi = gd.Value;
-                    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
+                    foreach (var gd in model.GameData)
                     {
-                        if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
-                        {
-                            if (gi.Comments.Length > 0)
-                            {
-                                sw.Write("\"");
-                                sw.Write(gi.Region); sw.Write("\",\"");
-                                sw.Write(gi.Name); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-                                sw.WriteLine();
-                            }
-                        }
+                        GameInformation gi = gd.Value;
+                        sw.WriteLine(gi.SaveDir.Trim() + ", " + gi.Name + ", " + gi.GameSetting.EmulationState.ToString());
                     }
                 }
-                sw.WriteLine();
-                foreach (var gd in model.GameData)
-                {
-                    GameInformation gi = gd.Value;
-                    if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
-                    {
+            }
+            //using (StreamWriter sw = new StreamWriter("C:\\Development\\broken.csv"))
+            //{
+            //    sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
+            //    foreach (var gd in model.GameData)
+            //    {
+            //        GameInformation gi = gd.Value;
+            //        if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
+            //        {
+            //            if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
+            //            {
+            //                if (gi.Comments.Length > 0)
+            //                {
+            //                    sw.Write("\"");
+            //                    sw.Write(gi.Region); sw.Write("\",\"");
+            //                    sw.Write(gi.Name); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+            //                    sw.WriteLine();
+            //                }
+            //            }
+            //        }
+            //    }
+            //    sw.WriteLine();
+            //    foreach (var gd in model.GameData)
+            //    {
+            //        GameInformation gi = gd.Value;
+            //        if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
+            //        {
 
-                        if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
-                        {
-                            if (gi.Comments.Length > 0)
-                            {
-                                sw.Write("\"");
-                                sw.Write(gi.Region); sw.Write("\",\"");
-                                sw.Write(gi.Name); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-                                sw.WriteLine();
-                            }
-                        }
-                    }
-                }
-            }
-            using (StreamWriter sw = new StreamWriter("C:\\Development\\running.csv"))
-            {
-                sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
-                foreach (var gd in model.GameData)
-                {
-                    GameInformation gi = gd.Value;
-                    if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
-                    {
-                        if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
-                        {
-                            //if (gi.Comments.Length > 0)
-                            {
-                                sw.Write("\"");
-                                sw.Write(gi.Region); sw.Write("\",\"");
-                                sw.Write(gi.Name); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-                                sw.WriteLine();
-                            }
-                        }
-                    }
-                }
-                sw.WriteLine();
-                foreach (var gd in model.GameData)
-                {
-                    GameInformation gi = gd.Value;
-                    if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
-                    {
-                        if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
-                        {
-                            //if (gi.Comments.Length > 0)
-                            {
-                                sw.Write("\"");
-                                sw.Write(gi.Region); sw.Write("\",\"");
-                                sw.Write(gi.Name); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-                                sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-                                sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-                                sw.WriteLine();
-                            }
-                        }
-                    }
-                }
-            }
+            //            if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
+            //            {
+            //                if (gi.Comments.Length > 0)
+            //                {
+            //                    sw.Write("\"");
+            //                    sw.Write(gi.Region); sw.Write("\",\"");
+            //                    sw.Write(gi.Name); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+            //                    sw.WriteLine();
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            //using (StreamWriter sw = new StreamWriter("C:\\Development\\running.csv"))
+            //{
+            //    sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
+            //    foreach (var gd in model.GameData)
+            //    {
+            //        GameInformation gi = gd.Value;
+            //        if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+            //        {
+            //            if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
+            //            {
+            //                //if (gi.Comments.Length > 0)
+            //                {
+            //                    sw.Write("\"");
+            //                    sw.Write(gi.Region); sw.Write("\",\"");
+            //                    sw.Write(gi.Name); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+            //                    sw.WriteLine();
+            //                }
+            //            }
+            //        }
+            //    }
+            //    sw.WriteLine();
+            //    foreach (var gd in model.GameData)
+            //    {
+            //        GameInformation gi = gd.Value;
+            //        if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+            //        {
+            //            if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
+            //            {
+            //                //if (gi.Comments.Length > 0)
+            //                {
+            //                    sw.Write("\"");
+            //                    sw.Write(gi.Region); sw.Write("\",\"");
+            //                    sw.Write(gi.Name); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
+            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
+            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
+            //                    sw.WriteLine();
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1950,6 +1964,18 @@ namespace Budford
             rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2 = false;
             rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1 = false;
             PopulateListView();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                {
+                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    toolStripStatusLabel1.Text = game.Comments;
+                }
+            }
         }
     }   
 }

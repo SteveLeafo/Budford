@@ -31,7 +31,7 @@ namespace Budford.Model
 
         public byte EnableDebugOffset;
 
-        public byte Volume = 0x1E;
+        internal byte Volume = 0x1E;
 
 
         // CEMU Hook

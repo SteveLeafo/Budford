@@ -46,8 +46,6 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -64,12 +62,15 @@
             this.downloadCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadOldCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadGraphicsPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importGraphicsPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshSaveDirDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -93,13 +94,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 8, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 9, 2);
             this.tableLayoutPanel1.Controls.Add(this.button3, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.button4, 6, 2);
             this.tableLayoutPanel1.Controls.Add(this.button5, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 9, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 8, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 27);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -220,26 +221,6 @@
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(697, 542);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(778, 542);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(8, 542);
@@ -266,12 +247,12 @@
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(302, 542);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(328, 20);
+            this.textBox1.Size = new System.Drawing.Size(285, 20);
             this.textBox1.TabIndex = 4;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(636, 542);
+            this.button4.Location = new System.Drawing.Point(593, 542);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(35, 23);
             this.button4.TabIndex = 1;
@@ -326,6 +307,7 @@
             this.downloadCemuHookToolStripMenuItem,
             this.downloadOldCemuHookToolStripMenuItem,
             this.downloadGraphicsPacksToolStripMenuItem,
+            this.importGraphicsPackToolStripMenuItem,
             this.toolStripSeparator2,
             this.refreshSaveDirDatabaseToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -379,6 +361,13 @@
             this.downloadGraphicsPacksToolStripMenuItem.Text = "Download Graphics Packs";
             this.downloadGraphicsPacksToolStripMenuItem.Click += new System.EventHandler(this.downloadGraphicsPacksToolStripMenuItem_Click);
             // 
+            // importGraphicsPackToolStripMenuItem
+            // 
+            this.importGraphicsPackToolStripMenuItem.Name = "importGraphicsPackToolStripMenuItem";
+            this.importGraphicsPackToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.importGraphicsPackToolStripMenuItem.Text = "Import Graphics Pack";
+            this.importGraphicsPackToolStripMenuItem.Click += new System.EventHandler(this.importGraphicsPackToolStripMenuItem_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -422,6 +411,26 @@
             this.addNewInstanceToolStripMenuItem.Text = "Add new instance...";
             this.addNewInstanceToolStripMenuItem.Click += new System.EventHandler(this.addNewInstanceToolStripMenuItem_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(732, 542);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(654, 539);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 29);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Graphic Pack";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormEditInstalledVersions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,8 +463,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
@@ -486,5 +493,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem refreshSaveDirDatabaseToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ToolStripMenuItem importGraphicsPackToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

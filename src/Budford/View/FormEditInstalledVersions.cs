@@ -54,29 +54,7 @@ namespace Budford.View
 
             model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml");
 
-            listView1.DoubleBuffered(true);
-
-            PopulateList();
-
-            textBox1.Text = model.Settings.DefaultInstallFolder;
-
-            uris = new[]
-            {
-                "http://cemu.info/releases/cemu_" + model.Settings.CurrentCemuVersion + ".zip",
-                "https://files.sshnuke.net/cemuhook_190c_0532.zip",
-                "https://github.com/slashiee/cemu_graphic_packs/archive/master.zip",
-                "https://files.sshnuke.net/sharedFonts.7z"
-            };
-
-            filenames = new[]
-            {
-                "cemu_" + model.Settings.CurrentCemuVersion + ".zip",
-                "cemu_hook.zip",
-                "graphicsPacks.zip",
-                "sharedFonts.7z"
-            };
-
-            AddOldGameMenuItems();            
+            Initialise();
         }
 
         /// <summary>
@@ -92,6 +70,11 @@ namespace Budford.View
             launcher = launcherIn;
             fileManager = fileManagerIn;
 
+            Initialise(); 
+        }
+
+        private void Initialise()
+        {
             listView1.DoubleBuffered(true);
 
             PopulateList();
@@ -116,8 +99,23 @@ namespace Budford.View
                 "sharedFonts.7z"
             };
 
-            AddOldGameMenuItems();  
+            AddOldGameMenuItems();
+
+            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+            {
+                string folder = dir.Replace("graphicsPacks\\", "");
+                if (folder.StartsWith("graphicPacks_2-"))
+                {
+                    string pack = folder.Replace("graphicPacks_2-", "");
+                    comboBox1.Items.Add(pack);
+                    if (pack == model.Settings.GraphicsPackRevision)
+                    {
+                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                    }
+                }
+            }
         }
+
 
         /// <summary>
         /// 
@@ -611,6 +609,25 @@ namespace Budford.View
                 }
             }
             return false;
+        }
+
+        private void importGraphicsPackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "Graphic Packs| *.zip;";
+
+                // Show open file dialog box 
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    unpacker.Unpack(dlg.FileName, "graphicsPacks\\" + Path.GetFileNameWithoutExtension(dlg.FileName));
+                }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            model.Settings.GraphicsPackRevision = comboBox1.Text;
         }
     }
 }

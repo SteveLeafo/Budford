@@ -90,6 +90,9 @@ namespace Budford.Control
 
                 PopulateStartInfo(game, getSaveDir, cemu_only, cemu, start, shiftUp);
 
+                // Required since 1.11.2
+                start.WorkingDirectory = runningVersion.Folder;
+
                 // Run the external process & wait for it to finish
                 var parentProcess = Process.GetCurrentProcess();
                 var original = parentProcess.PriorityClass;
@@ -125,7 +128,7 @@ namespace Budford.Control
                 if (src.Exists)
                 {
                     FileInfo dest = new FileInfo(runningVersion.Folder + "\\shaderCache\\transferable\\" + game.SaveDir + ".bin");
-                    if (!dest.Exists || dest.Length > src.Length)
+                    if (!dest.Exists || dest.Length < src.Length)
                     {
                         File.Copy(src.FullName, dest.FullName, true);
                     }
