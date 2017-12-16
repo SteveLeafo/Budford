@@ -54,7 +54,13 @@ namespace Budford.Control
                 {
                     if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                     {
-                        file.CopyTo(Path.Combine(target.FullName, file.Name));
+                        try
+                        {
+                            file.CopyTo(Path.Combine(target.FullName, file.Name));
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     else
                     {
@@ -199,9 +205,10 @@ namespace Budford.Control
             iv.Name = folder.Replace(model.Settings.DefaultInstallFolder + "\\", "");
             iv.Folder = folder;
 
-            if (version == "??")
+            if (version == "??" || version == "")
             {
-                string name = iv.Name.TrimStart('_').ToLower(); ;
+                string name = iv.Name.TrimStart('_').ToLower();
+
                 if (name.StartsWith("cemu_"))
                 {
                     iv.Version = name.Replace("cemu_", "").Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", "");
@@ -211,6 +218,11 @@ namespace Budford.Control
                     if (iv.Name.Contains("_"))
                     {
                         iv.Version = iv.Name.Split('_')[0].Replace("cemu", "");
+                    }
+                    else
+                    {
+                        iv.Version = name.Replace("cemu", "");
+                        iv.Version = iv.Version.Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", "");
                     }
                 }
             }

@@ -88,7 +88,7 @@ namespace Budford.Control
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo();
 
-                PopulateStartInfo(game, getSaveDir, cemu_only, cemu, start, shiftUp);
+                PopulateStartInfo(game, getSaveDir, cemu_only, "CEMU.EXE", start, shiftUp);
 
                 // Required since 1.11.2
                 start.WorkingDirectory = runningVersion.Folder;
