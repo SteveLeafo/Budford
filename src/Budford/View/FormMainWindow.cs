@@ -1977,5 +1977,50 @@ namespace Budford
                 }
             }
         }
+
+        private void updateShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateShaderCachesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            iv1 = GetCurrentVersion();
+
+            System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc2);
+        }
+
+        static InstalledVersion iv1;
+
+        void ThreadProc2(Object stateInfo)
+        {
+            if (iv1 != null)
+            {
+                foreach (var game in model.GameData)
+                {
+                    if (!game.Value.SaveDir.StartsWith("??"))
+                    {
+                        FileInfo fi = new FileInfo(iv1.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin");
+                        if (fi.Exists)
+                        {
+                            if (fi.Length > 1000000)
+                            {
+                                model.CurrentId = game.Key;
+                                launcher.LaunchCemu(model, game.Value, true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void mergeShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormShaderMerger merger = new FormShaderMerger())
+            {
+                merger.ShowDialog(this);
+            }
+        }
+
     }   
 }

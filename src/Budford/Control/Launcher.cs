@@ -99,6 +99,9 @@ namespace Budford.Control
 
                 parentProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
 
+
+                string path = Directory.GetCurrentDirectory();
+                
                 proc = Process.Start(start);
                 proc.EnableRaisingEvents = true;
                 proc.Exited += new EventHandler(proc_Exited);
@@ -240,7 +243,7 @@ namespace Budford.Control
                         if (srcFile.Exists)
                         {
                             FileInfo destFile = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + runningGame.SaveDir + "\\post_180.bin");
-                            if (!destFile.Exists || destFile.Length > srcFile.Length)
+                            if (!destFile.Exists || destFile.Length < srcFile.Length)
                             {
                                 string folder = Path.GetDirectoryName(destFile.FullName);
                                 if (!Directory.Exists(folder))
@@ -548,20 +551,21 @@ namespace Budford.Control
         {
             int i = proc.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
             int c = 0;
-            while (i == -1 && c < 300)
+            while (i == -1 && c < 50000)
             {
                 try
                 {
                     System.Threading.Thread.Sleep(100);
                     proc.Refresh();
-                    i = proc.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
-                    if (File.Exists(logFile))
-                    {
-                        game.SaveDir = ExtractSaveDirFromLogfile(logFile);
-                        parent.UpdateSaveDir(game.SaveDir);
-                        i = -1;
-                        break;
-                    }
+                    i = proc.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+
+                    //if (File.Exists(logFile))
+                    //{
+                    //    game.SaveDir = ExtractSaveDirFromLogfile(logFile);
+                    //    parent.UpdateSaveDir(game.SaveDir);
+                    //    i = -1;
+                    //    break;
+                    //}
                     c++;
                 }
                 catch (Exception ex)

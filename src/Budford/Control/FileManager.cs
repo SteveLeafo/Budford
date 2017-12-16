@@ -173,6 +173,10 @@ namespace Budford.Control
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Folder doesn't exist: " + model.Settings.DefaultInstallFolder);
+            }
         }
 
         /// <summary>

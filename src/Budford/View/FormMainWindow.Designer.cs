@@ -61,6 +61,7 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadCompatabilityStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateSaveDirDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateShaderCachesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showStatusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,6 +131,9 @@
             this.copySavesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyShadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpTestingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mergeShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -149,8 +153,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -359,7 +363,8 @@
             this.manageInstalledVersionsToolStripMenuItem,
             this.toolStripSeparator12,
             this.downloadCompatabilityStatusToolStripMenuItem,
-            this.updateSaveDirDatabaseToolStripMenuItem});
+            this.updateSaveDirDatabaseToolStripMenuItem,
+            this.updateShaderCachesToolStripMenuItem1});
             this.cemuToolStripMenuItem.Name = "cemuToolStripMenuItem";
             this.cemuToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.cemuToolStripMenuItem.Text = "Cemu";
@@ -408,6 +413,13 @@
             this.updateSaveDirDatabaseToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.updateSaveDirDatabaseToolStripMenuItem.Text = "Update SaveDir Database";
             this.updateSaveDirDatabaseToolStripMenuItem.Click += new System.EventHandler(this.updateSaveDirDatabaseToolStripMenuItem_Click);
+            // 
+            // updateShaderCachesToolStripMenuItem1
+            // 
+            this.updateShaderCachesToolStripMenuItem1.Name = "updateShaderCachesToolStripMenuItem1";
+            this.updateShaderCachesToolStripMenuItem1.Size = new System.Drawing.Size(241, 22);
+            this.updateShaderCachesToolStripMenuItem1.Text = "Update Shader Caches";
+            this.updateShaderCachesToolStripMenuItem1.Click += new System.EventHandler(this.updateShaderCachesToolStripMenuItem1_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -822,7 +834,10 @@
             this.fixUnityGameSettingsToolStripMenuItem,
             this.copySavesToolStripMenuItem,
             this.copyShadersToolStripMenuItem,
-            this.dumpTestingResultsToolStripMenuItem});
+            this.dumpTestingResultsToolStripMenuItem,
+            this.updateShaderCachesToolStripMenuItem,
+            this.mergeShaderCachesToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -921,6 +936,25 @@
             this.dumpTestingResultsToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.dumpTestingResultsToolStripMenuItem.Text = "Dump Testing Results";
             this.dumpTestingResultsToolStripMenuItem.Click += new System.EventHandler(this.dumpTestingResultsToolStripMenuItem_Click);
+            // 
+            // updateShaderCachesToolStripMenuItem
+            // 
+            this.updateShaderCachesToolStripMenuItem.Name = "updateShaderCachesToolStripMenuItem";
+            this.updateShaderCachesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.updateShaderCachesToolStripMenuItem.Text = "Update Shader Caches";
+            this.updateShaderCachesToolStripMenuItem.Click += new System.EventHandler(this.updateShaderCachesToolStripMenuItem_Click);
+            // 
+            // mergeShaderCachesToolStripMenuItem
+            // 
+            this.mergeShaderCachesToolStripMenuItem.Name = "mergeShaderCachesToolStripMenuItem";
+            this.mergeShaderCachesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.mergeShaderCachesToolStripMenuItem.Text = "Merge Shader Caches";
+            this.mergeShaderCachesToolStripMenuItem.Click += new System.EventHandler(this.mergeShaderCachesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
             // 
             // helpToolStripMenuItem
             // 
@@ -1053,13 +1087,12 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(17, 17);
-            this.toolStripStatusLabel1.Text = "\"\"";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(850, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(867, 17);
             this.toolStripStatusLabel2.Spring = true;
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1102,15 +1135,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1031, 497);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
-            // uTiledView1
-            // 
-            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
-            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
-            this.uTiledView1.Name = "uTiledView1";
-            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
-            this.uTiledView1.TabIndex = 1;
-            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -1121,6 +1145,15 @@
             this.imageList2.Images.SetKeyName(3, "loads.png");
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
+            // 
+            // uTiledView1
+            // 
+            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
+            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
+            this.uTiledView1.Name = "uTiledView1";
+            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
+            this.uTiledView1.TabIndex = 1;
             // 
             // FormMainWindow
             // 
@@ -1275,6 +1308,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripMenuItem updateShaderCachesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateShaderCachesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mergeShaderCachesToolStripMenuItem;
     }
 }
 

@@ -100,6 +100,8 @@
     <Compile Include="Tools\CopySaves.cs" />
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Utilities\CurrentUserSecurity.cs" />
+    <Compile Include="Utilities\FileCache.cs" />
+    <Compile Include="Utilities\FileCacheEntry.cs" />
     <Compile Include="Utilities\JunctionPoint.cs" />
     <Compile Include="Utilities\LevenshteinDistance.cs" />
     <Compile Include="Utilities\ListViewColumnSorter.cs" />
@@ -155,6 +157,12 @@
     <Compile Include="View\FormMultiFileDownload.Designer.cs">
       <DependentUpon>FormMultiFileDownload.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormShaderMerger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormShaderMerger.Designer.cs">
+      <DependentUpon>FormShaderMerger.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormWebpageDownload.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormMultiFileDownload.resx">
       <DependentUpon>FormMultiFileDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormShaderMerger.resx">
+      <DependentUpon>FormShaderMerger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormWebpageDownload.resx">
       <DependentUpon>FormWebpageDownload.cs</DependentUpon>

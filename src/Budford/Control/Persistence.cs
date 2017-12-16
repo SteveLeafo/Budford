@@ -31,12 +31,13 @@ namespace Budford.Control
                     model = (Model.Model)xsSubmit.Deserialize(writer);
                 }
 
-                SetSaveDirs(model);
 
                 FileManager.SearchForInstalledVersions(model);
                 FolderScanner.GetGameInformation(null, "", "");
                 SetGameTypes(model);
                 CemuFeatures.UpdateFeaturesForInstalledVersions(model);
+
+                SetSaveDirs(model);
 
                 return model;
             }
@@ -55,6 +56,12 @@ namespace Budford.Control
             foreach (var gd in model.GameData2)
             {
                 string key = gd.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + gd.CompanyCode;
+
+                if (gd.SaveDir.Contains("??") )
+                {
+                    //model.Sa
+                }
+
                 if (FolderScanner.regions.TryGetValue(key.Substring(0, 4), out gd.Type))
                 {
                     if (!model.GameData.ContainsKey(key))
