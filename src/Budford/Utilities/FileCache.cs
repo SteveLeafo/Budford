@@ -29,7 +29,7 @@ namespace Budford.Utilities
         public UInt64 fileTableOffset;
         public UInt32 fileTableSize;
         // threadsafe
-        public UInt32 cs;
+        public UInt32 cs = 0;
 
         public static FileCache fileCache_create(string path, UInt32 extraVersion)
         {
@@ -208,7 +208,8 @@ namespace Budford.Utilities
             }
             fileCache.fileTableEntryCount = (UInt32)newFileTableEntryCount;
 
-            fileCache_addFile(fileCache, FILECACHE_FILETABLE_NAME1, FILECACHE_FILETABLE_NAME2, AsByteArray(fileCache.fileTableEntries), (int)(sizeof_fileCacheEntry_t * newFileTableEntryCount));
+            byte[] fileTable = AsByteArray(fileCache.fileTableEntries);
+            fileCache_addFile(fileCache, FILECACHE_FILETABLE_NAME1, FILECACHE_FILETABLE_NAME2, fileTable, (int)(sizeof_fileCacheEntry_t * newFileTableEntryCount));
 
             // update file table info in struct
             if (fileCache.fileTableEntries[0].name1 != FILECACHE_FILETABLE_NAME1 || fileCache.fileTableEntries[0].name2 != FILECACHE_FILETABLE_NAME2)
