@@ -343,11 +343,11 @@ ${If} ${Errors}
 	execStep1:
 	Execwait '"$Temp/vcredist_x64.exe" /q' ; '/q' to install silently
 	pop $0
-	StrCmp "$0" "success" installed execStep1
+	#StrCmp "$0" "success" installed execStep1
 	instAbort1:
-	StrCmp $0 "cancel" 0 +1
-	MessageBox MB_OKCANCEL "Connection Timed Out. Retry ? " IDOK  download1 IDCANCEL 0
-	Quit
+	#StrCmp $0 "cancel" 0 +1
+	#MessageBox MB_OKCANCEL "Connection Timed Out. Retry ? " IDOK  download1 IDCANCEL 0
+	#Quit
 	;not installed, so run the installer
 	;ExecWait 'MyPathWhereInstallerIs\vc++2010setup.exe'
 ${EndIf}
