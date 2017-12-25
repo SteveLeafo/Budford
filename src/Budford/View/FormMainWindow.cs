@@ -31,6 +31,8 @@ namespace Budford
         // Used for column sorting when clicking on a header
         private ListViewColumnSorter lvwColumnSorter;
 
+        static InstalledVersion iv1;
+
         bool comments = false;
 
         /// <summary>
@@ -117,6 +119,7 @@ namespace Budford
             pictureBox1.Visible = model.Settings.ShowToolBar;
             showToolbarToolStripMenuItem.Checked = model.Settings.ShowToolBar;
             listView1.KeyDown += listView1_KeyDown;
+            //listView1.MouseDown += listView1_MouseDown;
 
             if (model.Settings.CurrentView == "Detailed")
             {
@@ -147,12 +150,33 @@ namespace Budford
             }
         }
 
+        void listView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip2.Items.Clear();
+                var mi = new ToolStripMenuItem("C:\\temp");
+                // handle menu item click event here [as required]
+                mi.Click += mi_Click;
+                contextMenuStrip2.Items.Add(mi);
+                //var bounds = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                if (sender != null)
+                {
+                    contextMenuStrip2.Show(sender as ListView, new Point(e.X, e.Y));
+                }
+            }
+        }
+
+        void mi_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hello");
+        }
+
         void listView1_KeyDown(object sender, KeyEventArgs e)
         {
             KeysConverter kc = new KeysConverter();
             string keyChar = kc.ConvertToString(e.KeyData);
-            FindMyString(keyChar);
-            e.Handled = true;
+            e.Handled = FindMyString(keyChar);
         }
 
         /// <summary>
@@ -1673,7 +1697,7 @@ namespace Budford
         /// 
         /// </summary>
         /// <param name="searchString"></param>
-        private void FindMyString(string searchString)
+        private bool FindMyString(string searchString)
         {
             // Ensure we have a proper string to search for.
             if (searchString != string.Empty)
@@ -1696,11 +1720,13 @@ namespace Budford
                     if (listView1.Items[i].SubItems[1].Text.ToLower().StartsWith(searchString.ToLower()))
                     {
                         listView1.Items[i].Selected = true;
+                        listView1.Items[i].Focused = true;
                         listView1.Items[i].EnsureVisible();
-                        break;
+                        return true;
                     }
                 }
             }
+            return false;
         }
 
         /// <summary>
@@ -1730,24 +1756,43 @@ namespace Budford
             }
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             launcher.Open(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void copySavesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CopySaves cs = new CopySaves(model);
             cs.Execute();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void copyShadersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CopyShaderCache cs = new CopyShaderCache(model);
             cs.Execute();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dumpTestingResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var cv = GetCurrentVersion();
@@ -1859,6 +1904,11 @@ namespace Budford
             //}
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // All
@@ -1871,6 +1921,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // None
@@ -1883,6 +1938,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void allToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // Officially all
@@ -1895,6 +1955,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noneToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // Officially none
@@ -1907,6 +1972,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void allToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // All regions
@@ -1915,7 +1985,12 @@ namespace Budford
             japanToolStripMenuItem.Checked = model.Filters.ViewRegionJap = true;
             PopulateListView();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noneToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // No regions
@@ -1925,6 +2000,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void allToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // All types
@@ -1934,7 +2014,12 @@ namespace Budford
             virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc = true;
             PopulateListView();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noneToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // No types
@@ -1945,6 +2030,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void allToolStripMenuItem4_Click(object sender, EventArgs e)
         {
              // No types
@@ -1956,6 +2046,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void noneToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5 = false;
@@ -1966,6 +2061,11 @@ namespace Budford
             PopulateListView();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 1)
@@ -1978,11 +2078,21 @@ namespace Budford
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void updateShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void updateShaderCachesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             iv1 = GetCurrentVersion();
@@ -1990,8 +2100,10 @@ namespace Budford
             System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc2);
         }
 
-        static InstalledVersion iv1;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stateInfo"></param>
         void ThreadProc2(Object stateInfo)
         {
             if (iv1 != null)
@@ -2014,11 +2126,33 @@ namespace Budford
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mergeShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormShaderMerger merger = new FormShaderMerger())
             {
                 merger.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void createSaveFileSnapshotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                {
+                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    launcher.CreateSaveSnapshot(model, game);
+                }
             }
         }
 

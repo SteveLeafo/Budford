@@ -73,6 +73,9 @@ namespace Budford.View
             Initialise(); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Initialise()
         {
             listView1.DoubleBuffered(true);
@@ -101,6 +104,15 @@ namespace Budford.View
 
             AddOldGameMenuItems();
 
+            UpdateGraphicsPackCombo();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateGraphicsPackCombo()
+        {
+            comboBox1.Items.Clear();
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = dir.Replace("graphicsPacks\\", "");
@@ -115,7 +127,6 @@ namespace Budford.View
                 }
             }
         }
-
 
         /// <summary>
         /// 
@@ -490,6 +501,10 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         static string GetCemuLatestHookVersion()
         {
             foreach (string str in File.ReadAllLines("C:\\Development\\hook.html"))
@@ -567,8 +582,6 @@ namespace Budford.View
             }
         }
 
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -593,7 +606,6 @@ namespace Budford.View
             }
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -611,6 +623,11 @@ namespace Budford.View
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void importGraphicsPackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
@@ -621,10 +638,16 @@ namespace Budford.View
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     unpacker.Unpack(dlg.FileName, "graphicsPacks\\" + Path.GetFileNameWithoutExtension(dlg.FileName));
+                    UpdateGraphicsPackCombo();
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             model.Settings.GraphicsPackRevision = comboBox1.Text;

@@ -78,6 +78,7 @@
     <Compile Include="Control\Launcher.cs" />
     <Compile Include="Control\NativeMethods.cs" />
     <Compile Include="Control\Persistence.cs" />
+    <Compile Include="Control\SpecialFolders.cs" />
     <Compile Include="Control\Unpacker.cs" />
     <Compile Include="Control\CemuSettings.cs" />
     <Compile Include="Control\WindowsOS.cs" />

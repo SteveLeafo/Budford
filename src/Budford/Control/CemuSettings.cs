@@ -498,6 +498,10 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
+                    if (pack.Gui == null)
+                    {
+                        FolderScanner.AddPackGui(pack);
+                    }
                     if (pack.Gui != null)
                     {
 

@@ -11,9 +11,30 @@ namespace Budford.Control
 {
     internal class Launcher
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        Model.Model model;
+
+        /// <summary>
+        /// 
+        /// </summary>
         readonly FormMainWindow parent;
 
-        Process proc;
+        /// <summary>
+        /// 
+        /// </summary>
+        Process runningProcess;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        GameInformation runningGame = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        InstalledVersion runningVersion = null;
 
         /// <summary>
         /// Constructor
@@ -40,10 +61,6 @@ namespace Budford.Control
                 }
             }
         }
-
-        GameInformation runningGame = null;
-        InstalledVersion runningVersion = null;
-        Model.Model model;
 
         /// <summary>
         /// 
@@ -75,13 +92,13 @@ namespace Budford.Control
 
                 if (game != null)
                 {
-                    CopyLargestShaderCache(game);
-                    CopyLatestSave(game);
+                    CopyLargestShaderCacheToCemu(game);
+                    CopyLatestSaveToCemu(game);
                 }
 
                 if (!getSaveDir)
                 {
-                    DeleteShaderCacheIfRequired(modelIn);
+                    DeleteShaderCacheIfRequired(modelIn, runningVersion);
 
                     CreateDefaultSettingsFile(modelIn, game);
                 }
@@ -102,18 +119,18 @@ namespace Budford.Control
 
                 string path = Directory.GetCurrentDirectory();
                 
-                proc = Process.Start(start);
-                proc.EnableRaisingEvents = true;
-                proc.Exited += new EventHandler(proc_Exited);
+                runningProcess = Process.Start(start);
+                runningProcess.EnableRaisingEvents = true;
+                runningProcess.Exited += new EventHandler(proc_Exited);
 
                 runningGame = game;
 
                 parentProcess.PriorityClass = original;
 
                 // Allow the process to finish starting.
-                if (proc != null)
+                if (runningProcess != null)
                 {
-                    proc.PriorityClass = ProcessPriorityClass.BelowNormal;
+                    runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
                     WaitForProcess(modelIn, game, getSaveDir, cemu_only, logfile);
                 }
             }
@@ -123,14 +140,18 @@ namespace Budford.Control
             }
         }
 
-        private void CopyLargestShaderCache(GameInformation game)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        private void CopyLargestShaderCacheToCemu(GameInformation game)
         {
             if (!game.SaveDir.StartsWith("??"))
             {
-                FileInfo src = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\post_180.bin");
+                FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(game));
                 if (src.Exists)
                 {
-                    FileInfo dest = new FileInfo(runningVersion.Folder + "\\shaderCache\\transferable\\" + game.SaveDir + ".bin");
+                    FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
                     if (!dest.Exists || dest.Length < src.Length)
                     {
                         File.Copy(src.FullName, dest.FullName, true);
@@ -139,43 +160,39 @@ namespace Budford.Control
             }
         }
 
-        private void CopyLatestSave(GameInformation game)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        private void CopyLatestSaveToCemu(GameInformation game)
         {
             if (!game.SaveDir.StartsWith("??"))
             {
-                string gameId = game.TitleId.Replace("00050000", "");
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
+                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion,game));
+                UpdateFolder(src, dest);
 
-                if (runningVersion.VersionNumber >= 1110)
-                {
-                    DirectoryInfo src = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\" + model.CurrentUser);
-                    DirectoryInfo dest = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\80000001");
-                    UpdateFolder(src, dest);
-
-                    src = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\common");
-                    dest = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\common");
-
-                    UpdateFolder(src, dest);
-                }
-                else
-                {
-                    DirectoryInfo src = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\" + model.CurrentUser);
-                    DirectoryInfo dest = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\emulatorSave\\" + game.SaveDir);
-                    UpdateFolder(src, dest);
-
-                    src = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\common");
-                    dest = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\emulatorSave\\" + game.SaveDir + "_255");
-                    UpdateFolder(src, dest);
-                }
+                src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
+                dest = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
+                UpdateFolder(src, dest);
             }
         }
 
-        private static void UpdateFolder(DirectoryInfo src, DirectoryInfo dest)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dest"></param>    
+        private static void UpdateFolder(DirectoryInfo src, DirectoryInfo dest, bool smashIt = false)
         {
-            if (dest.Exists)
+            if (smashIt)
             {
-                dest.Delete(true);
+                if (dest.Exists)
+                {
+                    dest.Delete(true);
+                }
+                dest.Create();
             }
-            dest.Create();
 
             if (src.Exists)
             {
@@ -185,8 +202,6 @@ namespace Budford.Control
                 }
             }
         }
-
-
 
         /// <summary>
         /// 
@@ -200,14 +215,14 @@ namespace Budford.Control
         {
             try
             {
-                proc.WaitForInputIdle();
+                runningProcess.WaitForInputIdle();
             }
             catch (Exception ex)
             {
                 model.Errors.Add(ex.Message);
             }
 
-            proc.PriorityClass = ProcessPriorityClass.BelowNormal;
+            runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
 
             if (getSaveDir && !cemu_only)
             {
@@ -216,7 +231,7 @@ namespace Budford.Control
 
             if (getSaveDir)
             {
-                proc.WaitForExit();
+                runningProcess.WaitForExit();
             }
             else
             {
@@ -224,12 +239,17 @@ namespace Budford.Control
                 {
                     ThreadPool.QueueUserWorkItem(delegate
                     {
-                        proc.WaitForExit();
+                        runningProcess.WaitForExit();
                     });
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
         {
             if (runningGame != null)
@@ -239,10 +259,10 @@ namespace Budford.Control
                     if (!runningGame.SaveDir.StartsWith("??"))
                     {
                         // Copy shader caches...
-                        FileInfo srcFile = new FileInfo(runningVersion.Folder + "\\shaderCache\\transferable\\" + runningGame.SaveDir + ".bin");
+                        FileInfo srcFile = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, runningGame));
                         if (srcFile.Exists)
                         {
-                            FileInfo destFile = new FileInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + runningGame.SaveDir + "\\post_180.bin");
+                            FileInfo destFile = new FileInfo(SpecialFolders.ShaderCacheBudford(runningGame));
                             if (!destFile.Exists || destFile.Length < srcFile.Length)
                             {
                                 string folder = Path.GetDirectoryName(destFile.FullName);
@@ -255,62 +275,25 @@ namespace Budford.Control
                         }
 
                         // Copy saves
-                        if (runningVersion.VersionNumber < 1110)
+                        DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, runningGame));
+                        DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, runningGame, ""));
+                        DirectoryInfo src_255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
+                        DirectoryInfo dest_255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(runningGame, ""));
+                        if (src.Exists)
                         {
-                            string folder = runningGame.Name.Replace(":", "_");
-                            folder = runningGame.SaveDir;
-                            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
-
-                            DirectoryInfo src = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\emulatorSave\\" + runningGame.SaveDir);
-                            DirectoryInfo dest = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
-                            DirectoryInfo src_255 = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\emulatorSave\\" + runningGame.SaveDir + "_255");
-                            DirectoryInfo dest_255 = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
-
-                            if (src.Exists)
+                            if (src.GetFiles().Any() || (src_255.Exists && src_255.GetFiles().Any()))
                             {
-                                if (src.GetFiles().Any() || (src_255.Exists && src_255.GetFiles().Any()))
+                                if (!dest.Exists)
                                 {
-                                    if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser))
-                                    {
-                                        Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
-                                    }
-                                    if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common"))
-                                    {
-                                        Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
-                                    }
-
-                                    FileManager.CopyFilesRecursively(src, dest, false, true);
-                                    FileManager.CopyFilesRecursively(src_255, dest_255, false, true);
+                                    dest.Create();
                                 }
-                            }
-                        }
-                        else
-                        {
-                            string folder = runningGame.Name.Replace(":", "_");
-                            folder = runningGame.SaveDir;
-                            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
-
-                            DirectoryInfo src = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\usr\\save\\00050000\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\80000001");
-                            DirectoryInfo dest = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
-                            DirectoryInfo src_255 = new DirectoryInfo(runningVersion.Folder + "\\mlc01\\usr\\save\\00050000\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
-                            DirectoryInfo dest_255 = new DirectoryInfo(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
-
-                            if (src.Exists)
-                            {
-                                if (src.GetFiles().Any() || (src_255.Exists && src_255.GetFiles().Any()))
+                                if (!dest_255.Exists)
                                 {
-                                    if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser))
-                                    {
-                                        Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\" + model.CurrentUser);
-                                    }
-                                    if (!Directory.Exists(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common"))
-                                    {
-                                        Directory.CreateDirectory(saveFolder + folder + "\\00050000" + "\\" + runningGame.TitleId.Replace("00050000", "") + "\\user\\common");
-                                    }
-
-                                    FileManager.CopyFilesRecursively(src, dest, false, true);
-                                    FileManager.CopyFilesRecursively(src_255, dest_255, false, true);
+                                    dest_255.Create();
                                 }
+
+                                FileManager.CopyFilesRecursively(src, dest, false, true);
+                                FileManager.CopyFilesRecursively(src_255, dest_255, false, true);
                             }
                         }
                     }
@@ -400,16 +383,16 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="model"></param>
-        private static void DeleteShaderCacheIfRequired(Model.Model model)
+        private static void DeleteShaderCacheIfRequired(Model.Model model, InstalledVersion version)
         {
             if (model.Settings.DisableShaderCache)
             {
-                DirectoryInfo di1 = new DirectoryInfo("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\shaderCache\\transferable");
+                DirectoryInfo di1 = new DirectoryInfo(SpecialFolders.ShaderCacheFolderCemu(version) + "\\transferable");
                 foreach (FileInfo file in di1.GetFiles())
                 {
                     file.Delete();
                 }
-                DirectoryInfo di2 = new DirectoryInfo("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\shaderCache\\precompiled");
+                DirectoryInfo di2 = new DirectoryInfo(SpecialFolders.ShaderCacheFolderCemu(version) + "\\shaderCache\\precompiled");
                 foreach (FileInfo file in di2.GetFiles())
                 {
                     file.Delete();
@@ -510,17 +493,9 @@ namespace Budford.Control
                         file.Delete();
                     }
                 }
+
                 GameSettings setting = null;
                 GameInformation information = null;
-
-                //foreach (var gd in model.GameData)
-                //{
-                //    if (gd.Value.LaunchFile == fileName)
-                //    {
-                //        setting = gd.Value.GameSetting;
-                //        information = gd.Value;
-                //    }
-                //}
 
                 CemuSettings cs = new CemuSettings(model, setting, information);
                 cs.WriteSettingsBinFile();
@@ -534,7 +509,7 @@ namespace Budford.Control
                 };
 
                 // Run the external process & wait for it to finish
-                proc = Process.Start(start);               
+                runningProcess = Process.Start(start);               
             }
             else
             {
@@ -549,15 +524,15 @@ namespace Budford.Control
         /// <param name="logFile"></param>
         private void ExtractSaveDirName(GameInformation game, string logFile)
         {
-            int i = proc.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
+            int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
             int c = 0;
             while (i == -1 && c < 50000)
             {
                 try
                 {
                     System.Threading.Thread.Sleep(100);
-                    proc.Refresh();
-                    i = proc.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+                    runningProcess.Refresh();
+                    i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
 
                     //if (File.Exists(logFile))
                     //{
@@ -577,13 +552,13 @@ namespace Budford.Control
 
             if (i != -1)
             {
-                game.SaveDir = proc.MainWindowTitle.Substring(proc.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal) + 9, 8);
+                game.SaveDir = runningProcess.MainWindowTitle.Substring(runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal) + 9, 8);
                 parent.UpdateSaveDir(game.SaveDir);
             }
 
-            if (!proc.HasExited)
+            if (!runningProcess.HasExited)
             {
-                proc.Kill();
+                runningProcess.Kill();
             }
         }
 
@@ -617,12 +592,41 @@ namespace Budford.Control
         /// </summary>
         internal void KillCurrentProcess()
         {
-            if (proc != null)
+            if (runningProcess != null)
             {
-                if (!proc.HasExited)
+                if (!runningProcess.HasExited)
                 {
-                    proc.Kill();
+                    runningProcess.Kill();
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="game"></param>
+        internal void CreateSaveSnapshot(Model.Model model, GameInformation game)
+        {
+            if (!game.SaveDir.StartsWith("??"))
+            {
+                if (runningVersion == null)
+                {
+                    string cemu = "";
+                    string logfile = "";
+                    SetCemuVersion(model, game, out runningVersion, ref cemu, ref logfile);
+                }
+                DirectoryInfo saveDir = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford("", game, ""));
+                string snapShotDir = "S_" + saveDir.EnumerateDirectories().Count();
+
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, game));
+                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, snapShotDir));
+                UpdateFolder(src, dest);
+
+                src = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
+                dest = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, snapShotDir));
+
+                UpdateFolder(src, dest);
             }
         }
     }

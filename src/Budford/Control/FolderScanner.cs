@@ -195,16 +195,21 @@ namespace Budford.Control
         {
             if (!PackAdded(game.Value, pack.Title))
             {
-                foreach (var s in GraphicsPack.graphicPacks_2_347)
-                {
-                    if (s[0] == pack.Folder)
-                    {
-                        pack.Gui = s[1];
-                        break;
-                    }   
-                }
+                AddPackGui(pack);
                 game.Value.GameSetting.graphicsPacks.Add(pack);
                 game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
+            }
+        }
+
+        internal static void AddPackGui(GraphicsPack pack)
+        {
+            foreach (var s in GraphicsPack.graphicPacks_2_347)
+            {
+                if (s[0] == pack.Folder)
+                {
+                    pack.Gui = s[1];
+                    break;
+                }
             }
         }
 

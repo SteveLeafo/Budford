@@ -153,8 +153,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.uTiledView1 = new Budford.View.UserControlTiledView();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.createSaveFileSnapshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.snapshotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -185,9 +188,12 @@
             this.toolStripSeparator5,
             this.openSaveFileLocationToolStripMenuItem,
             this.openContainingFolderToolStripMenuItem,
-            this.openCEMUShaderCacheFolderToolStripMenuItem});
+            this.openCEMUShaderCacheFolderToolStripMenuItem,
+            this.toolStripSeparator18,
+            this.createSaveFileSnapshotToolStripMenuItem,
+            this.snapshotsToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 98);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 170);
             // 
             // propertiesToolStripMenuItem
             // 
@@ -1092,7 +1098,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(867, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(898, 17);
             this.toolStripStatusLabel2.Spring = true;
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1135,6 +1141,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1031, 497);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
+            // uTiledView1
+            // 
+            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
+            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
+            this.uTiledView1.Name = "uTiledView1";
+            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
+            this.uTiledView1.TabIndex = 1;
+            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -1146,14 +1161,23 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
-            // uTiledView1
+            // createSaveFileSnapshotToolStripMenuItem
             // 
-            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
-            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
-            this.uTiledView1.Name = "uTiledView1";
-            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
-            this.uTiledView1.TabIndex = 1;
+            this.createSaveFileSnapshotToolStripMenuItem.Name = "createSaveFileSnapshotToolStripMenuItem";
+            this.createSaveFileSnapshotToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.createSaveFileSnapshotToolStripMenuItem.Text = "Create save file snapshot";
+            this.createSaveFileSnapshotToolStripMenuItem.Click += new System.EventHandler(this.createSaveFileSnapshotToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(241, 6);
+            // 
+            // snapshotsToolStripMenuItem
+            // 
+            this.snapshotsToolStripMenuItem.Name = "snapshotsToolStripMenuItem";
+            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.snapshotsToolStripMenuItem.Text = "Snapshots";
             // 
             // FormMainWindow
             // 
@@ -1312,6 +1336,9 @@
         private System.Windows.Forms.ToolStripMenuItem updateShaderCachesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mergeShaderCachesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+        private System.Windows.Forms.ToolStripMenuItem createSaveFileSnapshotToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
     }
 }
 
