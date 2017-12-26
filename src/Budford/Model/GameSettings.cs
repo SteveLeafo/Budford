@@ -68,7 +68,9 @@ namespace Budford.Model
         public enum CpuModeType : byte
         {
             SingleCoreInterpreter = 0,
-            SingleCoreCompiler = 1
+            SingleCoreCompiler = 1,
+            DualCoreCompiler = 2,
+            TripleCoreCompiler = 3
         }
 
         public enum CpuTimerType : byte

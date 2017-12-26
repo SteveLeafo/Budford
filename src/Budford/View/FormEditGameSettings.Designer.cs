@@ -41,6 +41,8 @@
             this.comboBox19 = new System.Windows.Forms.ComboBox();
             this.label34 = new System.Windows.Forms.Label();
             this.textBox14 = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.comboBox20 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -118,8 +120,6 @@
             this.comboBox15 = new System.Windows.Forms.ComboBox();
             this.comboBox16 = new System.Windows.Forms.ComboBox();
             this.comboBox18 = new System.Windows.Forms.ComboBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.comboBox20 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -308,6 +308,30 @@
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(287, 134);
             this.textBox14.TabIndex = 2;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(3, 86);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(38, 13);
+            this.label35.TabIndex = 0;
+            this.label35.Text = "Rating";
+            // 
+            // comboBox20
+            // 
+            this.comboBox20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox20.FormattingEnabled = true;
+            this.comboBox20.Items.AddRange(new object[] {
+            "5",
+            "4",
+            "3",
+            "2",
+            "1"});
+            this.comboBox20.Location = new System.Drawing.Point(125, 89);
+            this.comboBox20.Name = "comboBox20";
+            this.comboBox20.Size = new System.Drawing.Size(287, 21);
+            this.comboBox20.TabIndex = 1;
             // 
             // groupBox2
             // 
@@ -1064,7 +1088,9 @@
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Items.AddRange(new object[] {
             "Single core interpreter",
-            "Single core recompiler (fast)"});
+            "Single core recompiler (fast)",
+            "Dual core recompiler (fast, unstable!)",
+            "Triple core recompiler (fast, unstable!)"});
             this.comboBox8.Location = new System.Drawing.Point(47, 8);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(371, 21);
@@ -1193,30 +1219,6 @@
             this.comboBox18.Name = "comboBox18";
             this.comboBox18.Size = new System.Drawing.Size(199, 21);
             this.comboBox18.TabIndex = 7;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(3, 86);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(38, 13);
-            this.label35.TabIndex = 0;
-            this.label35.Text = "Rating";
-            // 
-            // comboBox20
-            // 
-            this.comboBox20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox20.FormattingEnabled = true;
-            this.comboBox20.Items.AddRange(new object[] {
-            "5",
-            "4",
-            "3",
-            "2",
-            "1"});
-            this.comboBox20.Location = new System.Drawing.Point(125, 89);
-            this.comboBox20.Name = "comboBox20";
-            this.comboBox20.Size = new System.Drawing.Size(287, 21);
-            this.comboBox20.TabIndex = 1;
             // 
             // FormEditGameSettings
             // 

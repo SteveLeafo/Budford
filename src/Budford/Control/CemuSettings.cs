@@ -47,19 +47,25 @@ namespace Budford.Control
             EnableOnLineMode = 11           // 3 = On / 2 = Off
         }
 
-        const int DebugGX2ApiOffset = 0x16;
-        const int DebugUnsupportedAPICallsOffset = 0x17;
-        const int DebugThreadSynchronisationAPIOffset = 0x18;
-        const int DebugAudioAPIOffset = 0x19;
-        const int DebugInputAPIOffset = 0x1A;
-
-        const int EnableDebugOffset = 0x1E;         // 1 = Enabled
-        const int VolumeOffset = 0x28;              // Volume 0 -> 0x64
-        const int CpuModeOffset = 0x2B;             // 1 = Fast
-        const int CpuTimerOffset = 0x2C;            // 1 = Host
+        enum CoreSettings : byte
+        {
+            DebugGX2ApiOffset = 0,
+            DebugUnsupportedAPICallsOffset = 1,
+            DebugThreadSynchronisationAPIOffset = 2,
+            DebugAudioAPIOffset = 3,
+            DebugInputAPIOffset = 4,
+            EnableDebugOffset = 5,          // 1 = Enabled
+            VolumeOffset = 6,               // Volume 0 -> 0x64
+            CpuModeOffset = 7,              // 1 = Fast
+            CpuTimerOffset = 8              // 1 = Host
+        }
 
         int[] SettingsOffsets;
+        int[] CoreSettingsOffsets;
         int[] SettingsFile;
+
+        readonly int[] Core_Settings =       new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] Core_Settings_V1113 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
 
         readonly int[] V1112_Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a};
         readonly int[] V1110_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x00 };
@@ -189,12 +195,32 @@ namespace Budford.Control
             {
                 SettingsFile = settingsOffsets.Item1;
                 SettingsOffsets = settingsOffsets.Item2;
+                int version;
+                if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_", ""), out version))
+                {
+                    if (version >= 1113)
+                    {
+                        CoreSettingsOffsets = Core_Settings_V1113;
+                    }
+                    else
+                    {
+                        CoreSettingsOffsets = Core_Settings;
+                    }
+                }
             }
             else
             {
                 int version;
                 if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_",""), out version))
                 {
+                    if (version >= 1113)
+                    {
+                        CoreSettingsOffsets = Core_Settings_V1113;
+                    }
+                    else
+                    {
+                        CoreSettingsOffsets = Core_Settings;
+                    }
                     if (version > 191)
                     {
                         SettingsFile = settings_1_10_0_bin;
@@ -304,16 +330,16 @@ namespace Budford.Control
             {
                 using (FileStream fn = new FileStream(folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
                 {
-                    WriteByte(fn, DebugGX2ApiOffset, settings.DebugGX2ApiOffset);
-                    WriteByte(fn, DebugUnsupportedAPICallsOffset, settings.DebugUnsupportedAPICallsOffset);
-                    WriteByte(fn, DebugThreadSynchronisationAPIOffset, settings.DebugThreadSynchronisationAPIOffset);
-                    WriteByte(fn, DebugAudioAPIOffset, settings.DebugAudioAPIOffset);
-                    WriteByte(fn, DebugInputAPIOffset, settings.DebugInputAPIOffset);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugGX2ApiOffset], settings.DebugGX2ApiOffset);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugUnsupportedAPICallsOffset], settings.DebugUnsupportedAPICallsOffset);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugThreadSynchronisationAPIOffset], settings.DebugThreadSynchronisationAPIOffset);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugAudioAPIOffset], settings.DebugAudioAPIOffset);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugInputAPIOffset], settings.DebugInputAPIOffset);
 
-                    WriteByte(fn, VolumeOffset, settings.Volume);
-                    WriteByte(fn, EnableDebugOffset, settings.EnableDebugOffset);
-                    WriteByte(fn, CpuModeOffset, (byte)settings.CpuMode);
-                    WriteByte(fn, CpuTimerOffset, (byte)settings.CpuTimer);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.VolumeOffset], settings.Volume);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.EnableDebugOffset], settings.EnableDebugOffset);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.CpuModeOffset], (byte)settings.CpuMode);
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.CpuTimerOffset], (byte)settings.CpuTimer);
 
                     WriteByte(fn, SettingsOffsets[(int)Settings.GpuBufferAccuractOffset], (byte)settings.GpuBufferCacheAccuracy);
                     WriteByte(fn, SettingsOffsets[(int)Settings.UpscaleFilterOffset], (byte)settings.UpscaleFilter);
@@ -375,7 +401,7 @@ namespace Budford.Control
                 int gfxPackStartOffset;
                 using (FileStream fn = new FileStream(version.Folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
                 {
-                    if (version.VersionNumber >= 1112)
+                    if (version.VersionNumber == 1112)
                     {
                         gfxPackStartOffset = 0X6B + 4;
                     }
