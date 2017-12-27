@@ -120,6 +120,8 @@
             this.comboBox15 = new System.Windows.Forms.ComboBox();
             this.comboBox16 = new System.Windows.Forms.ComboBox();
             this.comboBox18 = new System.Windows.Forms.ComboBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -140,6 +142,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -205,19 +208,22 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label33, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.comboBox19, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label34, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.textBox14, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label34, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.textBox14, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.label35, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.comboBox20, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label36, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.trackBar1, 1, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowCount = 8;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 258);
@@ -294,7 +300,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(3, 113);
+            this.label34.Location = new System.Drawing.Point(3, 143);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(56, 13);
             this.label34.TabIndex = 0;
@@ -303,10 +309,10 @@
             // textBox14
             // 
             this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox14.Location = new System.Drawing.Point(125, 116);
+            this.textBox14.Location = new System.Drawing.Point(125, 146);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(287, 134);
+            this.textBox14.Size = new System.Drawing.Size(287, 104);
             this.textBox14.TabIndex = 2;
             // 
             // label35
@@ -1220,6 +1226,24 @@
             this.comboBox18.Size = new System.Drawing.Size(199, 21);
             this.comboBox18.TabIndex = 7;
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(3, 113);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(42, 13);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Volume";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trackBar1.Location = new System.Drawing.Point(125, 116);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(287, 24);
+            this.trackBar1.TabIndex = 3;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
             // FormEditGameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1255,6 +1279,7 @@
             this.groupBox5.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1353,5 +1378,7 @@
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.ComboBox comboBox20;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }

@@ -28,6 +28,8 @@ namespace Budford.View
                 comboBox1.Items.AddRange(installedVersionsIn.OrderByDescending(version => version.Name).Select(a => a.Name).ToArray());
             }
 
+            trackBar1.SetRange(0, 100);
+
             PopulateGameSettings();
             PopulateGraphicsPack();
             PopulateGameInformation();
@@ -65,6 +67,8 @@ namespace Budford.View
             {
                 pictureBox2.Image = TgaReader.Load(logoFile);
             }
+
+            trackBar1.Value = information.GameSetting.Volume;
         }
 
         /// <summary>
@@ -173,6 +177,8 @@ namespace Budford.View
             }
 
             information.Comments = textBox14.Text;
+
+            information.GameSetting.Volume = (byte)trackBar1.Value;
 
             base.OnFormClosed(e);
         }
