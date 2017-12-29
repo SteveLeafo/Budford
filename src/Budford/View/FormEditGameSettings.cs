@@ -120,6 +120,16 @@ namespace Budford.View
             comboBox16.SelectedIndex = information.GameSetting.DisableGPUFence;
             comboBox18.SelectedIndex = information.GameSetting.EmulateSinglePrecision;
             comboBox17.SelectedIndex = information.GameSetting.SeparateGamePadView;
+
+            comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
+            comboBox22.SelectedIndex = information.CemuHookSetting.CustomTimerMultiplier;
+            comboBox23.SelectedIndex = information.CemuHookSetting.DisableAVX ? 1 : 0;
+            comboBox24.SelectedIndex = information.CemuHookSetting.DisableLZCNT ? 1 : 0;
+            comboBox25.SelectedIndex = information.CemuHookSetting.DisableMOVBE ? 1 : 0;
+            comboBox26.SelectedIndex = information.CemuHookSetting.MotionSource;
+            comboBox27.SelectedIndex = information.CemuHookSetting.MMTimerAccuracy;
+            
+
         }
 
         /// <summary>
@@ -170,6 +180,14 @@ namespace Budford.View
             information.GameSetting.DisableGPUFence = (byte)comboBox16.SelectedIndex;
             information.GameSetting.EmulateSinglePrecision = (byte)comboBox18.SelectedIndex;
             information.GameSetting.SeparateGamePadView = (byte)comboBox17.SelectedIndex;
+
+            information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
+            information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;
+            information.CemuHookSetting.DisableAVX = comboBox23.SelectedIndex != 0;
+            information.CemuHookSetting.DisableLZCNT = comboBox24.SelectedIndex != 0;
+            information.CemuHookSetting.DisableMOVBE = comboBox25.SelectedIndex != 0;
+            information.CemuHookSetting.MotionSource = comboBox26.SelectedIndex;
+            information.CemuHookSetting.MMTimerAccuracy = comboBox27.SelectedIndex;
 
             foreach (ListViewItem lvi in listView1.Items)
             {

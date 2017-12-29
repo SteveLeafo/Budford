@@ -317,7 +317,7 @@ namespace Budford.Control
                 using (StreamWriter writer = new StreamWriter(folder + "\\gameProfiles\\" + information.TitleId + ".ini"))
                 {
                     writer.WriteLine("[Graphics]");
-                    writer.WriteLine("accurateShaderMul = " + (settings.AccaccurateShaderMul == 1 ? "true" : "false"));
+                    writer.WriteLine("accurateShaderMul = " + (settings.AccaccurateShaderMul == 1 ? "true" :  (settings.AccaccurateShaderMul == 0) ? "false" : "min"));
                     writer.WriteLine("disableGPUFence =  " + (settings.DisableGPUFence == 1 ? "true" : "false"));
                     writer.WriteLine("[CPU]");
                     writer.WriteLine("emulateSinglePrecision = " + (settings.EmulateSinglePrecision == 1 ? "true" : "false"));

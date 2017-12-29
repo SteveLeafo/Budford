@@ -82,6 +82,8 @@
     <Compile Include="Control\Unpacker.cs" />
     <Compile Include="Control\CemuSettings.cs" />
     <Compile Include="Control\WindowsOS.cs" />
+    <Compile Include="Control\WriteCemuHookIniFile.cs" />
+    <Compile Include="Model\CemuHookSettings.cs" />
     <Compile Include="Model\SaveDir.cs" />
     <Compile Include="Model\GameSettings.cs" />
     <Compile Include="Model\GraphicsPack.cs" />

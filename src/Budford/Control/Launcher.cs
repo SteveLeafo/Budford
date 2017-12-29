@@ -376,6 +376,7 @@ namespace Budford.Control
             {
                 CemuSettings cs = new CemuSettings(model, game.GameSetting, game);
                 cs.WriteSettingsBinFile();
+                WriteCemuHookIniFile.WriteIni(model, game);
             }
         }
 

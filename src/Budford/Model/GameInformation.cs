@@ -22,6 +22,7 @@ namespace Budford.Model
         public int PlayCount = 0;
         public int GraphicsPacksCount = 0;
         public GameSettings GameSetting;
+        public CemuHookSettings CemuHookSetting =new CemuHookSettings();
         internal bool Exists = false;
     }
 }
