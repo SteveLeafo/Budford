@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cemu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\View\Resources\cemu.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eu_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\View\Resources\eu_flag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="oz_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\View\Resources\oz_flag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="us_flag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\View\Resources\us_flag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wii_u" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\View\Resources\wii-u.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Unpacker_DownloadAndUnpack_The_latest_version_of_" xml:space="preserve">
+    <value>The latest version of </value>
+  </data>
+  <data name="Unpacker_DownloadAndUnpack__has_already_been_installed" xml:space="preserve">
+    <value> has already been installed</value>
+  </data>
+  <data name="Unpacker_DownloadAndUnpack_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Launcher_LaunchCemu_CEMU_is_not_installed" xml:space="preserve">
+    <value>Cemu is not installed</value>
+  </data>
+  <data name="Launcher_LaunchCemu_Please_install_CEMU" xml:space="preserve">
+    <value>Please install Cemu</value>
+  </data>
+  <data name="fWebpageDownload_fWebpageDownload_Downloading_" xml:space="preserve">
+    <value>Downloading </value>
+  </data>
+  <data name="fWebpageDownload_fWebpageDownload____" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__" xml:space="preserve">
+    <value>Budford - Cemu Configuration Manager      Current User: </value>
+  </data>
+  <data name="fMainWindow_openSaveFileLocationToolStripMenuItem_Click_" xml:space="preserve">
+    <value>Save folder doesn't exist.
+
+Perhaps the game hasn't been played yet...</value>
+  </data>
+  <data name="fMainWindow_openSaveFileLocationToolStripMenuItem_Click_Folder_not_found" xml:space="preserve">
+    <value>Folder not found</value>
+  </data>
+  <data name="fFileDownload_fFileDownload_Downloading_" xml:space="preserve">
+    <value>Downloading </value>
+  </data>
+  <data name="fFileDownload_fFileDownload____" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="FileManager_ImportShaderCache_About_to_import_shader_cache_for_" xml:space="preserve">
+    <value>About to import shader cache for </value>
+  </data>
+  <data name="FileManager_ImportShaderCache_" xml:space="preserve">
+    <value>
+Click on OK to continue</value>
+  </data>
+  <data name="FileManager_ImportShaderCache_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="WindowsOS_IsVC2013RedistInstalled_Visual_C___2013_Redistributable_is_installed_" xml:space="preserve">
+    <value>Visual C++ 2013 Redistributable is installed.</value>
+  </data>
+  <data name="fEditInstalledVersion_button4_Click_Please_select_another_name_before_continuing" xml:space="preserve">
+    <value>Please select another name before continuing</value>
+  </data>
+  <data name="fEditInstalledVersion_button4_Click_Name_exists_" xml:space="preserve">
+    <value>Name exists!</value>
+  </data>
+  <data name="fMainWindow_toolStripButton1_Click_Nintendo_Launch_Files_____rpx_" xml:space="preserve">
+    <value>Nintendo Launch Files | *.rpx;</value>
+  </data>
+  <data name="fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_SaveDirs_saved_successfully" xml:space="preserve">
+    <value>SaveDirs saved successfully</value>
+  </data>
+  <data name="fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="fMainWindow_importShaderCacheToolStripMenuItem_Click_Shader_Cache_Files_____bin_" xml:space="preserve">
+    <value>Shader Cache Files | *.bin;</value>
+  </data>
+  <data name="fScanRomFolder_fScanRomFolder_Scanning_" xml:space="preserve">
+    <value>Scanning </value>
+  </data>
+  <data name="fScanRomFolder_fScanRomFolder_____" xml:space="preserve">
+    <value> ...</value>
+  </data>
+</root>

@@ -1,0 +1,3883 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SaveDirs xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AllSaveDirs>
+    <SaveDir>
+      <GameName>360 Breakout</GameName>
+      <GameId>0005000010202E00</GameId>
+      <SaveDirId>60e48912</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Adventure Time: Explore the  Dungeon Because I Don't Know!</GameName>
+      <GameId>000500001014E100</GameId>
+      <SaveDirId>8278ee14</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Affordable Space Adventures</GameName>
+      <GameId>00050000101A1200</GameId>
+      <SaveDirId>b3a03005</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Angry Birds Star Wars</GameName>
+      <GameId>0005000010149100</GameId>
+      <SaveDirId>6452cad6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BAYONETTA</GameName>
+      <GameId>0005000010157F00</GameId>
+      <SaveDirId>52f48c53</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Captain Toad: Treasure Tracker</GameName>
+      <GameId>0005000010180600</GameId>
+      <SaveDirId>51c69ca0</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chariot</GameName>
+      <GameId>0005000010179900</GameId>
+      <SaveDirId>990a5035</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Donkey Kong Country Tropical Freeze</GameName>
+      <GameId>0005000010138300</GameId>
+      <SaveDirId>92060467</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Family Tennis SP</GameName>
+      <GameId>00050000101A2C00</GameId>
+      <SaveDirId>36325ea6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Guacamelee! Super Turbo
+Championship Edition</GameName>
+      <GameId>0005000010176800</GameId>
+      <SaveDirId>0db19727</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Gunman Clive HD Collection</GameName>
+      <GameId>00050000101D0900</GameId>
+      <SaveDirId>223020d1</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>How to Train Your Dragon 2</GameName>
+      <GameId>0005000010161A00</GameId>
+      <SaveDirId>a8955b09</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Kick and Fennick</GameName>
+      <GameId>00050000101D9700</GameId>
+      <SaveDirId>5337af12</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® Jurassic World™</GameName>
+      <GameId>00050000101A6200</GameId>
+      <SaveDirId>aa2ad247</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® CITY UNDERCOVER</GameName>
+      <GameId>0005000010101B00</GameId>
+      <SaveDirId>7bbad1ee</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® Jurassic World™</GameName>
+      <GameId>00050000101A5C00</GameId>
+      <SaveDirId>e9b927e3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Lone Survivor The Director's Cut</GameName>
+      <GameId>000500001018D100</GameId>
+      <SaveDirId>a6356804</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MARIO KART 8</GameName>
+      <GameId>000500001010EC00</GameId>
+      <SaveDirId>9708a1d3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MARIO KART 8</GameName>
+      <GameId>000500001010ED00</GameId>
+      <SaveDirId>9708a1d3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mario Tennis: Ultra Smash</GameName>
+      <GameId>00050000101A3600</GameId>
+      <SaveDirId>7f94c0e0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mighty No. 9</GameName>
+      <GameId>00050000101C5A00</GameId>
+      <SaveDirId>bd9ae50a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Minecraft: Super Mario Edition</GameName>
+      <GameId>00050000101D9D00</GameId>
+      <SaveDirId>a3c2773a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>NES REMIX</GameName>
+      <GameId>0005000010146100</GameId>
+      <SaveDirId>5171bda4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>New SUPER LUIGI U</GameName>
+      <GameId>0005000010142400</GameId>
+      <SaveDirId>2e163203</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>New SUPER MARIO BROS. U</GameName>
+      <GameId>0005000010101D00</GameId>
+      <SaveDirId>80c3dfdc</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nintendo Land</GameName>
+      <GameId>0005000010102000</GameId>
+      <SaveDirId>39f755fd</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>OlliOlli</GameName>
+      <GameId>00050000101A6900</GameId>
+      <SaveDirId>5710ac01</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PAPER MARIO Color Splash</GameName>
+      <GameId>000500001F600B00</GameId>
+      <SaveDirId>3034f732</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PIKMIN 3</GameName>
+      <GameId>000500001012BD00</GameId>
+      <SaveDirId>39c5589b</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Scribblenauts Unlimited</GameName>
+      <GameId>000500001010B200</GameId>
+      <SaveDirId>b61213a7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shantae and the Pirate's Curse</GameName>
+      <GameId>00050000101A5F00</GameId>
+      <SaveDirId>ec509825</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shovel Knight</GameName>
+      <GameId>000500001016E100</GameId>
+      <SaveDirId>e3297986</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splatoon</GameName>
+      <GameId>0005000010176A00</GameId>
+      <SaveDirId>8d354cea</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Spot The Differences: Party!</GameName>
+      <GameId>0005000010149200</GameId>
+      <SaveDirId>af49b3d2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Fox Guard</GameName>
+      <GameId>00050000101BED00</GameId>
+      <SaveDirId>0ae969f2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SteamWorld Dig</GameName>
+      <GameId>000500001018D800</GameId>
+      <SaveDirId>92502da4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SUPER MARIO 3D WORLD</GameName>
+      <GameId>0005000010145D00</GameId>
+      <SaveDirId>7bba927a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Meat Boy</GameName>
+      <GameId>00050000101F4000</GameId>
+      <SaveDirId>d29f6d84</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Smash Bros.
+for Wii U</GameName>
+      <GameId>0005000010144F00</GameId>
+      <SaveDirId>df40dcd0</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Terraria</GameName>
+      <GameId>000500001019C300</GameId>
+      <SaveDirId>54e7a588</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Legend of Zelda Breath of the Wild</GameName>
+      <GameId>00050000101C9500</GameId>
+      <SaveDirId>dcac9927</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Swapper</GameName>
+      <GameId>000500001018D300</GameId>
+      <SaveDirId>2ac839c0</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Wonderful 101</GameName>
+      <GameId>000500001012DC00</GameId>
+      <SaveDirId>b8cc3f27</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Toto Temple Deluxe</GameName>
+      <GameId>00050000101C7F00</GameId>
+      <SaveDirId>811e6dc5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Turbo: Super Stunt Squad</GameName>
+      <GameId>0005000010136700</GameId>
+      <SaveDirId>ab14da1c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Sports Club</GameName>
+      <GameId>0005000010144D00</GameId>
+      <SaveDirId>49672d2c</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii U Panorama View Double-Decker Tour</GameName>
+      <GameId>0005000010131400</GameId>
+      <SaveDirId>9acee325</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii U Panorama View Trailer</GameName>
+      <GameId>0005000010131C00</GameId>
+      <SaveDirId>76092033</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wipeout 3</GameName>
+      <GameId>000500001010E800</GameId>
+      <SaveDirId>398cdece</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Xenoblade Chronicles X</GameName>
+      <GameId>00050000101C4C00</GameId>
+      <SaveDirId>59a32695</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Yoshi's Woolly World</GameName>
+      <GameId>0005000010184E00</GameId>
+      <SaveDirId>31537a8c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>YouTube</GameName>
+      <GameId>0005000010105700</GameId>
+      <SaveDirId>b46aff31</SaveDirId>
+      <Region>ALL</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Captain Toad: Treasure Tracker</GameName>
+      <GameId>0005000010180700</GameId>
+      <SaveDirId>b46aff31</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PIKMIN 3</GameName>
+      <GameId>000500001012BE00</GameId>
+      <SaveDirId>3eabc0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Smash Bros. for Wii U</GameName>
+      <GameId>0005000010145000</GameId>
+      <SaveDirId>7e0e6290</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Zelda: Majora's Mask</GameName>
+      <GameId>50000101baf00</GameId>
+      <SaveDirId>4f70c231</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Christmas Adventure of Rocket P.</GameName>
+      <GameId>50000101e2e00</GameId>
+      <SaveDirId>cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Demonic Karma Summoner</GameName>
+      <GameId>50000101ef400</GameId>
+      <SaveDirId>cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Electronic Super Joy</GameName>
+      <GameId>50000101cee00</GameId>
+      <SaveDirId>abf8170c</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Demaecan</GameName>
+      <GameId>5000010102900</GameId>
+      <SaveDirId>f73af47e</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BANDAI CHANNEL</GameName>
+      <GameId>5000010136100</GameId>
+      <SaveDirId>4dcbc188</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Flowerworks HD</GameName>
+      <GameId>500001016ff00</GameId>
+      <SaveDirId>897f2ef7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shantae: Risky's Revenge</GameName>
+      <GameId>50000101a6100</GameId>
+      <SaveDirId>6f44756</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Project Zero: Maiden of Black...</GameName>
+      <GameId>50000101d0300</GameId>
+      <SaveDirId>459af5ed</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pirate Pop Plus</GameName>
+      <GameId>50000101f8b00</GameId>
+      <SaveDirId>a3cdb3d5</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Skylanders SWAP Force</GameName>
+      <GameId>5000010139200</GameId>
+      <SaveDirId>6cd668ab</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Minecraft: Super Mario Edition</GameName>
+      <GameId>50000101d9d00</GameId>
+      <SaveDirId>7c4083ce</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Disney Epic Mickey 2</GameName>
+      <GameId>500001010db00</GameId>
+      <SaveDirId>435d98ee</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Mario Maker</GameName>
+      <GameId>500001018dd00</GameId>
+      <SaveDirId>44fc5929</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PUYOPUYOTETRIS</GameName>
+      <GameId>500001014d900</GameId>
+      <SaveDirId>fba8d182</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SD2: Go Duck Yourself</GameName>
+      <GameId>50000101f9400</GameId>
+      <SaveDirId>3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TEKKEN TAG 2 Wii U EDITION</GameName>
+      <GameId>5000010110000</GameId>
+      <SaveDirId>36adda6c</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PIKMIN 3</GameName>
+      <GameId>500001012bd00</GameId>
+      <SaveDirId>39c5589b</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>XType Plus</GameName>
+      <GameId>500001016e200</GameId>
+      <SaveDirId>bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Breath of the Wild</GameName>
+      <GameId>50000101c9400</GameId>
+      <SaveDirId>2912eb2f</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Taiko no Tatsujin Atsumete...</GameName>
+      <GameId>50000101d3000</GameId>
+      <SaveDirId>dfdb1596</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Breath of the Wild</GameName>
+      <GameId>50000101c9500</GameId>
+      <SaveDirId>dcac9927</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mario Tennis: Ultra Smash</GameName>
+      <GameId>50000101a3500</GameId>
+      <SaveDirId>7f94c0e0</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Miiverse</GameName>
+      <GameId>500301001610a</GameId>
+      <SaveDirId>d395449d</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mario Tennis: Ultra Smash</GameName>
+      <GameId>50000101a3600</GameId>
+      <SaveDirId>d033ce40</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Internet Browser</GameName>
+      <GameId>500301001210a</GameId>
+      <SaveDirId>29f584be</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SONIC LOST WORLD</GameName>
+      <GameId>5000010128f00</GameId>
+      <SaveDirId>f47e17d7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Gravity Badgers</GameName>
+      <GameId>500001016b100</GameId>
+      <SaveDirId>d1ee0b28</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Twilight Princess HD</GameName>
+      <GameId>500001019e600</GameId>
+      <SaveDirId>3bc226d1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® DIMENSIONS™</GameName>
+      <GameId>5000010195d00</GameId>
+      <SaveDirId>4f5ce4c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splatoon</GameName>
+      <GameId>5000010176900</GameId>
+      <SaveDirId>73c7792c</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Mario Maker</GameName>
+      <GameId>500001018dc00</GameId>
+      <SaveDirId>fe31b7f2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Runbow</GameName>
+      <GameId>5000010183000</GameId>
+      <SaveDirId>59076f4c</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TRANSFORMERS PRIME</GameName>
+      <GameId>500001010b500</GameId>
+      <SaveDirId>93f33377</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Smash Bros.</GameName>
+      <GameId>5000010144f00</GameId>
+      <SaveDirId>d72e798a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dr. Luigi</GameName>
+      <GameId>5000010152b00</GameId>
+      <SaveDirId>afaead48</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nintendo Land</GameName>
+      <GameId>5000010102000</GameId>
+      <SaveDirId>39f755fd</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mario Party 10</GameName>
+      <GameId>5000010162d00</GameId>
+      <SaveDirId>b9064400</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Fast Racing Neo</GameName>
+      <GameId>50000101d6000</GameId>
+      <SaveDirId>57b4449</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Hyrule Warriors</GameName>
+      <GameId>500001017d800</GameId>
+      <SaveDirId>5ede3462</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Typoman</GameName>
+      <GameId>50000101ce000</GameId>
+      <SaveDirId>70e5c105</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MARIO &amp;amp; SONIC SOCHI 2014</GameName>
+      <GameId>500001010c700</GameId>
+      <SaveDirId>a4fcc215</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>WARRIORS OROCHI 3 Hyper(EU)</GameName>
+      <GameId>5000010112b00</GameId>
+      <SaveDirId>61d4711c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mini Mario &amp;amp; Friends</GameName>
+      <GameId>50000101c6200</GameId>
+      <SaveDirId>758814aa</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>New SUPER LUIGI U</GameName>
+      <GameId>5000010142400</GameId>
+      <SaveDirId>2e163203</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Fatal Frame: Maiden of Black...</GameName>
+      <GameId>50000101d0600</GameId>
+      <SaveDirId>abd21c85</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Breath of the Wild</GameName>
+      <GameId>50000101c9300</GameId>
+      <SaveDirId>dcac9927</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PUYOPUYOTETRIS</GameName>
+      <GameId>000500001014D900</GameId>
+      <SaveDirId>fba8d182</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Mario Maker</GameName>
+      <GameId>000500001018DB00</GameId>
+      <SaveDirId>44fc5929</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Freedom Planet</GameName>
+      <GameId>00050000101C3100</GameId>
+      <SaveDirId>8508e605</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>POKKÉN TOURNAMENT</GameName>
+      <GameId>00050000101DF500</GameId>
+      <SaveDirId>a1fbfb65</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Fox Zero</GameName>
+      <GameId>00050000101B0500</GameId>
+      <SaveDirId>62beb053</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Mario Maker</GameName>
+      <GameId>000500001018DD00</GameId>
+      <SaveDirId>44fc5929</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nintendo Land</GameName>
+      <GameId>0005000010102100</GameId>
+      <SaveDirId>39f755fd</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>1001 Spikes</GameName>
+      <GameId>00050000101CA000</GameId>
+      <SaveDirId>ed01d8b4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Giana Sisters Twisted Dreams</GameName>
+      <GameId>000500001014C600</GameId>
+      <SaveDirId>8c34b273</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Gunman Clive HD Collection</GameName>
+      <GameId>00050000101D6100</GameId>
+      <SaveDirId>5563b815</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Jones on Fire</GameName>
+      <GameId>00050000101D4E00</GameId>
+      <SaveDirId>20d3e774</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pure Chess</GameName>
+      <GameId>0005000010145A00</GameId>
+      <SaveDirId>b1903c1c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Thomas Was Alone</GameName>
+      <GameId>000500001018A900</GameId>
+      <SaveDirId>57fe1dd8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TNT Racers</GameName>
+      <GameId>0005000010142800</GameId>
+      <SaveDirId>4176071e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Trine Enchanted Edition</GameName>
+      <GameId>0005000010189C00</GameId>
+      <SaveDirId>80e6497a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Triple Breakout</GameName>
+      <GameId>000500001020FB00</GameId>
+      <SaveDirId>8c786439</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Turtle Tale</GameName>
+      <GameId>000500001017E000</GameId>
+      <SaveDirId>aabb6222</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Typoman</GameName>
+      <GameId>00050000101CE000</GameId>
+      <SaveDirId>70e5c105</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ultratron</GameName>
+      <GameId>00050000101A1400</GameId>
+      <SaveDirId>7c406c94</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Vektor Wars</GameName>
+      <GameId>00050000101DC200</GameId>
+      <SaveDirId>ff398e63</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>VRog</GameName>
+      <GameId>00050000101FF000</GameId>
+      <SaveDirId>da6a0cb1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Whispering Willows</GameName>
+      <GameId>00050000101D4800</GameId>
+      <SaveDirId>f0e81401</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Zen Pinball 2</GameName>
+      <GameId>0005000010113800</GameId>
+      <SaveDirId>59bf529b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Unepic EnjoyUp Games</GameName>
+      <GameId>0005000010145800</GameId>
+      <SaveDirId>b9eade96</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Uplay</GameName>
+      <GameId>000500001011B700</GameId>
+      <SaveDirId>093038ec</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Word Party</GameName>
+      <GameId>00050000101C4A00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Axiom Verge</GameName>
+      <GameId>0005000010200800</GameId>
+      <SaveDirId> 4e4a3a54</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Bombing Bastards</GameName>
+      <GameId>000500001016A200</GameId>
+      <SaveDirId> 366150d9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TITANS TOWER</GameName>
+      <GameId>0005000010201600</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Toki Tori</GameName>
+      <GameId>0005000010152400</GameId>
+      <SaveDirId> a7591685</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Defend your Crypt</GameName>
+      <GameId>00050000101F5A00</GameId>
+      <SaveDirId> 1fe1bc41</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>EDGE</GameName>
+      <GameId>0005000010152100</GameId>
+      <SaveDirId> 85ecf2f1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LOST REAVERS NOTICE</GameName>
+      <GameId>0005000010204500</GameId>
+      <SaveDirId> d744b74e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mutant Mudds Super Challenge</GameName>
+      <GameId>00050000101CA800</GameId>
+      <SaveDirId> 7e48c227</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>NES REMIX 2</GameName>
+      <GameId>0005000010162600</GameId>
+      <SaveDirId> 5431e670</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Toki Tori 2</GameName>
+      <GameId>0005000010116500</GameId>
+      <SaveDirId> 48ab3cf6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Toon Tanks</GameName>
+      <GameId>00050000101FEC00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TOUCH SELECTIONS</GameName>
+      <GameId>00050000101E7E00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Twin Robots</GameName>
+      <GameId>00050000101F8900</GameId>
+      <SaveDirId> d48e4914</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Twisted Fusion</GameName>
+      <GameId>0005000010200700</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>VoxelMaker</GameName>
+      <GameId>00050000101DCA00</GameId>
+      <SaveDirId> 7b7a5fc1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BLOK DROP U</GameName>
+      <GameId>0005000010175700</GameId>
+      <SaveDirId> 39f00dec</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BRICK RACE</GameName>
+      <GameId>000500001020E100</GameId>
+      <SaveDirId> a156fdce</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>COLOR CUBES</GameName>
+      <GameId>000500001020E200</GameId>
+      <SaveDirId> 978abec2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Color Zen Kids</GameName>
+      <GameId>0005000010174200</GameId>
+      <SaveDirId> 4c796a75</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Darts Up</GameName>
+      <GameId>000500001018A200</GameId>
+      <SaveDirId> dd3d2914</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Frenchy Bird</GameName>
+      <GameId>0005000010182800</GameId>
+      <SaveDirId> cac5e1ae</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>I C REDD</GameName>
+      <GameId>000500001020C100</GameId>
+      <SaveDirId> daaf92c8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Job the Leprechaun</GameName>
+      <GameId>00050000101D9F00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SD2: Go Duck Yourself</GameName>
+      <GameId>00050000101FB000</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SDK Paint</GameName>
+      <GameId>00050000101AEB00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SHOOTY SPACE</GameName>
+      <GameId>0005000010201800</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Trine 2 Director's Cut</GameName>
+      <GameId>0005000010112200</GameId>
+      <SaveDirId> 5ac67119</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>99Seconds</GameName>
+      <GameId>0005000010182700</GameId>
+      <SaveDirId> f5c94fa4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Absolutely Unstoppable MineRun</GameName>
+      <GameId>000500001020F500</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Abyss</GameName>
+      <GameId>000500001016D900</GameId>
+      <SaveDirId> 3354105a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Aenigma Os</GameName>
+      <GameId>00050000101F9900</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Amazon / LOVEFiLM</GameName>
+      <GameId>0005000010102F00</GameId>
+      <SaveDirId> d039c335</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>amiibo Touch &amp; Play Nintendo Classics Highlights</GameName>
+      <GameId>00050000101B4300</GameId>
+      <SaveDirId> e4568bcb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>CUP CRITTERS</GameName>
+      <GameId>00050000101FE300</GameId>
+      <SaveDirId> c70f552c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Exile's End</GameName>
+      <GameId>0005000010204A00</GameId>
+      <SaveDirId> ac5657cb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FullBlast</GameName>
+      <GameId>00050000101C4100</GameId>
+      <SaveDirId> 3a11a5a6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GolT Stadium</GameName>
+      <GameId>0005000010185900</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Kung Fu Rabbit</GameName>
+      <GameId>0005000010117800</GameId>
+      <SaveDirId> 97a4b069</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MY STYLE STUDIO: NOTEBOOK</GameName>
+      <GameId>0005000010154A00</GameId>
+      <SaveDirId> 2b81e028</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Hyrule Warriors</GameName>
+      <GameId>000500001017D900</GameId>
+      <SaveDirId> 5ede3462</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cake Ninja 3: The Legend Continues</GameName>
+      <GameId>000500001018CD00</GameId>
+      <SaveDirId> f8aed2fa</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Crunchyroll</GameName>
+      <GameId>0005000010172B00</GameId>
+      <SaveDirId> 861e6bef</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dungeons &amp; Dragons: Chronicles of Mystara</GameName>
+      <GameId>000500001012BF00</GameId>
+      <SaveDirId> f95be003</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Sky 2</GameName>
+      <GameId>00050000101F2700</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Sky</GameName>
+      <GameId>00050000101D6700</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Word Search by POWGI</GameName>
+      <GameId>00050000101C3900</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ZaciSa: Defense of the Crayon Dimension!</GameName>
+      <GameId>00050000101BB300</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mighty Switch Force! 2™ </GameName>
+      <GameId>000500001014F100</GameId>
+      <SaveDirId> eacba29d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>140</GameName>
+      <GameId>00050000101FB500</GameId>
+      <SaveDirId> 9a7edace</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>3Souls</GameName>
+      <GameId>000500001017E200</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>99Moves</GameName>
+      <GameId>0005000010191700</GameId>
+      <SaveDirId> d60ae13d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Angry Bunnies: Colossal Carrot Crusade</GameName>
+      <GameId>0005000010154900</GameId>
+      <SaveDirId> 19e402ff</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Angry Video Game Nerd Adventures</GameName>
+      <GameId>00050000101DBF00</GameId>
+      <SaveDirId> 5c94e68c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Aqua TV</GameName>
+      <GameId>0005000010205F00</GameId>
+      <SaveDirId> 671f1dd5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Armillo</GameName>
+      <GameId>000500001016C700</GameId>
+      <SaveDirId> 9a15b9e5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Art of Balance</GameName>
+      <GameId>0005000010149400</GameId>
+      <SaveDirId> 25135808</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Asdivine Hearts</GameName>
+      <GameId>00050000101EFF00</GameId>
+      <SaveDirId> 76389670</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BIT.TRIP Presents... Runner2: Future Legend of Rhythm Alien</GameName>
+      <GameId>0005000010136300</GameId>
+      <SaveDirId> f03c26d8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Blasting Agent: Ultimate Edition</GameName>
+      <GameId>00050000101FA900</GameId>
+      <SaveDirId> d9250199</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Blek</GameName>
+      <GameId>00050000101A3900</GameId>
+      <SaveDirId> 0334e0d7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Blocky Bot</GameName>
+      <GameId>00050000101BB700</GameId>
+      <SaveDirId> 48f40b3d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BLOK DROP X TWISTED FUSION</GameName>
+      <GameId>000500001019BA00</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BRICK BREAKER</GameName>
+      <GameId>0005000010200A00</GameId>
+      <SaveDirId> 95239829</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chasing Aurora</GameName>
+      <GameId>0005000010117700</GameId>
+      <SaveDirId> e04f8362</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chasing Dead</GameName>
+      <GameId>00050000101E5E00</GameId>
+      <SaveDirId> 35e59cbc</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Citadale</GameName>
+      <GameId>00050000101F9A00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Citizens of Earth</GameName>
+      <GameId>0005000010180B00</GameId>
+      <SaveDirId> 54bfe8a0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Color Zen</GameName>
+      <GameId>0005000010162300</GameId>
+      <SaveDirId> b03a6cde</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cube Life: Island Survival</GameName>
+      <GameId>00050000101A6300</GameId>
+      <SaveDirId> 62cab846</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Defense Dome</GameName>
+      <GameId>00050000101EC600</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dinox</GameName>
+      <GameId>000500001018A700</GameId>
+      <SaveDirId> 8dbcaa5d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dracula's Legacy</GameName>
+      <GameId>00050000101F4F00</GameId>
+      <SaveDirId> 4ebefeeb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dual Core</GameName>
+      <GameId>00050000101F7600</GameId>
+      <SaveDirId> 788881a2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>DuckTales: Remastered</GameName>
+      <GameId>0005000010129200</GameId>
+      <SaveDirId> a24fedb8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>F1 RACE STARS POWERED UP EDITION</GameName>
+      <GameId>0005000010131900</GameId>
+      <SaveDirId> 59ae6bca</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FAST Racing NEO</GameName>
+      <GameId>00050000101D6000</GameId>
+      <SaveDirId> 057b4449</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Fire</GameName>
+      <GameId>00050000101E1500</GameId>
+      <SaveDirId> e7f1d81d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Flowerworks HD Follie's Adventure</GameName>
+      <GameId>000500001017ED00</GameId>
+      <SaveDirId> 26d4fe49</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Freedom Planet</GameName>
+      <GameId>00050000101CC900</GameId>
+      <SaveDirId> 722b18c6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Guac' a Mole</GameName>
+      <GameId>000500001017EC00</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Human Resource Machine</GameName>
+      <GameId>00050000101E1A00</GameId>
+      <SaveDirId> 9fdbbb88</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Kung Fu FIGHT!</GameName>
+      <GameId>00050000101E8B00</GameId>
+      <SaveDirId> 1dfc1195</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Laser Blaster</GameName>
+      <GameId>0005000010202B00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Level 22</GameName>
+      <GameId>00050000101D3B00</GameId>
+      <SaveDirId> d1d432e7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Lone Survivor The Director's Cut</GameName>
+      <GameId>000500001018CB00</GameId>
+      <SaveDirId> 0d8a3c52</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mario vs. Donkey Kong Tipping Stars</GameName>
+      <GameId>0005000010178E00</GameId>
+      <SaveDirId> bd839104</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MikroGame: Rotator</GameName>
+      <GameId>0005000010205500</GameId>
+      <SaveDirId> a152b6fe</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mini Mario &amp; Friends amiibo Challenge</GameName>
+      <GameId>00050000101C6300</GameId>
+      <SaveDirId> 758814aa</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mortar Melon</GameName>
+      <GameId>00050000101BC500</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nano Assault Neo</GameName>
+      <GameId>0005000010110600</GameId>
+      <SaveDirId> ca4bea21</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Napster</GameName>
+      <GameId>00050000101BCA00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>OlliOlli</GameName>
+      <GameId>00050000101A5E00</GameId>
+      <SaveDirId> 37af52b7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Olympia Rising</GameName>
+      <GameId>00050000101E3300</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PANDA LOVE</GameName>
+      <GameId>0005000010200F00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PENTAPUZZLE</GameName>
+      <GameId>00050000101F5900</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PictoParty</GameName>
+      <GameId>00050000101C3C00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PIXEL SLIME U</GameName>
+      <GameId>00050000101F6B00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PixelJunk Monsters</GameName>
+      <GameId>00050000101E1200</GameId>
+      <SaveDirId> 90e630cb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PixelMaker</GameName>
+      <GameId>00050000101F7700</GameId>
+      <SaveDirId> a6fc4006</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Puzzle Monkeys</GameName>
+      <GameId>00050000101AFC00</GameId>
+      <SaveDirId> cc48bd3f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Race The Sun</GameName>
+      <GameId>00050000101C6D00</GameId>
+      <SaveDirId> 60296622</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>RADIANTFLUX: HYPERFRACTAL</GameName>
+      <GameId>000500001020C400</GameId>
+      <SaveDirId> c15cdc98</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Red Riding Hood</GameName>
+      <GameId>00050000101AAC00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rorrim</GameName>
+      <GameId>0005000010203600</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Scram Kitty and his Buddy on Rails</GameName>
+      <GameId>000500001014D100</GameId>
+      <SaveDirId> f06252cb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shadow Archer</GameName>
+      <GameId>0005000010207B00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shantae and the Pirate's Curse</GameName>
+      <GameId>00050000101A9500</GameId>
+      <SaveDirId> 6d08f225</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SHOOT THE BALL</GameName>
+      <GameId>0005000010201100</GameId>
+      <SaveDirId> 907192f7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sky Force Anniversary</GameName>
+      <GameId>0005000010203500</GameId>
+      <SaveDirId> 708118bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Spin the Bottle: Bumpie's Party</GameName>
+      <GameId>0005000010138700</GameId>
+      <SaveDirId> dbdd47a7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Ghost</GameName>
+      <GameId>00050000101DBC00</GameId>
+      <SaveDirId> e0f4d1cb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Wars Pinball</GameName>
+      <GameId>0005000010132A00</GameId>
+      <SaveDirId> 6102d7b1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SteamWorld Heist</GameName>
+      <GameId>00050000101A3700</GameId>
+      <SaveDirId> 5ad9014f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Stone Shire</GameName>
+      <GameId>00050000101D5100</GameId>
+      <SaveDirId> d35a03bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sudoku &amp; Permudoku</GameName>
+      <GameId>00050000101E8900</GameId>
+      <SaveDirId> 95b45e9d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SUPER ROBO MOUSE</GameName>
+      <GameId>000500001019B900</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Swords &amp; Soldiers</GameName>
+      <GameId>000500001017C800</GameId>
+      <SaveDirId> 224576c1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TABLETOP GALLERY</GameName>
+      <GameId>00050000101B5F00</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TAP TAP ARCADE</GameName>
+      <GameId>00050000101E7C00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tengami</GameName>
+      <GameId>0005000010155B00</GameId>
+      <SaveDirId> a1568cd5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tested with robots !</GameName>
+      <GameId>00050000101A2400</GameId>
+      <SaveDirId> 861e6bef</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Bridge</GameName>
+      <GameId>00050000101CBD00</GameId>
+      <SaveDirId> 79ec3d0b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Fall</GameName>
+      <GameId>00050000101B2800</GameId>
+      <SaveDirId> 7bebec9f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Quiet Collection</GameName>
+      <GameId>00050000101D3900</GameId>
+      <SaveDirId> 1abca967</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Swapper</GameName>
+      <GameId>000500001018C600</GameId>
+      <SaveDirId> ca2d3864</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>WICKED MONSTERS BLAST! HD PLUS</GameName>
+      <GameId>00050000101C8B00</GameId>
+      <SaveDirId> 3af06a87</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Fit U (promo)</GameName>
+      <GameId>0005000010159A00</GameId>
+      <SaveDirId> 08d1d8c4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Fit U Info</GameName>
+      <GameId>000500001016AA00</GameId>
+      <SaveDirId> da2fe71d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Fit U Quick Check</GameName>
+      <GameId>0005000010132700</GameId>
+      <SaveDirId> aacc6dec</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii KARAOKE U by JOYSOUND</GameName>
+      <GameId>0005000010149600</GameId>
+      <SaveDirId> a546796f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii U Panorama View Birds in Flight</GameName>
+      <GameId>0005000010131500</GameId>
+      <SaveDirId> 07ae8951</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii U Panorama View Carnival!</GameName>
+      <GameId>0005000010131600</GameId>
+      <SaveDirId> 0af141f2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii U Panorama View Rickshaw Around Kyoto</GameName>
+      <GameId>0005000010131700</GameId>
+      <SaveDirId> 0ee73fb9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wooden Sen'SeY</GameName>
+      <GameId>0005000010152700</GameId>
+      <SaveDirId> 7ddf56b4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>XType Plus</GameName>
+      <GameId>000500001016E200</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cubit The Robot HD</GameName>
+      <GameId>000500001020F100</GameId>
+      <SaveDirId> ef891c09</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Year Walk</GameName>
+      <GameId>00050000101D4B00</GameId>
+      <SaveDirId> e1f55d13</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Zombie Defense</GameName>
+      <GameId>00050000101A1800</GameId>
+      <SaveDirId> 82425826</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Don't Starve: Giant Edition</GameName>
+      <GameId>00050000101C9A00</GameId>
+      <SaveDirId> c3c1f5f2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dr. Luigi</GameName>
+      <GameId>0005000010152B00</GameId>
+      <SaveDirId> ca505ab4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dreamals</GameName>
+      <GameId>00050000101EAB00</GameId>
+      <SaveDirId> 5049d2c8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Epic Dumpster Bear</GameName>
+      <GameId>00050000101C6000</GameId>
+      <SaveDirId> 9d958521</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>EvoFish</GameName>
+      <GameId>0005000010147600</GameId>
+      <SaveDirId> 060ef1b5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Extreme Exorcism</GameName>
+      <GameId>00050000101B9F00</GameId>
+      <SaveDirId> 3ff97481</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Frankenstein - Master of Death</GameName>
+      <GameId>00050000101D4600</GameId>
+      <SaveDirId> baeaa5a2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FreezeME</GameName>
+      <GameId>00050000101E8000</GameId>
+      <SaveDirId> cdaf2028</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Funk of Titans EnjoyUp Games</GameName>
+      <GameId>00050000101B4E00</GameId>
+      <SaveDirId> bfb60992</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Futuridium EP Deluxe</GameName>
+      <GameId>00050000101E8D00</GameId>
+      <SaveDirId> 8f5dc61e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GAIABREAKER</GameName>
+      <GameId>000500001017AB00</GameId>
+      <SaveDirId> 16134eac</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Grand Prix Rock 'N Racing</GameName>
+      <GameId>0005000010201F00</GameId>
+      <SaveDirId> b6564ba7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Gravity Badgers</GameName>
+      <GameId>000500001016E900</GameId>
+      <SaveDirId> d1ee0b28</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Grumpy Reaper</GameName>
+      <GameId>00050000101E7400</GameId>
+      <SaveDirId> 54fe347c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Runbow</GameName>
+      <GameId>00050000101D6D00</GameId>
+      <SaveDirId> 679ecef6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shantae: Half-Genie Hero</GameName>
+      <GameId>0005000010203200</GameId>
+      <SaveDirId> 4b34b755</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shiny The Firefly</GameName>
+      <GameId>0005000010180D00</GameId>
+      <SaveDirId> 280ed76e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shütshimi</GameName>
+      <GameId>00050000101BF400</GameId>
+      <SaveDirId> 7b58188f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Spheroids</GameName>
+      <GameId>00050000101E3500</GameId>
+      <SaveDirId> 2cfeba80</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Stealth Inc 2 A Game of Clones</GameName>
+      <GameId>0005000010173300</GameId>
+      <SaveDirId> f9acf3df</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>6180 the moon</GameName>
+      <GameId>00050000101D3300</GameId>
+      <SaveDirId> bbec7090</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ACT IT OUT! A Game of Charades</GameName>
+      <GameId>00050000101EB600</GameId>
+      <SaveDirId> 0cd7bd3d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Another World 20th Anniversary Edition</GameName>
+      <GameId>0005000010173200</GameId>
+      <SaveDirId> ced12219</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Armored ACORNs Action Squirrel Squad</GameName>
+      <GameId>0005000010212500</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BADLAND Game of the year edition</GameName>
+      <GameId>00050000101A5D00</GameId>
+      <SaveDirId> 10354b85</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>CastleStorm</GameName>
+      <GameId>0005000010113A00</GameId>
+      <SaveDirId> 8cc5c658</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Electronic Super Joy</GameName>
+      <GameId>00050000101D8300</GameId>
+      <SaveDirId> abf8170c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Homebrew Launcher</GameName>
+      <GameId>0005000013374842</GameId>
+      <SaveDirId> 8e5970e4</SaveDirId>
+      <Region>ALL</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Adventures of Pip</GameName>
+      <GameId>00050000101E5600</GameId>
+      <SaveDirId> 30bc9e91</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Alphadia Genesis</GameName>
+      <GameId>000500001019C900</GameId>
+      <SaveDirId> 651f1559</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Art Academy: SketchPad</GameName>
+      <GameId>0005000010142700</GameId>
+      <SaveDirId> 9adcfbbe</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Bird Mania Party</GameName>
+      <GameId>00050000101E4B00</GameId>
+      <SaveDirId> 2b9b9ad9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Bit Dungeon+</GameName>
+      <GameId>00050000101E2C00</GameId>
+      <SaveDirId> 5537e19c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Brave Tank Hero</GameName>
+      <GameId>00050000101CF800</GameId>
+      <SaveDirId> 425f7921</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Buddy &amp; Me: Dream Edition</GameName>
+      <GameId>00050000101F4A00</GameId>
+      <SaveDirId> 13de6774</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Canvaleon</GameName>
+      <GameId>00050000101D0700</GameId>
+      <SaveDirId> d618ea7c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Life of Pixel</GameName>
+      <GameId>00050000101A4900</GameId>
+      <SaveDirId> d36f68a8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Little Inferno</GameName>
+      <GameId>0005000010128600</GameId>
+      <SaveDirId> 59183a66</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Bike Rider UltraDX WORLD TOUR</GameName>
+      <GameId>00050000101D9E00</GameId>
+      <SaveDirId> 7b1a4233</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Double Breakout II</GameName>
+      <GameId>000500001020EB00</GameId>
+      <SaveDirId> 38b3cd87</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ice Cream Surfer</GameName>
+      <GameId>000500001017E100</GameId>
+      <SaveDirId> e8610f51</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PONCHO</GameName>
+      <GameId>00050000101CA700</GameId>
+      <SaveDirId> d85c4a15</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rayman Legends Challenges App</GameName>
+      <GameId>0005000010138E00</GameId>
+      <SaveDirId> 5491a70c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Severed</GameName>
+      <GameId>00050000101BA000</GameId>
+      <SaveDirId> 56dbca49</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Spy Chameleon</GameName>
+      <GameId>00050000101A3800</GameId>
+      <SaveDirId> 58ccda41</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>STARWHAL</GameName>
+      <GameId>00050000101D4700</GameId>
+      <SaveDirId> f65b1cb9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>STEEL RIVALS</GameName>
+      <GameId>00050000101F1600</GameId>
+      <SaveDirId> e1d53b95</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tachyon Project</GameName>
+      <GameId>000500001019B200</GameId>
+      <SaveDirId> eb515ef6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Teslagrad</GameName>
+      <GameId>0005000010161B00</GameId>
+      <SaveDirId> fe7662e7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Island Flight Simulator</GameName>
+      <GameId>00050000101CF200</GameId>
+      <SaveDirId> 3509e8f3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Lovely Planet</GameName>
+      <GameId>00050000101E0A00</GameId>
+      <SaveDirId> cb0fe0b7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Paper Monsters Recut</GameName>
+      <GameId>00050000101A1300</GameId>
+      <SaveDirId> 0b3df955</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rock 'N Racing Off Road</GameName>
+      <GameId>0005000010191800</GameId>
+      <SaveDirId> d60ae13d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Angry Birds Trilogy</GameName>
+      <GameId>0005000010140000</GameId>
+      <SaveDirId>78784e7c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BAYONETTA 2</GameName>
+      <GameId>0005000010172700</GameId>
+      <SaveDirId>b8611392</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Injustice: Gods Among Us</GameName>
+      <GameId>0005000010111A00</GameId>
+      <SaveDirId>30a60e07</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>NINJA GAIDEN 3: Razor's Edge</GameName>
+      <GameId>0005000010110B00</GameId>
+      <SaveDirId> 3c3273e8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rabbids Land</GameName>
+      <GameId>000500001010FC00</GameId>
+      <SaveDirId>317fd01c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rayman Legends</GameName>
+      <GameId>0005000010111400</GameId>
+      <SaveDirId>1e9e626a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TEKKEN TAG TOURNAMENT 2 Wii U EDITION</GameName>
+      <GameId>000500001010F800</GameId>
+      <SaveDirId>36adda6c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Terraria</GameName>
+      <GameId>0005000010198F00</GameId>
+      <SaveDirId>b938a10f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Adventure Time Finn and Jake Investigations</GameName>
+      <GameId>00050000101AFE00</GameId>
+      <SaveDirId>65d37053</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Batman Arkham City: Armoured Edition</GameName>
+      <GameId>0005000010111300</GameId>
+      <SaveDirId>d0330005</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BEN 10 OMNIVERSE™</GameName>
+      <GameId>0005000010111000</GameId>
+      <SaveDirId> 46512c53</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Kung Fu Panda Showdown of Legendary Legends</GameName>
+      <GameId>00050000101AA500</GameId>
+      <SaveDirId>3bd59a23</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>NBA 2K13</GameName>
+      <GameId>0005000010112F00</GameId>
+      <SaveDirId>6801486e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>New SUPER MARIO BROS. U +  New SUPER LUIGI U</GameName>
+      <GameId>000500001014B800</GameId>
+      <SaveDirId>d6baeb96</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>New SUPER MARIO BROS. U</GameName>
+      <GameId>0005000010101E00</GameId>
+      <SaveDirId>7ecb8e8b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PAC-MAN and the Ghostly Adventures 2</GameName>
+      <GameId>000500001017E500</GameId>
+      <SaveDirId>29274d76</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PAC-MAN and the Ghostly Adventures</GameName>
+      <GameId>0005000010147900</GameId>
+      <SaveDirId>f1b4f9ab</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>THE LEGEND OF ZELDA The Wind Waker HD</GameName>
+      <GameId>0005000010143600</GameId>
+      <SaveDirId>cdc68acd</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>THE LEGEND OF ZELDA Twilight Princess HD</GameName>
+      <GameId>000500001019E600</GameId>
+      <SaveDirId>3bc226d1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chimpuzzle Pro</GameName>
+      <GameId>000500001014DD00</GameId>
+      <SaveDirId>866b8105</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chompy Chomp Chomp Party</GameName>
+      <GameId>00050000101A9C00</GameId>
+      <SaveDirId>75ad139f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chronicles of Teddy Harmony of Exidus</GameName>
+      <GameId>00050000101DAF00</GameId>
+      <SaveDirId>c3db6b23</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Coaster Crazy Deluxe</GameName>
+      <GameId>0005000010145900</GameId>
+      <SaveDirId> 830cfd6e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cube Life: Pixel Action Heroes</GameName>
+      <GameId>00050000101A4E00</GameId>
+      <SaveDirId>f944db91</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cubemen 2</GameName>
+      <GameId>0005000010150200</GameId>
+      <SaveDirId> 40d3bc68</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Guacamelee! Super Turbo Championship Edition</GameName>
+      <GameId>0005000010179700</GameId>
+      <SaveDirId>0db19727</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Infinity Runner</GameName>
+      <GameId>0005000010184400</GameId>
+      <SaveDirId>738d1ac3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mighty Switch Force!™  Hyper Drive Edition</GameName>
+      <GameId>0005000010128200</GameId>
+      <SaveDirId> b9d5cef4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Monkey Pirates</GameName>
+      <GameId>0005000010162200</GameId>
+      <SaveDirId>14f6260c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mutant Alien Moles of the Dead</GameName>
+      <GameId>000500001020FC00</GameId>
+      <SaveDirId>9fe4e4e3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>My Style Studio: Hair Salon</GameName>
+      <GameId>0005000010154C00</GameId>
+      <SaveDirId>6f0e2a51</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nova-111</GameName>
+      <GameId>00050000101C0700</GameId>
+      <SaveDirId>0aed8d0c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Roving Rogue</GameName>
+      <GameId>0005000010180E00</GameId>
+      <SaveDirId>a091bda4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TANK! TANK! TANK! (DL)</GameName>
+      <GameId>0005000010128C00</GameId>
+      <SaveDirId>d6d47611</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Binding of Isaac: Rebirth</GameName>
+      <GameId>00050000101C9B00</GameId>
+      <SaveDirId>6bcd618e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® Marvel Super Heroes</GameName>
+      <GameId>0005000010132400</GameId>
+      <SaveDirId> 82f0f47f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Hot Wheels™ World’s Best Driver</GameName>
+      <GameId>0005000010145100</GameId>
+      <SaveDirId> 384a426c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Kirby and the Rainbow Paintbrush</GameName>
+      <GameId>00050000101B5100</GameId>
+      <SaveDirId> 88f67f07</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Legend of Kay Anniversary</GameName>
+      <GameId>0005000010193300</GameId>
+      <SaveDirId> ad20180f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Meme Run</GameName>
+      <GameId>0005000010194000</GameId>
+      <SaveDirId> 893dca28</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Minecraft: Story Mode</GameName>
+      <GameId>000500001020A300</GameId>
+      <SaveDirId> 03ff8e25</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Soul Axiom</GameName>
+      <GameId>0005000010188E00</GameId>
+      <SaveDirId> c1d150ae</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Squids Odyssey</GameName>
+      <GameId>0005000010157800</GameId>
+      <SaveDirId> fbb06a01</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Cave</GameName>
+      <GameId>000500001012B500</GameId>
+      <SaveDirId> 08a99dc8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Swindle</GameName>
+      <GameId>00050000101C0C00</GameId>
+      <SaveDirId> 2d3af180</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>How to Train Your Dragon 2</GameName>
+      <GameId>0005000010162A00</GameId>
+      <SaveDirId> a201abe7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Scribblenauts Unlimited</GameName>
+      <GameId>000500001010F900</GameId>
+      <SaveDirId> c13c8089</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Scribblenauts Unmasked A DC Comics Adventure</GameName>
+      <GameId>0005000010132D00</GameId>
+      <SaveDirId> 5fdb4bc1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shovel Knight</GameName>
+      <GameId>0005000010178F00</GameId>
+      <SaveDirId> 9fd0ca97</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Amazing Spider-Man</GameName>
+      <GameId>0005000010128300</GameId>
+      <SaveDirId> 8e00935b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Book of Unwritten Tales 2</GameName>
+      <GameId>00050000101E9F00</GameId>
+      <SaveDirId> 38da401c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tokyo Mirage Sessions #FE</GameName>
+      <GameId>00050000101ED700</GameId>
+      <SaveDirId> 0ecea24b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>WARRIORS OROCHI 3 Hyper(EU)</GameName>
+      <GameId>0005000010112B00</GameId>
+      <SaveDirId> a60312c0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Sports Club</GameName>
+      <GameId>0005000010144E00</GameId>
+      <SaveDirId> 18cb8381</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Wonderful 101</GameName>
+      <GameId>0005000010135300</GameId>
+      <SaveDirId> e7705cc4</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Darksiders II</GameName>
+      <GameId>0005000010110F00</GameId>
+      <SaveDirId> 3308abbc</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Darksiders Warmastered Edition</GameName>
+      <GameId>00050000101F9700</GameId>
+      <SaveDirId> 9fa75717</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Minecraft: Wii U Edition</GameName>
+      <GameId>00050000101D7500</GameId>
+      <SaveDirId>3a024692</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pumped BMX +</GameName>
+      <GameId>00050000101C7600</GameId>
+      <SaveDirId> 0d67bf39</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Run Run and Die</GameName>
+      <GameId>00050000101F6300</GameId>
+      <SaveDirId>6255382b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sweetest Thing</GameName>
+      <GameId>00050000101F4300</GameId>
+      <SaveDirId>62b66ccb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>REPLAY : VHS IS NOT DEAD</GameName>
+      <GameId>00050000101E2D00</GameId>
+      <SaveDirId> a405c67c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>RUSH</GameName>
+      <GameId>0005000010152500</GameId>
+      <SaveDirId> 7624f8d1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sanatory Hallways</GameName>
+      <GameId>00050000101C5F00</GameId>
+      <SaveDirId>e6293214</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shantae: Risky's Revenge Director's Cut</GameName>
+      <GameId>00050000101A9600</GameId>
+      <SaveDirId>06f44756</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Toy Cars</GameName>
+      <GameId>000500001016D500</GameId>
+      <SaveDirId>88344836</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Suspension Railroad Simulator</GameName>
+      <GameId>00050000101A6700</GameId>
+      <SaveDirId>b2dae2f0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Swords &amp; Soldiers II</GameName>
+      <GameId>00050000101C6E00</GameId>
+      <SaveDirId>42930472</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TEMPLE OF YOG</GameName>
+      <GameId>00050000101E8500</GameId>
+      <SaveDirId>2c75134f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ittle Dew</GameName>
+      <GameId>000500001016DB00</GameId>
+      <SaveDirId> 94a50166</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Knytt Underground</GameName>
+      <GameId>000500001014D800</GameId>
+      <SaveDirId> 873e2adc</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ohayou! Beginner's Japanese</GameName>
+      <GameId>0005000010206A00</GameId>
+      <SaveDirId> e6e5954a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Puddle</GameName>
+      <GameId>000500001010FB00</GameId>
+      <SaveDirId> 0d76b70f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pullblox World</GameName>
+      <GameId>0005000010172000</GameId>
+      <SaveDirId> 282ef30d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Queens Garden</GameName>
+      <GameId>00050000101F4200</GameId>
+      <SaveDirId> 57134665</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>RetroArch Launcher</GameName>
+      <GameId>0005000010102172</GameId>
+      <SaveDirId> 206cf84a</SaveDirId>
+      <Region>ALL</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rock 'N Racing Off Road DX</GameName>
+      <GameId>00050000101D9600</GameId>
+      <SaveDirId> 318c38e5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rock Zombie</GameName>
+      <GameId>000500001019CA00</GameId>
+      <SaveDirId> dbc7cfa2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Mario Maker (Media)</GameName>
+      <GameId>000500001F600800</GameId>
+      <SaveDirId> d6eac910</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tetrobot and Co.</GameName>
+      <GameId>000500001018DE00</GameId>
+      <SaveDirId> e834dafa</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Beggar's Ride</GameName>
+      <GameId>00050000101EC700</GameId>
+      <SaveDirId> 42cc6fa7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Rivers of Alice Extended version</GameName>
+      <GameId>00050000101D9200</GameId>
+      <SaveDirId> 227164d5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Joe's Diner</GameName>
+      <GameId>00050000101D4D00</GameId>
+      <SaveDirId> fbc2356e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Slender: The Arrival</GameName>
+      <GameId>00050000101D8900</GameId>
+      <SaveDirId> ab104adb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SPACE HULK</GameName>
+      <GameId>00050000101B6000</GameId>
+      <SaveDirId> 1e65528a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Beatbuddy</GameName>
+      <GameId>00050000101BC300</GameId>
+      <SaveDirId> 9b3c2446</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cloudberry Kingdom</GameName>
+      <GameId>0005000010131A00</GameId>
+      <SaveDirId> 99517775</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Koi DX</GameName>
+      <GameId>0005000010207300</GameId>
+      <SaveDirId> 9de9fe66</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MONSTER HUNTER 3 ULTIMATE Packet Relay...for Nintendo 3DS</GameName>
+      <GameId>0005000010132F00</GameId>
+      <SaveDirId> f02f3fad</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mr.Pumpkin Adventure</GameName>
+      <GameId>0005000010206B00</GameId>
+      <SaveDirId> 4af61795</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ninja Pizza Girl</GameName>
+      <GameId>0005000010203800</GameId>
+      <SaveDirId> fc7aa43c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nintendont</GameName>
+      <GameId>00050000101999FF</GameId>
+      <SaveDirId> a916771c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PIKMIN Short Movies HD</GameName>
+      <GameId>0005000010161900</GameId>
+      <SaveDirId> 5a551773</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>How to Survive</GameName>
+      <GameId>0005000010138900</GameId>
+      <SaveDirId> 383bc4e3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Inside My Radio</GameName>
+      <GameId>00050000101E5800</GameId>
+      <SaveDirId> 0e272d8f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LOST REAVERS</GameName>
+      <GameId>00050000101B9900</GameId>
+      <SaveDirId> f2aa423e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Master Reboot</GameName>
+      <GameId>000500001016E800</GameId>
+      <SaveDirId> 57712c91</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shadow Puppeteer</GameName>
+      <GameId>00050000101E1B00</GameId>
+      <SaveDirId> d45bea78</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shiftlings</GameName>
+      <GameId>00050000101ACC00</GameId>
+      <SaveDirId> 1a36d10e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Six Sides of the World</GameName>
+      <GameId>000500001020C600</GameId>
+      <SaveDirId> 8493da10</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>CHILD of LIGHT</GameName>
+      <GameId>000500001016EA00</GameId>
+      <SaveDirId> b3266113</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Marvel Avengers™:  Battle for Earth</GameName>
+      <GameId>0005000010110800</GameId>
+      <SaveDirId> b57ad7ba</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Never Alone (Kisima Ingitchuna)</GameName>
+      <GameId>00050000101CE800</GameId>
+      <SaveDirId> ca4bc5d5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Nihilumbra</GameName>
+      <GameId>000500001016DA00</GameId>
+      <SaveDirId> 2f22e3c0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Oddworld New 'n' Tasty</GameName>
+      <GameId>00050000101DBB00</GameId>
+      <SaveDirId> 07a1e116</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pier Solar and the Great Architects</GameName>
+      <GameId>0005000010187000</GameId>
+      <SaveDirId> cbe00f50</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Stick It to the Man</GameName>
+      <GameId>000500001016D400</GameId>
+      <SaveDirId> 5395d29b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Fist of the North Star:  Ken's Rage 2</GameName>
+      <GameId>000500001012B800</GameId>
+      <SaveDirId> 67321dc7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>153 Hand Video Poker</GameName>
+      <GameId>00050000101D7F00</GameId>
+      <SaveDirId> b22ec4de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Bridge Constructor Playground</GameName>
+      <GameId>000500001020B100</GameId>
+      <SaveDirId> 0ea0825f</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>IQ Test</GameName>
+      <GameId>000500001018D000</GameId>
+      <SaveDirId> 598199e0</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>KAMEN RIDER BATTRIDE WAR Ⅱ</GameName>
+      <GameId>0005000010170700</GameId>
+      <SaveDirId> f18c0e74</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>KEYTARI 8-bit Music Maker</GameName>
+      <GameId>00050000101CFC00</GameId>
+      <SaveDirId> 8000dc9c</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Taiko no Tatsujin Tokumori!</GameName>
+      <GameId>0005000010192000</GameId>
+      <SaveDirId> 2fe44354</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Taiko no Tatsujin Wii U version!</GameName>
+      <GameId>0005000010132200</GameId>
+      <SaveDirId> 0b2e5602</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Terraria</GameName>
+      <GameId>00050000101F3A00</GameId>
+      <SaveDirId> a2c159fb</SaveDirId>
+      <Region>JPN</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>6-HAND VIDEO POKER</GameName>
+      <GameId>00050000101D7A00</GameId>
+      <SaveDirId> b22ec4de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>8Bit Hero</GameName>
+      <GameId>00050000101F2800</GameId>
+      <SaveDirId> 14b8f5af</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>A World Of Keflings</GameName>
+      <GameId>000500001017B300</GameId>
+      <SaveDirId> ce343eb2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Amazon Instant Video</GameName>
+      <GameId>0005000010102E00</GameId>
+      <SaveDirId> 4fdaf519</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>AVOIDER</GameName>
+      <GameId>00050000101DEE00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>B3 Game Expo For Bees</GameName>
+      <GameId>00050000101E1F00</GameId>
+      <SaveDirId> 4b014cd3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Back to Bed</GameName>
+      <GameId>00050000101F0200</GameId>
+      <SaveDirId> a096533f</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ballpoint Universe: Infinite</GameName>
+      <GameId>000500001016FE00</GameId>
+      <SaveDirId> 676dc51f</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Blackjack 21</GameName>
+      <GameId>00050000101FBB00</GameId>
+      <SaveDirId> b22ec4de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BOX UP</GameName>
+      <GameId>0005000010212B00</GameId>
+      <SaveDirId> 9e280076</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Bubble Gum Popper</GameName>
+      <GameId>00050000101BBD00</GameId>
+      <SaveDirId> b46128f7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Candy Hoarder</GameName>
+      <GameId>00050000101B0000</GameId>
+      <SaveDirId> e3024297</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Christmas Adventure of Rocket P.</GameName>
+      <GameId>00050000101E2E00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Chroma Blast</GameName>
+      <GameId>00050000101DE000</GameId>
+      <SaveDirId> 6ebdb69e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>COLOR BOMBS</GameName>
+      <GameId>00050000101ABB00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cosmophony</GameName>
+      <GameId>0005000010197200</GameId>
+      <SaveDirId> 9bfb2fb8</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Daikon Set</GameName>
+      <GameId>0005000010211400</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Darts Up</GameName>
+      <GameId>0005000010135100</GameId>
+      <SaveDirId> dd3d2914</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Demonic Karma Summoner</GameName>
+      <GameId>00050000101EF400</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>DON'T CRASH</GameName>
+      <GameId>00050000101D2800</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dragon Fantasy The Volumes of Westeria</GameName>
+      <GameId>00050000101B2A00</GameId>
+      <SaveDirId> 0a90144b</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Dragon Skills</GameName>
+      <GameId>00050000101D9100</GameId>
+      <SaveDirId> 938a5456</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Draw 2 Survive</GameName>
+      <GameId>00050000101DFA00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mutant Mudds Super Challenge</GameName>
+      <GameId>00050000101B9B00</GameId>
+      <SaveDirId> 2fd5d0e2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>RUBIKS CUBE</GameName>
+      <GameId>0005000010156400</GameId>
+      <SaveDirId> 4810536b</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Eba &amp; Egg: A Hatch Trip</GameName>
+      <GameId>00050000101ADA00</GameId>
+      <SaveDirId> 43eddd41</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ECTOPLAZA</GameName>
+      <GameId>00050000101F8500</GameId>
+      <SaveDirId> 8d8961db</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Elliot Quest</GameName>
+      <GameId>000500001019AD00</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Escape From Flare Industries</GameName>
+      <GameId>00050000101E5500</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Explody Bomb</GameName>
+      <GameId>00050000101D7700</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FAST Racing NEO</GameName>
+      <GameId>000500001012F000</GameId>
+      <SaveDirId> 057b4449</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Free Balling</GameName>
+      <GameId>00050000101ACA00</GameId>
+      <SaveDirId> 1710aa28</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FreezeME</GameName>
+      <GameId>00050000101D5F00</GameId>
+      <SaveDirId> cdaf2028</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Funky Physics</GameName>
+      <GameId>00050000101D9C00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GALAXY BLASTER</GameName>
+      <GameId>0005000010212D00</GameId>
+      <SaveDirId> 20945894</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Gear Gauntlet</GameName>
+      <GameId>00050000101E9300</GameId>
+      <SaveDirId> 0d9e80a1</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GetClose</GameName>
+      <GameId>0005000010182E00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GHOST BLADE HD</GameName>
+      <GameId>00050000101FFC00</GameId>
+      <SaveDirId> b9aa6283</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Girls Like Robots</GameName>
+      <GameId>00050000101D1800</GameId>
+      <SaveDirId> 04eef7b1</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Hold Your Fire</GameName>
+      <GameId>00050000101D7800</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Hot Rod Racer</GameName>
+      <GameId>00050000101F5F00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Humanitarian Helicopter</GameName>
+      <GameId>00050000101E9500</GameId>
+      <SaveDirId> 21f17762</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>I've Got to Run!</GameName>
+      <GameId>0005000010173100</GameId>
+      <SaveDirId> 39f00dec</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>INVANOID</GameName>
+      <GameId>00050000101FAC00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ittle Dew</GameName>
+      <GameId>0005000010179400</GameId>
+      <SaveDirId> 0b47f5e1</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MAHJONG</GameName>
+      <GameId>00050000101FFD00</GameId>
+      <SaveDirId> 6731d761</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Midnight 2</GameName>
+      <GameId>00050000101F7500</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mini-Games Madness Vol: #1</GameName>
+      <GameId>00050000101D7E00</GameId>
+      <SaveDirId> b22ec4de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Neon Battle</GameName>
+      <GameId>00050000101CA300</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Noitu Love: Devolution</GameName>
+      <GameId>00050000101EA500</GameId>
+      <SaveDirId> 236f96a9</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PEG SOLITAIRE</GameName>
+      <GameId>00050000101C6B00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PENTAPUZZLE</GameName>
+      <GameId>00050000101BA700</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pirate Pop Plus</GameName>
+      <GameId>00050000101F8B00</GameId>
+      <SaveDirId> a3cdb3d5</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pixel Paint</GameName>
+      <GameId>0005000010176400</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Plantera</GameName>
+      <GameId>0005000010204800</GameId>
+      <SaveDirId> bd8438b6</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Quest of Dungeons</GameName>
+      <GameId>00050000101F1400</GameId>
+      <SaveDirId> aa6bdc30</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>A Drawing's Journey</GameName>
+      <GameId>0005000010211E00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ascent of Kings</GameName>
+      <GameId>00050000101E8A00</GameId>
+      <SaveDirId> cae228bd</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BOX UP</GameName>
+      <GameId>0005000010212800</GameId>
+      <SaveDirId> 9e280076</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Candy Hoarder</GameName>
+      <GameId>000500001020D400</GameId>
+      <SaveDirId> 08e87685</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>COLOR BOMBS</GameName>
+      <GameId>00050000101E8800</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cosmophony</GameName>
+      <GameId>0005000010195C00</GameId>
+      <SaveDirId> 9bfb2fb8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FIFTEEN</GameName>
+      <GameId>0005000010211900</GameId>
+      <SaveDirId> b244ba4a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GALAXY BLASTER</GameName>
+      <GameId>0005000010212A00</GameId>
+      <SaveDirId> 20945894</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JACKPOT 777</GameName>
+      <GameId>00050000101F8400</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Midnight 2</GameName>
+      <GameId>00050000101FAF00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Midtown Crazy Race</GameName>
+      <GameId>0005000010189B00</GameId>
+      <SaveDirId> 566f090c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ORBIT</GameName>
+      <GameId>0005000010211100</GameId>
+      <SaveDirId> 18674adc</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PINBALL</GameName>
+      <GameId>0005000010211A00</GameId>
+      <SaveDirId> c6edfb3b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SPHERE SLICE</GameName>
+      <GameId>0005000010211B00</GameId>
+      <SaveDirId> 25830065</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SPLASHY DUCK</GameName>
+      <GameId>00050000101B5E00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TAP TAP ARCADE 2</GameName>
+      <GameId>00050000101F8D00</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Mysterious Cities of Gold: Secret Paths</GameName>
+      <GameId>0005000010154D00</GameId>
+      <SaveDirId> b992af67</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Stonecutter</GameName>
+      <GameId>0005000010210700</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Zombie Brigade: No Brain No Gain</GameName>
+      <GameId>0005000010181B00</GameId>
+      <SaveDirId> 9a12f714</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Call of Duty: Black Ops II</GameName>
+      <GameId>0005000010113500</GameId>
+      <SaveDirId> 2bb2090d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Art Academy: Atelier</GameName>
+      <GameId>000500001017B500</GameId>
+      <SaveDirId> 5dfbe24b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Cars 3: Driven to Win</GameName>
+      <GameId>000500001020A400</GameId>
+      <SaveDirId> 4cdaef25</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Disney Epic Mickey 2</GameName>
+      <GameId>000500001011B000</GameId>
+      <SaveDirId> b964eb8e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sonic &amp; All-Stars Racing Transformed</GameName>
+      <GameId>0005000010111F00</GameId>
+      <SaveDirId> 49f7e755</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splatoon Pre-Launch Review</GameName>
+      <GameId>00050000101CDD00</GameId>
+      <SaveDirId> 6da2a0c6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Fox Guard: Special Demo Version</GameName>
+      <GameId>00050000101DCE00</GameId>
+      <SaveDirId> e7c0ed92</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Star Fox Zero The Battle Begins + Training</GameName>
+      <GameId>0005000010201C00</GameId>
+      <SaveDirId> 10cb6ceb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Project Zero: Maiden of Black Water</GameName>
+      <GameId>00050000101D3F00</GameId>
+      <SaveDirId> cd3c7b9a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Ziggurat</GameName>
+      <GameId>00050000101F7800</GameId>
+      <SaveDirId> 33ca209e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>MONSTER HUNTER 3 ULTIMATE</GameName>
+      <GameId>0005000010117200</GameId>
+      <SaveDirId> 021e0259</SaveDirId>
+      <Region>??</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ZombiU</GameName>
+      <GameId>000500001011A700</GameId>
+      <SaveDirId> e426355b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Preston Sterling</GameName>
+      <GameId>000500001020EF00</GameId>
+      <SaveDirId> bf45a2b9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TETRAMINOS</GameName>
+      <GameId>0005000010200B00</GameId>
+      <SaveDirId> 6496a93e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Assassin's Creed® III</GameName>
+      <GameId>000500001010F600</GameId>
+      <SaveDirId> 7bdbf4fd</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Disney Planes</GameName>
+      <GameId>0005000010136900</GameId>
+      <SaveDirId> 4edcd5d0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Animal Crossing: amiibo Festival</GameName>
+      <GameId>00050000101C6500</GameId>
+      <SaveDirId> fc6ec06e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Assassin's Creed® IV Black Flag</GameName>
+      <GameId>0005000010138800</GameId>
+      <SaveDirId> b7783666</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Baila Latino</GameName>
+      <GameId>000500001017C200</GameId>
+      <SaveDirId> f8ea768c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Barbie Dreamhouse Party</GameName>
+      <GameId>0005000010147B00</GameId>
+      <SaveDirId> 029c16aa</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Batman™: Arkham Origins</GameName>
+      <GameId>0005000010136C00</GameId>
+      <SaveDirId> e3aa2bd3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>BEN 10 OMNIVERSE™ 2</GameName>
+      <GameId>0005000010146600</GameId>
+      <SaveDirId> 90a2d999</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>DEUS EX: HUMAN REV. DIRECTOR'S CUT</GameName>
+      <GameId>000500001012B200</GameId>
+      <SaveDirId> 64a9ee0d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Devil's Third</GameName>
+      <GameId>0005000010177700</GameId>
+      <SaveDirId> 147393d2</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Disney Epic Mickey 2</GameName>
+      <GameId>0005000010112E00</GameId>
+      <SaveDirId> abece153</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>DISNEY INFINITY 3.0: PLAY WITHOUT LIMITS</GameName>
+      <GameId>00050000101B3D00</GameId>
+      <SaveDirId> 8281d9f0</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Disney Infinity [2.0]</GameName>
+      <GameId>0005000010188C00</GameId>
+      <SaveDirId> f590803e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Family Party 30 Great Games Obstacle Arcade</GameName>
+      <GameId>0005000010113200</GameId>
+      <SaveDirId> cfe56fdd</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>FIFA 13 </GameName>
+      <GameId>000500001010EE00</GameId>
+      <SaveDirId> e2325b04</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Fit Music For Wii U</GameName>
+      <GameId>0005000010137200</GameId>
+      <SaveDirId> a484ac0d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>GAME &amp; WARIO</GameName>
+      <GameId>0005000010128900</GameId>
+      <SaveDirId> 26c4d56d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Game Party Champions</GameName>
+      <GameId>000500001010FF00</GameId>
+      <SaveDirId> eba24f4a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Hello Kitty Kruisers</GameName>
+      <GameId>0005000010177000</GameId>
+      <SaveDirId> 63dcb9a5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Jett Tailfin</GameName>
+      <GameId>0005000010182C00</GameId>
+      <SaveDirId> d19eaaae</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Luv Me Buddies Wonderland</GameName>
+      <GameId>0005000010154E00</GameId>
+      <SaveDirId> 13f7e45a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Monster High New Ghoul in School</GameName>
+      <GameId>00050000101CA900</GameId>
+      <SaveDirId> 7a7c3747</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Penguins</GameName>
+      <GameId>0005000010193F00</GameId>
+      <SaveDirId> b0216919</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Planes Fire &amp; Rescue</GameName>
+      <GameId>000500001018CC00</GameId>
+      <SaveDirId> 0146f35a</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sports Connection</GameName>
+      <GameId>0005000010111D00</GameId>
+      <SaveDirId> 60d38951</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>THE CROODS</GameName>
+      <GameId>000500001012C500</GameId>
+      <SaveDirId> 73f09850</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Peanuts® Movie: Snoopy's Grand Adventure</GameName>
+      <GameId>00050000101D5000</GameId>
+      <SaveDirId> ac5dd96d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Smurfs™ 2</GameName>
+      <GameId>0005000010115D00</GameId>
+      <SaveDirId> fc44bef7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TRANSFORMERS PRIME</GameName>
+      <GameId>000500001010F400</GameId>
+      <SaveDirId> cc04a11c</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Your Shape® Fitness Evolved 2013</GameName>
+      <GameId>000500001010F700</GameId>
+      <SaveDirId> 60749358</SaveDirId>
+      <Region>??</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JUST DANCE 4</GameName>
+      <GameId>000500001010F000</GameId>
+      <SaveDirId> bb9ff882</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JUST DANCE® 2014</GameName>
+      <GameId>0005000010143F00</GameId>
+      <SaveDirId> 9f0a5f43</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JUST DANCE® 2015</GameName>
+      <GameId>0005000010176F00</GameId>
+      <SaveDirId> ea64e349</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JUST DANCE® 2016</GameName>
+      <GameId>00050000101B9800</GameId>
+      <SaveDirId> 3577c5be</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JUST DANCE® 2017</GameName>
+      <GameId>00050000101EAA00</GameId>
+      <SaveDirId> d045d733</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>JUST DANCE® 2018</GameName>
+      <GameId>0005000010210C00</GameId>
+      <SaveDirId> 1774ab26</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Just Dance® Kids 2014</GameName>
+      <GameId>0005000010145B00</GameId>
+      <SaveDirId> e05821b9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® Batman™ 2</GameName>
+      <GameId>0005000010135500</GameId>
+      <SaveDirId> 3696310f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® Batman™ 3 Beyond Gotham</GameName>
+      <GameId>000500001016A400</GameId>
+      <SaveDirId> 769af271</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® MARVEL's Avengers</GameName>
+      <GameId>00050000101BE900</GameId>
+      <SaveDirId> ab9f7981</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® STAR WARS™ The Force Awakens</GameName>
+      <GameId>00050000101DAA00</GameId>
+      <SaveDirId> d5240f1b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>LEGO® The Hobbit™</GameName>
+      <GameId>0005000010168D00</GameId>
+      <SaveDirId> 1ae5fab5</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>M &amp; S at the Rio 2016 Olympic Games</GameName>
+      <GameId>00050000101E5400</GameId>
+      <SaveDirId> 9e47ca64</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Mario &amp; Sonic at the Sochi 2014 Olympic Winter Games</GameName>
+      <GameId>000500001010C800</GameId>
+      <SaveDirId> a4fcc215</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Need for Speed™ Most Wanted U</GameName>
+      <GameId>0005000010128400</GameId>
+      <SaveDirId> 0397417d</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ONE PIECE Unlimited World Red</GameName>
+      <GameId>0005000010175D00</GameId>
+      <SaveDirId> df44ead6</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>RESIDENT EVIL REVELATIONS</GameName>
+      <GameId>000500001012B400</GameId>
+      <SaveDirId> cb0be841</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>RISE OF THE GUARDIANS</GameName>
+      <GameId>000500001010F100</GameId>
+      <SaveDirId> f5442f05</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rodea the Sky Soldier</GameName>
+      <GameId>00050000101C4000</GameId>
+      <SaveDirId> 6ed646b3</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SiNG PARTY</GameName>
+      <GameId>0005000010101900</GameId>
+      <SaveDirId> ea80657b</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Skylanders SuperChargers</GameName>
+      <GameId>00050000101BFC00</GameId>
+      <SaveDirId> c92410d9</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Skylanders SWAP Force</GameName>
+      <GameId>0005000010140400</GameId>
+      <SaveDirId> 6cd668ab</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Skylanders Trap Team</GameName>
+      <GameId>0005000010181F00</GameId>
+      <SaveDirId> 24e28517</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sonic Boom: Rise of Lyric</GameName>
+      <GameId>0005000010177800</GameId>
+      <SaveDirId> f3961803</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SONIC LOST WORLD</GameName>
+      <GameId>000500001012B100</GameId>
+      <SaveDirId> f47e17d7</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splinter Cell Blacklist</GameName>
+      <GameId>000500001012AC00</GameId>
+      <SaveDirId> 3d62ec2e</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Amazing Spider-Man 2™</GameName>
+      <GameId>000500001016D600</GameId>
+      <SaveDirId> 5b546d51</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The LEGO® Movie Videogame</GameName>
+      <GameId>000500001014E000</GameId>
+      <SaveDirId> e1361872</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TRANSFORMERS: Rise of the Dark Spark</GameName>
+      <GameId>0005000010173400</GameId>
+      <SaveDirId> fab814f1</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>WATCH_DOGS</GameName>
+      <GameId>0005000010140500</GameId>
+      <SaveDirId> 3f9716ab</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Fit U</GameName>
+      <GameId>0005000010102400</GameId>
+      <SaveDirId> e15a3676</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wii Party U</GameName>
+      <GameId>0005000010137E00</GameId>
+      <SaveDirId> 73144a5f</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Monster High 13 Wishes</GameName>
+      <GameId>0005000010147A00</GameId>
+      <SaveDirId> c780b4c8</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Call of Duty: Ghosts</GameName>
+      <GameId>0005000010146800</GameId>
+      <SaveDirId> 19709587</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sniper Elite V2</GameName>
+      <GameId>0005000010134E00</GameId>
+      <SaveDirId> 056cec3a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Jewel Quest</GameName>
+      <GameId>00050000101E3200</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Jotun: Valhalla Edition</GameName>
+      <GameId>00050000101F5700</GameId>
+      <SaveDirId> e7e38547</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Journey of a Special Average Balloon</GameName>
+      <GameId>00050000101A8300</GameId>
+      <SaveDirId> fe340aea</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Letter Quest Grimm's Journey Remastered</GameName>
+      <GameId>00050000101F5500</GameId>
+      <SaveDirId> fdc033dd</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Octodad: Dadliest Catch</GameName>
+      <GameId>00050000101C6A00</GameId>
+      <SaveDirId> ef5b05d7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Paparazzi</GameName>
+      <GameId>00050000101AA100</GameId>
+      <SaveDirId> 1e4481f7</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pokémon Rumble U</GameName>
+      <GameId>0005000010147700</GameId>
+      <SaveDirId> 40d5a2e9</SaveDirId>
+      <Region>??</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>PSIBO</GameName>
+      <GameId>00050000101E1E00</GameId>
+      <SaveDirId> 6f18a7f2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>psyscrolr</GameName>
+      <GameId>00050000101ACB00</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Völgarr the Viking</GameName>
+      <GameId>00050000101F6800</GameId>
+      <SaveDirId> f522b3d2</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Pushmo World</GameName>
+      <GameId>0005000010171F00</GameId>
+      <SaveDirId> 7b16491a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Reptilian Rebellion</GameName>
+      <GameId>00050000101F4C00</GameId>
+      <SaveDirId> b345571a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Retro Road Rumble</GameName>
+      <GameId>0005000010205B00</GameId>
+      <SaveDirId> ab4e5ac4</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Rhapsody</GameName>
+      <GameId>00050000101BCB00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SDK Spriter</GameName>
+      <GameId>00050000101AA300</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SHUT THE BOX</GameName>
+      <GameId>000500001018D700</GameId>
+      <SaveDirId> 39f00dec</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Shuttle Rush</GameName>
+      <GameId>000500001017B100</GameId>
+      <SaveDirId> 85d62dd1</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SKEASY</GameName>
+      <GameId>00050000101E7800</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Slots - Pharaoh's Riches</GameName>
+      <GameId>00050000101D7600</GameId>
+      <SaveDirId> b22ec4de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Space Hunted</GameName>
+      <GameId>0005000010207600</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>SphereZor</GameName>
+      <GameId>00050000101ED600</GameId>
+      <SaveDirId> 8d28ef88</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Sportsball</GameName>
+      <GameId>0005000010189200</GameId>
+      <SaveDirId> d2a48f1e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Super Destronaut</GameName>
+      <GameId>00050000101B9600</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Swap Fire</GameName>
+      <GameId>00050000101DAC00</GameId>
+      <SaveDirId> 62bc1676</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tadpole Treble</GameName>
+      <GameId>00050000101A6000</GameId>
+      <SaveDirId> 1e6b83ca</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tallowmere</GameName>
+      <GameId>00050000101F4900</GameId>
+      <SaveDirId> 786ff9ea</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Teslapunk</GameName>
+      <GameId>000500001018AF00</GameId>
+      <SaveDirId> b43e2626</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Deer God</GameName>
+      <GameId>00050000101E7300</GameId>
+      <SaveDirId> 97dcca0a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The First Skunk Bundle</GameName>
+      <GameId>00050000101FC700</GameId>
+      <SaveDirId> fe50dbfa</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Gem Collector</GameName>
+      <GameId>00050000101E5000</GameId>
+      <SaveDirId> 88ae1287</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Girl and the Robot</GameName>
+      <GameId>00050000101F9D00</GameId>
+      <SaveDirId> 693cc7fe</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Legend of Zelda™:  Hyrule Historia</GameName>
+      <GameId>000500001014CA00</GameId>
+      <SaveDirId> 23dc034d</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Letter</GameName>
+      <GameId>0005000010181700</GameId>
+      <SaveDirId> 9faef941</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>The Mysterious Cities of Gold: Secret Paths</GameName>
+      <GameId>0005000010156500</GameId>
+      <SaveDirId> a60402ff</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Toby: The Secret Mine</GameName>
+      <GameId>00050000101F8800</GameId>
+      <SaveDirId> 277b9231</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>TOSS N GO</GameName>
+      <GameId>000500001018F900</GameId>
+      <SaveDirId> bed104c9</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Underground</GameName>
+      <GameId>00050000101BCD00</GameId>
+      <SaveDirId> a5b5313e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>uWordsmith</GameName>
+      <GameId>00050000101A8000</GameId>
+      <SaveDirId> f2b33358</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Vaccine</GameName>
+      <GameId>000500001020B200</GameId>
+      <SaveDirId> e4f290de</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Watchup</GameName>
+      <GameId>0005000010198700</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Woah Dave!</GameName>
+      <GameId>00050000101BCE00</GameId>
+      <SaveDirId> 34aedd38</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Word Puzzles by POWGI</GameName>
+      <GameId>00050000101CFA00</GameId>
+      <SaveDirId> 55aec0bb</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Xeodrifter™</GameName>
+      <GameId>00050000101D1600</GameId>
+      <SaveDirId> ba7b1902</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Y.A.S.G</GameName>
+      <GameId>0005000010207700</GameId>
+      <SaveDirId> 3bc2ecb3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ZaciSa's Last Stand</GameName>
+      <GameId>000500001016E600</GameId>
+      <SaveDirId> cfe83163</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wipeout Create &amp; Crash</GameName>
+      <GameId>0005000010145500</GameId>
+      <SaveDirId> 793f26e5</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Brunswick Pro Bowling</GameName>
+      <GameId>00050000101D4200</GameId>
+      <SaveDirId> b5696309</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>ESPN Sports Connection</GameName>
+      <GameId>000500001010B400</GameId>
+      <SaveDirId> 860db5d5</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Family Party 30 Great Games Obstacle Arcade</GameName>
+      <GameId>000500001010F300</GameId>
+      <SaveDirId> d3d4cea6</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Phineas and Ferb : Quest for Cool Stuff</GameName>
+      <GameId>0005000010139400</GameId>
+      <SaveDirId> 57d3f280</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>POKER DICE SOLITAIRE FUTURE</GameName>
+      <GameId>000500001018A400</GameId>
+      <SaveDirId> 39f00dec</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Wheel of Fortune</GameName>
+      <GameId>0005000010111200</GameId>
+      <SaveDirId> f404d060</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Splinter Cell Blacklist</GameName>
+      <GameId>000500001010E300</GameId>
+      <SaveDirId> 3d62ec2e</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Barbie and Her Sisters Puppy Rescue</GameName>
+      <GameId>00050000101D1D00</GameId>
+      <SaveDirId> ddb2affb</SaveDirId>
+      <Region>EUR</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Electronic Super Joy: Groove City</GameName>
+      <GameId>0005000010197300</GameId>
+      <SaveDirId> 7a393bc3</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>High Strangeness</GameName>
+      <GameId>0005000010199E00</GameId>
+      <SaveDirId> b2cdce6a</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+    <SaveDir>
+      <GameName>Tumblestone</GameName>
+      <GameId>00050000101DAD00</GameId>
+      <SaveDirId> 49493e44</SaveDirId>
+      <Region>USA</Region>
+    </SaveDir>
+  </AllSaveDirs>
+</SaveDirs>

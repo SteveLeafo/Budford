@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CEACB3BA-3A88-41FE-A8F8-77562E8FB6CB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Budford</RootNamespace>
+    <AssemblyName>Budford</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Install\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Install\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>View\budford.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\CemuFeatures.cs" />
+    <Compile Include="Control\FileManager.cs" />
+    <Compile Include="Control\FolderScanner.cs" />
+    <Compile Include="Control\Launcher.cs" />
+    <Compile Include="Control\NativeMethods.cs" />
+    <Compile Include="Control\Persistence.cs" />
+    <Compile Include="Control\SpecialFolders.cs" />
+    <Compile Include="Control\Unpacker.cs" />
+    <Compile Include="Control\CemuSettings.cs" />
+    <Compile Include="Control\WindowsOS.cs" />
+    <Compile Include="Control\WriteCemuHookIniFile.cs" />
+    <Compile Include="Model\CemuHookSettings.cs" />
+    <Compile Include="Model\SaveDir.cs" />
+    <Compile Include="Model\GameSettings.cs" />
+    <Compile Include="Model\GraphicsPack.cs" />
+    <Compile Include="Model\InstalledVersion.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\OldVersion.cs" />
+    <Compile Include="Model\SaveDirs.cs" />
+    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\ViewFilters.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CopyShaderCache.cs" />
+    <Compile Include="Tools\CopySaves.cs" />
+    <Compile Include="Tools\Tool.cs" />
+    <Compile Include="Utilities\CurrentUserSecurity.cs" />
+    <Compile Include="Utilities\FileCache.cs" />
+    <Compile Include="Utilities\FileCacheEntry.cs" />
+    <Compile Include="Utilities\JunctionPoint.cs" />
+    <Compile Include="Utilities\LevenshteinDistance.cs" />
+    <Compile Include="Utilities\ListViewColumnSorter.cs" />
+    <Compile Include="Utilities\Nintendo.cs" />
+    <Compile Include="Utilities\TgaReader.cs" />
+    <Compile Include="Utilities\UsbNotification.cs" />
+    <Compile Include="Utilities\Xml.cs" />
+    <Compile Include="View\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormEditConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormEditConfiguration.Designer.cs">
+      <DependentUpon>FormEditConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormEditGameSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormEditGameSettings.Designer.cs">
+      <DependentUpon>FormEditGameSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormEditInstalledVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormEditInstalledVersion.Designer.cs">
+      <DependentUpon>FormEditInstalledVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormEditInstalledVersions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormEditInstalledVersions.Designer.cs">
+      <DependentUpon>FormEditInstalledVersions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormEditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormEditUser.Designer.cs">
+      <DependentUpon>FormEditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormScanRomFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormScanRomFolder.Designer.cs">
+      <DependentUpon>FormScanRomFolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormMultiFileDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormMultiFileDownload.Designer.cs">
+      <DependentUpon>FormMultiFileDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormShaderMerger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormShaderMerger.Designer.cs">
+      <DependentUpon>FormShaderMerger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormWebpageDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormWebpageDownload.Designer.cs">
+      <DependentUpon>FormWebpageDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormFileDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormFileDownload.Designer.cs">
+      <DependentUpon>FormFileDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormMainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormMainWindow.Designer.cs">
+      <DependentUpon>FormMainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GameInformation.cs" />
+    <Compile Include="Control\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ListViewHelper.cs" />
+    <Compile Include="View\UserControlTiledView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UserControlTiledView.Designer.cs">
+      <DependentUpon>UserControlTiledView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormEditConfiguration.resx">
+      <DependentUpon>FormEditConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormEditGameSettings.resx">
+      <DependentUpon>FormEditGameSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormEditInstalledVersion.resx">
+      <DependentUpon>FormEditInstalledVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormEditInstalledVersions.resx">
+      <DependentUpon>FormEditInstalledVersions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormEditUser.resx">
+      <DependentUpon>FormEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormScanRomFolder.resx">
+      <DependentUpon>FormScanRomFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormMultiFileDownload.resx">
+      <DependentUpon>FormMultiFileDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormShaderMerger.resx">
+      <DependentUpon>FormShaderMerger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormWebpageDownload.resx">
+      <DependentUpon>FormWebpageDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormFileDownload.resx">
+      <DependentUpon>FormFileDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormMainWindow.resx">
+      <DependentUpon>FormMainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserControlTiledView.resx">
+      <DependentUpon>UserControlTiledView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Control\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Resources\eu_flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Resources\oz_flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Resources\us_flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Resources\wii-u.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Resources\cemu.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="View\budford.ico" />
+    <Content Include="View\cemu2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
