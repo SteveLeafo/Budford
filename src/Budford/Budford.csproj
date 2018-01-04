@@ -92,6 +92,7 @@
     <Compile Include="Model\OldVersion.cs" />
     <Compile Include="Model\SaveDirs.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\SnapShot.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewFilters.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -166,6 +167,12 @@
     <Compile Include="View\FormShaderMerger.Designer.cs">
       <DependentUpon>FormShaderMerger.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormShapShots.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormShapShots.Designer.cs">
+      <DependentUpon>FormShapShots.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormWebpageDownload.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormShaderMerger.resx">
       <DependentUpon>FormShaderMerger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormShapShots.resx">
+      <DependentUpon>FormShapShots.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormWebpageDownload.resx">
       <DependentUpon>FormWebpageDownload.cs</DependentUpon>

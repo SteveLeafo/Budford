@@ -37,6 +37,9 @@
             this.openSaveFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openContainingFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCEMUShaderCacheFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.createSaveFileSnapshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.snapshotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,9 +158,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.createSaveFileSnapshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.snapshotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -227,6 +227,25 @@
             this.openCEMUShaderCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.openCEMUShaderCacheFolderToolStripMenuItem.Text = "Open Cemu shader cache folder";
             this.openCEMUShaderCacheFolderToolStripMenuItem.Click += new System.EventHandler(this.openCEMUShaderCacheFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(241, 6);
+            // 
+            // createSaveFileSnapshotToolStripMenuItem
+            // 
+            this.createSaveFileSnapshotToolStripMenuItem.Name = "createSaveFileSnapshotToolStripMenuItem";
+            this.createSaveFileSnapshotToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.createSaveFileSnapshotToolStripMenuItem.Text = "Create save file snapshot";
+            this.createSaveFileSnapshotToolStripMenuItem.Click += new System.EventHandler(this.createSaveFileSnapshotToolStripMenuItem_Click);
+            // 
+            // snapshotsToolStripMenuItem
+            // 
+            this.snapshotsToolStripMenuItem.Name = "snapshotsToolStripMenuItem";
+            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.snapshotsToolStripMenuItem.Text = "Snapshots";
+            this.snapshotsToolStripMenuItem.Click += new System.EventHandler(this.snapshotsToolStripMenuItem_Click);
             // 
             // imageList1
             // 
@@ -425,7 +444,7 @@
             this.updateShaderCachesToolStripMenuItem1.Name = "updateShaderCachesToolStripMenuItem1";
             this.updateShaderCachesToolStripMenuItem1.Size = new System.Drawing.Size(241, 22);
             this.updateShaderCachesToolStripMenuItem1.Text = "Update Shader Caches";
-            this.updateShaderCachesToolStripMenuItem1.Click += new System.EventHandler(this.updateShaderCachesToolStripMenuItem1_Click);
+            this.updateShaderCachesToolStripMenuItem1.Click += new System.EventHandler(this.updateShaderCachesToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -1160,24 +1179,6 @@
             this.imageList2.Images.SetKeyName(3, "loads.png");
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
-            // 
-            // createSaveFileSnapshotToolStripMenuItem
-            // 
-            this.createSaveFileSnapshotToolStripMenuItem.Name = "createSaveFileSnapshotToolStripMenuItem";
-            this.createSaveFileSnapshotToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.createSaveFileSnapshotToolStripMenuItem.Text = "Create save file snapshot";
-            this.createSaveFileSnapshotToolStripMenuItem.Click += new System.EventHandler(this.createSaveFileSnapshotToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator18
-            // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(241, 6);
-            // 
-            // snapshotsToolStripMenuItem
-            // 
-            this.snapshotsToolStripMenuItem.Name = "snapshotsToolStripMenuItem";
-            this.snapshotsToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.snapshotsToolStripMenuItem.Text = "Snapshots";
             // 
             // FormMainWindow
             // 

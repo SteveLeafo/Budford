@@ -11,13 +11,13 @@ namespace Budford.Model
         public string CurrentUser;
 
         // The installed games.
-        internal Dictionary<string, GameInformation> GameData  = new Dictionary<string, GameInformation>();
         public List<GameInformation> GameData2  = new List<GameInformation>();
-
-        internal Dictionary<string, List<GraphicsPack>> GraphicsPacks  = new Dictionary<string, List<GraphicsPack>>();
 
         // Currently available releases.
         public List<OldVersion> OldVersions  = new List<OldVersion>();
+
+        // Additional game save "snap shots"
+        public List<SnapShot> ShapShots = new List<SnapShot>();
 
         // A list of users that have been added to the system.
         public List<User> Users  = new List<User>();
@@ -28,6 +28,13 @@ namespace Budford.Model
         // Filters for the main list view
         public ViewFilters Filters  = new ViewFilters();
 
+        // A log of all the errors that have occurred
         internal List<string> Errors = new List<string>();
+
+        // Lookup table for game data
+        internal Dictionary<string, GameInformation> GameData = new Dictionary<string, GameInformation>();
+
+        // Lookup table for graphic packs
+        internal Dictionary<string, List<GraphicsPack>> GraphicsPacks = new Dictionary<string, List<GraphicsPack>>();
     }
 }

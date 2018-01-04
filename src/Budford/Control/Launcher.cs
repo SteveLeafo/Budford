@@ -14,7 +14,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        Model.Model model;
+        internal Model.Model model;
 
         /// <summary>
         /// 
@@ -34,7 +34,11 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        InstalledVersion runningVersion = null;
+        static InstalledVersion runningVersion = null;
+
+        static string cemu = "";
+        static string logfile = "";
+
 
         /// <summary>
         /// Constructor
@@ -81,10 +85,8 @@ namespace Budford.Control
                 }
                 return;
             }            
-            string cemu = "";
-            string logfile = "";
 
-            SetCemuVersion(modelIn, game, out runningVersion, ref cemu, ref logfile);
+            SetCemuVersion(modelIn, game);
 
             if (File.Exists(cemu))
             {
@@ -144,8 +146,13 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="game"></param>
-        private void CopyLargestShaderCacheToCemu(GameInformation game)
+        internal void CopyLargestShaderCacheToCemu(GameInformation game)
         {
+            if (runningVersion == null)
+            {
+                SetCemuVersion(model, game);
+            }
+
             if (!game.SaveDir.StartsWith("??"))
             {
                 FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(game));
@@ -428,25 +435,25 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="cemu"></param>
         /// <param name="logfile"></param>
-        internal static void SetCemuVersion(Model.Model model, GameInformation game, out InstalledVersion latest, ref string cemu, ref string logfile)
+        internal static void SetCemuVersion(Model.Model model, GameInformation game)
         {
             if (game != null)
             {
                 if (game.GameSetting.PreferedVersion != "Latest")
                 {
-                    latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == game.GameSetting.PreferedVersion);
-                    PopulateFromVersion(ref cemu, ref logfile, latest);
+                    runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == game.GameSetting.PreferedVersion);
+                    PopulateFromVersion(ref cemu, ref logfile, runningVersion);
                 }
                 else
                 {
-                    latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-                    PopulateFromVersion(ref cemu, ref logfile, latest);
+                    runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                    PopulateFromVersion(ref cemu, ref logfile, runningVersion);
                 }
             }
             else
             {
-                latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-                PopulateFromVersion(ref cemu, ref logfile, latest);
+                runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                PopulateFromVersion(ref cemu, ref logfile, runningVersion);
             }
         }
 
@@ -613,9 +620,7 @@ namespace Budford.Control
             {
                 if (runningVersion == null)
                 {
-                    string cemu = "";
-                    string logfile = "";
-                    SetCemuVersion(model, game, out runningVersion, ref cemu, ref logfile);
+                    SetCemuVersion(model, game);
                 }
                 DirectoryInfo saveDir = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford("", game, ""));
                 string snapShotDir = "S_" + saveDir.EnumerateDirectories().Count();

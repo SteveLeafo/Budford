@@ -2085,17 +2085,17 @@ namespace Budford
         /// <param name="e"></param>
         private void updateShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void updateShaderCachesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
             iv1 = GetCurrentVersion();
+
+            launcher.model = model;
+
+            foreach (var game in model.GameData)
+            {
+                if (!game.Value.SaveDir.StartsWith("??"))
+                {
+                    launcher.CopyLargestShaderCacheToCemu(game.Value);
+                }
+            }
 
             System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc2);
         }
@@ -2113,6 +2113,7 @@ namespace Budford
                     if (!game.Value.SaveDir.StartsWith("??"))
                     {
                         FileInfo fi = new FileInfo(iv1.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin");
+                        
                         if (fi.Exists)
                         {
                             if (fi.Length > 1000000)
@@ -2156,5 +2157,24 @@ namespace Budford
             }
         }
 
+        private void snapshotsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                {
+                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    using (FormShapShots ss = new FormShapShots(model, game))
+                    {
+                        ss.ShowDialog(this);
+
+                        if (ss.LaunchSnapShot != "")
+                        {
+                            MessageBox.Show("Launching " + ss.LaunchSnapShot);
+                        }
+                    }
+                }
+            }
+        }
     }   
 }

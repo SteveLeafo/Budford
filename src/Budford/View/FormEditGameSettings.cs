@@ -128,7 +128,7 @@ namespace Budford.View
             comboBox25.SelectedIndex = information.CemuHookSetting.DisableMOVBE ? 1 : 0;
             comboBox26.SelectedIndex = information.CemuHookSetting.MotionSource;
             comboBox27.SelectedIndex = information.CemuHookSetting.MMTimerAccuracy;
-            
+            comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
         }
 
@@ -188,6 +188,7 @@ namespace Budford.View
             information.CemuHookSetting.DisableMOVBE = comboBox25.SelectedIndex != 0;
             information.CemuHookSetting.MotionSource = comboBox26.SelectedIndex;
             information.CemuHookSetting.MMTimerAccuracy = comboBox27.SelectedIndex;
+            information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox28.SelectedIndex != 0;
 
             foreach (ListViewItem lvi in listView1.Items)
             {

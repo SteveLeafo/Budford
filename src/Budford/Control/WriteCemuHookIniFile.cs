@@ -29,6 +29,8 @@ namespace Budford.Control
                 sw.WriteLine("motionSource = " + GetMotionSource(gameInfo.CemuHookSetting.MotionSource));
                 sw.WriteLine("[Debug]");
                 sw.WriteLine("mmTimerAccuracy = " + GetMMTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
+                sw.WriteLine("[Graphics]");
+                sw.WriteLine("ignorePrecompiledShaderCache = true");
             }
         }
 

@@ -125,23 +125,26 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
-            this.comboBox21 = new System.Windows.Forms.ComboBox();
             this.comboBox22 = new System.Windows.Forms.ComboBox();
             this.comboBox23 = new System.Windows.Forms.ComboBox();
             this.comboBox24 = new System.Windows.Forms.ComboBox();
             this.comboBox25 = new System.Windows.Forms.ComboBox();
             this.comboBox26 = new System.Windows.Forms.ComboBox();
             this.comboBox27 = new System.Windows.Forms.ComboBox();
+            this.comboBox21 = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.comboBox28 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1313,10 +1316,15 @@
             this.tableLayoutPanel9.Controls.Add(this.label37, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.label45, 0, 8);
             this.tableLayoutPanel9.Controls.Add(this.label43, 0, 6);
+            this.tableLayoutPanel9.Controls.Add(this.label47, 0, 10);
+            this.tableLayoutPanel9.Controls.Add(this.label48, 1, 11);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox28, 2, 11);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 11;
+            this.tableLayoutPanel9.RowCount = 13;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1330,15 +1338,6 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(437, 460);
             this.tableLayoutPanel9.TabIndex = 0;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(3, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(29, 13);
-            this.label37.TabIndex = 0;
-            this.label37.Text = "CPU";
             // 
             // label38
             // 
@@ -1385,15 +1384,6 @@
             this.label42.TabIndex = 0;
             this.label42.Text = "Disable MOVBE";
             // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(3, 148);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(31, 13);
-            this.label43.TabIndex = 0;
-            this.label43.Text = "Input";
-            // 
             // label44
             // 
             this.label44.AutoSize = true;
@@ -1403,15 +1393,6 @@
             this.label44.TabIndex = 0;
             this.label44.Text = "Motion Source";
             // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(3, 188);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(39, 13);
-            this.label45.TabIndex = 0;
-            this.label45.Text = "Debug";
-            // 
             // label46
             // 
             this.label46.AutoSize = true;
@@ -1420,19 +1401,6 @@
             this.label46.Size = new System.Drawing.Size(102, 13);
             this.label46.TabIndex = 0;
             this.label46.Text = "MM Timer Accuracy";
-            // 
-            // comboBox21
-            // 
-            this.comboBox21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox21.FormattingEnabled = true;
-            this.comboBox21.Items.AddRange(new object[] {
-            "None",
-            "QPC",
-            "RDTSC"});
-            this.comboBox21.Location = new System.Drawing.Point(169, 16);
-            this.comboBox21.Name = "comboBox21";
-            this.comboBox21.Size = new System.Drawing.Size(265, 21);
-            this.comboBox21.TabIndex = 1;
             // 
             // comboBox22
             // 
@@ -1446,9 +1414,9 @@
             "0.5",
             "0.25",
             "0.125"});
-            this.comboBox22.Location = new System.Drawing.Point(169, 43);
+            this.comboBox22.Location = new System.Drawing.Point(223, 43);
             this.comboBox22.Name = "comboBox22";
-            this.comboBox22.Size = new System.Drawing.Size(265, 21);
+            this.comboBox22.Size = new System.Drawing.Size(211, 21);
             this.comboBox22.TabIndex = 1;
             // 
             // comboBox23
@@ -1458,9 +1426,9 @@
             this.comboBox23.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox23.Location = new System.Drawing.Point(169, 70);
+            this.comboBox23.Location = new System.Drawing.Point(223, 70);
             this.comboBox23.Name = "comboBox23";
-            this.comboBox23.Size = new System.Drawing.Size(265, 21);
+            this.comboBox23.Size = new System.Drawing.Size(211, 21);
             this.comboBox23.TabIndex = 1;
             // 
             // comboBox24
@@ -1470,9 +1438,9 @@
             this.comboBox24.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox24.Location = new System.Drawing.Point(169, 97);
+            this.comboBox24.Location = new System.Drawing.Point(223, 97);
             this.comboBox24.Name = "comboBox24";
-            this.comboBox24.Size = new System.Drawing.Size(265, 21);
+            this.comboBox24.Size = new System.Drawing.Size(211, 21);
             this.comboBox24.TabIndex = 1;
             // 
             // comboBox25
@@ -1482,9 +1450,9 @@
             this.comboBox25.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox25.Location = new System.Drawing.Point(169, 124);
+            this.comboBox25.Location = new System.Drawing.Point(223, 124);
             this.comboBox25.Name = "comboBox25";
-            this.comboBox25.Size = new System.Drawing.Size(265, 21);
+            this.comboBox25.Size = new System.Drawing.Size(211, 21);
             this.comboBox25.TabIndex = 1;
             // 
             // comboBox26
@@ -1496,9 +1464,9 @@
             "DSU2",
             "DSU3",
             "DSU4"});
-            this.comboBox26.Location = new System.Drawing.Point(169, 164);
+            this.comboBox26.Location = new System.Drawing.Point(223, 164);
             this.comboBox26.Name = "comboBox26";
-            this.comboBox26.Size = new System.Drawing.Size(265, 21);
+            this.comboBox26.Size = new System.Drawing.Size(211, 21);
             this.comboBox26.TabIndex = 1;
             // 
             // comboBox27
@@ -1509,10 +1477,81 @@
             "Default",
             "Max",
             "1ms"});
-            this.comboBox27.Location = new System.Drawing.Point(169, 204);
+            this.comboBox27.Location = new System.Drawing.Point(223, 204);
             this.comboBox27.Name = "comboBox27";
-            this.comboBox27.Size = new System.Drawing.Size(265, 21);
+            this.comboBox27.Size = new System.Drawing.Size(211, 21);
             this.comboBox27.TabIndex = 1;
+            // 
+            // comboBox21
+            // 
+            this.comboBox21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox21.FormattingEnabled = true;
+            this.comboBox21.Items.AddRange(new object[] {
+            "None",
+            "QPC",
+            "RDTSC"});
+            this.comboBox21.Location = new System.Drawing.Point(223, 16);
+            this.comboBox21.Name = "comboBox21";
+            this.comboBox21.Size = new System.Drawing.Size(211, 21);
+            this.comboBox21.TabIndex = 1;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(3, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(29, 13);
+            this.label37.TabIndex = 0;
+            this.label37.Text = "CPU";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(3, 188);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(39, 13);
+            this.label45.TabIndex = 0;
+            this.label45.Text = "Debug";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(3, 148);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(31, 13);
+            this.label43.TabIndex = 0;
+            this.label43.Text = "Input";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(3, 228);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(39, 13);
+            this.label47.TabIndex = 0;
+            this.label47.Text = "Debug";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(48, 241);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(169, 13);
+            this.label48.TabIndex = 0;
+            this.label48.Text = "Ignore Precompiled Shader Cache";
+            // 
+            // comboBox28
+            // 
+            this.comboBox28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox28.FormattingEnabled = true;
+            this.comboBox28.Items.AddRange(new object[] {
+            "Default",
+            "Max",
+            "1ms"});
+            this.comboBox28.Location = new System.Drawing.Point(223, 244);
+            this.comboBox28.Name = "comboBox28";
+            this.comboBox28.Size = new System.Drawing.Size(211, 21);
+            this.comboBox28.TabIndex = 1;
             // 
             // FormEditGameSettings
             // 
@@ -1674,5 +1713,8 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.ComboBox comboBox28;
     }
 }

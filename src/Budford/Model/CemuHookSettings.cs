@@ -13,6 +13,7 @@ namespace Budford.Model
         public bool DisableLZCNT = false;
         public bool DisableMOVBE = false;
         public bool DisableAVX = false;
+        public bool IgnorePrecompiledShaderCache = false;
         public int MotionSource = 0;
         public int MMTimerAccuracy = 0;
     }
