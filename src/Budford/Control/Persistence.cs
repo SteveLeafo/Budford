@@ -77,7 +77,6 @@ namespace Budford.Control
                         model.GameData.Add(key, gd);
                     }
                 }
-                gd.GameSetting.EnableVSync = 0;
             }
             Persistence.PurgeGames(model);
         }
