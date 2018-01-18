@@ -151,7 +151,10 @@ namespace Budford.Control
         {
             foreach (var gd in model.GameData)
             {
-                gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
+                if (gd.Value.SaveDir.StartsWith("??"))
+                {
+                    gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
+                }
             }
         }
 

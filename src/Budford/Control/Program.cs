@@ -18,24 +18,24 @@ namespace Budford
         [STAThread]
         static void Main()
         {
-            byte[] ba = Encoding.ASCII.GetBytes("@");
-            byte[] b1 = Encoding.ASCII.GetBytes("@");
-            byte[] b2 = Encoding.ASCII.GetBytes("0");
+            //byte[] ba = Encoding.ASCII.GetBytes("@");
+            //byte[] b1 = Encoding.ASCII.GetBytes("@");
+            //byte[] b2 = Encoding.ASCII.GetBytes("0");
 
-            UInt32 jx1 = HashGenerator.GenerateHashFromRpxRawData(ba, ba.Length);
-            UInt32 jx2 = HashGenerator.GenerateHashFromRpxRawData(b1, ba.Length);
-            UInt32 jx3 = HashGenerator.GenerateHashFromRpxRawData(b2, ba.Length);
+            //UInt32 jx1 = HashGenerator.GenerateHashFromRpxRawData(ba, ba.Length);
+            //UInt32 jx2 = HashGenerator.GenerateHashFromRpxRawData(b1, ba.Length);
+            //UInt32 jx3 = HashGenerator.GenerateHashFromRpxRawData(b2, ba.Length);
                 
-            List<int> xxers = new List<int>();
-            for (int i = 0; i < 256; ++i)
-            {
-                UInt32 jx = HashGenerator.GenerateHashFromRpxRawData(ba, ba.Length);
-                UInt64 hasher = HashGenerator.GenerateHashFromRpxRawData2((ulong)i, ba, ba.Length);
-                if (hasher == 0x713B832AE0DAC43B)
-                {
-                    xxers.Add(i);
-                }
-            }
+            //List<int> xxers = new List<int>();
+            //for (int i = 0; i < 256; ++i)
+            //{
+            //    UInt32 jx = HashGenerator.GenerateHashFromRpxRawData(ba, ba.Length);
+            //    UInt64 hasher = HashGenerator.GenerateHashFromRpxRawData2((ulong)i, ba, ba.Length);
+            //    if (hasher == 0x713B832AE0DAC43B)
+            //    {
+            //        xxers.Add(i);
+            //    }
+            //}
             //Parallel.For(0, long.MaxValue, i =>
             ////for (ulong i = 0; i < ulong.MaxValue; i++)
             //{
