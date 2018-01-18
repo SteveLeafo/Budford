@@ -30,7 +30,7 @@ namespace Budford.Control
                 sw.WriteLine("[Debug]");
                 sw.WriteLine("mmTimerAccuracy = " + GetMMTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
                 sw.WriteLine("[Graphics]");
-                sw.WriteLine("ignorePrecompiledShaderCache = true");
+                sw.WriteLine("ignorePrecompiledShaderCache = " + (gameInfo.CemuHookSetting.IgnorePrecompiledShaderCache ? "true" : "false"));
             }
         }
 

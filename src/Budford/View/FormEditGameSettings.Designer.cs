@@ -1545,9 +1545,8 @@
             this.comboBox28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox28.FormattingEnabled = true;
             this.comboBox28.Items.AddRange(new object[] {
-            "Default",
-            "Max",
-            "1ms"});
+            "False",
+            "True"});
             this.comboBox28.Location = new System.Drawing.Point(223, 244);
             this.comboBox28.Name = "comboBox28";
             this.comboBox28.Size = new System.Drawing.Size(211, 21);
