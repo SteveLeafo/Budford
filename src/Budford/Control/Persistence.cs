@@ -149,24 +149,9 @@ namespace Budford.Control
         /// <param name="model"></param>
         internal static void SetSaveDirs(Model.Model model)
         {
-            if (File.Exists("SaveDirDatabase.xml"))
+            foreach (var gd in model.GameData)
             {
-                Dictionary<string, SaveDir> dirs = new Dictionary<string, SaveDir>();
-                SaveDirs sd = Load();
-                foreach (var s in sd.AllSaveDirs)
-                {
-                    if (!dirs.ContainsKey(s.GameId))
-                    {
-                        dirs.Add(s.GameId, s);
-                    }
-                }
-                foreach (var gd in model.GameData)
-                {
-                    if (dirs.ContainsKey(gd.Value.TitleId))
-                    {
-                        gd.Value.SaveDir = dirs[gd.Value.TitleId].SaveDirId;
-                    }
-                }
+                gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
             }
         }
 

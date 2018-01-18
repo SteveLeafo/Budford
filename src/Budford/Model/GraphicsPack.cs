@@ -112,6 +112,7 @@
             new string[]{"BreathOfTheWild_720pBetterColorDepth", "3c5e73eda847e087"},
             new string[]{"BreathOfTheWild_900p", "39e825d98306a93d"},
             new string[]{"BreathOfTheWild_AdjustableFog", "79d5a12557043d6d"},
+            new string[]{"BreathOfTheWild_Clarity",     "59cf7d17584e7ad0"},
             new string[]{"BreathOfTheWild_ClarityGFX",     "31fc23ebb9ef02cb"},
             new string[]{"BreathOfTheWild_ClarityGFXv176", "4d757c12c33fb29e"},
             new string[]{"BreathOfTheWild_Contrasty", "67ce74c1ee399093"},
