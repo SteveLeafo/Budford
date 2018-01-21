@@ -236,7 +236,14 @@ namespace Budford.Control
                 model.Errors.Add(ex.Message);
             }
 
-            runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+            try
+            {
+                runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+            }
+            catch (Exception)
+            {
+                // Probably don't have enough permissions.
+            }
 
             if (getSaveDir && !cemu_only)
             {
