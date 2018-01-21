@@ -132,7 +132,14 @@ namespace Budford.Control
                 // Allow the process to finish starting.
                 if (runningProcess != null)
                 {
-                    runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+                    try
+                    {
+                        runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+                    }
+                    catch (Exception)
+                    {
+                        // Probably not enough permissions...
+                    }
                     WaitForProcess(modelIn, game, getSaveDir, cemu_only, logfile);
                 }
             }
