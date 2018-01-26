@@ -176,7 +176,23 @@ namespace Budford
         {
             KeysConverter kc = new KeysConverter();
             string keyChar = kc.ConvertToString(e.KeyData);
-            e.Handled = FindMyString(keyChar);
+            if (keyChar == "Enter")
+            {
+                if (listView1.SelectedItems.Count == 1)
+                {
+                    if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                    {
+                        GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                        model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                        launcher.LaunchCemu(model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                        e.Handled = true;
+                    }
+                }
+            }
+            else
+            {
+                e.Handled = FindMyString(keyChar);
+            }
         }
 
         /// <summary>
@@ -2173,6 +2189,20 @@ namespace Budford
                             MessageBox.Show("Launching " + ss.LaunchSnapShot);
                         }
                     }
+                }
+            }
+        }
+
+        private void openBudfordSaveFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Save location
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                {
+                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
+                    Process.Start(src.FullName);
                 }
             }
         }

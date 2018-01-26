@@ -158,6 +158,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.openBudfordSaveFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -187,13 +188,14 @@
             this.propertiesToolStripMenuItem,
             this.toolStripSeparator5,
             this.openSaveFileLocationToolStripMenuItem,
+            this.openBudfordSaveFolderToolStripMenuItem,
             this.openContainingFolderToolStripMenuItem,
             this.openCEMUShaderCacheFolderToolStripMenuItem,
             this.toolStripSeparator18,
             this.createSaveFileSnapshotToolStripMenuItem,
             this.snapshotsToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 170);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 192);
             // 
             // propertiesToolStripMenuItem
             // 
@@ -1180,6 +1182,13 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
+            // openBudfordSaveFolderToolStripMenuItem
+            // 
+            this.openBudfordSaveFolderToolStripMenuItem.Name = "openBudfordSaveFolderToolStripMenuItem";
+            this.openBudfordSaveFolderToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.openBudfordSaveFolderToolStripMenuItem.Text = "Open Budford save folder";
+            this.openBudfordSaveFolderToolStripMenuItem.Click += new System.EventHandler(this.openBudfordSaveFolderToolStripMenuItem_Click);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1340,6 +1349,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
         private System.Windows.Forms.ToolStripMenuItem createSaveFileSnapshotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openBudfordSaveFolderToolStripMenuItem;
     }
 }
 
