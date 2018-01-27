@@ -79,6 +79,7 @@ namespace Budford.View
             if (information.TitleId != "")
             {
                 listView1.Items.Clear();
+                information.GameSetting.graphicsPacks = new HashSet<GraphicsPack>(information.GameSetting.graphicsPacks.OrderBy(p => p.Folder));
                 foreach (var pack in information.GameSetting.graphicsPacks)
                 {
                     ListViewItem lvi = new ListViewItem();
@@ -118,8 +119,9 @@ namespace Budford.View
 
             comboBox15.SelectedIndex = information.GameSetting.AccaccurateShaderMul;
             comboBox16.SelectedIndex = information.GameSetting.DisableGPUFence;
-            comboBox18.SelectedIndex = information.GameSetting.EmulateSinglePrecision;
             comboBox17.SelectedIndex = information.GameSetting.SeparateGamePadView;
+            comboBox18.SelectedIndex = information.GameSetting.EmulateSinglePrecision;
+            comboBox29.SelectedIndex = information.GameSetting.UseRtdsc;
 
             comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
             comboBox22.SelectedIndex = information.CemuHookSetting.CustomTimerMultiplier;
@@ -180,6 +182,7 @@ namespace Budford.View
             information.GameSetting.DisableGPUFence = (byte)comboBox16.SelectedIndex;
             information.GameSetting.EmulateSinglePrecision = (byte)comboBox18.SelectedIndex;
             information.GameSetting.SeparateGamePadView = (byte)comboBox17.SelectedIndex;
+            information.GameSetting.UseRtdsc = (byte)comboBox29.SelectedIndex;
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;

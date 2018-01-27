@@ -2173,6 +2173,11 @@ namespace Budford
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void snapshotsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 1)
@@ -2193,6 +2198,11 @@ namespace Budford
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openBudfordSaveFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Save location
@@ -2201,7 +2211,7 @@ namespace Budford
                 if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
                     GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
+                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
                     Process.Start(src.FullName);
                 }
             }

@@ -193,11 +193,15 @@ namespace Budford.Control
         /// <returns></returns>
         private static void AddGraphicsPack(KeyValuePair<string, GameInformation> game, GraphicsPack pack)
         {
-            if (!PackAdded(game.Value, pack.Title))
+            if (!PackAdded(game.Value, pack.Folder))
             {
                 AddPackGui(pack);
-                game.Value.GameSetting.graphicsPacks.Add(pack);
-                game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
+                if (!game.Value.GameSetting.graphicsPacksFolders.Contains(pack.Folder))
+                {
+                    game.Value.GameSetting.graphicsPacksFolders.Add(pack.Folder);
+                    game.Value.GameSetting.graphicsPacks.Add(pack);
+                    game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
+                }
             }
         }
 
@@ -223,7 +227,7 @@ namespace Budford.Control
         {
             foreach (var pack in game.GameSetting.graphicsPacks)
             {
-                if (pack.Title == packIn)
+                if (pack.Folder == packIn)
                 {
                     return true;
                 }
@@ -267,15 +271,31 @@ namespace Budford.Control
                     foreach (string i in ids)
                     {
                         string id = i.ToUpper();
+                        pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf('\\'));
                         if (!graphicsPacks.ContainsKey(id))
                         {
                             graphicsPacks.Add(id, new List<GraphicsPack>());
                         }
-                        graphicsPacks[id].Add(pack);
-                        pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf('\\'));
+
+                        if (!IsContained(graphicsPacks[id], pack))
+                        {
+                            graphicsPacks[id].Add(pack);
+                        }
                     }
                 }
             }
+        }
+
+        private static bool IsContained(List<GraphicsPack> list, GraphicsPack pack)
+        {
+            foreach (var p in list)
+            {
+                if (p.Folder == pack.Folder)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

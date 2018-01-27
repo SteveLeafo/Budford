@@ -9,6 +9,7 @@ namespace Budford.Model
         public EmulationStateType EmulationState = EmulationStateType.NotSet;
         public EmulationStateType OfficialEmulationState = EmulationStateType.NotSet;
         public HashSet<GraphicsPack> graphicsPacks  = new HashSet<GraphicsPack>();
+        internal HashSet<string> graphicsPacksFolders = new HashSet<string>();
 
         // CEMU Options
         public byte FullScreen  = 1;
@@ -41,10 +42,11 @@ namespace Budford.Model
         public byte DisableAudio ;
         public byte EnableBoTWCrashWorkaround ;
         public byte FullSyncAtGX2DrawDone ;
-        public byte SeparateGamePadView ;
-        public byte AccaccurateShaderMul  = 1;
+        public byte SeparateGamePadView  = 0;
+        public byte AccaccurateShaderMul = 1;
         public byte DisableGPUFence ;
         public byte EmulateSinglePrecision ;
+        public byte UseRtdsc = 1;
 
         public enum GpuBufferCacheAccuracyType : byte
         {
