@@ -59,6 +59,8 @@
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.comboBox17 = new System.Windows.Forms.ComboBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.comboBox29 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -145,8 +147,8 @@
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.comboBox28 = new System.Windows.Forms.ComboBox();
-            this.label49 = new System.Windows.Forms.Label();
-            this.comboBox29 = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.comboBox30 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -210,8 +212,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 473);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -221,7 +223,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(8, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 244);
+            this.groupBox1.Size = new System.Drawing.Size(421, 216);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Preferences";
@@ -255,7 +257,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 225);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 197);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -341,7 +343,7 @@
             this.textBox14.Location = new System.Drawing.Point(125, 146);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(287, 71);
+            this.textBox14.Size = new System.Drawing.Size(287, 43);
             this.textBox14.TabIndex = 2;
             // 
             // label35
@@ -390,9 +392,9 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(8, 253);
+            this.groupBox2.Location = new System.Drawing.Point(8, 225);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 217);
+            this.groupBox2.Size = new System.Drawing.Size(421, 245);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CEMU Options";
@@ -416,10 +418,12 @@
             this.tableLayoutPanel3.Controls.Add(this.comboBox17, 1, 6);
             this.tableLayoutPanel3.Controls.Add(this.label49, 0, 7);
             this.tableLayoutPanel3.Controls.Add(this.comboBox29, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.label50, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.comboBox30, 1, 8);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 8;
+            this.tableLayoutPanel3.RowCount = 10;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -427,8 +431,10 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 198);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 226);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // label3
@@ -557,6 +563,27 @@
             this.comboBox17.Name = "comboBox17";
             this.comboBox17.Size = new System.Drawing.Size(260, 21);
             this.comboBox17.TabIndex = 1;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(3, 167);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(66, 13);
+            this.label49.TabIndex = 0;
+            this.label49.Text = "Use RTDSC";
+            // 
+            // comboBox29
+            // 
+            this.comboBox29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox29.FormattingEnabled = true;
+            this.comboBox29.Items.AddRange(new object[] {
+            "Off",
+            "On"});
+            this.comboBox29.Location = new System.Drawing.Point(152, 170);
+            this.comboBox29.Name = "comboBox29";
+            this.comboBox29.Size = new System.Drawing.Size(260, 21);
+            this.comboBox29.TabIndex = 1;
             // 
             // tabPage2
             // 
@@ -1556,26 +1583,26 @@
             this.comboBox28.Size = new System.Drawing.Size(211, 21);
             this.comboBox28.TabIndex = 1;
             // 
-            // label49
+            // label50
             // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(3, 167);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(66, 13);
-            this.label49.TabIndex = 0;
-            this.label49.Text = "Use RTDSC";
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(3, 194);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(67, 13);
+            this.label50.TabIndex = 0;
+            this.label50.Text = "Online Mode";
             // 
-            // comboBox29
+            // comboBox30
             // 
-            this.comboBox29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox29.FormattingEnabled = true;
-            this.comboBox29.Items.AddRange(new object[] {
+            this.comboBox30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox30.FormattingEnabled = true;
+            this.comboBox30.Items.AddRange(new object[] {
             "Off",
             "On"});
-            this.comboBox29.Location = new System.Drawing.Point(152, 170);
-            this.comboBox29.Name = "comboBox29";
-            this.comboBox29.Size = new System.Drawing.Size(260, 21);
-            this.comboBox29.TabIndex = 1;
+            this.comboBox30.Location = new System.Drawing.Point(152, 197);
+            this.comboBox30.Name = "comboBox30";
+            this.comboBox30.Size = new System.Drawing.Size(260, 21);
+            this.comboBox30.TabIndex = 1;
             // 
             // FormEditGameSettings
             // 
@@ -1742,5 +1769,7 @@
         private System.Windows.Forms.ComboBox comboBox28;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.ComboBox comboBox29;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.ComboBox comboBox30;
     }
 }

@@ -1819,7 +1819,8 @@ namespace Budford
                     foreach (var gd in model.GameData)
                     {
                         GameInformation gi = gd.Value;
-                        sw.WriteLine(gi.SaveDir.Trim() + ", " + gi.Name + ", " + gi.GameSetting.EmulationState.ToString());
+                        gi.GameSetting.UseRtdsc = 1;
+                        //sw.WriteLine(gi.SaveDir.Trim() + ", " + gi.Name + ", " + gi.GameSetting.EmulationState.ToString());
                     }
                 }
             }

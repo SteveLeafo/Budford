@@ -68,9 +68,10 @@ namespace Budford.Control
         readonly int[] Core_Settings =       new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
         readonly int[] Core_Settings_V1113 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
 
+        readonly int[] V1113_Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
         readonly int[] V1112_Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
-        readonly int[] V1110_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x00 };
-        readonly int[] V1100_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x00 };
+        readonly int[] V1110_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a };
+        readonly int[] V1100_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a };
         readonly int[] V191_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x00, 0x00 };
         readonly int[] V190_Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00 };
         readonly int[] V182_Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -180,7 +181,9 @@ namespace Budford.Control
                 {"1.9.1", new Tuple<int[], int[]>(settings_1_9_1_bin, V191_Settings) },
                 {"1.10.0", new Tuple<int[], int[]>(settings_1_10_0_bin, V1100_Settings) },
                 {"1.11.0", new Tuple<int[], int[]>(settings_1_11_0_bin, V1110_Settings) },
-                {"1.11.2", new Tuple<int[], int[]>(settings_1_11_2_bin, V1112_Settings) }
+                {"1.11.2", new Tuple<int[], int[]>(settings_1_11_2_bin, V1112_Settings) },
+                {"1.11.3", new Tuple<int[], int[]>(settings_1_11_2_bin, V1113_Settings) },
+                {"1.11.4", new Tuple<int[], int[]>(settings_1_11_2_bin, V1113_Settings) }
             };
         }
 
@@ -353,8 +356,9 @@ namespace Budford.Control
                     WriteByte(fn, SettingsOffsets[(int)Settings.ConsoleLanguageOffset], (byte)model.Settings.ConsoleLanguage);
                     WriteByte(fn, SettingsOffsets[(int)Settings.BoTWWorkAroundOffset], settings.EnableBoTWCrashWorkaround);
                     WriteByte(fn, SettingsOffsets[(int)Settings.FullSyncAtGx2Offset], settings.FullSyncAtGX2DrawDone);
-                    WriteByte(fn, SettingsOffsets[(int)Settings.SeparateGamepadViewOffset], settings.SeparateGamePadView);
-                    WriteByte(fn, SettingsOffsets[(int)Settings.UseRtdscOffset], settings.UseRtdsc);
+                    if (Settings.SeparateGamepadViewOffset != 0) WriteByte(fn, SettingsOffsets[(int)Settings.SeparateGamepadViewOffset], settings.SeparateGamePadView);
+                    if (Settings.EnableOnLineModeOffset != 0) WriteByte(fn, SettingsOffsets[(int)Settings.EnableOnLineModeOffset], settings.Online != 0 ? 3 : 2);
+                    if (Settings.UseRtdscOffset != 0) WriteByte(fn, SettingsOffsets[(int)Settings.UseRtdscOffset], settings.UseRtdsc);
                 }
             }
         }
