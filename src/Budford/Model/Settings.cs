@@ -51,8 +51,8 @@ namespace Budford.Model
 
         public enum ConsoleLanguageType : byte
         {
-            Jap = 0x00,
-            English = 0x01,
+            English = 0x00,
+            Jap = 0x01,
             French = 0x02,
             German = 0x03,
             Italian = 0x04,
