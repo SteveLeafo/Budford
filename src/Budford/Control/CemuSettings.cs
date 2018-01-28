@@ -447,7 +447,7 @@ namespace Budford.Control
                             Directory.Delete(version.Folder + "\\graphicPacks\\" + pack.Folder, true);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         // May be in use 
                     }
