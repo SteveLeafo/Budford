@@ -30,6 +30,8 @@ namespace Budford.Model
 
         public bool ForceLowResolutionGraphicsPacks;
 
+        public bool LegacyIntelGpuMode = false;
+
         public string DefaultResolution = "default";
 
         public ConsoleRegionType ConsoleRegion = ConsoleRegionType.Auto;

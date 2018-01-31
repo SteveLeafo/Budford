@@ -369,7 +369,7 @@ namespace Budford.Control
             {
                 if (game != null)
                 {
-                    start.Arguments = "-g \"" + game.LaunchFile + "\"";
+                    start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
                 }
                 start.WindowStyle = ProcessWindowStyle.Minimized;
             }
@@ -377,11 +377,11 @@ namespace Budford.Control
             {
                 if (game != null && game.GameSetting.FullScreen == 1 && !shiftUp)
                 {
-                    start.Arguments = "-f -g \"" + game.LaunchFile + "\"";
+                    start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"";
                 }
                 else if (game != null)
                 {
-                    start.Arguments = "-g \"" + game.LaunchFile + "\"";
+                    start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
                 }
             }
         }

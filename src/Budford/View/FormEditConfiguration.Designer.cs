@@ -37,6 +37,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -63,7 +64,7 @@
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -199,6 +200,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox3
+            // 
+            this.checkBox3.Location = new System.Drawing.Point(8, 279);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(190, 23);
+            this.checkBox3.TabIndex = 4;
+            this.checkBox3.Text = "Remove missing games from library";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(302, 448);
@@ -307,7 +317,7 @@
             this.tabPage1.Controls.Add(this.tableLayoutPanel3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(391, 472);
+            this.tabPage1.Size = new System.Drawing.Size(391, 485);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Graphics";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -326,7 +336,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(391, 472);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(391, 485);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // groupBox2
@@ -348,6 +358,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel4.Controls.Add(this.checkBox1, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.checkBox2, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.checkBox4, 1, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -535,19 +546,21 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(391, 472);
+            this.tabPage3.Size = new System.Drawing.Size(391, 485);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Controls";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkBox4
             // 
-            this.checkBox3.Location = new System.Drawing.Point(8, 279);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(190, 23);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Remove missing games from library";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(13, 57);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(182, 15);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "Remove Intel GPU work arounds";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // FormEditConfiguration
             // 
@@ -620,5 +633,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

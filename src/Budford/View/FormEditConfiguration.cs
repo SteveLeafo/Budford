@@ -32,6 +32,7 @@ namespace Budford
             }
             checkBox1.Checked = settings.DisableShaderCache;
             checkBox2.Checked = settings.ForceLowResolutionGraphicsPacks;
+            checkBox4.Checked = settings.LegacyIntelGpuMode;
 
             radioButton1.Checked = settings.DefaultResolution == "2160p";
             radioButton2.Checked = settings.DefaultResolution == "1800p";
@@ -219,6 +220,16 @@ namespace Budford
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             settings.ForceLowResolutionGraphicsPacks = checkBox2.Checked;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.LegacyIntelGpuMode = checkBox4.Checked;
         }
     }
 }
