@@ -208,7 +208,6 @@ Function InstallBudfordFiles
 	;File "shaderCache.zip"
 	File "graphicsPacks.zip"
 	File "controllerProfiles.zip"
-	File "sys.zip"
 	File "wiiutdb.xml"
 	AccessControl::GrantOnFile "$AppDataPath\Budford\SaveDirDatabase.xml" "(BU)" "GenericRead + GenericWrite"
 	AccessControl::GrantOnFile "$AppDataPath\Budford\OldVersions.xml" "(BU)" "GenericRead + GenericWrite"
