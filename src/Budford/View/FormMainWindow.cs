@@ -2213,9 +2213,18 @@ namespace Budford
                 {
                     GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                     DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
+                    if (!src.Exists)
+                    {
+                        src.Create();
+                    }
                     Process.Start(src.FullName);
                 }
             }
+        }
+
+        private void downloadLatestGraphicPacksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Graphic Packs
         }
     }   
 }

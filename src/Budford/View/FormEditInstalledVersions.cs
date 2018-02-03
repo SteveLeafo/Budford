@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using Budford.Model;
 using Budford.Control;
 using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Xml.Linq;
+using System.Text;
 
 namespace Budford.View
 {
@@ -110,21 +113,28 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
-        private void UpdateGraphicsPackCombo()
+        private void UpdateGraphicsPackCombo(bool useLatest = false)
         {
             comboBox1.Items.Clear();
+            string pack = "";
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = dir.Replace("graphicsPacks\\", "");
                 if (folder.StartsWith("graphicPacks_2-"))
                 {
-                    string pack = folder.Replace("graphicPacks_2-", "");
+                    pack = folder.Replace("graphicPacks_2-", "");
                     comboBox1.Items.Add(pack);
                     if (pack == model.Settings.GraphicsPackRevision)
                     {
                         comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
                     }
                 }
+            }
+
+            if (useLatest && pack != "")
+            {
+                comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                model.Settings.GraphicsPackRevision = pack;
             }
         }
 
@@ -546,14 +556,25 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadGraphicsPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            unpacker.DownloadAndUnpack("graphicsPacks.zip", "https://github.com/slashiee/cemu_graphic_packs/archive/master.zip", "graphicsPacks", "Graphics Pack");
-
-            if (Directory.Exists("graphicsPacks"))
+            using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
             {
-                FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicsPacks"), model.GraphicsPacks);
-            }
-            FolderScanner.AddGraphicsPacksToGames(model);
+                dlc.ShowDialog(this);
+                // For that you will need to add reference to System.Runtime.Serialization
+                var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(dlc.Result.ToCharArray()), new System.Xml.XmlDictionaryReaderQuotas());
 
+                // For that you will need to add reference to System.Xml and System.Xml.Linq
+                var root = XElement.Load(jsonReader);
+                string uri = root.Elements("assets").First().Elements().First().Element("browser_download_url").Value;
+
+                string packName = Path.GetFileNameWithoutExtension(uri);
+
+                if (File.Exists("tempGraphicPack.zip"))
+                {
+                    File.Delete("tempGraphicPack.zip");
+                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");
+                    UpdateGraphicsPackCombo(true);
+                }
+            }
         }
 
         /// <summary>

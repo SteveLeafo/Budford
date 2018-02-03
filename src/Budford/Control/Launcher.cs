@@ -245,11 +245,6 @@ namespace Budford.Control
                 // Probably don't have enough permissions.
             }
 
-            if (getSaveDir && !cemu_only)
-            {
-                ExtractSaveDirName(game, logfile);
-            }
-
             if (getSaveDir)
             {
                 runningProcess.WaitForExit();
@@ -537,76 +532,6 @@ namespace Budford.Control
             {
                 MessageBox.Show(parent, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
             }
-        }
-
-        /// <summary>
-        /// Launches CEMU and tries to extract the SaveDir from the windows title
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="logFile"></param>
-        private void ExtractSaveDirName(GameInformation game, string logFile)
-        {
-            int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
-            int c = 0;
-            while (i == -1 && c < 50000)
-            {
-                try
-                {
-                    System.Threading.Thread.Sleep(100);
-                    runningProcess.Refresh();
-                    i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
-
-                    //if (File.Exists(logFile))
-                    //{
-                    //    game.SaveDir = ExtractSaveDirFromLogfile(logFile);
-                    //    parent.UpdateSaveDir(game.SaveDir);
-                    //    i = -1;
-                    //    break;
-                    //}
-                    c++;
-                }
-                catch (Exception ex)
-                {
-                    parent.model.Errors.Add(ex.Message);
-                    break;
-                }
-            }
-
-            if (i != -1)
-            {
-                game.SaveDir = runningProcess.MainWindowTitle.Substring(runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal) + 9, 8);
-                parent.UpdateSaveDir(game.SaveDir);
-            }
-
-            if (!runningProcess.HasExited)
-            {
-                runningProcess.Kill();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="logFile"></param>
-        /// <returns></returns>
-        private string ExtractSaveDirFromLogfile(string logFile)
-        {
-            System.Threading.Thread.Sleep(1200);
-            var fs = new FileStream(logFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using (StreamReader sr = new StreamReader(fs))
-            {
-                string[] lines = sr.ReadToEnd().Replace("\r", "").Split('\n');
-                foreach (var line in lines)
-                {
-                    if (line.Contains("saveDir and shaderCache name"))
-                    {
-                        int col = line.LastIndexOf(':');
-                        string saveDir = line.Substring(col + 1);
-                        return saveDir;
-                    }
-                }
-            }
-            return "??";
         }
 
         /// <summary>

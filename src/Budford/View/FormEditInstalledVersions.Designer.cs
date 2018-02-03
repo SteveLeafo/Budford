@@ -66,7 +66,6 @@
             this.downloadGraphicsPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importGraphicsPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.refreshSaveDirDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -313,7 +312,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -327,9 +326,8 @@
             this.downloadCemuHookToolStripMenuItem,
             this.downloadOldCemuHookToolStripMenuItem,
             this.downloadGraphicsPacksToolStripMenuItem,
-            this.importGraphicsPackToolStripMenuItem,
             this.toolStripSeparator2,
-            this.refreshSaveDirDatabaseToolStripMenuItem});
+            this.importGraphicsPackToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(51, 20);
             this.toolStripMenuItem1.Text = "Cemu";
@@ -392,13 +390,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
-            // 
-            // refreshSaveDirDatabaseToolStripMenuItem
-            // 
-            this.refreshSaveDirDatabaseToolStripMenuItem.Name = "refreshSaveDirDatabaseToolStripMenuItem";
-            this.refreshSaveDirDatabaseToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.refreshSaveDirDatabaseToolStripMenuItem.Text = "Refresh SaveDir Database";
-            this.refreshSaveDirDatabaseToolStripMenuItem.Click += new System.EventHandler(this.refreshSaveDirDatabaseToolStripMenuItem_Click);
             // 
             // cemuToolStripMenuItem
             // 
@@ -491,7 +482,6 @@
         private System.Windows.Forms.ToolStripMenuItem downloadOldCemuHookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadGraphicsPacksToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem refreshSaveDirDatabaseToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ToolStripMenuItem importGraphicsPackToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBox1;

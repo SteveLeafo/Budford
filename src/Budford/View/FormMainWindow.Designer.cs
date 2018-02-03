@@ -35,6 +35,7 @@
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.openSaveFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openBudfordSaveFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openContainingFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCEMUShaderCacheFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,12 +59,12 @@
             this.takeScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchCemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageInstalledVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageInstalledVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.downloadLatestGraphicPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadCompatabilityStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateSaveDirDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.updateShaderCachesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showStatusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,9 +157,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.openBudfordSaveFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -195,7 +195,7 @@
             this.createSaveFileSnapshotToolStripMenuItem,
             this.snapshotsToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 192);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 170);
             // 
             // propertiesToolStripMenuItem
             // 
@@ -215,6 +215,13 @@
             this.openSaveFileLocationToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.openSaveFileLocationToolStripMenuItem.Text = "Open Cemu save folder";
             this.openSaveFileLocationToolStripMenuItem.Click += new System.EventHandler(this.openSaveFileLocationToolStripMenuItem_Click);
+            // 
+            // openBudfordSaveFolderToolStripMenuItem
+            // 
+            this.openBudfordSaveFolderToolStripMenuItem.Name = "openBudfordSaveFolderToolStripMenuItem";
+            this.openBudfordSaveFolderToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.openBudfordSaveFolderToolStripMenuItem.Text = "Open Budford save folder";
+            this.openBudfordSaveFolderToolStripMenuItem.Click += new System.EventHandler(this.openBudfordSaveFolderToolStripMenuItem_Click);
             // 
             // openContainingFolderToolStripMenuItem
             // 
@@ -385,12 +392,12 @@
             // 
             this.cemuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.launchCemuToolStripMenuItem,
+            this.manageInstalledVersionsToolStripMenuItem,
             this.toolStripSeparator7,
             this.downloadLatestToolStripMenuItem,
-            this.manageInstalledVersionsToolStripMenuItem,
-            this.toolStripSeparator12,
+            this.downloadLatestGraphicPacksToolStripMenuItem,
             this.downloadCompatabilityStatusToolStripMenuItem,
-            this.updateSaveDirDatabaseToolStripMenuItem,
+            this.toolStripSeparator12,
             this.updateShaderCachesToolStripMenuItem1});
             this.cemuToolStripMenuItem.Name = "cemuToolStripMenuItem";
             this.cemuToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
@@ -403,6 +410,13 @@
             this.launchCemuToolStripMenuItem.Text = "Launch Cemu";
             this.launchCemuToolStripMenuItem.Click += new System.EventHandler(this.launchCemuToolStripMenuItem_Click);
             // 
+            // manageInstalledVersionsToolStripMenuItem
+            // 
+            this.manageInstalledVersionsToolStripMenuItem.Name = "manageInstalledVersionsToolStripMenuItem";
+            this.manageInstalledVersionsToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.manageInstalledVersionsToolStripMenuItem.Text = "Manage Installed Versions";
+            this.manageInstalledVersionsToolStripMenuItem.Click += new System.EventHandler(this.manageInstalledVersionsToolStripMenuItem_Click);
+            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
@@ -412,20 +426,15 @@
             // 
             this.downloadLatestToolStripMenuItem.Name = "downloadLatestToolStripMenuItem";
             this.downloadLatestToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.downloadLatestToolStripMenuItem.Text = "Download Latest";
+            this.downloadLatestToolStripMenuItem.Text = "Download Latest Cemu";
             this.downloadLatestToolStripMenuItem.Click += new System.EventHandler(this.downloadLatestToolStripMenuItem_Click);
             // 
-            // manageInstalledVersionsToolStripMenuItem
+            // downloadLatestGraphicPacksToolStripMenuItem
             // 
-            this.manageInstalledVersionsToolStripMenuItem.Name = "manageInstalledVersionsToolStripMenuItem";
-            this.manageInstalledVersionsToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.manageInstalledVersionsToolStripMenuItem.Text = "Manage Installed Versions";
-            this.manageInstalledVersionsToolStripMenuItem.Click += new System.EventHandler(this.manageInstalledVersionsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(238, 6);
+            this.downloadLatestGraphicPacksToolStripMenuItem.Name = "downloadLatestGraphicPacksToolStripMenuItem";
+            this.downloadLatestGraphicPacksToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.downloadLatestGraphicPacksToolStripMenuItem.Text = "Download Latest Graphic Packs";
+            this.downloadLatestGraphicPacksToolStripMenuItem.Click += new System.EventHandler(this.downloadLatestGraphicPacksToolStripMenuItem_Click);
             // 
             // downloadCompatabilityStatusToolStripMenuItem
             // 
@@ -434,12 +443,10 @@
             this.downloadCompatabilityStatusToolStripMenuItem.Text = "Download Compatability Status";
             this.downloadCompatabilityStatusToolStripMenuItem.Click += new System.EventHandler(this.downloadCompatabilityStatusToolStripMenuItem_Click);
             // 
-            // updateSaveDirDatabaseToolStripMenuItem
+            // toolStripSeparator12
             // 
-            this.updateSaveDirDatabaseToolStripMenuItem.Name = "updateSaveDirDatabaseToolStripMenuItem";
-            this.updateSaveDirDatabaseToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.updateSaveDirDatabaseToolStripMenuItem.Text = "Update SaveDir Database";
-            this.updateSaveDirDatabaseToolStripMenuItem.Click += new System.EventHandler(this.updateSaveDirDatabaseToolStripMenuItem_Click);
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(238, 6);
             // 
             // updateShaderCachesToolStripMenuItem1
             // 
@@ -830,19 +837,19 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // addNewToolStripMenuItem
             // 
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addNewToolStripMenuItem.Text = "Add new...";
             this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
             // 
             // editCurrentToolStripMenuItem
             // 
             this.editCurrentToolStripMenuItem.Name = "editCurrentToolStripMenuItem";
-            this.editCurrentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.editCurrentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editCurrentToolStripMenuItem.Text = "Edit Current...";
             this.editCurrentToolStripMenuItem.Click += new System.EventHandler(this.editCurrentToolStripMenuItem_Click);
             // 
@@ -1162,15 +1169,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1031, 497);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
-            // uTiledView1
-            // 
-            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
-            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
-            this.uTiledView1.Name = "uTiledView1";
-            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
-            this.uTiledView1.TabIndex = 1;
-            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -1182,12 +1180,14 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
-            // openBudfordSaveFolderToolStripMenuItem
+            // uTiledView1
             // 
-            this.openBudfordSaveFolderToolStripMenuItem.Name = "openBudfordSaveFolderToolStripMenuItem";
-            this.openBudfordSaveFolderToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.openBudfordSaveFolderToolStripMenuItem.Text = "Open Budford save folder";
-            this.openBudfordSaveFolderToolStripMenuItem.Click += new System.EventHandler(this.openBudfordSaveFolderToolStripMenuItem_Click);
+            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
+            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
+            this.uTiledView1.Name = "uTiledView1";
+            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
+            this.uTiledView1.TabIndex = 1;
             // 
             // FormMainWindow
             // 
@@ -1300,7 +1300,6 @@
         private System.Windows.Forms.ToolStripMenuItem cemuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchCemuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadCompatabilityStatusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateSaveDirDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fixUnityGameSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem downloadLatestToolStripMenuItem;
@@ -1350,6 +1349,7 @@
         private System.Windows.Forms.ToolStripMenuItem createSaveFileSnapshotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openBudfordSaveFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadLatestGraphicPacksToolStripMenuItem;
     }
 }
 

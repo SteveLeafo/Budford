@@ -394,22 +394,18 @@ namespace Budford.Control
         /// <param name="v"></param>
         internal static void InstallCemuHook(Unpacker unpacker, InstalledVersion v)
         {
-            int version;
-            if (int.TryParse(v.Version.Replace(".", ""), out version))
+            if (v.VersionNumber >= 181)
             {
-                if (version >= 181)
+                if (File.Exists("cemu_hook.zip"))
                 {
-                    if (File.Exists("cemu_hook.zip"))
-                    {
-                        unpacker.Unpack("cemu_hook.zip", v.Folder);
-                    }
+                    unpacker.Unpack("cemu_hook.zip", v.Folder);
                 }
-                else if (version >= 173)
+            }
+            else if (v.VersionNumber >= 173)
+            {
+                if (File.Exists("OldCemuHook.zip"))
                 {
-                    if (File.Exists("OldCemuHook.zip"))
-                    {
-                        unpacker.Unpack("OldCemuHook.zip", v.Folder);
-                    }
+                    unpacker.Unpack("OldCemuHook.zip", v.Folder);
                 }
             }
         }
