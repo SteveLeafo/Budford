@@ -6,11 +6,16 @@ using System.Linq;
 using System.Windows.Forms;
 using Budford.Properties;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace Budford.Control
 {
     internal class Launcher
     {
+        // import the function in your class
+        [DllImport("User32.dll")]
+        static extern int SetForegroundWindow(IntPtr point);
+
         /// <summary>
         /// 
         /// </summary>
@@ -116,7 +121,7 @@ namespace Budford.Control
                 var parentProcess = Process.GetCurrentProcess();
                 var original = parentProcess.PriorityClass;
 
-                parentProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+                parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
 
 
                 string path = Directory.GetCurrentDirectory();
@@ -134,7 +139,7 @@ namespace Budford.Control
                 {
                     try
                     {
-                        runningProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+                        runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
                     }
                     catch (Exception)
                     {
@@ -147,6 +152,19 @@ namespace Budford.Control
             {
                 MessageBox.Show(parent, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
             }
+        }
+
+        ProcessPriorityClass GetProcessPriority(int priority)
+        {
+            switch (priority)
+            {
+                case 0: return ProcessPriorityClass.High;
+                case 1: return ProcessPriorityClass.AboveNormal;
+                case 2: return ProcessPriorityClass.Normal;
+                case 3: return ProcessPriorityClass.BelowNormal;
+                case 4: return ProcessPriorityClass.Idle;
+            }
+            return ProcessPriorityClass.Normal;
         }
 
         /// <summary>
@@ -243,6 +261,16 @@ namespace Budford.Control
             catch (Exception)
             {
                 // Probably don't have enough permissions.
+            }
+
+            ExtractSaveDirName(game, logfile);
+
+            if (getSaveDir && !cemu_only)
+            {
+                if (!runningProcess.HasExited)
+                {
+                    runningProcess.Kill();
+                }
             }
 
             if (getSaveDir)
@@ -532,6 +560,89 @@ namespace Budford.Control
             {
                 MessageBox.Show(parent, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
             }
+        }
+
+        /// <summary>
+        /// Launches CEMU and tries to extract the SaveDir from the windows title
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="logFile"></param>
+        private void ExtractSaveDirName(GameInformation game, string logFile)
+        {
+            int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
+            int c = 0;
+            while (i == -1 && c < 50000)
+            {
+                try
+                {
+                    System.Threading.Thread.Sleep(100);
+                    runningProcess.Refresh();
+                    i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+
+                    c++;
+                }
+                catch (Exception ex)
+                {
+                    parent.model.Errors.Add(ex.Message);
+                    break;
+                }
+            }
+
+            try
+            {
+                switch (game.GameSetting.CpuMode)
+                {
+                    case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(model.Settings.DualCorePriority);
+                        break;
+                    case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(model.Settings.TripleCorePriority);
+                        break;
+                    default: runningProcess.PriorityClass = GetProcessPriority(model.Settings.SingleCorePriority);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                parent.model.Errors.Add(ex.Message);
+            }
+
+            try
+            {
+                if (game.GameSetting.DefaultView == 1)
+                {
+                    IntPtr h = runningProcess.MainWindowHandle;
+                    SetForegroundWindow(h);
+                    SendKeys.SendWait("^{TAB}");
+                }
+            }
+            catch (Exception ex)
+            {
+                parent.model.Errors.Add(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logFile"></param>
+        /// <returns></returns>
+        private string ExtractSaveDirFromLogfile(string logFile)
+        {
+            System.Threading.Thread.Sleep(1200);
+            var fs = new FileStream(logFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                string[] lines = sr.ReadToEnd().Replace("\r", "").Split('\n');
+                foreach (var line in lines)
+                {
+                    if (line.Contains("saveDir and shaderCache name"))
+                    {
+                        int col = line.LastIndexOf(':');
+                        string saveDir = line.Substring(col + 1);
+                        return saveDir;
+                    }
+                }
+            }
+            return "??";
         }
 
         /// <summary>

@@ -61,6 +61,8 @@
             this.comboBox17 = new System.Windows.Forms.ComboBox();
             this.label49 = new System.Windows.Forms.Label();
             this.comboBox29 = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.comboBox30 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -147,8 +149,8 @@
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.comboBox28 = new System.Windows.Forms.ComboBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.comboBox30 = new System.Windows.Forms.ComboBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.comboBox31 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -186,7 +188,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(451, 505);
+            this.tabControl1.Size = new System.Drawing.Size(451, 540);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -195,7 +197,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(443, 479);
+            this.tabPage1.Size = new System.Drawing.Size(443, 514);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuration";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -214,7 +216,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 473);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 508);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
@@ -223,7 +225,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(8, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 216);
+            this.groupBox1.Size = new System.Drawing.Size(421, 232);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Preferences";
@@ -245,10 +247,12 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox20, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.label36, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.trackBar1, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label51, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox31, 1, 7);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 8;
+            this.tableLayoutPanel2.RowCount = 9;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -256,27 +260,32 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 197);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 213);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.label1.Size = new System.Drawing.Size(116, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "Prefered Version";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 13);
+            this.label2.Size = new System.Drawing.Size(116, 27);
             this.label2.TabIndex = 0;
             this.label2.Text = "Official Emulation State";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox1
             // 
@@ -306,11 +315,13 @@
             // label33
             // 
             this.label33.AutoSize = true;
+            this.label33.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label33.Location = new System.Drawing.Point(3, 59);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(81, 13);
+            this.label33.Size = new System.Drawing.Size(116, 27);
             this.label33.TabIndex = 0;
             this.label33.Text = "Emulation State";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox19
             // 
@@ -331,11 +342,13 @@
             // label34
             // 
             this.label34.AutoSize = true;
+            this.label34.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label34.Location = new System.Drawing.Point(3, 143);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(56, 13);
+            this.label34.Size = new System.Drawing.Size(116, 38);
             this.label34.TabIndex = 0;
             this.label34.Text = "Comments";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox14
             // 
@@ -343,21 +356,22 @@
             this.textBox14.Location = new System.Drawing.Point(125, 146);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(287, 43);
+            this.textBox14.Size = new System.Drawing.Size(287, 32);
             this.textBox14.TabIndex = 2;
             // 
             // label35
             // 
             this.label35.AutoSize = true;
+            this.label35.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label35.Location = new System.Drawing.Point(3, 86);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(38, 13);
+            this.label35.Size = new System.Drawing.Size(116, 27);
             this.label35.TabIndex = 0;
             this.label35.Text = "Rating";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox20
             // 
-            this.comboBox20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox20.FormattingEnabled = true;
             this.comboBox20.Items.AddRange(new object[] {
             "5",
@@ -373,11 +387,13 @@
             // label36
             // 
             this.label36.AutoSize = true;
+            this.label36.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label36.Location = new System.Drawing.Point(3, 113);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(42, 13);
+            this.label36.Size = new System.Drawing.Size(116, 30);
             this.label36.TabIndex = 0;
             this.label36.Text = "Volume";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // trackBar1
             // 
@@ -392,9 +408,9 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(8, 225);
+            this.groupBox2.Location = new System.Drawing.Point(8, 241);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 245);
+            this.groupBox2.Size = new System.Drawing.Size(421, 264);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CEMU Options";
@@ -434,7 +450,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 226);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 245);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // label3
@@ -584,6 +600,27 @@
             this.comboBox29.Name = "comboBox29";
             this.comboBox29.Size = new System.Drawing.Size(260, 21);
             this.comboBox29.TabIndex = 1;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(3, 194);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(67, 13);
+            this.label50.TabIndex = 0;
+            this.label50.Text = "Online Mode";
+            // 
+            // comboBox30
+            // 
+            this.comboBox30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox30.FormattingEnabled = true;
+            this.comboBox30.Items.AddRange(new object[] {
+            "Off",
+            "On"});
+            this.comboBox30.Location = new System.Drawing.Point(152, 197);
+            this.comboBox30.Name = "comboBox30";
+            this.comboBox30.Size = new System.Drawing.Size(260, 21);
+            this.comboBox30.TabIndex = 1;
             // 
             // tabPage2
             // 
@@ -1583,32 +1620,34 @@
             this.comboBox28.Size = new System.Drawing.Size(211, 21);
             this.comboBox28.TabIndex = 1;
             // 
-            // label50
+            // label51
             // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(3, 194);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(67, 13);
-            this.label50.TabIndex = 0;
-            this.label50.Text = "Online Mode";
+            this.label51.AutoSize = true;
+            this.label51.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label51.Location = new System.Drawing.Point(3, 181);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(116, 27);
+            this.label51.TabIndex = 0;
+            this.label51.Text = "Start Screen";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBox30
+            // comboBox31
             // 
-            this.comboBox30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox30.FormattingEnabled = true;
-            this.comboBox30.Items.AddRange(new object[] {
-            "Off",
-            "On"});
-            this.comboBox30.Location = new System.Drawing.Point(152, 197);
-            this.comboBox30.Name = "comboBox30";
-            this.comboBox30.Size = new System.Drawing.Size(260, 21);
-            this.comboBox30.TabIndex = 1;
+            this.comboBox31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox31.FormattingEnabled = true;
+            this.comboBox31.Items.AddRange(new object[] {
+            "TV Screen",
+            "Gamepad"});
+            this.comboBox31.Location = new System.Drawing.Point(125, 184);
+            this.comboBox31.Name = "comboBox31";
+            this.comboBox31.Size = new System.Drawing.Size(287, 21);
+            this.comboBox31.TabIndex = 1;
             // 
             // FormEditGameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 505);
+            this.ClientSize = new System.Drawing.Size(451, 540);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormEditGameSettings";
             this.ShowIcon = false;
@@ -1771,5 +1810,7 @@
         private System.Windows.Forms.ComboBox comboBox29;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ComboBox comboBox30;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.ComboBox comboBox31;
     }
 }

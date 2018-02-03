@@ -62,11 +62,14 @@ namespace Budford
             launcher = new Launcher(this);
             fileManager = new FileManager(model);
 
-            foreach (var folder in model.Settings.RomFolders)
+            if (model.Settings.ScanGameFoldersOnStart)
             {
-                using (FormScanRomFolder scanner = new FormScanRomFolder(folder, model.GameData))
+                foreach (var folder in model.Settings.RomFolders)
                 {
-                    scanner.ShowDialog(this);
+                    using (FormScanRomFolder scanner = new FormScanRomFolder(folder, model.GameData))
+                    {
+                        scanner.ShowDialog(this);
+                    }
                 }
             }
 

@@ -322,10 +322,6 @@ namespace Budford.Control
             if (version != null)
             {
                 SetOffsets(version.Version);
-                if (version.Version.Contains("1.10.0"))
-                {
-                    settings.Volume = 80;
-                }
 
                 if (File.Exists(version.Folder + "\\settings.bin"))
                 {
@@ -391,7 +387,13 @@ namespace Budford.Control
                     WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugAudioAPIOffset], settings.DebugAudioAPIOffset);
                     WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.DebugInputAPIOffset], settings.DebugInputAPIOffset);
 
-                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.VolumeOffset], settings.Volume);
+                    byte volume = settings.Volume;
+                    if (model.Settings.UseGlobalVolumeSettings)
+                    {
+                        volume = (byte)model.Settings.GlobalVolume;
+                    }
+
+                    WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.VolumeOffset], volume);
                     WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.EnableDebugOffset], settings.EnableDebugOffset);
                     WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.CpuModeOffset], (byte)settings.CpuMode);
                     WriteByte(fn, CoreSettingsOffsets[(int)CoreSettings.CpuTimerOffset], (byte)settings.CpuTimer);

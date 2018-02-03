@@ -110,6 +110,22 @@ namespace Budford.View
             UpdateGraphicsPackCombo();
         }
 
+        bool IsGraphicPackInstalled(string pack)
+        {
+            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+            {
+                string folder = dir.Replace("graphicsPacks\\", "");
+                if (folder.StartsWith("graphicPacks_2-"))
+                {
+                    if (pack == folder)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+            
         /// <summary>
         /// 
         /// </summary>
@@ -568,11 +584,18 @@ namespace Budford.View
 
                 string packName = Path.GetFileNameWithoutExtension(uri);
 
-                if (File.Exists("tempGraphicPack.zip"))
+                if (!IsGraphicPackInstalled(packName))
                 {
-                    File.Delete("tempGraphicPack.zip");
-                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");
-                    UpdateGraphicsPackCombo(true);
+                    if (File.Exists("tempGraphicPack.zip"))
+                    {
+                        File.Delete("tempGraphicPack.zip");
+                        unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");
+                        UpdateGraphicsPackCombo(true);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Latest version is already installed");
                 }
             }
         }

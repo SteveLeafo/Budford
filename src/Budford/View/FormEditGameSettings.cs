@@ -123,6 +123,7 @@ namespace Budford.View
             comboBox18.SelectedIndex = information.GameSetting.EmulateSinglePrecision;
             comboBox29.SelectedIndex = information.GameSetting.UseRtdsc;
             comboBox30.SelectedIndex = information.GameSetting.Online;
+            comboBox31.SelectedIndex = information.GameSetting.DefaultView;
 
             comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
             comboBox22.SelectedIndex = information.CemuHookSetting.CustomTimerMultiplier;
@@ -132,6 +133,7 @@ namespace Budford.View
             comboBox26.SelectedIndex = information.CemuHookSetting.MotionSource;
             comboBox27.SelectedIndex = information.CemuHookSetting.MMTimerAccuracy;
             comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
+
 
         }
 
@@ -185,6 +187,7 @@ namespace Budford.View
             information.GameSetting.SeparateGamePadView = (byte)comboBox17.SelectedIndex;
             information.GameSetting.UseRtdsc = (byte)comboBox29.SelectedIndex;
             information.GameSetting.Online = (byte)comboBox30.SelectedIndex;
+            information.GameSetting.DefaultView = (byte)comboBox31.SelectedIndex;
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;

@@ -22,6 +22,16 @@ namespace Budford.Model
 
         public int CurrentSortDirection = 0;
 
+        public int GlobalVolume = 85;
+
+        public int SingleCorePriority = 1;
+
+        public int DualCorePriority = 1;
+
+        public int TripleCorePriority = 3;
+
+        public int ShaderPriority = 2;
+
         public bool ShowToolBar  = true;
 
         public bool ShowStausBar  = true;
@@ -30,7 +40,11 @@ namespace Budford.Model
 
         public bool ForceLowResolutionGraphicsPacks;
 
+        public bool UseGlobalVolumeSettings = false;
+
         public bool LegacyIntelGpuMode = false;
+
+        public bool ScanGameFoldersOnStart = false;
 
         public string DefaultResolution = "default";
 

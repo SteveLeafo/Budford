@@ -48,6 +48,7 @@ namespace Budford.Model
         public byte EmulateSinglePrecision ;
         public byte UseRtdsc = 1;
         public byte Online = 0;
+        public byte DefaultView = 0;
 
         public enum GpuBufferCacheAccuracyType : byte
         {

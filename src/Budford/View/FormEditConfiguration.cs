@@ -33,6 +33,12 @@ namespace Budford
             checkBox1.Checked = settings.DisableShaderCache;
             checkBox2.Checked = settings.ForceLowResolutionGraphicsPacks;
             checkBox4.Checked = settings.LegacyIntelGpuMode;
+            checkBox5.Checked = settings.UseGlobalVolumeSettings;
+            checkBox6.Checked = settings.ScanGameFoldersOnStart;
+
+            trackBar1.Minimum = 1;
+            trackBar1.Maximum = 100;
+            trackBar1.Value = settings.GlobalVolume;
 
             radioButton1.Checked = settings.DefaultResolution == "2160p";
             radioButton2.Checked = settings.DefaultResolution == "1800p";
@@ -79,6 +85,10 @@ namespace Budford
                     break;                
             }
 
+            comboBox3.SelectedIndex = settings.SingleCorePriority;
+            comboBox4.SelectedIndex = settings.DualCorePriority;
+            comboBox5.SelectedIndex = settings.TripleCorePriority;
+            comboBox6.SelectedIndex = settings.ShaderPriority;
         }
 
         /// <summary>
@@ -145,6 +155,11 @@ namespace Budford
             if (radioButton5.Checked) settings.DefaultResolution = "540p";
             if (radioButton6.Checked) settings.DefaultResolution = "360p";
             if (radioButton7.Checked) settings.DefaultResolution = "default";
+
+            settings.UseGlobalVolumeSettings = checkBox5.Checked;
+            settings.ScanGameFoldersOnStart = checkBox6.Checked;
+
+            settings.GlobalVolume = trackBar1.Value;
 
             settings.ConsoleLanguage = (Settings.ConsoleLanguageType)comboBox2.SelectedIndex;
 
@@ -231,5 +246,14 @@ namespace Budford
         {
             settings.LegacyIntelGpuMode = checkBox4.Checked;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (var game in model.GameData)
+            {
+                game.Value.GameSetting.Volume = (byte)trackBar1.Value;
+            }
+        }
+
     }
 }
