@@ -112,17 +112,23 @@ namespace Budford.Control
         /// <param name="completeFileName"></param>
         private static void ExtractFile(ZipArchiveEntry file, string completeFileName)
         {
-            CurrentUserSecurity cs = new CurrentUserSecurity();
-            if (File.Exists(completeFileName))
+            try
             {
-                if (cs.HasAccess(new FileInfo(completeFileName), System.Security.AccessControl.FileSystemRights.Write))
+                CurrentUserSecurity cs = new CurrentUserSecurity();
+                if (File.Exists(completeFileName))
+                {
+                    if (cs.HasAccess(new FileInfo(completeFileName), System.Security.AccessControl.FileSystemRights.Write))
+                    {
+                        file.ExtractToFile(completeFileName, true);
+                    }
+                }
+                else
                 {
                     file.ExtractToFile(completeFileName, true);
                 }
             }
-            else
+            catch (System.Exception)
             {
-                file.ExtractToFile(completeFileName, true);
             }
         }
     }

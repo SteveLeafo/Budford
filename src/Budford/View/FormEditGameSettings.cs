@@ -35,6 +35,11 @@ namespace Budford.View
             PopulateGameInformation();
 
             Text = information.Name;
+            if (information.Name != "The Legend of Zelda Breath of the Wild")
+            {
+                label52.Visible = false;
+                comboBox32.Visible = false;
+            }
         }
 
         /// <summary>
@@ -125,6 +130,8 @@ namespace Budford.View
             comboBox30.SelectedIndex = information.GameSetting.Online;
             comboBox31.SelectedIndex = information.GameSetting.DefaultView;
 
+            comboBox32.SelectedIndex = information.GameSetting.ClarityPreset;
+
             comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
             comboBox22.SelectedIndex = information.CemuHookSetting.CustomTimerMultiplier;
             comboBox23.SelectedIndex = information.CemuHookSetting.DisableAVX ? 1 : 0;
@@ -188,6 +195,8 @@ namespace Budford.View
             information.GameSetting.UseRtdsc = (byte)comboBox29.SelectedIndex;
             information.GameSetting.Online = (byte)comboBox30.SelectedIndex;
             information.GameSetting.DefaultView = (byte)comboBox31.SelectedIndex;
+
+            information.GameSetting.ClarityPreset = comboBox32.SelectedIndex;
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;

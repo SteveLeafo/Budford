@@ -460,6 +460,20 @@ namespace Budford.Control
                 }
             }
 
+            string clarityShader = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BreathOfTheWild_Clarity\\37040a485a29d54e_00000000000003c9_ps.txt";
+            string text = File.ReadAllText(clarityShader);
+            string preset = "#define Preset " + settings.ClarityPreset;
+            text = text.Replace("#define Preset 0", preset);
+            text = text.Replace("#define Preset 1", preset);
+            text = text.Replace("#define Preset 2", preset);
+            text = text.Replace("#define Preset 3", preset);
+            text = text.Replace("#define Preset 4", preset);
+            text = text.Replace("#define Preset 5", preset);
+            text = text.Replace("#define Preset 6", preset);
+            text = text.Replace("#define Preset 7", preset);
+            text = text.Replace("#define Preset 8", preset);
+            File.WriteAllText(clarityShader, text);
+
             if (packs > 0)
             {
                 int gfxPackStartOffset;

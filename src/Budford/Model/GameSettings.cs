@@ -22,7 +22,8 @@ namespace Budford.Model
         public CpuModeType CpuMode  = CpuModeType.SingleCoreCompiler;
         public CpuTimerType CpuTimer  = CpuTimerType.HostBasedTimer;
 
-
+        // Graphic Pack Settings
+        public int ClarityPreset = 3;
 
         public byte DebugGX2ApiOffset;
         public byte DebugUnsupportedAPICallsOffset ;

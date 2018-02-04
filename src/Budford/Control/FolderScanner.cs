@@ -207,7 +207,7 @@ namespace Budford.Control
 
         internal static void AddPackGui(GraphicsPack pack)
         {
-            foreach (var s in GraphicsPack.graphicPacks_2_347)
+            foreach (var s in GraphicsPack.GraphicPackHashes)
             {
                 if (s[0] == pack.Folder)
                 {
