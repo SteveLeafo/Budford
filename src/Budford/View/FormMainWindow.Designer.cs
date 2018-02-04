@@ -137,7 +137,6 @@
             this.dumpTestingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -159,6 +158,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.uTiledView1 = new Budford.View.UserControlTiledView();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -408,6 +408,7 @@
             this.launchCemuToolStripMenuItem.Name = "launchCemuToolStripMenuItem";
             this.launchCemuToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.launchCemuToolStripMenuItem.Text = "Launch Cemu";
+            this.launchCemuToolStripMenuItem.Visible = false;
             this.launchCemuToolStripMenuItem.Click += new System.EventHandler(this.launchCemuToolStripMenuItem_Click);
             // 
             // manageInstalledVersionsToolStripMenuItem
@@ -837,19 +838,19 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
             // 
             // addNewToolStripMenuItem
             // 
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.addNewToolStripMenuItem.Text = "Add new...";
             this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
             // 
             // editCurrentToolStripMenuItem
             // 
             this.editCurrentToolStripMenuItem.Name = "editCurrentToolStripMenuItem";
-            this.editCurrentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editCurrentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.editCurrentToolStripMenuItem.Text = "Edit Current...";
             this.editCurrentToolStripMenuItem.Click += new System.EventHandler(this.editCurrentToolStripMenuItem_Click);
             // 
@@ -869,9 +870,9 @@
             this.copySavesToolStripMenuItem,
             this.copyShadersToolStripMenuItem,
             this.dumpTestingResultsToolStripMenuItem,
+            this.toolStripSeparator19,
             this.updateShaderCachesToolStripMenuItem,
-            this.mergeShaderCachesToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.mergeShaderCachesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -933,6 +934,7 @@
             this.dumpSaveDirCodesToolStripMenuItem.Name = "dumpSaveDirCodesToolStripMenuItem";
             this.dumpSaveDirCodesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.dumpSaveDirCodesToolStripMenuItem.Text = "Dump SaveDir Codes";
+            this.dumpSaveDirCodesToolStripMenuItem.Visible = false;
             this.dumpSaveDirCodesToolStripMenuItem.Click += new System.EventHandler(this.dumpSaveDirCodesToolStripMenuItem_Click);
             // 
             // linkDLCFoldersToolStripMenuItem
@@ -969,6 +971,7 @@
             this.dumpTestingResultsToolStripMenuItem.Name = "dumpTestingResultsToolStripMenuItem";
             this.dumpTestingResultsToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.dumpTestingResultsToolStripMenuItem.Text = "Dump Testing Results";
+            this.dumpTestingResultsToolStripMenuItem.Visible = false;
             this.dumpTestingResultsToolStripMenuItem.Click += new System.EventHandler(this.dumpTestingResultsToolStripMenuItem_Click);
             // 
             // updateShaderCachesToolStripMenuItem
@@ -984,11 +987,6 @@
             this.mergeShaderCachesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.mergeShaderCachesToolStripMenuItem.Text = "Merge Shader Caches";
             this.mergeShaderCachesToolStripMenuItem.Click += new System.EventHandler(this.mergeShaderCachesToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
             // 
             // helpToolStripMenuItem
             // 
@@ -1189,6 +1187,11 @@
             this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
             this.uTiledView1.TabIndex = 1;
             // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(247, 6);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1343,13 +1346,13 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripMenuItem updateShaderCachesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateShaderCachesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mergeShaderCachesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
         private System.Windows.Forms.ToolStripMenuItem createSaveFileSnapshotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snapshotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openBudfordSaveFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadLatestGraphicPacksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
     }
 }
 

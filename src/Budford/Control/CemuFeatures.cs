@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Budford.Control
 {
@@ -477,6 +480,48 @@ namespace Budford.Control
                         currentGame.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.NotSet;
                     break;
             }
+        }
+
+        internal static void DownloadLatestGraphicPack(Form parent, string jsonString)
+        {
+            // For that you will need to add reference to System.Runtime.Serialization
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(jsonString.ToCharArray()), new System.Xml.XmlDictionaryReaderQuotas());
+
+            // For that you will need to add reference to System.Xml and System.Xml.Linq
+            var root = XElement.Load(jsonReader);
+            string uri = root.Elements("assets").First().Elements().First().Element("browser_download_url").Value;
+
+            string packName = Path.GetFileNameWithoutExtension(uri);
+
+            if (!IsGraphicPackInstalled(packName))
+            {
+                if (File.Exists("tempGraphicPack.zip"))
+                {
+                    File.Delete("tempGraphicPack.zip");
+                    var unpacker = new Unpacker(parent);
+                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("Latest version is already installed");
+            }
+        }
+
+        static bool IsGraphicPackInstalled(string pack)
+        {
+            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+            {
+                string folder = dir.Replace("graphicsPacks\\", "");
+                if (folder.StartsWith("graphicPacks_2-"))
+                {
+                    if (pack == folder)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

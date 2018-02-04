@@ -2228,6 +2228,25 @@ namespace Budford
         private void downloadLatestGraphicPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Graphic Packs
+            using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
+            {
+                dlc.ShowDialog(this);
+                CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result);
+                string pack = "";
+                foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                {
+                    string folder = dir.Replace("graphicsPacks\\", "");
+                    if (folder.StartsWith("graphicPacks_2-"))
+                    {
+                        pack = folder.Replace("graphicPacks_2-", "");
+                    }
+                }
+
+                if (pack != "")
+                {
+                    model.Settings.GraphicsPackRevision = pack;
+                }
+            }
         }
     }   
 }

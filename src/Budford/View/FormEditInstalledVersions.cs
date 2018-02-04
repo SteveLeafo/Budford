@@ -108,23 +108,7 @@ namespace Budford.View
             AddOldGameMenuItems();
 
             UpdateGraphicsPackCombo();
-        }
-
-        bool IsGraphicPackInstalled(string pack)
-        {
-            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
-            {
-                string folder = dir.Replace("graphicsPacks\\", "");
-                if (folder.StartsWith("graphicPacks_2-"))
-                {
-                    if (pack == folder)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        }     
             
         /// <summary>
         /// 
@@ -575,30 +559,12 @@ namespace Budford.View
             using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
             {
                 dlc.ShowDialog(this);
-                // For that you will need to add reference to System.Runtime.Serialization
-                var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(dlc.Result.ToCharArray()), new System.Xml.XmlDictionaryReaderQuotas());
-
-                // For that you will need to add reference to System.Xml and System.Xml.Linq
-                var root = XElement.Load(jsonReader);
-                string uri = root.Elements("assets").First().Elements().First().Element("browser_download_url").Value;
-
-                string packName = Path.GetFileNameWithoutExtension(uri);
-
-                if (!IsGraphicPackInstalled(packName))
-                {
-                    if (File.Exists("tempGraphicPack.zip"))
-                    {
-                        File.Delete("tempGraphicPack.zip");
-                        unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");
-                        UpdateGraphicsPackCombo(true);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Latest version is already installed");
-                }
+                CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result);
+                UpdateGraphicsPackCombo(true);
             }
         }
+
+      
 
         /// <summary>
         /// 
