@@ -195,7 +195,6 @@ namespace Budford.Control
         {
             if (!PackAdded(game.Value, pack.Folder))
             {
-                AddPackGui(pack);
                 if (!game.Value.GameSetting.graphicsPacksFolders.Contains(pack.Folder))
                 {
                     game.Value.GameSetting.graphicsPacksFolders.Add(pack.Folder);
@@ -205,17 +204,6 @@ namespace Budford.Control
             }
         }
 
-        internal static void AddPackGui(GraphicsPack pack)
-        {
-            foreach (var s in GraphicsPack.GraphicPackHashes)
-            {
-                if (s[0] == pack.Folder)
-                {
-                    pack.Gui = s[1];
-                    break;
-                }
-            }
-        }
 
         /// <summary>
         /// 

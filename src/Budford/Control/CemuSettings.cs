@@ -439,40 +439,35 @@ namespace Budford.Control
         void WriteGraphicsPacks(InstalledVersion version)
         {
             EnableDefaultGraphicsPack();
+            for (int i = 0; i < 100; ++i)
+            {
+                try
+                {
+                    if (Directory.Exists(version.Folder + "\\graphicPacks\\" + "Budford_" + i))
+                    {
+                        Directory.Delete(version.Folder + "\\graphicPacks\\" + "Budford_" + i, true);
+                    }
+                }
+                catch (Exception)
+                {
+                    // May be in use 
+                }
+            }
+
+            SetClarityPreset();
+            SetFPS();
+
+
             int packs = 0;
             foreach (var pack in settings.graphicsPacks)
             {
                 if (pack.Active)
                 {
-                    try
-                    {
-                        if (Directory.Exists(version.Folder + "\\graphicPacks\\" + pack.Folder))
-                        {
-                            Directory.Delete(version.Folder + "\\graphicPacks\\" + pack.Folder, true);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // May be in use 
-                    }
-                    FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\" + pack.Folder), new DirectoryInfo(version.Folder + "\\graphicPacks\\" + pack.Folder), false, true);
+                    FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\" + pack.Folder), new DirectoryInfo(version.Folder + "\\graphicPacks\\" + "Budford_" + packs), false, true);
+                    pack.packId = packs;
                     packs++;
                 }
             }
-
-            string clarityShader = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BreathOfTheWild_Clarity\\37040a485a29d54e_00000000000003c9_ps.txt";
-            string text = File.ReadAllText(clarityShader);
-            string preset = "#define Preset " + settings.ClarityPreset;
-            text = text.Replace("#define Preset 0", preset);
-            text = text.Replace("#define Preset 1", preset);
-            text = text.Replace("#define Preset 2", preset);
-            text = text.Replace("#define Preset 3", preset);
-            text = text.Replace("#define Preset 4", preset);
-            text = text.Replace("#define Preset 5", preset);
-            text = text.Replace("#define Preset 6", preset);
-            text = text.Replace("#define Preset 7", preset);
-            text = text.Replace("#define Preset 8", preset);
-            File.WriteAllText(clarityShader, text);
 
             if (packs > 0)
             {
@@ -510,10 +505,10 @@ namespace Budford.Control
                     AppendGraphicsPack(version.Folder, gfxPackStartOffset, pack);
                 }
 
-                if (resolutionPack != null)
-                {
-                    AppendGraphicsPack(version.Folder, gfxPackStartOffset, resolutionPack);
-                }
+                //if (resolutionPack != null)
+                //{
+                //    AppendGraphicsPack(version.Folder, gfxPackStartOffset, resolutionPack);
+                //}
 
                 using (FileStream fn = new FileStream(version.Folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
                 {
@@ -524,6 +519,40 @@ namespace Budford.Control
                     }
                 }
             }
+        }
+
+        private void SetClarityPreset()
+        {
+            string clarityShader = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BreathOfTheWild_Clarity\\37040a485a29d54e_00000000000003c9_ps.txt";
+            string text = File.ReadAllText(clarityShader);
+            string preset = "#define Preset " + settings.ClarityPreset;
+            text = text.Replace("#define Preset 0", preset);
+            text = text.Replace("#define Preset 1", preset);
+            text = text.Replace("#define Preset 2", preset);
+            text = text.Replace("#define Preset 3", preset);
+            text = text.Replace("#define Preset 4", preset);
+            text = text.Replace("#define Preset 5", preset);
+            text = text.Replace("#define Preset 6", preset);
+            text = text.Replace("#define Preset 7", preset);
+            text = text.Replace("#define Preset 8", preset);
+            File.WriteAllText(clarityShader, text);
+        }
+
+        private void SetFPS()
+        {
+            int fps = settings.Fps;
+
+            string fpsPatch = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\New Folder\\patches.txt";
+            string text = File.ReadAllText(fpsPatch);
+            text = text.Replace("0x00000000 = .float 1.0 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / (float)fps));
+            text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
+            File.WriteAllText("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\patches.txt", text);
+
+            string fpsRules = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\New Folder\\rules.txt";
+            text = File.ReadAllText(fpsRules);
+            text = text.Replace("0x00000000 = .float 1.00 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / (float)fps));
+            text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (fps));
+            File.WriteAllText("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\rules.txt", text);
         }
 
         /// <summary>
@@ -610,17 +639,14 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    if (pack.Gui == null)
-                    {
-                        FolderScanner.AddPackGui(pack);
-                    }
                     if (pack.Gui != null)
                     {
 
                         fn.Seek(gfxPackStartOffset + (packIndex++ * 9), SeekOrigin.Begin);
-                        fn.Write(StringToByteArray(pack.Gui), 0, 8);
+                        string Gui = GraphicsPack.GraphicPackHashes[pack.packId][1];
+                        fn.Write(StringToByteArray(Gui), 0, 8);
                         fn.WriteByte(1);
-                        CopyGraphicsPack(folder, pack);
+                        //CopyGraphicsPack(folder, pack);
                     }
                 }
             }

@@ -25,6 +25,8 @@ namespace Budford.Model
         // Graphic Pack Settings
         public int ClarityPreset = 3;
 
+        public int Fps = 30;
+
         public byte DebugGX2ApiOffset;
         public byte DebugUnsupportedAPICallsOffset ;
         public byte DebugThreadSynchronisationAPIOffset ;

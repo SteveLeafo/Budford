@@ -141,7 +141,7 @@ namespace Budford.View
             comboBox27.SelectedIndex = information.CemuHookSetting.MMTimerAccuracy;
             comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
-
+            numericUpDown1.Value = information.GameSetting.Fps;
         }
 
         /// <summary>
@@ -206,6 +206,8 @@ namespace Budford.View
             information.CemuHookSetting.MotionSource = comboBox26.SelectedIndex;
             information.CemuHookSetting.MMTimerAccuracy = comboBox27.SelectedIndex;
             information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox28.SelectedIndex != 0;
+
+            information.GameSetting.Fps = (int)numericUpDown1.Value;
 
             foreach (ListViewItem lvi in listView1.Items)
             {
