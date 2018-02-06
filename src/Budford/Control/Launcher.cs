@@ -263,7 +263,17 @@ namespace Budford.Control
                 // Probably don't have enough permissions.
             }
 
-            ExtractSaveDirName(game, logfile);
+            if (getSaveDir)
+            {
+                ExtractSaveDirName(game, logfile);
+            }
+            else
+            {
+                ThreadPool.QueueUserWorkItem(delegate
+                {
+                    ExtractSaveDirName(game, logfile);
+                });
+            }
 
             if (getSaveDir && !cemu_only)
             {
