@@ -498,9 +498,9 @@ namespace Budford.Control
                 if (File.Exists("tempGraphicPack.zip"))
                 {
                     File.Delete("tempGraphicPack.zip");
-                    var unpacker = new Unpacker(parent);
-                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");                    
                 }
+                var unpacker = new Unpacker(parent);
+                unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");                    
             }
             else
             {
