@@ -2113,7 +2113,19 @@ namespace Budford
             {
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    launcher.CopyLargestShaderCacheToCemu(game.Value);
+                    if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.NotSet)
+                    {
+                        if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+                        {
+                            if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable)
+                            {
+                                if (game.Value.GameSetting.PreferedVersion == "Latest")
+                                {
+                                    launcher.CopyLargestShaderCacheToCemu(game.Value);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -2132,14 +2144,30 @@ namespace Budford
                 {
                     if (!game.Value.SaveDir.StartsWith("??"))
                     {
-                        FileInfo fi = new FileInfo(iv1.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin");
-                        
-                        if (fi.Exists)
+                        if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.NotSet)
                         {
-                            if (fi.Length > 1000000)
+                            if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
                             {
-                                model.CurrentId = game.Key;
-                                launcher.LaunchCemu(model, game.Value, true);
+                                if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable)
+                                {
+                                    if (game.Value.GameSetting.PreferedVersion == "Latest")
+                                    {
+                                        FileInfo transferableShader = new FileInfo(iv1.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin");
+                                        FileInfo precompiledShader = new FileInfo(iv1.Folder + "\\shaderCache\\precompiled\\" + game.Value.SaveDir + ".bin");
+
+                                        if (!precompiledShader.Exists)
+                                        {
+                                            if (transferableShader.Exists)
+                                            {
+                                                if (transferableShader.Length > 1000000)
+                                                {
+                                                    model.CurrentId = game.Key;
+                                                    launcher.LaunchCemu(model, game.Value, true);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

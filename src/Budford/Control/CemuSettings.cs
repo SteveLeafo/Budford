@@ -593,7 +593,6 @@ namespace Budford.Control
                             File = pack.File,
                             Folder = pack.Folder,
                             Title = pack.Title,
-                            Gui = pack.Gui
                         };
                         break;
                     }
@@ -660,15 +659,10 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    if (pack.Gui != null)
-                    {
-
-                        fn.Seek(gfxPackStartOffset + (packIndex++ * 9), SeekOrigin.Begin);
-                        string Gui = GraphicsPack.GraphicPackHashes[pack.packId][1];
-                        fn.Write(StringToByteArray(Gui), 0, 8);
-                        fn.WriteByte(1);
-                        //CopyGraphicsPack(folder, pack);
-                    }
+                    fn.Seek(gfxPackStartOffset + (packIndex++ * 9), SeekOrigin.Begin);
+                    string Gui = GraphicsPack.GraphicPackHashes[pack.packId][1];
+                    fn.Write(StringToByteArray(Gui), 0, 8);
+                    fn.WriteByte(1);
                 }
             }
         }

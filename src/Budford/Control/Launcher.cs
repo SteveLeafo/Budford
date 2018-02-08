@@ -404,7 +404,7 @@ namespace Budford.Control
                 {
                     start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
                 }
-                start.WindowStyle = ProcessWindowStyle.Minimized;
+                //start.WindowStyle = ProcessWindowStyle.Minimized;
             }
             else
             {
