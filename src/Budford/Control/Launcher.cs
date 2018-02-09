@@ -178,15 +178,18 @@ namespace Budford.Control
                 SetCemuVersion(model, game);
             }
 
-            if (!game.SaveDir.StartsWith("??"))
+            if (runningVersion.VersionNumber >= 170)
             {
-                FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(game));
-                if (src.Exists)
+                if (!game.SaveDir.StartsWith("??"))
                 {
-                    FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
-                    if (!dest.Exists || dest.Length < src.Length)
+                    FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(game));
+                    if (src.Exists)
                     {
-                        File.Copy(src.FullName, dest.FullName, true);
+                        FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
+                        if (!dest.Exists || dest.Length < src.Length)
+                        {
+                            File.Copy(src.FullName, dest.FullName, true);
+                        }
                     }
                 }
             }
