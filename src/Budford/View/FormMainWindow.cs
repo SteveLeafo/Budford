@@ -730,6 +730,14 @@ namespace Budford
         /// <returns></returns>
         private bool FilterCheckedOut(GameInformation game)
         {
+            if (!model.Settings.IncludeWiiULauncherRpx)
+            {
+                if (game.LaunchFile.Contains("WiiULauncher.rpx"))
+                {
+                    return false;
+                }
+            }
+
             if (CheckRegionFilter(game))
             {
                 if (CheckStatusFilter(game))

@@ -46,6 +46,8 @@ namespace Budford.Model
 
         public bool ScanGameFoldersOnStart = false;
 
+        public bool IncludeWiiULauncherRpx = true;
+
         public string DefaultResolution = "default";
 
         public ConsoleRegionType ConsoleRegion = ConsoleRegionType.Auto;

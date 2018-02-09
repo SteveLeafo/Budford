@@ -589,9 +589,16 @@ namespace Budford.Control
                 try
                 {
                     System.Threading.Thread.Sleep(100);
-                    runningProcess.Refresh();
-                    i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
-
+                    System.Threading.Thread.Sleep(100);
+                    if (!runningProcess.HasExited)
+                    {
+                        runningProcess.Refresh();
+                        i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+                    }
+                    else
+                    {
+                        return;
+                    }
                     c++;
                 }
                 catch (Exception ex)

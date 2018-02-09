@@ -64,8 +64,8 @@
             this.downloadCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadOldCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadGraphicsPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importGraphicsPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.importGraphicsPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -312,7 +312,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -379,17 +379,17 @@
             this.downloadGraphicsPacksToolStripMenuItem.Text = "Download Graphics Packs";
             this.downloadGraphicsPacksToolStripMenuItem.Click += new System.EventHandler(this.downloadGraphicsPacksToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
+            // 
             // importGraphicsPackToolStripMenuItem
             // 
             this.importGraphicsPackToolStripMenuItem.Name = "importGraphicsPackToolStripMenuItem";
             this.importGraphicsPackToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.importGraphicsPackToolStripMenuItem.Text = "Import Graphics Pack";
             this.importGraphicsPackToolStripMenuItem.Click += new System.EventHandler(this.importGraphicsPackToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
             // 
             // cemuToolStripMenuItem
             // 
