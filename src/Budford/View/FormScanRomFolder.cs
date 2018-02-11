@@ -79,7 +79,6 @@ namespace Budford
         {
             if (Directory.Exists(romFolder))
             {
-
                 if (Directory.Exists(romFolder + "\\code"))
                 {
                     CheckFolder(romFolder);

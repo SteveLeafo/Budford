@@ -155,6 +155,22 @@ namespace Budford.Control
                 {
                     gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
                 }
+
+                if (gd.Value.ShaderCacheFileSize == -1)
+                {
+                    var version = CemuFeatures.GetLatestVersion(model);
+                    FileInfo info = new FileInfo(SpecialFolders.ShaderCacheFolderCemu(version) + "\\" + gd.Value.SaveDir + ".bin");
+                    if (File.Exists(info.FullName))
+                    {
+                        gd.Value.ShaderCacheFileSize = (int)info.Length;
+                    }
+                    else
+                    {
+                        gd.Value.ShaderCacheFileSize = 999;
+                    }
+
+                }
+
             }
         }
 

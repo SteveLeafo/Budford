@@ -8,6 +8,9 @@ namespace Budford.Control
         [DllImport("kernel32.dll")]
         static extern ErrorModes SetErrorMode(ErrorModes uMode);
 
+        [DllImport("user32.dll")]
+        internal static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
         [Flags]
         public enum ErrorModes : uint
         {

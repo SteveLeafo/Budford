@@ -178,15 +178,26 @@ namespace Budford.Control
             int latestVersion = 0;
             foreach (var v in model.Settings.InstalledVersions)
             {
-                int version;
-                if (int.TryParse(v.Version.Replace(".", ""), out version))
+                int version = v.VersionNumber;
+                //if (int.TryParse(v.Version.Replace(".", ""), out version))
                 {
-                    if (version > latestVersion)
+                    if (version >= latestVersion)
                     {
                         if (version < maxVersion)
                         {
-                            latest = v;
-                            latestVersion = version;
+                            if (version == latestVersion)
+                            {
+                                if (v.IsLatest)
+                                {
+                                    latest = v;
+                                    latestVersion = version;
+                                }
+                            }
+                            else
+                            {
+                                latest = v;
+                                latestVersion = version;
+                            }
                         }
                     }
                 }

@@ -187,7 +187,7 @@ namespace Budford
                     {
                         GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                         model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                        launcher.LaunchCemu(model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                        launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
                         e.Handled = true;
                     }
                 }
@@ -710,7 +710,7 @@ namespace Budford
                 lvi.SubItems.Add(game.Value.Publisher);
             }
             lvi.SubItems.Add(game.Value.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + game.Value.CompanyCode + "       ");
-            lvi.SubItems.Add(game.Value.Size);
+            lvi.SubItems.Add(game.Value.ShaderCacheFileSize.ToString());
             lvi.SubItems.Add(game.Value.LaunchFileName);
             lvi.SubItems.Add(game.Value.GameSetting.PreferedVersion + "               ");
             lvi.SubItems.Add(game.Value.GameSetting.OfficialEmulationState + "        ");
@@ -987,7 +987,7 @@ namespace Budford
                 {
                     GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                     model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                    launcher.LaunchCemu(model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                    launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
                 }
             }
         }
@@ -1479,7 +1479,7 @@ namespace Budford
                 {
                     model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                     GameInformation game = model.GameData[model.CurrentId];
-                    launcher.LaunchCemu(model, game);
+                    launcher.LaunchCemu(this, model, game);
                 }
             }
         }
@@ -1498,7 +1498,7 @@ namespace Budford
                 {
                     model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                     GameInformation game = model.GameData[model.CurrentId];
-                    launcher.LaunchCemu(model, game);
+                    launcher.LaunchCemu(this, model, game);
                 }
             }
         }
@@ -1603,7 +1603,7 @@ namespace Budford
         /// <param name="e"></param>
         private void lanchCemuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            launcher.LaunchCemu(model, null, false, true);
+            launcher.LaunchCemu(this, model, null, false, true);
         }
 
         /// <summary>
@@ -1625,7 +1625,7 @@ namespace Budford
         /// <param name="e"></param>
         private void launchCemuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            launcher.LaunchCemu(model, null, false, true);
+            launcher.LaunchCemu(this, model, null, false, true);
         }
 
         /// <summary>
@@ -1661,7 +1661,7 @@ namespace Budford
                 if (game.Value.SaveDir.StartsWith("??"))
                 {
                     model.CurrentId = game.Key;
-                    launcher.LaunchCemu(model, game.Value, true);
+                    launcher.LaunchCemu(this, model, game.Value, true);
                 }
             }
         }
@@ -2163,14 +2163,14 @@ namespace Budford
                                         FileInfo transferableShader = new FileInfo(iv1.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin");
                                         FileInfo precompiledShader = new FileInfo(iv1.Folder + "\\shaderCache\\precompiled\\" + game.Value.SaveDir + ".bin");
 
-                                        if (!precompiledShader.Exists)
+                                        if (!File.Exists(precompiledShader.FullName))
                                         {
-                                            if (transferableShader.Exists)
+                                            if (File.Exists(transferableShader.FullName))
                                             {
                                                 if (transferableShader.Length > 1000000)
                                                 {
                                                     model.CurrentId = game.Key;
-                                                    launcher.LaunchCemu(model, game.Value, true);
+                                                    launcher.LaunchCemu(this, model, game.Value, true);
                                                 }
                                             }
                                         }
@@ -2252,7 +2252,7 @@ namespace Budford
                 {
                     GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                     DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
-                    if (!src.Exists)
+                    if (!Directory.Exists(src.FullName))
                     {
                         src.Create();
                     }

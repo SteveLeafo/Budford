@@ -436,7 +436,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void launchCEMUToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            launcher.LaunchCemu(model, null, false, true);
+            launcher.LaunchCemu(null, model, null, false, true);
         }
 
         /// <summary>
@@ -587,7 +587,7 @@ namespace Budford.View
                 if (game.Value.SaveDir.StartsWith("??"))
                 {
                     model.CurrentId = game.Key;
-                    launcher.LaunchCemu(model, game.Value, true);
+                    launcher.LaunchCemu(null, model, game.Value, true);
                 }
             }
         }

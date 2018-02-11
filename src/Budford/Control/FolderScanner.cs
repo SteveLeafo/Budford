@@ -123,7 +123,7 @@ namespace Budford.Control
         /// <param name="graphicsPacks"></param>
         internal static void FindGraphicsPacks(DirectoryInfo source, Dictionary<string, List<GraphicsPack>> graphicsPacks)
         {
-            if (source.Exists)
+            if (Directory.Exists(source.FullName))
             {
                 foreach (DirectoryInfo dir in source.GetDirectories())
                 {
@@ -259,6 +259,10 @@ namespace Budford.Control
                     foreach (string i in ids)
                     {
                         string id = i.ToUpper();
+                        if (id.Length == 15)
+                        {
+                            id = "0" + id;
+                        }
                         pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf('\\'));
                         if (!graphicsPacks.ContainsKey(id))
                         {

@@ -18,6 +18,9 @@ namespace Budford.Model
         public string Type = "";
         public int Rating = 1;
 
+        internal int ShaderCacheFileSize = -1;
+        internal int ShaderCacheCount = -1;
+
         public DateTime LastPlayed = DateTime.MinValue;
         public int PlayCount = 0;
         public int GraphicsPacksCount = 0;

@@ -30,11 +30,11 @@ namespace Budford.Control
         /// <param name="ten80p"></param>
         internal static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, bool ten80p = false, bool overrideit = false)
         {
-            if (source.Exists)
+            if (Directory.Exists(source.FullName))
             {
-                if (!target.Exists)
+                if (!Directory.Exists(target.FullName))
                 {
-                    target.Create();
+                    Directory.CreateDirectory(target.FullName);
                 }
                 foreach (DirectoryInfo dir in source.GetDirectories())
                 {
@@ -56,6 +56,10 @@ namespace Budford.Control
                     {
                         try
                         {
+                            if (!Directory.Exists(target.FullName))
+                            {
+                                Directory.CreateDirectory(target.FullName);
+                            }
                             file.CopyTo(Path.Combine(target.FullName, file.Name));
                         }
                         catch (Exception)
@@ -245,7 +249,7 @@ namespace Budford.Control
             DirectoryInfo dInfo = new DirectoryInfo(fullPath);
             DirectorySecurity dSecurity = dInfo.GetAccessControl();
             dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
-            if (dInfo.Exists)
+            if (Directory.Exists(dInfo.FullName))
             {
                 dInfo.SetAccessControl(dSecurity);
             }
