@@ -57,7 +57,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        internal void Open(Model.Model model)
+        internal bool Open(Model.Model model)
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
@@ -67,8 +67,10 @@ namespace Budford.Control
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     LaunchRpx(model, dlg.FileName);
+                    return true;
                 }
             }
+            return false;
         }
 
         /// <summary>

@@ -987,11 +987,9 @@ namespace Budford
                 {
                     if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                     {
-                        toolStripButton1.Enabled = false;
-                        toolStripButton3.Enabled = false;
-                        toolStripButton4.Enabled = true;
-                        toolStripButton8.Enabled = true;
-                        toolStripButton9.Enabled = true;
+                        EnableControlsForGameRunning();
+
+
                         GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                         model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                         launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
@@ -1055,7 +1053,10 @@ namespace Budford
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            launcher.Open(model);
+            if (launcher.Open(model))
+            {
+                EnableControlsForGameRunning();
+            }
         }
 
         /// <summary>
@@ -1479,39 +1480,10 @@ namespace Budford
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void playToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Play
-            if (listView1.SelectedItems.Count == 1)
-            {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
-                {
-                    model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                    GameInformation game = model.GameData[model.CurrentId];
-                    launcher.LaunchCemu(this, model, game);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             // Play
             LaunchGame();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            launcher.KillCurrentProcess();
         }
 
         /// <summary>
@@ -1792,16 +1764,6 @@ namespace Budford
                 FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
                 manageInstalledVersionsToolStripMenuItem_Click(sender, e);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            launcher.Open(model);
         }
 
         /// <summary>
@@ -2305,12 +2267,41 @@ namespace Budford
             }
             else
             {
-                toolStripButton1.Enabled = true;
-                toolStripButton3.Enabled = true;
-                toolStripButton4.Enabled = false;
-                toolStripButton8.Enabled = false;
-                toolStripButton9.Enabled = false;
+                EnableControlsForGameExitted();
             }
+        }
+
+        private void EnableControlsForGameExitted()
+        {
+            toolStripButton1.Enabled = true;
+            toolStripButton3.Enabled = true;
+            playToolStripMenuItem.Enabled = true;
+            loadToolStripMenuItem.Enabled = true;
+
+            toolStripButton4.Enabled = false;
+            toolStripButton8.Enabled = false;
+            toolStripButton9.Enabled = false;
+
+            stopToolStripMenuItem.Enabled = false;
+            fullScreenToolStripMenuItem.Enabled = false;
+            takeScreenshotToolStripMenuItem.Enabled = false;
+        }
+
+        private void EnableControlsForGameRunning()
+        {
+            toolStripButton1.Enabled = false;
+            toolStripButton3.Enabled = false;
+            playToolStripMenuItem.Enabled = false;
+            loadToolStripMenuItem.Enabled = false;
+
+            toolStripButton4.Enabled = true;
+            toolStripButton8.Enabled = true;
+            toolStripButton9.Enabled = true;
+
+
+            stopToolStripMenuItem.Enabled = true;
+            fullScreenToolStripMenuItem.Enabled = true;
+            takeScreenshotToolStripMenuItem.Enabled = true;
         }
 
         private void toolStripButton8_Click(object sender, EventArgs e)
