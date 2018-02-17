@@ -16,7 +16,7 @@ Budford is not a game launcher, it is designed to work with your favorite game l
 
 - Simple user interface for configuring per game settings.
 - Budford can support multiple users each with their own save file for each game.
-- Supports multiple concurrent versions of[Cemu](http://cemu.info/) Cemu.  Budford will create a symbolic link to your mlc01\usr\title folder.
+- Supports multiple concurrent versions of [Cemu](http://cemu.info/).  Budford will create a symbolic link to your mlc01\usr\title folder.
 - Can download the latest version of [Cemu](http://cemu.info/) , [Cemu hook](https://sshnuke.net/cemuhook/) and performs all the required setup for you.
 - Can automatically download the latest graphic packs.
 - Budford can integrate with your favorite game launcher such as launch box or emulation station, it can even launch straight into the game pad view so you'll never need your keyboard again.
