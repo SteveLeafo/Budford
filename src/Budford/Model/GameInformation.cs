@@ -16,6 +16,7 @@ namespace Budford.Model
         public string TitleId  = "";
         public string GroupId  = "";
         public string Type = "";
+        internal string UnplayableReason = "Playable";
         public int Rating = 1;
 
         internal int ShaderCacheFileSize = -1;

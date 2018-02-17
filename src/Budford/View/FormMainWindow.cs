@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Budford.Properties;
 using Budford.Utilities;
 using Budford.Tools;
+using System.ComponentModel;
 
 namespace Budford
 {
@@ -74,14 +75,6 @@ namespace Budford
             }
 
             model.OldVersions.Clear();
-
-            if (!Directory.Exists("graphicsPacks"))
-            {
-                if (File.Exists("graphicsPacks.zip"))
-                {
-                    unpacker.Unpack("graphicsPacks.zip", "graphicsPacks");
-                }
-            }
 
             FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision), model.GraphicsPacks);
 
@@ -720,7 +713,8 @@ namespace Budford
             lvi.SubItems.Add(game.Value.LastPlayed != DateTime.MinValue ? game.Value.LastPlayed.ToShortDateString() + " " : "                    ");
             lvi.SubItems.Add(game.Value.PlayCount != 0 ? game.Value.PlayCount + "                 " : "                 ");
             lvi.SubItems.Add(game.Value.GraphicsPacksCount != 0 ? game.Value.GraphicsPacksCount + "                    " : "                    ");
-            lvi.SubItems.Add(game.Value.Rating + "                 ");
+            lvi.SubItems.Add(game.Value.Rating + "                 "); 
+            lvi.SubItems.Add(game.Value.Comments + "                 ");
         }
 
         /// <summary>
@@ -921,7 +915,8 @@ namespace Budford
             listView1.Columns.Add("Play Count", 50);
             listView1.Columns.Add("Graphics Packs", 50);
             listView1.Columns.Add("Rating", 50);
-            listView1.Columns.Add("", 50);
+            listView1.Columns.Add("Comment", 50);
+            //listView1.Columns.Add("", 50);
             listView1.HeaderStyle = ColumnHeaderStyle.Clickable;
 
             listView1.FullRowSelect = true;
@@ -981,13 +976,26 @@ namespace Budford
         /// <param name="e"></param>
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count == 1)
+            LaunchGame();
+        }
+
+        private void LaunchGame()
+        {
+            if (toolStripButton3.Enabled)
             {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                if (listView1.SelectedItems.Count == 1)
                 {
-                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                    launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                    if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                    {
+                        toolStripButton1.Enabled = false;
+                        toolStripButton3.Enabled = false;
+                        toolStripButton4.Enabled = true;
+                        toolStripButton8.Enabled = true;
+                        toolStripButton9.Enabled = true;
+                        GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                        model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                        launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                    }
                 }
             }
         }
@@ -1035,6 +1043,7 @@ namespace Budford
                     listView1.SelectedItems[0].SubItems[12].Text = game.LastPlayed != DateTime.MinValue ? game.LastPlayed.ToShortDateString() + " " : "                    ";
                     listView1.SelectedItems[0].SubItems[13].Text = game.PlayCount != 0 ? game.PlayCount + "                 " : "                 ";
                     listView1.SelectedItems[0].SubItems[15].Text = game.Rating + "                 ";
+                    listView1.SelectedItems[0].SubItems[16].Text = game.Comments + "                 ";
                 }
             }
         }      
@@ -1492,15 +1501,7 @@ namespace Budford
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             // Play
-            if (listView1.SelectedItems.Count == 1)
-            {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
-                {
-                    model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                    GameInformation game = model.GameData[model.CurrentId];
-                    launcher.LaunchCemu(this, model, game);
-                }
-            }
+            LaunchGame();
         }
 
         /// <summary>
@@ -1676,6 +1677,16 @@ namespace Budford
             foreach (var v in model.GameData)
             {
                 GameInformation gi = v.Value;
+
+
+                //gi.CemuHookSetting.DisableLZCNT = false;
+                //gi.CemuHookSetting.DisableAVX = false;
+                //gi.CemuHookSetting.DisableMOVBE = false;
+
+                if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable)
+                {
+                    gi.GameSetting.CpuMode = GameSettings.CpuModeType.SingleCoreCompiler;
+                }
 
                 //if (gi.GameSetting.GpuBufferCacheAccuracy == GameSettings.GpuBufferCacheAccuracyType.Medium)
                 //{
@@ -2281,8 +2292,41 @@ namespace Budford
                 if (pack != "")
                 {
                     model.Settings.GraphicsPackRevision = pack;
+                    FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision), model.GraphicsPacks);
                 }
             }
         }
-    }   
+
+        internal void ProcessExited()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(() => { ProcessExited(); }));
+            }
+            else
+            {
+                toolStripButton1.Enabled = true;
+                toolStripButton3.Enabled = true;
+                toolStripButton4.Enabled = false;
+                toolStripButton8.Enabled = false;
+                toolStripButton9.Enabled = false;
+            }
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            if (launcher != null)
+            {
+                launcher.FullScreen();
+            }
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            if (launcher != null)
+            {
+                launcher.ScreenShot();
+            }
+        }
+    }
 }

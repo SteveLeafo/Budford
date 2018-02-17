@@ -115,6 +115,9 @@
     <Compile Include="Utilities\TgaReader.cs" />
     <Compile Include="Utilities\UsbNotification.cs" />
     <Compile Include="Utilities\Xml.cs" />
+    <Compile Include="View\CustomToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="View\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>

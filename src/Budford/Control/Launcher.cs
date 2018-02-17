@@ -368,6 +368,11 @@ namespace Budford.Control
 
             runningGame = null;
             runningVersion = null;
+
+            if (parent != null)
+            {
+                parent.ProcessExited();
+            }
         }
 
         /// <summary>
@@ -712,6 +717,30 @@ namespace Budford.Control
                 dest = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, snapShotDir));
 
                 UpdateFolder(src, dest);
+            }
+        }
+
+        internal void FullScreen()
+        {
+            if (runningProcess != null)
+            {
+                IntPtr h = runningProcess.MainWindowHandle;
+                SetForegroundWindow(h);
+                //SendKeys.SendWait("+{PRTSC}");
+                SendKeys.SendWait("%{ENTER}");
+            }
+        }
+
+        internal void ScreenShot()
+        {
+            if (runningProcess != null)
+            {
+                IntPtr h = runningProcess.MainWindowHandle;
+                SetForegroundWindow(h);
+                Thread.Sleep(100);
+                SendKeys.SendWait("+{PRTSC}");
+                Thread.Sleep(100);
+                SetForegroundWindow(parent.Handle);
             }
         }
     }
