@@ -521,6 +521,10 @@ namespace Budford.Control
 
         static bool IsGraphicPackInstalled(string pack)
         {
+            if (!Directory.Exists("graphicsPacks"))
+            {
+                Directory.CreateDirectory("graphicsPacks");
+            }
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = dir.Replace("graphicsPacks\\", "");
