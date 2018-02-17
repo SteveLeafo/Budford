@@ -1,7 +1,7 @@
 # Budford
 Budford: A small app to assist children with Cemu installation and setup.
 
-![usage](https://raw.githubusercontent.com/SteveLeafo/Budford/master/doc/ready_to_go.png)
+![usage](https://raw.githubusercontent.com/SteveLeafo/Budford/master/docs/ready_to_go.png)
 
 
 ## Why?
