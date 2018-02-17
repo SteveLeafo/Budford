@@ -36,6 +36,7 @@ namespace Budford
             checkBox5.Checked = settings.UseGlobalVolumeSettings;
             checkBox6.Checked = settings.ScanGameFoldersOnStart;
             checkBox7.Checked = settings.IncludeWiiULauncherRpx;
+            checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
 
             trackBar1.Minimum = 1;
             trackBar1.Maximum = 100;
@@ -160,6 +161,7 @@ namespace Budford
             settings.UseGlobalVolumeSettings = checkBox5.Checked;
             settings.ScanGameFoldersOnStart = checkBox6.Checked;
             settings.IncludeWiiULauncherRpx = checkBox7.Checked;
+            settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
 
             settings.GlobalVolume = trackBar1.Value;
 

@@ -493,7 +493,7 @@ namespace Budford.Control
             }
         }
 
-        internal static void DownloadLatestGraphicPack(Form parent, string jsonString)
+        internal static void DownloadLatestGraphicPack(Form parent, string jsonString, bool showMessage = true)
         {
             // For that you will need to add reference to System.Runtime.Serialization
             var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(jsonString.ToCharArray()), new System.Xml.XmlDictionaryReaderQuotas());
@@ -515,7 +515,10 @@ namespace Budford.Control
             }
             else
             {
-                MessageBox.Show("Latest version is already installed");
+                if (showMessage)
+                {
+                    MessageBox.Show("Latest version is already installed");
+                }
             }
         }
 

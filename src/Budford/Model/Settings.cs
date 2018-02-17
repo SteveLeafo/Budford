@@ -48,6 +48,8 @@ namespace Budford.Model
 
         public bool IncludeWiiULauncherRpx = true;
 
+        public bool AutomaticallyDownloadGraphicsPackOnStart = false;
+
         public string DefaultResolution = "default";
 
         public ConsoleRegionType ConsoleRegion = ConsoleRegionType.Auto;

@@ -76,6 +76,12 @@ namespace Budford
 
             model.OldVersions.Clear();
 
+
+            if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+            {
+                DownloadLatestGraphicsPack(false);
+            }
+
             FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision), model.GraphicsPacks);
 
             Persistence.LoadFromXml(model.OldVersions);
@@ -2237,10 +2243,15 @@ namespace Budford
         private void downloadLatestGraphicPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Graphic Packs
+            DownloadLatestGraphicsPack();
+        }
+
+        private void DownloadLatestGraphicsPack(bool showMessage = true)
+        {
             using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
             {
                 dlc.ShowDialog(this);
-                CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result);
+                CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result, showMessage);
                 string pack = "";
                 foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                 {
