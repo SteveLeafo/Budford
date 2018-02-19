@@ -89,7 +89,7 @@ namespace Budford.Utilities
             // If the current rule applies to the current user.
             if (RuleAppliesToCurrentUser(currentRule))
             {
-                if (currentRule.AccessControlType.Equals(AccessControlType.Deny))
+                if (currentRule != null && currentRule.AccessControlType.Equals(AccessControlType.Deny))
                 {
                     if (RightIsRight(right, currentRule))
                     {
@@ -103,7 +103,7 @@ namespace Budford.Utilities
                         }
                     }
                 }
-                else if (currentRule.AccessControlType.Equals(AccessControlType.Allow))
+                else if (currentRule != null && currentRule.AccessControlType.Equals(AccessControlType.Allow))
                 {
                     Allow(right, ref allow, ref inheritedAllow, currentRule);
                 }
@@ -128,7 +128,7 @@ namespace Budford.Utilities
         /// <returns></returns>
         private bool RuleAppliesToCurrentUser(FileSystemAccessRule currentRule)
         {
-            return currentUser.User.Equals(currentRule.IdentityReference) || currentPrincipal.IsInRole((SecurityIdentifier)currentRule.IdentityReference);
+            return currentUser.User != null && (currentUser.User.Equals(currentRule.IdentityReference) || currentPrincipal.IsInRole((SecurityIdentifier)currentRule.IdentityReference));
         }
 
 
@@ -136,6 +136,7 @@ namespace Budford.Utilities
         /// 
         /// </summary>
         /// <param name="allow"></param>
+        /// <param name="deny"></param>
         /// <param name="inheritedAllow"></param>
         /// <param name="inheritedDeny"></param>
         /// <returns></returns>

@@ -3,6 +3,7 @@ using System.IO.Compression;
 using System.Windows.Forms;
 using Budford.Properties;
 using Budford.Utilities;
+using Budford.View;
 
 namespace Budford.Control
 {
@@ -129,6 +130,7 @@ namespace Budford.Control
             }
             catch (System.Exception)
             {
+                // ignored
             }
         }
     }

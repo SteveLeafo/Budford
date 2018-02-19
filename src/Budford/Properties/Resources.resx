@@ -208,4 +208,82 @@ Click on OK to continue</value>
   <data name="fScanRomFolder_fScanRomFolder_____" xml:space="preserve">
     <value> ...</value>
   </data>
+  <data name="CemuFeatures_DownloadLatestVersion_The_latest_version_of_Cemu_is_already_installed_" xml:space="preserve">
+    <value>The latest version of Cemu is already installed.</value>
+  </data>
+  <data name="CemuFeatures_DownloadLatestVersion_Information___" xml:space="preserve">
+    <value>Information...</value>
+  </data>
+  <data name="CemuFeatures_DownloadLatestGraphicPack_Latest_version_is_already_installed" xml:space="preserve">
+    <value>Latest version is already installed</value>
+  </data>
+  <data name="FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__" xml:space="preserve">
+    <value>Folder doesn't exist: </value>
+  </data>
+  <data name="Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again" xml:space="preserve">
+    <value>If you are using a removable storage device check it is plugged in and try again</value>
+  </data>
+  <data name="Launcher_LaunchCemu_Can_not_find_file" xml:space="preserve">
+    <value>Can not find file</value>
+  </data>
+  <data name="WindowsOs_IsVc2013RedistInstalled_Visual_C___2013_Redistributable_is_not_installed_" xml:space="preserve">
+    <value>Visual C++ 2013 Redistributable is not installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_installed_" xml:space="preserve">
+    <value>Visual C++ 2012 Redistributable is installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_not_installed_" xml:space="preserve">
+    <value>Visual C++ 2012 Redistributable is not installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_installed_" xml:space="preserve">
+    <value>Visual C++ 2010 Redistributable is installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_not_installed_" xml:space="preserve">
+    <value>Visual C++ 2010 Redistributable is not installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_installed_" xml:space="preserve">
+    <value>Visual C++ 2008 Redistributable is installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_not_installed_" xml:space="preserve">
+    <value>Visual C++ 2008 Redistributable is not installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_installed_" xml:space="preserve">
+    <value>Visual C++ 2005 Redistributable is installed.</value>
+  </data>
+  <data name="WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_not_installed_" xml:space="preserve">
+    <value>Visual C++ 2005 Redistributable is not installed.</value>
+  </data>
+  <data name="FileCache_fileCache_openExisting___0___is_corrupted" xml:space="preserve">
+    <value>"{0}" is corrupted</value>
+  </data>
+  <data name="FormAbout_FormAbout_V" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="FormEditInstalledVersions_importGraphicsPackToolStripMenuItem_Click_Graphic_Packs____zip_" xml:space="preserve">
+    <value>Graphic Packs| *.zip;</value>
+  </data>
+  <data name="FormMainWindow_mi_Click_Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="FormMainWindow_PopulateListView_Currently_showing_" xml:space="preserve">
+    <value>Currently showing </value>
+  </data>
+  <data name="FormMainWindow_RefreshList__________________" xml:space="preserve">
+    <value>                 </value>
+  </data>
+  <data name="FormMainWindow_snapshotsToolStripMenuItem_Click_Launching_" xml:space="preserve">
+    <value>Launching </value>
+  </data>
+  <data name="FormShaderMerger_openToolStripMenuItem_Click_Shader_Cache_Files____bin_" xml:space="preserve">
+    <value>Shader Cache Files| *.bin;</value>
+  </data>
+  <data name="FormShaderMerger_UpdateListView_Added_" xml:space="preserve">
+    <value>Added </value>
+  </data>
+  <data name="FormShaderMerger_UpdateListView__new_shaders" xml:space="preserve">
+    <value> new shaders</value>
+  </data>
+  <data name="FormShaderMerger_saveAsToolStripMenuItem_Click_Shader_Cache_Files____bin_" xml:space="preserve">
+    <value>Shader Cache Files| *.bin;</value>
+  </data>
 </root>

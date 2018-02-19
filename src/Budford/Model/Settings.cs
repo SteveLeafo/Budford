@@ -61,9 +61,9 @@ namespace Budford.Model
         public enum ConsoleRegionType : byte
         {
             Auto = 0xFF,
-            JAP = 0x01,
-            USA = 0x02,
-            EUR = 0x04,
+            Jap = 0x01,
+            Usa = 0x02,
+            Eur = 0x04,
             China = 0x10,
             Korea = 0x20,
             Taiwan = 0x40

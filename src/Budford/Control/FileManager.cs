@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Budford.Properties;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using Budford.View;
 
 namespace Budford.Control
 {
@@ -27,8 +28,9 @@ namespace Budford.Control
         /// </summary>
         /// <param name="source"></param>
         /// <param name="target"></param>
-        /// <param name="ten80p"></param>
-        internal static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, bool ten80p = false, bool overrideit = false)
+        /// <param name="ten80P"></param>
+        /// <param name="overrideit"></param>
+        internal static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target, bool ten80P = false, bool overrideit = false)
         {
             if (Directory.Exists(source.FullName))
             {
@@ -38,16 +40,16 @@ namespace Budford.Control
                 }
                 foreach (DirectoryInfo dir in source.GetDirectories())
                 {
-                    if (ten80p)
+                    if (ten80P)
                     {
                         if (dir.Name.EndsWith("1080p"))
                         {
-                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), ten80p, overrideit);
+                            CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), true, overrideit);
                         }
                     }
                     else
                     {
-                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), ten80p, overrideit);
+                        CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), false, overrideit);
                     }
                 }
                 foreach (FileInfo file in source.GetFiles())
@@ -64,6 +66,7 @@ namespace Budford.Control
                         }
                         catch (Exception)
                         {
+                            // ignored
                         }
                     }
                     else
@@ -185,7 +188,7 @@ namespace Budford.Control
             }
             else
             {
-                MessageBox.Show("Folder doesn't exist: " + model.Settings.DefaultInstallFolder);
+                MessageBox.Show(Resources.FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__ + model.Settings.DefaultInstallFolder);
             }
         }
 

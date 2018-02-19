@@ -3,7 +3,7 @@ using System.Net;
 using System.Windows.Forms;
 using Budford.Properties;
 
-namespace Budford
+namespace Budford.View
 {
     public partial class FormWebpageDownload : Form
     {

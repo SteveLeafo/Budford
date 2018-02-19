@@ -4,7 +4,7 @@ using System.Net;
 using System.Windows.Forms;
 using Budford.Properties;
 
-namespace Budford
+namespace Budford.View
 {
     public sealed partial class FormFileDownload : Form
     {

@@ -50,7 +50,7 @@ namespace Budford.Utilities
 
                 NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer();
 
-                reparseDataBuffer.ReparseTag = NativeMethods.IO_REPARSE_TAG_MOUNT_POINT;
+                reparseDataBuffer.ReparseTag = NativeMethods.IoReparseTagMountPoint;
                 reparseDataBuffer.ReparseDataLength = (ushort)(sourceDirBytes.Length + 12);
                 reparseDataBuffer.SubstituteNameOffset = 0;
                 reparseDataBuffer.SubstituteNameLength = (ushort)sourceDirBytes.Length;
@@ -67,7 +67,7 @@ namespace Budford.Utilities
                     Marshal.StructureToPtr(reparseDataBuffer, inBuffer, false);
 
                     int bytesReturned;
-                    bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FSCTL_SET_REPARSE_POINT,
+                    bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FsctlSetReparsePoint,
                         inBuffer, sourceDirBytes.Length + 20, IntPtr.Zero, 0, out bytesReturned, IntPtr.Zero);
 
                     if (!result)
@@ -106,7 +106,7 @@ namespace Budford.Utilities
             {
                 NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer();
 
-                reparseDataBuffer.ReparseTag = NativeMethods.IO_REPARSE_TAG_MOUNT_POINT;
+                reparseDataBuffer.ReparseTag = NativeMethods.IoReparseTagMountPoint;
                 reparseDataBuffer.ReparseDataLength = 0;
                 reparseDataBuffer.PathBuffer = new byte[0x3ff0];
 
@@ -117,7 +117,7 @@ namespace Budford.Utilities
                     Marshal.StructureToPtr(reparseDataBuffer, inBuffer, false);
 
                     int bytesReturned;
-                    bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FSCTL_DELETE_REPARSE_POINT,
+                    bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FsctlDeleteReparsePoint,
                         inBuffer, 8, IntPtr.Zero, 0, out bytesReturned, IntPtr.Zero);
 
                     if (!result)
@@ -193,13 +193,13 @@ namespace Budford.Utilities
             try
             {
                 int bytesReturned;
-                bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FSCTL_GET_REPARSE_POINT,
+                bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FsctlGetReparsePoint,
                     IntPtr.Zero, 0, outBuffer, outBufferSize, out bytesReturned, IntPtr.Zero);
 
                 if (!result)
                 {
                     int error = Marshal.GetLastWin32Error();
-                    if (error == NativeMethods.ERROR_NOT_A_REPARSE_POINT)
+                    if (error == NativeMethods.ErrorNotAReparsePoint)
                     {
                         return null;
                     }
@@ -210,7 +210,7 @@ namespace Budford.Utilities
                 NativeMethods.ReparseDataBuffer reparseDataBuffer = (NativeMethods.ReparseDataBuffer)
                     Marshal.PtrToStructure(outBuffer, typeof(NativeMethods.ReparseDataBuffer));
 
-                if (reparseDataBuffer.ReparseTag != NativeMethods.IO_REPARSE_TAG_MOUNT_POINT)
+                if (reparseDataBuffer.ReparseTag != NativeMethods.IoReparseTagMountPoint)
                 {
                     return null;
                 }

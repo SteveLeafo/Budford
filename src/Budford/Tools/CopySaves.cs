@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Budford.Control;
 
@@ -10,7 +7,7 @@ namespace Budford.Tools
 {
     class CopySaves : Tool
     {
-        Model.Model model;
+        readonly Model.Model model;
 
         internal CopySaves(Model.Model modelIn) : base(modelIn)
         {
@@ -21,13 +18,9 @@ namespace Budford.Tools
         {
             foreach (var game in model.GameData)
             {
-                string folder = game.Value.Name.Replace(":", "_");
-                folder = game.Value.SaveDir;
-                string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
-
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    Budford.Model.InstalledVersion latest = null;
+                    Model.InstalledVersion latest = null;
                     FileInfo latestFile = null;
                     foreach (var version in model.Settings.InstalledVersions)
                     {
@@ -45,7 +38,7 @@ namespace Budford.Tools
                     }
                     if (latest != null)
                     {
-                        CopySaveFolder(game.Value, folder, saveFolder, latest);
+                        CopySaveFolder(game.Value, latest);
                     }
                 }
             }
@@ -57,27 +50,27 @@ namespace Budford.Tools
             if (Directory.Exists(directory.FullName))
             {
                 return directory.GetFiles()
-                    .Union(directory.GetDirectories().Select(d => GetNewestFile(d)))
+                    .Union(directory.GetDirectories().Select(GetNewestFile))
                     .OrderByDescending(f => (f == null ? DateTime.MinValue : f.LastWriteTime))
                     .FirstOrDefault();
             }
             return null;
         }
 
-        private void CopySaveFolder(Budford.Model.GameInformation game, string folder, string saveFolder, Budford.Model.InstalledVersion latest)
+        private void CopySaveFolder(Model.GameInformation game, Model.InstalledVersion latest)
         {
             DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(latest, game));
-            DirectoryInfo src_255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(latest, game));
+            DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(latest, game));
 
             DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
-            DirectoryInfo dest_255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
+            DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
 
             if (Directory.Exists(src.FullName))
             {
-                if (src.GetFiles().Any() || src.GetDirectories().Any() || (Directory.Exists(src_255.FullName) && (src_255.GetFiles().Any() || src_255.GetDirectories().Any())))
+                if (src.GetFiles().Any() || src.GetDirectories().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
                 {
                     Launcher.UpdateFolder(src, dest, true);
-                    Launcher.UpdateFolder(src_255, dest_255, true);
+                    Launcher.UpdateFolder(src255, dest255, true);
                 }
             }
         }

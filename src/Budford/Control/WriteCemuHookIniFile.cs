@@ -1,10 +1,6 @@
 ﻿using Budford.Model;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Budford.Control
 {
@@ -22,13 +18,13 @@ namespace Budford.Control
                 sw.WriteLine("[CPU]");
                 sw.WriteLine("customTimerMode = " + GetCustomTimerMode(gameInfo.CemuHookSetting.CustomTimerMode));
                 sw.WriteLine("customTimerMultiplier = " + GetCustomTimerMultiplier(gameInfo.CemuHookSetting.CustomTimerMultiplier));
-                sw.WriteLine("disableLZCNT = " + (gameInfo.CemuHookSetting.DisableLZCNT ? "true" : "false"));
-                sw.WriteLine("disableMOVBE =  " + (gameInfo.CemuHookSetting.DisableLZCNT ? "true" : "false"));
-                sw.WriteLine("disableAVX =  " + (gameInfo.CemuHookSetting.DisableLZCNT ? "true" : "false"));
+                sw.WriteLine("disableLZCNT = " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
+                sw.WriteLine("disableMOVBE =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
+                sw.WriteLine("disableAVX =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
                 sw.WriteLine("[Input]");
                 sw.WriteLine("motionSource = " + GetMotionSource(gameInfo.CemuHookSetting.MotionSource));
                 sw.WriteLine("[Debug]");
-                sw.WriteLine("mmTimerAccuracy = " + GetMMTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
+                sw.WriteLine("mmTimerAccuracy = " + GetMmTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
                 sw.WriteLine("[Graphics]");
                 sw.WriteLine("ignorePrecompiledShaderCache = " + (gameInfo.CemuHookSetting.IgnorePrecompiledShaderCache ? "true" : "false"));
             }
@@ -92,7 +88,7 @@ namespace Budford.Control
         /// </summary>
         /// <param name="mode"></param>
         /// <returns></returns>
-        static string GetMMTimerAccuracy(int mode)
+        static string GetMmTimerAccuracy(int mode)
         {
             switch (mode)
             {

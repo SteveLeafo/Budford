@@ -62,7 +62,7 @@ namespace Budford.Control
                     //model.Sa
                 }
 
-                if (FolderScanner.regions.TryGetValue(key.Substring(0, 4), out gd.Type))
+                if (FolderScanner.Regions.TryGetValue(key.Substring(0, 4), out gd.Type))
                 {
                     if (!model.GameData.ContainsKey(key))
                     {
@@ -78,7 +78,7 @@ namespace Budford.Control
                     }
                 }
             }
-            Persistence.PurgeGames(model);
+            PurgeGames(model);
         }
 
         /// <summary>

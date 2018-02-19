@@ -84,8 +84,8 @@ namespace Budford.View
             if (information.TitleId != "")
             {
                 listView1.Items.Clear();
-                information.GameSetting.graphicsPacks = new HashSet<GraphicsPack>(information.GameSetting.graphicsPacks.OrderBy(p => p.Folder));
-                foreach (var pack in information.GameSetting.graphicsPacks)
+                information.GameSetting.GraphicsPacks = new HashSet<GraphicsPack>(information.GameSetting.GraphicsPacks.OrderBy(p => p.Folder));
+                foreach (var pack in information.GameSetting.GraphicsPacks)
                 {
                     ListViewItem lvi = new ListViewItem();
                     lvi.SubItems.Add(pack.Title);
@@ -119,11 +119,11 @@ namespace Budford.View
 
             comboBox11.SelectedIndex = information.GameSetting.RenderUpsideDown;
             comboBox12.SelectedIndex = information.GameSetting.DisableAudio;
-            comboBox13.SelectedIndex = information.GameSetting.EnableBoTWCrashWorkaround;
-            comboBox14.SelectedIndex = information.GameSetting.FullSyncAtGX2DrawDone;
+            comboBox13.SelectedIndex = information.GameSetting.EnableBoTwCrashWorkaround;
+            comboBox14.SelectedIndex = information.GameSetting.FullSyncAtGx2DrawDone;
 
             comboBox15.SelectedIndex = information.GameSetting.AccaccurateShaderMul;
-            comboBox16.SelectedIndex = information.GameSetting.DisableGPUFence;
+            comboBox16.SelectedIndex = information.GameSetting.DisableGpuFence;
             comboBox17.SelectedIndex = information.GameSetting.SeparateGamePadView;
             comboBox18.SelectedIndex = information.GameSetting.EmulateSinglePrecision;
             comboBox29.SelectedIndex = information.GameSetting.UseRtdsc;
@@ -134,11 +134,11 @@ namespace Budford.View
 
             comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
             comboBox22.SelectedIndex = information.CemuHookSetting.CustomTimerMultiplier;
-            comboBox23.SelectedIndex = information.CemuHookSetting.DisableAVX ? 1 : 0;
-            comboBox24.SelectedIndex = information.CemuHookSetting.DisableLZCNT ? 1 : 0;
-            comboBox25.SelectedIndex = information.CemuHookSetting.DisableMOVBE ? 1 : 0;
+            comboBox23.SelectedIndex = information.CemuHookSetting.DisableAvx ? 1 : 0;
+            comboBox24.SelectedIndex = information.CemuHookSetting.DisableLzcnt ? 1 : 0;
+            comboBox25.SelectedIndex = information.CemuHookSetting.DisableMovbe ? 1 : 0;
             comboBox26.SelectedIndex = information.CemuHookSetting.MotionSource;
-            comboBox27.SelectedIndex = information.CemuHookSetting.MMTimerAccuracy;
+            comboBox27.SelectedIndex = information.CemuHookSetting.MmTimerAccuracy;
             comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
             numericUpDown1.Value = information.GameSetting.Fps;
@@ -185,11 +185,11 @@ namespace Budford.View
 
             information.GameSetting.RenderUpsideDown = (byte)comboBox11.SelectedIndex;
             information.GameSetting.DisableAudio = (byte)comboBox12.SelectedIndex;
-            information.GameSetting.EnableBoTWCrashWorkaround = (byte)comboBox13.SelectedIndex;
-            information.GameSetting.FullSyncAtGX2DrawDone = (byte)comboBox14.SelectedIndex;
+            information.GameSetting.EnableBoTwCrashWorkaround = (byte)comboBox13.SelectedIndex;
+            information.GameSetting.FullSyncAtGx2DrawDone = (byte)comboBox14.SelectedIndex;
 
             information.GameSetting.AccaccurateShaderMul = (byte)comboBox15.SelectedIndex;
-            information.GameSetting.DisableGPUFence = (byte)comboBox16.SelectedIndex;
+            information.GameSetting.DisableGpuFence = (byte)comboBox16.SelectedIndex;
             information.GameSetting.EmulateSinglePrecision = (byte)comboBox18.SelectedIndex;
             information.GameSetting.SeparateGamePadView = (byte)comboBox17.SelectedIndex;
             information.GameSetting.UseRtdsc = (byte)comboBox29.SelectedIndex;
@@ -200,11 +200,11 @@ namespace Budford.View
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;
-            information.CemuHookSetting.DisableAVX = comboBox23.SelectedIndex != 0;
-            information.CemuHookSetting.DisableLZCNT = comboBox24.SelectedIndex != 0;
-            information.CemuHookSetting.DisableMOVBE = comboBox25.SelectedIndex != 0;
+            information.CemuHookSetting.DisableAvx = comboBox23.SelectedIndex != 0;
+            information.CemuHookSetting.DisableLzcnt = comboBox24.SelectedIndex != 0;
+            information.CemuHookSetting.DisableMovbe = comboBox25.SelectedIndex != 0;
             information.CemuHookSetting.MotionSource = comboBox26.SelectedIndex;
-            information.CemuHookSetting.MMTimerAccuracy = comboBox27.SelectedIndex;
+            information.CemuHookSetting.MmTimerAccuracy = comboBox27.SelectedIndex;
             information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox28.SelectedIndex != 0;
 
             information.GameSetting.Fps = (int)numericUpDown1.Value;

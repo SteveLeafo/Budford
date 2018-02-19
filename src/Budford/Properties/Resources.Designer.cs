@@ -71,6 +71,34 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Latest version is already installed.
+        /// </summary>
+        internal static string CemuFeatures_DownloadLatestGraphicPack_Latest_version_is_already_installed {
+            get {
+                return ResourceManager.GetString("CemuFeatures_DownloadLatestGraphicPack_Latest_version_is_already_installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information....
+        /// </summary>
+        internal static string CemuFeatures_DownloadLatestVersion_Information___ {
+            get {
+                return ResourceManager.GetString("CemuFeatures_DownloadLatestVersion_Information___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The latest version of Cemu is already installed..
+        /// </summary>
+        internal static string CemuFeatures_DownloadLatestVersion_The_latest_version_of_Cemu_is_already_installed_ {
+            get {
+                return ResourceManager.GetString("CemuFeatures_DownloadLatestVersion_The_latest_version_of_Cemu_is_already_installe" +
+                        "d_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap eu_flag {
@@ -117,6 +145,15 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot; is corrupted.
+        /// </summary>
+        internal static string FileCache_fileCache_openExisting___0___is_corrupted {
+            get {
+                return ResourceManager.GetString("FileCache_fileCache_openExisting___0___is_corrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Click on OK to continue.
         /// </summary>
@@ -141,6 +178,15 @@ namespace Budford.Properties {
         internal static string FileManager_ImportShaderCache_Continue {
             get {
                 return ResourceManager.GetString("FileManager_ImportShaderCache_Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder doesn&apos;t exist: .
+        /// </summary>
+        internal static string FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__ {
+            get {
+                return ResourceManager.GetString("FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__", resourceCulture);
             }
         }
         
@@ -210,6 +256,97 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to V.
+        /// </summary>
+        internal static string FormAbout_FormAbout_V {
+            get {
+                return ResourceManager.GetString("FormAbout_FormAbout_V", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graphic Packs| *.zip;.
+        /// </summary>
+        internal static string FormEditInstalledVersions_importGraphicsPackToolStripMenuItem_Click_Graphic_Packs____zip_ {
+            get {
+                return ResourceManager.GetString("FormEditInstalledVersions_importGraphicsPackToolStripMenuItem_Click_Graphic_Packs" +
+                        "____zip_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello.
+        /// </summary>
+        internal static string FormMainWindow_mi_Click_Hello {
+            get {
+                return ResourceManager.GetString("FormMainWindow_mi_Click_Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently showing .
+        /// </summary>
+        internal static string FormMainWindow_PopulateListView_Currently_showing_ {
+            get {
+                return ResourceManager.GetString("FormMainWindow_PopulateListView_Currently_showing_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to                  .
+        /// </summary>
+        internal static string FormMainWindow_RefreshList__________________ {
+            get {
+                return ResourceManager.GetString("FormMainWindow_RefreshList__________________", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launching .
+        /// </summary>
+        internal static string FormMainWindow_snapshotsToolStripMenuItem_Click_Launching_ {
+            get {
+                return ResourceManager.GetString("FormMainWindow_snapshotsToolStripMenuItem_Click_Launching_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shader Cache Files| *.bin;.
+        /// </summary>
+        internal static string FormShaderMerger_openToolStripMenuItem_Click_Shader_Cache_Files____bin_ {
+            get {
+                return ResourceManager.GetString("FormShaderMerger_openToolStripMenuItem_Click_Shader_Cache_Files____bin_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shader Cache Files| *.bin;.
+        /// </summary>
+        internal static string FormShaderMerger_saveAsToolStripMenuItem_Click_Shader_Cache_Files____bin_ {
+            get {
+                return ResourceManager.GetString("FormShaderMerger_saveAsToolStripMenuItem_Click_Shader_Cache_Files____bin_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  new shaders.
+        /// </summary>
+        internal static string FormShaderMerger_UpdateListView__new_shaders {
+            get {
+                return ResourceManager.GetString("FormShaderMerger_UpdateListView__new_shaders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added .
+        /// </summary>
+        internal static string FormShaderMerger_UpdateListView_Added_ {
+            get {
+                return ResourceManager.GetString("FormShaderMerger_UpdateListView_Added_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  ....
         /// </summary>
         internal static string fScanRomFolder_fScanRomFolder_____ {
@@ -246,11 +383,30 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not find file.
+        /// </summary>
+        internal static string Launcher_LaunchCemu_Can_not_find_file {
+            get {
+                return ResourceManager.GetString("Launcher_LaunchCemu_Can_not_find_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cemu is not installed.
         /// </summary>
         internal static string Launcher_LaunchCemu_CEMU_is_not_installed {
             get {
                 return ResourceManager.GetString("Launcher_LaunchCemu_CEMU_is_not_installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are using a removable storage device check it is plugged in and try again.
+        /// </summary>
+        internal static string Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again {
+            get {
+                return ResourceManager.GetString("Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugg" +
+                        "ed_in_and_try_again", resourceCulture);
             }
         }
         
@@ -321,11 +477,97 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2005 Redistributable is installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_installed_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2005 Redistributable is not installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_not_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_not_installe" +
+                        "d_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2008 Redistributable is installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_installed_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2008 Redistributable is not installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_not_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_not_installe" +
+                        "d_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2010 Redistributable is installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_installed_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2010 Redistributable is not installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_not_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_not_installe" +
+                        "d_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2012 Redistributable is installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_installed_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2012 Redistributable is not installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_not_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_not_installe" +
+                        "d_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Visual C++ 2013 Redistributable is installed..
         /// </summary>
         internal static string WindowsOS_IsVC2013RedistInstalled_Visual_C___2013_Redistributable_is_installed_ {
             get {
                 return ResourceManager.GetString("WindowsOS_IsVC2013RedistInstalled_Visual_C___2013_Redistributable_is_installed_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual C++ 2013 Redistributable is not installed..
+        /// </summary>
+        internal static string WindowsOs_IsVc2013RedistInstalled_Visual_C___2013_Redistributable_is_not_installed_ {
+            get {
+                return ResourceManager.GetString("WindowsOs_IsVc2013RedistInstalled_Visual_C___2013_Redistributable_is_not_installe" +
+                        "d_", resourceCulture);
             }
         }
     }
