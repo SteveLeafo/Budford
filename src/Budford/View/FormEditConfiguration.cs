@@ -1,11 +1,10 @@
-﻿using Budford.Model;
-using System;
-using System.Windows.Forms;
-using System.ComponentModel;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.Windows.Forms;
+using Budford.Model;
 
-namespace Budford
+namespace Budford.View
 {
     public partial class FormEditConfiguration : Form
     {
@@ -14,12 +13,11 @@ namespace Budford
 
         readonly Settings settings;
 
-        List<string> removedFolders = new List<string>();
+        readonly List<string> removedFolders = new List<string>();
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="settingsIn"></param>
         public FormEditConfiguration(Model.Model modelIn, int modeIn)
         {
             InitializeComponent();
@@ -67,13 +65,13 @@ namespace Budford
                 case Settings.ConsoleRegionType.Auto:
                     comboBox1.SelectedIndex = 0;
                     break;
-                case Settings.ConsoleRegionType.JAP:
+                case Settings.ConsoleRegionType.Jap:
                     comboBox1.SelectedIndex = 1;
                     break;
-                case Settings.ConsoleRegionType.USA:
+                case Settings.ConsoleRegionType.Usa:
                     comboBox1.SelectedIndex = 2;
                     break;
-                case Settings.ConsoleRegionType.EUR:
+                case Settings.ConsoleRegionType.Eur:
                     comboBox1.SelectedIndex = 3;
                     break;
                 case Settings.ConsoleRegionType.China:
@@ -173,13 +171,13 @@ namespace Budford
                     settings.ConsoleRegion = Settings.ConsoleRegionType.Auto;
                     break;
                 case 1:
-                    settings.ConsoleRegion = Settings.ConsoleRegionType.JAP;
+                    settings.ConsoleRegion = Settings.ConsoleRegionType.Jap;
                     break;
                 case 2:
-                    settings.ConsoleRegion = Settings.ConsoleRegionType.USA;
+                    settings.ConsoleRegion = Settings.ConsoleRegionType.Usa;
                     break;
                 case 3:
-                    settings.ConsoleRegion = Settings.ConsoleRegionType.EUR;
+                    settings.ConsoleRegion = Settings.ConsoleRegionType.Eur;
                     break;
                 case 4:
                     settings.ConsoleRegion = Settings.ConsoleRegionType.China;

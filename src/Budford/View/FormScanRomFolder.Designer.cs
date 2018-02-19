@@ -1,4 +1,4 @@
-﻿namespace Budford
+﻿namespace Budford.View
 {
     partial class FormScanRomFolder
     {

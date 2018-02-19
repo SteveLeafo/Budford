@@ -1,16 +1,16 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.IO;
-using System.Xml.Linq;
-using Budford.Model;
-using Budford.Utilities;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Linq;
 using Budford.Control;
+using Budford.Model;
 using Budford.Properties;
+using Budford.Utilities;
 
-namespace Budford
+namespace Budford.View
 {
     public partial class FormScanRomFolder : Form
     {

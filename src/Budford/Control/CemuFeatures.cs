@@ -8,6 +8,9 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Budford.Properties;
+using Budford.View;
+using Settings = Budford.Model.Settings;
 
 namespace Budford.Control
 {
@@ -171,6 +174,7 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="maxVersion"></param>
         /// <returns></returns>
         internal static InstalledVersion GetLatestVersion(Model.Model model, int maxVersion = int.MaxValue)
         {
@@ -215,16 +219,16 @@ namespace Budford.Control
                     if (line.Contains("name=\"download\""))
                     {
                         string[] toks = line.Split('=');
-                        Budford.View.FormEditInstalledVersions.uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
-                        Budford.View.FormEditInstalledVersions.filenames[0] = Budford.View.FormEditInstalledVersions.uris[0].Substring(1 + Budford.View.FormEditInstalledVersions.uris[0].LastIndexOf('/'));
-                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(Budford.View.FormEditInstalledVersions.uris[0]));
+                        View.FormEditInstalledVersions.Uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
+                        View.FormEditInstalledVersions.Filenames[0] = View.FormEditInstalledVersions.Uris[0].Substring(1 + View.FormEditInstalledVersions.Uris[0].LastIndexOf('/'));
+                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(View.FormEditInstalledVersions.Uris[0]));
                         if (!IsInstalled(currentVersion, settings))
                         {
                             return true;
                         }
                         else
                         {
-                            MessageBox.Show("The latest version of Cemu is already installed.", "Information...");
+                            MessageBox.Show(Resources.CemuFeatures_DownloadLatestVersion_The_latest_version_of_Cemu_is_already_installed_, Resources.CemuFeatures_DownloadLatestVersion_Information___);
                             return false;
                         }
                     }
@@ -237,6 +241,7 @@ namespace Budford.Control
         /// Returns true if requested version is installed
         /// </summary>
         /// <param name="versionNo"></param>
+        /// <param name="settings"></param>
         /// <returns></returns>
         static bool IsInstalled(int versionNo, Settings settings)
         {
@@ -375,7 +380,6 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="v"></param>
         internal static void CopyLatestControllerProfiles(Model.Model model, InstalledVersion installedVersion)
         {
             int latestVersionWithProfiles = -1;
@@ -500,24 +504,28 @@ namespace Budford.Control
 
             // For that you will need to add reference to System.Xml and System.Xml.Linq
             var root = XElement.Load(jsonReader);
-            string uri = root.Elements("assets").First().Elements().First().Element("browser_download_url").Value;
-
-            string packName = Path.GetFileNameWithoutExtension(uri);
-
-            if (!IsGraphicPackInstalled(packName))
+            var xElement = root.Elements("assets").First().Elements().First().Element("browser_download_url");
+            if (xElement != null)
             {
-                if (File.Exists("tempGraphicPack.zip"))
+                string uri = xElement.Value;
+
+                string packName = Path.GetFileNameWithoutExtension(uri);
+
+                if (!IsGraphicPackInstalled(packName))
                 {
-                    File.Delete("tempGraphicPack.zip");
+                    if (File.Exists("tempGraphicPack.zip"))
+                    {
+                        File.Delete("tempGraphicPack.zip");
+                    }
+                    var unpacker = new Unpacker(parent);
+                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");                    
                 }
-                var unpacker = new Unpacker(parent);
-                unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");                    
-            }
-            else
-            {
-                if (showMessage)
+                else
                 {
-                    MessageBox.Show("Latest version is already installed");
+                    if (showMessage)
+                    {
+                        MessageBox.Show(Resources.CemuFeatures_DownloadLatestGraphicPack_Latest_version_is_already_installed);
+                    }
                 }
             }
         }

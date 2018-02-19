@@ -32,47 +32,47 @@ namespace Budford.Control
         /// <summary>
         /// The file or directory is not a reparse point.
         /// </summary>
-        internal const int ERROR_NOT_A_REPARSE_POINT = 4390;
+        internal const int ErrorNotAReparsePoint = 4390;
 
         /// <summary>
         /// The reparse point attribute cannot be set because it conflicts with an existing attribute.
         /// </summary>
-        internal const int ERROR_REPARSE_ATTRIBUTE_CONFLICT = 4391;
+        internal const int ErrorReparseAttributeConflict = 4391;
 
         /// <summary>
         /// The data present in the reparse point buffer is invalid.
         /// </summary>
-        internal const int ERROR_INVALID_REPARSE_DATA = 4392;
+        internal const int ErrorInvalidReparseData = 4392;
 
         /// <summary>
         /// The tag present in the reparse point buffer is invalid.
         /// </summary>
-        internal const int ERROR_REPARSE_TAG_INVALID = 4393;
+        internal const int ErrorReparseTagInvalid = 4393;
 
         /// <summary>
         /// There is a mismatch between the tag specified in the request and the tag present in the reparse point.
         /// </summary>
-        internal const int ERROR_REPARSE_TAG_MISMATCH = 4394;
+        internal const int ErrorReparseTagMismatch = 4394;
 
         /// <summary>
         /// Command to set the reparse point data block.
         /// </summary>
-        internal const int FSCTL_SET_REPARSE_POINT = 0x000900A4;
+        internal const int FsctlSetReparsePoint = 0x000900A4;
 
         /// <summary>
         /// Command to get the reparse point data block.
         /// </summary>
-        internal const int FSCTL_GET_REPARSE_POINT = 0x000900A8;
+        internal const int FsctlGetReparsePoint = 0x000900A8;
 
         /// <summary>
         /// Command to delete the reparse point data base.
         /// </summary>
-        internal const int FSCTL_DELETE_REPARSE_POINT = 0x000900AC;
+        internal const int FsctlDeleteReparsePoint = 0x000900AC;
 
         /// <summary>
         /// Reparse point tag used to identify mount points and junction points.
         /// </summary>
-        internal const uint IO_REPARSE_TAG_MOUNT_POINT = 0xA0000003;
+        internal const uint IoReparseTagMountPoint = 0xA0000003;
 
         /// <summary>
         /// This prefix indicates to NTFS that the path is to be treated as a non-interpreted
@@ -124,7 +124,7 @@ namespace Budford.Control
             Offline = 0x00001000,
             NotContentIndexed = 0x00002000,
             Encrypted = 0x00004000,
-            Write_Through = 0x80000000,
+            WriteThrough = 0x80000000,
             Overlapped = 0x40000000,
             NoBuffering = 0x20000000,
             RandomAccess = 0x10000000,
@@ -189,8 +189,8 @@ namespace Budford.Control
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         internal static extern bool DeviceIoControl(IntPtr hDevice, uint dwIoControlCode,
-            IntPtr InBuffer, int nInBufferSize,
-            IntPtr OutBuffer, int nOutBufferSize,
+            IntPtr inBuffer, int nInBufferSize,
+            IntPtr outBuffer, int nOutBufferSize,
             out int pBytesReturned, IntPtr lpOverlapped);
 
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]

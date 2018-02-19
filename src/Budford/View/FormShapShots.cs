@@ -1,27 +1,16 @@
 ﻿using Budford.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Budford.View
 {
     public partial class FormShapShots : Form
     {
-        Model.Model model;
-        GameInformation gameInformation;
-
         internal string LaunchSnapShot = "";
 
         public FormShapShots(Model.Model modelIn, GameInformation gameInformationIn)
         {
-            model = modelIn;
-            gameInformation = gameInformationIn;
+            var model = modelIn;
 
             InitializeComponent();
 
@@ -29,7 +18,7 @@ namespace Budford.View
             {
                 if (snapShot.User == model.CurrentUser)
                 {
-                    if (snapShot.GameId == gameInformation.SaveDir)
+                    if (snapShot.GameId == gameInformationIn.SaveDir)
                     {
                         ListViewItem lvi = new ListViewItem(snapShot.Folder);
                         lvi.SubItems.Add(snapShot.Comment);

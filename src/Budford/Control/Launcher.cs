@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Budford.Properties;
 using System.Threading;
 using System.Runtime.InteropServices;
+using Budford.View;
 
 namespace Budford.Control
 {
@@ -19,7 +20,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        internal Model.Model model;
+        internal Model.Model Model;
 
         /// <summary>
         /// 
@@ -34,12 +35,12 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        GameInformation runningGame = null;
+        GameInformation runningGame;
 
         /// <summary>
         /// 
         /// </summary>
-        static InstalledVersion runningVersion = null;
+        static InstalledVersion runningVersion;
 
         static string cemu = "";
         static string logfile = "";
@@ -76,24 +77,26 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="parentIn"></param>
         /// <param name="modelIn"></param>
         /// <param name="game"></param>
         /// <param name="getSaveDir"></param>
-        /// <param name="cemu_only"></param>
-        internal void LaunchCemu(Form parent, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemu_only = false, bool shiftUp = true)
+        /// <param name="cemuOnly"></param>
+        /// <param name="shiftUp"></param>
+        internal void LaunchCemu(Form parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true)
         {
             if (runningVersion != null)
             {
                 return;
             }
 
-            model = modelIn;
+            Model = modelIn;
 
             if (game != null &&  !game.Exists)
             {
-                if (!parent.InvokeRequired)
+                if (!parentIn.InvokeRequired)
                 {
-                    MessageBox.Show(parent, "If you are using a removable storage device check it is plugged in and try again", "Can not find file");
+                    MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again, Resources.Launcher_LaunchCemu_Can_not_find_file);
                 }
                 return;
             }            
@@ -119,10 +122,13 @@ namespace Budford.Control
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo();
 
-                PopulateStartInfo(game, getSaveDir, cemu_only, "CEMU.EXE", start, shiftUp);
+                PopulateStartInfo(game, getSaveDir, cemuOnly, "CEMU.EXE", start, shiftUp);
 
                 // Required since 1.11.2
-                start.WorkingDirectory = runningVersion.Folder;
+                if (runningVersion != null)
+                {
+                    start.WorkingDirectory = runningVersion.Folder;                    
+                }
 
                 // Run the external process & wait for it to finish
                 var parentProcess = Process.GetCurrentProcess();
@@ -130,38 +136,38 @@ namespace Budford.Control
 
                 parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
 
-
-                string path = Directory.GetCurrentDirectory();
-                
                 runningProcess = Process.Start(start);
-                runningProcess.EnableRaisingEvents = true;
-                runningProcess.Exited += new EventHandler(proc_Exited);
-
-                runningGame = game;
-
-                if (parent != null)
-                {
-                    NativeMethods.SetParent(runningProcess.Handle, parent.Handle);
-                }
-                parentProcess.PriorityClass = original;
-
-                // Allow the process to finish starting.
                 if (runningProcess != null)
                 {
-                    try
+                    runningProcess.EnableRaisingEvents = true;
+                    runningProcess.Exited += proc_Exited;
+
+                    runningGame = game;
+
+                    if (parentIn != null)
                     {
-                        runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+                        NativeMethods.SetParent(runningProcess.Handle, parentIn.Handle);
                     }
-                    catch (Exception)
+                    parentProcess.PriorityClass = original;
+
+                    // Allow the process to finish starting.
+                    if (runningProcess != null)
                     {
-                        // Probably not enough permissions...
+                        try
+                        {
+                            runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+                        }
+                        catch (Exception)
+                        {
+                            // Probably not enough permissions...
+                        }
+                        WaitForProcess(modelIn, game, getSaveDir, cemuOnly);
                     }
-                    WaitForProcess(modelIn, game, getSaveDir, cemu_only, logfile);
                 }
             }
             else
             {
-                MessageBox.Show(parent, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
+                MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
             }
         }
 
@@ -186,10 +192,10 @@ namespace Budford.Control
         {
             if (runningVersion == null)
             {
-                SetCemuVersion(model, game);
+                SetCemuVersion(Model, game);
             }
 
-            if (runningVersion.VersionNumber >= 170)
+            if (runningVersion != null && runningVersion.VersionNumber >= 170)
             {
                 if (!game.SaveDir.StartsWith("??"))
                 {
@@ -214,7 +220,7 @@ namespace Budford.Control
         {
             if (!game.SaveDir.StartsWith("??"))
             {
-                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, game, ""));
                 DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion,game));
                 UpdateFolder(src, dest, true);
 
@@ -228,7 +234,8 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="src"></param>
-        /// <param name="dest"></param>    
+        /// <param name="dest"></param>
+        /// <param name="smashIt"></param>    
         internal static void UpdateFolder(DirectoryInfo src, DirectoryInfo dest, bool smashIt = false)
         {
             if (smashIt)
@@ -255,9 +262,8 @@ namespace Budford.Control
         /// <param name="model"></param>
         /// <param name="game"></param>
         /// <param name="getSaveDir"></param>
-        /// <param name="cemu_only"></param>
-        /// <param name="logfile"></param>
-        private void WaitForProcess(Model.Model model, GameInformation game, bool getSaveDir, bool cemu_only, string logfile)
+        /// <param name="cemuOnly"></param>
+        private void WaitForProcess(Model.Model model, GameInformation game, bool getSaveDir, bool cemuOnly)
         {
             try
             {
@@ -279,17 +285,17 @@ namespace Budford.Control
 
             if (getSaveDir)
             {
-                ExtractSaveDirName(game, logfile);
+                ExtractSaveDirName(game);
             }
             else
             {
                 ThreadPool.QueueUserWorkItem(delegate
                 {
-                    ExtractSaveDirName(game, logfile);
+                    ExtractSaveDirName(game);
                 });
             }
 
-            if (getSaveDir && !cemu_only)
+            if (getSaveDir && !cemuOnly)
             {
                 if (!runningProcess.HasExited)
                 {
@@ -336,7 +342,7 @@ namespace Budford.Control
                                 string folder = Path.GetDirectoryName(destFile.FullName);
                                 if (!Directory.Exists(folder))
                                 {
-                                    Directory.CreateDirectory(folder);
+                                    if (folder != null) Directory.CreateDirectory(folder);
                                 }
                                 File.Copy(srcFile.FullName, destFile.FullName, true);
                             }
@@ -344,24 +350,24 @@ namespace Budford.Control
 
                         // Copy saves
                         DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, runningGame));
-                        DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, runningGame, ""));
-                        DirectoryInfo src_255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
-                        DirectoryInfo dest_255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(runningGame, ""));
+                        DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, runningGame, ""));
+                        DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
+                        DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(runningGame, ""));
                         if (Directory.Exists(src.FullName))
                         {
-                            if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src_255.FullName) && (src_255.GetFiles().Any() || src_255.GetDirectories().Any())))
+                            if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
                             {
                                 if (!Directory.Exists(dest.FullName))
                                 {
                                     dest.Create();
                                 }
-                                if (!Directory.Exists(dest_255.FullName))
+                                if (!Directory.Exists(dest255.FullName))
                                 {
-                                    dest_255.Create();
+                                    dest255.Create();
                                 }
 
                                 FileManager.CopyFilesRecursively(src, dest, false, true);
-                                FileManager.CopyFilesRecursively(src_255, dest_255, false, true);
+                                FileManager.CopyFilesRecursively(src255, dest255, false, true);
                             }
                         }
                     }
@@ -382,19 +388,20 @@ namespace Budford.Control
         /// </summary>
         /// <param name="game"></param>
         /// <param name="getSaveDir"></param>
-        /// <param name="cemu_only"></param>
-        /// <param name="cemu"></param>
+        /// <param name="cemuOnly"></param>
+        /// <param name="cemuIn"></param>
         /// <param name="start"></param>
-        private void PopulateStartInfo(GameInformation game, bool getSaveDir, bool cemu_only, string cemu, ProcessStartInfo start, bool shiftUp)
+        /// <param name="shiftUp"></param>
+        private void PopulateStartInfo(GameInformation game, bool getSaveDir, bool cemuOnly, string cemuIn, ProcessStartInfo start, bool shiftUp)
         {
             // Enter in the command line arguments, everything you would enter after the executable name itself
-            if (!cemu_only)
+            if (!cemuOnly)
             {
                 SetGameLaunchParameters(game, getSaveDir, start, shiftUp);
             }
 
             // Enter the executable to run, including the complete path
-            start.FileName = cemu;
+            start.FileName = cemuIn;
 
             // Do you want to show a console window?
             start.CreateNoWindow = true;
@@ -415,6 +422,7 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="getSaveDir"></param>
         /// <param name="start"></param>
+        /// <param name="shiftUp"></param>
         private static void SetGameLaunchParameters(GameInformation game, bool getSaveDir, ProcessStartInfo start, bool shiftUp = true)
         {
             if (getSaveDir)
@@ -457,6 +465,7 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="version"></param>
         private static void DeleteShaderCacheIfRequired(Model.Model model, InstalledVersion version)
         {
             if (model.Settings.DisableShaderCache)
@@ -478,14 +487,14 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="logfile"></param>
-        private static void DeleteLogFile(Model.Model model, string logfile)
+        /// <param name="logfileIn"></param>
+        private static void DeleteLogFile(Model.Model model, string logfileIn)
         {
             try
             {
-                if (File.Exists(logfile))
+                if (File.Exists(logfileIn))
                 {
-                    File.Delete(logfile);
+                    File.Delete(logfileIn);
                 }
             }
             catch (Exception ex)
@@ -499,8 +508,6 @@ namespace Budford.Control
         /// </summary>
         /// <param name="model"></param>
         /// <param name="game"></param>
-        /// <param name="cemu"></param>
-        /// <param name="logfile"></param>
         internal static void SetCemuVersion(Model.Model model, GameInformation game)
         {
             if (game != null)
@@ -526,15 +533,15 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cemu"></param>
-        /// <param name="logfile"></param>
+        /// <param name="cemuIn"></param>
+        /// <param name="logfileIn"></param>
         /// <param name="version"></param>
-        private static void PopulateFromVersion(ref string cemu, ref string logfile, InstalledVersion version)
+        private static void PopulateFromVersion(ref string cemuIn, ref string logfileIn, InstalledVersion version)
         {
             if (version != null)
             {
-                cemu = version.Folder + "\\cemu.exe";
-                logfile = version.Folder + "\\log.txt";
+                cemuIn = version.Folder + "\\cemuIn.exe";
+                logfileIn = version.Folder + "\\log.txt";
             }
         }
 
@@ -543,16 +550,17 @@ namespace Budford.Control
         /// </summary>
         /// <param name="model"></param>
         /// <param name="fileName"></param>
+        /// <param name="forceFullScreen"></param>
         internal void LaunchRpx(Model.Model model, string fileName, bool forceFullScreen = false)
         {
-            string cemu = "";
+            string cemuExe = "";
             var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
             if (latest != null)
             {
-                cemu = latest.Folder + "\\cemu.exe";
+                cemuExe = latest.Folder + "\\cemuIn.exe";
             }
 
-            if (File.Exists(cemu))
+            if (File.Exists(cemuExe))
             {
                 if (model.Settings.DisableShaderCache)
                 {
@@ -568,17 +576,14 @@ namespace Budford.Control
                     }
                 }
 
-                GameSettings setting = null;
-                GameInformation information = null;
-
-                CemuSettings cs = new CemuSettings(model, setting, information);
+                CemuSettings cs = new CemuSettings(model, null, null);
                 cs.WriteSettingsBinFile();
 
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo
                 {
                     Arguments = forceFullScreen ? "-f -g \"" + fileName + "\"" : "-g \"" + fileName + "\"",
-                    FileName = cemu,
+                    FileName = cemuExe,
                     CreateNoWindow = true
                 };
 
@@ -595,8 +600,7 @@ namespace Budford.Control
         /// Launches CEMU and tries to extract the SaveDir from the windows title
         /// </summary>
         /// <param name="game"></param>
-        /// <param name="logFile"></param>
-        private void ExtractSaveDirName(GameInformation game, string logFile)
+        private void ExtractSaveDirName(GameInformation game)
         {
             int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
             int c = 0;
@@ -604,8 +608,8 @@ namespace Budford.Control
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(100);
-                    System.Threading.Thread.Sleep(100);
+                    Thread.Sleep(100);
+                    Thread.Sleep(100);
                     if (!runningProcess.HasExited)
                     {
                         runningProcess.Refresh();
@@ -619,7 +623,7 @@ namespace Budford.Control
                 }
                 catch (Exception ex)
                 {
-                    parent.model.Errors.Add(ex.Message);
+                    parent.Model.Errors.Add(ex.Message);
                     break;
                 }
             }
@@ -628,17 +632,17 @@ namespace Budford.Control
             {
                 switch (game.GameSetting.CpuMode)
                 {
-                    case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(model.Settings.DualCorePriority);
+                    case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
                         break;
-                    case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(model.Settings.TripleCorePriority);
+                    case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
                         break;
-                    default: runningProcess.PriorityClass = GetProcessPriority(model.Settings.SingleCorePriority);
+                    default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                parent.model.Errors.Add(ex.Message);
+                parent.Model.Errors.Add(ex.Message);
             }
 
             try
@@ -652,33 +656,8 @@ namespace Budford.Control
             }
             catch (Exception ex)
             {
-                parent.model.Errors.Add(ex.Message);
+                parent.Model.Errors.Add(ex.Message);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="logFile"></param>
-        /// <returns></returns>
-        private string ExtractSaveDirFromLogfile(string logFile)
-        {
-            System.Threading.Thread.Sleep(1200);
-            var fs = new FileStream(logFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using (StreamReader sr = new StreamReader(fs))
-            {
-                string[] lines = sr.ReadToEnd().Replace("\r", "").Split('\n');
-                foreach (var line in lines)
-                {
-                    if (line.Contains("saveDir and shaderCache name"))
-                    {
-                        int col = line.LastIndexOf(':');
-                        string saveDir = line.Substring(col + 1);
-                        return saveDir;
-                    }
-                }
-            }
-            return "??";
         }
 
         /// <summary>

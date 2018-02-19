@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Budford.Control;
 using Budford.Model;
-using Budford.View;
-using System.Diagnostics;
 using Budford.Properties;
-using Budford.Utilities;
 using Budford.Tools;
-using System.ComponentModel;
+using Budford.Utilities;
 
-namespace Budford
+namespace Budford.View
 {
     public partial class FormMainWindow : Form
     {
         // All of our data...
-        internal readonly Model.Model model;
+        internal readonly Model.Model Model;
 
         // For downloading and extracing.
         readonly Unpacker unpacker;
@@ -30,11 +28,11 @@ namespace Budford
         readonly FileManager fileManager;
 
         // Used for column sorting when clicking on a header
-        private ListViewColumnSorter lvwColumnSorter;
+        private readonly ListViewColumnSorter lvwColumnSorter;
 
         static InstalledVersion iv1;
 
-        bool comments = false;
+        readonly bool comments = false;
 
         /// <summary>
         /// 
@@ -43,7 +41,7 @@ namespace Budford
         {
             InitializeComponent();
 
-            UsbNotification.RegisterUsbDeviceNotification(this.Handle);
+            UsbNotification.RegisterUsbDeviceNotification(Handle);
 
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford"))
             {
@@ -56,52 +54,52 @@ namespace Budford
                     File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml", false);
                 }
             }
-            model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
+            Model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
            
 
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
-            fileManager = new FileManager(model);
+            fileManager = new FileManager(Model);
 
-            if (model.Settings.ScanGameFoldersOnStart)
+            if (Model.Settings.ScanGameFoldersOnStart)
             {
-                foreach (var folder in model.Settings.RomFolders)
+                foreach (var folder in Model.Settings.RomFolders)
                 {
-                    using (FormScanRomFolder scanner = new FormScanRomFolder(folder, model.GameData))
+                    using (FormScanRomFolder scanner = new FormScanRomFolder(folder, Model.GameData))
                     {
                         scanner.ShowDialog(this);
                     }
                 }
             }
 
-            model.OldVersions.Clear();
+            Model.OldVersions.Clear();
 
 
-            if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+            if (Model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
             {
                 DownloadLatestGraphicsPack(false);
             }
 
-            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision), model.GraphicsPacks);
+            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
 
-            Persistence.LoadFromXml(model.OldVersions);
+            Persistence.LoadFromXml(Model.OldVersions);
 
-            fileManager.InitialiseFolderStructure(model);
+            fileManager.InitialiseFolderStructure(Model);
 
-            FolderScanner.AddGraphicsPacksToGames(model);
+            FolderScanner.AddGraphicsPacksToGames(Model);
 
             NativeMethods.SurpressOsErrors();
 
-            if (model.Users.Count == 0)
+            if (Model.Users.Count == 0)
             {
-                model.Users.Add(new User() { Name = "Default", Image = "default.png" });
-                model.CurrentUser = "Default";
+                Model.Users.Add(new User() { Name = "Default", Image = "default.png" });
+                Model.CurrentUser = "Default";
             }
 
-            var firstOrDefault = model.Users.FirstOrDefault(u => u.Name == model.CurrentUser);
+            var firstOrDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
             if (firstOrDefault != null && File.Exists("Users\\" + firstOrDefault.Image))
             {
-                var orDefault = model.Users.FirstOrDefault(u => u.Name == model.CurrentUser);
+                var orDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
                 if (orDefault != null)
                 {
                     using (FileStream stream = new FileStream("Users\\" + orDefault.Image, FileMode.Open, FileAccess.Read))
@@ -110,20 +108,20 @@ namespace Budford
                     }
                 }
             }
-            Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + model.CurrentUser;
+            Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
 
             AddUserMenuItems();
             SetupShowRegionMenuItems();
 
-            showStatusToolStripMenuItem1.Checked = model.Settings.ShowStausBar;
-            statusStrip1.Visible = model.Settings.ShowStausBar;
-            toolStrip1.Visible = model.Settings.ShowToolBar;
-            pictureBox1.Visible = model.Settings.ShowToolBar;
-            showToolbarToolStripMenuItem.Checked = model.Settings.ShowToolBar;
+            showStatusToolStripMenuItem1.Checked = Model.Settings.ShowStausBar;
+            statusStrip1.Visible = Model.Settings.ShowStausBar;
+            toolStrip1.Visible = Model.Settings.ShowToolBar;
+            pictureBox1.Visible = Model.Settings.ShowToolBar;
+            showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
             listView1.KeyDown += listView1_KeyDown;
             //listView1.MouseDown += listView1_MouseDown;
 
-            if (model.Settings.CurrentView == "Detailed")
+            if (Model.Settings.CurrentView == "Detailed")
             {
                 detailsToolStripMenuItem_Click(null, null);
             }
@@ -134,44 +132,21 @@ namespace Budford
 
             // Create an instance of a ListView column sorter and assign it 
             // to the ListView control.
-            lvwColumnSorter = new ListViewColumnSorter();
-            lvwColumnSorter.ColumnToSort = -1;
-            this.listView1.ListViewItemSorter = lvwColumnSorter;
+            lvwColumnSorter = new ListViewColumnSorter {ColumnToSort = -1};
+            listView1.ListViewItemSorter = lvwColumnSorter;
 
             listView1.DoubleBuffered(true);
             pictureBox1.DoubleBuffered(true);
-            this.DoubleBuffered = true;
+            DoubleBuffered = true;
             listView1.DrawColumnHeader += ListView1_DrawColumnHeader;
             listView1.DrawSubItem += ListView1_DrawSubItem;
             listView1.ColumnClick += ListView1_ColumnClick;
 
-            ListView1_ColumnClick(this, new ColumnClickEventArgs(model.Settings.CurrentSortColumn));
-            if (model.Settings.CurrentSortDirection == 1)
+            ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
+            if (Model.Settings.CurrentSortDirection == 1)
             {
-                ListView1_ColumnClick(this, new ColumnClickEventArgs(model.Settings.CurrentSortColumn));
+                ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
             }
-        }
-
-        void listView1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                contextMenuStrip2.Items.Clear();
-                var mi = new ToolStripMenuItem("C:\\temp");
-                // handle menu item click event here [as required]
-                mi.Click += mi_Click;
-                contextMenuStrip2.Items.Add(mi);
-                //var bounds = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-                if (sender != null)
-                {
-                    contextMenuStrip2.Show(sender as ListView, new Point(e.X, e.Y));
-                }
-            }
-        }
-
-        void mi_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hello");
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -182,11 +157,11 @@ namespace Budford
             {
                 if (listView1.SelectedItems.Count == 1)
                 {
-                    if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                    if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                     {
-                        GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                        model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                        launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                        GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                        Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                        launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
                         e.Handled = true;
                     }
                 }
@@ -240,11 +215,11 @@ namespace Budford
                 }
             }
 
-            model.Settings.CurrentSortColumn = e.Column;
-            model.Settings.CurrentSortDirection = lvwColumnSorter.OrderOfSort == SortOrder.Ascending ? 0 : 1;
+            Model.Settings.CurrentSortColumn = e.Column;
+            Model.Settings.CurrentSortDirection = lvwColumnSorter.OrderOfSort == SortOrder.Ascending ? 0 : 1;
 
             // Perform the sort with these new sort options.
-            this.listView1.Sort();
+            listView1.Sort();
 
             for (int i = 0; i < listView1.Items.Count; i++)
             {
@@ -376,57 +351,57 @@ namespace Budford
         /// </summary>
         private void SetupShowRegionMenuItems()
         {
-            usaToolStripMenuItem.Checked = model.Filters.ViewRegionUsa;
+            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
             usaToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            europeToolStripMenuItem.Checked = model.Filters.ViewRegionEur;
+            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
             europeToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            japanToolStripMenuItem .Checked = model.Filters.ViewRegionJap;
+            japanToolStripMenuItem .Checked = Model.Filters.ViewRegionJap;
             japanToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            wiiUToolStripMenuItem.Checked = model.Filters.ViewTypeWiiU;
+            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
             wiiUToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            eShopToolStripMenuItem.Checked = model.Filters.ViewTypeEshop;
+            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
             eShopToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            channelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel;
+            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
             channelToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc;
+            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
             virtualConsoleToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5;
+            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
             rating5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4;
+            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
             rating4ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3;
+            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
             rating3ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2;
+            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
             rating2ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1;
+            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
             rating1ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            perfectToolStripMenuItem.Checked = model.Filters.ViewStatusPerfect;
+            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
             perfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            playableToolStripMenuItem.Checked = model.Filters.ViewStatusPlayable;
+            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
             playableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            runsToolStripMenuItem.Checked = model.Filters.ViewStatusRuns;
+            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
             runsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            loadsToolStripMenuItem.Checked = model.Filters.ViewStatusLoads;
+            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
             loadsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            unplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable;
+            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
             unplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            notSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet;
+            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
             notSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            officiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect;
+            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
             officiallyPerfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable;
+            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
             officiallyPlayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns;
+            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
             officiallyRunsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyLoadsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusLoads;
+            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
             officiallyLoadsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyUnplayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusUnplayable;
+            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
             officiallyUnplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyNotSetToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusNotSet;
+            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;
             officiallyNotSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;           
 
         }
@@ -440,34 +415,34 @@ namespace Budford
         {
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
 
-            model.Filters.ViewRegionUsa = usaToolStripMenuItem.Checked;
-            model.Filters.ViewRegionEur = europeToolStripMenuItem.Checked;
-            model.Filters.ViewRegionJap = japanToolStripMenuItem.Checked;
+            Model.Filters.ViewRegionUsa = usaToolStripMenuItem.Checked;
+            Model.Filters.ViewRegionEur = europeToolStripMenuItem.Checked;
+            Model.Filters.ViewRegionJap = japanToolStripMenuItem.Checked;
 
-            model.Filters.ViewTypeWiiU = wiiUToolStripMenuItem.Checked;
-            model.Filters.ViewTypeEshop = eShopToolStripMenuItem.Checked;
-            model.Filters.ViewTypeChannel = channelToolStripMenuItem.Checked;
-            model.Filters.ViewTypeVc = virtualConsoleToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeWiiU = wiiUToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeEshop = eShopToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeChannel = channelToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeVc = virtualConsoleToolStripMenuItem.Checked;
 
-            model.Filters.ViewRating5 = rating5ToolStripMenuItem.Checked;
-            model.Filters.ViewRating4 = rating4ToolStripMenuItem.Checked;
-            model.Filters.ViewRating3 = rating3ToolStripMenuItem.Checked;
-            model.Filters.ViewRating2 = rating2ToolStripMenuItem.Checked;
-            model.Filters.ViewRating1 = rating1ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating5 = rating5ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating4 = rating4ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating3 = rating3ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating2 = rating2ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating1 = rating1ToolStripMenuItem.Checked;
 
-            model.Filters.ViewStatusPerfect = perfectToolStripMenuItem.Checked;
-            model.Filters.ViewStatusPlayable = playableToolStripMenuItem.Checked;
-            model.Filters.ViewStatusRuns = runsToolStripMenuItem.Checked;
-            model.Filters.ViewStatusLoads = loadsToolStripMenuItem.Checked;
-            model.Filters.ViewStatusUnplayable = unplayableToolStripMenuItem.Checked;
-            model.Filters.ViewStatusNotSet = notSetToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusPerfect = perfectToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusPlayable = playableToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusRuns = runsToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusLoads = loadsToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusUnplayable = unplayableToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusNotSet = notSetToolStripMenuItem.Checked;
 
-            model.Filters.ViewOfficialStatusPerfect = officiallyPerfectToolStripMenuItem.Checked;
-            model.Filters.ViewOfficialStatusPlayable = officiallyPlayableToolStripMenuItem.Checked;
-            model.Filters.ViewOfficialStatusRuns = officiallyRunsToolStripMenuItem.Checked;
-            model.Filters.ViewOfficialStatusLoads = officiallyLoadsToolStripMenuItem.Checked;
-            model.Filters.ViewOfficialStatusUnplayable = officiallyUnplayableToolStripMenuItem.Checked;
-            model.Filters.ViewOfficialStatusNotSet = officiallyNotSetToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusPerfect = officiallyPerfectToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusPlayable = officiallyPlayableToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusRuns = officiallyRunsToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusLoads = officiallyLoadsToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusUnplayable = officiallyUnplayableToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusNotSet = officiallyNotSetToolStripMenuItem.Checked;
 
             PopulateListView();
         }           
@@ -478,7 +453,7 @@ namespace Budford
         void AddUserMenuItems()
         {
             List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
-            foreach (var user in model.Users)
+            foreach (var user in Model.Users)
             {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem
                 {
@@ -495,7 +470,7 @@ namespace Budford
                 };
                 menuItem2.Click += User_Click;
                 contextMenuStrip1.Items.Add(menuItem2);
-                if (user.Name == model.CurrentUser)
+                if (user.Name == Model.CurrentUser)
                 {
                     menuItem2.Checked = true;
                     menuItem.Checked = true;
@@ -522,7 +497,7 @@ namespace Budford
                 User user = toolStripMenuItem.Tag as User;
                 if (user != null)
                 {
-                    if (user.Name != model.CurrentUser)
+                    if (user.Name != Model.CurrentUser)
                     {
                         if (File.Exists("Users\\" + user.Image))
                         {
@@ -533,9 +508,9 @@ namespace Budford
 
                         }
                         Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + user.Name;
-                        fileManager.SaveUserSaves(model.Users.FirstOrDefault(u => u.Name == model.CurrentUser));
+                        fileManager.SaveUserSaves(Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser));
                         fileManager.LoadUserSaves(user);
-                        model.CurrentUser = user.Name;
+                        Model.CurrentUser = user.Name;
                     }
                 }
                 UpdateMenuStrip(user);
@@ -556,7 +531,7 @@ namespace Budford
                 {
                     item.Checked = false;
                 }
-                if (menu.Text == model.CurrentUser)
+                if (menu.Text == Model.CurrentUser)
                 {
                     ((ToolStripMenuItem)menu).Checked = true;
                     if (user != null)
@@ -580,7 +555,7 @@ namespace Budford
                 {
                     item.Checked = false;
                 }
-                if (menu.Text == model.CurrentUser)
+                if (menu.Text == Model.CurrentUser)
                 {
                     ((ToolStripMenuItem)menu).Checked = true;
                     if (user != null)
@@ -614,9 +589,9 @@ namespace Budford
             try
             {
                 listView1.Items.Clear();
-                FolderScanner.CheckGames(model);
+                FolderScanner.CheckGames(Model);
 
-                foreach (var game in model.GameData.OrderByDescending(gd => gd.Value.Name))
+                foreach (var game in Model.GameData.OrderByDescending(gd => gd.Value.Name))
                 {
                     if (FilterCheckedOut(game.Value))
                     {
@@ -650,7 +625,7 @@ namespace Budford
 
                 ResizeColumns();
 
-                toolStripStatusLabel3.Text = "Currently showing " + listView1.Items.Count + (listView1.Items.Count == 1 ? " Game" : " Games");
+                toolStripStatusLabel3.Text = Resources.FormMainWindow_PopulateListView_Currently_showing_ + listView1.Items.Count + (listView1.Items.Count == 1 ? " Game" : " Games");
             }
             finally
             {
@@ -664,7 +639,7 @@ namespace Budford
         private void ResizeColumns()
         {
             listView1.Columns[0].Width = 36;
-            if (model.Settings.AutoSizeColumns)
+            if (Model.Settings.AutoSizeColumns)
             {
                 for (int c = 4; c < listView1.Columns.Count; ++c)
                 {
@@ -730,7 +705,7 @@ namespace Budford
         /// <returns></returns>
         private bool FilterCheckedOut(GameInformation game)
         {
-            if (!model.Settings.IncludeWiiULauncherRpx)
+            if (!Model.Settings.IncludeWiiULauncherRpx)
             {
                 if (game.LaunchFile.Contains("WiiULauncher.rpx"))
                 {
@@ -765,22 +740,22 @@ namespace Budford
             switch (game.GameSetting.EmulationState)
             {
                 case GameSettings.EmulationStateType.NotSet:
-                    if (!model.Filters.ViewStatusNotSet) return false;
+                    if (!Model.Filters.ViewStatusNotSet) return false;
                     break;
                 case GameSettings.EmulationStateType.Perfect:
-                    if (!model.Filters.ViewStatusPerfect) return false;
+                    if (!Model.Filters.ViewStatusPerfect) return false;
                     break;
                 case GameSettings.EmulationStateType.Playable:
-                    if (!model.Filters.ViewStatusPlayable) return false;
+                    if (!Model.Filters.ViewStatusPlayable) return false;
                     break;
                 case GameSettings.EmulationStateType.Runs:
-                    if (!model.Filters.ViewStatusRuns) return false;
+                    if (!Model.Filters.ViewStatusRuns) return false;
                     break;
                 case GameSettings.EmulationStateType.Loads:
-                    if (!model.Filters.ViewStatusLoads) return false;
+                    if (!Model.Filters.ViewStatusLoads) return false;
                     break;
                 case GameSettings.EmulationStateType.Unplayable:
-                    if (!model.Filters.ViewStatusUnplayable) return false;
+                    if (!Model.Filters.ViewStatusUnplayable) return false;
                     break;
             }
             return true;
@@ -796,22 +771,22 @@ namespace Budford
             switch (game.GameSetting.OfficialEmulationState)
             {
                 case GameSettings.EmulationStateType.NotSet:
-                    if (!model.Filters.ViewOfficialStatusNotSet) return false;
+                    if (!Model.Filters.ViewOfficialStatusNotSet) return false;
                     break;
                 case GameSettings.EmulationStateType.Perfect:
-                    if (!model.Filters.ViewOfficialStatusPerfect) return false;
+                    if (!Model.Filters.ViewOfficialStatusPerfect) return false;
                     break;
                 case GameSettings.EmulationStateType.Playable:
-                    if (!model.Filters.ViewOfficialStatusPlayable) return false;
+                    if (!Model.Filters.ViewOfficialStatusPlayable) return false;
                     break;
                 case GameSettings.EmulationStateType.Runs:
-                    if (!model.Filters.ViewOfficialStatusRuns) return false;
+                    if (!Model.Filters.ViewOfficialStatusRuns) return false;
                     break;
                 case GameSettings.EmulationStateType.Loads:
-                    if (!model.Filters.ViewOfficialStatusLoads) return false;
+                    if (!Model.Filters.ViewOfficialStatusLoads) return false;
                     break;
                 case GameSettings.EmulationStateType.Unplayable:
-                    if (!model.Filters.ViewOfficialStatusUnplayable) return false;
+                    if (!Model.Filters.ViewOfficialStatusUnplayable) return false;
                     break;
             }
             return true;
@@ -827,16 +802,16 @@ namespace Budford
             switch (game.Region)
             {
                 case "USA":
-                    if (!model.Filters.ViewRegionUsa) return false;
+                    if (!Model.Filters.ViewRegionUsa) return false;
                     break;
                 case "EUR":
-                    if (!model.Filters.ViewRegionEur) return false;
+                    if (!Model.Filters.ViewRegionEur) return false;
                     break;
                 case "JAP":
-                    if (!model.Filters.ViewRegionJap) return false;
+                    if (!Model.Filters.ViewRegionJap) return false;
                     break;
                 case "ALL":
-                    if (!model.Filters.ViewRegionAll) return false;
+                    if (!Model.Filters.ViewRegionAll) return false;
                     break;
             }
             return true;
@@ -852,16 +827,16 @@ namespace Budford
             switch (game.Type)
             {
                 case "WiiU":
-                    if (!model.Filters.ViewTypeWiiU) return false;
+                    if (!Model.Filters.ViewTypeWiiU) return false;
                     break;
                 case "eShop":
-                    if (!model.Filters.ViewTypeEshop) return false;
+                    if (!Model.Filters.ViewTypeEshop) return false;
                     break;
                 case "Channel":
-                    if (!model.Filters.ViewTypeChannel) return false;
+                    if (!Model.Filters.ViewTypeChannel) return false;
                     break;
                 default:
-                    if (!model.Filters.ViewTypeVc) return false;
+                    if (!Model.Filters.ViewTypeVc) return false;
                     break;
             }
             return true;
@@ -877,19 +852,19 @@ namespace Budford
             switch (game.Rating)
             {
                 case 5:
-                    if (!model.Filters.ViewRating5) return false;
+                    if (!Model.Filters.ViewRating5) return false;
                     break;
                 case 4:
-                    if (!model.Filters.ViewRating4) return false;
+                    if (!Model.Filters.ViewRating4) return false;
                     break;
                 case 3:
-                    if (!model.Filters.ViewRating3) return false;
+                    if (!Model.Filters.ViewRating3) return false;
                     break;
                 case 2:
-                    if (!model.Filters.ViewRating2) return false;
+                    if (!Model.Filters.ViewRating2) return false;
                     break;
                 case 1:
-                    if (!model.Filters.ViewRating1) return false;
+                    if (!Model.Filters.ViewRating1) return false;
                     break;
                 default:
                     return false;
@@ -935,11 +910,11 @@ namespace Budford
         /// </summary>
         private void ResizeColumnHeaders()
         {
-            if (model != null)
+            if (Model != null)
             {
-                if (model.GameData.Count > 0)
+                if (Model.GameData.Count > 0)
                 {
-                    if (model.Settings.AutoSizeColumns)
+                    if (Model.Settings.AutoSizeColumns)
                     {
                         for (int i = 4; i < listView1.Columns.Count; i++)
                         {
@@ -991,14 +966,14 @@ namespace Budford
             {
                 if (listView1.SelectedItems.Count == 1)
                 {
-                    if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                    if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                     {
                         EnableControlsForGameRunning();
 
 
-                        GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                        model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                        launcher.LaunchCemu(this, model, game, false, false, System.Windows.Forms.Control.ModifierKeys == Keys.Shift);
+                        GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                        Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                        launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
                     }
                 }
             }
@@ -1015,7 +990,7 @@ namespace Budford
             }
             else
             {
-                ListViewItem lvi =  listView1.FindItemWithText(model.CurrentId, true, 0);
+                ListViewItem lvi =  listView1.FindItemWithText(Model.CurrentId, true, 0);
                 if (lvi != null)
                 { 
                     lvi.SubItems[10].Text = savedDir;
@@ -1046,8 +1021,8 @@ namespace Budford
                     listView1.SelectedItems[0].SubItems[9].Text = game.GameSetting.EmulationState.ToString();
                     listView1.SelectedItems[0].SubItems[12].Text = game.LastPlayed != DateTime.MinValue ? game.LastPlayed.ToShortDateString() + " " : "                    ";
                     listView1.SelectedItems[0].SubItems[13].Text = game.PlayCount != 0 ? game.PlayCount + "                 " : "                 ";
-                    listView1.SelectedItems[0].SubItems[15].Text = game.Rating + "                 ";
-                    listView1.SelectedItems[0].SubItems[16].Text = game.Comments + "                 ";
+                    listView1.SelectedItems[0].SubItems[15].Text = game.Rating + Resources.FormMainWindow_RefreshList__________________;
+                    listView1.SelectedItems[0].SubItems[16].Text = game.Comments + Resources.FormMainWindow_RefreshList__________________;
                 }
             }
         }      
@@ -1059,7 +1034,7 @@ namespace Budford
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (launcher.Open(model))
+            if (launcher.Open(Model))
             {
                 EnableControlsForGameRunning();
             }
@@ -1081,15 +1056,15 @@ namespace Budford
         /// <param name="tabPageIndex"></param>
         private void LaunchConfigurationForm(int tabPageIndex)
         {
-            using (FormEditConfiguration configurationForm = new FormEditConfiguration(model, tabPageIndex))
+            using (FormEditConfiguration configurationForm = new FormEditConfiguration(Model, tabPageIndex))
             {
-                List<string> oldRomFolder = new List<string>(model.Settings.RomFolders.ToArray());
+                List<string> oldRomFolder = new List<string>(Model.Settings.RomFolders.ToArray());
                 configurationForm.ShowDialog(this);
-                if (oldRomFolder.Count == model.Settings.RomFolders.Count)
+                if (oldRomFolder.Count == Model.Settings.RomFolders.Count)
                 {
                     for (int i = 0; i < oldRomFolder.Count; ++i)
                     {
-                        if (oldRomFolder[i] != model.Settings.RomFolders[i])
+                        if (oldRomFolder[i] != Model.Settings.RomFolders[i])
                         {
                             RefreshGameList();
                             break;
@@ -1109,17 +1084,17 @@ namespace Budford
         /// </summary>
         private void RefreshGameList()
         {
-            foreach (var folder in model.Settings.RomFolders)
+            foreach (var folder in Model.Settings.RomFolders)
             {
-                using (FormScanRomFolder scanner = new FormScanRomFolder(folder, model.GameData))
+                using (FormScanRomFolder scanner = new FormScanRomFolder(folder, Model.GameData))
                 {
                     scanner.ShowDialog(this);
                 }
             }
 
-            Persistence.SetSaveDirs(model);
-            Persistence.SetGameTypes(model);
-            FolderScanner.AddGraphicsPacksToGames(model);
+            Persistence.SetSaveDirs(Model);
+            Persistence.SetGameTypes(Model);
+            FolderScanner.AddGraphicsPacksToGames(Model);
 
             PopulateListView();
             ResizeColumnHeaders();
@@ -1142,7 +1117,7 @@ namespace Budford
         /// <param name="e"></param>
         private void editCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            User user = model.Users.FirstOrDefault(u => u.Name == model.CurrentUser);
+            User user = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
             using (FormEditUser editUser = new FormEditUser(user))
             {
                 editUser.ShowDialog(this);
@@ -1154,24 +1129,24 @@ namespace Budford
                     pictureBox1.Image = Image.FromStream(stream);
                 }
             }
-            if (user != null && model.CurrentUser != user.Name)
+            if (user != null && Model.CurrentUser != user.Name)
             {
-                if (Directory.Exists("Users\\" + model.CurrentUser))
+                if (Directory.Exists("Users\\" + Model.CurrentUser))
                 {
                     try
                     {
-                        Directory.Move("Users\\" + model.CurrentUser, "Users\\" + user.Name);
+                        Directory.Move("Users\\" + Model.CurrentUser, "Users\\" + user.Name);
                     }
                     catch (Exception ex)
                     {
-                        model.Errors.Add(ex.Message);
+                        Model.Errors.Add(ex.Message);
                     }
                 }
                 UpdateMenuStrip(user);
                 UpdateContextMenuStrip(user);
               
-                model.CurrentUser = user.Name;
-                Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + model.CurrentUser;
+                Model.CurrentUser = user.Name;
+                Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
             }
         }
 
@@ -1182,12 +1157,12 @@ namespace Budford
         /// <param name="e"></param>
         private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            User newUser = new User() { Name = "User " + (model.Users.Count + 1), Image = "default.png" };
+            User newUser = new User() { Name = "User " + (Model.Users.Count + 1), Image = "default.png" };
             using (FormEditUser editUser = new FormEditUser(newUser))
             {
                 if (editUser.ShowDialog(this) == DialogResult.OK)
                 {
-                    model.Users.Add(newUser);
+                    Model.Users.Add(newUser);
                     ToolStripMenuItem menuItem = new ToolStripMenuItem
                     {
                         Text = newUser.Name,
@@ -1205,7 +1180,7 @@ namespace Budford
                     contextMenuStrip1.Items.Add(menuItem2);
                 }
             }
-            fileManager.InitialiseFolderStructure(model);
+            fileManager.InitialiseFolderStructure(Model);
         }
 
         /// <summary>
@@ -1233,11 +1208,11 @@ namespace Budford
             {
                 if (listView1.SelectedItems.Count == 1)
                 {
-                    model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                    var game = model.GameData[model.CurrentId];
+                    Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                    var game = Model.GameData[Model.CurrentId];
                     try
                     {
-                        using (FormEditGameSettings aboutBox = new FormEditGameSettings(game, model.Settings.InstalledVersions))
+                        using (FormEditGameSettings aboutBox = new FormEditGameSettings(game, Model.Settings.InstalledVersions))
                         {
                             aboutBox.ShowDialog(this);
                             if (listView1.SelectedItems.Count == 1)
@@ -1248,6 +1223,7 @@ namespace Budford
                     }
                     catch (Exception)
                     {
+                        // ignored
                     }
                 }
             }
@@ -1263,19 +1239,19 @@ namespace Budford
             // Save location
             if (listView1.SelectedItems.Count == 1)
             {
-                model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
 
                 if (GetCurrentVersion().VersionNumber < 1110)
                 {
-                    if (!Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir))
+                    if (!Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir))
                     {
-                        Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir);
+                        Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir);
                     }
-                    Process.Start(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir);
+                    Process.Start(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir);
                 }
                 else
                 {
-                    string gameId = model.GameData[model.CurrentId].TitleId.Replace("00050000", "");
+                    string gameId = Model.GameData[Model.CurrentId].TitleId.Replace("00050000", "");
 
                     if (!Directory.Exists(GetCurrentVersion().Folder +"\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\"))
                     {
@@ -1296,10 +1272,10 @@ namespace Budford
             // Containing Folder
             if (listView1.SelectedItems.Count == 1)
             {
-                model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                if (Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + model.GameData[model.CurrentId].SaveDir))
+                Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                if (Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir))
                 {
-                    Process.Start(Path.GetDirectoryName(model.GameData[model.CurrentId].LaunchFile) + "\\..\\..");
+                    Process.Start(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile) + "\\..\\..");
                 }
             }
         }
@@ -1313,12 +1289,12 @@ namespace Budford
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                 if (Directory.Exists(GetCurrentVersion().Folder + "\\shaderCache\\transferable"))
                 {
-                    if (File.Exists(GetCurrentVersion().Folder + "\\shaderCache\\transferable\\" + model.GameData[model.CurrentId].SaveDir + ".bin"))
+                    if (File.Exists(GetCurrentVersion().Folder + "\\shaderCache\\transferable\\" + Model.GameData[Model.CurrentId].SaveDir + ".bin"))
                     {
-                        Process.Start("explorer.exe", "/select, " + GetCurrentVersion().Folder + "\\shaderCache\\transferable\\" + model.GameData[model.CurrentId].SaveDir + ".bin");
+                        Process.Start("explorer.exe", "/select, " + GetCurrentVersion().Folder + "\\shaderCache\\transferable\\" + Model.GameData[Model.CurrentId].SaveDir + ".bin");
                     }
                     else
                     {
@@ -1339,7 +1315,7 @@ namespace Budford
         /// <param name="e"></param>
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Persistence.Save(model, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
+            Persistence.Save(Model, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
         }
 
         /// <summary>
@@ -1351,7 +1327,7 @@ namespace Budford
         {
             showStatusToolStripMenuItem1.Checked = !showStatusToolStripMenuItem1.Checked;
             statusStrip1.Visible = showStatusToolStripMenuItem1.Checked;
-            model.Settings.ShowStausBar = showStatusToolStripMenuItem1.Checked;
+            Model.Settings.ShowStausBar = showStatusToolStripMenuItem1.Checked;
         }
 
         /// <summary>
@@ -1364,7 +1340,7 @@ namespace Budford
             showToolbarToolStripMenuItem.Checked = !showToolbarToolStripMenuItem.Checked;
             toolStrip1.Visible = showToolbarToolStripMenuItem.Checked;
             toolStrip1.Visible = showToolbarToolStripMenuItem.Checked;
-            model.Settings.ShowToolBar = showToolbarToolStripMenuItem.Checked;             
+            Model.Settings.ShowToolBar = showToolbarToolStripMenuItem.Checked;             
         }
 
         /// <summary>
@@ -1374,7 +1350,7 @@ namespace Budford
         /// <param name="e"></param>
         private void installVS2015RedistributablesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            WindowsOS.IsVC2013RedistInstalled();
+            WindowsOs.IsVc2013RedistInstalled();
         }
 
         /// <summary>
@@ -1384,7 +1360,7 @@ namespace Budford
         /// <param name="e"></param>
         private void installVS2015RedistributablesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WindowsOS.IsVC2015RedistInstalled();
+            WindowsOs.IsVc2015RedistInstalled();
         }
 
         /// <summary>
@@ -1394,7 +1370,7 @@ namespace Budford
         /// <param name="e"></param>
         private void installVS2012RedistributablesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WindowsOS.IsVC2012RedistInstalled();
+            WindowsOs.IsVc2012RedistInstalled();
         }
 
         /// <summary>
@@ -1404,7 +1380,7 @@ namespace Budford
         /// <param name="e"></param>
         private void installVS2012RedistributablesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            WindowsOS.IsVC2010RedistInstalled();
+            WindowsOs.IsVc2010RedistInstalled();
         }
 
         /// <summary>
@@ -1414,7 +1390,7 @@ namespace Budford
         /// <param name="e"></param>
         private void installVS2012RedistributablesToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            WindowsOS.IsVC2008RedistInstalled();
+            WindowsOs.IsVc2008RedistInstalled();
         }
 
         /// <summary>
@@ -1424,7 +1400,7 @@ namespace Budford
         /// <param name="e"></param>
         private void installVS2012RedistributablesToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            WindowsOS.IsVC2005RedistInstalled();
+            WindowsOs.IsVc2005RedistInstalled();
         }
 
         /// <summary>
@@ -1434,7 +1410,7 @@ namespace Budford
         /// <param name="e"></param>
         private void dumpSaveDirCodesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Persistence.Save(model);
+            Persistence.Save(Model);
             MessageBox.Show(Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_SaveDirs_saved_successfully, Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -1453,7 +1429,7 @@ namespace Budford
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    FileManager.ImportShaderCache(model, dlg.FileName);
+                    FileManager.ImportShaderCache(Model, dlg.FileName);
                 }
             }
         }
@@ -1466,19 +1442,6 @@ namespace Budford
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             RefreshGameList();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installedVersionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(model, unpacker, launcher, fileManager))
-            {
-                installedVersions.ShowDialog(this);
-            }
         }
 
         /// <summary>
@@ -1499,7 +1462,7 @@ namespace Budford
         /// <param name="e"></param>
         private void tToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            model.Settings.CurrentView = "Tiled";
+            Model.Settings.CurrentView = "Tiled";
             tToolStripMenuItem.Checked = true;
             detailsToolStripMenuItem.Checked = false;
             tableLayoutPanel1.RowStyles[0].Height = 0;
@@ -1513,7 +1476,7 @@ namespace Budford
         /// <param name="e"></param>
         private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            model.Settings.CurrentView = "Detailed";
+            Model.Settings.CurrentView = "Detailed";
             tToolStripMenuItem.Checked = false;
             detailsToolStripMenuItem.Checked = true;
             tableLayoutPanel1.RowStyles[1].Height = 0;
@@ -1558,43 +1521,21 @@ namespace Budford
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                var setting = model.GameData[model.CurrentId].GameSetting;
+                Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                var setting = Model.GameData[Model.CurrentId].GameSetting;
                 InstalledVersion version;
                 if (setting.PreferedVersion != "Latest")
                 {
-                    version = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == setting.PreferedVersion);
+                    version = Model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == setting.PreferedVersion);
                 }
                 else
                 {
-                    version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                    version = Model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
                 }
 
                 return version;
             }
-            return model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lanchCemuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            launcher.LaunchCemu(this, model, null, false, true);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void downloadStatusToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CemuFeatures.DownloadCompatibilityStatus(this, model);
-            PopulateListView();
-            ResizeColumnHeaders();
+            return Model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
         }
 
         /// <summary>
@@ -1604,7 +1545,7 @@ namespace Budford
         /// <param name="e"></param>
         private void launchCemuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            launcher.LaunchCemu(this, model, null, false, true);
+            launcher.LaunchCemu(this, Model, null, false, true);
         }
 
         /// <summary>
@@ -1614,7 +1555,7 @@ namespace Budford
         /// <param name="e"></param>
         private void downloadCompatabilityStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CemuFeatures.DownloadCompatibilityStatus(this, model);  
+            CemuFeatures.DownloadCompatibilityStatus(this, Model);  
             PopulateListView();
             ResizeColumnHeaders();
         }
@@ -1624,35 +1565,9 @@ namespace Budford
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void updateSaveDirDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stateInfo"></param>
-        void ThreadProc(Object stateInfo)
-        {
-            foreach (var game in model.GameData)
-            {
-                if (game.Value.SaveDir.StartsWith("??"))
-                {
-                    model.CurrentId = game.Key;
-                    launcher.LaunchCemu(this, model, game.Value, true);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void fixUnityGameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var v in model.GameData)
+            foreach (var v in Model.GameData)
             {
                 GameInformation gi = v.Value;
 
@@ -1752,7 +1667,7 @@ namespace Budford
         /// <param name="e"></param>
         private void manageInstalledVersionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(model, unpacker, launcher, fileManager))
+            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(Model, unpacker, launcher))
             {
                 installedVersions.ShowDialog(this);
             }
@@ -1765,9 +1680,9 @@ namespace Budford
         /// <param name="e"></param>
         private void downloadLatestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CemuFeatures.DownloadLatestVersion(this, model.Settings))
+            if (CemuFeatures.DownloadLatestVersion(this, Model.Settings))
             {
-                FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
+                FileManager.DownloadCemu(this, unpacker, Model, FormEditInstalledVersions.Uris, FormEditInstalledVersions.Filenames);
                 manageInstalledVersionsToolStripMenuItem_Click(sender, e);
             }
         }
@@ -1779,7 +1694,7 @@ namespace Budford
         /// <param name="e"></param>
         private void copySavesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CopySaves cs = new CopySaves(model);
+            CopySaves cs = new CopySaves(Model);
             cs.Execute();
         }
 
@@ -1790,7 +1705,7 @@ namespace Budford
         /// <param name="e"></param>
         private void copyShadersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CopyShaderCache cs = new CopyShaderCache(model);
+            CopyShaderCache cs = new CopyShaderCache(Model);
             cs.Execute();
         }
 
@@ -1806,7 +1721,7 @@ namespace Budford
             {
                 using (StreamWriter sw = new StreamWriter("C:\\Development\\" + cv.Version + ".txt"))
                 {
-                    foreach (var gd in model.GameData)
+                    foreach (var gd in Model.GameData)
                     {
                         GameInformation gi = gd.Value;
                         gi.GameSetting.UseRtdsc = 1;
@@ -1919,12 +1834,12 @@ namespace Budford
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // All
-            perfectToolStripMenuItem.Checked = model.Filters.ViewStatusPerfect = true;
-            playableToolStripMenuItem.Checked = model.Filters.ViewStatusPlayable = true;
-            runsToolStripMenuItem.Checked = model.Filters.ViewStatusRuns = true;
-            loadsToolStripMenuItem.Checked = model.Filters.ViewStatusLoads = true;
-            unplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable = true;
-            notSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet = true;
+            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect = true;
+            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable = true;
+            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns = true;
+            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads = true;
+            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable = true;
+            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet = true;
             PopulateListView();
         }
 
@@ -1936,12 +1851,12 @@ namespace Budford
         private void noneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // None
-            perfectToolStripMenuItem.Checked = model.Filters.ViewStatusPerfect = false;
-            playableToolStripMenuItem.Checked = model.Filters.ViewStatusPlayable = false;
-            runsToolStripMenuItem.Checked = model.Filters.ViewStatusRuns = false;
-            loadsToolStripMenuItem.Checked = model.Filters.ViewStatusLoads = false;
-            unplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable = false;
-            notSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet = false;
+            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect = false;
+            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable = false;
+            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns = false;
+            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads = false;
+            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable = false;
+            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet = false;
             PopulateListView();
         }
 
@@ -1953,12 +1868,12 @@ namespace Budford
         private void allToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // Officially all
-            officiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect = true;
-            officiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable = true;
-            officiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns = true;
-            officiallyLoadsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusLoads = true;
-            officiallyUnplayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusUnplayable = true;
-            officiallyNotSetToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusNotSet = true;
+            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect = true;
+            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable = true;
+            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns = true;
+            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads = true;
+            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable = true;
+            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet = true;
             PopulateListView();
         }
 
@@ -1970,12 +1885,12 @@ namespace Budford
         private void noneToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // Officially none
-            officiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect = false;
-            officiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable = false;
-            officiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns = false;
-            officiallyLoadsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusLoads = false;
-            officiallyUnplayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusUnplayable = false;
-            officiallyNotSetToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusNotSet = false;
+            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect = false;
+            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable = false;
+            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns = false;
+            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads = false;
+            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable = false;
+            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet = false;
             PopulateListView();
         }
 
@@ -1987,9 +1902,9 @@ namespace Budford
         private void allToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // All regions
-            usaToolStripMenuItem.Checked = model.Filters.ViewRegionUsa = true;
-            europeToolStripMenuItem.Checked = model.Filters.ViewRegionEur = true;
-            japanToolStripMenuItem.Checked = model.Filters.ViewRegionJap = true;
+            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa = true;
+            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur = true;
+            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap = true;
             PopulateListView();
         }
         
@@ -2001,9 +1916,9 @@ namespace Budford
         private void noneToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // No regions
-            usaToolStripMenuItem.Checked = model.Filters.ViewRegionUsa = false;
-            europeToolStripMenuItem.Checked = model.Filters.ViewRegionEur = false;
-            japanToolStripMenuItem.Checked = model.Filters.ViewRegionJap = false;
+            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa = false;
+            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur = false;
+            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap = false;
             PopulateListView();
         }
 
@@ -2015,10 +1930,10 @@ namespace Budford
         private void allToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // All types
-            wiiUToolStripMenuItem.Checked = model.Filters.ViewTypeWiiU = true;
-            eShopToolStripMenuItem.Checked = model.Filters.ViewTypeEshop = true;
-            channelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel = true;
-            virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc = true;
+            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU = true;
+            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop = true;
+            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel = true;
+            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc = true;
             PopulateListView();
         }
         
@@ -2030,10 +1945,10 @@ namespace Budford
         private void noneToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // No types
-            wiiUToolStripMenuItem.Checked = model.Filters.ViewTypeWiiU = false;
-            eShopToolStripMenuItem.Checked = model.Filters.ViewTypeEshop = false;
-            channelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel = false;
-            virtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc = false;
+            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU = false;
+            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop = false;
+            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel = false;
+            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc = false;
             PopulateListView();
         }
 
@@ -2045,11 +1960,11 @@ namespace Budford
         private void allToolStripMenuItem4_Click(object sender, EventArgs e)
         {
              // No types
-            rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5 = true;
-            rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4 = true;
-            rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3 = true;
-            rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2 = true;
-            rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1 = true;
+            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5 = true;
+            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4 = true;
+            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3 = true;
+            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2 = true;
+            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1 = true;
             PopulateListView();
         }
 
@@ -2060,11 +1975,11 @@ namespace Budford
         /// <param name="e"></param>
         private void noneToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5 = false;
-            rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4 = false;
-            rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3 = false;
-            rating2ToolStripMenuItem.Checked = model.Filters.ViewRating2 = false;
-            rating1ToolStripMenuItem.Checked = model.Filters.ViewRating1 = false;
+            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5 = false;
+            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4 = false;
+            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3 = false;
+            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2 = false;
+            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1 = false;
             PopulateListView();
         }
 
@@ -2077,9 +1992,9 @@ namespace Budford
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
-                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                     toolStripStatusLabel1.Text = game.Comments;
                 }
             }
@@ -2094,9 +2009,9 @@ namespace Budford
         {
             iv1 = GetCurrentVersion();
 
-            launcher.model = model;
+            launcher.Model = Model;
 
-            foreach (var game in model.GameData)
+            foreach (var game in Model.GameData)
             {
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
@@ -2127,7 +2042,7 @@ namespace Budford
         {
             if (iv1 != null)
             {
-                foreach (var game in model.GameData)
+                foreach (var game in Model.GameData)
                 {
                     if (!game.Value.SaveDir.StartsWith("??"))
                     {
@@ -2148,8 +2063,8 @@ namespace Budford
                                             {
                                                 if (transferableShader.Length > 1000000)
                                                 {
-                                                    model.CurrentId = game.Key;
-                                                    launcher.LaunchCemu(this, model, game.Value, true);
+                                                    Model.CurrentId = game.Key;
+                                                    launcher.LaunchCemu(this, Model, game.Value, true);
                                                 }
                                             }
                                         }
@@ -2184,10 +2099,10 @@ namespace Budford
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
-                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    launcher.CreateSaveSnapshot(model, game);
+                    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    launcher.CreateSaveSnapshot(Model, game);
                 }
             }
         }
@@ -2201,16 +2116,16 @@ namespace Budford
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
-                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    using (FormShapShots ss = new FormShapShots(model, game))
+                    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    using (FormShapShots ss = new FormShapShots(Model, game))
                     {
                         ss.ShowDialog(this);
 
                         if (ss.LaunchSnapShot != "")
                         {
-                            MessageBox.Show("Launching " + ss.LaunchSnapShot);
+                            MessageBox.Show(Resources.FormMainWindow_snapshotsToolStripMenuItem_Click_Launching_ + ss.LaunchSnapShot);
                         }
                     }
                 }
@@ -2227,10 +2142,10 @@ namespace Budford
             // Save location
             if (listView1.SelectedItems.Count == 1)
             {
-                if (model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
-                    GameInformation game = model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
+                    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, game, ""));
                     if (!Directory.Exists(src.FullName))
                     {
                         src.Create();
@@ -2264,8 +2179,8 @@ namespace Budford
 
                 if (pack != "")
                 {
-                    model.Settings.GraphicsPackRevision = pack;
-                    FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision), model.GraphicsPacks);
+                    Model.Settings.GraphicsPackRevision = pack;
+                    FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
                 }
             }
         }
@@ -2274,7 +2189,7 @@ namespace Budford
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(() => { ProcessExited(); }));
+                Invoke(new MethodInvoker(ProcessExited));
             }
             else
             {

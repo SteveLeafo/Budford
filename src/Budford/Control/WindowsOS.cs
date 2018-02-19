@@ -1,15 +1,17 @@
 ﻿using Microsoft.Win32;
 using System.Windows.Forms;
+using Budford.Properties;
+using Budford.View;
 
 namespace Budford.Control
 {
-    internal static class WindowsOS
+    internal static class WindowsOs
     {
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool IsVC2015RedistInstalled()
+        public static bool IsVc2015RedistInstalled()
         {
             using (FormFileDownload dl = new FormFileDownload("https://download.microsoft.com/download/6/A/A/6AA4EDFF-645B-48C5-81CC-ED5963AEAD48/vc_redist.x64.exe", "vc_redist.x64.exe"))
             {
@@ -22,17 +24,17 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool IsVC2013RedistInstalled()
+        public static bool IsVc2013RedistInstalled()
         {
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\Dependencies\{ca67548a-5ebe-413a-b50c-4b9ceb6d66c6}", false);
 
             if (winLogonKey != null)
             {
-                MessageBox.Show("Visual C++ 2013 Redistributable is installed.");
+                MessageBox.Show(Resources.WindowsOS_IsVC2013RedistInstalled_Visual_C___2013_Redistributable_is_installed_);
                 return true;
             }
 
-            MessageBox.Show("Visual C++ 2013 Redistributable is not installed.");
+            MessageBox.Show(Resources.WindowsOs_IsVc2013RedistInstalled_Visual_C___2013_Redistributable_is_not_installed_);
             return false;
         }
 
@@ -40,17 +42,17 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool IsVC2012RedistInstalled()
+        public static bool IsVc2012RedistInstalled()
         {
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\Dependencies\{d992c12e-cab2-426f-bde3-fb8c53950b0d}", false);
 
             if (winLogonKey != null)
             {
-                MessageBox.Show("Visual C++ 2012 Redistributable is installed.");
+                MessageBox.Show(Resources.WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_installed_);
                 return true;
             }
 
-            MessageBox.Show("Visual C++ 2012 Redistributable is not installed.");
+            MessageBox.Show(Resources.WindowsOs_IsVc2012RedistInstalled_Visual_C___2012_Redistributable_is_not_installed_);
             return false;
         }
 
@@ -58,17 +60,17 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool IsVC2010RedistInstalled()
+        public static bool IsVc2010RedistInstalled()
         {
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\Products\1926E8D15D0BCE53481466615F760A7F", false);
 
             if (winLogonKey != null)
             {
-                MessageBox.Show("Visual C++ 2010 Redistributable is installed.");
+                MessageBox.Show(Resources.WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_installed_);
                 return true;
             }
 
-            MessageBox.Show("Visual C++ 2010 Redistributable is not installed.");
+            MessageBox.Show(Resources.WindowsOs_IsVc2010RedistInstalled_Visual_C___2010_Redistributable_is_not_installed_);
             return false;
         }
 
@@ -76,17 +78,17 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool IsVC2008RedistInstalled()
+        public static bool IsVc2008RedistInstalled()
         {
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\Products\67D6ECF5CD5FBA732B8B22BAC8DE1B4D", false);
 
             if (winLogonKey != null)
             {
-                MessageBox.Show("Visual C++ 2008 Redistributable is installed.");
+                MessageBox.Show(Resources.WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_installed_);
                 return true;
             }
 
-            MessageBox.Show("Visual C++ 2008 Redistributable is not installed.");
+            MessageBox.Show(Resources.WindowsOs_IsVc2008RedistInstalled_Visual_C___2008_Redistributable_is_not_installed_);
             return false;
         }
 
@@ -94,17 +96,17 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool IsVC2005RedistInstalled()
+        public static bool IsVc2005RedistInstalled()
         {
             RegistryKey winLogonKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\Products\1af2a8da7e60d0b429d7e6453b3d0182", false);
 
             if (winLogonKey != null)
             {
-                MessageBox.Show("Visual C++ 2005 Redistributable is installed.");
+                MessageBox.Show(Resources.WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_installed_);
                 return true;
             }
 
-            MessageBox.Show("Visual C++ 2005 Redistributable is not installed.");
+            MessageBox.Show(Resources.WindowsOs_IsVc2005RedistInstalled_Visual_C___2005_Redistributable_is_not_installed_);
             return false;
         }
     }

@@ -4,9 +4,7 @@ using System.Windows.Forms;
 using Budford.Model;
 using Budford.Control;
 using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Xml.Linq;
-using System.Text;
+using Budford.Properties;
 
 namespace Budford.View
 {
@@ -21,14 +19,11 @@ namespace Budford.View
         // For launching the games.
         readonly Launcher launcher;
 
-        // Managing files between revisions
-        readonly FileManager fileManager;
-
         // Set to true while populating the list to stop events changing the data
         bool updating;
 
         // Managing save files and folders.
-        internal static string[] uris = new[]
+        internal static string[] Uris = new[]
             {
                 "http://cemu.info/releases/cemu_1.9.1.zip",
                 "https://files.sshnuke.net/cemuhook_190c_0532.zip",
@@ -36,7 +31,7 @@ namespace Budford.View
                 "https://files.sshnuke.net/sharedFonts.7z"
             };
 
-        internal static string[] filenames= new[]
+        internal static string[] Filenames= new[]
             {
                 "cemu_1.9.1.zip",
                 "cemu_hook.zip",
@@ -53,7 +48,7 @@ namespace Budford.View
         {
             InitializeComponent();
 
-            this.ShowIcon = true;
+            ShowIcon = true;
 
             model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml");
 
@@ -64,14 +59,15 @@ namespace Budford.View
         /// 
         /// </summary>
         /// <param name="modelIn"></param>
-        internal FormEditInstalledVersions(Model.Model modelIn, Unpacker unpackerIn, Launcher launcherIn, FileManager fileManagerIn)
+        /// <param name="unpackerIn"></param>
+        /// <param name="launcherIn"></param>
+        internal FormEditInstalledVersions(Model.Model modelIn, Unpacker unpackerIn, Launcher launcherIn)
         {
             InitializeComponent();
 
             model = modelIn;
             unpacker = unpackerIn;
             launcher = launcherIn;
-            fileManager = fileManagerIn;
 
             Initialise(); 
         }
@@ -89,7 +85,7 @@ namespace Budford.View
 
             autoSize = true;
 
-            uris = new[]
+            Uris = new[]
             {
                 "http://cemu.info/releases/cemu_" + model.Settings.CurrentCemuVersion + ".zip",
                 "https://files.sshnuke.net/cemuhook_190c_0532.zip",
@@ -97,7 +93,7 @@ namespace Budford.View
                 "https://files.sshnuke.net/sharedFonts.7z"
             };
 
-            filenames = new[]
+            Filenames = new[]
             {
                 "cemu_" + model.Settings.CurrentCemuVersion + ".zip",
                 "cemu_hook.zip",
@@ -268,26 +264,6 @@ namespace Budford.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             FileManager.SearchForInstalledVersions(model);
@@ -448,7 +424,7 @@ namespace Budford.View
         {
             if (CemuFeatures.DownloadLatestVersion(this, model.Settings))
             {
-                FileManager.DownloadCemu(this, unpacker, model, FormEditInstalledVersions.uris, FormEditInstalledVersions.filenames);
+                FileManager.DownloadCemu(this, unpacker, model, Uris, Filenames);
             }
         }
 
@@ -494,7 +470,7 @@ namespace Budford.View
                         if (s.Length > 20)
                         {
                             s = s.Substring(39);
-                            int p = s.IndexOf("\"");
+                            int p = s.IndexOf("\"", StringComparison.Ordinal);
                             if (p > -1)
                             {
                                 string cemuHook = s.Substring(0, p);
@@ -509,31 +485,6 @@ namespace Budford.View
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        static string GetCemuLatestHookVersion()
-        {
-            foreach (string str in File.ReadAllLines("C:\\Development\\hook.html"))
-            {
-                string s = str.Trim();
-                if (s.Contains(".zip"))
-                {
-                    if (s.Length > 20)
-                    {
-                        s = s.Substring(39);
-                        int p = s.IndexOf("\"");
-                        if (p > -1)
-                        {
-                            return s.Substring(0, p);
-                        }
-                    }
-                }
-            }
-            return "";
         }
 
         /// <summary>
@@ -564,33 +515,6 @@ namespace Budford.View
             }
         }
 
-      
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void refreshSaveDirDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stateInfo"></param>
-        void ThreadProc(Object stateInfo)
-        {
-            foreach (var game in model.GameData)
-            {
-                if (game.Value.SaveDir.StartsWith("??"))
-                {
-                    model.CurrentId = game.Key;
-                    launcher.LaunchCemu(null, model, game.Value, true);
-                }
-            }
-        }
 
         /// <summary>
         /// 
@@ -642,7 +566,7 @@ namespace Budford.View
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "Graphic Packs| *.zip;";
+                dlg.Filter = Resources.FormEditInstalledVersions_importGraphicsPackToolStripMenuItem_Click_Graphic_Packs____zip_;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)

@@ -1,5 +1,4 @@
-﻿using Budford.View;
-namespace Budford
+﻿namespace Budford.View
 {
     partial class FormMainWindow
     {

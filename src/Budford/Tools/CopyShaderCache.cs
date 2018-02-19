@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using Budford.Control;
 
 namespace Budford.Tools
 {
     class CopyShaderCache: Tool
     {
-        Model.Model model;
+        readonly Model.Model model;
 
         internal CopyShaderCache(Model.Model modelIn)
             : base(modelIn)
@@ -22,8 +17,7 @@ namespace Budford.Tools
         {
             foreach (var game in model.GameData)
             {
-                string folder = game.Value.Name.Replace(":", "_");
-                folder = game.Value.SaveDir;
+                string folder = game.Value.SaveDir;
                 string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
@@ -38,9 +32,9 @@ namespace Budford.Tools
                         {
                             if (File.Exists(dest))
                             {
-                                FileInfo srcFI = new FileInfo(src);
-                                FileInfo destFI = new FileInfo(dest);
-                                if (srcFI.Length > destFI.Length)
+                                FileInfo srcFi = new FileInfo(src);
+                                FileInfo destFi = new FileInfo(dest);
+                                if (srcFi.Length > destFi.Length)
                                 {
                                     // Always keep a copy of the largest
                                     File.Copy(src, dest, true);

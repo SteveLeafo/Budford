@@ -8,8 +8,8 @@ namespace Budford.Model
 
         public EmulationStateType EmulationState = EmulationStateType.NotSet;
         public EmulationStateType OfficialEmulationState = EmulationStateType.NotSet;
-        public HashSet<GraphicsPack> graphicsPacks  = new HashSet<GraphicsPack>();
-        internal HashSet<string> graphicsPacksFolders = new HashSet<string>();
+        public HashSet<GraphicsPack> GraphicsPacks  = new HashSet<GraphicsPack>();
+        internal HashSet<string> GraphicsPacksFolders = new HashSet<string>();
 
         // CEMU Options
         public byte FullScreen  = 1;
@@ -27,11 +27,11 @@ namespace Budford.Model
 
         public int Fps = 30;
 
-        public byte DebugGX2ApiOffset;
-        public byte DebugUnsupportedAPICallsOffset ;
-        public byte DebugThreadSynchronisationAPIOffset ;
-        public byte DebugAudioAPIOffset ;
-        public byte DebugInputAPIOffset ;
+        public byte DebugGx2ApiOffset;
+        public byte DebugUnsupportedApiCallsOffset ;
+        public byte DebugThreadSynchronisationApiOffset ;
+        public byte DebugAudioApiOffset ;
+        public byte DebugInputApiOffset ;
 
         public byte EnableDebugOffset;
 
@@ -43,11 +43,11 @@ namespace Budford.Model
 
         public byte RenderUpsideDown ;
         public byte DisableAudio ;
-        public byte EnableBoTWCrashWorkaround ;
-        public byte FullSyncAtGX2DrawDone ;
+        public byte EnableBoTwCrashWorkaround ;
+        public byte FullSyncAtGx2DrawDone ;
         public byte SeparateGamePadView  = 0;
         public byte AccaccurateShaderMul = 1;
-        public byte DisableGPUFence ;
+        public byte DisableGpuFence ;
         public byte EmulateSinglePrecision ;
         public byte UseRtdsc = 1;
         public byte Online = 0;

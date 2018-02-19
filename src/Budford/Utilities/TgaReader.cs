@@ -53,23 +53,18 @@ namespace Budford.Utilities
         {
             BinaryReader reader = new BinaryReader(stream);
 
-            UInt32[] palette = null;
-
-            byte idFieldLength, colorMap, imageType, bitsPerColorMap, bitsPerPixel, imgFlags;
-            ushort colorMapOffset, colorsUsed, imgWidth, imgHeight;
-
-            idFieldLength = (byte)stream.ReadByte();
-            colorMap = (byte)stream.ReadByte();
-            imageType = (byte)stream.ReadByte();
-            colorMapOffset = LittleEndian(reader.ReadUInt16());
-            colorsUsed = LittleEndian(reader.ReadUInt16());
-            bitsPerColorMap = (byte)stream.ReadByte();
+            var idFieldLength = (byte)stream.ReadByte();
+            var colorMap = (byte)stream.ReadByte();
+            var imageType = (byte)stream.ReadByte();
+            var colorMapOffset = LittleEndian(reader.ReadUInt16());
+            var colorsUsed = LittleEndian(reader.ReadUInt16());
+            var bitsPerColorMap = (byte)stream.ReadByte();
             LittleEndian(reader.ReadUInt16());
             LittleEndian(reader.ReadUInt16());
-            imgWidth = LittleEndian(reader.ReadUInt16());
-            imgHeight = LittleEndian(reader.ReadUInt16());
-            bitsPerPixel = (byte)stream.ReadByte();
-            imgFlags = (byte)stream.ReadByte();
+            var imgWidth = LittleEndian(reader.ReadUInt16());
+            var imgHeight = LittleEndian(reader.ReadUInt16());
+            var bitsPerPixel = (byte)stream.ReadByte();
+            var imgFlags = (byte)stream.ReadByte();
 
             if (colorMap > 1)
             {
@@ -88,12 +83,11 @@ namespace Budford.Utilities
 
             try
             {
-                palette = ReadColorMap(stream, palette, colorMap, bitsPerColorMap, colorMapOffset, colorsUsed);
+                var palette = ReadColorMap(stream, null, colorMap, bitsPerColorMap, colorMapOffset, colorsUsed);
 
-                byte[] scanline;
                 if (imageType == 1 || imageType == 2 || imageType == 3)
                 {
-                    scanline = ReadImageType1To3(stream, palette, imageType, bitsPerPixel, imgWidth, imgHeight, bmpData);
+                    ReadImageType1To3(stream, palette, imageType, bitsPerPixel, imgWidth, imgHeight, bmpData);
 
                 }
             }
@@ -177,7 +171,7 @@ namespace Budford.Utilities
         /// <param name="imgHeight"></param>
         /// <param name="bmpData"></param>
         /// <returns></returns>
-        private static byte[] ReadImageType1To3(Stream stream, uint[] palette, byte imageType, byte bitsPerPixel, ushort imgWidth, ushort imgHeight, byte[] bmpData)
+        private static void ReadImageType1To3(Stream stream, uint[] palette, byte imageType, byte bitsPerPixel, ushort imgWidth, ushort imgHeight, byte[] bmpData)
         {
             byte[] scanline = new byte[imgWidth * (bitsPerPixel / 8)];
             for (int y = imgHeight - 1; y >= 0; y--)
@@ -208,8 +202,6 @@ namespace Budford.Utilities
                         break;
                 }
             }
-
-            return scanline;
         }
 
         /// <summary>

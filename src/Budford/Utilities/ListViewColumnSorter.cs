@@ -21,7 +21,7 @@ namespace Budford.Utilities
         /// <summary>
         /// Case insensitive comparer object
         /// </summary>
-        private readonly CaseInsensitiveComparer ObjectCompare;
+        private readonly CaseInsensitiveComparer objectCompare;
 
         internal int SortType = 0;
 
@@ -37,7 +37,7 @@ namespace Budford.Utilities
             OrderOfSort = SortOrder.Ascending;
 
             // Initialize the CaseInsensitiveComparer object
-            ObjectCompare = new CaseInsensitiveComparer();
+            objectCompare = new CaseInsensitiveComparer();
         }
 
         /// <summary>
@@ -49,23 +49,22 @@ namespace Budford.Utilities
         public int Compare(object x, object y)
         {
             int compareResult = 0;
-            ListViewItem listviewX, listviewY;
 
             // Cast the objects to be compared to ListViewItem objects
-            listviewX = (ListViewItem)x;
-            listviewY = (ListViewItem)y;
+            var listviewX = (ListViewItem)x;
+            var listviewY = (ListViewItem)y;
 
             // Compare the two items
             if (SortType == 1)
             {
                 int a = 0, b = 0;
 
-                if (ColumnToSort < listviewX.SubItems.Count)
+                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
                 {
                     if (ColumnToSort < listviewX.SubItems.Count)
                     {
                         int.TryParse(listviewX.SubItems[ColumnToSort].Text, out a);
-                        int.TryParse(listviewY.SubItems[ColumnToSort].Text, out b);
+                        if (listviewY != null) int.TryParse(listviewY.SubItems[ColumnToSort].Text, out b);
                     }
                 }
 
@@ -75,12 +74,15 @@ namespace Budford.Utilities
             {
                 int a = 0, b = 0;
 
-                if (ColumnToSort < listviewX.SubItems.Count)
+                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
                 {
                     if (ColumnToSort < listviewX.SubItems.Count)
                     {
                         int.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
-                        int.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+                        if (listviewY != null)
+                        {
+                            int.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+                        }
                     }
                 }
                 compareResult = b.CompareTo(a);
@@ -88,12 +90,15 @@ namespace Budford.Utilities
             else if (SortType == 3)
             {
                 DateTime a = DateTime.MinValue, b = DateTime.MinValue;
-                if (ColumnToSort < listviewX.SubItems.Count)
+                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
                 {
                     if (ColumnToSort < listviewX.SubItems.Count)
                     {
                         DateTime.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
-                        DateTime.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+                        if (listviewY != null)
+                        {
+                            DateTime.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+                        }
                     }
                 }
 
@@ -101,11 +106,14 @@ namespace Budford.Utilities
             }
             else
             {
-                if (ColumnToSort < listviewX.SubItems.Count)
+                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
                 {
                     if (ColumnToSort < listviewX.SubItems.Count)
                     {
-                        compareResult = ObjectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+                        if (listviewY != null)
+                        { 
+                            compareResult = objectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+                        }
                     }
                 }
             }

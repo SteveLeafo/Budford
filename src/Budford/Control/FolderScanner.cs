@@ -9,7 +9,7 @@ namespace Budford.Control
 {
     internal static class FolderScanner
     {
-        internal readonly static Dictionary<string, string> regions = new Dictionary<string, string>();
+        internal static readonly Dictionary<string, string> Regions = new Dictionary<string, string>();
 
         /// <summary>
         /// 
@@ -88,7 +88,7 @@ namespace Budford.Control
         /// <param name="launchFile"></param>
         internal static void GetGameInformation(Dictionary<string, GameInformation> gameData, string folder, string launchFile)
         {
-            regions.Clear();
+            Regions.Clear();
             if (File.Exists("wiiutdb.xml"))
             {
                 XElement xElement = XElement.Parse(XDocument.Load("wiiutdb.xml").ToString());
@@ -98,9 +98,9 @@ namespace Budford.Control
                     string type = Xml.GetValue(g, "type");
                     string id = Xml.GetValue(g, "id").Substring(0, 4);
 
-                    if (!regions.ContainsKey(id))
+                    if (!Regions.ContainsKey(id))
                     {
-                        regions.Add(id, type);
+                        Regions.Add(id, type);
                     }
                 }
             }
@@ -152,7 +152,7 @@ namespace Budford.Control
                         AddGraphicsPack(game, pack);
                     }
                 }
-                game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
+                game.Value.GraphicsPacksCount = game.Value.GameSetting.GraphicsPacks.Count;
             }
         }
 
@@ -195,11 +195,11 @@ namespace Budford.Control
         {
             if (!PackAdded(game.Value, pack.Folder))
             {
-                if (!game.Value.GameSetting.graphicsPacksFolders.Contains(pack.Folder))
+                if (!game.Value.GameSetting.GraphicsPacksFolders.Contains(pack.Folder))
                 {
-                    game.Value.GameSetting.graphicsPacksFolders.Add(pack.Folder);
-                    game.Value.GameSetting.graphicsPacks.Add(pack);
-                    game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
+                    game.Value.GameSetting.GraphicsPacksFolders.Add(pack.Folder);
+                    game.Value.GameSetting.GraphicsPacks.Add(pack);
+                    game.Value.GraphicsPacksCount = game.Value.GameSetting.GraphicsPacks.Count;
                 }
             }
         }
@@ -213,7 +213,7 @@ namespace Budford.Control
         /// <returns></returns>
         static bool PackAdded(GameInformation game, string packIn)
         {
-            foreach (var pack in game.GameSetting.graphicsPacks)
+            foreach (var pack in game.GameSetting.GraphicsPacks)
             {
                 if (pack.Folder == packIn)
                 {
@@ -263,7 +263,12 @@ namespace Budford.Control
                         {
                             id = "0" + id;
                         }
-                        pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf('\\'));
+
+                        if (file.DirectoryName != null)
+                        {
+                            pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf('\\'));
+                        }
+
                         if (!graphicsPacks.ContainsKey(id))
                         {
                             graphicsPacks.Add(id, new List<GraphicsPack>());

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Budford.Utilities
+﻿namespace Budford.Utilities
 {
     using System;
     using System.Runtime.InteropServices;
@@ -15,7 +9,7 @@ namespace Budford.Utilities
         public const int DbtDeviceremovecomplete = 0x8004; // device is gone      
         public const int WmDevicechange = 0x0219; // device change event      
         private const int DbtDevtypDeviceinterface = 5;
-        private static readonly Guid GuidDevinterfaceUSBDevice = new Guid("A5DCBF10-6530-11D2-901F-00C04FB951ED"); // USB devices
+        private static readonly Guid GuidDevinterfaceUsbDevice = new Guid("A5DCBF10-6530-11D2-901F-00C04FB951ED"); // USB devices
         private static IntPtr notificationHandle;
 
         /// <summary>
@@ -28,7 +22,7 @@ namespace Budford.Utilities
             {
                 DeviceType = DbtDevtypDeviceinterface,
                 Reserved = 0,
-                ClassGuid = GuidDevinterfaceUSBDevice,
+                ClassGuid = GuidDevinterfaceUsbDevice,
                 Name = 0
             };
 

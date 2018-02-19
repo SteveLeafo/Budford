@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Budford.Properties;
 using Budford.Utilities;
 
 namespace Budford.View
@@ -14,7 +9,7 @@ namespace Budford.View
     public partial class FormShaderMerger : Form
     {
         FileCache cache;
-        HashSet<Tuple<ulong, ulong>> items = new HashSet<Tuple<ulong, ulong>>();
+        readonly HashSet<Tuple<ulong, ulong>> items = new HashSet<Tuple<ulong, ulong>>();
         int id = 1;
 
         public FormShaderMerger()
@@ -28,7 +23,7 @@ namespace Budford.View
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "Shader Cache Files| *.bin;";
+                dlg.Filter = Resources.FormShaderMerger_openToolStripMenuItem_Click_Shader_Cache_Files____bin_;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
@@ -41,22 +36,21 @@ namespace Budford.View
 
         void UpdateListView()
         {
-            int originalCount = id;
             listView1.BeginUpdate();
-            foreach (var item in cache.fileTableEntries)
+            foreach (var item in cache.FileTableEntries)
             {
                 //if (!items.Contains(new Tuple<ulong, ulong>(item.name1, item.name2)))
                 {
                     ListViewItem lvi = new ListViewItem(id.ToString());
-                    lvi.SubItems.Add(item.name1.ToString("X"));
-                    lvi.SubItems.Add(item.name2.ToString("X"));
-                    lvi.SubItems.Add(item.fileOffset.ToString());
-                    lvi.SubItems.Add(item.fileSize.ToString());
-                    lvi.SubItems.Add(item.extraReserved.ToString("X"));
+                    lvi.SubItems.Add(item.Name1.ToString("X"));
+                    lvi.SubItems.Add(item.Name2.ToString("X"));
+                    lvi.SubItems.Add(item.FileOffset.ToString());
+                    lvi.SubItems.Add(item.FileSize.ToString());
+                    lvi.SubItems.Add(item.ExtraReserved.ToString("X"));
 
                     listView1.Items.Add(lvi);
                     id++;
-                    items.Add(new Tuple<ulong, ulong>(item.name1, item.name2));
+                    items.Add(new Tuple<ulong, ulong>(item.Name1, item.Name2));
                 }
             }
             listView1.EndUpdate();
@@ -64,7 +58,7 @@ namespace Budford.View
             //{
             //    MessageBox.Show("Added " + (id - originalCount).ToString() + " new shaders");
             //    MessageBox.Show("Added " + FileCache.fileCache_countFileEntries(cache) + " new shaders");
-            MessageBox.Show("Added " + FileCache.fileCache_getFileEntryCount(cache) + " new shaders");
+            MessageBox.Show(Resources.FormShaderMerger_UpdateListView_Added_ + FileCache.fileCache_getFileEntryCount(cache) + Resources.FormShaderMerger_UpdateListView__new_shaders);
             //}
         }
 
@@ -79,19 +73,19 @@ namespace Budford.View
         {
             using (SaveFileDialog dlg = new SaveFileDialog())
             {
-                dlg.Filter = "Shader Cache Files| *.bin;";
+                dlg.Filter = Resources.FormShaderMerger_saveAsToolStripMenuItem_Click_Shader_Cache_Files____bin_;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     FileCache newCache = FileCache.fileCache_create(dlg.FileName, 1);
-                    int c = 5;
-                    c = cache.fileTableEntries.Length;
+                    int c;
+                    c = cache.FileTableEntries.Length;
                     for (int i = 1; i < c; ++i)
                     {
                         int sz = 0;
-                        byte[] file = FileCache.fileCache_getFile(cache, cache.fileTableEntries[i].name1, cache.fileTableEntries[i].name2, ref sz);
-                        FileCache.fileCache_addFile(newCache, cache.fileTableEntries[i].name1, cache.fileTableEntries[i].name2, file, sz, cache.fileTableEntries[i].extraReserved);
+                        byte[] file = FileCache.fileCache_getFile(cache, cache.FileTableEntries[i].Name1, cache.FileTableEntries[i].Name2, ref sz);
+                        FileCache.fileCache_addFile(newCache, cache.FileTableEntries[i].Name1, cache.FileTableEntries[i].Name2, file, sz, cache.FileTableEntries[i].ExtraReserved);
                     }
                 }
             }
