@@ -35,6 +35,11 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        DateTime startTime = DateTime.MinValue;
+
+        /// <summary>
+        /// 
+        /// </summary>
         GameInformation runningGame;
 
         /// <summary>
@@ -140,6 +145,7 @@ namespace Budford.Control
 
                 parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
 
+                startTime = DateTime.Now;
                 runningProcess = Process.Start(start);
                 if (runningProcess != null)
                 {
@@ -382,6 +388,7 @@ namespace Budford.Control
                 }
             }
 
+            runningGame.PlayTime += (long)(DateTime.Now - startTime).TotalSeconds;
             runningGame = null;
             runningVersion = null;
 
@@ -596,6 +603,7 @@ namespace Budford.Control
                 };
 
                 // Run the external process & wait for it to finish
+                startTime = DateTime.Now;
                 runningProcess = Process.Start(start);               
             }
             else

@@ -84,8 +84,8 @@ namespace Budford.View
             if (information.TitleId != "")
             {
                 listView1.Items.Clear();
-                information.GameSetting.GraphicsPacks = new HashSet<GraphicsPack>(information.GameSetting.GraphicsPacks.OrderBy(p => p.Folder));
-                foreach (var pack in information.GameSetting.GraphicsPacks)
+                information.GameSetting.graphicsPacks = new HashSet<GraphicsPack>(information.GameSetting.graphicsPacks.OrderBy(p => p.Folder));
+                foreach (var pack in information.GameSetting.graphicsPacks)
                 {
                     ListViewItem lvi = new ListViewItem();
                     lvi.SubItems.Add(pack.Title);

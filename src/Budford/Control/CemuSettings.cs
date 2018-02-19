@@ -465,7 +465,7 @@ namespace Budford.Control
                 packs++;
             }
 
-            foreach (var pack in settings.GraphicsPacks)
+            foreach (var pack in settings.graphicsPacks)
             {
                 if (pack.Active)
                 {
@@ -506,7 +506,7 @@ namespace Budford.Control
                 }
 
                 packIndex = 0;
-                foreach (var pack in settings.GraphicsPacks)
+                foreach (var pack in settings.graphicsPacks)
                 {
                     AppendGraphicsPack(version.Folder, gfxPackStartOffset, pack);
                 }
@@ -581,7 +581,7 @@ namespace Budford.Control
         void EnableDefaultGraphicsPack()
         {
             resolutionPack = null;
-            foreach (var pack in settings.GraphicsPacks)
+            foreach (var pack in settings.graphicsPacks)
             {
                 if (IsResolutionPack(pack.Title))
                 {

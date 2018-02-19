@@ -83,7 +83,14 @@ namespace Budford.Control
         /// <returns></returns>
         internal static string ShaderCacheFolderCemu(InstalledVersion version)
         {
-            return version.Folder + "\\shaderCache\\transferable";
+            if (version != null)
+            {
+                return version.Folder + "\\shaderCache\\transferable";
+            }
+            else
+            {
+                return "";
+            }
         }
 
         /// <summary>

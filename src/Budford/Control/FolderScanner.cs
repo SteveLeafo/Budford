@@ -152,7 +152,7 @@ namespace Budford.Control
                         AddGraphicsPack(game, pack);
                     }
                 }
-                game.Value.GraphicsPacksCount = game.Value.GameSetting.GraphicsPacks.Count;
+                game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
             }
         }
 
@@ -198,8 +198,8 @@ namespace Budford.Control
                 if (!game.Value.GameSetting.GraphicsPacksFolders.Contains(pack.Folder))
                 {
                     game.Value.GameSetting.GraphicsPacksFolders.Add(pack.Folder);
-                    game.Value.GameSetting.GraphicsPacks.Add(pack);
-                    game.Value.GraphicsPacksCount = game.Value.GameSetting.GraphicsPacks.Count;
+                    game.Value.GameSetting.graphicsPacks.Add(pack);
+                    game.Value.GraphicsPacksCount = game.Value.GameSetting.graphicsPacks.Count;
                 }
             }
         }
@@ -213,7 +213,7 @@ namespace Budford.Control
         /// <returns></returns>
         static bool PackAdded(GameInformation game, string packIn)
         {
-            foreach (var pack in game.GameSetting.GraphicsPacks)
+            foreach (var pack in game.GameSetting.graphicsPacks)
             {
                 if (pack.Folder == packIn)
                 {

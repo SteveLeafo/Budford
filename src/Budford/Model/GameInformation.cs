@@ -18,6 +18,7 @@ namespace Budford.Model
         public string Type = "";
         internal string UnplayableReason = "Playable";
         public int Rating = 1;
+        public long PlayTime = 0;
 
         internal int ShaderCacheFileSize = -1;
         internal int ShaderCacheCount = -1;
