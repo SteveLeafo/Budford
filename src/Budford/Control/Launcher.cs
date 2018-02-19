@@ -97,6 +97,10 @@ namespace Budford.Control
                 if (!parentIn.InvokeRequired)
                 {
                     MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again, Resources.Launcher_LaunchCemu_Can_not_find_file);
+                    if (parent != null)
+                    {
+                        parent.ProcessExited();
+                    }
                 }
                 return;
             }            
@@ -168,6 +172,10 @@ namespace Budford.Control
             else
             {
                 MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
+                if (parent != null)
+                {
+                    parent.ProcessExited();
+                }
             }
         }
 
@@ -540,7 +548,7 @@ namespace Budford.Control
         {
             if (version != null)
             {
-                cemuIn = version.Folder + "\\cemuIn.exe";
+                cemuIn = version.Folder + "\\cemu.exe";
                 logfileIn = version.Folder + "\\log.txt";
             }
         }
@@ -557,7 +565,7 @@ namespace Budford.Control
             var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
             if (latest != null)
             {
-                cemuExe = latest.Folder + "\\cemuIn.exe";
+                cemuExe = latest.Folder + "\\cemu.exe";
             }
 
             if (File.Exists(cemuExe))
@@ -593,6 +601,10 @@ namespace Budford.Control
             else
             {
                 MessageBox.Show(parent, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
+                if (parent != null)
+                {
+                    parent.ProcessExited();
+                }
             }
         }
 
