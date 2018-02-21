@@ -85,6 +85,7 @@
     <Compile Include="Control\WindowsOS.cs" />
     <Compile Include="Control\WriteCemuHookIniFile.cs" />
     <Compile Include="Model\CemuHookSettings.cs" />
+    <Compile Include="Model\LaunchPad.cs" />
     <Compile Include="Model\SaveDir.cs" />
     <Compile Include="Model\GameSettings.cs" />
     <Compile Include="Model\GraphicsPack.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Utilities\CurrentUserSecurity.cs" />
     <Compile Include="Utilities\FileCache.cs" />
     <Compile Include="Utilities\FileCacheEntry.cs" />
+    <Compile Include="Utilities\IconHelper.cs" />
     <Compile Include="Utilities\JunctionPoint.cs" />
     <Compile Include="Utilities\LevenshteinDistance.cs" />
     <Compile Include="Utilities\ListViewColumnSorter.cs" />
@@ -153,6 +155,12 @@
     </Compile>
     <Compile Include="View\FormEditUser.Designer.cs">
       <DependentUpon>FormEditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormLaunchboxExporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormLaunchboxExporter.Designer.cs">
+      <DependentUpon>FormLaunchboxExporter.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormScanRomFolder.cs">
       <SubType>Form</SubType>
@@ -223,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormLaunchboxExporter.resx">
+      <DependentUpon>FormLaunchboxExporter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormScanRomFolder.resx">
       <DependentUpon>FormScanRomFolder.cs</DependentUpon>

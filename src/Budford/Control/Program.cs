@@ -34,7 +34,28 @@ namespace Budford.Control
             }
             else
             {
-                new Launcher(null).LaunchRpx(Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml"), cmdLineFileName, cmdLineFullScreen);
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford"))
+                {
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford");
+                }
+                if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml"))
+                {
+                    if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml"))
+                    {
+                        File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml", false);
+                    }
+                }
+                var model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
+                foreach (var game in model.GameData)
+                {
+                    if (game.Value.LaunchFile == cmdLineFileName)
+                    {
+                        game.Value.Exists = true;
+                        new Launcher(null).LaunchCemu(null, model, game.Value);
+                        return;
+                    }
+                }
+                new Launcher(null).LaunchRpx(model, cmdLineFileName, cmdLineFullScreen);
             }
         }
 

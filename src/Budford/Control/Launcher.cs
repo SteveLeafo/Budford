@@ -99,12 +99,15 @@ namespace Budford.Control
 
             if (game != null &&  !game.Exists)
             {
-                if (!parentIn.InvokeRequired)
+                if (parentIn != null)
                 {
-                    MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again, Resources.Launcher_LaunchCemu_Can_not_find_file);
-                    if (parent != null)
+                    if (!parentIn.InvokeRequired)
                     {
-                        parent.ProcessExited();
+                        MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again, Resources.Launcher_LaunchCemu_Can_not_find_file);
+                        if (parent != null)
+                        {
+                            parent.ProcessExited();
+                        }
                     }
                 }
                 return;
@@ -427,7 +430,10 @@ namespace Budford.Control
 
                 game.LastPlayed = DateTime.Now;
 
-                parent.RefreshList(game);
+                if (parent != null)
+                {
+                    parent.RefreshList(game);
+                }
             }
         }
 

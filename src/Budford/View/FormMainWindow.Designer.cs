@@ -158,6 +158,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.exportToLaunchboxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -299,7 +301,7 @@
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.loadToolStripMenuItem.Text = "Open";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton1_Click );
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator10
             // 
@@ -850,7 +852,9 @@
             this.dumpTestingResultsToolStripMenuItem,
             this.toolStripSeparator19,
             this.updateShaderCachesToolStripMenuItem,
-            this.mergeShaderCachesToolStripMenuItem});
+            this.mergeShaderCachesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exportToLaunchboxToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -1203,6 +1207,18 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
+            // exportToLaunchboxToolStripMenuItem
+            // 
+            this.exportToLaunchboxToolStripMenuItem.Name = "exportToLaunchboxToolStripMenuItem";
+            this.exportToLaunchboxToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.exportToLaunchboxToolStripMenuItem.Text = "Export to Launchbox";
+            this.exportToLaunchboxToolStripMenuItem.Click += new System.EventHandler(this.exportToLaunchboxToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(247, 6);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1363,6 +1379,8 @@
         private CustomToolStripButton toolStripButton4;
         private CustomToolStripButton toolStripButton8;
         private CustomToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem exportToLaunchboxToolStripMenuItem;
     }
 }
 

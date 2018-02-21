@@ -599,6 +599,7 @@ namespace Budford.View
                         PopulateSubItems(game, lvi);
 
                         lvi.ImageIndex = GetRegionImageIndex(game);
+                        lvi.Tag = game.Value;
 
                         listView1.Items.Add(lvi);
 
@@ -2244,6 +2245,18 @@ namespace Budford.View
             {
                 launcher.ScreenShot();
             }
+        }
+
+        private void exportToLaunchboxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HashSet<string> games = new HashSet<string>();
+            foreach (ListViewItem item in listView1.Items)
+            {
+                GameInformation g = (GameInformation)item.Tag;
+                games.Add(g.Name);
+            }
+            FormLaunchboxExporter flbe = new FormLaunchboxExporter(Model, games);
+            flbe.ShowDialog(this);
         }
     }
 }

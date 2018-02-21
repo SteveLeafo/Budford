@@ -56,6 +56,8 @@ namespace Budford.Model
 
         public ConsoleLanguageType ConsoleLanguage = ConsoleLanguageType.English;
 
+        public string LaunchBoxExe = "";
+
         internal bool AutoSizeColumns = true;
 
         public enum ConsoleRegionType : byte
