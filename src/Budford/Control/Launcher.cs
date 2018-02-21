@@ -88,7 +88,7 @@ namespace Budford.Control
         /// <param name="getSaveDir"></param>
         /// <param name="cemuOnly"></param>
         /// <param name="shiftUp"></param>
-        internal void LaunchCemu(Form parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true)
+        internal void LaunchCemu(Form parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
         {
             if (runningVersion != null)
             {
@@ -134,7 +134,7 @@ namespace Budford.Control
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo();
 
-                PopulateStartInfo(game, getSaveDir, cemuOnly, "CEMU.EXE", start, shiftUp);
+                PopulateStartInfo(game, getSaveDir, cemuOnly, "CEMU.EXE", start, shiftUp, forceFullScreen);
 
                 // Required since 1.11.2
                 if (runningVersion != null)
@@ -410,12 +410,12 @@ namespace Budford.Control
         /// <param name="cemuIn"></param>
         /// <param name="start"></param>
         /// <param name="shiftUp"></param>
-        private void PopulateStartInfo(GameInformation game, bool getSaveDir, bool cemuOnly, string cemuIn, ProcessStartInfo start, bool shiftUp)
+        private void PopulateStartInfo(GameInformation game, bool getSaveDir, bool cemuOnly, string cemuIn, ProcessStartInfo start, bool shiftUp, bool forceFullScreen = false)
         {
             // Enter in the command line arguments, everything you would enter after the executable name itself
             if (!cemuOnly)
             {
-                SetGameLaunchParameters(game, getSaveDir, start, shiftUp);
+                SetGameLaunchParameters(game, getSaveDir, start, shiftUp, forceFullScreen);
             }
 
             // Enter the executable to run, including the complete path
@@ -444,7 +444,7 @@ namespace Budford.Control
         /// <param name="getSaveDir"></param>
         /// <param name="start"></param>
         /// <param name="shiftUp"></param>
-        private static void SetGameLaunchParameters(GameInformation game, bool getSaveDir, ProcessStartInfo start, bool shiftUp = true)
+        private static void SetGameLaunchParameters(GameInformation game, bool getSaveDir, ProcessStartInfo start, bool shiftUp = true, bool forceFullScreen = false)
         {
             if (getSaveDir)
             {
@@ -462,7 +462,14 @@ namespace Budford.Control
                 }
                 else if (game != null)
                 {
-                    start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
+                    if (forceFullScreen)
+                    {
+                        start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"";
+                    }
+                    else
+                    {
+                        start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
+                    }
                 }
             }
         }

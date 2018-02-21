@@ -51,7 +51,7 @@ namespace Budford.Control
                     if (game.Value.LaunchFile == cmdLineFileName)
                     {
                         game.Value.Exists = true;
-                        new Launcher(null).LaunchCemu(null, model, game.Value);
+                        new Launcher(null).LaunchCemu(null, model, game.Value, false, false, true, cmdLineFullScreen);
                         return;
                     }
                 }
