@@ -225,17 +225,10 @@ namespace Budford.View
         private void pictureBox1_Click(object sender, System.EventArgs e)
         {
             FileStream stream = File.Create("C:\\Development\\icontest.ico");
-            IconHelper.ConvertToIcon((Bitmap)pictureBox1.Image, stream, pictureBox1.Image.Width);
+            IconHelper helper = new IconHelper();
+            helper.AddImage((Bitmap)pictureBox1.Image, pictureBox1.Image.Width);
+            helper.ConvertToIcon(stream);
             stream.Close();
-
-            //string fileName = "C:\\Development\\icontest2.ico";
-            //Stream IconStream = System.IO.File.OpenWrite(fileName);
-
-            //Bitmap bitmap = new Bitmap(pictureBox1.Image);
-            //bitmap.SetResolution(72, 72);
-            //Icon icon = System.Drawing.Icon.FromHandle(bitmap.GetHicon());
-            //this.Icon = icon;
-            //icon.Save(IconStream);
         }
     }
 }

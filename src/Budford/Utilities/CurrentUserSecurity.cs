@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
 
@@ -26,11 +27,17 @@ namespace Budford.Utilities
         /// <returns></returns>
         public bool HasAccess(DirectoryInfo directory, FileSystemRights right)
         {
-            // Get the collection of authorization rules that apply to the directory.if
-            if (Directory.Exists(directory.FullName))
+            try
             {
-                AuthorizationRuleCollection acl = directory.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
-                return HasFileOrDirectoryAccess(right, acl);
+                // Get the collection of authorization rules that apply to the directory.if
+                if (Directory.Exists(directory.FullName))
+                {
+                    AuthorizationRuleCollection acl = directory.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
+                    return HasFileOrDirectoryAccess(right, acl);
+                }
+            }
+            catch (Exception)
+            {
             }
             return true;
         }
@@ -43,11 +50,17 @@ namespace Budford.Utilities
         /// <returns></returns>
         public bool HasAccess(FileInfo file, FileSystemRights right)
         {
-            // Get the collection of authorization rules that apply to the file.
-            if (File.Exists(file.FullName))
+            try
             {
-                AuthorizationRuleCollection acl = file.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
-                return HasFileOrDirectoryAccess(right, acl);
+                // Get the collection of authorization rules that apply to the file.
+                if (File.Exists(file.FullName))
+                {
+                    AuthorizationRuleCollection acl = file.GetAccessControl().GetAccessRules(true, true, typeof(SecurityIdentifier));
+                    return HasFileOrDirectoryAccess(right, acl);
+                }
+            }
+            catch (Exception)
+            {
             }
             return true;
         }

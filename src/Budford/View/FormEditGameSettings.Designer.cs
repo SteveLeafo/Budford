@@ -194,6 +194,7 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(6, 6);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(451, 540);
             this.tabControl1.TabIndex = 0;
@@ -201,10 +202,10 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(443, 514);
+            this.tabPage1.Size = new System.Drawing.Size(443, 508);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuration";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -223,7 +224,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 508);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 502);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
@@ -232,7 +233,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(8, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 232);
+            this.groupBox1.Size = new System.Drawing.Size(421, 229);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Preferences";
@@ -269,7 +270,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 213);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 210);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -352,7 +353,7 @@
             this.label34.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label34.Location = new System.Drawing.Point(3, 143);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(116, 38);
+            this.label34.Size = new System.Drawing.Size(116, 35);
             this.label34.TabIndex = 0;
             this.label34.Text = "Comments";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -363,7 +364,7 @@
             this.textBox14.Location = new System.Drawing.Point(125, 146);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(287, 32);
+            this.textBox14.Size = new System.Drawing.Size(287, 29);
             this.textBox14.TabIndex = 2;
             // 
             // label35
@@ -415,7 +416,7 @@
             // 
             this.label51.AutoSize = true;
             this.label51.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label51.Location = new System.Drawing.Point(3, 181);
+            this.label51.Location = new System.Drawing.Point(3, 178);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(116, 27);
             this.label51.TabIndex = 0;
@@ -429,7 +430,7 @@
             this.comboBox31.Items.AddRange(new object[] {
             "TV Screen",
             "Gamepad"});
-            this.comboBox31.Location = new System.Drawing.Point(125, 184);
+            this.comboBox31.Location = new System.Drawing.Point(125, 181);
             this.comboBox31.Name = "comboBox31";
             this.comboBox31.Size = new System.Drawing.Size(287, 21);
             this.comboBox31.TabIndex = 1;
@@ -438,9 +439,9 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(8, 241);
+            this.groupBox2.Location = new System.Drawing.Point(8, 238);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 264);
+            this.groupBox2.Size = new System.Drawing.Size(421, 261);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CEMU Options";
@@ -480,7 +481,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 245);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 242);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // label3
@@ -655,10 +656,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel10);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(443, 514);
+            this.tabPage2.Size = new System.Drawing.Size(443, 508);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Graphics Packs";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -680,7 +681,7 @@
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(437, 508);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(437, 502);
             this.tableLayoutPanel10.TabIndex = 1;
             // 
             // listView1
@@ -693,7 +694,7 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(431, 449);
+            this.listView1.Size = new System.Drawing.Size(431, 443);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -713,7 +714,7 @@
             this.label52.AutoSize = true;
             this.label52.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label52.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label52.Location = new System.Drawing.Point(3, 455);
+            this.label52.Location = new System.Drawing.Point(3, 449);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(68, 27);
             this.label52.TabIndex = 1;
@@ -734,7 +735,7 @@
             "Sharpen Only",
             "The Complaning Gamer",
             "Filmic"});
-            this.comboBox32.Location = new System.Drawing.Point(77, 458);
+            this.comboBox32.Location = new System.Drawing.Point(77, 452);
             this.comboBox32.Name = "comboBox32";
             this.comboBox32.Size = new System.Drawing.Size(357, 21);
             this.comboBox32.TabIndex = 2;
@@ -744,7 +745,7 @@
             this.label53.AutoSize = true;
             this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label53.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label53.Location = new System.Drawing.Point(3, 482);
+            this.label53.Location = new System.Drawing.Point(3, 476);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(68, 26);
             this.label53.TabIndex = 1;
@@ -754,7 +755,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDown1.Location = new System.Drawing.Point(77, 485);
+            this.numericUpDown1.Location = new System.Drawing.Point(77, 479);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             60,
             0,
@@ -777,9 +778,9 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tableLayoutPanel5);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 28);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(443, 514);
+            this.tabPage3.Size = new System.Drawing.Size(443, 508);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Information";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -844,7 +845,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(443, 514);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(443, 508);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // pictureBox1
@@ -1106,9 +1107,9 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Location = new System.Drawing.Point(4, 28);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(443, 514);
+            this.tabPage5.Size = new System.Drawing.Size(443, 508);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Advanced";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1131,7 +1132,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(443, 514);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(443, 508);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // groupBox4
@@ -1140,7 +1141,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(8, 8);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(427, 195);
+            this.groupBox4.Size = new System.Drawing.Size(427, 193);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Debug";
@@ -1171,7 +1172,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 176);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 174);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // label15
@@ -1262,9 +1263,9 @@
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel4);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(8, 360);
+            this.groupBox3.Location = new System.Drawing.Point(8, 356);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(427, 145);
+            this.groupBox3.Size = new System.Drawing.Size(427, 143);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "CPU";
@@ -1289,7 +1290,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(421, 126);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(421, 124);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // label8
@@ -1360,9 +1361,9 @@
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel8);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(8, 209);
+            this.groupBox5.Location = new System.Drawing.Point(8, 207);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(427, 145);
+            this.groupBox5.Size = new System.Drawing.Size(427, 143);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Advanced";
@@ -1391,7 +1392,7 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(421, 126);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(421, 124);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
             // label19
@@ -1461,11 +1462,11 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.groupBox6);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 28);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(443, 514);
+            this.tabPage4.Size = new System.Drawing.Size(443, 508);
             this.tabPage4.TabIndex = 5;
-            this.tabPage4.Text = "Cemu Hook";
+            this.tabPage4.Text = "Cemu Hook ";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // groupBox6
@@ -1474,7 +1475,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(0, 0);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(443, 514);
+            this.groupBox6.Size = new System.Drawing.Size(443, 508);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Cemu Hook Options";
@@ -1522,7 +1523,7 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(437, 495);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(437, 489);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // label38
