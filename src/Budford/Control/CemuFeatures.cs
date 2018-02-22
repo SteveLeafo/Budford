@@ -14,9 +14,9 @@ using Settings = Budford.Model.Settings;
 
 namespace Budford.Control
 {
-    static class CemuFeatures
+    internal static class CemuFeatures
     {
-        static string cemu = "Cemu.exe";
+        internal static string cemu = "Cemu.exe";
 
         // Lookup table for each of the released Cemu versions - will replace with a hash code one day
         static Dictionary<long, string> versionSizes;

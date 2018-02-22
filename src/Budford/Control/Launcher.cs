@@ -134,7 +134,7 @@ namespace Budford.Control
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo();
 
-                PopulateStartInfo(game, getSaveDir, cemuOnly, "CEMU.EXE", start, shiftUp, forceFullScreen);
+                PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.cemu, start, shiftUp, forceFullScreen);
 
                 // Required since 1.11.2
                 if (runningVersion != null)
@@ -568,8 +568,8 @@ namespace Budford.Control
         {
             if (version != null)
             {
-                cemuIn = version.Folder + "\\cemu.exe";
-                logfileIn = version.Folder + "\\log.txt";
+                cemuIn = Path.Combine(version.Folder , CemuFeatures.cemu);
+                logfileIn = Path.Combine(version.Folder, "log.txt");
             }
         }
 
@@ -585,7 +585,7 @@ namespace Budford.Control
             var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
             if (latest != null)
             {
-                cemuExe = latest.Folder + "\\cemu.exe";
+                cemuExe = Path.Combine(latest.Folder, CemuFeatures.cemu);
             }
 
             if (File.Exists(cemuExe))
