@@ -357,16 +357,16 @@ namespace Budford.Control
         /// <param name="folder"></param>
         void WriteSettings(string folder)
         {
-            if (!Directory.Exists(folder + "\\gameProfiles\\"))
+            if (!Directory.Exists(Path.Combine(folder, "gameProfiles")))
             {
-                Directory.CreateDirectory(folder + "\\gameProfiles\\");
+                Directory.CreateDirectory(Path.Combine(folder, "gameProfiles"));
             }
 
             CurrentUserSecurity cs = new CurrentUserSecurity();
 
-            if (cs.HasAccess(new FileInfo(folder + "\\gameProfiles\\" + information.TitleId + ".ini"), System.Security.AccessControl.FileSystemRights.Write))
+            if (cs.HasAccess(new FileInfo(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini")), System.Security.AccessControl.FileSystemRights.Write))
             {
-                using (StreamWriter writer = new StreamWriter(folder + "\\gameProfiles\\" + information.TitleId + ".ini"))
+                using (StreamWriter writer = new StreamWriter(Path.Combine(folder, "gameProfiles",  information.TitleId + ".ini")))
                 {
                     writer.WriteLine("[Graphics]");
                     writer.WriteLine("accurateShaderMul = " + (settings.AccaccurateShaderMul == 1 ? "true" :  (settings.AccaccurateShaderMul == 0) ? "false" : "min"));
@@ -376,11 +376,11 @@ namespace Budford.Control
                 }
             }
 
-            FileManager.GrantAccess(folder + "\\gameProfiles\\" + information.TitleId + ".ini");
+            FileManager.GrantAccess(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini"));
 
-            if (cs.HasAccess(new FileInfo(folder + "\\settings.bin"), System.Security.AccessControl.FileSystemRights.Write))
+            if (cs.HasAccess(new FileInfo(Path.Combine(folder, "settings.bin")), System.Security.AccessControl.FileSystemRights.Write))
             {
-                using (FileStream fn = new FileStream(folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
+                using (FileStream fn = new FileStream(Path.Combine(folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
                 {
                     WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugGx2ApiOffset], settings.DebugGx2ApiOffset);
                     WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugUnsupportedApiCallsOffset], settings.DebugUnsupportedApiCallsOffset);
@@ -444,9 +444,9 @@ namespace Budford.Control
             {
                 try
                 {
-                    if (Directory.Exists(version.Folder + "\\graphicPacks\\" + "Budford_" + i))
+                    if (Directory.Exists(Path.Combine(version.Folder, "graphicPacks", "Budford_" + i)))
                     {
-                        Directory.Delete(version.Folder + "\\graphicPacks\\" + "Budford_" + i, true);
+                        Directory.Delete(Path.Combine(version.Folder, "graphicPacks", "Budford_" + i), true);
                     }
                 }
                 catch (Exception)
@@ -470,7 +470,8 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\" + pack.Folder), new DirectoryInfo(version.Folder + "\\graphicPacks\\" + "Budford_" + packs), false, true);
+                    FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, pack.Folder)), 
+                        new DirectoryInfo(Path.Combine(version.Folder,  "graphicPacks", "Budford_" + packs)), false, true);
                     pack.PackId = packs;
                     packs++;
                 }
@@ -533,7 +534,7 @@ namespace Budford.Control
         /// </summary>
         private void SetClarityPreset()
         {
-            string clarityShader = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BreathOfTheWild_Clarity\\37040a485a29d54e_00000000000003c9_ps.txt";
+            string clarityShader = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_Clarity", "37040a485a29d54e_00000000000003c9_ps.txt");
             if (File.Exists(clarityShader))
             {
                 string text = File.ReadAllText(clarityShader);
@@ -558,21 +559,21 @@ namespace Budford.Control
         {
             int fps = settings.Fps;
 
-            string fpsPatch = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\New Folder\\patches.txt";
+            string fpsPatch = Path.Combine(new string[] {"graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision,"BotW Static 30FPS for v1.4+", "New Folder", "patches.txt"});
             if (File.Exists(fpsPatch))
             {
                 string text = File.ReadAllText(fpsPatch);
                 text = text.Replace("0x00000000 = .float 1.0 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / (float)fps));
                 text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
-                File.WriteAllText("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\patches.txt", text);
+                File.WriteAllText(Path.Combine(new string[]{"graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "patches.txt"}), text);
             }
-            string fpsRules = "graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\New Folder\\rules.txt";
+            string fpsRules = Path.Combine(new string[] {"graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "New Folder", "rules.txt"});
             if (File.Exists(fpsRules))
             {
                 string text = File.ReadAllText(fpsRules);
                 text = text.Replace("0x00000000 = .float 1.00 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / (float)fps));
                 text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (fps));
-                File.WriteAllText("graphicsPacks\\graphicPacks_2-" + model.Settings.GraphicsPackRevision + "\\BotW Static 30FPS for v1.4+\\rules.txt", text);
+                File.WriteAllText(Path.Combine(new string [] {"graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "rules.txt"}), text);
             }
         }
 
@@ -656,7 +657,7 @@ namespace Budford.Control
                 }
             }
 
-            using (FileStream fn = new FileStream(folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
+            using (FileStream fn = new FileStream(Path.Combine(folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
             {
                 if (pack.Active)
                 {
@@ -675,11 +676,11 @@ namespace Budford.Control
         /// <param name="pack"></param>
         private static void CopyGraphicsPack(string folder, GraphicsPack pack)
         {
-            if (!Directory.Exists(folder + "\\graphicPacks\\" + pack.Folder))
+            if (!Directory.Exists(Path.Combine(folder, "graphicPacks", pack.Folder)))
             {
-                Directory.CreateDirectory(folder + "\\graphicPacks\\" + pack.Folder);
+                Directory.CreateDirectory(Path.Combine(folder, "graphicPacks", pack.Folder));
             }
-            FileManager.CopyFilesRecursively(new DirectoryInfo("graphicsPacks\\graphicsPacks\\" + pack.Folder), new DirectoryInfo(folder + "\\graphicPacks\\" + pack.Folder));
+            FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicsPacks", pack.Folder)), new DirectoryInfo(Path.Combine(folder, "graphicPacks", pack.Folder)));
         }
     }
 }

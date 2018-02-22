@@ -35,18 +35,7 @@ namespace Budford.Control
             }
             else
             {
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford"))
-                {
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford");
-                }
-                if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml"))
-                {
-                    if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml"))
-                    {
-                        File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml", false);
-                    }
-                }
-                var model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
+                var model = FormMainWindow.TransferLegacyModel();
                 foreach (var game in model.GameData)
                 {
                     if (game.Value.LaunchFile == cmdLineFileName)

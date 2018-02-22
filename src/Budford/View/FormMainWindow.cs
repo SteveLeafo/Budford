@@ -41,18 +41,7 @@ namespace Budford.View
         {
             InitializeComponent();
 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford"))
-            {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford");
-            }
-            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml"))
-            {
-                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml"))
-                {
-                    File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml", false);
-                }
-            }
-            Model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
+            Model = TransferLegacyModel();
 
             //if (Model.Settings.RegisterUsbNotification)
             {
@@ -82,11 +71,9 @@ namespace Budford.View
                 DownloadLatestGraphicsPack(false);
             }
 
-            FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
+            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
 
             Persistence.LoadFromXml(Model.OldVersions);
-
-            fileManager.InitialiseFolderStructure(Model);
 
             FolderScanner.AddGraphicsPacksToGames(Model);
 
@@ -97,12 +84,12 @@ namespace Budford.View
             }
 
             var firstOrDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
-            if (firstOrDefault != null && File.Exists("Users\\" + firstOrDefault.Image))
+            if (firstOrDefault != null && File.Exists(Path.Combine("Users", firstOrDefault.Image)))
             {
                 var orDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
                 if (orDefault != null)
                 {
-                    using (FileStream stream = new FileStream("Users\\" + orDefault.Image, FileMode.Open, FileAccess.Read))
+                    using (FileStream stream = new FileStream(Path.Combine("Users", orDefault.Image), FileMode.Open, FileAccess.Read))
                     {
                         pictureBox1.Image = Image.FromStream(stream);
                     }
@@ -147,6 +134,23 @@ namespace Budford.View
             {
                 ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
             }
+        }
+
+        static internal Model.Model TransferLegacyModel()
+        {
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
+            }
+            if (!File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml")))
+            {
+                if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
+                {
+                    File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"), false);
+                }
+            }
+            return  Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -499,17 +503,15 @@ namespace Budford.View
                 {
                     if (user.Name != Model.CurrentUser)
                     {
-                        if (File.Exists("Users\\" + user.Image))
+                        if (File.Exists(Path.Combine("Users", user.Image)))
                         {
-                            using (FileStream stream = new FileStream("Users\\" + user.Image, FileMode.Open, FileAccess.Read))
+                            using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
                             {
                                 pictureBox1.Image = Image.FromStream(stream);
                             }
 
                         }
                         Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + user.Name;
-                        fileManager.SaveUserSaves(Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser));
-                        fileManager.LoadUserSaves(user);
                         Model.CurrentUser = user.Name;
                     }
                 }
@@ -1123,20 +1125,20 @@ namespace Budford.View
             {
                 editUser.ShowDialog(this);
             }
-            if (user != null && File.Exists("Users\\" + user.Image))
+            if (user != null && File.Exists(Path.Combine("Users", user.Image)))
             {
-                using (FileStream stream = new FileStream("Users\\" + user.Image, FileMode.Open, FileAccess.Read))
+                using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
                 {
                     pictureBox1.Image = Image.FromStream(stream);
                 }
             }
             if (user != null && Model.CurrentUser != user.Name)
             {
-                if (Directory.Exists("Users\\" + Model.CurrentUser))
+                if (Directory.Exists(Path.Combine("Users", Model.CurrentUser)))
                 {
                     try
                     {
-                        Directory.Move("Users\\" + Model.CurrentUser, "Users\\" + user.Name);
+                        Directory.Move(Path.Combine("Users", Model.CurrentUser), Path.Combine("Users", user.Name));
                     }
                     catch (Exception ex)
                     {
@@ -1181,7 +1183,6 @@ namespace Budford.View
                     contextMenuStrip1.Items.Add(menuItem2);
                 }
             }
-            fileManager.InitialiseFolderStructure(Model);
         }
 
         /// <summary>
@@ -1244,21 +1245,21 @@ namespace Budford.View
 
                 if (GetCurrentVersion().VersionNumber < 1110)
                 {
-                    if (!Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir))
+                    if (!Directory.Exists(Path.Combine(GetCurrentVersion().Folder,  "mlc01", "emulatorSave",  Model.GameData[Model.CurrentId].SaveDir)))
                     {
-                        Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir);
+                        Directory.CreateDirectory(Path.Combine(GetCurrentVersion().Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
                     }
-                    Process.Start(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir);
+                    Process.Start(Path.Combine(GetCurrentVersion().Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
                 }
                 else
                 {
                     string gameId = Model.GameData[Model.CurrentId].TitleId.Replace("00050000", "");
 
-                    if (!Directory.Exists(GetCurrentVersion().Folder +"\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\"))
+                    if (!Directory.Exists(Path.Combine(new string[] {GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId,  "user"})))
                     {
-                        Directory.CreateDirectory(GetCurrentVersion().Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\");
+                        Directory.CreateDirectory(Path.Combine(new string[] {GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId,  "user"}));
                     }
-                    Process.Start(GetCurrentVersion().Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\");
+                    Process.Start(Path.Combine(new string[] {GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId,  "user"}));
                 }
             }
         }
@@ -1274,9 +1275,9 @@ namespace Budford.View
             if (listView1.SelectedItems.Count == 1)
             {
                 Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                if (Directory.Exists(GetCurrentVersion().Folder + "\\mlc01\\emulatorSave\\" + Model.GameData[Model.CurrentId].SaveDir))
+                if (Directory.Exists(Path.Combine(GetCurrentVersion().Folder, "mlc01", "emulatorSave",  Model.GameData[Model.CurrentId].SaveDir)))
                 {
-                    Process.Start(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile) + "\\..\\..");
+                    Process.Start(Path.GetDirectoryName(Path.Combine(Model.GameData[Model.CurrentId].LaunchFile, "..", "..")));
                 }
             }
         }
@@ -1291,15 +1292,15 @@ namespace Budford.View
             if (listView1.SelectedItems.Count == 1)
             {
                 Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                if (Directory.Exists(GetCurrentVersion().Folder + "\\shaderCache\\transferable"))
+                if (Directory.Exists(Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable")))
                 {
-                    if (File.Exists(GetCurrentVersion().Folder + "\\shaderCache\\transferable\\" + Model.GameData[Model.CurrentId].SaveDir + ".bin"))
+                    if (File.Exists(Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin")))
                     {
-                        Process.Start("explorer.exe", "/select, " + GetCurrentVersion().Folder + "\\shaderCache\\transferable\\" + Model.GameData[Model.CurrentId].SaveDir + ".bin");
+                        Process.Start("explorer.exe", "/select, " + Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin"));
                     }
                     else
                     {
-                        Process.Start("explorer.exe", "/select, " + GetCurrentVersion().Folder + "\\shaderCache\\transferable\\");
+                        Process.Start("explorer.exe", "/select, " + Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable"));
                     }
                 }
                 else
@@ -1316,7 +1317,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Persistence.Save(Model, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
+            Persistence.Save(Model, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
         }
 
         /// <summary>
@@ -2055,8 +2056,8 @@ namespace Budford.View
                                 {
                                     if (game.Value.GameSetting.PreferedVersion == "Latest")
                                     {
-                                        FileInfo transferableShader = new FileInfo(iv1.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin");
-                                        FileInfo precompiledShader = new FileInfo(iv1.Folder + "\\shaderCache\\precompiled\\" + game.Value.SaveDir + ".bin");
+                                        FileInfo transferableShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "transferable", game.Value.SaveDir + ".bin"));
+                                        FileInfo precompiledShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "precompiled", game.Value.SaveDir + ".bin"));
 
                                         if (!File.Exists(precompiledShader.FullName))
                                         {
@@ -2171,7 +2172,7 @@ namespace Budford.View
                 string pack = "";
                 foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                 {
-                    string folder = dir.Replace("graphicsPacks\\", "");
+                    string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
                     if (folder.StartsWith("graphicPacks_2-"))
                     {
                         pack = folder.Replace("graphicPacks_2-", "");
@@ -2181,7 +2182,7 @@ namespace Budford.View
                 if (pack != "")
                 {
                     Model.Settings.GraphicsPackRevision = pack;
-                    FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicPacks_2-" + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
+                    FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + Model.Settings.GraphicsPackRevision)), Model.GraphicsPacks);
                 }
             }
         }

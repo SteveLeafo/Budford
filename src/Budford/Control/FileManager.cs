@@ -87,26 +87,6 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="user"></param>
-        internal void LoadUserSaves(User user)
-        {
-            if (Directory.Exists("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\emulatorSave"))
-            {
-                Directory.Delete("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\emulatorSave");
-            }
-            try
-            {
-                Directory.Move("Users\\" + user.Name + "\\SaveFiles\\emulatorSave", "Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\emulatorSave");
-            }
-            catch (Exception ex)
-            {
-                model.Errors.Add(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="model"></param>
         /// <param name="fileName"></param>
         internal static void ImportShaderCache(Model.Model model, string fileName)
@@ -125,45 +105,6 @@ namespace Budford.Control
                     }
                     break;
                 }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user"></param>
-        internal void SaveUserSaves(User user)
-        {
-            try
-            {
-                if (Directory.Exists("Users\\" + user.Name + "\\SaveFiles\\emulatorSave"))
-                {
-                    Directory.Delete("Users\\" + user.Name + "\\SaveFiles\\emulatorSave");
-                }
-                Directory.Move("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\emulatorSave", "Users\\" + user.Name + "\\SaveFiles\\emulatorSave");
-            }
-            catch (Exception ex)
-            {
-                model.Errors.Add(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal void InitialiseFolderStructure(Model.Model modelIn)
-        {
-            try
-            {
-                foreach (var user in modelIn.Users)
-                {
-                    if (!Directory.Exists("Users\\" + user.Name + "\\SaveFiles")) Directory.CreateDirectory("Users\\" + user.Name + "\\SaveFiles");
-                    if (!Directory.Exists("Users\\" + user.Name + "\\SaveFiles\\emulatorSave")) Directory.CreateDirectory("Users\\" + user.Name + "\\SaveFiles\\emulatorSave");
-                }
-            }
-            catch (Exception ex)
-            {
-                model.Errors.Add(ex.Message);
             }
         }
 
@@ -213,7 +154,7 @@ namespace Budford.Control
                 model.Settings.InstalledVersions.Add(iv);
             }
 
-            iv.Name = folder.Replace(model.Settings.DefaultInstallFolder + "\\", "");
+            iv.Name = folder.Replace(model.Settings.DefaultInstallFolder + Path.DirectorySeparatorChar, "");
             iv.Folder = folder;
 
             if (version == "??" || version == "")
