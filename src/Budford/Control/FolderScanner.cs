@@ -171,7 +171,7 @@ namespace Budford.Control
                     string currentRomFolder = game.Value.LaunchFile;
                     for (int i = 0; i < 3; ++i)
                     {
-                        currentRomFolder = currentRomFolder.Substring(0, currentRomFolder.LastIndexOf('\\'));
+                        currentRomFolder = currentRomFolder.Substring(0, currentRomFolder.LastIndexOf(Path.DirectorySeparatorChar));
                     }
                     foreach (var version in model.Settings.RomFolders)
                     {
@@ -266,7 +266,7 @@ namespace Budford.Control
 
                         if (file.DirectoryName != null)
                         {
-                            pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf('\\'));
+                            pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf(Path.DirectorySeparatorChar));
                         }
 
                         if (!graphicsPacks.ContainsKey(id))

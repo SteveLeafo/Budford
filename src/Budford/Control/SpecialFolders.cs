@@ -1,5 +1,6 @@
 ﻿using Budford.Model;
 using System;
+using System.IO;
 
 namespace Budford.Control
 {
@@ -19,9 +20,9 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (snapShotDir.Length == 0)
             {
-                return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\" + currentUser;
+                return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user" , currentUser});
             }
-            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\" + currentUser + "_" + snapShotDir;
+            return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", currentUser + "_" + snapShotDir});
         }
 
         /// <summary>
@@ -35,9 +36,9 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (snapShotDir.Length == 0)
             {
-                return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\common";
+                return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId , "user", "common"});
             }
-            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\00050000\\" + gameId + "\\user\\common" + "_" + snapShotDir;
+            return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) , "Budford", game.SaveDir , "00050000", gameId , "user", "common" + "_" + snapShotDir});
         }
 
         /// <summary>
@@ -51,9 +52,9 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (version.VersionNumber >= 1110)
             {
-                return version.Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\common";
+                return Path.Combine(new string [] {version.Folder + "mlc01", "usr", "save", "00050000", gameId , "user", "common"});
             }
-            return version.Folder + "\\mlc01\\emulatorSave\\" + game.SaveDir + "_255";
+            return Path.Combine(version.Folder, "mlc01", "emulatorSave", game.SaveDir + "_255");
         }
 
         /// <summary>
@@ -67,9 +68,9 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (version.VersionNumber >= 1110)
             {
-                return version.Folder + "\\mlc01\\usr\\save\\00050000\\" + gameId + "\\user\\80000001";
+                return Path.Combine(new string [] {version.Folder, "mlc01", "usr", "save", "00050000" , gameId , "user", "80000001"});
             }
-            return version.Folder + "\\mlc01\\emulatorSave\\" + game.SaveDir;
+            return Path.Combine(version.Folder, "mlc01", "emulatorSave", game.SaveDir);
         }
 
         #endregion
@@ -85,7 +86,7 @@ namespace Budford.Control
         {
             if (version != null)
             {
-                return version.Folder + "\\shaderCache\\transferable";
+                return Path.Combine(version.Folder, "shaderCache", "transferable");
             }
             else
             {
@@ -101,7 +102,7 @@ namespace Budford.Control
         /// <returns></returns>
         internal static string ShaderCacheCemu(InstalledVersion version, GameInformation game)
         {
-            return ShaderCacheFolderCemu(version) + "\\" + game.SaveDir + ".bin";
+            return Path.Combine(ShaderCacheFolderCemu(version),  game.SaveDir + ".bin");
         }
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace Budford.Control
         /// <returns></returns>
         internal static string ShaderCacheBudford(GameInformation game)
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\" + game.SaveDir + "\\post_180.bin";
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "post_180.bin");
         }
 
         #endregion

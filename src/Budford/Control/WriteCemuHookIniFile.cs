@@ -13,7 +13,7 @@ namespace Budford.Control
         /// <param name="gameInfo"></param>
         public static void WriteIni(Model.Model model, GameInformation gameInfo)
         {
-            using (StreamWriter sw = new StreamWriter(GetVersion(model, gameInfo).Folder + "\\cemuhook.ini"))
+            using (StreamWriter sw = new StreamWriter(Path.Combine(GetVersion(model, gameInfo).Folder, "cemuhook.ini")))
             {
                 sw.WriteLine("[CPU]");
                 sw.WriteLine("customTimerMode = " + GetCustomTimerMode(gameInfo.CemuHookSetting.CustomTimerMode));

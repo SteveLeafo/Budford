@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Budford.Properties;
+using System.IO;
 
 namespace Budford.View
 {
@@ -85,7 +86,7 @@ namespace Budford.View
         {
             if (installedVersion.Version == "")
             {
-                int idx = installedVersion.Folder.LastIndexOf('\\');
+                int idx = installedVersion.Folder.LastIndexOf(Path.DirectorySeparatorChar);
                 if (idx != -1)
                 {
                     installedVersion.Version = installedVersion.Folder.Substring(idx + 1);

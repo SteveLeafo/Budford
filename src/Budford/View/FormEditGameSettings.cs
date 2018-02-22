@@ -63,8 +63,8 @@ namespace Budford.View
             textBox13.Text = information.LaunchFileName;
             textBox14.Text = information.Comments;
 
-            string iconFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code\\", "meta\\iconTex.tga");
-            string logoFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code\\", "meta\\bootLogoTex.tga");
+            string iconFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "iconTex.tga");
+            string logoFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "bootLogoTex.tga");
             if (File.Exists(iconFile))
             {
                 pictureBox1.Image = TgaReader.Load(iconFile);

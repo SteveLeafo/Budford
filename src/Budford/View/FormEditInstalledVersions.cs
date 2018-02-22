@@ -117,7 +117,7 @@ namespace Budford.View
             {
                 foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                 {
-                    string folder = dir.Replace("graphicsPacks\\", "");
+                    string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
                     if (folder.StartsWith("graphicPacks_2-"))
                     {
                         pack = folder.Replace("graphicPacks_2-", "");
@@ -574,7 +574,7 @@ namespace Budford.View
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    unpacker.Unpack(dlg.FileName, "graphicsPacks\\" + Path.GetFileNameWithoutExtension(dlg.FileName));
+                    unpacker.Unpack(dlg.FileName, Path.Combine("graphicsPacks", Path.GetFileNameWithoutExtension(dlg.FileName)));
                     UpdateGraphicsPackCombo();
                 }
             }

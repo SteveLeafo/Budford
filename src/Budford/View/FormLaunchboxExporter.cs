@@ -54,7 +54,7 @@ namespace Budford.View
                 string[] toks = comboBox1.Text.Split(':');
                 if (toks.Length == 2)
                 {
-                    string platformFileName = Path.GetDirectoryName(textBox1.Text) + "\\Data\\Platforms\\" + toks[0] + ".xml";
+                    string platformFileName = Path.Combine(Path.GetDirectoryName(textBox1.Text), "Data", "Platforms", toks[0] + ".xml");
                     if (File.Exists(platformFileName))
                     {
                         if (File.Exists(platformFileName + ".bak"))
@@ -116,7 +116,7 @@ namespace Budford.View
             emulators.Clear();
             if (textBox1.Text.Length > 0)
             {
-                string emulatorFileName = Path.GetDirectoryName(textBox1.Text) + "\\Data\\Emulators.xml";
+                string emulatorFileName = Path.Combine(Path.GetDirectoryName(textBox1.Text), "Data", "Emulators.xml");
                 
                 if (File.Exists(emulatorFileName))
                 {

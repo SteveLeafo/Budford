@@ -159,7 +159,7 @@ namespace Budford.Control
                 if (gd.Value.ShaderCacheFileSize == -1)
                 {
                     var version = CemuFeatures.GetLatestVersion(model);
-                    FileInfo info = new FileInfo(SpecialFolders.ShaderCacheFolderCemu(version) + "\\" + gd.Value.SaveDir + ".bin");
+                    FileInfo info = new FileInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), gd.Value.SaveDir + ".bin"));
                     if (File.Exists(info.FullName))
                     {
                         gd.Value.ShaderCacheFileSize = (int)info.Length;

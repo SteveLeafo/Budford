@@ -34,9 +34,9 @@ namespace Budford.View
         /// </summary>
         private void NewMethod()
         {
-            if (File.Exists("Users\\" + user.Image))
+            if (File.Exists(Path.Combine("Users", user.Image)))
             {
-                using (FileStream stream = new FileStream("Users\\" + user.Image, FileMode.Open, FileAccess.Read))
+                using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
                 {
                     pictureBox1.Image = Image.FromStream(stream);
                 }
@@ -57,7 +57,7 @@ namespace Budford.View
             if (user.Image != textBox2.Text)
             {
                 user.Image = textBox2.Text;
-                pictureBox1.Image.Save("Users\\" + user.Image, ImageFormat.Png);
+                pictureBox1.Image.Save(Path.Combine("Users", user.Image), ImageFormat.Png);
             }
             
             Close();

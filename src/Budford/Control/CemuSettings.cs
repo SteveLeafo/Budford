@@ -323,15 +323,15 @@ namespace Budford.Control
             {
                 SetOffsets(version.Version);
 
-                if (File.Exists(version.Folder + "\\settings.bin"))
+                if (File.Exists(Path.Combine(version.Folder, "settings.bin")))
                 {
-                    File.Delete(version.Folder + "\\settings.bin");
+                    File.Delete(Path.Combine(version.Folder, "settings.bin"));
                 }
 
                 // No settings file, so lets build our own..
-                if (!File.Exists(version.Folder + "\\settings.bin"))
+                if (!File.Exists(Path.Combine(version.Folder, "settings.bin")))
                 {
-                    using (FileStream fn = new FileStream(version.Folder + "\\settings.bin", FileMode.Create, FileAccess.ReadWrite))
+                    using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
                     {
                         foreach (int file in settingsFile)
                         {
@@ -340,7 +340,7 @@ namespace Budford.Control
                     }
                 }
 
-                FileManager.GrantAccess(version.Folder + "\\settings.bin");
+                FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
 
                 if (information != null)
                 {
@@ -479,7 +479,7 @@ namespace Budford.Control
             if (packs > 0)
             {
                 int gfxPackStartOffset;
-                using (FileStream fn = new FileStream(version.Folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
+                using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
                 {
                     
                     if (!graphicPackOffset.TryGetValue(version.VersionNumber, out gfxPackStartOffset))
@@ -517,7 +517,7 @@ namespace Budford.Control
                     AppendGraphicsPack(version.Folder, gfxPackStartOffset, resolutionPack);
                 }
 
-                using (FileStream fn = new FileStream(version.Folder + "\\settings.bin", FileMode.Open, FileAccess.ReadWrite))
+                using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
                 {
                     fn.Seek(gfxPackStartOffset + (9 * packs), SeekOrigin.Begin);
                     for (int i = 0; i < 137; ++i)

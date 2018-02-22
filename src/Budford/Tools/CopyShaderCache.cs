@@ -18,15 +18,15 @@ namespace Budford.Tools
             foreach (var game in model.GameData)
             {
                 string folder = game.Value.SaveDir;
-                string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\";
+                string saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford");
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
                     //var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
 
                     foreach (var latest in model.Settings.InstalledVersions)
                     {
-                        string src = latest.Folder + "\\shaderCache\\transferable\\" + game.Value.SaveDir + ".bin";
-                        string dest = saveFolder + folder + "\\post_180.bin";
+                        string src = Path.Combine(latest.Folder, "shaderCache", "transferable" , game.Value.SaveDir + ".bin");
+                        string dest = Path.Combine(saveFolder, folder, "post_180.bin");
 
                         if (File.Exists(src))
                         {
