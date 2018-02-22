@@ -48,7 +48,7 @@ namespace Budford.Model
         public byte SeparateGamePadView  = 0;
         public byte AccaccurateShaderMul = 1;
         public byte DisableGpuFence ;
-        public byte EmulateSinglePrecision ;
+        public byte EmulateSinglePrecision = 1;
         public byte UseRtdsc = 1;
         public byte Online = 0;
         public byte DefaultView = 0;
