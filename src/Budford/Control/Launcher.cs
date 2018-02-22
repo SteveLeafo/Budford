@@ -391,7 +391,10 @@ namespace Budford.Control
                 }
             }
 
-            runningGame.PlayTime += (long)(DateTime.Now - startTime).TotalSeconds;
+            if (runningGame != null)
+            {
+                runningGame.PlayTime += (long)(DateTime.Now - startTime).TotalSeconds;
+            }
             runningGame = null;
             runningVersion = null;
 
@@ -452,7 +455,7 @@ namespace Budford.Control
                 {
                     start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
                 }
-                //start.WindowStyle = ProcessWindowStyle.Minimized;
+                start.WindowStyle = ProcessWindowStyle.Minimized;
             }
             else
             {

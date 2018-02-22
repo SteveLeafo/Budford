@@ -43,10 +43,7 @@ namespace Budford.View
 
             Model = TransferLegacyModel();
 
-            //if (Model.Settings.RegisterUsbNotification)
-            {
-                UsbNotification.RegisterUsbDeviceNotification(Handle);
-            }
+            UsbNotification.RegisterUsbDeviceNotification(Handle);
 
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
@@ -106,7 +103,6 @@ namespace Budford.View
             pictureBox1.Visible = Model.Settings.ShowToolBar;
             showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
             listView1.KeyDown += listView1_KeyDown;
-            //listView1.MouseDown += listView1_MouseDown;
 
             if (Model.Settings.CurrentView == "Detailed")
             {
@@ -142,6 +138,7 @@ namespace Budford.View
             {
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
             }
+
             if (!File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml")))
             {
                 if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
@@ -150,6 +147,7 @@ namespace Budford.View
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"), false);
                 }
             }
+
             return  Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
         }
 
@@ -319,7 +317,6 @@ namespace Budford.View
                 case "Unplayable":
                     imageIndex = 4;
                     break;
-
             }
 
             return imageIndex;
@@ -900,7 +897,7 @@ namespace Budford.View
             listView1.Columns.Add("Graphics Packs", 50);
             listView1.Columns.Add("Rating", 50);
             listView1.Columns.Add("Comment", 50);
-            //listView1.Columns.Add("", 50);
+
             listView1.HeaderStyle = ColumnHeaderStyle.Clickable;
 
             listView1.FullRowSelect = true;
@@ -1078,7 +1075,6 @@ namespace Budford.View
                 {
                     RefreshGameList();
                 }
-
             }
         }
 
@@ -1125,6 +1121,7 @@ namespace Budford.View
             {
                 editUser.ShowDialog(this);
             }
+
             if (user != null && File.Exists(Path.Combine("Users", user.Image)))
             {
                 using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
@@ -1132,6 +1129,7 @@ namespace Budford.View
                     pictureBox1.Image = Image.FromStream(stream);
                 }
             }
+
             if (user != null && Model.CurrentUser != user.Name)
             {
                 if (Directory.Exists(Path.Combine("Users", Model.CurrentUser)))
@@ -1275,9 +1273,9 @@ namespace Budford.View
             if (listView1.SelectedItems.Count == 1)
             {
                 Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                if (Directory.Exists(Path.Combine(GetCurrentVersion().Folder, "mlc01", "emulatorSave",  Model.GameData[Model.CurrentId].SaveDir)))
+                if (Directory.Exists(Path.Combine(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile), "..", "..")))
                 {
-                    Process.Start(Path.GetDirectoryName(Path.Combine(Model.GameData[Model.CurrentId].LaunchFile, "..", "..")));
+                    Process.Start((Path.Combine(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile), "..", "..")));
                 }
             }
         }
@@ -1573,55 +1571,11 @@ namespace Budford.View
             {
                 GameInformation gi = v.Value;
 
-
-                //gi.CemuHookSetting.DisableLZCNT = false;
-                //gi.CemuHookSetting.DisableAVX = false;
-                //gi.CemuHookSetting.DisableMOVBE = false;
-
                 if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable)
                 {
                     gi.GameSetting.CpuMode = GameSettings.CpuModeType.SingleCoreCompiler;
                 }
-
-                //if (gi.GameSetting.GpuBufferCacheAccuracy == GameSettings.GpuBufferCacheAccuracyType.Medium)
-                //{
-                //    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
-                //}
-
-                //if (gi.LaunchFileName.ToLower().StartsWith("unity"))
-                //{
-                //    gi.GameSetting.GpuBufferCacheAccuracy = GameSettings.GpuBufferCacheAccuracyType.High;
-                //    gi.GameSetting.PreferedVersion = "Latest";
-                //}
-
-                //if (gi.LaunchFileName == "WiiULauncher.rpx")
-                //{
-                //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Unplayable;
-                //}
-
-
-                //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Perfect)
-                //{
-                    //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
-                    //{
-                    //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Perfect;
-                    //}
-                   // gi.Rating = 3;
-                //}
-
-                //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Playable)
-                //{
-                    //if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
-                    //{
-                    //    gi.GameSetting.EmulationState = GameSettings.EmulationStateType.Playable;
-                    //}
-                    //gi.Rating = 3;
-                //}
-
-                //if (gi.LaunchFileName == "WiiULauncher.rpx")
-                //{
-                //    gi.Comments = "Game crashes instantly on start up";
-                //}
+          
             }
             PopulateListView();
         }
@@ -1727,105 +1681,9 @@ namespace Budford.View
                     {
                         GameInformation gi = gd.Value;
                         gi.GameSetting.UseRtdsc = 1;
-                        //sw.WriteLine(gi.SaveDir.Trim() + ", " + gi.Name + ", " + gi.GameSetting.EmulationState.ToString());
                     }
                 }
-            }
-            //using (StreamWriter sw = new StreamWriter("C:\\Development\\broken.csv"))
-            //{
-            //    sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
-            //    foreach (var gd in model.GameData)
-            //    {
-            //        GameInformation gi = gd.Value;
-            //        if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
-            //        {
-            //            if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
-            //            {
-            //                if (gi.Comments.Length > 0)
-            //                {
-            //                    sw.Write("\"");
-            //                    sw.Write(gi.Region); sw.Write("\",\"");
-            //                    sw.Write(gi.Name); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-            //                    sw.WriteLine();
-            //                }
-            //            }
-            //        }
-            //    }
-            //    sw.WriteLine();
-            //    foreach (var gd in model.GameData)
-            //    {
-            //        GameInformation gi = gd.Value;
-            //        if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable || gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Loads)
-            //        {
-
-            //            if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
-            //            {
-            //                if (gi.Comments.Length > 0)
-            //                {
-            //                    sw.Write("\"");
-            //                    sw.Write(gi.Region); sw.Write("\",\"");
-            //                    sw.Write(gi.Name); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-            //                    sw.WriteLine();
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //using (StreamWriter sw = new StreamWriter("C:\\Development\\running.csv"))
-            //{
-            //    sw.WriteLine("Region, Title, Wiki Status, 1.11.1 Status, Launch file, Comment");
-            //    foreach (var gd in model.GameData)
-            //    {
-            //        GameInformation gi = gd.Value;
-            //        if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
-            //        {
-            //            if (gi.GameSetting.EmulationState != gi.GameSetting.OfficialEmulationState)
-            //            {
-            //                //if (gi.Comments.Length > 0)
-            //                {
-            //                    sw.Write("\"");
-            //                    sw.Write(gi.Region); sw.Write("\",\"");
-            //                    sw.Write(gi.Name); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-            //                    sw.WriteLine();
-            //                }
-            //            }
-            //        }
-            //    }
-            //    sw.WriteLine();
-            //    foreach (var gd in model.GameData)
-            //    {
-            //        GameInformation gi = gd.Value;
-            //        if (gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable && gi.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
-            //        {
-            //            if (gi.GameSetting.EmulationState == gi.GameSetting.OfficialEmulationState)
-            //            {
-            //                //if (gi.Comments.Length > 0)
-            //                {
-            //                    sw.Write("\"");
-            //                    sw.Write(gi.Region); sw.Write("\",\"");
-            //                    sw.Write(gi.Name); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.OfficialEmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.GameSetting.EmulationState.ToString()); sw.Write("\",\"");
-            //                    sw.Write(gi.LaunchFileName); sw.Write("\",\"");
-            //                    sw.Write(gi.Comments.Trim().Replace("\n", "").Replace("\r", "").Replace("\"", "'")); sw.Write("\"");
-            //                    sw.WriteLine();
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            }     
         }
 
         /// <summary>
@@ -1836,12 +1694,20 @@ namespace Budford.View
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // All
-            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect = true;
-            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable = true;
-            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns = true;
-            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads = true;
-            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable = true;
-            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet = true;
+            Model.Filters.ViewStatusPerfect = true;
+            Model.Filters.ViewStatusPlayable = true;
+            Model.Filters.ViewStatusRuns = true;
+            Model.Filters.ViewStatusLoads = true;
+            Model.Filters.ViewStatusUnplayable = true;
+            Model.Filters.ViewStatusNotSet = true;
+
+            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
+            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
+            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
+            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
+            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
+            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
+
             PopulateListView();
         }
 
@@ -1853,12 +1719,20 @@ namespace Budford.View
         private void noneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // None
-            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect = false;
-            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable = false;
-            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns = false;
-            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads = false;
-            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable = false;
-            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet = false;
+            Model.Filters.ViewStatusPerfect = false;
+            Model.Filters.ViewStatusPlayable = false;
+            Model.Filters.ViewStatusRuns = false;
+            Model.Filters.ViewStatusLoads = false;
+            Model.Filters.ViewStatusUnplayable = false;
+            Model.Filters.ViewStatusNotSet = false;
+
+            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
+            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
+            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
+            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
+            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
+            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
+
             PopulateListView();
         }
 
@@ -1870,12 +1744,20 @@ namespace Budford.View
         private void allToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // Officially all
-            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect = true;
-            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable = true;
-            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns = true;
-            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads = true;
-            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable = true;
-            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet = true;
+            Model.Filters.ViewOfficialStatusPerfect = true;
+            Model.Filters.ViewOfficialStatusPlayable = true;
+            Model.Filters.ViewOfficialStatusRuns = true;
+            Model.Filters.ViewOfficialStatusLoads = true;
+            Model.Filters.ViewOfficialStatusUnplayable = true;
+            Model.Filters.ViewOfficialStatusNotSet = true;
+
+            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
+            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
+            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
+            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
+            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
+            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;
+
             PopulateListView();
         }
 
@@ -1887,12 +1769,20 @@ namespace Budford.View
         private void noneToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             // Officially none
-            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect = false;
-            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable = false;
-            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns = false;
-            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads = false;
-            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable = false;
-            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet = false;
+            Model.Filters.ViewOfficialStatusPerfect = false;
+            Model.Filters.ViewOfficialStatusPlayable = false;
+            Model.Filters.ViewOfficialStatusRuns = false;
+            Model.Filters.ViewOfficialStatusLoads = false;
+            Model.Filters.ViewOfficialStatusUnplayable = false;
+            Model.Filters.ViewOfficialStatusNotSet = false;
+
+            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
+            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
+            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
+            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
+            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
+            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;
+
             PopulateListView();
         }
 
@@ -1904,9 +1794,14 @@ namespace Budford.View
         private void allToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // All regions
-            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa = true;
-            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur = true;
-            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap = true;
+            Model.Filters.ViewRegionUsa = true;
+            Model.Filters.ViewRegionEur = true;
+            Model.Filters.ViewRegionJap = true;
+
+            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
+            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
+            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap;
+
             PopulateListView();
         }
         
@@ -1918,9 +1813,14 @@ namespace Budford.View
         private void noneToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // No regions
-            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa = false;
-            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur = false;
-            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap = false;
+            Model.Filters.ViewRegionUsa = false;
+            Model.Filters.ViewRegionEur = false;
+            Model.Filters.ViewRegionJap = false;
+
+            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
+            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
+            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap;
+
             PopulateListView();
         }
 
@@ -1932,10 +1832,16 @@ namespace Budford.View
         private void allToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // All types
-            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU = true;
-            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop = true;
-            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel = true;
-            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc = true;
+            Model.Filters.ViewTypeWiiU = true;
+            Model.Filters.ViewTypeEshop = true;
+            Model.Filters.ViewTypeChannel = true;
+            Model.Filters.ViewTypeVc = true;
+
+            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
+            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
+            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
+            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
+
             PopulateListView();
         }
         
@@ -1947,10 +1853,16 @@ namespace Budford.View
         private void noneToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // No types
-            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU = false;
-            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop = false;
-            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel = false;
-            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc = false;
+            Model.Filters.ViewTypeWiiU = false;
+            Model.Filters.ViewTypeEshop = false;
+            Model.Filters.ViewTypeChannel = false;
+            Model.Filters.ViewTypeVc = false;
+
+            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
+            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
+            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
+            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
+
             PopulateListView();
         }
 
@@ -1962,11 +1874,18 @@ namespace Budford.View
         private void allToolStripMenuItem4_Click(object sender, EventArgs e)
         {
              // No types
-            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5 = true;
-            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4 = true;
-            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3 = true;
-            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2 = true;
-            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1 = true;
+            Model.Filters.ViewRating5 = true;
+            Model.Filters.ViewRating4 = true;
+            Model.Filters.ViewRating3 = true;
+            Model.Filters.ViewRating2 = true;
+            Model.Filters.ViewRating1 = true;
+
+            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
+            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
+            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
+            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
+            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
+
             PopulateListView();
         }
 
@@ -1977,11 +1896,18 @@ namespace Budford.View
         /// <param name="e"></param>
         private void noneToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5 = false;
-            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4 = false;
-            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3 = false;
-            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2 = false;
-            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1 = false;
+            Model.Filters.ViewRating5 = false;
+            Model.Filters.ViewRating4 = false;
+            Model.Filters.ViewRating3 = false;
+            Model.Filters.ViewRating2 = false;
+            Model.Filters.ViewRating1 = false;
+
+            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
+            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
+            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
+            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
+            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
+
             PopulateListView();
         }
 
@@ -2165,25 +2091,32 @@ namespace Budford.View
 
         private void DownloadLatestGraphicsPack(bool showMessage = true)
         {
-            using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
+            try
             {
-                dlc.ShowDialog(this);
-                CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result, showMessage);
-                string pack = "";
-                foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
                 {
-                    string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                    if (folder.StartsWith("graphicPacks_2-"))
+                    dlc.ShowDialog(this);
+                    CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result, showMessage);
+                    string pack = "";
+                    foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                     {
-                        pack = folder.Replace("graphicPacks_2-", "");
+                        string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
+                        if (folder.StartsWith("graphicPacks_2-"))
+                        {
+                            pack = folder.Replace("graphicPacks_2-", "");
+                        }
+                    }
+
+                    if (pack != "")
+                    {
+                        Model.Settings.GraphicsPackRevision = pack;
+                        FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + Model.Settings.GraphicsPackRevision)), Model.GraphicsPacks);
                     }
                 }
-
-                if (pack != "")
-                {
-                    Model.Settings.GraphicsPackRevision = pack;
-                    FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + Model.Settings.GraphicsPackRevision)), Model.GraphicsPacks);
-                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to download graphic packs at this time.  Try again later or upgrate to latest version of Budford");
             }
         }
 

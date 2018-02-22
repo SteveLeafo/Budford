@@ -41,6 +41,9 @@ namespace Budford.View
             using (CustomWebClient wc = new CustomWebClient())
             {
                 //wc.Headers[HttpRequestHeader.Authorization] = "Basic " + "Steve";
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
                 wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
                 wc.UseDefaultCredentials = true;
                 wc.DownloadProgressChanged += wc_DownloadProgressChanged;
