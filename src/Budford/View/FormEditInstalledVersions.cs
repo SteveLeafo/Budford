@@ -50,7 +50,7 @@ namespace Budford.View
 
             ShowIcon = true;
 
-            model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Model.xml");
+            model = Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
 
             Initialise();
         }

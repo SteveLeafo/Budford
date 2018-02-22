@@ -13,6 +13,7 @@ namespace Budford.Control
         [STAThread]
         static void Main()
         {
+            string steve = Directory.GetCurrentDirectory();
             if (!Directory.Exists("C:\\ProgramData\\Budford"))
             {
                 Directory.CreateDirectory("C:\\ProgramData\\Budford");

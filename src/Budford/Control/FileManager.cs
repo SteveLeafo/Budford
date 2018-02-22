@@ -265,17 +265,16 @@ namespace Budford.Control
                 dl.ShowDialog(parent);
             }
             unpacker.Unpack(Path.GetFileName(uris[0]), model.Settings.DefaultInstallFolder);
-            unpacker.Unpack("cemu_hook.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-            unpacker.Unpack("sharedFonts.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-            unpacker.Unpack("shaderCache.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
-            unpacker.Unpack("controllerProfiles.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "");
+            unpacker.Unpack("cemu_hook.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            unpacker.Unpack("sharedFonts.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            unpacker.Unpack("shaderCache.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            unpacker.Unpack("controllerProfiles.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
 
-            unpacker.ExtractToDirectory("sys.zip", model.Settings.DefaultInstallFolder + "\\cemu_" + model.Settings.CurrentCemuVersion + "\\mlc01\\", true);
             unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
 
             if (Directory.Exists("graphicsPacks"))
             {
-                FolderScanner.FindGraphicsPacks(new DirectoryInfo("graphicsPacks\\graphicsPacks"), model.GraphicsPacks);
+                FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicsPacks")), model.GraphicsPacks);
             }
             FolderScanner.AddGraphicsPacksToGames(model);
             CemuFeatures.UpdateFeaturesForInstalledVersions(model);

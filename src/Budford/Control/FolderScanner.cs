@@ -22,9 +22,9 @@ namespace Budford.Control
             {
                 foreach (var folder in Directory.EnumerateDirectories(romFolder))
                 {
-                    if (Directory.Exists(folder + "\\code"))
+                    if (Directory.Exists(Path.Combine(folder, "code")))
                     {
-                        foreach (var file in Directory.EnumerateFiles(folder + "\\code"))
+                        foreach (var file in Directory.EnumerateFiles(Path.Combine(folder, "code")))
                         {
                             if (file.ToUpper().EndsWith(".RPX"))
                             {
@@ -45,9 +45,9 @@ namespace Budford.Control
         /// <param name="launchFile"></param>
         private static void AddGame(Dictionary<string, GameInformation> gameData, string folder, string launchFile)
         {
-            if (File.Exists(folder + "\\meta\\meta.xml"))
+            if (File.Exists(Path.Combine(folder, "meta", "meta.xml")))
             {
-                XElement xElement = XElement.Parse(XDocument.Load(folder + "\\meta\\meta.xml").ToString());
+                XElement xElement = XElement.Parse(XDocument.Load(Path.Combine(folder, "meta", "meta.xml")).ToString());
 
                 var productCode = Xml.GetValue(xElement, "product_code");
                 if (productCode != null)

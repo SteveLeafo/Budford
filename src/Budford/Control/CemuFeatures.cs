@@ -16,6 +16,8 @@ namespace Budford.Control
 {
     static class CemuFeatures
     {
+        static string cemu = "Cemu.exe";
+
         // Lookup table for each of the released Cemu versions - will replace with a hash code one day
         static Dictionary<long, string> versionSizes;
 
@@ -126,7 +128,7 @@ namespace Budford.Control
             InstalledVersion dlcSource = GetLatestDlcVersion(model);
             foreach (var v in model.Settings.InstalledVersions)
             {
-                if (!v.HasPatch) unpacker.ExtractToDirectory("sys.zip", v.Folder + "\\mlc01\\", true);
+                if (!v.HasPatch) unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
                 if (!v.HasFonts) unpacker.Unpack("sharedFonts.zip", v.Folder);
                 //if (!v.HasCemuHook) 
                     InstallCemuHook(unpacker, v);
@@ -135,7 +137,14 @@ namespace Budford.Control
                 {
                     if (dlcSource != null)
                     {
-                        JunctionPoint.Create(dlcSource.Folder + @"\mlc01\usr\title", v.Folder + @"\mlc01\usr\title", true);
+                        try
+                        {
+                            JunctionPoint.Create(dlcSource.Folder + @"\mlc01\usr\title", v.Folder + @"\mlc01\usr\title", true);
+                        }
+                        catch (Exception)
+                        {
+                            // No code0
+                        }
                     }
                 }
             }
@@ -264,14 +273,14 @@ namespace Budford.Control
         internal static bool IsCemuFolder(string folder, out string version)
         {
             version = "??";
-            if (File.Exists(folder + "\\cemu.exe"))
+            if (File.Exists(Path.Combine(folder, cemu)))
             {
-                FileInfo fi = new FileInfo(folder + "\\cemu.exe");
+                FileInfo fi = new FileInfo(Path.Combine(folder, cemu));
                 if (versionSizes.ContainsKey(fi.Length))
                 {
                     version = versionSizes[fi.Length];
                 }
-                return Directory.Exists(folder + "\\mlc01");
+                return Directory.Exists(Path.Combine(folder, "mlc01"));
             }
             return false;
         }
@@ -283,7 +292,7 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasCemuHookInstalled(string folder)
         {
-            return File.Exists(folder + "\\dbghelp.dll");
+            return File.Exists(Path.Combine(folder, "dbghelp.dll"));
         }
 
         /// <summary>
@@ -293,15 +302,15 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasFontsInstalled(string folder)
         {
-            if (Directory.Exists(folder + "\\sharedFonts"))
+            if (Directory.Exists(Path.Combine(folder, "sharedFonts")))
             {
-                if (File.Exists(folder + "\\sharedFonts\\CafeCn.ttf"))
+                if (File.Exists(Path.Combine(folder, "sharedFonts", "CafeCn.ttf")))
                 {
-                    if (File.Exists(folder + "\\sharedFonts\\CafeKr.ttf"))
+                    if (File.Exists(Path.Combine(folder, "sharedFonts", "CafeKr.ttf")))
                     {
-                        if (File.Exists(folder + "\\sharedFonts\\CafeStd.ttf"))
+                        if (File.Exists(Path.Combine(folder, "sharedFonts", "CafeStd.ttf")))
                         {
-                            if (File.Exists(folder + "\\sharedFonts\\CafeTw.ttf"))
+                            if (File.Exists(Path.Combine(folder, "sharedFonts", "CafeTw.ttf")))
                             {
                                 return true;
                             }
@@ -319,15 +328,15 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasPatchInstalled(string folder)
         {
-            if (Directory.Exists(folder + "\\mlc01\\sys\\title\\0005001b\\10056000\\content"))
+            if (Directory.Exists(Path.Combine(new string[] { folder, "mlc01", "sys", "title", "0005001b", "10056000", "content" })))
             {
-                if (File.Exists(folder + "\\mlc01\\sys\\title\\0005001b\\10056000\\content\\FFLResHigh.dat"))
+                if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"})))
                 {
-                    if (File.Exists(folder + "\\mlc01\\sys\\title\\0005001b\\10056000\\content\\FFLResHighLG.dat"))
+                    if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"})))
                     {
-                        if (File.Exists(folder + "\\mlc01\\sys\\title\\0005001b\\10056000\\content\\FFLResMiddle.dat"))
+                        if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"})))
                         {
-                            if (File.Exists(folder + "\\mlc01\\sys\\title\\0005001b\\10056000\\content\\FFLResMiddleLG.dat"))
+                            if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"})))
                             {
                                 return true;
                             }
@@ -345,9 +354,9 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasControllerProfiles(string folder)
         {
-            if (Directory.Exists(folder + "\\controllerProfiles"))
+            if (Directory.Exists(Path.Combine(folder, "controllerProfiles")))
             {
-                return Directory.EnumerateFiles(folder + "\\controllerProfiles").Any();
+                return Directory.EnumerateFiles(Path.Combine(folder, "controllerProfiles")).Any();
             }
             return false;
         }
@@ -359,9 +368,9 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasDlcInstalled(string folder)
         {
-            if (Directory.Exists(folder + @"\mlc01\usr\title"))
+            if (Directory.Exists(Path.Combine(new string[] { folder + "mlc01","usr", "title" })))
             {
-                string dest = JunctionPoint.GetTarget(folder + @"\mlc01\usr\title");
+                string dest = JunctionPoint.GetTarget(Path.Combine(new string[] { folder + "mlc01", "usr", "title" }));
                 if (dest != null)
                 {
                     if (!Directory.Exists(dest))
@@ -369,7 +378,7 @@ namespace Budford.Control
                         return true;
                     }
                 }
-                if (Directory.EnumerateDirectories(folder + @"\mlc01\usr\title").Any())
+                if (Directory.EnumerateDirectories(Path.Combine(new string[] { folder + "mlc01", "usr", "title" })).Any())
                 {
                     return true;
                 }
@@ -400,8 +409,8 @@ namespace Budford.Control
             if (versionWithControllerProfiles != null)
             {
                 FileManager.CopyFilesRecursively(
-                    new DirectoryInfo(versionWithControllerProfiles.Folder + "\\controllerProfiles"),
-                    new DirectoryInfo(installedVersion.Folder + "\\controllerProfiles"));
+                    new DirectoryInfo(Path.Combine(versionWithControllerProfiles.Folder, "controllerProfiles")),
+                    new DirectoryInfo(Path.Combine(installedVersion.Folder, "controllerProfiles")));
             }
         }
 
@@ -518,7 +527,7 @@ namespace Budford.Control
                         File.Delete("tempGraphicPack.zip");
                     }
                     var unpacker = new Unpacker(parent);
-                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, "graphicsPacks\\" + packName, "Graphic Pack");                    
+                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, Path.Combine("graphicsPacks", packName), "Graphic Pack");                    
                 }
                 else
                 {
@@ -538,7 +547,7 @@ namespace Budford.Control
             }
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
-                string folder = dir.Replace("graphicsPacks\\", "");
+                string folder = dir.Replace("graphicsPacks" + Path.PathSeparator, "");
                 if (folder.StartsWith("graphicPacks_2-"))
                 {
                     if (pack == folder)
