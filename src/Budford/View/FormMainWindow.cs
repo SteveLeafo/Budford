@@ -41,8 +41,6 @@ namespace Budford.View
         {
             InitializeComponent();
 
-            UsbNotification.RegisterUsbDeviceNotification(Handle);
-
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford");
@@ -55,7 +53,11 @@ namespace Budford.View
                 }
             }
             Model = Persistence.Load(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Budford\\Model.xml");
-           
+
+            //if (Model.Settings.RegisterUsbNotification)
+            {
+                UsbNotification.RegisterUsbDeviceNotification(Handle);
+            }
 
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
@@ -87,8 +89,6 @@ namespace Budford.View
             fileManager.InitialiseFolderStructure(Model);
 
             FolderScanner.AddGraphicsPacksToGames(Model);
-
-            NativeMethods.SurpressOsErrors();
 
             if (Model.Users.Count == 0)
             {

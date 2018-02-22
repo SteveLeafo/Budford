@@ -18,19 +18,26 @@
         /// <param name="windowHandle">Handle to the window receiving notifications.</param>
         public static void RegisterUsbDeviceNotification(IntPtr windowHandle)
         {
-            DevBroadcastDeviceinterface dbi = new DevBroadcastDeviceinterface
+            try
             {
-                DeviceType = DbtDevtypDeviceinterface,
-                Reserved = 0,
-                ClassGuid = GuidDevinterfaceUsbDevice,
-                Name = 0
-            };
+                DevBroadcastDeviceinterface dbi = new DevBroadcastDeviceinterface
+                {
+                    DeviceType = DbtDevtypDeviceinterface,
+                    Reserved = 0,
+                    ClassGuid = GuidDevinterfaceUsbDevice,
+                    Name = 0
+                };
 
-            dbi.Size = Marshal.SizeOf(dbi);
-            IntPtr buffer = Marshal.AllocHGlobal(dbi.Size);
-            Marshal.StructureToPtr(dbi, buffer, true);
+                dbi.Size = Marshal.SizeOf(dbi);
+                IntPtr buffer = Marshal.AllocHGlobal(dbi.Size);
+                Marshal.StructureToPtr(dbi, buffer, true);
 
-            notificationHandle = RegisterDeviceNotification(windowHandle, buffer, 0);
+                notificationHandle = RegisterDeviceNotification(windowHandle, buffer, 0);
+            }
+            catch (Exception)
+            {
+                // Do nothing
+            }
         }
 
         /// <summary>

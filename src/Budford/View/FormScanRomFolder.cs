@@ -79,7 +79,7 @@ namespace Budford.View
         {
             if (Directory.Exists(romFolder))
             {
-                if (Directory.Exists(romFolder + "\\code"))
+                if (Directory.Exists(Path.Combine(romFolder, "code")))
                 {
                     CheckFolder(romFolder);
                 }
@@ -90,7 +90,7 @@ namespace Budford.View
 
                 foreach (var folder in Directory.EnumerateDirectories(romFolder))
                 {
-                    if (Directory.Exists(folder + "\\code"))
+                    if (Directory.Exists(Path.Combine(folder, "code")))
                     {
                         CheckFolder(folder);
                     }
@@ -108,16 +108,16 @@ namespace Budford.View
         /// <param name="folder"></param>
         private void CheckFolder(string folder)
         {
-            foreach (var file in Directory.EnumerateFiles(folder + "\\code"))
+            foreach (var file in Directory.EnumerateFiles(Path.Combine(folder, "code")))
             {
                 var extension = Path.GetExtension(file);
                 if (extension != null && extension.ToUpper() == ".RPX")
                 {
-                    if (Directory.Exists(folder + "\\meta"))
+                    if (Directory.Exists(Path.Combine(folder, "meta")))
                     {
-                        if (File.Exists(folder + "\\meta\\meta.xml"))
+                        if (File.Exists(Path.Combine(folder, Path.Combine("meta", "meta.xml"))))
                         {
-                            XDocument xDoc = XDocument.Load(folder + "\\meta\\meta.xml");
+                            XDocument xDoc = XDocument.Load(Path.Combine(folder, Path.Combine("meta", "meta.xml")));
                             XElement xElement = XElement.Parse(xDoc.ToString());
 
                             ReadMetaData(folder, file, xElement);

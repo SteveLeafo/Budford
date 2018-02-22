@@ -264,7 +264,6 @@
     <EmbeddedResource Include="View\UserControlTiledView.resx">
       <DependentUpon>UserControlTiledView.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -274,6 +273,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Control\App.config" />

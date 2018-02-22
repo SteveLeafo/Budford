@@ -113,16 +113,19 @@ namespace Budford.View
         {
             comboBox1.Items.Clear();
             string pack = "";
-            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+            if (Directory.Exists("graphicsPacks"))
             {
-                string folder = dir.Replace("graphicsPacks\\", "");
-                if (folder.StartsWith("graphicPacks_2-"))
+                foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                 {
-                    pack = folder.Replace("graphicPacks_2-", "");
-                    comboBox1.Items.Add(pack);
-                    if (pack == model.Settings.GraphicsPackRevision)
+                    string folder = dir.Replace("graphicsPacks\\", "");
+                    if (folder.StartsWith("graphicPacks_2-"))
                     {
-                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                        pack = folder.Replace("graphicPacks_2-", "");
+                        comboBox1.Items.Add(pack);
+                        if (pack == model.Settings.GraphicsPackRevision)
+                        {
+                            comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                        }
                     }
                 }
             }
