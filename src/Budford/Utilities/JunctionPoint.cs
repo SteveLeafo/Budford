@@ -174,9 +174,16 @@ namespace Budford.Utilities
         /// exist, is invalid, is not a junction point, or some other error occurs</exception>
         public static string GetTarget(string junctionPoint)
         {
-            using (SafeFileHandle handle = OpenReparsePoint(junctionPoint, NativeMethods.FileAccess.GenericRead))
+            try
             {
-                return InternalGetTarget(handle);
+                using (SafeFileHandle handle = OpenReparsePoint(junctionPoint, NativeMethods.FileAccess.GenericRead))
+                {
+                    return InternalGetTarget(handle);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
