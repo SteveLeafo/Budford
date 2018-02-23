@@ -107,6 +107,7 @@
     <Compile Include="Tools\CopySaves.cs" />
     <Compile Include="Tools\HashGenerator.cs" />
     <Compile Include="Tools\Tool.cs" />
+    <Compile Include="Utilities\CurrentOS.cs" />
     <Compile Include="Utilities\CurrentUserSecurity.cs" />
     <Compile Include="Utilities\FileCache.cs" />
     <Compile Include="Utilities\FileCacheEntry.cs" />
