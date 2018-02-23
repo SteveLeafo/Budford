@@ -179,12 +179,19 @@ namespace Budford.Control
         /// <param name="fullPath"></param>
         internal static void GrantAccess(string fullPath)
         {
-            DirectoryInfo dInfo = new DirectoryInfo(fullPath);
-            DirectorySecurity dSecurity = dInfo.GetAccessControl();
-            dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
-            if (Directory.Exists(dInfo.FullName))
+            try
             {
-                dInfo.SetAccessControl(dSecurity);
+                DirectoryInfo dInfo = new DirectoryInfo(fullPath);
+                DirectorySecurity dSecurity = dInfo.GetAccessControl();
+                dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
+                if (Directory.Exists(dInfo.FullName))
+                {
+                    dInfo.SetAccessControl(dSecurity);
+                }
+            }
+            catch (Exception)
+            {
+                // Linux hates this
             }
         }
 

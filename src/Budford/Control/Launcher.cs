@@ -116,7 +116,9 @@ namespace Budford.Control
 
             SetCemuVersion(modelIn, game);
 
-            if (File.Exists(cemu))
+           
+
+            if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
                 DeleteLogFile(modelIn, logfile);
 
@@ -151,6 +153,7 @@ namespace Budford.Control
 
                 startTime = DateTime.Now;
                 runningProcess = Process.Start(start);
+
                 if (runningProcess != null)
                 {
                     runningProcess.EnableRaisingEvents = true;
@@ -160,7 +163,14 @@ namespace Budford.Control
 
                     if (parentIn != null)
                     {
-                        NativeMethods.SetParent(runningProcess.Handle, parentIn.Handle);
+                        try
+                        {
+                            NativeMethods.SetParent(runningProcess.Handle, parentIn.Handle);
+                        }
+                        catch (Exception)
+                        {
+                            // Dies in Linux
+                        }
                     }
                     parentProcess.PriorityClass = original;
 
@@ -434,7 +444,7 @@ namespace Budford.Control
             if (Model.Settings.WineExe.Length > 1)
             {
                 start.FileName = Model.Settings.WineExe;
-                start.Arguments = cemuIn + " " + start.Arguments;
+                start.Arguments = Path.Combine(Directory.GetCurrentDirectory(), runningVersion.Folder ,cemuIn) + " " + start.Arguments;
             }
             else
             {
