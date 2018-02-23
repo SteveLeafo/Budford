@@ -275,6 +275,43 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  games to LaunchBox.
+        /// </summary>
+        internal static string FormLaunchboxExporter_button1_Click__games_to_LaunchBox {
+            get {
+                return ResourceManager.GetString("FormLaunchboxExporter_button1_Click__games_to_LaunchBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully exported .
+        /// </summary>
+        internal static string FormLaunchboxExporter_button1_Click_Successfully_exported_ {
+            get {
+                return ResourceManager.GetString("FormLaunchboxExporter_button1_Click_Successfully_exported_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LaunchBox Executeable| *.exe;.
+        /// </summary>
+        internal static string FormLaunchboxExporter_button2_Click_LaunchBox_Executeable____exe_ {
+            get {
+                return ResourceManager.GetString("FormLaunchboxExporter_button2_Click_LaunchBox_Executeable____exe_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to download graphic packs at this time.  Try again later or upgrate to latest version of Budford.
+        /// </summary>
+        internal static string FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford {
+            get {
+                return ResourceManager.GetString("FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_thi" +
+                        "s_time___Try_again_later_or_upgrate_to_latest_version_of_Budford", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         internal static string FormMainWindow_mi_Click_Hello {

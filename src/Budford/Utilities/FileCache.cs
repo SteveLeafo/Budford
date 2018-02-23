@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Budford.Properties;
 
 namespace Budford.Utilities
 {
@@ -31,14 +32,7 @@ namespace Budford.Utilities
         {
             FileCache fileCache = new FileCache();
             BinaryWriter streamFile = new BinaryWriter(File.Open(path, FileMode.Create));
-            if (streamFile == null)
-            {
-                //forceLog_printf("Failed to create cache file \"%ls\"", path);
-                return null;
-            }
             // init file cache
-            //memset(fileCache, 0x00, sizeof(fileCache_t));
-            //InitializeCriticalSection(&fileCache.cs);
             fileCache.StreamFile2 = streamFile;
             fileCache.DataOffset = FilecacheHeaderResv;
             fileCache.FileTableEntryCount = 32;
@@ -49,8 +43,7 @@ namespace Budford.Utilities
             {
                 fileCache.FileTableEntries[f] = new FileCacheEntry();
             }
-            //fileCache.fileTableEntries = new FileCacheEntry[fileCache.fileTableEntries];
-            //memset(fileCache->fileTableEntries, 0, fileCache->fileTableSize);
+
             fileCache.ExtraVersion = extraVersion;
             // file table stores info about itself
             fileCache.FileTableEntries[0].Name1 = FilecacheFiletableName1;
@@ -80,7 +73,7 @@ namespace Budford.Utilities
             bool isV1 = false;
             if (headerMagic != FilecacheMagic && headerMagic != FilecacheMagicV2)
             {
-                stream_destroy(streamFile);
+                stream_destroy();
                 return null;
             }
             if (headerMagic == FilecacheMagic)
@@ -91,11 +84,11 @@ namespace Budford.Utilities
             UInt32 headerExtraVersion = stream_readU32(streamFile);
             if (headerExtraVersion != extraVersion)
             {
-                stream_destroy(streamFile);
+                stream_destroy();
                 return null;
             }
 
-            UInt64 headerDataOffset = 0;
+            UInt64 headerDataOffset;
             if (isV1)
             {
                 headerDataOffset = stream_readU32(streamFile);
@@ -115,10 +108,9 @@ namespace Budford.Utilities
             }
 
             UInt32 headerFileTableSize = stream_readU32(streamFile);
-            //if( (headerFileTableSize%sizeof(fileCacheEntry_t)) != 0 )
-            //  return NULL;
-            UInt32 fileTableEntryCount = 0;
-            bool invalidFileTableSize = false;
+
+            UInt32 fileTableEntryCount;
+            bool invalidFileTableSize;
             if (isV1)
             {
                 fileTableEntryCount = headerFileTableSize / 24;
@@ -132,12 +124,12 @@ namespace Budford.Utilities
 
             if (invalidFileTableSize)
             {
-                Console.WriteLine("\"{0}\" is corrupted", path);
-                stream_destroy(streamFile);
+                Console.WriteLine(Resources.FileCache_fileCache_openExisting___0___is_corrupted, path);
+                stream_destroy();
                 return null;
             }
 
-            InitializeCriticalSection(fileCache.Cs);
+            InitializeCriticalSection();
             fileCache.StreamFile = streamFile;
             fileCache.ExtraVersion = extraVersion;
             fileCache.DataOffset = headerDataOffset;
@@ -177,35 +169,28 @@ namespace Budford.Utilities
             return fileCache;
         }
 
-        void fileCache_close(FileCache fileCache)
-        {
-            //free(fileCache->fileTableEntries);
-            fileCache.StreamFile.Dispose();// stream_destroy(fileCache->stream_file);
-            fileCache.StreamFile2.Dispose();
-            //free(fileCache);
-        }
-
         private static void fileCache_updateFiletable(FileCache fileCache, Int32 extraEntriesToAllocate)
         {
             // recreate file table with bigger size (optional)
             fileCache.FileTableEntries[0].Name1 = FilecacheFiletableFreeName;
             fileCache.FileTableEntries[0].Name2 = FilecacheFiletableFreeName;
             Int32 newFileTableEntryCount = (Int32)fileCache.FileTableEntryCount + extraEntriesToAllocate;
-            //fileCache.fileTableEntries = (fileCacheEntry_t*)realloc(fileCache.fileTableEntries, sizeof_fileCacheEntry_t * newFileTableEntryCount);
-            //fileCache.fileTableEntries = new FileCacheEntry[fileCache.fileTableSize];
-            Array.Resize<FileCacheEntry>(ref fileCache.FileTableEntries, newFileTableEntryCount);
+
+            Array.Resize(ref fileCache.FileTableEntries, newFileTableEntryCount);
             for (Int32 f = (Int32)fileCache.FileTableEntryCount; f < newFileTableEntryCount; f++)
             {
-                fileCache.FileTableEntries[f] = new FileCacheEntry();
-                fileCache.FileTableEntries[f].Name1 = FilecacheFiletableFreeName;
-                fileCache.FileTableEntries[f].Name2 = FilecacheFiletableFreeName;
-                fileCache.FileTableEntries[f].FileOffset = 0;
-                fileCache.FileTableEntries[f].FileSize = 0;
+                fileCache.FileTableEntries[f] = new FileCacheEntry
+                {
+                    Name1 = FilecacheFiletableFreeName,
+                    Name2 = FilecacheFiletableFreeName,
+                    FileOffset = 0,
+                    FileSize = 0
+                };
             }
             fileCache.FileTableEntryCount = (UInt32)newFileTableEntryCount;
 
             byte[] fileTable = AsByteArray(fileCache.FileTableEntries);
-            fileCache_addFile(fileCache, FilecacheFiletableName1, FilecacheFiletableName2, fileTable, (int)(SizeofFileCacheEntryT * newFileTableEntryCount));
+            fileCache_addFile(fileCache, FilecacheFiletableName1, FilecacheFiletableName2, fileTable, SizeofFileCacheEntryT * newFileTableEntryCount);
 
             // update file table info in struct
             if (fileCache.FileTableEntries[0].Name1 != FilecacheFiletableName1 || fileCache.FileTableEntries[0].Name2 != FilecacheFiletableName2)
@@ -239,7 +224,7 @@ namespace Budford.Utilities
             {
                 return;
             }
-            EnterCriticalSection(fileCache.Cs);
+            EnterCriticalSection();
             // find free entry in file table
             Int32 entryIndex = -1;
             // scan for already existing entry
@@ -274,7 +259,6 @@ namespace Budford.Utilities
                         // no free entry, recreate file table with bigger size
                         fileCache_updateFiletable(fileCache, 64);
                         // try again
-                        continue;
                     }
                     else
                     {
@@ -289,8 +273,7 @@ namespace Budford.Utilities
             {
                 bool hasCollision = false;
                 UInt64 currentEndOffset = currentStartOffset + (UInt64)fileSize;
-                //FileCacheEntry_t* entry = fileCache.fileTableEntries;
-                //FileCacheEntry_t* entryLast = fileCache.fileTableEntries + fileCache.fileTableEntryCount;
+
                 int entry = s0;
                 int entryLast = (int)fileCache.FileTableEntryCount;
                 while (entry < entryLast)
@@ -302,7 +285,7 @@ namespace Budford.Utilities
                     }
                     if (currentEndOffset >= fileCache.FileTableEntries[entry].FileOffset && currentStartOffset < fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize)
                     {
-                        currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + (UInt64)fileCache.FileTableEntries[entry].FileSize;
+                        currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
                         hasCollision = true;
                         s0 = 0;
                         break;
@@ -322,40 +305,36 @@ namespace Budford.Utilities
                             entry++;
                             continue;
                         }
-                        if ((UInt64)fileCache.FileTableEntries[entry].FileOffset == currentStartOffset)
+                        if (fileCache.FileTableEntries[entry].FileOffset == currentStartOffset)
                         {
-                            currentStartOffset = (UInt64)fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
+                            currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
                             entry++;
                             continue;
                         }
-                        break;
+                        entry = entryLast;
                     }
                 }
                 // retry in case of collision
-                if (hasCollision == false)
+                if (!hasCollision)
                 {
-                    s0 = 0;
                     break;
                 }
-                //if (entry > 128)
-                //{
-                //    s0 = entry - 128;
-                //}
+
             }
             // update file table entry
             fileCache.FileTableEntries[entryIndex].Name1 = name1;
             fileCache.FileTableEntries[entryIndex].Name2 = name2;
             fileCache.FileTableEntries[entryIndex].ExtraReserved = extraReserved;
-            fileCache.FileTableEntries[entryIndex].FileOffset = (UInt64)currentStartOffset;
+            fileCache.FileTableEntries[entryIndex].FileOffset = currentStartOffset;
             fileCache.FileTableEntries[entryIndex].FileSize = (UInt32)fileSize;
             // write file data
-            stream_setSeek64(fileCache.StreamFile2, fileCache.DataOffset + (UInt64)currentStartOffset);
-            stream_writeData(fileCache.StreamFile2, fileData, fileSize);
+            stream_setSeek64(fileCache.StreamFile2, fileCache.DataOffset + currentStartOffset);
+            stream_writeData(fileCache.StreamFile2, fileData);
             // write file table entry
             stream_setSeek64(fileCache.StreamFile2, fileCache.DataOffset + fileCache.FileTableOffset + (UInt64)(SizeofFileCacheEntryT * entryIndex));
 
             stream_writeData(fileCache.StreamFile2, fileCache.FileTableEntries, fileCache.FileTableEntryCount);
-            LeaveCriticalSection(fileCache.Cs);
+            LeaveCriticalSection();
         }
 
         public static bool fileCache_deleteFile(FileCache fileCache, UInt64 name1, UInt64 name2)
@@ -368,9 +347,8 @@ namespace Budford.Utilities
             {
                 return false; // make sure the filetable is not accidentally deleted
             }
-            EnterCriticalSection(fileCache.Cs);
-            //fileCacheEntry_t* entry = fileCache->fileTableEntries;
-            //fileCacheEntry_t* entryLast = fileCache->fileTableEntries + fileCache->fileTableEntryCount;
+            EnterCriticalSection();
+
             int entry = 0;
             uint entryLast = fileCache.FileTableEntryCount;
             while (entry < entryLast)
@@ -382,15 +360,15 @@ namespace Budford.Utilities
                     fileCache.FileTableEntries[entry].FileOffset = 0;
                     fileCache.FileTableEntries[entry].FileSize = 0;
                     // store updated entry to file cache
-                    Int32 entryIndex = entry; ;
+                    Int32 entryIndex = entry;
                     stream_setSeek64(fileCache.StreamFile, fileCache.DataOffset + fileCache.FileTableOffset + (UInt64)(SizeofFileCacheEntryT * entryIndex));
-                    //TODOstream_writeData(fileCache.stream_file, fileCache.fileTableEntries[entryIndex], sizeof_fileCacheEntry_t);
-                    LeaveCriticalSection(fileCache.Cs);
+
+                    LeaveCriticalSection();
                     return true;
                 }
                 entry++;
             }
-            LeaveCriticalSection(fileCache.Cs);
+            LeaveCriticalSection();
             return false;
         }
 
@@ -400,9 +378,8 @@ namespace Budford.Utilities
             {
                 return null;
             }
-            EnterCriticalSection(fileCache.Cs);
-            //fileCacheEntry_t* entry = fileCache.fileTableEntries;
-            //fileCacheEntry_t* entryLast = fileCache.fileTableEntries + fileCache.fileTableEntryCount;
+            EnterCriticalSection();
+
             int entry = 0;
             uint entryLast = fileCache.FileTableEntryCount;
             while (entry < entryLast)
@@ -410,16 +387,16 @@ namespace Budford.Utilities
                 if (fileCache.FileTableEntries[entry].Name1 == name1 && fileCache.FileTableEntries[entry].Name2 == name2)
                 {
                     fileSize = (Int32)fileCache.FileTableEntries[entry].FileSize;
-                    //uint8* fileData = (uint8*)malloc(fileCache.fileTableEntries[entry].fileSize);
+
                     byte[] fileData = new byte[fileCache.FileTableEntries[entry].FileSize];
                     stream_setSeek64(fileCache.StreamFile, fileCache.DataOffset + fileCache.FileTableEntries[entry].FileOffset);
                     stream_readData(fileCache.StreamFile, fileData, fileCache.FileTableEntries[entry].FileSize);
-                    LeaveCriticalSection(fileCache.Cs);
+                    LeaveCriticalSection();
                     return fileData;
                 }
                 entry++;
             }
-            LeaveCriticalSection(fileCache.Cs);
+            LeaveCriticalSection();
             return null;
         }
 
@@ -443,10 +420,9 @@ namespace Budford.Utilities
             {
                 return 0;
             }
-            EnterCriticalSection(fileCache.Cs);
+            EnterCriticalSection();
             Int32 fileCount = 0;
-            //fileCacheEntry_t* entry = fileCache->fileTableEntries;
-            //fileCacheEntry_t* entryLast = fileCache->fileTableEntries + fileCache->fileTableEntryCount;
+
             int entry = 0;
             int entryLast = (int)fileCache.FileTableEntryCount;
             while (entry < entryLast)
@@ -464,28 +440,28 @@ namespace Budford.Utilities
                 fileCount++;
                 entry++;
             }
-            LeaveCriticalSection(fileCache.Cs);
+            LeaveCriticalSection();
             return fileCount;
         }
 
-        private static void LeaveCriticalSection(uint p)
+        private static void LeaveCriticalSection()
         {
-
+            // To keep the code looking more like the original
         }
 
-        private static void stream_writeData(BinaryWriter binaryWriter, byte[] fileData, int fileSize)
+        private static void stream_writeData(BinaryWriter binaryWriter, byte[] fileData)
         {
             binaryWriter.Write(fileData);
         }
 
         private static void __debugbreak()
         {
-            //throw new NotImplementedException();
+            // To keep the code looking more like the original
         }
 
-        private static void EnterCriticalSection(uint p)
+        private static void EnterCriticalSection()
         {
-
+            // To keep the code looking more like the original
         }
         private static void stream_writeData(BinaryWriter streamFile2, FileCacheEntry[] fileCacheEntry, uint p)
         {
@@ -525,12 +501,14 @@ namespace Budford.Utilities
                 UInt64 fileOffset = stream_readU64(streamFile);
                 UInt32 fileSize = stream_readU32(streamFile);
                 UInt32 extraReserved = stream_readU32(streamFile);
-                entries[i] = new FileCacheEntry();
-                entries[i].Name1 = name1;
-                entries[i].Name2 = name2;
-                entries[i].FileOffset = fileOffset;
-                entries[i].FileSize = fileSize;
-                entries[i].ExtraReserved = extraReserved;
+                entries[i] = new FileCacheEntry
+                {
+                    Name1 = name1,
+                    Name2 = name2,
+                    FileOffset = fileOffset,
+                    FileSize = fileSize,
+                    ExtraReserved = extraReserved
+                };
             }
         }
 
@@ -540,12 +518,14 @@ namespace Budford.Utilities
             streamFile.BaseStream.Position = (long)p;
         }
 
-        private static void InitializeCriticalSection(uint p)
+        private static void InitializeCriticalSection()
         {
+            // To keep the code looking more like the original
         }
 
-        private static void stream_destroy(BinaryReader streamFile)
+        private static void stream_destroy()
         {
+            // To keep the code looking more like the original
         }
 
         private static uint stream_readU32(BinaryReader streamFile)

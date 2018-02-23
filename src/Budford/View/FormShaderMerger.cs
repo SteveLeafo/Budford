@@ -39,27 +39,20 @@ namespace Budford.View
             listView1.BeginUpdate();
             foreach (var item in cache.FileTableEntries)
             {
-                //if (!items.Contains(new Tuple<ulong, ulong>(item.name1, item.name2)))
-                {
-                    ListViewItem lvi = new ListViewItem(id.ToString());
-                    lvi.SubItems.Add(item.Name1.ToString("X"));
-                    lvi.SubItems.Add(item.Name2.ToString("X"));
-                    lvi.SubItems.Add(item.FileOffset.ToString());
-                    lvi.SubItems.Add(item.FileSize.ToString());
-                    lvi.SubItems.Add(item.ExtraReserved.ToString("X"));
+                ListViewItem lvi = new ListViewItem(id.ToString());
+                lvi.SubItems.Add(item.Name1.ToString("X"));
+                lvi.SubItems.Add(item.Name2.ToString("X"));
+                lvi.SubItems.Add(item.FileOffset.ToString());
+                lvi.SubItems.Add(item.FileSize.ToString());
+                lvi.SubItems.Add(item.ExtraReserved.ToString("X"));
 
-                    listView1.Items.Add(lvi);
-                    id++;
-                    items.Add(new Tuple<ulong, ulong>(item.Name1, item.Name2));
-                }
+                listView1.Items.Add(lvi);
+                id++;
+                items.Add(new Tuple<ulong, ulong>(item.Name1, item.Name2));
             }
             listView1.EndUpdate();
-            //if (id > originalCount)
-            //{
-            //    MessageBox.Show("Added " + (id - originalCount).ToString() + " new shaders");
-            //    MessageBox.Show("Added " + FileCache.fileCache_countFileEntries(cache) + " new shaders");
+
             MessageBox.Show(Resources.FormShaderMerger_UpdateListView_Added_ + FileCache.fileCache_getFileEntryCount(cache) + Resources.FormShaderMerger_UpdateListView__new_shaders);
-            //}
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)

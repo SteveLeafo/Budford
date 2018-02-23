@@ -2,24 +2,20 @@
 using Budford.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Budford.Properties;
 
 namespace Budford.View
 {
     public partial class FormLaunchboxExporter : Form
     {
-        Model.Model model;
-        HashSet<string> games;
+        readonly Model.Model model;
+        readonly HashSet<string> games;
 
-        Dictionary<string, string> emulators = new Dictionary<string, string>();
+        readonly Dictionary<string, string> emulators = new Dictionary<string, string>();
 
         public FormLaunchboxExporter(Model.Model modelIn, HashSet<string>gamesIn)
         {
@@ -88,7 +84,7 @@ namespace Budford.View
                             }
                         }
                         sw.WriteLine("</LaunchBox>");
-                        MessageBox.Show("Successfully exported " + count + " games to LaunchBox");
+                        MessageBox.Show(Resources.FormLaunchboxExporter_button1_Click_Successfully_exported_ + count + Resources.FormLaunchboxExporter_button1_Click__games_to_LaunchBox);
                     }
                 }
             }
@@ -98,7 +94,7 @@ namespace Budford.View
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "LaunchBox Executeable| *.exe;";
+                dlg.Filter = Resources.FormLaunchboxExporter_button2_Click_LaunchBox_Executeable____exe_;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
@@ -125,23 +121,43 @@ namespace Budford.View
                     XElement xElement = XElement.Parse(XDocument.Load(emulatorFileName).ToString());
                     foreach (var g in xElement.Elements("EmulatorPlatform"))
                     {
-                        string Emulator = g.Element("Emulator").Value;
-                        string Platform = g.Element("Platform").Value;
-                        if (Emulator.Length > 0)
+                        var element = g.Element("Emulator");
+                        if (element != null)
                         {
-                            emulators.Add(Emulator, Platform);
+                            string emulator = element.Value;
+                            var o = g.Element("Platform");
+                            if (o != null)
+                            {
+                                string platform = o.Value;
+                                if (emulator.Length > 0)
+                                {
+                                    emulators.Add(emulator, platform);
+                                }
+                            }
                         }
                     }
 
                     foreach (var g in xElement.Elements("Emulator"))
                     {
-                        string Title = g.Element("Title").Value;
-                        string ID = g.Element("ID").Value;
-                        if (Title.Length > 0)
+                        var element = g.Element("Title");
+                        if (element != null)
                         {
-                            if (emulators.ContainsKey(ID))
+                            string title = element.Value;
+                            var o = g.Element("ID");
+                            if (o != null)
                             {
-                                emulators[ID] += ":" + Title;
+                                string id = o.Value;
+                                if (title.Length > 0)
+                                {
+                                    if (emulators.ContainsKey(id))
+                                    {
+                                        StringBuilder sb = new StringBuilder();
+                                        sb.Append(emulators[id]);
+                                        sb.Append( ":");
+                                        sb.Append( title);
+                                        emulators[id] = sb.ToString();
+                                    }
+                                }
                             }
                         }
                     }

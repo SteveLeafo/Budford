@@ -10,12 +10,12 @@ namespace Budford.Utilities
     /// </summary>
     public class IconHelper
     {
-        List<Bitmap> images = new List<Bitmap>();
+        readonly List<Bitmap> images = new List<Bitmap>();
 
         /// <summary>
         /// Converts a PNG image to an icon (ico)
         /// </summary>
-        /// <param name="input">The input stream</param>
+        /// <param name="inputBitmap"></param>
         /// <param name="size">Needs to be a factor of 2 (16x16 px by default)</param>
         /// <param name="preserveAspectRatio">Preserve the aspect ratio</param>
         /// <returns>Wether or not the icon was succesfully generated</returns>
@@ -40,10 +40,6 @@ namespace Budford.Utilities
             }
 
             var newBitmap = new Bitmap(inputBitmap, new Size((int)width, (int)height));
-            if (newBitmap == null)
-            {
-                return false;
-            }
             images.Add(newBitmap);
             return true;
         }
@@ -52,10 +48,7 @@ namespace Budford.Utilities
         /// <summary>
         /// Converts a PNG image to an icon (ico)
         /// </summary>
-        /// <param name="input">The input stream</param>
         /// <param name="output">The output stream</param>
-        /// <param name="size">Needs to be a factor of 2 (16x16 px by default)</param>
-        /// <param name="preserveAspectRatio">Preserve the aspect ratio</param>
         /// <returns>Wether or not the icon was succesfully generated</returns>
         public bool ConvertToIcon(Stream output)
         {
@@ -64,10 +57,8 @@ namespace Budford.Utilities
             {
 
                 var iconWriter = new BinaryWriter(output);
-                if (output == null || iconWriter == null)
-                    return false;
 
-                
+
                 WriteIconHeader(iconWriter);
 
                 foreach (var inputBitmap in images)

@@ -21,8 +21,6 @@ namespace Budford.Tools
                 string saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford");
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    //var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-
                     foreach (var latest in model.Settings.InstalledVersions)
                     {
                         string src = Path.Combine(latest.Folder, "shaderCache", "transferable" , game.Value.SaveDir + ".bin");

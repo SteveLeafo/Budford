@@ -1,9 +1,4 @@
 ﻿using Budford.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Budford.Model
 {
@@ -13,11 +8,7 @@ namespace Budford.Model
         {
             foreach (var s in TitleIds)
             {
-                if (s[1].ToLower() == title.ToLower())
-                {
-                    return s[0];
-                }
-                else if (LevenshteinDistance.Compute(s[1].ToLower(), title.ToLower()) < 5)
+                if (s[1].ToLower() == title.ToLower() || LevenshteinDistance.Compute(s[1].ToLower(), title.ToLower()) < 5)
                 {
                     return s[0];
                 }

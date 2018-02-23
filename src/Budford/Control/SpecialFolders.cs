@@ -20,9 +20,9 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (snapShotDir.Length == 0)
             {
-                return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user" , currentUser});
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", currentUser);
             }
-            return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", currentUser + "_" + snapShotDir});
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", currentUser + "_" + snapShotDir);
         }
 
         /// <summary>
@@ -36,9 +36,9 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (snapShotDir.Length == 0)
             {
-                return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId , "user", "common"});
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", "common");
             }
-            return Path.Combine(new string [] {Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) , "Budford", game.SaveDir , "00050000", gameId , "user", "common" + "_" + snapShotDir});
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", "common" + "_" + snapShotDir);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (version.VersionNumber >= 1110)
             {
-                return Path.Combine(new string [] {version.Folder + "mlc01", "usr", "save", "00050000", gameId , "user", "common"});
+                return Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user", "common");
             }
             return Path.Combine(version.Folder, "mlc01", "emulatorSave", game.SaveDir + "_255");
         }
@@ -68,7 +68,7 @@ namespace Budford.Control
             string gameId = game.TitleId.Replace("00050000", "");
             if (version.VersionNumber >= 1110)
             {
-                return Path.Combine(new string [] {version.Folder, "mlc01", "usr", "save", "00050000" , gameId , "user", "80000001"});
+                return Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user", "80000001");
             }
             return Path.Combine(version.Folder, "mlc01", "emulatorSave", game.SaveDir);
         }

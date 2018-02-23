@@ -13,7 +13,6 @@ namespace Budford.Control
         [STAThread]
         static void Main()
         {
-            string steve = Directory.GetCurrentDirectory();
             if (!Directory.Exists("C:\\ProgramData\\Budford"))
             {
                 Directory.CreateDirectory("C:\\ProgramData\\Budford");
@@ -29,7 +28,7 @@ namespace Budford.Control
             string cmdLineFileName = string.Empty;
             ParseCommandLineArguments(arguments, ref cmdLineLaunch, ref cmdLineFullScreen, ref cmdLineFileName);
 
-            if (cmdLineFileName == string.Empty || cmdLineLaunch == false)
+            if (cmdLineFileName == string.Empty || !cmdLineLaunch)
             {
                 Application.Run(new FormMainWindow());
             }

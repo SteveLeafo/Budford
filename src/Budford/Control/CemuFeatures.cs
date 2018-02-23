@@ -16,7 +16,7 @@ namespace Budford.Control
 {
     internal static class CemuFeatures
     {
-        internal static string cemu = "Cemu.exe";
+        internal const string Cemu = "Cemu.exe";
 
         // Lookup table for each of the released Cemu versions - will replace with a hash code one day
         static Dictionary<long, string> versionSizes;
@@ -87,8 +87,8 @@ namespace Budford.Control
                 version.HasControllerProfiles = HasControllerProfiles(version.Folder);
                 if (version.HasDlc)
                 {
-                    version.DlcSource = JunctionPoint.GetTarget(version.Folder + @"\mlc01\usr\title");
-                    if (JunctionPoint.Exists(version.Folder + @"\mlc01\usr\title"))
+                    version.DlcSource = JunctionPoint.GetTarget(Path.Combine(version.Folder, "mlc01", "usr", "title"));
+                    if (JunctionPoint.Exists(Path.Combine(version.Folder, "mlc01", "usr", "title")))
                     {
                         if (Directory.Exists(version.DlcSource))
                         {
@@ -228,9 +228,9 @@ namespace Budford.Control
                     if (line.Contains("name=\"download\""))
                     {
                         string[] toks = line.Split('=');
-                        View.FormEditInstalledVersions.Uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
-                        View.FormEditInstalledVersions.Filenames[0] = View.FormEditInstalledVersions.Uris[0].Substring(1 + View.FormEditInstalledVersions.Uris[0].LastIndexOf('/'));
-                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(View.FormEditInstalledVersions.Uris[0]));
+                        FormEditInstalledVersions.Uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
+                        FormEditInstalledVersions.Filenames[0] = FormEditInstalledVersions.Uris[0].Substring(1 + FormEditInstalledVersions.Uris[0].LastIndexOf('/'));
+                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(FormEditInstalledVersions.Uris[0]));
                         if (!IsInstalled(currentVersion, settings))
                         {
                             return true;
@@ -273,9 +273,9 @@ namespace Budford.Control
         internal static bool IsCemuFolder(string folder, out string version)
         {
             version = "??";
-            if (File.Exists(Path.Combine(folder, cemu)))
+            if (File.Exists(Path.Combine(folder, Cemu)))
             {
-                FileInfo fi = new FileInfo(Path.Combine(folder, cemu));
+                FileInfo fi = new FileInfo(Path.Combine(folder, Cemu));
                 if (versionSizes.ContainsKey(fi.Length))
                 {
                     version = versionSizes[fi.Length];
@@ -328,15 +328,15 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasPatchInstalled(string folder)
         {
-            if (Directory.Exists(Path.Combine(new string[] { folder, "mlc01", "sys", "title", "0005001b", "10056000", "content" })))
+            if (Directory.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10056000", "content")))
             {
-                if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"})))
+                if (File.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat")))
                 {
-                    if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"})))
+                    if (File.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat")))
                     {
-                        if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"})))
+                        if (File.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat")))
                         {
-                            if (File.Exists(Path.Combine(new string[] { folder + "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"})))
+                            if (File.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat")))
                             {
                                 return true;
                             }
@@ -368,9 +368,9 @@ namespace Budford.Control
         /// <returns></returns>
         static bool HasDlcInstalled(string folder)
         {
-            if (Directory.Exists(Path.Combine(new string[] { folder + "mlc01","usr", "title" })))
+            if (Directory.Exists(Path.Combine(new[] { folder,  "mlc01","usr", "title" })))
             {
-                string dest = JunctionPoint.GetTarget(Path.Combine(new string[] { folder + "mlc01", "usr", "title" }));
+                string dest = JunctionPoint.GetTarget(Path.Combine(new[] { folder, "mlc01", "usr", "title" }));
                 if (dest != null)
                 {
                     if (!Directory.Exists(dest))
@@ -378,7 +378,7 @@ namespace Budford.Control
                         return true;
                     }
                 }
-                if (Directory.EnumerateDirectories(Path.Combine(new string[] { folder + "mlc01", "usr", "title" })).Any())
+                if (Directory.EnumerateDirectories(Path.Combine(new[] { folder,  "mlc01", "usr", "title" })).Any())
                 {
                     return true;
                 }

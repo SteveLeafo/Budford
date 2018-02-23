@@ -38,6 +38,7 @@ namespace Budford.Utilities
             }
             catch (Exception)
             {
+                // ignored
             }
             return true;
         }
@@ -61,6 +62,7 @@ namespace Budford.Utilities
             }
             catch (Exception)
             {
+                // ignored
             }
             return true;
         }

@@ -461,7 +461,6 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadCemuHookToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //unpacker.DownloadAndUnpack("cemu_hook.zip", "https://files.sshnuke.net/cemuhook_190c_0532.zip", "Downloads", "CEMU Hook");
             using (FormWebpageDownload dlc = new FormWebpageDownload("https://sshnuke.net/cemuhook", "Latest Version"))
             {
                 dlc.ShowDialog(this);

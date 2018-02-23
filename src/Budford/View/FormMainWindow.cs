@@ -24,9 +24,6 @@ namespace Budford.View
         // For launching the games.
         readonly Launcher launcher;
 
-        // Managing files between revisions
-        readonly FileManager fileManager;
-
         // Used for column sorting when clicking on a header
         private readonly ListViewColumnSorter lvwColumnSorter;
 
@@ -47,8 +44,7 @@ namespace Budford.View
 
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
-            fileManager = new FileManager(Model);
-
+            
             if (Model.Settings.ScanGameFoldersOnStart)
             {
                 foreach (var folder in Model.Settings.RomFolders)
@@ -132,7 +128,7 @@ namespace Budford.View
             }
         }
 
-        static internal Model.Model TransferLegacyModel()
+        internal static Model.Model TransferLegacyModel()
         {
             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
             {
@@ -1253,11 +1249,11 @@ namespace Budford.View
                 {
                     string gameId = Model.GameData[Model.CurrentId].TitleId.Replace("00050000", "");
 
-                    if (!Directory.Exists(Path.Combine(new string[] {GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId,  "user"})))
+                    if (!Directory.Exists(Path.Combine(GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId, "user")))
                     {
-                        Directory.CreateDirectory(Path.Combine(new string[] {GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId,  "user"}));
+                        Directory.CreateDirectory(Path.Combine(GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
                     }
-                    Process.Start(Path.Combine(new string[] {GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId,  "user"}));
+                    Process.Start(Path.Combine(GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
                 }
             }
         }
@@ -1675,13 +1671,10 @@ namespace Budford.View
             var cv = GetCurrentVersion();
             if (cv != null)
             {
-                using (StreamWriter sw = new StreamWriter("C:\\Development\\" + cv.Version + ".txt"))
+                foreach (var gd in Model.GameData)
                 {
-                    foreach (var gd in Model.GameData)
-                    {
-                        GameInformation gi = gd.Value;
-                        gi.GameSetting.UseRtdsc = 1;
-                    }
+                    GameInformation gi = gd.Value;
+                    gi.GameSetting.UseRtdsc = 1;
                 }
             }     
         }
@@ -2116,7 +2109,7 @@ namespace Budford.View
             }
             catch (Exception)
             {
-                MessageBox.Show("Unable to download graphic packs at this time.  Try again later or upgrate to latest version of Budford");
+                MessageBox.Show(Resources.FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford);
             }
         }
 

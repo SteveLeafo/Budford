@@ -40,7 +40,6 @@ namespace Budford.View
             // TODO - Use scraper to find current latest version
             using (CustomWebClient wc = new CustomWebClient())
             {
-                //wc.Headers[HttpRequestHeader.Authorization] = "Basic " + "Steve";
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons

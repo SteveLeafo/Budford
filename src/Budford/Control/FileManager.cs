@@ -10,19 +10,8 @@ using Budford.View;
 
 namespace Budford.Control
 {
-    internal class FileManager
+    internal static class FileManager
     {
-        readonly Model.Model model;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="modelIn"></param>
-        internal FileManager(Model.Model modelIn)
-        {
-            model = modelIn;
-        }
-
         /// <summary>
         /// 
         /// </summary>

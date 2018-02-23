@@ -88,6 +88,7 @@ namespace Budford.Control
         /// <param name="getSaveDir"></param>
         /// <param name="cemuOnly"></param>
         /// <param name="shiftUp"></param>
+        /// <param name="forceFullScreen"></param>
         internal void LaunchCemu(Form parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
         {
             if (runningVersion != null)
@@ -134,7 +135,7 @@ namespace Budford.Control
                 // Prepare the process to run
                 ProcessStartInfo start = new ProcessStartInfo();
 
-                PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.cemu, start, shiftUp, forceFullScreen);
+                PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
 
                 // Required since 1.11.2
                 if (runningVersion != null)
@@ -396,12 +397,17 @@ namespace Budford.Control
                 runningGame.PlayTime += (long)(DateTime.Now - startTime).TotalSeconds;
             }
             runningGame = null;
-            runningVersion = null;
+            ClearRunningVersion();
 
             if (parent != null)
             {
                 parent.ProcessExited();
             }
+        }
+
+        private static void ClearRunningVersion()
+        {
+            runningVersion = null;
         }
 
         /// <summary>
@@ -413,6 +419,7 @@ namespace Budford.Control
         /// <param name="cemuIn"></param>
         /// <param name="start"></param>
         /// <param name="shiftUp"></param>
+        /// <param name="forceFullScreen"></param>
         private void PopulateStartInfo(GameInformation game, bool getSaveDir, bool cemuOnly, string cemuIn, ProcessStartInfo start, bool shiftUp, bool forceFullScreen = false)
         {
             // Enter in the command line arguments, everything you would enter after the executable name itself
@@ -447,6 +454,7 @@ namespace Budford.Control
         /// <param name="getSaveDir"></param>
         /// <param name="start"></param>
         /// <param name="shiftUp"></param>
+        /// <param name="forceFullScreen"></param>
         private static void SetGameLaunchParameters(GameInformation game, bool getSaveDir, ProcessStartInfo start, bool shiftUp = true, bool forceFullScreen = false)
         {
             if (getSaveDir)
@@ -571,7 +579,7 @@ namespace Budford.Control
         {
             if (version != null)
             {
-                cemuIn = Path.Combine(version.Folder , CemuFeatures.cemu);
+                cemuIn = Path.Combine(version.Folder , CemuFeatures.Cemu);
                 logfileIn = Path.Combine(version.Folder, "log.txt");
             }
         }
@@ -588,7 +596,7 @@ namespace Budford.Control
             var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
             if (latest != null)
             {
-                cemuExe = Path.Combine(latest.Folder, CemuFeatures.cemu);
+                cemuExe = Path.Combine(latest.Folder, CemuFeatures.Cemu);
             }
 
             if (File.Exists(cemuExe))
@@ -743,7 +751,6 @@ namespace Budford.Control
             {
                 IntPtr h = runningProcess.MainWindowHandle;
                 SetForegroundWindow(h);
-                //SendKeys.SendWait("+{PRTSC}");
                 SendKeys.SendWait("%{ENTER}");
             }
         }

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Budford.Tools
 {
-    internal class HashGenerator
+    internal static class HashGenerator
     {
         internal static UInt32 GenerateHashFromRpxRawData(byte[] rpxData, long size)
         {

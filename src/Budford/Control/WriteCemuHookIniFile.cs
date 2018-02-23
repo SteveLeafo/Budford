@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Budford.Control
 {
-    public class WriteCemuHookIniFile
+    internal static class WriteCemuHookIniFile
     {
         /// <summary>
         /// 
