@@ -428,8 +428,18 @@ namespace Budford.Control
                 SetGameLaunchParameters(game, getSaveDir, start, shiftUp, forceFullScreen);
             }
 
+            //string wine = @"C:\Users\steve\OneDrive\Documents\Visual Studio 2012\Projects\WineTester\WineTester\bin\Debug\WineTester.exe";
+
             // Enter the executable to run, including the complete path
-            start.FileName = cemuIn;
+            if (Model.Settings.WineExe.Length > 1)
+            {
+                start.FileName = Model.Settings.WineExe;
+                start.Arguments = cemuIn + " " + start.Arguments;
+            }
+            else
+            {
+                start.FileName = cemuIn;
+            }
 
             // Do you want to show a console window?
             start.CreateNoWindow = true;
@@ -646,61 +656,68 @@ namespace Budford.Control
         /// <param name="game"></param>
         private void ExtractSaveDirName(GameInformation game)
         {
-            int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
-            int c = 0;
-            while (i == -1 && c < 50000)
+            try
             {
+                int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
+                int c = 0;
+                while (i == -1 && c < 50000)
+                {
+                    try
+                    {
+                        Thread.Sleep(100);
+                        Thread.Sleep(100);
+                        if (!runningProcess.HasExited)
+                        {
+                            runningProcess.Refresh();
+                            i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        c++;
+                    }
+                    catch (Exception ex)
+                    {
+                        parent.Model.Errors.Add(ex.Message);
+                        break;
+                    }
+                }
+
                 try
                 {
-                    Thread.Sleep(100);
-                    Thread.Sleep(100);
-                    if (!runningProcess.HasExited)
+                    switch (game.GameSetting.CpuMode)
                     {
-                        runningProcess.Refresh();
-                        i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+                        case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
+                            break;
+                        case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
+                            break;
+                        default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
+                            break;
                     }
-                    else
-                    {
-                        return;
-                    }
-                    c++;
                 }
                 catch (Exception ex)
                 {
                     parent.Model.Errors.Add(ex.Message);
-                    break;
                 }
-            }
 
-            try
-            {
-                switch (game.GameSetting.CpuMode)
+                try
                 {
-                    case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
-                        break;
-                    case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
-                        break;
-                    default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
-                        break;
+                    if (game.GameSetting.DefaultView == 1)
+                    {
+                        IntPtr h = runningProcess.MainWindowHandle;
+                        SetForegroundWindow(h);
+                        SendKeys.SendWait("^{TAB}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    parent.Model.Errors.Add(ex.Message);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                parent.Model.Errors.Add(ex.Message);
-            }
-
-            try
-            {
-                if (game.GameSetting.DefaultView == 1)
-                {
-                    IntPtr h = runningProcess.MainWindowHandle;
-                    SetForegroundWindow(h);
-                    SendKeys.SendWait("^{TAB}");
-                }
-            }
-            catch (Exception ex)
-            {
-                parent.Model.Errors.Add(ex.Message);
+                // Nothing
             }
         }
 

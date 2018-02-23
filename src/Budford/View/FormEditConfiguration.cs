@@ -36,6 +36,8 @@ namespace Budford.View
             checkBox7.Checked = settings.IncludeWiiULauncherRpx;
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
 
+            textBox1.Text = model.Settings.WineExe;
+
             trackBar1.Minimum = 1;
             trackBar1.Maximum = 100;
             trackBar1.Value = settings.GlobalVolume;
@@ -161,6 +163,8 @@ namespace Budford.View
             settings.IncludeWiiULauncherRpx = checkBox7.Checked;
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
 
+            model.Settings.WineExe = textBox1.Text;
+
             settings.GlobalVolume = trackBar1.Value;
 
             settings.ConsoleLanguage = (Settings.ConsoleLanguageType)comboBox2.SelectedIndex;
@@ -257,5 +261,19 @@ namespace Budford.View
             }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "Wine Executeable| *.*;";
+
+                // Show open file dialog box 
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    textBox1.Text = dlg.FileName;
+                    model.Settings.WineExe = textBox1.Text;
+                }
+            }
+        }
     }
 }

@@ -58,6 +58,8 @@ namespace Budford.Model
 
         public string LaunchBoxExe = "";
 
+        public string WineExe = "";
+
         internal bool AutoSizeColumns = true;
 
         public enum ConsoleRegionType : byte
