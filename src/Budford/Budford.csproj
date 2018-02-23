@@ -73,8 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CemuSettingsFiles.cs" />
     <Compile Include="Control\CemuFeatures.cs" />
+    <Compile Include="Control\CemuSettingsFiles.cs" />
     <Compile Include="Control\FileManager.cs" />
     <Compile Include="Control\FolderScanner.cs" />
     <Compile Include="Control\Launcher.cs" />
