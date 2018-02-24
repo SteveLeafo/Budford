@@ -734,7 +734,8 @@
             "Serfrost",
             "Sharpen Only",
             "The Complaning Gamer",
-            "Filmic"});
+            "Filmic",
+            "Cell Hunter"});
             this.comboBox32.Location = new System.Drawing.Point(77, 452);
             this.comboBox32.Name = "comboBox32";
             this.comboBox32.Size = new System.Drawing.Size(357, 21);

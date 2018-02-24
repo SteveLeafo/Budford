@@ -503,6 +503,7 @@ namespace Budford.Control
                 text = text.Replace("#define Preset 6", preset);
                 text = text.Replace("#define Preset 7", preset);
                 text = text.Replace("#define Preset 8", preset);
+                text = text.Replace("#define Preset 9", preset);
                 File.WriteAllText(clarityShader, text);
             }
         }
@@ -513,22 +514,29 @@ namespace Budford.Control
         private void SetFps()
         {
             int fps = settings.Fps;
-
-            string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "New Folder", "patches.txt");
-            if (File.Exists(fpsPatch))
+            string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "patches.txt");
+            if (!File.Exists(fpsPatch + ".bak"))
             {
-                string text = File.ReadAllText(fpsPatch);
-                text = text.Replace("0x00000000 = .float 1.0 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / fps));
-                text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
-                File.WriteAllText(Path.Combine(new[]{"graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "patches.txt"}), text);
+                File.Copy(fpsPatch, fpsPatch + ".bak");
             }
-            string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "New Folder", "rules.txt");
-            if (File.Exists(fpsRules))
+            if (File.Exists(fpsPatch + ".bak"))
             {
-                string text = File.ReadAllText(fpsRules);
-                text = text.Replace("0x00000000 = .float 1.00 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / fps));
+                string text = File.ReadAllText(fpsPatch + ".bak");
+                text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / fps));
+                text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
+                File.WriteAllText(fpsPatch, text);
+            }
+            string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
+            if (!File.Exists(fpsRules + ".bak"))
+            {
+                File.Copy(fpsRules, fpsRules + ".bak");
+            }
+            if (File.Exists(fpsRules + ".bak"))
+            {
+                string text = File.ReadAllText(fpsRules + ".bak");
+                text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / fps));
                 text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (fps));
-                File.WriteAllText(Path.Combine(new[] {"graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BotW Static 30FPS for v1.4+", "rules.txt"}), text);
+                File.WriteAllText(fpsRules, text);
             }
         }
 
