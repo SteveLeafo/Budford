@@ -91,13 +91,7 @@ namespace Budford.Control
         /// <param name="forceFullScreen"></param>
         internal void LaunchCemu(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
         {
-            if (game != null)
-            {
-                if (modelIn != null)
-                {
-                    SetCemuVersion(modelIn, game);
-                }
-            }
+            SetCemuVersion(modelIn, game);
 
             if (runningVersion == null)
             {
@@ -598,23 +592,26 @@ namespace Budford.Control
         /// <param name="game"></param>
         internal static void SetCemuVersion(Model.Model model, GameInformation game)
         {
-            if (game != null)
+            if (model != null)
             {
-                if (game.GameSetting.PreferedVersion != "Latest")
+                if (game != null)
                 {
-                    runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == game.GameSetting.PreferedVersion);
-                    PopulateFromVersion(ref cemu, ref logfile, runningVersion);
+                    if (game.GameSetting.PreferedVersion != "Latest")
+                    {
+                        runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.Name == game.GameSetting.PreferedVersion);
+                        PopulateFromVersion(ref cemu, ref logfile, runningVersion);
+                    }
+                    else
+                    {
+                        runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+                        PopulateFromVersion(ref cemu, ref logfile, runningVersion);
+                    }
                 }
                 else
                 {
                     runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
                     PopulateFromVersion(ref cemu, ref logfile, runningVersion);
                 }
-            }
-            else
-            {
-                runningVersion = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-                PopulateFromVersion(ref cemu, ref logfile, runningVersion);
             }
         }
 
@@ -725,14 +722,17 @@ namespace Budford.Control
 
                 try
                 {
-                    switch (game.GameSetting.CpuMode)
+                    if (game != null)
                     {
-                        case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
-                            break;
-                        case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
-                            break;
-                        default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
-                            break;
+                        switch (game.GameSetting.CpuMode)
+                        {
+                            case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
+                                break;
+                            case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
+                                break;
+                            default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
+                                break;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -742,11 +742,14 @@ namespace Budford.Control
 
                 try
                 {
-                    if (game.GameSetting.DefaultView == 1)
+                    if (game != null)
                     {
-                        IntPtr h = runningProcess.MainWindowHandle;
-                        SetForegroundWindow(h);
-                        SendKeys.SendWait("^{TAB}");
+                        if (game.GameSetting.DefaultView == 1)
+                        {
+                            IntPtr h = runningProcess.MainWindowHandle;
+                            SetForegroundWindow(h);
+                            SendKeys.SendWait("^{TAB}");
+                        }
                     }
                 }
                 catch (Exception ex)

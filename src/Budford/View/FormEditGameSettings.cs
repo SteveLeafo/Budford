@@ -40,6 +40,8 @@ namespace Budford.View
             {
                 label52.Visible = false;
                 comboBox32.Visible = false;
+                checkBox1.Visible = false;
+                numericUpDown1.Visible = false;
             }
         }
 
@@ -146,6 +148,7 @@ namespace Budford.View
             comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
             numericUpDown1.Value = information.GameSetting.Fps;
+            checkBox1.Checked = information.GameSetting.OverrideFps;
         }
 
         /// <summary>
@@ -213,6 +216,7 @@ namespace Budford.View
             information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox28.SelectedIndex != 0;
 
             information.GameSetting.Fps = (int)numericUpDown1.Value;
+            information.GameSetting.OverrideFps = checkBox1.Checked;
 
             foreach (ListViewItem lvi in listView1.Items)
             {
@@ -238,6 +242,43 @@ namespace Budford.View
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(linkLabel1.Text);
+        }
+
+        private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            label52.Enabled = false;
+            checkBox1.Enabled = false;
+
+            comboBox32.Enabled = false;
+            numericUpDown1.Enabled = false;
+
+            foreach (ListViewItem v in listView1.Items)
+            {
+                if (((GraphicsPack)v.Tag).Folder.Contains("BreathOfTheWild_StaticFPS"))
+                {
+                    if (v.Checked)
+                    {                       
+                        checkBox1.Enabled = true;
+                        if (checkBox1.Checked)
+                        {
+                            numericUpDown1.Enabled = true;
+                        }
+                    }
+                }
+                if (((GraphicsPack)v.Tag).Folder.Contains("Clarity"))
+                {
+                    if (v.Checked)
+                    {
+                        comboBox32.Enabled = true;
+                        label52.Enabled = true;
+                    }
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+            numericUpDown1.Enabled = checkBox1.Checked;
         }
     }
 }

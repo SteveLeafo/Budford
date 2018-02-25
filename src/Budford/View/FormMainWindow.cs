@@ -680,7 +680,7 @@ namespace Budford.View
                 lvi.SubItems.Add(game.Value.Publisher);
             }
             lvi.SubItems.Add(game.Value.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + game.Value.CompanyCode + "       ");
-            lvi.SubItems.Add(game.Value.ShaderCacheFileSize.ToString());
+            lvi.SubItems.Add(game.Value.Size);//.ShaderCacheFileSize.ToString());
             lvi.SubItems.Add(game.Value.LaunchFileName);
             lvi.SubItems.Add(game.Value.GameSetting.PreferedVersion + "               ");
             lvi.SubItems.Add(game.Value.GameSetting.OfficialEmulationState + "        ");

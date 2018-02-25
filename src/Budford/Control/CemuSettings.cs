@@ -146,7 +146,11 @@ namespace Budford.Control
                 {"1.11.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1110Bin, v1110Settings) },
                 {"1.11.2", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1112Bin, v1112Settings) },
                 {"1.11.3", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1113Bin, v1113Settings) },
-                {"1.11.4", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) }
+                {"1.11.4", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
+                {"1.11.5", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
+                {"1.11.6", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
+                {"1.12.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
+                {"2.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) }
             };
 
             graphicPackOffset = new Dictionary<int, int>
@@ -459,7 +463,14 @@ namespace Budford.Control
                     
                     if (!graphicPackOffset.TryGetValue(version.VersionNumber, out gfxPackStartOffset))
                     {
-                        gfxPackStartOffset = 0x23;
+                        if (version.VersionNumber >= 1112)
+                        {
+                            gfxPackStartOffset = 0x7c;
+                        }
+                        else
+                        {
+                            gfxPackStartOffset = 0x23;
+                        }
                     }
 
                     if (version.VersionNumber >= 1112)
@@ -532,30 +543,40 @@ namespace Budford.Control
         /// </summary>
         private void SetFps()
         {
-            int fps = settings.Fps;
-            string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "patches.txt");
-            if (!File.Exists(fpsPatch + ".bak"))
+            if (settings.OverrideFps)
             {
-                File.Copy(fpsPatch, fpsPatch + ".bak");
-            }
-            if (File.Exists(fpsPatch + ".bak"))
-            {
-                string text = File.ReadAllText(fpsPatch + ".bak");
-                text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / fps));
-                text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
-                File.WriteAllText(fpsPatch, text);
-            }
-            string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
-            if (!File.Exists(fpsRules + ".bak"))
-            {
-                File.Copy(fpsRules, fpsRules + ".bak");
-            }
-            if (File.Exists(fpsRules + ".bak"))
-            {
-                string text = File.ReadAllText(fpsRules + ".bak");
-                text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.666", "0x00000000 = .float " + (30.0f / fps));
-                text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (fps));
-                File.WriteAllText(fpsRules, text);
+                float fps = settings.Fps;
+                string[] fpsPatches = new[] { "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30" };
+                foreach (var fpsPatchSpeed in fpsPatches)
+                {
+                    string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, fpsPatchSpeed, "patches.txt");
+                    if (!File.Exists(fpsPatch + ".bak"))
+                    {
+                        File.Copy(fpsPatch, fpsPatch + ".bak");
+                    }
+                    if (File.Exists(fpsPatch + ".bak"))
+                    {
+                        string text = File.ReadAllText(fpsPatch + ".bak");
+                        if (text.Contains("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667"))
+                        {
+                            text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / (float)fps));
+                        }
+                        text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
+                        File.WriteAllText(fpsPatch, text);
+                    }
+                }
+
+                string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
+                if (!File.Exists(fpsRules + ".bak"))
+                {
+                    File.Copy(fpsRules, fpsRules + ".bak");
+                }
+                if (File.Exists(fpsRules + ".bak"))
+                {
+                    string text = File.ReadAllText(fpsRules + ".bak");
+                    text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (fps));
+                    File.WriteAllText(fpsRules, text);
+                }
             }
         }
 

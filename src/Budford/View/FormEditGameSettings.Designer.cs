@@ -72,7 +72,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label52 = new System.Windows.Forms.Label();
             this.comboBox32 = new System.Windows.Forms.ComboBox();
-            this.label53 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -105,6 +104,8 @@
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -158,8 +159,7 @@
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.comboBox28 = new System.Windows.Forms.ComboBox();
-            this.label55 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -676,8 +676,8 @@
             this.tableLayoutPanel10.Controls.Add(this.listView1, 0, 0);
             this.tableLayoutPanel10.Controls.Add(this.label52, 0, 1);
             this.tableLayoutPanel10.Controls.Add(this.comboBox32, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label53, 0, 2);
             this.tableLayoutPanel10.Controls.Add(this.numericUpDown1, 1, 2);
+            this.tableLayoutPanel10.Controls.Add(this.checkBox1, 0, 2);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -702,6 +702,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
             // 
             // columnHeader1
             // 
@@ -720,7 +721,7 @@
             this.label52.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label52.Location = new System.Drawing.Point(3, 449);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(68, 27);
+            this.label52.Size = new System.Drawing.Size(86, 27);
             this.label52.TabIndex = 1;
             this.label52.Text = "Clarity Preset";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -728,6 +729,7 @@
             // comboBox32
             // 
             this.comboBox32.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox32.Enabled = false;
             this.comboBox32.FormattingEnabled = true;
             this.comboBox32.Items.AddRange(new object[] {
             "User Defined",
@@ -740,27 +742,16 @@
             "The Complaning Gamer",
             "Filmic",
             "Cell Hunter"});
-            this.comboBox32.Location = new System.Drawing.Point(77, 452);
+            this.comboBox32.Location = new System.Drawing.Point(95, 452);
             this.comboBox32.Name = "comboBox32";
-            this.comboBox32.Size = new System.Drawing.Size(357, 21);
+            this.comboBox32.Size = new System.Drawing.Size(339, 21);
             this.comboBox32.TabIndex = 2;
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label53.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label53.Location = new System.Drawing.Point(3, 476);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(68, 26);
-            this.label53.TabIndex = 1;
-            this.label53.Text = "FPS";
-            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDown1.Location = new System.Drawing.Point(77, 479);
+            this.numericUpDown1.Enabled = false;
+            this.numericUpDown1.Location = new System.Drawing.Point(95, 479);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             60,
             0,
@@ -772,7 +763,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(357, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(339, 20);
             this.numericUpDown1.TabIndex = 3;
             this.numericUpDown1.Value = new decimal(new int[] {
             30,
@@ -1111,6 +1102,28 @@
             this.pictureBox2.Size = new System.Drawing.Size(170, 42);
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(142, 31);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(65, 13);
+            this.label55.TabIndex = 2;
+            this.label55.Text = "Compatibility";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.linkLabel1.Location = new System.Drawing.Point(213, 31);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(222, 23);
+            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "linkLabel1";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // tabPage5
             // 
@@ -1771,27 +1784,16 @@
             this.comboBox28.Size = new System.Drawing.Size(211, 21);
             this.comboBox28.TabIndex = 1;
             // 
-            // label55
+            // checkBox1
             // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(142, 31);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(65, 13);
-            this.label55.TabIndex = 2;
-            this.label55.Text = "Compatibility";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.linkLabel1.Location = new System.Drawing.Point(213, 31);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(222, 23);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 479);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(86, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Overide FPS";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // FormEditGameSettings
             // 
@@ -1968,11 +1970,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.ComboBox comboBox32;
-        private System.Windows.Forms.Label label53;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.ComboBox comboBox33;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

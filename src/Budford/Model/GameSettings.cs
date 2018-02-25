@@ -28,6 +28,7 @@ namespace Budford.Model
         public int UseCafeLibs = 0;
 
         public int Fps = 30;
+        public bool OverrideFps = false;
 
         public byte DebugGx2ApiOffset;
         public byte DebugUnsupportedApiCallsOffset ;
