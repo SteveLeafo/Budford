@@ -447,12 +447,16 @@ namespace Budford.Control
             using (FormWebpageDownload dlc = new FormWebpageDownload("http://compat.cemu.info/", "Game Status"))
             {
                 dlc.ShowDialog(parent);
+
                 List<GameInformation> currentGames = null;
+                string url = "";
+
                 foreach (var line in dlc.Result.Split('\n'))
                 {
                     if (line.Contains("<td class=\"title\">"))
                     {
                         string name = line.Substring(line.LastIndexOf("\">", StringComparison.Ordinal) + 2, line.LastIndexOf("/a", StringComparison.Ordinal) - line.LastIndexOf("\">", StringComparison.Ordinal) - 3).Replace("&amp;", "&");
+                        url = line.Substring(line.IndexOf("http"), (line.LastIndexOf("\">", StringComparison.Ordinal) - line.IndexOf("http"))).Replace("&amp;", "&");
                         currentGames = Persistence.GetGames(model, name);
                     }
                     if (line.Contains("<td class=\"rating\">"))
@@ -460,7 +464,7 @@ namespace Budford.Control
                         string rating = line.Substring(line.LastIndexOf("title=", StringComparison.Ordinal) + 7, line.LastIndexOf("\"", StringComparison.Ordinal) - line.LastIndexOf("title=", StringComparison.Ordinal) - 7);
                         if (currentGames != null)
                         {
-                            SetGameStatus(currentGames, rating);
+                            SetGameStatus(currentGames, rating, url);
                             currentGames.Clear();
                         }
                     }
@@ -473,36 +477,35 @@ namespace Budford.Control
         /// </summary>
         /// <param name="currentGames"></param>
         /// <param name="rating"></param>
-        private static void SetGameStatus(List<GameInformation> currentGames, string rating)
+        private static void SetGameStatus(List<GameInformation> currentGames, string rating, string url)
         {
+            GameSettings.EmulationStateType state = GameSettings.EmulationStateType.NotSet;
+
             switch (rating)
             {
                 case "Playable":
-                    foreach (var currentGame in currentGames)
-                        currentGame.GameSetting.OfficialEmulationState =
-                            GameSettings.EmulationStateType.Playable;
+                    state = GameSettings.EmulationStateType.Playable;
                     break;
                 case "Perfect":
-                    foreach (var currentGame in currentGames)
-                        currentGame.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.Perfect;
+                    state = GameSettings.EmulationStateType.Perfect;
                     break;
                 case "Loads":
-                    foreach (var currentGame in currentGames)
-                        currentGame.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.Loads;
+                    state = GameSettings.EmulationStateType.Loads;
                     break;
                 case "Runs":
-                    foreach (var currentGame in currentGames)
-                        currentGame.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.Runs;
+                    state = GameSettings.EmulationStateType.Runs;
                     break;
                 case "Unplayable":
-                    foreach (var currentGame in currentGames)
-                        currentGame.GameSetting.OfficialEmulationState =
-                            GameSettings.EmulationStateType.Unplayable;
+                    state = GameSettings.EmulationStateType.Unplayable;
                     break;
                 default:
-                    foreach (var currentGame in currentGames)
-                        currentGame.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.NotSet;
+                    state = GameSettings.EmulationStateType.NotSet;
                     break;
+            }
+            foreach (var currentGame in currentGames)
+            {
+                currentGame.GameSetting.OfficialEmulationState = state;
+                currentGame.GameSetting.CompatibilityUrl = url;
             }
         }
 

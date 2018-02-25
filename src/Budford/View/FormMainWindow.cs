@@ -2197,5 +2197,20 @@ namespace Budford.View
                 NativeMethods.SetParent(runningProcess.Handle, Handle);
             }
         }
+
+        private void openCompatibilityWikiEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
+                {
+                    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                    if (game.GameSetting.CompatibilityUrl != "")
+                    {
+                        System.Diagnostics.Process.Start(game.GameSetting.CompatibilityUrl);
+                    }
+                }
+            }
+        }
     }
 }

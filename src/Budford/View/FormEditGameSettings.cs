@@ -63,6 +63,8 @@ namespace Budford.View
             textBox13.Text = information.LaunchFileName;
             textBox14.Text = information.Comments;
 
+            linkLabel1.Text = information.GameSetting.CompatibilityUrl;
+
             string iconFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "iconTex.tga");
             string logoFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "bootLogoTex.tga");
             if (File.Exists(iconFile))
@@ -231,6 +233,11 @@ namespace Budford.View
             helper.AddImage((Bitmap)pictureBox1.Image, pictureBox1.Image.Width);
             helper.ConvertToIcon(stream);
             stream.Close();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(linkLabel1.Text);
         }
     }
 }

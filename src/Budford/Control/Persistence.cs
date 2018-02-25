@@ -273,15 +273,36 @@ namespace Budford.Control
         internal static List<GameInformation> GetGames(Model.Model model, string name)
         {
             List<GameInformation> games = new List<GameInformation>();
-            foreach (var g in model.GameData)
+            if (name.Contains("hovel"))
             {
-                if (g.Value.Name.ToUpper() == name.ToUpper() || g.Value.Name.ToUpper().StartsWith(name.ToUpper()))
+                name = name.ToUpper();
+            }
+            for (int levenshteinTolerence = 5; levenshteinTolerence < 10; levenshteinTolerence += 2)
+            {
+                foreach (var g in model.GameData)
                 {
-                    games.Add(g.Value);
+                    if (g.Value.Name.ToUpper() == name.ToUpper() || g.Value.Name.ToUpper().StartsWith(name.ToUpper()))
+                    {
+                        games.Add(g.Value);
+                    }
+                    else if (LevenshteinDistance.Compute(g.Value.Name.ToUpper(), name.ToUpper()) < levenshteinTolerence)
+                    {
+                        if (g.Value.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.NotSet)
+                        {
+                            games.Add(g.Value);
+                        }
+                    }
                 }
-                else if (LevenshteinDistance.Compute(g.Value.Name.ToUpper(), name.ToUpper()) < 5)
+                if (games.Count > 0)
                 {
-                    if (g.Value.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.NotSet)
+                    break;
+                }
+            }
+            if (games.Count == 0)
+            {
+                foreach (var g in model.GameData)
+                {
+                    if (name.ToUpper().StartsWith(g.Value.Name.ToUpper()))
                     {
                         games.Add(g.Value);
                     }
