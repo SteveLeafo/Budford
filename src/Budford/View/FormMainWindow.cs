@@ -61,7 +61,7 @@ namespace Budford.View
 
             if (Model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
             {
-                DownloadLatestGraphicsPack(false);
+                CemuFeatures.DownloadLatestGraphicsPack(this, Model, false);
             }
 
             FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
@@ -2079,39 +2079,10 @@ namespace Budford.View
         private void downloadLatestGraphicPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Graphic Packs
-            DownloadLatestGraphicsPack();
+            CemuFeatures.DownloadLatestGraphicsPack(this, Model, false);
         }
 
-        private void DownloadLatestGraphicsPack(bool showMessage = true)
-        {
-            try
-            {
-                using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
-                {
-                    dlc.ShowDialog(this);
-                    CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result, showMessage);
-                    string pack = "";
-                    foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
-                    {
-                        string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                        if (folder.StartsWith("graphicPacks_2-"))
-                        {
-                            pack = folder.Replace("graphicPacks_2-", "");
-                        }
-                    }
-
-                    if (pack != "")
-                    {
-                        Model.Settings.GraphicsPackRevision = pack;
-                        FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + Model.Settings.GraphicsPackRevision)), Model.GraphicsPacks);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Resources.FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford);
-            }
-        }
+     
 
         internal void ProcessExited()
         {

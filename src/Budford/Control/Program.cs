@@ -23,11 +23,17 @@ namespace Budford.Control
 
             var arguments = Environment.GetCommandLineArgs();
 
+
             bool cmdLineLaunch = false;
             bool cmdLineFullScreen = false;
             string cmdLineFileName = string.Empty;
             ParseCommandLineArguments(arguments, ref cmdLineLaunch, ref cmdLineFullScreen, ref cmdLineFileName);
 
+            if (arguments.Length == 2)
+            {
+                cmdLineLaunch = true;
+            }
+            
             if (cmdLineFileName == string.Empty || !cmdLineLaunch)
             {
                 Application.Run(new FormMainWindow());
@@ -35,6 +41,10 @@ namespace Budford.Control
             else
             {
                 var model = FormMainWindow.TransferLegacyModel();
+                if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+                {
+                    CemuFeatures.DownloadLatestGraphicsPack(null, model, false);
+                }
                 foreach (var game in model.GameData)
                 {
                     if (game.Value.LaunchFile == cmdLineFileName)

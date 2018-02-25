@@ -561,5 +561,36 @@ namespace Budford.Control
             }
             return false;
         }
+
+        static internal void DownloadLatestGraphicsPack(Form form, Model.Model modelIn, bool showMessage = true)
+        {
+            try
+            {
+                using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
+                {
+                    dlc.ShowDialog(form);
+                    CemuFeatures.DownloadLatestGraphicPack(form, dlc.Result, showMessage);
+                    string pack = "";
+                    foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                    {
+                        string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
+                        if (folder.StartsWith("graphicPacks_2-"))
+                        {
+                            pack = folder.Replace("graphicPacks_2-", "");
+                        }
+                    }
+
+                    if (pack != "")
+                    {
+                        modelIn.Settings.GraphicsPackRevision = pack;
+                        FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Resources.FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford);
+            }
+        }
     }
 }
