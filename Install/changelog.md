@@ -1,5 +1,11 @@
 # Budford Change Log
 
+## V1.0.43
+
+- Update for Cemu 1.11.5
+- Improved name matching with entries on the Compatibility Wiki (Levenshtien distance)
+- Added links to the Compatibility Wiki for each game in the context menu and game information form
+
 
 ## V1.0.43
 
