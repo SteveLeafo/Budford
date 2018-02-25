@@ -66,9 +66,12 @@ namespace Budford.Control
         int[] coreSettingsOffsets;
         int[] settingsFile;
 
-        readonly int[] coreSettings =       new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] coreSettingsV1115 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2c, 0x2d, 0x00, 0x00, 0x00, 0x00 };
         readonly int[] coreSettingsV1113 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2c, 0x2d, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] coreSettings = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
 
+
+        readonly int[] v1115Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
         readonly int[] v1114Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
         readonly int[] v1113Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
         readonly int[] v1112Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
@@ -211,6 +214,10 @@ namespace Budford.Control
                     if (version >= 1113)
                     {
                         coreSettingsOffsets = coreSettingsV1113;
+                        if (version >= 1115)
+                        {
+                            coreSettingsOffsets = coreSettingsV1115;
+                        }
                     }
                     else
                     {
@@ -226,6 +233,10 @@ namespace Budford.Control
                     if (version >= 1113)
                     {
                         coreSettingsOffsets = coreSettingsV1113;
+                        if (version >= 1115)
+                        {
+                            coreSettingsOffsets = coreSettingsV1115;
+                        }
                     }
                     else
                     {
@@ -233,8 +244,16 @@ namespace Budford.Control
                     }
                     if (version > 191)
                     {
-                        settingsFile = CemuSettingsFiles.Settings1100Bin;
-                        settingsOffsets = v1100Settings;
+                         if (version >= 1114)
+                         {
+                            settingsFile = CemuSettingsFiles.Settings1114Bin;
+                            settingsOffsets = v1114Settings;
+                         }
+                         else
+                         {
+                            settingsFile = CemuSettingsFiles.Settings1100Bin;
+                            settingsOffsets = v1100Settings;
+                         }
                     }
                     else
                     {
