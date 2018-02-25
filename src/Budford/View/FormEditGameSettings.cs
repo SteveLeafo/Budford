@@ -132,6 +132,7 @@ namespace Budford.View
             comboBox31.SelectedIndex = information.GameSetting.DefaultView;
 
             comboBox32.SelectedIndex = information.GameSetting.ClarityPreset;
+            comboBox33.SelectedIndex = information.GameSetting.UseCafeLibs;
 
             comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
             comboBox22.SelectedIndex = information.CemuHookSetting.CustomTimerMultiplier;
@@ -198,6 +199,7 @@ namespace Budford.View
             information.GameSetting.DefaultView = (byte)comboBox31.SelectedIndex;
 
             information.GameSetting.ClarityPreset = comboBox32.SelectedIndex;
+            information.GameSetting.UseCafeLibs = comboBox33.SelectedIndex;
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;

@@ -156,6 +156,8 @@
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.comboBox28 = new System.Windows.Forms.ComboBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.comboBox33 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1382,6 +1384,8 @@
             this.tableLayoutPanel8.Controls.Add(this.comboBox15, 2, 1);
             this.tableLayoutPanel8.Controls.Add(this.comboBox16, 2, 2);
             this.tableLayoutPanel8.Controls.Add(this.comboBox18, 2, 4);
+            this.tableLayoutPanel8.Controls.Add(this.label54, 1, 5);
+            this.tableLayoutPanel8.Controls.Add(this.comboBox33, 2, 5);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -1393,6 +1397,7 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(421, 124);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
@@ -1740,6 +1745,27 @@
             this.comboBox28.Size = new System.Drawing.Size(211, 21);
             this.comboBox28.TabIndex = 1;
             // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(8, 86);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(73, 13);
+            this.label54.TabIndex = 3;
+            this.label54.Text = "Use Cafe Libs";
+            // 
+            // comboBox33
+            // 
+            this.comboBox33.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox33.FormattingEnabled = true;
+            this.comboBox33.Items.AddRange(new object[] {
+            "False",
+            "True"});
+            this.comboBox33.Location = new System.Drawing.Point(213, 89);
+            this.comboBox33.Name = "comboBox33";
+            this.comboBox33.Size = new System.Drawing.Size(199, 21);
+            this.comboBox33.TabIndex = 7;
+            // 
             // FormEditGameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1917,5 +1943,7 @@
         private System.Windows.Forms.ComboBox comboBox32;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ComboBox comboBox33;
     }
 }

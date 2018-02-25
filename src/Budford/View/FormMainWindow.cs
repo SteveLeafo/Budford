@@ -2185,5 +2185,17 @@ namespace Budford.View
             FormLaunchboxExporter flbe = new FormLaunchboxExporter(Model, games);
             flbe.ShowDialog(this);
         }
+
+        internal void SetParent(Process runningProcess)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(() => { SetParent(runningProcess); }));
+            }
+            else
+            {
+                NativeMethods.SetParent(runningProcess.Handle, Handle);
+            }
+        }
     }
 }

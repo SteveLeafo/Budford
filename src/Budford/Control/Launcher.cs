@@ -89,9 +89,17 @@ namespace Budford.Control
         /// <param name="cemuOnly"></param>
         /// <param name="shiftUp"></param>
         /// <param name="forceFullScreen"></param>
-        internal void LaunchCemu(Form parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
+        internal void LaunchCemu(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
         {
-            if (runningVersion != null)
+            if (game != null)
+            {
+                if (modelIn != null)
+                {
+                    SetCemuVersion(modelIn, game);
+                }
+            }
+
+            if (runningVersion == null)
             {
                 return;
             }
@@ -114,14 +122,13 @@ namespace Budford.Control
                 return;
             }            
 
-            SetCemuVersion(modelIn, game);
 
            
 
             if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
                 DeleteLogFile(modelIn, logfile);
-
+                SetupCafeLibs(game);
                 if (game != null)
                 {
                     CopyLargestShaderCacheToCemu(game);
@@ -165,7 +172,7 @@ namespace Budford.Control
                     {
                         try
                         {
-                            NativeMethods.SetParent(runningProcess.Handle, parentIn.Handle);
+                            parentIn.SetParent(runningProcess);
                         }
                         catch (Exception)
                         {
@@ -195,6 +202,28 @@ namespace Budford.Control
                 if (parent != null)
                 {
                     parent.ProcessExited();
+                }
+            }
+        }
+
+        private static void SetupCafeLibs(GameInformation game)
+        {
+            string cafeLibs = Path.Combine(runningVersion.Folder, "cafeLibs");
+
+            if (!Directory.Exists(cafeLibs))
+            {
+                Directory.CreateDirectory(cafeLibs);
+            }
+            FileManager.ClearFolder(cafeLibs);
+
+            if (game != null)
+            {
+                if (game.GameSetting.UseCafeLibs == 1)
+                {
+                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
+                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));                    
+                    //File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snd_core.rpl"), Path.Combine(cafeLibs, "snd_core.rpl"));
+                    //File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "sndcore2.rpl"), Path.Combine(cafeLibs, "sndcore2.rpl"));
                 }
             }
         }

@@ -216,5 +216,27 @@ namespace Budford.Control
             FolderScanner.AddGraphicsPacksToGames(model);
             CemuFeatures.UpdateFeaturesForInstalledVersions(model);
         }
+
+        static internal bool ClearFolder(string folderName)
+        {
+            try
+            {
+                System.IO.DirectoryInfo di = new DirectoryInfo(folderName);
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
     }   
 }

@@ -24,6 +24,7 @@ namespace Budford.Model
 
         // Graphic Pack Settings
         public int ClarityPreset = 3;
+        public int UseCafeLibs = 0;
 
         public int Fps = 30;
 

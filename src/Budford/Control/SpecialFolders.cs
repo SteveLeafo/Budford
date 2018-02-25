@@ -116,5 +116,16 @@ namespace Budford.Control
         }
 
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="snapShotDir"></param>
+        /// <returns></returns>
+        internal static string CafeLibDirBudford()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "cafeLibs");
+        }
     }
 }
