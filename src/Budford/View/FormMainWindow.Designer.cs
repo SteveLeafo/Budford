@@ -33,6 +33,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openCompatibilityWikiEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.openSaveFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openBudfordSaveFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,7 +155,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.openCompatibilityWikiEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.toolStripButton1 = new Budford.View.CustomToolStripButton();
             this.toolStripButton3 = new Budford.View.CustomToolStripButton();
@@ -198,7 +198,7 @@
             this.createSaveFileSnapshotToolStripMenuItem,
             this.snapshotsToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 214);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(245, 192);
             // 
             // propertiesToolStripMenuItem
             // 
@@ -206,6 +206,13 @@
             this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.propertiesToolStripMenuItem.Text = "Properties";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
+            // 
+            // openCompatibilityWikiEntryToolStripMenuItem
+            // 
+            this.openCompatibilityWikiEntryToolStripMenuItem.Name = "openCompatibilityWikiEntryToolStripMenuItem";
+            this.openCompatibilityWikiEntryToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.openCompatibilityWikiEntryToolStripMenuItem.Text = "Open compatibility wiki entry";
+            this.openCompatibilityWikiEntryToolStripMenuItem.Click += new System.EventHandler(this.openCompatibilityWikiEntryToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -629,55 +636,55 @@
             // perfectToolStripMenuItem
             // 
             this.perfectToolStripMenuItem.Name = "perfectToolStripMenuItem";
-            this.perfectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.perfectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.perfectToolStripMenuItem.Text = "Perfect";
             // 
             // playableToolStripMenuItem
             // 
             this.playableToolStripMenuItem.Name = "playableToolStripMenuItem";
-            this.playableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.playableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.playableToolStripMenuItem.Text = "Playable";
             // 
             // runsToolStripMenuItem
             // 
             this.runsToolStripMenuItem.Name = "runsToolStripMenuItem";
-            this.runsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.runsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.runsToolStripMenuItem.Text = "Runs";
             // 
             // loadsToolStripMenuItem
             // 
             this.loadsToolStripMenuItem.Name = "loadsToolStripMenuItem";
-            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadsToolStripMenuItem.Text = "Loads";
             // 
             // unplayableToolStripMenuItem
             // 
             this.unplayableToolStripMenuItem.Name = "unplayableToolStripMenuItem";
-            this.unplayableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.unplayableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.unplayableToolStripMenuItem.Text = "Unplayable";
             // 
             // notSetToolStripMenuItem
             // 
             this.notSetToolStripMenuItem.Name = "notSetToolStripMenuItem";
-            this.notSetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.notSetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.notSetToolStripMenuItem.Text = "Not Set";
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(149, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.allToolStripMenuItem.Text = "All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
             // 
@@ -792,12 +799,14 @@
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator11.Visible = false;
             // 
             // detailsToolStripMenuItem
             // 
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
             this.detailsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.detailsToolStripMenuItem.Text = "Detailed View";
+            this.detailsToolStripMenuItem.Visible = false;
             this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
             // 
             // tToolStripMenuItem
@@ -805,6 +814,7 @@
             this.tToolStripMenuItem.Name = "tToolStripMenuItem";
             this.tToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.tToolStripMenuItem.Text = "Tiled View";
+            this.tToolStripMenuItem.Visible = false;
             this.tToolStripMenuItem.Click += new System.EventHandler(this.tToolStripMenuItem_Click);
             // 
             // userToolStripMenuItem
@@ -1153,13 +1163,6 @@
             this.imageList2.Images.SetKeyName(3, "loads.png");
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
-            // 
-            // openCompatibilityWikiEntryToolStripMenuItem
-            // 
-            this.openCompatibilityWikiEntryToolStripMenuItem.Name = "openCompatibilityWikiEntryToolStripMenuItem";
-            this.openCompatibilityWikiEntryToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.openCompatibilityWikiEntryToolStripMenuItem.Text = "Open compatibility wiki entry";
-            this.openCompatibilityWikiEntryToolStripMenuItem.Click += new System.EventHandler(this.openCompatibilityWikiEntryToolStripMenuItem_Click);
             // 
             // uTiledView1
             // 

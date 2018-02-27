@@ -34,7 +34,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -70,6 +69,7 @@
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeDeadLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -117,7 +117,6 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7,
             this.columnHeader1,
-            this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5,
@@ -149,11 +148,6 @@
             // 
             this.columnHeader1.Text = "Name                  ";
             this.columnHeader1.Width = 104;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Location";
-            this.columnHeader2.Width = 303;
             // 
             // columnHeader3
             // 
@@ -396,7 +390,8 @@
             this.cemuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scanToolStripMenuItem,
             this.removeAllToolStripMenuItem,
-            this.addNewInstanceToolStripMenuItem});
+            this.addNewInstanceToolStripMenuItem,
+            this.removeDeadLinksToolStripMenuItem});
             this.cemuToolStripMenuItem.Name = "cemuToolStripMenuItem";
             this.cemuToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.cemuToolStripMenuItem.Text = "Folder";
@@ -421,6 +416,13 @@
             this.addNewInstanceToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.addNewInstanceToolStripMenuItem.Text = "Add new instance...";
             this.addNewInstanceToolStripMenuItem.Click += new System.EventHandler(this.addNewInstanceToolStripMenuItem_Click);
+            // 
+            // removeDeadLinksToolStripMenuItem
+            // 
+            this.removeDeadLinksToolStripMenuItem.Name = "removeDeadLinksToolStripMenuItem";
+            this.removeDeadLinksToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.removeDeadLinksToolStripMenuItem.Text = "Remove dead links";
+            this.removeDeadLinksToolStripMenuItem.Click += new System.EventHandler(this.removeDeadLinksToolStripMenuItem_Click);
             // 
             // FormEditInstalledVersions
             // 
@@ -449,7 +451,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
@@ -486,5 +487,6 @@
         private System.Windows.Forms.ToolStripMenuItem importGraphicsPackToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem removeDeadLinksToolStripMenuItem;
     }
 }

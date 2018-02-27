@@ -22,10 +22,22 @@ namespace Budford.Model
         // CPU
         public CpuModeType CpuMode  = CpuModeType.SingleCoreCompiler;
         public CpuTimerType CpuTimer  = CpuTimerType.HostBasedTimer;
-
+        
         // Graphic Pack Settings
         public int ClarityPreset = 3;
         public int UseCafeLibs = 0;
+
+        // Steve settings
+
+        // 0 = Do nothing, 1 = Wii U GamePad, 2 = Wii U Pro Controller, 3 = Wii U Classic Controller, 4 = Wiimote, 5 = Disable
+        public int ControllerOverride1 = 0; 
+        public int ControllerOverride2 = 0; 
+        public int ControllerOverride3 = 0; 
+        public int ControllerOverride4 = 0; 
+        public int ControllerOverride5 = 0; 
+        public int ControllerOverride6 = 0; 
+        public int ControllerOverride7 = 0; 
+        public int ControllerOverride8 = 0; 
 
         public int Fps = 30;
         public bool OverrideFps = false;

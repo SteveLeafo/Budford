@@ -147,6 +147,15 @@ namespace Budford.View
             comboBox27.SelectedIndex = information.CemuHookSetting.MmTimerAccuracy;
             comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
+            comboBox34.SelectedIndex = information.GameSetting.ControllerOverride1;
+            comboBox35.SelectedIndex = information.GameSetting.ControllerOverride2;
+            comboBox36.SelectedIndex = information.GameSetting.ControllerOverride3;
+            comboBox37.SelectedIndex = information.GameSetting.ControllerOverride4;
+            comboBox38.SelectedIndex = information.GameSetting.ControllerOverride5;
+            comboBox39.SelectedIndex = information.GameSetting.ControllerOverride6;
+            comboBox40.SelectedIndex = information.GameSetting.ControllerOverride7;
+            comboBox41.SelectedIndex = information.GameSetting.ControllerOverride8;
+
             numericUpDown1.Value = information.GameSetting.Fps;
             checkBox1.Checked = information.GameSetting.OverrideFps;
         }
@@ -205,6 +214,15 @@ namespace Budford.View
 
             information.GameSetting.ClarityPreset = comboBox32.SelectedIndex;
             information.GameSetting.UseCafeLibs = comboBox33.SelectedIndex;
+
+            information.GameSetting.ControllerOverride1 = comboBox34.SelectedIndex;
+            information.GameSetting.ControllerOverride2 = comboBox35.SelectedIndex;
+            information.GameSetting.ControllerOverride3 = comboBox36.SelectedIndex;
+            information.GameSetting.ControllerOverride4 = comboBox37.SelectedIndex;
+            information.GameSetting.ControllerOverride5 = comboBox38.SelectedIndex;
+            information.GameSetting.ControllerOverride6 = comboBox39.SelectedIndex;
+            information.GameSetting.ControllerOverride7 = comboBox40.SelectedIndex;
+            information.GameSetting.ControllerOverride8 = comboBox41.SelectedIndex;
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;

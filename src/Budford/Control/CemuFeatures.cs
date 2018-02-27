@@ -108,6 +108,7 @@ namespace Budford.Control
                 else
                 {
                     version.DlcType = 0;
+                    version.DlcSource = "";
                 }
 
                 if (version.Version.StartsWith("cemu"))
@@ -128,7 +129,7 @@ namespace Budford.Control
             InstalledVersion dlcSource = GetLatestDlcVersion(model);
             foreach (var v in model.Settings.InstalledVersions)
             {
-                if (!v.HasPatch) unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
+                if (!v.HasPatch) Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
                 if (!v.HasFonts) unpacker.Unpack("sharedFonts.zip", v.Folder);
                 //if (!v.HasCemuHook) 
                     InstallCemuHook(unpacker, v);
@@ -550,7 +551,7 @@ namespace Budford.Control
             }
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
-                string folder = dir.Replace("graphicsPacks" + Path.PathSeparator, "");
+                string folder = Path.GetFileName(dir);
                 if (folder.StartsWith("graphicPacks_2-"))
                 {
                     if (pack == folder)

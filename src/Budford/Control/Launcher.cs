@@ -116,9 +116,6 @@ namespace Budford.Control
                 return;
             }            
 
-
-           
-
             if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
                 DeleteLogFile(modelIn, logfile);
@@ -129,8 +126,15 @@ namespace Budford.Control
                     CopyLatestSaveToCemu(game);
                 }
 
+                if (modelIn.Settings.DisableShaderCache)
+                {
+                    FileManager.DeleteShaderCache(runningVersion);
+                }
+
                 if (!getSaveDir)
                 {
+                    CreateDefaultSettingsFile(runningVersion, game);
+
                     DeleteShaderCacheIfRequired(modelIn, runningVersion);
 
                     CreateDefaultSettingsFile(modelIn, game);
@@ -376,11 +380,20 @@ namespace Budford.Control
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
-        {
-            if (runningGame != null)
+        {          
+            if (runningVersion!= null)
             {
-                if (runningVersion != null)
+                if (runningGame != null)
                 {
+                    SafeCopy(runningVersion, "controller0.bfb", "controller0.txt");
+                    SafeCopy(runningVersion, "controller1.bfb", "controller1.txt");
+                    SafeCopy(runningVersion, "controller2.bfb", "controller2.txt");
+                    SafeCopy(runningVersion, "controller3.bfb", "controller3.txt");
+                    SafeCopy(runningVersion, "controller4.bfb", "controller4.txt");
+                    SafeCopy(runningVersion, "controller5.bfb", "controller5.txt");
+                    SafeCopy(runningVersion, "controller6.bfb", "controller6.txt");
+                    SafeCopy(runningVersion, "controller7.bfb", "controller7.txt");
+
                     if (!runningGame.SaveDir.StartsWith("??"))
                     {
                         // Copy shader caches...
@@ -506,7 +519,7 @@ namespace Budford.Control
                 {
                     start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
                 }
-                start.WindowStyle = ProcessWindowStyle.Minimized;
+                //start.WindowStyle = ProcessWindowStyle.Minimized;
             }
             else
             {
@@ -540,6 +553,82 @@ namespace Budford.Control
                 CemuSettings cs = new CemuSettings(model, game.GameSetting, game);
                 cs.WriteSettingsBinFile();
                 WriteCemuHookIniFile.WriteIni(model, game);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="game"></param>
+        private static void CreateDefaultSettingsFile(InstalledVersion version, GameInformation game)
+        {
+            if (game != null)
+            {
+                if (version != null)
+                {
+                    SafeCopy(version, "controller0.txt", "controller0.bfb");
+                    SafeCopy(version, "controller1.txt", "controller1.bfb");
+                    SafeCopy(version, "controller2.txt", "controller2.bfb");
+                    SafeCopy(version, "controller3.txt", "controller3.bfb");
+                    SafeCopy(version, "controller4.txt", "controller4.bfb");
+                    SafeCopy(version, "controller5.txt", "controller5.bfb");
+                    SafeCopy(version, "controller6.txt", "controller6.bfb");
+                    SafeCopy(version, "controller7.txt", "controller7.bfb");
+
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride1, "controller0.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride2, "controller1.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride3, "controller2.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride4, "controller3.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride5, "controller4.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride6, "controller5.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride7, "controller6.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride8, "controller7.txt");
+                }
+            }
+        }
+
+        private static void UpdateControllerProfiles(InstalledVersion version, int ControllerOverride, string profileName)
+        {
+            string fileName = Path.Combine(version.Folder, "controllerProfiles", profileName);
+            if (File.Exists(fileName))
+            {
+                string text = File.ReadAllText(fileName);
+
+                switch (ControllerOverride)
+                {
+                    case 1:
+                        text = text.Replace("Wii U Pro Controller", "Wii U GamePad");
+                        text = text.Replace("Wii U Classic Controller", "Wii U GamePad");
+                        File.WriteAllText(fileName, text);
+                        break;
+                    case 2:
+                        text = text.Replace("Wii U GamePad", "Wii U Pro Controller");
+                        text = text.Replace("Wii U Classic Controller", "Wii U Pro Controller");
+                        File.WriteAllText(fileName, text);
+                        break;
+                    case 3:
+                        text = text.Replace("Wii U GamePad", "Wii U Classic Controller");
+                        text = text.Replace("Wii U Pro Controller", "Wii U Classic Controller");
+                        File.WriteAllText(fileName, text);
+                        break;
+                    case 5:
+                        if (File.Exists(fileName))
+                        {
+                            File.Delete(fileName);
+                        }
+                        break;
+                }
+            }
+        }
+
+        private static void SafeCopy(InstalledVersion version, string source, string destination)
+        {
+            string fileName = Path.Combine(version.Folder, "controllerProfiles", source);
+            if (File.Exists(fileName))
+            {
+                string backUpFileName = Path.Combine(version.Folder, "controllerProfiles", destination);
+                File.Copy(fileName, backUpFileName, true);
             }
         }
 
@@ -649,16 +738,7 @@ namespace Budford.Control
             {
                 if (model.Settings.DisableShaderCache)
                 {
-                    DirectoryInfo di1 = new DirectoryInfo("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\shaderCache\\transferable");
-                    foreach (FileInfo file in di1.GetFiles())
-                    {
-                        file.Delete();
-                    }
-                    DirectoryInfo di2 = new DirectoryInfo("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\shaderCache\\precompiled");
-                    foreach (FileInfo file in di2.GetFiles())
-                    {
-                        file.Delete();
-                    }
+                    FileManager.DeleteShaderCache(latest);
                 }
 
                 CemuSettings cs = new CemuSettings(model, null, null);
@@ -685,6 +765,7 @@ namespace Budford.Control
                 }
             }
         }
+
 
         /// <summary>
         /// Launches CEMU and tries to extract the SaveDir from the windows title

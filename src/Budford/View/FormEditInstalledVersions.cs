@@ -5,6 +5,7 @@ using Budford.Model;
 using Budford.Control;
 using System.IO;
 using Budford.Properties;
+using Budford.Utilities;
 
 namespace Budford.View
 {
@@ -147,7 +148,7 @@ namespace Budford.View
             listView1.BeginUpdate();
             try
             {
-                foreach (var v in model.Settings.InstalledVersions.OrderByDescending(version => version.Name))
+                foreach (var v in model.Settings.InstalledVersions.OrderByDescending(version => version.VersionNumber))
                 {
                     ListViewItem lvi = new ListViewItem("")
                     {
@@ -155,7 +156,7 @@ namespace Budford.View
                         Checked = v.IsLatest
                     };
                     lvi.SubItems.Add(v.Name);
-                    lvi.SubItems.Add(v.Folder);
+                    //lvi.SubItems.Add(Path.GetFileName(v.Folder));
                     lvi.SubItems.Add(v.Version);
                     lvi.SubItems.Add(v.HasFonts ? "Yes" : "No");
                     lvi.SubItems.Add(v.HasCemuHook ? "Yes" : "No");
@@ -587,6 +588,18 @@ namespace Budford.View
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             model.Settings.GraphicsPackRevision = comboBox1.Text;
+        }
+
+        private void removeDeadLinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var v in model.Settings.InstalledVersions.OrderByDescending(version => version.VersionNumber))
+            {
+                if (GetLinkType(v) == "Dead")
+                {
+                    JunctionPoint.Delete(Path.Combine(v.Folder, "mlc01", "usr", "title"));
+                }
+            }
+            button3_Click(null, null);
         }
     }
 }

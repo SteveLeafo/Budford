@@ -73,6 +73,7 @@
             this.label52 = new System.Windows.Forms.Label();
             this.comboBox32 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -159,7 +160,27 @@
             this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.comboBox28 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox34 = new System.Windows.Forms.ComboBox();
+            this.comboBox35 = new System.Windows.Forms.ComboBox();
+            this.comboBox36 = new System.Windows.Forms.ComboBox();
+            this.comboBox37 = new System.Windows.Forms.ComboBox();
+            this.comboBox38 = new System.Windows.Forms.ComboBox();
+            this.comboBox39 = new System.Windows.Forms.ComboBox();
+            this.comboBox40 = new System.Windows.Forms.ComboBox();
+            this.comboBox41 = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -186,6 +207,11 @@
             this.tabPage4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -195,6 +221,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -770,6 +797,17 @@
             0,
             0,
             0});
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 479);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(86, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Overide FPS";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // tabPage3
             // 
@@ -1506,7 +1544,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.groupBox6);
+            this.tabPage4.Controls.Add(this.tableLayoutPanel13);
             this.tabPage4.Location = new System.Drawing.Point(4, 28);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(443, 508);
@@ -1517,10 +1555,9 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel9);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox6.Location = new System.Drawing.Point(0, 0);
+            this.groupBox6.Location = new System.Drawing.Point(8, 8);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(443, 508);
+            this.groupBox6.Size = new System.Drawing.Size(427, 492);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Cemu Hook Options";
@@ -1531,30 +1568,31 @@
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Controls.Add(this.label38, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.label39, 1, 2);
-            this.tableLayoutPanel9.Controls.Add(this.label40, 1, 3);
-            this.tableLayoutPanel9.Controls.Add(this.label41, 1, 5);
-            this.tableLayoutPanel9.Controls.Add(this.label42, 1, 4);
-            this.tableLayoutPanel9.Controls.Add(this.label44, 1, 7);
-            this.tableLayoutPanel9.Controls.Add(this.label46, 1, 9);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox22, 2, 2);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox23, 2, 3);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox24, 2, 4);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox25, 2, 5);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox26, 2, 7);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox27, 2, 9);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox21, 2, 1);
-            this.tableLayoutPanel9.Controls.Add(this.label37, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.label45, 0, 8);
-            this.tableLayoutPanel9.Controls.Add(this.label43, 0, 6);
-            this.tableLayoutPanel9.Controls.Add(this.label47, 0, 10);
-            this.tableLayoutPanel9.Controls.Add(this.label48, 1, 11);
-            this.tableLayoutPanel9.Controls.Add(this.comboBox28, 2, 11);
+            this.tableLayoutPanel9.Controls.Add(this.label38, 1, 2);
+            this.tableLayoutPanel9.Controls.Add(this.label39, 1, 3);
+            this.tableLayoutPanel9.Controls.Add(this.label40, 1, 4);
+            this.tableLayoutPanel9.Controls.Add(this.label41, 1, 6);
+            this.tableLayoutPanel9.Controls.Add(this.label42, 1, 5);
+            this.tableLayoutPanel9.Controls.Add(this.label44, 1, 8);
+            this.tableLayoutPanel9.Controls.Add(this.label46, 1, 10);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox22, 2, 3);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox23, 2, 4);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox24, 2, 5);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox25, 2, 6);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox26, 2, 8);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox27, 2, 10);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox21, 2, 2);
+            this.tableLayoutPanel9.Controls.Add(this.label37, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.label45, 0, 9);
+            this.tableLayoutPanel9.Controls.Add(this.label43, 0, 7);
+            this.tableLayoutPanel9.Controls.Add(this.label47, 0, 11);
+            this.tableLayoutPanel9.Controls.Add(this.label48, 1, 12);
+            this.tableLayoutPanel9.Controls.Add(this.comboBox28, 2, 12);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 13;
+            this.tableLayoutPanel9.RowCount = 14;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1568,13 +1606,13 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(437, 489);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(421, 473);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(48, 13);
+            this.label38.Location = new System.Drawing.Point(48, 33);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(101, 13);
             this.label38.TabIndex = 0;
@@ -1583,7 +1621,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(48, 40);
+            this.label39.Location = new System.Drawing.Point(48, 60);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(115, 13);
             this.label39.TabIndex = 0;
@@ -1592,7 +1630,7 @@
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(48, 67);
+            this.label40.Location = new System.Drawing.Point(48, 87);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(80, 13);
             this.label40.TabIndex = 0;
@@ -1601,7 +1639,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(48, 121);
+            this.label41.Location = new System.Drawing.Point(48, 141);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(66, 13);
             this.label41.TabIndex = 0;
@@ -1610,7 +1648,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(48, 94);
+            this.label42.Location = new System.Drawing.Point(48, 114);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(83, 13);
             this.label42.TabIndex = 0;
@@ -1619,7 +1657,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(48, 161);
+            this.label44.Location = new System.Drawing.Point(48, 181);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(76, 13);
             this.label44.TabIndex = 0;
@@ -1628,7 +1666,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(48, 201);
+            this.label46.Location = new System.Drawing.Point(48, 221);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(102, 13);
             this.label46.TabIndex = 0;
@@ -1646,9 +1684,9 @@
             "0.5",
             "0.25",
             "0.125"});
-            this.comboBox22.Location = new System.Drawing.Point(223, 43);
+            this.comboBox22.Location = new System.Drawing.Point(223, 63);
             this.comboBox22.Name = "comboBox22";
-            this.comboBox22.Size = new System.Drawing.Size(211, 21);
+            this.comboBox22.Size = new System.Drawing.Size(195, 21);
             this.comboBox22.TabIndex = 1;
             // 
             // comboBox23
@@ -1658,9 +1696,9 @@
             this.comboBox23.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox23.Location = new System.Drawing.Point(223, 70);
+            this.comboBox23.Location = new System.Drawing.Point(223, 90);
             this.comboBox23.Name = "comboBox23";
-            this.comboBox23.Size = new System.Drawing.Size(211, 21);
+            this.comboBox23.Size = new System.Drawing.Size(195, 21);
             this.comboBox23.TabIndex = 1;
             // 
             // comboBox24
@@ -1670,9 +1708,9 @@
             this.comboBox24.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox24.Location = new System.Drawing.Point(223, 97);
+            this.comboBox24.Location = new System.Drawing.Point(223, 117);
             this.comboBox24.Name = "comboBox24";
-            this.comboBox24.Size = new System.Drawing.Size(211, 21);
+            this.comboBox24.Size = new System.Drawing.Size(195, 21);
             this.comboBox24.TabIndex = 1;
             // 
             // comboBox25
@@ -1682,9 +1720,9 @@
             this.comboBox25.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox25.Location = new System.Drawing.Point(223, 124);
+            this.comboBox25.Location = new System.Drawing.Point(223, 144);
             this.comboBox25.Name = "comboBox25";
-            this.comboBox25.Size = new System.Drawing.Size(211, 21);
+            this.comboBox25.Size = new System.Drawing.Size(195, 21);
             this.comboBox25.TabIndex = 1;
             // 
             // comboBox26
@@ -1696,9 +1734,9 @@
             "DSU2",
             "DSU3",
             "DSU4"});
-            this.comboBox26.Location = new System.Drawing.Point(223, 164);
+            this.comboBox26.Location = new System.Drawing.Point(223, 184);
             this.comboBox26.Name = "comboBox26";
-            this.comboBox26.Size = new System.Drawing.Size(211, 21);
+            this.comboBox26.Size = new System.Drawing.Size(195, 21);
             this.comboBox26.TabIndex = 1;
             // 
             // comboBox27
@@ -1709,9 +1747,9 @@
             "Default",
             "Max",
             "1ms"});
-            this.comboBox27.Location = new System.Drawing.Point(223, 204);
+            this.comboBox27.Location = new System.Drawing.Point(223, 224);
             this.comboBox27.Name = "comboBox27";
-            this.comboBox27.Size = new System.Drawing.Size(211, 21);
+            this.comboBox27.Size = new System.Drawing.Size(195, 21);
             this.comboBox27.TabIndex = 1;
             // 
             // comboBox21
@@ -1722,15 +1760,15 @@
             "None",
             "QPC",
             "RDTSC"});
-            this.comboBox21.Location = new System.Drawing.Point(223, 16);
+            this.comboBox21.Location = new System.Drawing.Point(223, 36);
             this.comboBox21.Name = "comboBox21";
-            this.comboBox21.Size = new System.Drawing.Size(211, 21);
+            this.comboBox21.Size = new System.Drawing.Size(195, 21);
             this.comboBox21.TabIndex = 1;
             // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(3, 0);
+            this.label37.Location = new System.Drawing.Point(3, 20);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(29, 13);
             this.label37.TabIndex = 0;
@@ -1739,7 +1777,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(3, 188);
+            this.label45.Location = new System.Drawing.Point(3, 208);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(39, 13);
             this.label45.TabIndex = 0;
@@ -1748,7 +1786,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(3, 148);
+            this.label43.Location = new System.Drawing.Point(3, 168);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(31, 13);
             this.label43.TabIndex = 0;
@@ -1757,7 +1795,7 @@
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(3, 228);
+            this.label47.Location = new System.Drawing.Point(3, 248);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(39, 13);
             this.label47.TabIndex = 0;
@@ -1766,7 +1804,7 @@
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(48, 241);
+            this.label48.Location = new System.Drawing.Point(48, 261);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(169, 13);
             this.label48.TabIndex = 0;
@@ -1779,21 +1817,318 @@
             this.comboBox28.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox28.Location = new System.Drawing.Point(223, 244);
+            this.comboBox28.Location = new System.Drawing.Point(223, 264);
             this.comboBox28.Name = "comboBox28";
-            this.comboBox28.Size = new System.Drawing.Size(211, 21);
+            this.comboBox28.Size = new System.Drawing.Size(195, 21);
             this.comboBox28.TabIndex = 1;
             // 
-            // checkBox1
+            // tabPage6
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 479);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(86, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Overide FPS";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.tabPage6.Controls.Add(this.tableLayoutPanel12);
+            this.tabPage6.Location = new System.Drawing.Point(4, 28);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(443, 508);
+            this.tabPage6.TabIndex = 6;
+            this.tabPage6.Text = "Controllers";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.tableLayoutPanel11);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox7.Location = new System.Drawing.Point(8, 8);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(427, 492);
+            this.groupBox7.TabIndex = 0;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Controller Overrides";
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Controls.Add(this.label53, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.label56, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.label57, 0, 2);
+            this.tableLayoutPanel11.Controls.Add(this.label58, 0, 3);
+            this.tableLayoutPanel11.Controls.Add(this.label59, 0, 4);
+            this.tableLayoutPanel11.Controls.Add(this.label60, 0, 5);
+            this.tableLayoutPanel11.Controls.Add(this.label61, 0, 6);
+            this.tableLayoutPanel11.Controls.Add(this.label62, 0, 7);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox34, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox35, 1, 1);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox36, 1, 2);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox37, 1, 3);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox38, 1, 4);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox39, 1, 5);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox40, 1, 6);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox41, 1, 7);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 9;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(421, 473);
+            this.tableLayoutPanel11.TabIndex = 0;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label53.Location = new System.Drawing.Point(3, 0);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(60, 27);
+            this.label53.TabIndex = 0;
+            this.label53.Text = "Controller 1";
+            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label56.Location = new System.Drawing.Point(3, 27);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(60, 27);
+            this.label56.TabIndex = 0;
+            this.label56.Text = "Controller 2";
+            this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label57.Location = new System.Drawing.Point(3, 54);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(60, 27);
+            this.label57.TabIndex = 0;
+            this.label57.Text = "Controller 3";
+            this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label58.Location = new System.Drawing.Point(3, 81);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(60, 27);
+            this.label58.TabIndex = 0;
+            this.label58.Text = "Controller 4";
+            this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label59.Location = new System.Drawing.Point(3, 108);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(60, 27);
+            this.label59.TabIndex = 0;
+            this.label59.Text = "Controller 5";
+            this.label59.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label60.Location = new System.Drawing.Point(3, 135);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(60, 27);
+            this.label60.TabIndex = 0;
+            this.label60.Text = "Controller 6";
+            this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label61.Location = new System.Drawing.Point(3, 162);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(60, 27);
+            this.label61.TabIndex = 0;
+            this.label61.Text = "Controller 7";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label62.Location = new System.Drawing.Point(3, 189);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(60, 27);
+            this.label62.TabIndex = 0;
+            this.label62.Text = "Controller 8";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 3;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.Controls.Add(this.groupBox7, 1, 1);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 3;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(443, 508);
+            this.tableLayoutPanel12.TabIndex = 1;
+            // 
+            // comboBox34
+            // 
+            this.comboBox34.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox34.FormattingEnabled = true;
+            this.comboBox34.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox34.Location = new System.Drawing.Point(69, 3);
+            this.comboBox34.Name = "comboBox34";
+            this.comboBox34.Size = new System.Drawing.Size(349, 21);
+            this.comboBox34.TabIndex = 1;
+            // 
+            // comboBox35
+            // 
+            this.comboBox35.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox35.FormattingEnabled = true;
+            this.comboBox35.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox35.Location = new System.Drawing.Point(69, 30);
+            this.comboBox35.Name = "comboBox35";
+            this.comboBox35.Size = new System.Drawing.Size(349, 21);
+            this.comboBox35.TabIndex = 1;
+            // 
+            // comboBox36
+            // 
+            this.comboBox36.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox36.FormattingEnabled = true;
+            this.comboBox36.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox36.Location = new System.Drawing.Point(69, 57);
+            this.comboBox36.Name = "comboBox36";
+            this.comboBox36.Size = new System.Drawing.Size(349, 21);
+            this.comboBox36.TabIndex = 1;
+            // 
+            // comboBox37
+            // 
+            this.comboBox37.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox37.FormattingEnabled = true;
+            this.comboBox37.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox37.Location = new System.Drawing.Point(69, 84);
+            this.comboBox37.Name = "comboBox37";
+            this.comboBox37.Size = new System.Drawing.Size(349, 21);
+            this.comboBox37.TabIndex = 1;
+            // 
+            // comboBox38
+            // 
+            this.comboBox38.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox38.FormattingEnabled = true;
+            this.comboBox38.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox38.Location = new System.Drawing.Point(69, 111);
+            this.comboBox38.Name = "comboBox38";
+            this.comboBox38.Size = new System.Drawing.Size(349, 21);
+            this.comboBox38.TabIndex = 1;
+            // 
+            // comboBox39
+            // 
+            this.comboBox39.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox39.FormattingEnabled = true;
+            this.comboBox39.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox39.Location = new System.Drawing.Point(69, 138);
+            this.comboBox39.Name = "comboBox39";
+            this.comboBox39.Size = new System.Drawing.Size(349, 21);
+            this.comboBox39.TabIndex = 1;
+            // 
+            // comboBox40
+            // 
+            this.comboBox40.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox40.FormattingEnabled = true;
+            this.comboBox40.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox40.Location = new System.Drawing.Point(69, 165);
+            this.comboBox40.Name = "comboBox40";
+            this.comboBox40.Size = new System.Drawing.Size(349, 21);
+            this.comboBox40.TabIndex = 1;
+            // 
+            // comboBox41
+            // 
+            this.comboBox41.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox41.FormattingEnabled = true;
+            this.comboBox41.Items.AddRange(new object[] {
+            "Default",
+            "Wii U GamePad",
+            "Wii U Pro Controller",
+            "Wii U Classic Controller",
+            "Wiimote",
+            "Disable"});
+            this.comboBox41.Location = new System.Drawing.Point(69, 192);
+            this.comboBox41.Name = "comboBox41";
+            this.comboBox41.Size = new System.Drawing.Size(349, 21);
+            this.comboBox41.TabIndex = 1;
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 3;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.Controls.Add(this.groupBox6, 1, 1);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 3;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(443, 508);
+            this.tableLayoutPanel13.TabIndex = 1;
             // 
             // FormEditGameSettings
             // 
@@ -1838,6 +2173,12 @@
             this.groupBox6.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1976,5 +2317,26 @@
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.ComboBox comboBox34;
+        private System.Windows.Forms.ComboBox comboBox35;
+        private System.Windows.Forms.ComboBox comboBox36;
+        private System.Windows.Forms.ComboBox comboBox37;
+        private System.Windows.Forms.ComboBox comboBox38;
+        private System.Windows.Forms.ComboBox comboBox39;
+        private System.Windows.Forms.ComboBox comboBox40;
+        private System.Windows.Forms.ComboBox comboBox41;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
     }
 }

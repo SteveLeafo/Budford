@@ -7,6 +7,7 @@ using Budford.Properties;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using Budford.View;
+using Budford.Utilities;
 
 namespace Budford.Control
 {
@@ -81,19 +82,58 @@ namespace Budford.Control
         internal static void ImportShaderCache(Model.Model model, string fileName)
         {
             string id = Path.GetFileNameWithoutExtension(fileName);
-            foreach (var s in Persistence.Load().AllSaveDirs)
+            id = id.Replace("(1)", "").Replace("(2)", "").Replace("(3)", "").Replace("(4)", "").Replace(" - Copy", "");
+
+            id.Trim();
+
+            string budfordFolder =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", id);
+
+            if (Directory.Exists(budfordFolder))
             {
-                if (s.SaveDirId == id)
+                bool copy = false;
+                string destination = Path.Combine(budfordFolder, "post_180.bin");
+                if (!File.Exists(destination))
                 {
-                    if (MessageBox.Show(Resources.FileManager_ImportShaderCache_About_to_import_shader_cache_for_ + s.GameName + Resources.FileManager_ImportShaderCache_, Resources.FileManager_ImportShaderCache_Continue, MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                    copy = true;
+                }
+                else
+                {
+                    FileInfo srcInfo = new FileInfo(fileName);
+                    FileInfo DestInfo = new FileInfo(destination);
+
+                    if (srcInfo.Length > DestInfo.Length)
                     {
-                        if (!File.Exists("Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\shaderCache\\transferable"))
+                        copy = true;
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("The shader cache file is smaller than the current file, are you sure want to over ride it?", "Are you sure", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                            File.Copy(fileName, "Cemu\\cemu_" + model.Settings.CurrentCemuVersion + "\\shaderCache\\transferable\\" + Path.GetFileName(fileName), true);
+                            copy = true;
                         }
                     }
-                    break;
                 }
+                if (copy)
+                {
+                    string message = "Shader cache import succesfull";
+                    if (File.Exists(destination))
+                    {
+                        FileCache srcCache = FileCache.fileCache_openExisting(fileName, 1);
+                        if (srcCache == null)
+                        {
+                            MessageBox.Show("The file doesn't appear to be a valid shader cache.\r\nPlease check the file and try again.", "Invalid Shader Cache");
+                            return;
+                        }
+                        FileCache destCache = FileCache.fileCache_openExisting(destination, 1);
+                        message = message + "\r\n\r\nExisting cache: " + destCache.FileTableEntryCount + " shaders.\r\nNew Cache: " + srcCache.FileTableEntryCount + " shaders.";
+                    }
+                    File.Copy(fileName, destination, true);
+                    MessageBox.Show(message, "Imported OK");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Could not find game with ID: " + id + ".\r\nPlease check the filename and try again.", "Game not found");
             }
         }
 
@@ -207,7 +247,7 @@ namespace Budford.Control
             unpacker.Unpack("shaderCache.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
             unpacker.Unpack("controllerProfiles.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
 
-            unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
+            Unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
 
             if (Directory.Exists("graphicsPacks"))
             {
@@ -238,5 +278,20 @@ namespace Budford.Control
             }
             return true;
         }
+
+        static internal void DeleteShaderCache(InstalledVersion version)
+        {
+            DirectoryInfo di1 = new DirectoryInfo(Path.Combine(version.Folder, "shaderCache", "transferable"));
+            foreach (FileInfo file in di1.GetFiles())
+            {
+                file.Delete();
+            }
+            DirectoryInfo di2 = new DirectoryInfo(Path.Combine(version.Folder, "shaderCache", "precompiled"));
+            foreach (FileInfo file in di2.GetFiles())
+            {
+                file.Delete();
+            }
+        }
+
     }   
 }

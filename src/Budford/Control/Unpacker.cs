@@ -36,17 +36,9 @@ namespace Budford.Control
             }
             else
             {
-                using (FormFileDownload fileDownload = new FormFileDownload(uri, fileName))
+                using (FormFileDownload fileDownload = new FormFileDownload(uri, fileName, folder))
                 {
-                    if (fileDownload.ShowDialog(owner) == DialogResult.OK)
-                    {
-                        if (Directory.Exists(folder))
-                        {
-                            Directory.CreateDirectory(folder);
-                        }
-
-                        ExtractToDirectory(fileName, folder, true);
-                    }
+                    fileDownload.ShowDialog(owner);
                 }
             }
         }
@@ -75,7 +67,7 @@ namespace Budford.Control
         /// <param name="archive"></param>
         /// <param name="destinationDirectoryName"></param>
         /// <param name="overwrite"></param>
-        public void ExtractToDirectory(string archive, string destinationDirectoryName, bool overwrite)
+        static public void ExtractToDirectory(string archive, string destinationDirectoryName, bool overwrite)
         {
             if (!overwrite)
             {

@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
 using Budford.Properties;
+using System.IO;
+using Budford.Control;
 
 namespace Budford.View
 {
@@ -17,14 +19,20 @@ namespace Budford.View
         // The man of the moment...
         WebClient webClient;
 
+        // The folder to extract to, if null won't extract
+        string folder;
+
         /// <summary>
         ///
         /// </summary>
-        public FormFileDownload(string urlIn, string fileNameIn)
+        public FormFileDownload(string urlIn, string fileNameIn, string folderIn = null)
         {
+            
             InitializeComponent();
             uri = urlIn;
             fileName = fileNameIn;
+            folder = folderIn;
+
             label1.Text = Resources.fFileDownload_fFileDownload_Downloading_ + fileName + Resources.fFileDownload_fFileDownload____;
         }
 
@@ -66,7 +74,17 @@ namespace Budford.View
             {
                 DialogResult = DialogResult.OK;
             }
-           
+
+            if (folder != null)
+            {
+                if (Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+
+                Unpacker.ExtractToDirectory(fileName, folder, true);
+            }
+
             Close();
         }
 

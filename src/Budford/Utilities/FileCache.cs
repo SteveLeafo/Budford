@@ -68,104 +68,105 @@ namespace Budford.Utilities
         {
             FileCache fileCache = new FileCache();
 
-            BinaryReader streamFile = new BinaryReader(File.Open(path, FileMode.Open));
-            UInt32 headerMagic = stream_readU32(streamFile);
-            bool isV1 = false;
-            if (headerMagic != FilecacheMagic && headerMagic != FilecacheMagicV2)
+            using (BinaryReader streamFile = new BinaryReader(File.Open(path, FileMode.Open)))
             {
-                stream_destroy();
-                return null;
-            }
-            if (headerMagic == FilecacheMagic)
-            {
-                isV1 = true;
-            }
-
-            UInt32 headerExtraVersion = stream_readU32(streamFile);
-            if (headerExtraVersion != extraVersion)
-            {
-                stream_destroy();
-                return null;
-            }
-
-            UInt64 headerDataOffset;
-            if (isV1)
-            {
-                headerDataOffset = stream_readU32(streamFile);
-            }
-            else
-            {
-                headerDataOffset = stream_readU64(streamFile);
-            }
-            UInt64 headerFileTableOffset;
-            if (isV1)
-            {
-                headerFileTableOffset = stream_readU32(streamFile);
-            }
-            else
-            {
-                headerFileTableOffset = stream_readU64(streamFile);
-            }
-
-            UInt32 headerFileTableSize = stream_readU32(streamFile);
-
-            UInt32 fileTableEntryCount;
-            bool invalidFileTableSize;
-            if (isV1)
-            {
-                fileTableEntryCount = headerFileTableSize / 24;
-                invalidFileTableSize = (headerFileTableSize % 24) != 0;
-            }
-            else
-            {
-                fileTableEntryCount = headerFileTableSize / SizeofFileCacheEntryT;
-                invalidFileTableSize = (headerFileTableSize % SizeofFileCacheEntryT) != 0;
-            }
-
-            if (invalidFileTableSize)
-            {
-                Console.WriteLine(Resources.FileCache_fileCache_openExisting___0___is_corrupted, path);
-                stream_destroy();
-                return null;
-            }
-
-            InitializeCriticalSection();
-            fileCache.StreamFile = streamFile;
-            fileCache.ExtraVersion = extraVersion;
-            fileCache.DataOffset = headerDataOffset;
-            fileCache.FileTableEntryCount = fileTableEntryCount;
-            fileCache.FileTableOffset = headerFileTableOffset;
-            fileCache.FileTableSize = fileTableEntryCount * SizeofFileCacheEntryT;
-            fileCache.FileTableEntries = new FileCacheEntry[fileTableEntryCount];
-
-            stream_setSeek64(streamFile, fileCache.DataOffset + fileCache.FileTableOffset);
-
-            if (isV1)
-            {
-                // read file table entries in old format
-                for (UInt32 i = 0; i < fileTableEntryCount; i++)
+                UInt32 headerMagic = stream_readU32(streamFile);
+                bool isV1 = false;
+                if (headerMagic != FilecacheMagic && headerMagic != FilecacheMagicV2)
                 {
-                    UInt64 name1 = stream_readU64(streamFile);
-                    UInt64 name2 = stream_readU64(streamFile);
-                    UInt32 fileOffset = stream_readU32(streamFile);
-                    UInt32 fileSize = stream_readU32(streamFile);
-                    fileCache.FileTableEntries[i].Name1 = name1;
-                    fileCache.FileTableEntries[i].Name2 = name2;
-                    fileCache.FileTableEntries[i].FileOffset = fileOffset;
-                    fileCache.FileTableEntries[i].FileSize = fileSize;
-                    fileCache.FileTableEntries[i].ExtraReserved = 0;
+                    stream_destroy();
+                    return null;
+                }
+                if (headerMagic == FilecacheMagic)
+                {
+                    isV1 = true;
+                }
+
+                UInt32 headerExtraVersion = stream_readU32(streamFile);
+                if (headerExtraVersion != extraVersion)
+                {
+                    stream_destroy();
+                    return null;
+                }
+
+                UInt64 headerDataOffset;
+                if (isV1)
+                {
+                    headerDataOffset = stream_readU32(streamFile);
+                }
+                else
+                {
+                    headerDataOffset = stream_readU64(streamFile);
+                }
+                UInt64 headerFileTableOffset;
+                if (isV1)
+                {
+                    headerFileTableOffset = stream_readU32(streamFile);
+                }
+                else
+                {
+                    headerFileTableOffset = stream_readU64(streamFile);
+                }
+
+                UInt32 headerFileTableSize = stream_readU32(streamFile);
+
+                UInt32 fileTableEntryCount;
+                bool invalidFileTableSize;
+                if (isV1)
+                {
+                    fileTableEntryCount = headerFileTableSize / 24;
+                    invalidFileTableSize = (headerFileTableSize % 24) != 0;
+                }
+                else
+                {
+                    fileTableEntryCount = headerFileTableSize / SizeofFileCacheEntryT;
+                    invalidFileTableSize = (headerFileTableSize % SizeofFileCacheEntryT) != 0;
+                }
+
+                if (invalidFileTableSize)
+                {
+                    Console.WriteLine(Resources.FileCache_fileCache_openExisting___0___is_corrupted, path);
+                    stream_destroy();
+                    return null;
+                }
+
+                InitializeCriticalSection();
+                fileCache.StreamFile = streamFile;
+                fileCache.ExtraVersion = extraVersion;
+                fileCache.DataOffset = headerDataOffset;
+                fileCache.FileTableEntryCount = fileTableEntryCount;
+                fileCache.FileTableOffset = headerFileTableOffset;
+                fileCache.FileTableSize = fileTableEntryCount * SizeofFileCacheEntryT;
+                fileCache.FileTableEntries = new FileCacheEntry[fileTableEntryCount];
+
+                stream_setSeek64(streamFile, fileCache.DataOffset + fileCache.FileTableOffset);
+
+                if (isV1)
+                {
+                    // read file table entries in old format
+                    for (UInt32 i = 0; i < fileTableEntryCount; i++)
+                    {
+                        UInt64 name1 = stream_readU64(streamFile);
+                        UInt64 name2 = stream_readU64(streamFile);
+                        UInt32 fileOffset = stream_readU32(streamFile);
+                        UInt32 fileSize = stream_readU32(streamFile);
+                        fileCache.FileTableEntries[i].Name1 = name1;
+                        fileCache.FileTableEntries[i].Name2 = name2;
+                        fileCache.FileTableEntries[i].FileOffset = fileOffset;
+                        fileCache.FileTableEntries[i].FileSize = fileSize;
+                        fileCache.FileTableEntries[i].ExtraReserved = 0;
+                    }
+                }
+                else
+                {
+                    stream_readData(streamFile, fileCache.FileTableEntries, fileTableEntryCount);
+                }
+                // upgrade file table and header if V1
+                if (isV1)
+                {
+                    fileCache_updateFiletable(fileCache, 0);
                 }
             }
-            else
-            {
-                stream_readData(streamFile, fileCache.FileTableEntries, fileTableEntryCount);
-            }
-            // upgrade file table and header if V1
-            if (isV1)
-            {
-                fileCache_updateFiletable(fileCache, 0);
-            }
-
             return fileCache;
         }
 

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using Budford.View;
+using Budford.Utilities;
 
 namespace Budford.Control
 {
@@ -13,16 +14,12 @@ namespace Budford.Control
         [STAThread]
         static void Main()
         {
-            if (!Directory.Exists("C:\\ProgramData\\Budford"))
-            {
-                Directory.CreateDirectory("C:\\ProgramData\\Budford");
-            }
-            Directory.SetCurrentDirectory("C:\\ProgramData\\Budford");
+            SetDefaultFolder();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             var arguments = Environment.GetCommandLineArgs();
-
 
             bool cmdLineLaunch = false;
             bool cmdLineFullScreen = false;
@@ -47,7 +44,7 @@ namespace Budford.Control
                 }
                 foreach (var game in model.GameData)
                 {
-                    if (game.Value.LaunchFile == cmdLineFileName)
+                    if (game.Value.LaunchFile.ToLower() == cmdLineFileName.ToLower())
                     {
                         game.Value.Exists = true;
                         new Launcher(null).LaunchCemu(null, model, game.Value, false, false, true, cmdLineFullScreen);
@@ -56,6 +53,23 @@ namespace Budford.Control
                 }
                 new Launcher(null).LaunchRpx(model, cmdLineFileName, cmdLineFullScreen);
             }
+        }
+
+        /// <summary>
+        /// This is the Budford folder where all the downloaded files will be saved
+        /// </summary>
+        private static void SetDefaultFolder()
+        {
+            string defaultFolder = "C:\\ProgramData\\Budford";
+            if (!CurrentOS.IsWindows)
+            {
+                defaultFolder = "Budford";
+            }
+            if (!Directory.Exists(defaultFolder))
+            {
+                Directory.CreateDirectory(defaultFolder);
+            }
+            Directory.SetCurrentDirectory(defaultFolder);
         }
 
         /// <summary>
