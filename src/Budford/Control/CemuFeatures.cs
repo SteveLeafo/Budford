@@ -81,6 +81,7 @@ namespace Budford.Control
             foreach (var version in model.Settings.InstalledVersions)
             {
                 version.HasFonts = HasFontsInstalled(version.Folder);
+                version.HasOnlineFiles = HasOnlineFiles(version.Folder);
                 version.HasCemuHook = HasCemuHookInstalled(version.Folder);
                 version.HasPatch = HasPatchInstalled(version.Folder);
                 version.HasDlc = HasDlcInstalled(version.Folder);
@@ -126,21 +127,45 @@ namespace Budford.Control
         internal static void RepairInstalledVersions(Form form, Model.Model model)
         {
             Unpacker unpacker = new Unpacker(form);
+
             InstalledVersion dlcSource = GetLatestDlcVersion(model);
+            InstalledVersion onlineSource = GetLatestOnlineVersion(model);
+
             foreach (var v in model.Settings.InstalledVersions)
             {
-                if (!v.HasPatch) Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
-                if (!v.HasFonts) unpacker.Unpack("sharedFonts.zip", v.Folder);
-                //if (!v.HasCemuHook) 
-                    InstallCemuHook(unpacker, v);
-                if (!v.HasControllerProfiles) CopyLatestControllerProfiles(model, v);
+                if (!v.HasPatch)
+                {
+                    Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
+                }
+
+                if (!v.HasFonts)
+                {
+                    unpacker.Unpack("sharedFonts.zip", v.Folder);
+                }
+
+                InstallCemuHook(unpacker, v);
+
+                if (!v.HasControllerProfiles)
+                {
+                    CopyLatestControllerProfiles(model, v);
+                }
+
+
+                if (!v.HasOnlineFiles)
+                {
+                    if (onlineSource != null)
+                    {
+                        CopyOnlineFiles(onlineSource, v);
+                    }
+                }
+
                 if (!v.HasDlc)
                 {
                     if (dlcSource != null)
                     {
                         try
                         {
-                            JunctionPoint.Create(dlcSource.Folder + @"\mlc01\usr\title", v.Folder + @"\mlc01\usr\title", true);
+                            JunctionPoint.Create(Path.Combine(dlcSource.Folder,"mlc01", "usr", "title"), Path.Combine(v.Folder, "mlc01", "usr", "title"), true);
                         }
                         catch (Exception)
                         {
@@ -151,6 +176,28 @@ namespace Budford.Control
             }
 
             UpdateFeaturesForInstalledVersions(model);
+        }
+
+        private static void CopyOnlineFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)
+        {
+            if (onlineDestination.VersionNumber > 1110)
+            {
+                File.Copy(Path.Combine(onlineSource.Folder, "otp.bin"), Path.Combine(onlineDestination.Folder, "otp.bin"), true);
+                File.Copy(Path.Combine(onlineSource.Folder, "seeprom.bin"), Path.Combine(onlineDestination.Folder, "seeprom.bin"), true);
+
+                Directory.CreateDirectory(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001"}));
+                File.Copy(Path.Combine(new[] { onlineSource.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat" }), Path.Combine(new[] { onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat" }), true);
+
+                Directory.CreateDirectory(Path.Combine(new[] { onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts" }));
+                DirectoryInfo s1 = new DirectoryInfo(Path.Combine(new[] { onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts" }));
+                DirectoryInfo d1 = new DirectoryInfo(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts" }));
+                FileManager.CopyFilesRecursively(s1, d1);
+
+                Directory.CreateDirectory(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" }));
+                DirectoryInfo s2 = new DirectoryInfo(Path.Combine(new[] { onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" }));
+                DirectoryInfo d2 = new DirectoryInfo(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" }));
+                FileManager.CopyFilesRecursively(s2, d2);
+            }
         }
 
         /// <summary>
@@ -166,14 +213,33 @@ namespace Budford.Control
             {
                 if (v.DlcType == 1)
                 {
-                    int version;
-                    if (int.TryParse(v.Version.Replace(".", ""), out version))
+                    if (v.VersionNumber > latestVersion)
                     {
-                        if (version > latestVersion)
-                        {
-                            lastestWithDlc = v;
-                            latestVersion = version;
-                        }
+                        lastestWithDlc = v;
+                        latestVersion = v.VersionNumber;
+                    }
+                }
+            }
+            return lastestWithDlc;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        static InstalledVersion GetLatestOnlineVersion(Model.Model model)
+        {
+            InstalledVersion lastestWithDlc = null;
+            int latestVersion = 0;
+            foreach (var v in model.Settings.InstalledVersions)
+            {
+                if (v.HasOnlineFiles)
+                {
+                    if (v.VersionNumber > latestVersion)
+                    {
+                        lastestWithDlc = v;
+                        latestVersion = v.VersionNumber;
                     }
                 }
             }
@@ -193,25 +259,23 @@ namespace Budford.Control
             foreach (var v in model.Settings.InstalledVersions)
             {
                 int version = v.VersionNumber;
-                //if (int.TryParse(v.Version.Replace(".", ""), out version))
+
+                if (v.VersionNumber >= latestVersion)
                 {
-                    if (version >= latestVersion)
+                    if (v.VersionNumber < maxVersion)
                     {
-                        if (version < maxVersion)
+                        if (version == latestVersion)
                         {
-                            if (version == latestVersion)
-                            {
-                                if (v.IsLatest)
-                                {
-                                    latest = v;
-                                    latestVersion = version;
-                                }
-                            }
-                            else
+                            if (v.IsLatest)
                             {
                                 latest = v;
-                                latestVersion = version;
+                                latestVersion = v.VersionNumber;
                             }
+                        }
+                        else
+                        {
+                            latest = v;
+                            latestVersion = version;
                         }
                     }
                 }
@@ -312,6 +376,32 @@ namespace Budford.Control
                         if (File.Exists(Path.Combine(folder, "sharedFonts", "CafeStd.ttf")))
                         {
                             if (File.Exists(Path.Combine(folder, "sharedFonts", "CafeTw.ttf")))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <returns></returns>
+        static bool HasOnlineFiles(string folder)
+        {
+            if (File.Exists(Path.Combine(folder, "otp.bin")))
+            {
+                if (File.Exists(Path.Combine(folder, "seeprom.bin")))
+                {
+                    if (File.Exists(Path.Combine(new [] {folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"})))
+                    {                        
+                        if (Directory.Exists(Path.Combine(new [] {folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"})))
+                        {
+                            if (Directory.Exists(Path.Combine(new[] { folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" })))
                             {
                                 return true;
                             }

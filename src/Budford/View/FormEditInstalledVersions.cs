@@ -162,6 +162,7 @@ namespace Budford.View
                     lvi.SubItems.Add(v.HasCemuHook ? "Yes" : "No");
                     lvi.SubItems.Add(GetLinkType(v));
                     lvi.SubItems.Add(v.HasPatch ? "Yes" : "No");
+                    lvi.SubItems.Add(v.HasOnlineFiles ? "Yes" : "No");
                     lvi.SubItems.Add(v.DlcSource == null ? "" : v.DlcSource);
                     listView1.Items.Add(lvi);
                 }

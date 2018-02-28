@@ -7,7 +7,8 @@ namespace Budford.Model
         public string Folder  = "";
         public string Version  = "";
         public bool HasFonts;
-        public bool HasCemuHook ;
+        public bool HasOnlineFiles;
+        public bool HasCemuHook;
         public bool HasPatch ;
         public bool HasDlc ;
         public bool HasControllerProfiles;

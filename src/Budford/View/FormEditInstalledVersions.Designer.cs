@@ -70,6 +70,7 @@
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeDeadLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -122,6 +123,7 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader8,
+            this.columnHeader2,
             this.columnHeader9});
             this.tableLayoutPanel1.SetColumnSpan(this.listView1, 9);
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
@@ -424,6 +426,10 @@
             this.removeDeadLinksToolStripMenuItem.Text = "Remove dead links";
             this.removeDeadLinksToolStripMenuItem.Click += new System.EventHandler(this.removeDeadLinksToolStripMenuItem_Click);
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Online";
+            // 
             // FormEditInstalledVersions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,5 +494,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem removeDeadLinksToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
