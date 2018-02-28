@@ -1,5 +1,7 @@
 # Budford
-Budford: A small app to assist children with Cemu installation and setup.
+Budford: Budford: Cemu configuration, settings and auto update tool. 
+
+Automates updating, installation and configuratiion of Cemu and allows all options to be configured on a per game basis.
 
 ![usage](https://raw.githubusercontent.com/SteveLeafo/Budford/master/docs/ready_to_go.png)
 
