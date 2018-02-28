@@ -72,6 +72,8 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
@@ -88,8 +90,7 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -299,8 +300,8 @@
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.27273F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.72727F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.48387F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.51613F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(391, 485);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
@@ -310,7 +311,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(13, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(365, 126);
+            this.groupBox2.Size = new System.Drawing.Size(365, 166);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Overrides";
@@ -325,16 +326,18 @@
             this.tableLayoutPanel4.Controls.Add(this.checkBox2, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.checkBox4, 1, 2);
             this.tableLayoutPanel4.Controls.Add(this.checkBox8, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.checkBox9, 1, 4);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 5;
+            this.tableLayoutPanel4.RowCount = 6;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(359, 107);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(359, 147);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // checkBox1
@@ -388,7 +391,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel5);
-            this.groupBox4.Location = new System.Drawing.Point(13, 135);
+            this.groupBox4.Location = new System.Drawing.Point(13, 175);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(362, 151);
             this.groupBox4.TabIndex = 2;
@@ -702,6 +705,173 @@
             this.textBox1.Size = new System.Drawing.Size(234, 20);
             this.textBox1.TabIndex = 4;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Location = new System.Drawing.Point(8, 88);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 28);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Stop Hotkey:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox7
+            // 
+            this.tableLayoutPanel6.SetColumnSpan(this.comboBox7, 2);
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Items.AddRange(new object[] {
+            "None",
+            "LButton",
+            "RButton",
+            "Cancel",
+            "MButton",
+            "XButton1",
+            "XButton2",
+            "Back",
+            "Tab",
+            "LineFeed",
+            "Clear",
+            "Return",
+            "Return",
+            "ShiftKey",
+            "ControlKey",
+            "Menu",
+            "Pause",
+            "Capital",
+            "Capital",
+            "KanaMode",
+            "KanaMode",
+            "KanaMode",
+            "JunjaMode",
+            "FinalMode",
+            "HanjaMode",
+            "HanjaMode",
+            "Escape",
+            "IMEConvert",
+            "IMENonconvert",
+            "IMEAceept",
+            "IMEAceept",
+            "IMEModeChange",
+            "Space",
+            "PageUp",
+            "PageUp",
+            "Next",
+            "Next",
+            "End",
+            "Home",
+            "Left",
+            "Up",
+            "Right",
+            "Down",
+            "Select",
+            "Print",
+            "Execute",
+            "PrintScreen",
+            "PrintScreen",
+            "Insert",
+            "Delete",
+            "Help",
+            "D0",
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8",
+            "D9",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+            "LWin",
+            "RWin",
+            "Apps",
+            "Sleep",
+            "NumPad0",
+            "NumPad1",
+            "NumPad2",
+            "NumPad3",
+            "NumPad4",
+            "NumPad5",
+            "NumPad6",
+            "NumPad7",
+            "NumPad8",
+            "NumPad9",
+            "Multiply",
+            "Add",
+            "Separator",
+            "Subtract",
+            "Decimal",
+            "Divide",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "F18",
+            "F19",
+            "F20",
+            "F21",
+            "F22",
+            "F23",
+            "F24",
+            "NumLock",
+            "Scroll",
+            "LShiftKey",
+            "RShiftKey",
+            "LControlKey",
+            "RControlKey",
+            "LMenu",
+            "RMenu",
+            "BrowserBack",
+            "BrowserForward",
+            "BrowserRefresh",
+            "BrowserStop",
+            "BrowserSearch",
+            "BrowserFavorites",
+            "BrowserHome"});
+            this.comboBox7.Location = new System.Drawing.Point(83, 91);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(272, 21);
+            this.comboBox7.TabIndex = 1;
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel8);
@@ -919,172 +1089,17 @@
             this.comboBox6.Size = new System.Drawing.Size(240, 21);
             this.comboBox6.TabIndex = 1;
             // 
-            // label12
+            // checkBox9
             // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(8, 88);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(69, 28);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Stop Hotkey:";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // comboBox7
-            // 
-            this.tableLayoutPanel6.SetColumnSpan(this.comboBox7, 2);
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Items.AddRange(new object[] {
-            "None",
-            "LButton",
-            "RButton",
-            "Cancel",
-            "MButton",
-            "XButton1",
-            "XButton2",
-            "Back",
-            "Tab",
-            "LineFeed",
-            "Clear",
-            "Return",
-            "Return",
-            "ShiftKey",
-            "ControlKey",
-            "Menu",
-            "Pause",
-            "Capital",
-            "Capital",
-            "KanaMode",
-            "KanaMode",
-            "KanaMode",
-            "JunjaMode",
-            "FinalMode",
-            "HanjaMode",
-            "HanjaMode",
-            "Escape",
-            "IMEConvert",
-            "IMENonconvert",
-            "IMEAceept",
-            "IMEAceept",
-            "IMEModeChange",
-            "Space",
-            "PageUp",
-            "PageUp",
-            "Next",
-            "Next",
-            "End",
-            "Home",
-            "Left",
-            "Up",
-            "Right",
-            "Down",
-            "Select",
-            "Print",
-            "Execute",
-            "PrintScreen",
-            "PrintScreen",
-            "Insert",
-            "Delete",
-            "Help",
-            "D0",
-            "D1",
-            "D2",
-            "D3",
-            "D4",
-            "D5",
-            "D6",
-            "D7",
-            "D8",
-            "D9",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z",
-            "LWin",
-            "RWin",
-            "Apps",
-            "Sleep",
-            "NumPad0",
-            "NumPad1",
-            "NumPad2",
-            "NumPad3",
-            "NumPad4",
-            "NumPad5",
-            "NumPad6",
-            "NumPad7",
-            "NumPad8",
-            "NumPad9",
-            "Multiply",
-            "Add",
-            "Separator",
-            "Subtract",
-            "Decimal",
-            "Divide",
-            "F1",
-            "F2",
-            "F3",
-            "F4",
-            "F5",
-            "F6",
-            "F7",
-            "F8",
-            "F9",
-            "F10",
-            "F11",
-            "F12",
-            "F13",
-            "F14",
-            "F15",
-            "F16",
-            "F17",
-            "F18",
-            "F19",
-            "F20",
-            "F21",
-            "F22",
-            "F23",
-            "F24",
-            "NumLock",
-            "Scroll",
-            "LShiftKey",
-            "RShiftKey",
-            "LControlKey",
-            "RControlKey",
-            "LMenu",
-            "RMenu",
-            "BrowserBack",
-            "BrowserForward",
-            "BrowserRefresh",
-            "BrowserStop",
-            "BrowserSearch",
-            "BrowserFavorites",
-            "BrowserHome"});
-            this.comboBox7.Location = new System.Drawing.Point(83, 91);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(272, 21);
-            this.comboBox7.TabIndex = 1;
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox9.Location = new System.Drawing.Point(13, 95);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(333, 17);
+            this.checkBox9.TabIndex = 0;
+            this.checkBox9.Text = "Automatically download latest everything on startup";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // FormEditConfiguration
             // 
@@ -1192,5 +1207,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.CheckBox checkBox9;
     }
 }

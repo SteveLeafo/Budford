@@ -39,6 +39,7 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,6 @@
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeDeadLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -174,6 +174,10 @@
             // 
             this.columnHeader8.Text = "Has Patch";
             this.columnHeader8.Width = 75;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Online";
             // 
             // columnHeader9
             // 
@@ -425,10 +429,6 @@
             this.removeDeadLinksToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.removeDeadLinksToolStripMenuItem.Text = "Remove dead links";
             this.removeDeadLinksToolStripMenuItem.Click += new System.EventHandler(this.removeDeadLinksToolStripMenuItem_Click);
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Online";
             // 
             // FormEditInstalledVersions
             // 

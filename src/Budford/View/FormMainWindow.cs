@@ -18,6 +18,7 @@ namespace Budford.View
     {
         public string launchGame = "";
         public bool launchFull = true;
+        bool launchConfig = false;
 
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
@@ -56,18 +57,55 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SetCemuFolder()
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    Model.Settings.DefaultInstallFolder = fbd.SelectedPath;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public FormMainWindow()
         {
             InitializeComponent();
 
             Model = TransferLegacyModel();
 
-
             UsbNotification.RegisterUsbDeviceNotification(Handle);
 
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
-            
+
+            if (!Directory.Exists(Model.Settings.DefaultInstallFolder))
+            {
+                using (FormFirstTimeWindow fftw = new FormFirstTimeWindow())
+                {
+                    switch (fftw.ShowDialog(this))
+                    {
+                        case DialogResult.OK:
+                            FileManager.DownloadCemu(this, unpacker, Model);
+                            break;
+                        case DialogResult.Yes:
+                            SetCemuFolder();
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                FileManager.SearchForInstalledVersions(Model);
+                FolderScanner.GetGameInformation(null, "", "");
+            }
+
             if (Model.Settings.ScanGameFoldersOnStart)
             {
                 foreach (var folder in Model.Settings.RomFolders)
@@ -81,10 +119,25 @@ namespace Budford.View
 
             Model.OldVersions.Clear();
 
-
-            if (Model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+            if (Model.Settings.AutomaticallyDownloadLatestEverythingOnStart)
             {
-                CemuFeatures.DownloadLatestGraphicsPack(this, Model, false);
+                try
+                {
+                    FileManager.DownloadCemu(this, unpacker, Model);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            else if (Model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+            {
+                try
+                {
+                    CemuFeatures.DownloadLatestGraphicsPack(this, Model, false);
+                }
+                catch (Exception)
+                {
+                }
             }
 
             FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
@@ -172,6 +225,10 @@ namespace Budford.View
                 }
                 return;
             }
+            //if (launchConfig)
+            //{
+            //    LaunchConfigurationForm(0);
+            //}
             base.OnLoad(e);
         }
 
@@ -191,7 +248,11 @@ namespace Budford.View
                 }
             }
 
-            return  Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
+            Model.Model m = Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
+
+          
+            return m;
+
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -697,13 +758,16 @@ namespace Budford.View
         /// </summary>
         private void ResizeColumns()
         {
-            listView1.Columns[0].Width = 36;
-            if (Model.Settings.AutoSizeColumns)
+            if (listView1.Columns.Count > 0)
             {
-                for (int c = 4; c < listView1.Columns.Count; ++c)
+                listView1.Columns[0].Width = 36;
+                if (Model.Settings.AutoSizeColumns)
                 {
-                    listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    for (int c = 4; c < listView1.Columns.Count; ++c)
+                    {
+                        listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    }
                 }
             }
         }
@@ -746,7 +810,14 @@ namespace Budford.View
             lvi.SubItems.Add(game.Value.Size);//.ShaderCacheFileSize.ToString());
             lvi.SubItems.Add(game.Value.LaunchFileName);
             lvi.SubItems.Add(game.Value.GameSetting.PreferedVersion + "               ");
-            lvi.SubItems.Add(game.Value.GameSetting.OfficialEmulationState + "        ");
+            if (game.Value.GameSetting.OfficialEmulationState == game.Value.GameSetting.PreviousOfficialEmulationState)
+            {
+                lvi.SubItems.Add(game.Value.GameSetting.OfficialEmulationState + "        ");
+            }
+            else
+            {
+                lvi.SubItems.Add(game.Value.GameSetting.OfficialEmulationState + " <- " + game.Value.GameSetting.PreviousOfficialEmulationState);
+            }
             lvi.SubItems.Add(game.Value.GameSetting.EmulationState + "        ");
             lvi.SubItems.Add(game.Value.SaveDir.Trim());
             lvi.SubItems.Add(game.Value.Type.Trim() + " ");
@@ -1811,7 +1882,19 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadCompatabilityStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CemuFeatures.DownloadCompatibilityStatus(this, Model);  
+            foreach (var game in Model.GameData)
+            {
+                game.Value.GameSetting.PreviousOfficialEmulationState = game.Value.GameSetting.OfficialEmulationState;
+            }
+            CemuFeatures.DownloadCompatibilityStatus(this, Model);
+            foreach (var game in Model.GameData)
+            {
+                if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
+                {
+                    MessageBox.Show("The status of one or more games have changed.\n\nTheir status will be set as New Status <- Old Status untill you restart or re-download the status", "Exciting news");
+                    break;
+                }
+            }
             PopulateListView();
             ResizeColumnHeaders();
         }
@@ -1899,11 +1982,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadLatestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CemuFeatures.DownloadLatestVersion(this, Model.Settings))
-            {
-                FileManager.DownloadCemu(this, unpacker, Model, FormEditInstalledVersions.Uris, FormEditInstalledVersions.Filenames);
-                manageInstalledVersionsToolStripMenuItem_Click(sender, e);
-            }
+            FileManager.DownloadCemu(this, unpacker, Model);
         }
 
         /// <summary>

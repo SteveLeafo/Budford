@@ -50,6 +50,8 @@ namespace Budford.Model
 
         public bool AutomaticallyDownloadGraphicsPackOnStart = false;
 
+        public bool AutomaticallyDownloadLatestEverythingOnStart = false;
+
         public string DefaultResolution = "default";
 
         public ConsoleRegionType ConsoleRegion = ConsoleRegionType.Auto;

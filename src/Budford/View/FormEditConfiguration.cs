@@ -35,6 +35,7 @@ namespace Budford.View
             checkBox6.Checked = settings.ScanGameFoldersOnStart;
             checkBox7.Checked = settings.IncludeWiiULauncherRpx;
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
+            checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
 
             textBox1.Text = model.Settings.WineExe;
             comboBox7.SelectedIndex = 0;
@@ -171,6 +172,7 @@ namespace Budford.View
             settings.ScanGameFoldersOnStart = checkBox6.Checked;
             settings.IncludeWiiULauncherRpx = checkBox7.Checked;
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
+            settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
 
             model.Settings.WineExe = textBox1.Text;
             model.Settings.StopHotkey = comboBox7.Text;

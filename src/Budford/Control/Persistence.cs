@@ -42,8 +42,6 @@ namespace Budford.Control
                 return model;
             }
             model = new Model.Model();
-            FileManager.SearchForInstalledVersions(model);
-            FolderScanner.GetGameInformation(null, "", "");
             return model;
         }
 
@@ -155,6 +153,8 @@ namespace Budford.Control
                 {
                     gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
                 }
+
+                gd.Value.GameSetting.PreviousOfficialEmulationState = gd.Value.GameSetting.OfficialEmulationState;
 
                 if (gd.Value.ShaderCacheFileSize == -1)
                 {

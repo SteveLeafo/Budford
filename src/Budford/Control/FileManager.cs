@@ -235,19 +235,19 @@ namespace Budford.Control
             }
         }
 
-        internal static void DownloadCemu(Form parent, Unpacker unpacker, Model.Model model, string[] uris, string[] filenames)
+        internal static void DownloadCemu(Form parent, Unpacker unpacker, Model.Model model)
         {
-            using (FormMultiFileDownload dl = new FormMultiFileDownload(uris, filenames))
+            using (FormMultiFileDownload dl = new FormMultiFileDownload(model))
             {
                 dl.ShowDialog(parent);
             }
-            unpacker.Unpack(Path.GetFileName(uris[0]), model.Settings.DefaultInstallFolder);
-            unpacker.Unpack("cemu_hook.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-            unpacker.Unpack("sharedFonts.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-            unpacker.Unpack("shaderCache.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-            unpacker.Unpack("controllerProfiles.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            //unpacker.Unpack(Path.GetFileName(uris[0]), model.Settings.DefaultInstallFolder);
+            //unpacker.Unpack("cemu_hook.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            //unpacker.Unpack("sharedFonts.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            //unpacker.Unpack("shaderCache.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
+            //unpacker.Unpack("controllerProfiles.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
 
-            Unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
+            //Unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
 
             if (Directory.Exists("graphicsPacks"))
             {

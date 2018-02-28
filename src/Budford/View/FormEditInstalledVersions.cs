@@ -28,7 +28,6 @@ namespace Budford.View
             {
                 "http://cemu.info/releases/cemu_1.9.1.zip",
                 "https://files.sshnuke.net/cemuhook_190c_0532.zip",
-                "https://github.com/slashiee/cemu_graphic_packs/archive/master.zip",
                 "https://files.sshnuke.net/sharedFonts.7z"
             };
 
@@ -36,7 +35,6 @@ namespace Budford.View
             {
                 "cemu_1.9.1.zip",
                 "cemu_hook.zip",
-                "graphicsPacks.zip",
                 "sharedFonts.7z"
             };
 
@@ -54,6 +52,12 @@ namespace Budford.View
             model = Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
 
             Initialise();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            button3_Click(null, null);
+            base.OnLoad(e);
         }
 
         /// <summary>
@@ -429,7 +433,7 @@ namespace Budford.View
         {
             if (CemuFeatures.DownloadLatestVersion(this, model.Settings))
             {
-                FileManager.DownloadCemu(this, unpacker, model, Uris, Filenames);
+                FileManager.DownloadCemu(this, unpacker, model);
             }
         }
 

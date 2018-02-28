@@ -676,7 +676,7 @@ namespace Budford.Control
             }
         }
 
-        static bool IsGraphicPackInstalled(string pack)
+        internal static bool IsGraphicPackInstalled(string pack)
         {
             if (!Directory.Exists("graphicsPacks"))
             {

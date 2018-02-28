@@ -946,6 +946,7 @@
             this.fixUnityGameSettingsToolStripMenuItem.Name = "fixUnityGameSettingsToolStripMenuItem";
             this.fixUnityGameSettingsToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.fixUnityGameSettingsToolStripMenuItem.Text = "Fix Wii U Launcher Game Settings";
+            this.fixUnityGameSettingsToolStripMenuItem.Visible = false;
             this.fixUnityGameSettingsToolStripMenuItem.Click += new System.EventHandler(this.fixUnityGameSettingsToolStripMenuItem_Click);
             // 
             // copySavesToolStripMenuItem

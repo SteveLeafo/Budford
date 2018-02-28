@@ -8,6 +8,7 @@ namespace Budford.Model
 
         public EmulationStateType EmulationState = EmulationStateType.NotSet;
         public EmulationStateType OfficialEmulationState = EmulationStateType.NotSet;
+        internal EmulationStateType PreviousOfficialEmulationState;
         public string CompatibilityUrl = "";
         public HashSet<GraphicsPack> graphicsPacks = new HashSet<GraphicsPack>();
         internal HashSet<string> GraphicsPacksFolders = new HashSet<string>();

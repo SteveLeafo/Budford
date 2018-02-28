@@ -158,6 +158,12 @@
     <Compile Include="View\FormEditUser.Designer.cs">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormFirstTimeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormFirstTimeWindow.Designer.cs">
+      <DependentUpon>FormFirstTimeWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormLaunchboxExporter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormFirstTimeWindow.resx">
+      <DependentUpon>FormFirstTimeWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormLaunchboxExporter.resx">
       <DependentUpon>FormLaunchboxExporter.cs</DependentUpon>
