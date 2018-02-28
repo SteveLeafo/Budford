@@ -1,5 +1,12 @@
 # Budford Change Log
 
+## V1.0.49
+- Added a notification if the official status of a game changes.  You can then see the old and new status of changed games
+- Added the ability to configure a hot key to Close Cemu
+- Added support for online file to the Cemu version manager
+- Improved the Cemu update form - you can now chose to automatically check for new Cemu and Cemu Hook release on start
+- Added a new welcome screen and simplified the initial setup for first time users
+
 ## V1.0.46
 - New per game options: Controller Profile Overrides.  Can change the controller type or disable a controller per game.  Default is to do nothing.
 - Fixed an issue with the shader cache importer.  It will now prompt you before importing with a smaller shader cache.
