@@ -130,12 +130,23 @@ namespace Budford.Control
 
             InstalledVersion dlcSource = GetLatestDlcVersion(model);
             InstalledVersion onlineSource = GetLatestOnlineVersion(model);
+            InstalledVersion patchSource = GetLatestPatchVersion(model);
 
             foreach (var v in model.Settings.InstalledVersions)
             {
                 if (!v.HasPatch)
                 {
-                    Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
+                    if (File.Exists("sys.zip"))
+                    {
+                        Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
+                    }
+                    else
+                    {
+                        if (onlineSource != null)
+                        {
+                            CopyPatchFiles(onlineSource, v);
+                        }
+                    }
                 }
 
                 if (!v.HasFonts)
@@ -176,6 +187,15 @@ namespace Budford.Control
             }
 
             UpdateFeaturesForInstalledVersions(model);
+        }
+
+        private static void CopyPatchFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)
+        {
+            Directory.CreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content"));
+            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), true);
+            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), true);
+            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), true);
+            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"), true);
         }
 
         private static void CopyOnlineFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)
@@ -235,6 +255,29 @@ namespace Budford.Control
             foreach (var v in model.Settings.InstalledVersions)
             {
                 if (v.HasOnlineFiles)
+                {
+                    if (v.VersionNumber > latestVersion)
+                    {
+                        lastestWithDlc = v;
+                        latestVersion = v.VersionNumber;
+                    }
+                }
+            }
+            return lastestWithDlc;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        static InstalledVersion GetLatestPatchVersion(Model.Model model)
+        {
+            InstalledVersion lastestWithDlc = null;
+            int latestVersion = 0;
+            foreach (var v in model.Settings.InstalledVersions)
+            {
+                if (v.HasPatch)
                 {
                     if (v.VersionNumber > latestVersion)
                     {
