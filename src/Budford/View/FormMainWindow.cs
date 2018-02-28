@@ -16,6 +16,9 @@ namespace Budford.View
 {
     public partial class FormMainWindow : Form
     {
+        public string launchGame = "";
+        public bool launchFull = true;
+
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
 
@@ -150,6 +153,28 @@ namespace Budford.View
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            if (launchGame != "")
+            {
+                this.WindowState = FormWindowState.Minimized;
+                this.Visible = false;
+                this.Hide();
+                foreach (var game in Model.GameData)
+                {
+                    if (game.Value.LaunchFile.ToLower() == launchGame.ToLower())
+                    {
+                        RegisterStopHotKey(Model);
+                        game.Value.Exists = true;
+                        launcher.LaunchCemu(this, Model, game.Value, false, false, false, launchFull);
+                        break;
+                    }
+                }
+                return;
+            }
+            base.OnLoad(e);
+        }
+
         internal static Model.Model TransferLegacyModel()
         {
             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
@@ -181,7 +206,7 @@ namespace Budford.View
                     {
                         GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                         Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                        RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, (int)KeyModifier.None, Keys.F11.GetHashCode());       // Register Shift + A as global hotkey. 
+                        RegisterStopHotKey(Model);
     
                         launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
                         e.Handled = true;
@@ -1007,7 +1032,7 @@ namespace Budford.View
 
                         GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                         Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                        RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, (int)KeyModifier.None, Keys.F11.GetHashCode());       // Register Shift + A as global hotkey. 
+                        RegisterStopHotKey(Model);
 
                         launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
                     }
@@ -1072,7 +1097,7 @@ namespace Budford.View
         {
             if (launcher.Open(Model))
             {
-                RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, (int)KeyModifier.None, Keys.F11.GetHashCode());       // Register Shift + A as global hotkey. 
+                RegisterStopHotKey(Model);
                 EnableControlsForGameRunning();
             }
         }
@@ -1492,6 +1517,190 @@ namespace Budford.View
             LaunchGame();
         }
 
+        Keys GetHotKey(string key)
+        {
+            switch (key)
+            {
+                case "None": return Keys.None;
+                case "LButton": return Keys.LButton;
+                case "RButton": return Keys.RButton;
+                case "Cancel": return Keys.Cancel;
+                case "MButton": return Keys.MButton;
+                case "XButton1": return Keys.XButton1;
+                case "XButton2": return Keys.XButton2;
+                case "Back": return Keys.Back;
+                case "Tab": return Keys.Tab;
+                case "LineFeed": return Keys.LineFeed;
+                case "Clear": return Keys.Clear;
+                case "Return": return Keys.Return;
+                case "ShiftKey": return Keys.ShiftKey;
+                case "ControlKey": return Keys.ControlKey;
+                case "Menu": return Keys.Menu;
+                case "Pause": return Keys.Pause;
+                case "Capital": return Keys.Capital;
+                case "KanaMode": return Keys.KanaMode;
+                case "JunjaMode": return Keys.JunjaMode;
+                case "FinalMode": return Keys.FinalMode;
+                case "HanjaMode": return Keys.HanjaMode;
+                case "Escape": return Keys.Escape;
+                case "IMEConvert": return Keys.IMEConvert;
+                case "IMENonconvert": return Keys.IMENonconvert;
+                case "IMEAceept": return Keys.IMEAceept;
+                case "IMEModeChange": return Keys.IMEModeChange;
+                case "Space": return Keys.Space;
+                case "PageUp": return Keys.PageUp;
+                case "Next": return Keys.Next;
+                case "End": return Keys.End;
+                case "Home": return Keys.Home;
+                case "Left": return Keys.Left;
+                case "Up": return Keys.Up;
+                case "Right": return Keys.Right;
+                case "Down": return Keys.Down;
+                case "Select": return Keys.Select;
+                case "Print": return Keys.Print;
+                case "Execute": return Keys.Execute;
+                case "PrintScreen": return Keys.PrintScreen;
+                case "Insert": return Keys.Insert;
+                case "Delete": return Keys.Delete;
+                case "Help": return Keys.Help;
+                case "D0": return Keys.D0;
+                case "D1": return Keys.D1;
+                case "D2": return Keys.D2;
+                case "D3": return Keys.D3;
+                case "D4": return Keys.D4;
+                case "D5": return Keys.D5;
+                case "D6": return Keys.D6;
+                case "D7": return Keys.D7;
+                case "D8": return Keys.D8;
+                case "D9": return Keys.D9;
+                case "A": return Keys.A;
+                case "B": return Keys.B;
+                case "C": return Keys.C;
+                case "D": return Keys.D;
+                case "E": return Keys.E;
+                case "F": return Keys.F;
+                case "G": return Keys.G;
+                case "H": return Keys.H;
+                case "I": return Keys.I;
+                case "J": return Keys.J;
+                case "K": return Keys.K;
+                case "L": return Keys.L;
+                case "M": return Keys.M;
+                case "N": return Keys.N;
+                case "O": return Keys.O;
+                case "P": return Keys.P;
+                case "Q": return Keys.Q;
+                case "R": return Keys.R;
+                case "S": return Keys.S;
+                case "T": return Keys.T;
+                case "U": return Keys.U;
+                case "V": return Keys.V;
+                case "W": return Keys.W;
+                case "X": return Keys.X;
+                case "Y": return Keys.Y;
+                case "Z": return Keys.Z;
+                case "LWin": return Keys.LWin;
+                case "RWin": return Keys.RWin;
+                case "Apps": return Keys.Apps;
+                case "Sleep": return Keys.Sleep;
+                case "NumPad0": return Keys.NumPad0;
+                case "NumPad1": return Keys.NumPad1;
+                case "NumPad2": return Keys.NumPad2;
+                case "NumPad3": return Keys.NumPad3;
+                case "NumPad4": return Keys.NumPad4;
+                case "NumPad5": return Keys.NumPad5;
+                case "NumPad6": return Keys.NumPad6;
+                case "NumPad7": return Keys.NumPad7;
+                case "NumPad8": return Keys.NumPad8;
+                case "NumPad9": return Keys.NumPad9;
+                case "Multiply": return Keys.Multiply;
+                case "Add": return Keys.Add;
+                case "Separator": return Keys.Separator;
+                case "Subtract": return Keys.Subtract;
+                case "Decimal": return Keys.Decimal;
+                case "Divide": return Keys.Divide;
+                case "F1": return Keys.F1;
+                case "F2": return Keys.F2;
+                case "F3": return Keys.F3;
+                case "F4": return Keys.F4;
+                case "F5": return Keys.F5;
+                case "F6": return Keys.F6;
+                case "F7": return Keys.F7;
+                case "F8": return Keys.F8;
+                case "F9": return Keys.F9;
+                case "F10": return Keys.F10;
+                case "F11": return Keys.F11;
+                case "F12": return Keys.F12;
+                case "F13": return Keys.F13;
+                case "F14": return Keys.F14;
+                case "F15": return Keys.F15;
+                case "F16": return Keys.F16;
+                case "F17": return Keys.F17;
+                case "F18": return Keys.F18;
+                case "F19": return Keys.F19;
+                case "F20": return Keys.F20;
+                case "F21": return Keys.F21;
+                case "F22": return Keys.F22;
+                case "F23": return Keys.F23;
+                case "F24": return Keys.F24;
+                case "NumLock": return Keys.NumLock;
+                case "Scroll": return Keys.Scroll;
+                case "LShiftKey": return Keys.LShiftKey;
+                case "RShiftKey": return Keys.RShiftKey;
+                case "LControlKey": return Keys.LControlKey;
+                case "RControlKey": return Keys.RControlKey;
+                case "LMenu": return Keys.LMenu;
+                case "RMenu": return Keys.RMenu;
+                case "BrowserBack": return Keys.BrowserBack;
+                case "BrowserForward": return Keys.BrowserForward;
+                case "BrowserRefresh": return Keys.BrowserRefresh;
+                case "BrowserStop": return Keys.BrowserStop;
+                case "BrowserSearch": return Keys.BrowserSearch;
+                case "BrowserFavorites": return Keys.BrowserFavorites;
+                case "BrowserHome": return Keys.BrowserHome;
+                case "VolumeMute": return Keys.VolumeMute;
+                case "VolumeDown": return Keys.VolumeDown;
+                case "VolumeUp": return Keys.VolumeUp;
+                case "MediaNextTrack": return Keys.MediaNextTrack;
+                case "MediaPreviousTrack": return Keys.MediaPreviousTrack;
+                case "MediaStop": return Keys.MediaStop;
+                case "MediaPlayPause": return Keys.MediaPlayPause;
+                case "LaunchMail": return Keys.LaunchMail;
+                case "SelectMedia": return Keys.SelectMedia;
+                case "LaunchApplication1": return Keys.LaunchApplication1;
+                case "LaunchApplication2": return Keys.LaunchApplication2;
+                case "Oem1": return Keys.Oem1;
+                case "Oemplus": return Keys.Oemplus;
+                case "Oemcomma": return Keys.Oemcomma;
+                case "OemMinus": return Keys.OemMinus;
+                case "OemPeriod": return Keys.OemPeriod;
+                case "OemQuestion": return Keys.OemQuestion;
+                case "Oemtilde": return Keys.Oemtilde;
+                case "OemOpenBrackets": return Keys.OemOpenBrackets;
+                case "Oem5": return Keys.Oem5;
+                case "Oem6": return Keys.Oem6;
+                case "Oem7": return Keys.Oem7;
+                case "Oem8": return Keys.Oem8;
+                case "OemBackslash": return Keys.OemBackslash;
+                case "ProcessKey": return Keys.ProcessKey;
+                case "Packet": return Keys.Packet;
+                case "Attn": return Keys.Attn;
+                case "Crsel": return Keys.Crsel;
+                case "Exsel": return Keys.Exsel;
+                case "EraseEof": return Keys.EraseEof;
+                case "Play": return Keys.Play;
+                case "Zoom": return Keys.Zoom;
+                case "NoName": return Keys.NoName;
+                case "Pa1": return Keys.Pa1;
+                case "OemClear": return Keys.OemClear;
+                case "KeyCode": return Keys.KeyCode;
+                case "Shift": return Keys.Shift;
+                case "Control": return Keys.Control;
+                case "Alt": return Keys.Alt;
+                case "Modifiers": return Keys.Modifiers;
+            }
+            return Keys.None;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -1582,8 +1791,17 @@ namespace Budford.View
         /// <param name="e"></param>
         private void launchCemuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, (int)KeyModifier.None, Keys.F11.GetHashCode());       // Register Shift + A as global hotkey. 
+            RegisterStopHotKey(Model);
             launcher.LaunchCemu(this, Model, null, false, true);
+        }
+
+        public void RegisterStopHotKey(Model.Model model)
+        {
+            if (model.Settings.StopHotkey != "None")
+            {
+                Keys key = GetHotKey(model.Settings.StopHotkey);
+                RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, (int)KeyModifier.None, key.GetHashCode());
+            }
         }
 
         /// <summary>
@@ -1611,7 +1829,14 @@ namespace Budford.View
 
                 if (gi.GameSetting.EmulationState == GameSettings.EmulationStateType.Unplayable)
                 {
-                    gi.GameSetting.CpuMode = GameSettings.CpuModeType.SingleCoreCompiler;
+                    //gi.GameSetting.CpuMode = GameSettings.CpuModeType.SingleCoreCompiler;
+                    gi.GameSetting.ControllerOverride2 = 5;
+                    gi.GameSetting.ControllerOverride3 = 5;
+                    gi.GameSetting.ControllerOverride4 = 5;
+                    gi.GameSetting.ControllerOverride5 = 5;
+                    gi.GameSetting.ControllerOverride6 = 5;
+                    gi.GameSetting.ControllerOverride7 = 5;
+                    gi.GameSetting.ControllerOverride8 = 5;
                 }
           
             }
@@ -2136,6 +2361,10 @@ namespace Budford.View
             {
                 UnregisterHotKey(this.Handle, MYACTION_HOTKEY_ID);
                 EnableControlsForGameExitted();
+                if (launchGame != "")
+                {
+                    Close();
+                }
             }
         }
 

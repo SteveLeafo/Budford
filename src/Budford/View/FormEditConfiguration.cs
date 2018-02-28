@@ -37,6 +37,15 @@ namespace Budford.View
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
 
             textBox1.Text = model.Settings.WineExe;
+            comboBox7.SelectedIndex = 0;
+            for (int i = 0; i < comboBox7.Items.Count; ++i)
+            {
+                if (comboBox7.Items[i].ToString() == model.Settings.StopHotkey)
+                {
+                    comboBox7.SelectedIndex = i;
+                    break;
+                }
+            }
 
             trackBar1.Minimum = 1;
             trackBar1.Maximum = 100;
@@ -164,6 +173,7 @@ namespace Budford.View
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
 
             model.Settings.WineExe = textBox1.Text;
+            model.Settings.StopHotkey = comboBox7.Text;
 
             settings.GlobalVolume = trackBar1.Value;
 

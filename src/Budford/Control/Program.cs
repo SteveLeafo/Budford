@@ -30,28 +30,41 @@ namespace Budford.Control
             {
                 cmdLineLaunch = true;
             }
-            
+
+            FormMainWindow mainForm = new FormMainWindow();
+
             if (cmdLineFileName == string.Empty || !cmdLineLaunch)
             {
-                Application.Run(new FormMainWindow());
+                Application.Run(mainForm);
             }
             else
             {
+
                 var model = FormMainWindow.TransferLegacyModel();
-                if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+                if (model.Settings.StopHotkey != "None")
                 {
-                    CemuFeatures.DownloadLatestGraphicsPack(null, model, false);
+                    mainForm.launchGame = cmdLineFileName;
+                    mainForm.launchFull = cmdLineFullScreen;
+
+                    Application.Run(mainForm);
                 }
-                foreach (var game in model.GameData)
+                else
                 {
-                    if (game.Value.LaunchFile.ToLower() == cmdLineFileName.ToLower())
+                    if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
                     {
-                        game.Value.Exists = true;
-                        new Launcher(null).LaunchCemu(null, model, game.Value, false, false, true, cmdLineFullScreen);
-                        return;
+                        CemuFeatures.DownloadLatestGraphicsPack(null, model, false);
                     }
+                    foreach (var game in model.GameData)
+                    {
+                        if (game.Value.LaunchFile.ToLower() == cmdLineFileName.ToLower())
+                        {
+                            game.Value.Exists = true;
+                            new Launcher(null).LaunchCemu(null, model, game.Value, false, false, true, cmdLineFullScreen);
+                            return;
+                        }
+                    }
+                    new Launcher(null).LaunchRpx(model, cmdLineFileName, cmdLineFullScreen);
                 }
-                new Launcher(null).LaunchRpx(model, cmdLineFileName, cmdLineFullScreen);
             }
         }
 

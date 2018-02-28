@@ -60,6 +60,8 @@ namespace Budford.Model
 
         public string WineExe = "";
 
+        public string StopHotkey = "None";
+
         internal bool AutoSizeColumns = true;
 
         public enum ConsoleRegionType : byte
