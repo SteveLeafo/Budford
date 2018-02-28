@@ -18,7 +18,6 @@ namespace Budford.View
     {
         public string launchGame = "";
         public bool launchFull = true;
-        bool launchConfig = false;
 
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
