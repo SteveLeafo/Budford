@@ -1,5 +1,8 @@
 # Budford Change Log
 
+## V1.0.51
+- Removed the ability to choose which monitor Cemu will launch on for systems with multiple displays
+
 ## V1.0.50
 - Added the ability to choose which monitor Cemu will launch on for systems with multiple displays
 
