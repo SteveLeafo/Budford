@@ -75,6 +75,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
@@ -91,8 +93,6 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -891,10 +891,33 @@
             this.comboBox7.Size = new System.Drawing.Size(272, 21);
             this.comboBox7.TabIndex = 1;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Location = new System.Drawing.Point(8, 115);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(69, 27);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Monitor:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label13.Visible = false;
+            // 
+            // comboBox8
+            // 
+            this.tableLayoutPanel6.SetColumnSpan(this.comboBox8, 2);
+            this.comboBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(83, 118);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(272, 21);
+            this.comboBox8.TabIndex = 1;
+            this.comboBox8.Visible = false;
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel8);
-            this.groupBox5.Location = new System.Drawing.Point(8, 164);
+            this.groupBox5.Location = new System.Drawing.Point(8, 194);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(369, 134);
             this.groupBox5.TabIndex = 3;
@@ -969,7 +992,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel9);
-            this.groupBox6.Location = new System.Drawing.Point(8, 314);
+            this.groupBox6.Location = new System.Drawing.Point(8, 344);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(369, 134);
             this.groupBox6.TabIndex = 3;
@@ -1107,27 +1130,6 @@
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(240, 21);
             this.comboBox6.TabIndex = 1;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(8, 115);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(69, 27);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Monitor:";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // comboBox8
-            // 
-            this.tableLayoutPanel6.SetColumnSpan(this.comboBox8, 2);
-            this.comboBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(83, 118);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(272, 21);
-            this.comboBox8.TabIndex = 1;
             // 
             // FormEditConfiguration
             // 

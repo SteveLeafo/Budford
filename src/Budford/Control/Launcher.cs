@@ -789,7 +789,7 @@ namespace Budford.Control
         {
             try
             {
-                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+                //MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
 
                 WaitForWindowTitleToAppear();
 

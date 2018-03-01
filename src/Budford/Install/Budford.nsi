@@ -94,7 +94,6 @@ SectionIn 1
         Call InstallBudfordFiles
 	Call CheckAndInstallDotNet
 	Call InstallUninstaller
-	Call InstallPreRequisits
 	Call InstallFileAssociations
 	Call InstallApplicationShortcuts
 	
@@ -322,36 +321,4 @@ Function Un.CheckUserIsAdministrator
         # if there is not a match, print message and return
     messageBox MB_OK "Please log in as an administrator of this computer to uninstall this software."
     Abort
-FunctionEnd
-
-;******************************************************************************
-; See InstallPreRequisits
-;******************************************************************************
-Function InstallPreRequisits
-ClearErrors
-
-ReadRegStr $0 HKLM "SOFTWARE\Classes\Installer\Dependencies\{d992c12e-cab2-426f-bde3-fb8c53950b0d}" ""
-
-${If} ${Errors}
-
-	# key does not exist
-	download1:
-	NSISdl::download "https://download.microsoft.com/download/6/A/A/6AA4EDFF-645B-48C5-81CC-ED5963AEAD48/vc_redist.x64.exe"  "$Temp/vcredist_x64.exe"
-	pop $0
-	StrCmp "$0" "success" execStep1 instAbort1
-	execStep1:
-	Execwait '"$Temp/vcredist_x64.exe" /q' ; '/q' to install silently
-	pop $0
-	#StrCmp "$0" "success" installed execStep1
-	instAbort1:
-	#StrCmp $0 "cancel" 0 +1
-	#MessageBox MB_OKCANCEL "Connection Timed Out. Retry ? " IDOK  download1 IDCANCEL 0
-	#Quit
-	;not installed, so run the installer
-	;ExecWait 'MyPathWhereInstallerIs\vc++2010setup.exe'
-${EndIf}
-
-	installed:
-
-;we are done
 FunctionEnd
