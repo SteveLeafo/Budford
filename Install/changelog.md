@@ -1,5 +1,8 @@
 # Budford Change Log
 
+## V1.0.50
+- Added the ability to choose which monitor Cemu will launch on for systems with multiple displays
+
 ## V1.0.49
 - Added a notification if the official status of a game changes.  You can then see the old and new status of changed games
 - Added the ability to configure a hot key to Close Cemu
