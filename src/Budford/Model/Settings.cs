@@ -66,6 +66,9 @@ namespace Budford.Model
 
         internal bool AutoSizeColumns = true;
 
+        public bool HideWindowWhenCaching = true;
+        public int Monitor = 2;
+
         public enum ConsoleRegionType : byte
         {
             Auto = 0xFF,

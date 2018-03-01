@@ -84,8 +84,6 @@ namespace Budford.Control
             string id = Path.GetFileNameWithoutExtension(fileName);
             id = id.Replace("(1)", "").Replace("(2)", "").Replace("(3)", "").Replace("(4)", "").Replace(" - Copy", "");
 
-            id.Trim();
-
             string budfordFolder =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", id);
 
             if (Directory.Exists(budfordFolder))
@@ -241,14 +239,7 @@ namespace Budford.Control
             {
                 dl.ShowDialog(parent);
             }
-            //unpacker.Unpack(Path.GetFileName(uris[0]), model.Settings.DefaultInstallFolder);
-            //unpacker.Unpack("cemu_hook.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-            //unpacker.Unpack("sharedFonts.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-            //unpacker.Unpack("shaderCache.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-            //unpacker.Unpack("controllerProfiles.zip", Path.Combine(model.Settings.DefaultInstallFolder, "cemu_" + model.Settings.CurrentCemuVersion + ""));
-
-            //Unpacker.ExtractToDirectory("graphicsPack.zip", "graphicsPacks", true);
-
+            
             if (Directory.Exists("graphicsPacks"))
             {
                 FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicsPacks")), model.GraphicsPacks);

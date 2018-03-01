@@ -377,7 +377,7 @@ namespace Budford.Utilities
         {
             if (fileCache == null)
             {
-                return null;
+                return new byte[0];
             }
             EnterCriticalSection();
 
@@ -398,7 +398,7 @@ namespace Budford.Utilities
                 entry++;
             }
             LeaveCriticalSection();
-            return null;
+            return new byte[0];
         }
 
         private static void stream_readData(BinaryReader binaryReader, byte[] fileData, uint p)

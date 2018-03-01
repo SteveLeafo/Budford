@@ -23,21 +23,6 @@ namespace Budford.View
         // Set to true while populating the list to stop events changing the data
         bool updating;
 
-        // Managing save files and folders.
-        internal static string[] Uris = new[]
-            {
-                "http://cemu.info/releases/cemu_1.9.1.zip",
-                "https://files.sshnuke.net/cemuhook_190c_0532.zip",
-                "https://files.sshnuke.net/sharedFonts.7z"
-            };
-
-        internal static string[] Filenames= new[]
-            {
-                "cemu_1.9.1.zip",
-                "cemu_hook.zip",
-                "sharedFonts.7z"
-            };
-
         bool autoSize = true;
 
         /// <summary>
@@ -89,22 +74,6 @@ namespace Budford.View
             textBox1.Text = model.Settings.DefaultInstallFolder;
 
             autoSize = true;
-
-            Uris = new[]
-            {
-                "http://cemu.info/releases/cemu_" + model.Settings.CurrentCemuVersion + ".zip",
-                "https://files.sshnuke.net/cemuhook_190c_0532.zip",
-                "https://github.com/slashiee/cemu_graphic_packs/archive/master.zip",
-                "https://files.sshnuke.net/sharedFonts.7z"
-            };
-
-            Filenames = new[]
-            {
-                "cemu_" + model.Settings.CurrentCemuVersion + ".zip",
-                "cemu_hook.zip",
-                "graphicsPacks.zip",
-                "sharedFonts.7z"
-            };
 
             AddOldGameMenuItems();
 
@@ -160,7 +129,6 @@ namespace Budford.View
                         Checked = v.IsLatest
                     };
                     lvi.SubItems.Add(v.Name);
-                    //lvi.SubItems.Add(Path.GetFileName(v.Folder));
                     lvi.SubItems.Add(v.Version);
                     lvi.SubItems.Add(v.HasFonts ? "Yes" : "No");
                     lvi.SubItems.Add(v.HasCemuHook ? "Yes" : "No");

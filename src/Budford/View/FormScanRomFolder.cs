@@ -38,7 +38,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO - Cancel
+            // Cancel
         }
 
         /// <summary>

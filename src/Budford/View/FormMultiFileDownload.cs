@@ -62,7 +62,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO - Cancel
+            currentFile = uris.Length;
         }
 
         /// <summary>
@@ -82,12 +82,10 @@ namespace Budford.View
         /// </summary>
         void LoadNextFile()
         {
-            bool skipped = false;
             if (currentFile < uris.Length)
             {
                 if (uris[currentFile].Length == 0)
                 {
-                    skipped = true;
                     currentFile++;
                     LoadNextFile();
                     return;
@@ -128,10 +126,7 @@ namespace Budford.View
                         }
                     }
                 }
-                if (!skipped)
-                {
-                    currentFile++;
-                }
+                currentFile++;
             }
         }
 

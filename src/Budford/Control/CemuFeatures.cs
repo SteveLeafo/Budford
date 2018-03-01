@@ -18,6 +18,8 @@ namespace Budford.Control
     {
         internal const string Cemu = "Cemu.exe";
 
+        internal const string CemuUrl = "http://cemu.info/";
+
         // Lookup table for each of the released Cemu versions - will replace with a hash code one day
         static Dictionary<long, string> versionSizes;
 
@@ -180,7 +182,7 @@ namespace Budford.Control
                         }
                         catch (Exception)
                         {
-                            // No code0
+                            // No code
                         }
                     }
                 }
@@ -328,7 +330,7 @@ namespace Budford.Control
 
         internal static bool DownloadLatestVersion(Form parent, Settings settings)
         {
-            using (FormWebpageDownload dlc = new FormWebpageDownload("http://cemu.info/", "Latest Version"))
+            using (FormWebpageDownload dlc = new FormWebpageDownload(CemuUrl, "Latest Version"))
             {
                 dlc.ShowDialog(parent);
                 foreach (var line in dlc.Result.Split('\n'))
@@ -336,9 +338,8 @@ namespace Budford.Control
                     if (line.Contains("name=\"download\""))
                     {
                         string[] toks = line.Split('=');
-                        FormEditInstalledVersions.Uris[0] = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
-                        FormEditInstalledVersions.Filenames[0] = FormEditInstalledVersions.Uris[0].Substring(1 + FormEditInstalledVersions.Uris[0].LastIndexOf('/'));
-                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(FormEditInstalledVersions.Uris[0]));
+                        string ver = toks[1].Substring(1, toks[1].LastIndexOf('\"') - 1);
+                        int currentVersion = InstalledVersion.GetVersionNumber(Path.GetFileName(ver));
                         if (!IsInstalled(currentVersion, settings))
                         {
                             return true;
@@ -613,7 +614,7 @@ namespace Budford.Control
         /// <param name="rating"></param>
         private static void SetGameStatus(List<GameInformation> currentGames, string rating, string url)
         {
-            GameSettings.EmulationStateType state = GameSettings.EmulationStateType.NotSet;
+            GameSettings.EmulationStateType state;
 
             switch (rating)
             {

@@ -161,6 +161,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.refreshGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -298,6 +299,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem,
             this.toolStripSeparator10,
+            this.refreshGameToolStripMenuItem,
             this.importShaderCacheToolStripMenuItem,
             this.toolStripSeparator9,
             this.exitToolStripMenuItem});
@@ -1231,6 +1233,13 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
+            // refreshGameToolStripMenuItem
+            // 
+            this.refreshGameToolStripMenuItem.Name = "refreshGameToolStripMenuItem";
+            this.refreshGameToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.refreshGameToolStripMenuItem.Text = "Refresh Game List";
+            this.refreshGameToolStripMenuItem.Click += new System.EventHandler(this.refreshGameToolStripMenuItem_Click);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1394,6 +1403,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exportToLaunchboxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openCompatibilityWikiEntryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshGameToolStripMenuItem;
     }
 }
 

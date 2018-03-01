@@ -50,6 +50,17 @@ namespace Budford.Control
         static string cemu = "";
         static string logfile = "";
 
+        static string[][] contollerFileNames = 
+        {
+            new[] { "controller0.txt", "controller0.bfb" },
+            new[] { "controller1.txt", "controller1.bfb" },
+            new[] { "controller2.txt", "controller2.bfb" },
+            new[] { "controller3.txt", "controller3.bfb" },
+            new[] { "controller4.txt", "controller4.bfb" },
+            new[] { "controller5.txt", "controller5.bfb" },
+            new[] { "controller6.txt", "controller6.bfb" },
+            new[] { "controller7.txt", "controller7.bfb" }
+        };
 
         /// <summary>
         /// Constructor
@@ -220,8 +231,6 @@ namespace Budford.Control
                 {
                     File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
                     File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));                    
-                    //File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snd_core.rpl"), Path.Combine(cafeLibs, "snd_core.rpl"));
-                    //File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "sndcore2.rpl"), Path.Combine(cafeLibs, "sndcore2.rpl"));
                 }
             }
         }
@@ -374,6 +383,8 @@ namespace Budford.Control
             }
         }
 
+        
+
         /// <summary>
         /// 
         /// </summary>
@@ -385,55 +396,16 @@ namespace Budford.Control
             {
                 if (runningGame != null)
                 {
-                    SafeCopy(runningVersion, "controller0.bfb", "controller0.txt");
-                    SafeCopy(runningVersion, "controller1.bfb", "controller1.txt");
-                    SafeCopy(runningVersion, "controller2.bfb", "controller2.txt");
-                    SafeCopy(runningVersion, "controller3.bfb", "controller3.txt");
-                    SafeCopy(runningVersion, "controller4.bfb", "controller4.txt");
-                    SafeCopy(runningVersion, "controller5.bfb", "controller5.txt");
-                    SafeCopy(runningVersion, "controller6.bfb", "controller6.txt");
-                    SafeCopy(runningVersion, "controller7.bfb", "controller7.txt");
+                    foreach (var controller in contollerFileNames)
+                    {
+                        SafeCopy(runningVersion, controller[1], controller[0]);
+                    }
 
                     if (!runningGame.SaveDir.StartsWith("??"))
                     {
-                        // Copy shader caches...
-                        FileInfo srcFile = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, runningGame));
-                        if (File.Exists(srcFile.FullName))
-                        {
-                            FileInfo destFile = new FileInfo(SpecialFolders.ShaderCacheBudford(runningGame));
-                            if (!File.Exists(destFile.FullName) || destFile.Length < srcFile.Length)
-                            {
-                                string folder = Path.GetDirectoryName(destFile.FullName);
-                                if (!Directory.Exists(folder))
-                                {
-                                    if (folder != null) Directory.CreateDirectory(folder);
-                                }
-                                File.Copy(srcFile.FullName, destFile.FullName, true);
-                            }
-                        }
+                        CopyShaderCaches();
 
-                        // Copy saves
-                        DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, runningGame));
-                        DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, runningGame, ""));
-                        DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
-                        DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(runningGame, ""));
-                        if (Directory.Exists(src.FullName))
-                        {
-                            if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
-                            {
-                                if (!Directory.Exists(dest.FullName))
-                                {
-                                    dest.Create();
-                                }
-                                if (!Directory.Exists(dest255.FullName))
-                                {
-                                    dest255.Create();
-                                }
-
-                                FileManager.CopyFilesRecursively(src, dest, false, true);
-                                FileManager.CopyFilesRecursively(src255, dest255, false, true);
-                            }
-                        }
+                        CopySaves();
                     }
                 }
             }
@@ -448,6 +420,51 @@ namespace Budford.Control
             if (parent != null)
             {
                 parent.ProcessExited();
+            }
+        }
+
+        private void CopySaves()
+        {
+            // Copy saves
+            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, runningGame));
+            DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, runningGame, ""));
+            DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
+            DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(runningGame, ""));
+            if (Directory.Exists(src.FullName))
+            {
+                if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
+                {
+                    if (!Directory.Exists(dest.FullName))
+                    {
+                        dest.Create();
+                    }
+                    if (!Directory.Exists(dest255.FullName))
+                    {
+                        dest255.Create();
+                    }
+
+                    FileManager.CopyFilesRecursively(src, dest, false, true);
+                    FileManager.CopyFilesRecursively(src255, dest255, false, true);
+                }
+            }
+        }
+
+        private void CopyShaderCaches()
+        {
+            // Copy shader caches...
+            FileInfo srcFile = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, runningGame));
+            if (File.Exists(srcFile.FullName))
+            {
+                FileInfo destFile = new FileInfo(SpecialFolders.ShaderCacheBudford(runningGame));
+                if (!File.Exists(destFile.FullName) || destFile.Length < srcFile.Length)
+                {
+                    string folder = Path.GetDirectoryName(destFile.FullName);
+                    if (!Directory.Exists(folder))
+                    {
+                        if (folder != null) Directory.CreateDirectory(folder);
+                    }
+                    File.Copy(srcFile.FullName, destFile.FullName, true);
+                }
             }
         }
 
@@ -473,8 +490,6 @@ namespace Budford.Control
             {
                 SetGameLaunchParameters(game, getSaveDir, start, shiftUp, forceFullScreen);
             }
-
-            //string wine = @"C:\Users\steve\OneDrive\Documents\Visual Studio 2012\Projects\WineTester\WineTester\bin\Debug\WineTester.exe";
 
             // Enter the executable to run, including the complete path
             if (Model.Settings.WineExe.Length > 1)
@@ -511,7 +526,7 @@ namespace Budford.Control
         /// <param name="start"></param>
         /// <param name="shiftUp"></param>
         /// <param name="forceFullScreen"></param>
-        private static void SetGameLaunchParameters(GameInformation game, bool getSaveDir, ProcessStartInfo start, bool shiftUp = true, bool forceFullScreen = false)
+        private void SetGameLaunchParameters(GameInformation game, bool getSaveDir, ProcessStartInfo start, bool shiftUp = true, bool forceFullScreen = false)
         {
             if (getSaveDir)
             {
@@ -519,7 +534,10 @@ namespace Budford.Control
                 {
                     start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
                 }
-                //start.WindowStyle = ProcessWindowStyle.Minimized;
+                if (Model.Settings.HideWindowWhenCaching)
+                {
+                    start.WindowStyle = ProcessWindowStyle.Minimized;
+                }
             }
             else
             {
@@ -567,14 +585,10 @@ namespace Budford.Control
             {
                 if (version != null)
                 {
-                    SafeCopy(version, "controller0.txt", "controller0.bfb");
-                    SafeCopy(version, "controller1.txt", "controller1.bfb");
-                    SafeCopy(version, "controller2.txt", "controller2.bfb");
-                    SafeCopy(version, "controller3.txt", "controller3.bfb");
-                    SafeCopy(version, "controller4.txt", "controller4.bfb");
-                    SafeCopy(version, "controller5.txt", "controller5.bfb");
-                    SafeCopy(version, "controller6.txt", "controller6.bfb");
-                    SafeCopy(version, "controller7.txt", "controller7.bfb");
+                    foreach (var controller in contollerFileNames)
+                    {
+                        SafeCopy(version, controller[0], controller[1]);
+                    }
 
                     UpdateControllerProfiles(version, game.GameSetting.ControllerOverride1, "controller0.txt");
                     UpdateControllerProfiles(version, game.GameSetting.ControllerOverride2, "controller1.txt");
@@ -775,72 +789,121 @@ namespace Budford.Control
         {
             try
             {
-                int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
-                int c = 0;
-                while (i == -1 && c < 50000)
-                {
-                    try
-                    {
-                        Thread.Sleep(100);
-                        Thread.Sleep(100);
-                        if (!runningProcess.HasExited)
-                        {
-                            runningProcess.Refresh();
-                            i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
-                        }
-                        else
-                        {
-                            return;
-                        }
-                        c++;
-                    }
-                    catch (Exception ex)
-                    {
-                        parent.Model.Errors.Add(ex.Message);
-                        break;
-                    }
-                }
+                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
 
-                try
-                {
-                    if (game != null)
-                    {
-                        switch (game.GameSetting.CpuMode)
-                        {
-                            case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
-                                break;
-                            case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
-                                break;
-                            default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
-                                break;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    parent.Model.Errors.Add(ex.Message);
-                }
+                WaitForWindowTitleToAppear();
 
-                try
-                {
-                    if (game != null)
-                    {
-                        if (game.GameSetting.DefaultView == 1)
-                        {
-                            IntPtr h = runningProcess.MainWindowHandle;
-                            SetForegroundWindow(h);
-                            SendKeys.SendWait("^{TAB}");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    parent.Model.Errors.Add(ex.Message);
-                }
+                SetCemuCpuPrioty(game);
+
+                SetGamePadViewIfDesired(game);
+
             }
             catch (Exception)
             {
                 // Nothing
+            }
+        }
+
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+
+
+        const short SWP_NOMOVE = 0X2;
+        const short SWP_NOSIZE = 1;
+        const short SWP_NOZORDER = 0X4;
+        const int SWP_SHOWWINDOW = 0x0040;
+        const int SWP_NOREDRAW = 0x0008;
+
+        public void MoveToMonitor(IntPtr windowHandle, int numberMonitor)
+        {
+            if (numberMonitor >= 1)
+            {
+                if (Screen.AllScreens.Length < numberMonitor)
+                {
+                    //MessageBox.Show("The monitor doesn't exist");
+                }
+                else
+                {
+                    numberMonitor--;
+                    //Get the data of the monitor
+                    var monitor = Screen.AllScreens[numberMonitor].WorkingArea;
+                    //change the window to the second monitor
+                    SetWindowPos(windowHandle, IntPtr.Zero,
+                    monitor.Left, monitor.Top, monitor.Width,
+                    monitor.Height, 0);
+                }
+            }
+        }
+
+        private void SetGamePadViewIfDesired(GameInformation game)
+        {
+            try
+            {
+                if (game != null)
+                {
+                    if (game.GameSetting.DefaultView == 1)
+                    {
+                        IntPtr h = runningProcess.MainWindowHandle;
+                        SetForegroundWindow(h);
+                        SendKeys.SendWait("^{TAB}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                parent.Model.Errors.Add(ex.Message);
+            }
+        }
+
+        private void SetCemuCpuPrioty(GameInformation game)
+        {
+            try
+            {
+                if (game != null)
+                {
+                    switch (game.GameSetting.CpuMode)
+                    {
+                        case GameSettings.CpuModeType.DualCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.DualCorePriority);
+                            break;
+                        case GameSettings.CpuModeType.TripleCoreCompiler: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.TripleCorePriority);
+                            break;
+                        default: runningProcess.PriorityClass = GetProcessPriority(Model.Settings.SingleCorePriority);
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                parent.Model.Errors.Add(ex.Message);
+            }
+        }
+
+        private void WaitForWindowTitleToAppear()
+        {
+            int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
+            int c = 0;
+            while (i == -1 && c < 50000)
+            {
+                try
+                {
+                    Thread.Sleep(100);
+                    Thread.Sleep(100);
+                    if (!runningProcess.HasExited)
+                    {
+                        runningProcess.Refresh();
+                        i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    c++;
+                }
+                catch (Exception ex)
+                {
+                    parent.Model.Errors.Add(ex.Message);
+                    break;
+                }
             }
         }
 

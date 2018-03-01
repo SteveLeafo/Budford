@@ -147,7 +147,7 @@ namespace Budford.Control
                 {"1.11.2", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1112Bin, v1112Settings) },
                 {"1.11.3", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1113Bin, v1113Settings) },
                 {"1.11.4", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
-                {"1.11.5", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
+                {"1.11.5", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1115Settings) },
                 {"1.11.6", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
                 {"1.12.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
                 {"2.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) }
@@ -559,7 +559,7 @@ namespace Budford.Control
                         string text = File.ReadAllText(fpsPatch + ".bak");
                         if (text.Contains("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667"))
                         {
-                            text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / (float)fps));
+                            text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / fps));
                         }
                         text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
                         File.WriteAllText(fpsPatch, text);

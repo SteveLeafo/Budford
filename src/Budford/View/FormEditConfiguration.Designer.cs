@@ -49,6 +49,7 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -90,7 +91,8 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -388,6 +390,18 @@
             this.checkBox8.UseVisualStyleBackColor = true;
             this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox9.Location = new System.Drawing.Point(13, 95);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(333, 17);
+            this.checkBox9.TabIndex = 0;
+            this.checkBox9.Text = "Automatically download latest everything on startup";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel5);
@@ -578,7 +592,7 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel6);
             this.groupBox3.Location = new System.Drawing.Point(8, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(369, 135);
+            this.groupBox3.Size = new System.Drawing.Size(369, 165);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cemu Settings";
@@ -600,16 +614,20 @@
             this.tableLayoutPanel6.Controls.Add(this.textBox1, 2, 3);
             this.tableLayoutPanel6.Controls.Add(this.label12, 1, 4);
             this.tableLayoutPanel6.Controls.Add(this.comboBox7, 2, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label13, 1, 5);
+            this.tableLayoutPanel6.Controls.Add(this.comboBox8, 2, 5);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 5;
+            this.tableLayoutPanel6.RowCount = 7;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(363, 116);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(363, 146);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // label4
@@ -667,6 +685,7 @@
             // comboBox2
             // 
             this.tableLayoutPanel6.SetColumnSpan(this.comboBox2, 2);
+            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Japanese",
@@ -708,10 +727,9 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Location = new System.Drawing.Point(8, 88);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(69, 28);
+            this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 0;
             this.label12.Text = "Stop Hotkey:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -719,6 +737,7 @@
             // comboBox7
             // 
             this.tableLayoutPanel6.SetColumnSpan(this.comboBox7, 2);
+            this.comboBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Items.AddRange(new object[] {
             "None",
@@ -1089,17 +1108,26 @@
             this.comboBox6.Size = new System.Drawing.Size(240, 21);
             this.comboBox6.TabIndex = 1;
             // 
-            // checkBox9
+            // label13
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox9.Location = new System.Drawing.Point(13, 95);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(333, 17);
-            this.checkBox9.TabIndex = 0;
-            this.checkBox9.Text = "Automatically download latest everything on startup";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Location = new System.Drawing.Point(8, 115);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(69, 27);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Monitor:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox8
+            // 
+            this.tableLayoutPanel6.SetColumnSpan(this.comboBox8, 2);
+            this.comboBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(83, 118);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(272, 21);
+            this.comboBox8.TabIndex = 1;
             // 
             // FormEditConfiguration
             // 
@@ -1208,5 +1236,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox7;
         private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox comboBox8;
     }
 }

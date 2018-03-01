@@ -27,7 +27,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO - Cancel
+            // Cancel
         }
 
         /// <summary>
@@ -37,7 +37,6 @@ namespace Budford.View
         /// <param name="e"></param>
         private void fFileDownload_Load(object sender, EventArgs e)
         {
-            // TODO - Use scraper to find current latest version
             using (CustomWebClient wc = new CustomWebClient())
             {
                 ServicePointManager.Expect100Continue = true;

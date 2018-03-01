@@ -37,6 +37,19 @@ namespace Budford.View
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
 
+
+
+            for (int i = 0; i < Screen.AllScreens.Length; ++i)
+            {
+                comboBox8.Items.Add("Monitor " + (i + 1));
+            }
+
+            comboBox8.SelectedIndex = 0;
+            if (model.Settings.Monitor - 1 < comboBox8.Items.Count)
+            {
+                comboBox8.SelectedIndex = model.Settings.Monitor - 1;
+            }
+
             textBox1.Text = model.Settings.WineExe;
             comboBox7.SelectedIndex = 0;
             for (int i = 0; i < comboBox7.Items.Count; ++i)
@@ -173,6 +186,8 @@ namespace Budford.View
             settings.IncludeWiiULauncherRpx = checkBox7.Checked;
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
             settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
+
+            model.Settings.Monitor = comboBox8.SelectedIndex + 1;
 
             model.Settings.WineExe = textBox1.Text;
             model.Settings.StopHotkey = comboBox7.Text;

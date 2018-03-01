@@ -138,6 +138,7 @@
             this.label54 = new System.Windows.Forms.Label();
             this.comboBox33 = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.label38 = new System.Windows.Forms.Label();
@@ -161,6 +162,7 @@
             this.label48 = new System.Windows.Forms.Label();
             this.comboBox28 = new System.Windows.Forms.ComboBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.label53 = new System.Windows.Forms.Label();
@@ -171,7 +173,6 @@
             this.label60 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox34 = new System.Windows.Forms.ComboBox();
             this.comboBox35 = new System.Windows.Forms.ComboBox();
             this.comboBox36 = new System.Windows.Forms.ComboBox();
@@ -180,7 +181,6 @@
             this.comboBox39 = new System.Windows.Forms.ComboBox();
             this.comboBox40 = new System.Windows.Forms.ComboBox();
             this.comboBox41 = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -205,13 +205,13 @@
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
-            this.tableLayoutPanel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -411,6 +411,7 @@
             // 
             // comboBox20
             // 
+            this.comboBox20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox20.FormattingEnabled = true;
             this.comboBox20.Items.AddRange(new object[] {
             "5",
@@ -518,29 +519,35 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(3, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 13);
+            this.label3.Size = new System.Drawing.Size(143, 27);
             this.label3.TabIndex = 0;
             this.label3.Text = "GPU Buffer Cache Accuracy";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(3, 86);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 13);
+            this.label4.Size = new System.Drawing.Size(143, 27);
             this.label4.TabIndex = 0;
             this.label4.Text = "Full Screen Scaling";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(3, 5);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.Size = new System.Drawing.Size(143, 27);
             this.label6.TabIndex = 0;
             this.label6.Text = "Full Screen";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox3
             // 
@@ -557,20 +564,24 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Location = new System.Drawing.Point(3, 32);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 13);
+            this.label5.Size = new System.Drawing.Size(143, 27);
             this.label5.TabIndex = 0;
             this.label5.Text = "Enable VSync";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Location = new System.Drawing.Point(3, 59);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 13);
+            this.label7.Size = new System.Drawing.Size(143, 27);
             this.label7.TabIndex = 0;
             this.label7.Text = "Upscale Filter";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox4
             // 
@@ -624,11 +635,13 @@
             // label21
             // 
             this.label21.AutoSize = true;
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label21.Location = new System.Drawing.Point(3, 140);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(129, 13);
+            this.label21.Size = new System.Drawing.Size(143, 27);
             this.label21.TabIndex = 0;
             this.label21.Text = "Separate Game Pad View";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox17
             // 
@@ -645,11 +658,13 @@
             // label49
             // 
             this.label49.AutoSize = true;
+            this.label49.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label49.Location = new System.Drawing.Point(3, 167);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(66, 13);
+            this.label49.Size = new System.Drawing.Size(143, 27);
             this.label49.TabIndex = 0;
             this.label49.Text = "Use RTDSC";
+            this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox29
             // 
@@ -666,11 +681,13 @@
             // label50
             // 
             this.label50.AutoSize = true;
+            this.label50.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label50.Location = new System.Drawing.Point(3, 194);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(67, 13);
+            this.label50.Size = new System.Drawing.Size(143, 27);
             this.label50.TabIndex = 0;
             this.label50.Text = "Online Mode";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox30
             // 
@@ -908,29 +925,35 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Location = new System.Drawing.Point(142, 5);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(35, 13);
+            this.label12.Size = new System.Drawing.Size(65, 26);
             this.label12.TabIndex = 2;
             this.label12.Text = "Name";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label13.Location = new System.Drawing.Point(142, 54);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(49, 13);
+            this.label13.Size = new System.Drawing.Size(65, 26);
             this.label13.TabIndex = 2;
             this.label13.Text = "Game ID";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Location = new System.Drawing.Point(142, 80);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(48, 13);
+            this.label14.Size = new System.Drawing.Size(65, 26);
             this.label14.TabIndex = 2;
             this.label14.Text = "Save Dir";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox1
             // 
@@ -958,20 +981,24 @@
             // label23
             // 
             this.label23.AutoSize = true;
+            this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Location = new System.Drawing.Point(142, 106);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(41, 13);
+            this.label23.Size = new System.Drawing.Size(65, 26);
             this.label23.TabIndex = 2;
             this.label23.Text = "Title ID";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
+            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label24.Location = new System.Drawing.Point(142, 132);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(50, 13);
+            this.label24.Size = new System.Drawing.Size(65, 26);
             this.label24.TabIndex = 2;
             this.label24.Text = "Group ID";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox4
             // 
@@ -990,11 +1017,13 @@
             // label25
             // 
             this.label25.AutoSize = true;
+            this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Location = new System.Drawing.Point(8, 178);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(62, 13);
+            this.label25.Size = new System.Drawing.Size(128, 26);
             this.label25.TabIndex = 2;
             this.label25.Text = "Launch File";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox5
             // 
@@ -1008,65 +1037,79 @@
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label26.Location = new System.Drawing.Point(8, 204);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(41, 13);
+            this.label26.Size = new System.Drawing.Size(128, 26);
             this.label26.TabIndex = 2;
             this.label26.Text = "Region";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
+            this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label27.Location = new System.Drawing.Point(8, 230);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(50, 13);
+            this.label27.Size = new System.Drawing.Size(128, 26);
             this.label27.TabIndex = 2;
             this.label27.Text = "Publisher";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
+            this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Location = new System.Drawing.Point(8, 256);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(27, 13);
+            this.label28.Size = new System.Drawing.Size(128, 26);
             this.label28.TabIndex = 2;
             this.label28.Text = "Size";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
+            this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label29.Location = new System.Drawing.Point(8, 282);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(85, 13);
+            this.label29.Size = new System.Drawing.Size(128, 26);
             this.label29.TabIndex = 2;
             this.label29.Text = "Prefered Version";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label30
             // 
             this.label30.AutoSize = true;
+            this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label30.Location = new System.Drawing.Point(8, 308);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(81, 13);
+            this.label30.Size = new System.Drawing.Size(128, 26);
             this.label30.TabIndex = 2;
             this.label30.Text = "Emulation State";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
+            this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label31.Location = new System.Drawing.Point(8, 334);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(79, 13);
+            this.label31.Size = new System.Drawing.Size(128, 26);
             this.label31.TabIndex = 2;
             this.label31.Text = "Company Code";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label32
             // 
             this.label32.AutoSize = true;
+            this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label32.Location = new System.Drawing.Point(8, 360);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(93, 13);
+            this.label32.Size = new System.Drawing.Size(128, 26);
             this.label32.TabIndex = 2;
             this.label32.Text = "Launch File Name";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox7
             // 
@@ -1144,11 +1187,13 @@
             // label55
             // 
             this.label55.AutoSize = true;
+            this.label55.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label55.Location = new System.Drawing.Point(142, 31);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(65, 13);
+            this.label55.Size = new System.Drawing.Size(65, 23);
             this.label55.TabIndex = 2;
             this.label55.Text = "Compatibility";
+            this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // linkLabel1
             // 
@@ -1237,38 +1282,46 @@
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Location = new System.Drawing.Point(3, 5);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(109, 13);
+            this.label15.Size = new System.Drawing.Size(166, 27);
             this.label15.TabIndex = 0;
             this.label15.Text = "Render Upside Down";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label16.Location = new System.Drawing.Point(3, 32);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(72, 13);
+            this.label16.Size = new System.Drawing.Size(166, 27);
             this.label16.TabIndex = 1;
             this.label16.Text = "Disable Audio";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label17.Location = new System.Drawing.Point(3, 59);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(166, 13);
+            this.label17.Size = new System.Drawing.Size(166, 27);
             this.label17.TabIndex = 2;
             this.label17.Text = "Enable BoTW Crash Workaround";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.Location = new System.Drawing.Point(3, 86);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(141, 13);
+            this.label18.Size = new System.Drawing.Size(166, 27);
             this.label18.TabIndex = 3;
             this.label18.Text = "FullSync At GX2 Draw Done";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox11
             // 
@@ -1355,29 +1408,35 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Location = new System.Drawing.Point(3, 5);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 13);
+            this.label8.Size = new System.Drawing.Size(38, 27);
             this.label8.TabIndex = 0;
             this.label8.Text = "Mode";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Location = new System.Drawing.Point(3, 32);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.Size = new System.Drawing.Size(38, 27);
             this.label9.TabIndex = 0;
             this.label9.Text = "Timer";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Location = new System.Drawing.Point(3, 59);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.Size = new System.Drawing.Size(38, 27);
             this.label10.TabIndex = 0;
             this.label10.Text = "Affinity";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox8
             // 
@@ -1431,8 +1490,8 @@
             // 
             this.tableLayoutPanel8.ColumnCount = 4;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.tableLayoutPanel8.Controls.Add(this.label19, 1, 1);
             this.tableLayoutPanel8.Controls.Add(this.label20, 1, 2);
@@ -1453,36 +1512,41 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(421, 124);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(8, 5);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(125, 13);
+            this.label19.Size = new System.Drawing.Size(125, 27);
             this.label19.TabIndex = 0;
             this.label19.Text = "Accaccurate Shader Mul";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
+            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label20.Location = new System.Drawing.Point(8, 32);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(101, 13);
+            this.label20.Size = new System.Drawing.Size(125, 27);
             this.label20.TabIndex = 1;
             this.label20.Text = "Disable GPU Fence";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
+            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label22.Location = new System.Drawing.Point(8, 59);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(123, 13);
+            this.label22.Size = new System.Drawing.Size(125, 27);
             this.label22.TabIndex = 3;
             this.label22.Text = "Emulate Single Precision";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox15
             // 
@@ -1492,9 +1556,9 @@
             "False",
             "True",
             "Min"});
-            this.comboBox15.Location = new System.Drawing.Point(213, 8);
+            this.comboBox15.Location = new System.Drawing.Point(139, 8);
             this.comboBox15.Name = "comboBox15";
-            this.comboBox15.Size = new System.Drawing.Size(199, 21);
+            this.comboBox15.Size = new System.Drawing.Size(273, 21);
             this.comboBox15.TabIndex = 4;
             // 
             // comboBox16
@@ -1504,9 +1568,9 @@
             this.comboBox16.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox16.Location = new System.Drawing.Point(213, 35);
+            this.comboBox16.Location = new System.Drawing.Point(139, 35);
             this.comboBox16.Name = "comboBox16";
-            this.comboBox16.Size = new System.Drawing.Size(199, 21);
+            this.comboBox16.Size = new System.Drawing.Size(273, 21);
             this.comboBox16.TabIndex = 5;
             // 
             // comboBox18
@@ -1516,19 +1580,21 @@
             this.comboBox18.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox18.Location = new System.Drawing.Point(213, 62);
+            this.comboBox18.Location = new System.Drawing.Point(139, 62);
             this.comboBox18.Name = "comboBox18";
-            this.comboBox18.Size = new System.Drawing.Size(199, 21);
+            this.comboBox18.Size = new System.Drawing.Size(273, 21);
             this.comboBox18.TabIndex = 7;
             // 
             // label54
             // 
             this.label54.AutoSize = true;
+            this.label54.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label54.Location = new System.Drawing.Point(8, 86);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(73, 13);
+            this.label54.Size = new System.Drawing.Size(125, 33);
             this.label54.TabIndex = 3;
             this.label54.Text = "Use Cafe Libs";
+            this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox33
             // 
@@ -1537,9 +1603,9 @@
             this.comboBox33.Items.AddRange(new object[] {
             "False",
             "True"});
-            this.comboBox33.Location = new System.Drawing.Point(213, 89);
+            this.comboBox33.Location = new System.Drawing.Point(139, 89);
             this.comboBox33.Name = "comboBox33";
-            this.comboBox33.Size = new System.Drawing.Size(199, 21);
+            this.comboBox33.Size = new System.Drawing.Size(273, 21);
             this.comboBox33.TabIndex = 7;
             // 
             // tabPage4
@@ -1552,9 +1618,27 @@
             this.tabPage4.Text = "Cemu Hook ";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 3;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.Controls.Add(this.groupBox6, 1, 1);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 3;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(443, 508);
+            this.tableLayoutPanel13.TabIndex = 1;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel9);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(8, 8);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(427, 492);
@@ -1612,65 +1696,79 @@
             // label38
             // 
             this.label38.AutoSize = true;
+            this.label38.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label38.Location = new System.Drawing.Point(48, 33);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(101, 13);
+            this.label38.Size = new System.Drawing.Size(169, 27);
             this.label38.TabIndex = 0;
             this.label38.Text = "Custom Timer Mode";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label39
             // 
             this.label39.AutoSize = true;
+            this.label39.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label39.Location = new System.Drawing.Point(48, 60);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(115, 13);
+            this.label39.Size = new System.Drawing.Size(169, 27);
             this.label39.TabIndex = 0;
             this.label39.Text = "Custom Timer Multiplier";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label40
             // 
             this.label40.AutoSize = true;
+            this.label40.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label40.Location = new System.Drawing.Point(48, 87);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(80, 13);
+            this.label40.Size = new System.Drawing.Size(169, 27);
             this.label40.TabIndex = 0;
             this.label40.Text = "Disable LZCNT";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label41
             // 
             this.label41.AutoSize = true;
+            this.label41.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label41.Location = new System.Drawing.Point(48, 141);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(66, 13);
+            this.label41.Size = new System.Drawing.Size(169, 27);
             this.label41.TabIndex = 0;
             this.label41.Text = "Disable AVX";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label42
             // 
             this.label42.AutoSize = true;
+            this.label42.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label42.Location = new System.Drawing.Point(48, 114);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(83, 13);
+            this.label42.Size = new System.Drawing.Size(169, 27);
             this.label42.TabIndex = 0;
             this.label42.Text = "Disable MOVBE";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label44
             // 
             this.label44.AutoSize = true;
+            this.label44.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label44.Location = new System.Drawing.Point(48, 181);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(76, 13);
+            this.label44.Size = new System.Drawing.Size(169, 27);
             this.label44.TabIndex = 0;
             this.label44.Text = "Motion Source";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label46
             // 
             this.label46.AutoSize = true;
+            this.label46.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label46.Location = new System.Drawing.Point(48, 221);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(102, 13);
+            this.label46.Size = new System.Drawing.Size(169, 27);
             this.label46.TabIndex = 0;
             this.label46.Text = "MM Timer Accuracy";
+            this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox22
             // 
@@ -1768,47 +1866,57 @@
             // label37
             // 
             this.label37.AutoSize = true;
+            this.label37.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label37.Location = new System.Drawing.Point(3, 20);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(29, 13);
+            this.label37.Size = new System.Drawing.Size(39, 13);
             this.label37.TabIndex = 0;
             this.label37.Text = "CPU";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
+            this.label45.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label45.Location = new System.Drawing.Point(3, 208);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(39, 13);
             this.label45.TabIndex = 0;
             this.label45.Text = "Debug";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label43
             // 
             this.label43.AutoSize = true;
+            this.label43.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label43.Location = new System.Drawing.Point(3, 168);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(31, 13);
+            this.label43.Size = new System.Drawing.Size(39, 13);
             this.label43.TabIndex = 0;
             this.label43.Text = "Input";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label47
             // 
             this.label47.AutoSize = true;
+            this.label47.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label47.Location = new System.Drawing.Point(3, 248);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(39, 13);
             this.label47.TabIndex = 0;
             this.label47.Text = "Debug";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label48
             // 
             this.label48.AutoSize = true;
+            this.label48.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label48.Location = new System.Drawing.Point(48, 261);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(169, 13);
+            this.label48.Size = new System.Drawing.Size(169, 27);
             this.label48.TabIndex = 0;
             this.label48.Text = "Ignore Precompiled Shader Cache";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox28
             // 
@@ -1831,6 +1939,23 @@
             this.tabPage6.TabIndex = 6;
             this.tabPage6.Text = "Controllers";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 3;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.Controls.Add(this.groupBox7, 1, 1);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 3;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(443, 508);
+            this.tableLayoutPanel12.TabIndex = 1;
             // 
             // groupBox7
             // 
@@ -1968,23 +2093,6 @@
             this.label62.Text = "Controller 8";
             this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.ColumnCount = 3;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel12.Controls.Add(this.groupBox7, 1, 1);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 3;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(443, 508);
-            this.tableLayoutPanel12.TabIndex = 1;
-            // 
             // comboBox34
             // 
             this.comboBox34.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2113,29 +2221,13 @@
             this.comboBox41.Size = new System.Drawing.Size(349, 21);
             this.comboBox41.TabIndex = 1;
             // 
-            // tableLayoutPanel13
-            // 
-            this.tableLayoutPanel13.ColumnCount = 3;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel13.Controls.Add(this.groupBox6, 1, 1);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 3;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(443, 508);
-            this.tableLayoutPanel13.TabIndex = 1;
-            // 
             // FormEditGameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 540);
             this.Controls.Add(this.tabControl1);
+            this.MinimumSize = new System.Drawing.Size(467, 579);
             this.Name = "FormEditGameSettings";
             this.ShowIcon = false;
             this.Text = "Current Game";
@@ -2170,15 +2262,15 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
             this.tabPage6.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel13.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -119,60 +119,75 @@ namespace Budford.View
                     comboBox1.Items.Clear();
 
                     XElement xElement = XElement.Parse(XDocument.Load(emulatorFileName).ToString());
-                    foreach (var g in xElement.Elements("EmulatorPlatform"))
-                    {
-                        var element = g.Element("Emulator");
-                        if (element != null)
-                        {
-                            string emulator = element.Value;
-                            var o = g.Element("Platform");
-                            if (o != null)
-                            {
-                                string platform = o.Value;
-                                if (emulator.Length > 0)
-                                {
-                                    emulators.Add(emulator, platform);
-                                }
-                            }
-                        }
-                    }
 
-                    foreach (var g in xElement.Elements("Emulator"))
-                    {
-                        var element = g.Element("Title");
-                        if (element != null)
-                        {
-                            string title = element.Value;
-                            var o = g.Element("ID");
-                            if (o != null)
-                            {
-                                string id = o.Value;
-                                if (title.Length > 0)
-                                {
-                                    if (emulators.ContainsKey(id))
-                                    {
-                                        StringBuilder sb = new StringBuilder();
-                                        sb.Append(emulators[id]);
-                                        sb.Append( ":");
-                                        sb.Append( title);
-                                        emulators[id] = sb.ToString();
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    ExtractPlatforms(xElement);
+                    ExtractEmulators(xElement);
 
                     foreach (var v in emulators)
                     {
                         comboBox1.Items.Add(v.Value);
                     }
 
-                    if (emulators.Count > 0)
+                    EnableControlsForExport();
+                }
+            }
+        }
+
+        private void EnableControlsForExport()
+        {
+            if (emulators.Count > 0)
+            {
+                comboBox1.SelectedIndex = 0;
+                comboBox1.Enabled = true;
+                button1.Enabled = true;
+            }
+        }
+
+        private void ExtractEmulators(XElement xElement)
+        {
+
+            foreach (var g in xElement.Elements("Emulator"))
+            {
+                var element = g.Element("Title");
+                if (element != null)
+                {
+                    string title = element.Value;
+                    var o = g.Element("ID");
+                    if (o != null)
                     {
-                        // TODO - Look for Wii U or Cemu?
-                        comboBox1.SelectedIndex = 0;
-                        comboBox1.Enabled = true;
-                        button1.Enabled = true;
+                        string id = o.Value;
+                        if (title.Length > 0)
+                        {
+                            if (emulators.ContainsKey(id))
+                            {
+                                StringBuilder sb = new StringBuilder();
+                                sb.Append(emulators[id]);
+                                sb.Append(":");
+                                sb.Append(title);
+                                emulators[id] = sb.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ExtractPlatforms(XElement xElement)
+        {
+            foreach (var g in xElement.Elements("EmulatorPlatform"))
+            {
+                var element = g.Element("Emulator");
+                if (element != null)
+                {
+                    string emulator = element.Value;
+                    var o = g.Element("Platform");
+                    if (o != null)
+                    {
+                        string platform = o.Value;
+                        if (emulator.Length > 0)
+                        {
+                            emulators.Add(emulator, platform);
+                        }
                     }
                 }
             }

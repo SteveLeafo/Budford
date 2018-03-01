@@ -128,9 +128,7 @@ namespace Budford.Utilities
                 if (args != null && args != "") p.StartInfo.Arguments = " " + args;
                 p.StartInfo.FileName = name;
                 p.Start();
-                // Do not wait for the child process to exit before
-                // reading to the end of its redirected stream.
-                // p.WaitForExit();
+
                 // Read the output stream first and then wait.
                 string output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
