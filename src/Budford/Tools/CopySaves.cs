@@ -62,8 +62,8 @@ namespace Budford.Tools
             DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(latest, game));
             DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(latest, game));
 
-            DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, ""));
-            DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
+            DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, model.CurrentUser, game, ""));
+            DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(model, game, ""));
 
             if (Directory.Exists(src.FullName))
             {

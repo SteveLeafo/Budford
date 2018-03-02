@@ -38,8 +38,14 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -172,26 +178,36 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnCount = 7;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox3, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox6, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox7, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox3, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox6, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox7, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.button2, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.button6, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.button7, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label14, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label15, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.textBox2, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.textBox3, 2, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowCount = 12;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -205,11 +221,11 @@
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.tableLayoutPanel1.SetColumnSpan(this.listView1, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.listView1, 5);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(8, 8);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(347, 268);
+            this.listView1.Size = new System.Drawing.Size(347, 190);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -221,37 +237,53 @@
             // 
             // checkBox3
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBox3, 5);
+            this.checkBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox3.Location = new System.Drawing.Point(8, 331);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(190, 23);
+            this.checkBox3.Size = new System.Drawing.Size(347, 23);
             this.checkBox3.TabIndex = 4;
             this.checkBox3.Text = "Remove missing games from library";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBox6
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBox6, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBox6, 5);
             this.checkBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox6.Location = new System.Drawing.Point(8, 360);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(266, 23);
+            this.checkBox6.Size = new System.Drawing.Size(347, 23);
             this.checkBox6.TabIndex = 4;
             this.checkBox6.Text = "Search for games on start up";
             this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // checkBox7
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBox7, 5);
+            this.checkBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox7.Location = new System.Drawing.Point(8, 389);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(266, 23);
+            this.checkBox7.Size = new System.Drawing.Size(347, 23);
             this.checkBox7.TabIndex = 4;
             this.checkBox7.Text = "Include WiiULauncher.rpx";
             this.checkBox7.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.button2, 2);
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Location = new System.Drawing.Point(280, 204);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Remove";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // button1
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.Location = new System.Drawing.Point(199, 282);
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(199, 204);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -259,15 +291,65 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // button6
             // 
-            this.button2.Location = new System.Drawing.Point(280, 282);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Remove";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button6.Location = new System.Drawing.Point(323, 253);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(32, 23);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "[...]";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(323, 282);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(32, 23);
+            this.button7.TabIndex = 2;
+            this.button7.Text = "[...]";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label14.Location = new System.Drawing.Point(8, 250);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 29);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Saves";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label15.Location = new System.Drawing.Point(8, 279);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 29);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Downloads";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox2
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox2, 3);
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox2.Location = new System.Drawing.Point(74, 253);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(243, 20);
+            this.textBox2.TabIndex = 7;
+            // 
+            // textBox3
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox3, 3);
+            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox3.Location = new System.Drawing.Point(74, 282);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(243, 20);
+            this.textBox3.TabIndex = 8;
             // 
             // button3
             // 
@@ -1149,6 +1231,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -1180,8 +1263,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -1209,9 +1290,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
@@ -1229,7 +1308,6 @@
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label11;
@@ -1240,5 +1318,16 @@
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }

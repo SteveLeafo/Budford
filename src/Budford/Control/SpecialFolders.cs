@@ -15,14 +15,14 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="snapShotDir"></param>
         /// <returns></returns>
-        internal static string CurrentUserSaveDirBudford(string currentUser, GameInformation game, string snapShotDir)
+        internal static string CurrentUserSaveDirBudford(Model.Model model, string currentUser, GameInformation game, string snapShotDir)
         {
             string gameId = game.TitleId.Replace("00050000", "");
             if (snapShotDir.Length == 0)
             {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", currentUser);
+                return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "00050000", gameId, "user", currentUser);
             }
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", currentUser + "_" + snapShotDir);
+            return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "00050000", gameId, "user", currentUser + "_" + snapShotDir);
         }
 
         /// <summary>
@@ -31,14 +31,14 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="snapShotDir"></param>
         /// <returns></returns>
-        internal static string CommonSaveDirBudford(GameInformation game, string snapShotDir)
+        internal static string CommonSaveDirBudford(Model.Model model, GameInformation game, string snapShotDir)
         {
             string gameId = game.TitleId.Replace("00050000", "");
             if (snapShotDir.Length == 0)
             {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", "common");
+                return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "00050000", gameId, "user", "common");
             }
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "00050000", gameId, "user", "common" + "_" + snapShotDir);
+            return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "00050000", gameId, "user", "common" + "_" + snapShotDir);
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace Budford.Control
         /// </summary>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static string ShaderCacheBudford(GameInformation game)
+        internal static string ShaderCacheBudford(Model.Model model, GameInformation game)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", game.SaveDir, "post_180.bin");
+            return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "post_180.bin");
         }
 
         #endregion
@@ -123,9 +123,9 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="snapShotDir"></param>
         /// <returns></returns>
-        internal static string CafeLibDirBudford()
+        internal static string CafeLibDirBudford(Model.Model model)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "cafeLibs");
+            return Path.Combine(model.Settings.SavesFolder, "Budford", "cafeLibs");
         }
     }
 }

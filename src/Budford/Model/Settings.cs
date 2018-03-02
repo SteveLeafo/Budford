@@ -14,6 +14,10 @@ namespace Budford.Model
 
         public string DefaultInstallFolder  = "Cemu";
 
+        public string SavesFolder = "";
+
+        public string DownloadsFolder = "";
+
         public string CurrentView  = "Detailed";
 
         public string GraphicsPackRevision = "347";

@@ -14,7 +14,9 @@ namespace Budford.Control
         [STAThread]
         static void Main()
         {
-            SetDefaultFolder();
+            var model = FormMainWindow.TransferLegacyModel();
+
+            SetDefaultFolder(model);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -40,7 +42,6 @@ namespace Budford.Control
             else
             {
 
-                var model = FormMainWindow.TransferLegacyModel();
                 if (model.Settings.StopHotkey != "None")
                 {
                     mainForm.launchGame = cmdLineFileName;
@@ -71,18 +72,27 @@ namespace Budford.Control
         /// <summary>
         /// This is the Budford folder where all the downloaded files will be saved
         /// </summary>
-        private static void SetDefaultFolder()
+        private static void SetDefaultFolder(Model.Model model)
         {
-            string defaultFolder = "C:\\ProgramData\\Budford";
-            if (!CurrentOS.IsWindows)
+            if (model.Settings.DownloadsFolder == "")
             {
-                defaultFolder = "Budford";
+                if (!CurrentOS.IsWindows)
+                {
+                    model.Settings.DownloadsFolder = "Budford";
+                }
+                else
+                {
+                    model.Settings.DownloadsFolder = "C:\\ProgramData\\Budford";
+                }
+
             }
-            if (!Directory.Exists(defaultFolder))
+
+            if (!Directory.Exists(model.Settings.DownloadsFolder))
             {
-                Directory.CreateDirectory(defaultFolder);
+                Directory.CreateDirectory(model.Settings.DownloadsFolder);
             }
-            Directory.SetCurrentDirectory(defaultFolder);
+            Directory.SetCurrentDirectory(model.Settings.DownloadsFolder);
+            Persistence.Save(model, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
         }
 
         /// <summary>

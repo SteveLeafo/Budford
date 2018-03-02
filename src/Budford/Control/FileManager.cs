@@ -84,7 +84,7 @@ namespace Budford.Control
             string id = Path.GetFileNameWithoutExtension(fileName);
             id = id.Replace("(1)", "").Replace("(2)", "").Replace("(3)", "").Replace("(4)", "").Replace(" - Copy", "");
 
-            string budfordFolder =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", id);
+            string budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", id);
 
             if (!Directory.Exists(budfordFolder))
             {
@@ -92,7 +92,7 @@ namespace Budford.Control
                 {
                     if (selectGame.ShowDialog(parent) == DialogResult.OK)
                     {
-                        budfordFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", selectGame.Id);
+                        budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", selectGame.Id);
                     }
                 }
             }

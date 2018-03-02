@@ -18,7 +18,7 @@ namespace Budford.Tools
             foreach (var game in model.GameData)
             {
                 string folder = game.Value.SaveDir;
-                string saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford");
+                string saveFolder = Path.Combine(model.Settings.SavesFolder, "Budford");
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
                     foreach (var latest in model.Settings.InstalledVersions)

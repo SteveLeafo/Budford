@@ -248,6 +248,10 @@ namespace Budford.View
 
             Model.Model m = Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
 
+            if (m.Settings.SavesFolder == "")
+            {
+                m.Settings.SavesFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
           
             return m;
 
@@ -2234,7 +2238,7 @@ namespace Budford.View
                 if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
                     GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, game, ""));
+                    DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, game, ""));
                     if (!Directory.Exists(src.FullName))
                     {
                         src.Create();

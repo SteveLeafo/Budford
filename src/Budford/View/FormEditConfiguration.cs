@@ -37,7 +37,8 @@ namespace Budford.View
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
 
-
+            textBox2.Text = settings.SavesFolder;
+            textBox3.Text = settings.DownloadsFolder;
 
             for (int i = 0; i < Screen.AllScreens.Length; ++i)
             {

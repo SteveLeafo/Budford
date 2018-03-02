@@ -130,7 +130,7 @@ namespace Budford.Control
             if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
                 DeleteLogFile(modelIn, logfile);
-                SetupCafeLibs(game);
+                SetupCafeLibs(modelIn, game);
                 if (game != null)
                 {
                     CopyLargestShaderCacheToCemu(game);
@@ -225,7 +225,7 @@ namespace Budford.Control
             }
         }
 
-        private static void SetupCafeLibs(GameInformation game)
+        private static void SetupCafeLibs(Model.Model model, GameInformation game)
         {
             string cafeLibs = Path.Combine(runningVersion.Folder, "cafeLibs");
 
@@ -239,8 +239,8 @@ namespace Budford.Control
             {
                 if (game.GameSetting.UseCafeLibs == 1)
                 {
-                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
-                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));                    
+                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
+                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));                    
                 }
             }
         }
@@ -273,7 +273,7 @@ namespace Budford.Control
             {
                 if (!game.SaveDir.StartsWith("??"))
                 {
-                    FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(game));
+                    FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(Model, game));
                     if (File.Exists(src.FullName))
                     {
                         FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
@@ -294,11 +294,11 @@ namespace Budford.Control
         {
             if (!game.SaveDir.StartsWith("??"))
             {
-                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, game, ""));
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, game, ""));
                 DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion,game));
                 UpdateFolder(src, dest, true);
 
-                src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, ""));
+                src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, game, ""));
                 dest = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
                 UpdateFolder(src, dest);
             }
@@ -437,9 +437,9 @@ namespace Budford.Control
         {
             // Copy saves
             DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, runningGame));
-            DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model.CurrentUser, runningGame, ""));
+            DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, runningGame, ""));
             DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
-            DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(runningGame, ""));
+            DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, runningGame, ""));
             if (Directory.Exists(src.FullName))
             {
                 if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
@@ -465,7 +465,7 @@ namespace Budford.Control
             FileInfo srcFile = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, runningGame));
             if (File.Exists(srcFile.FullName))
             {
-                FileInfo destFile = new FileInfo(SpecialFolders.ShaderCacheBudford(runningGame));
+                FileInfo destFile = new FileInfo(SpecialFolders.ShaderCacheBudford(Model, runningGame));
                 if (!File.Exists(destFile.FullName) || destFile.Length < srcFile.Length)
                 {
                     string folder = Path.GetDirectoryName(destFile.FullName);
@@ -945,15 +945,15 @@ namespace Budford.Control
                 {
                     SetCemuVersion(model, game);
                 }
-                DirectoryInfo saveDir = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford("", game, ""));
+                DirectoryInfo saveDir = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, "", game, ""));
                 string snapShotDir = "S_" + saveDir.EnumerateDirectories().Count();
 
                 DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, game));
-                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model.CurrentUser, game, snapShotDir));
+                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, model.CurrentUser, game, snapShotDir));
                 UpdateFolder(src, dest);
 
                 src = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
-                dest = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(game, snapShotDir));
+                dest = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(model, game, snapShotDir));
 
                 UpdateFolder(src, dest);
             }
