@@ -13,20 +13,23 @@ namespace Budford.Control
         /// <param name="gameInfo"></param>
         public static void WriteIni(Model.Model model, GameInformation gameInfo)
         {
-            using (StreamWriter sw = new StreamWriter(Path.Combine(GetVersion(model, gameInfo).Folder, "cemuhook.ini")))
+            if (GetVersion(model, gameInfo).Folder != null)
             {
-                sw.WriteLine("[CPU]");
-                sw.WriteLine("customTimerMode = " + GetCustomTimerMode(gameInfo.CemuHookSetting.CustomTimerMode));
-                sw.WriteLine("customTimerMultiplier = " + GetCustomTimerMultiplier(gameInfo.CemuHookSetting.CustomTimerMultiplier));
-                sw.WriteLine("disableLZCNT = " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
-                sw.WriteLine("disableMOVBE =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
-                sw.WriteLine("disableAVX =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
-                sw.WriteLine("[Input]");
-                sw.WriteLine("motionSource = " + GetMotionSource(gameInfo.CemuHookSetting.MotionSource));
-                sw.WriteLine("[Debug]");
-                sw.WriteLine("mmTimerAccuracy = " + GetMmTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
-                sw.WriteLine("[Graphics]");
-                sw.WriteLine("ignorePrecompiledShaderCache = " + (gameInfo.CemuHookSetting.IgnorePrecompiledShaderCache ? "true" : "false"));
+                using (StreamWriter sw = new StreamWriter(Path.Combine(GetVersion(model, gameInfo).Folder, "cemuhook.ini")))
+                {
+                    sw.WriteLine("[CPU]");
+                    sw.WriteLine("customTimerMode = " + GetCustomTimerMode(gameInfo.CemuHookSetting.CustomTimerMode));
+                    sw.WriteLine("customTimerMultiplier = " + GetCustomTimerMultiplier(gameInfo.CemuHookSetting.CustomTimerMultiplier));
+                    sw.WriteLine("disableLZCNT = " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
+                    sw.WriteLine("disableMOVBE =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
+                    sw.WriteLine("disableAVX =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
+                    sw.WriteLine("[Input]");
+                    sw.WriteLine("motionSource = " + GetMotionSource(gameInfo.CemuHookSetting.MotionSource));
+                    sw.WriteLine("[Debug]");
+                    sw.WriteLine("mmTimerAccuracy = " + GetMmTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
+                    sw.WriteLine("[Graphics]");
+                    sw.WriteLine("ignorePrecompiledShaderCache = " + (gameInfo.CemuHookSetting.IgnorePrecompiledShaderCache ? "true" : "false"));
+                }
             }
         }
 

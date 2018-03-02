@@ -79,12 +79,23 @@ namespace Budford.Control
         /// </summary>
         /// <param name="model"></param>
         /// <param name="fileName"></param>
-        internal static void ImportShaderCache(Model.Model model, string fileName)
+        internal static void ImportShaderCache(Form parent, Model.Model model, string fileName)
         {
             string id = Path.GetFileNameWithoutExtension(fileName);
             id = id.Replace("(1)", "").Replace("(2)", "").Replace("(3)", "").Replace("(4)", "").Replace(" - Copy", "");
 
             string budfordFolder =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", id);
+
+            if (!Directory.Exists(budfordFolder))
+            {
+                using (FormSelectGameForShaderImport selectGame = new FormSelectGameForShaderImport(model))
+                {
+                    if (selectGame.ShowDialog(parent) == DialogResult.OK)
+                    {
+                        budfordFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", selectGame.Id);
+                    }
+                }
+            }
 
             if (Directory.Exists(budfordFolder))
             {
@@ -129,10 +140,7 @@ namespace Budford.Control
                     MessageBox.Show(message, "Imported OK");
                 }
             }
-            else
-            {
-                MessageBox.Show("Could not find game with ID: " + id + ".\r\nPlease check the filename and try again.", "Game not found");
-            }
+
         }
 
         /// <summary>

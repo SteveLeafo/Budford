@@ -122,6 +122,12 @@
     <Compile Include="View\CustomToolStripButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\FormSelectGameForShaderImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormSelectGameForShaderImport.Designer.cs">
+      <DependentUpon>FormSelectGameForShaderImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     <Compile Include="View\UserControlTiledView.Designer.cs">
       <DependentUpon>UserControlTiledView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\FormSelectGameForShaderImport.resx">
+      <DependentUpon>FormSelectGameForShaderImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>

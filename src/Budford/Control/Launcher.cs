@@ -168,40 +168,50 @@ namespace Budford.Control
                 parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
 
                 startTime = DateTime.Now;
-                runningProcess = Process.Start(start);
-
-                if (runningProcess != null)
+                if (File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
                 {
-                    runningProcess.EnableRaisingEvents = true;
-                    runningProcess.Exited += proc_Exited;
+                    runningProcess = Process.Start(start);
 
-                    runningGame = game;
-
-                    if (parentIn != null)
-                    {
-                        try
-                        {
-                            parentIn.SetParent(runningProcess);
-                        }
-                        catch (Exception)
-                        {
-                            // Dies in Linux
-                        }
-                    }
-                    parentProcess.PriorityClass = original;
-
-                    // Allow the process to finish starting.
                     if (runningProcess != null)
                     {
-                        try
+                        runningProcess.EnableRaisingEvents = true;
+                        runningProcess.Exited += proc_Exited;
+
+                        runningGame = game;
+
+                        if (parentIn != null)
                         {
-                            runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+                            try
+                            {
+                                parentIn.SetParent(runningProcess);
+                            }
+                            catch (Exception)
+                            {
+                                // Dies in Linux
+                            }
                         }
-                        catch (Exception)
+                        parentProcess.PriorityClass = original;
+
+                        // Allow the process to finish starting.
+                        if (runningProcess != null)
                         {
-                            // Probably not enough permissions...
+                            try
+                            {
+                                runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+                            }
+                            catch (Exception)
+                            {
+                                // Probably not enough permissions...
+                            }
+                            WaitForProcess(modelIn, game, getSaveDir, cemuOnly);
                         }
-                        WaitForProcess(modelIn, game, getSaveDir, cemuOnly);
+                    }
+                }
+                else
+                {
+                    if (parent != null)
+                    {
+                        parent.ProcessExited();
                     }
                 }
             }

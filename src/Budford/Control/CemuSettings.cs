@@ -295,35 +295,44 @@ namespace Budford.Control
         internal void WriteSettingsBinFile()
         {
             InstalledVersion version = GetVersion();
-          
 
             if (version != null)
             {
-                SetOffsets(version.Version);
-
-                if (File.Exists(Path.Combine(version.Folder, "settings.bin")))
+                if (version.Folder != null)
                 {
-                    File.Delete(Path.Combine(version.Folder, "settings.bin"));
-                }
+                    SetOffsets(version.Version);
 
-                // No settings file, so lets build our own..
-                if (!File.Exists(Path.Combine(version.Folder, "settings.bin")))
-                {
-                    using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
+                    try
                     {
-                        foreach (int file in settingsFile)
+                        if (File.Exists(Path.Combine(version.Folder, "settings.bin")))
                         {
-                            fn.WriteByte((byte)file);
+                            File.Delete(Path.Combine(version.Folder, "settings.bin"));
                         }
                     }
-                }
+                    catch (Exception)
+                    {
+                    }
 
-                FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
+                    // No settings file, so lets build our own..
+                    if (!File.Exists(Path.Combine(version.Folder, "settings.bin")))
+                    {
+                        using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            foreach (int file in settingsFile)
+                            {
+                                fn.WriteByte((byte)file);
+                            }
+                        }
+                    }
 
-                if (information != null)
-                {
-                    WriteGraphicsPacks(version);
-                    WriteSettings(version.Folder);
+                    FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
+
+
+                    if (information != null)
+                    {
+                        WriteGraphicsPacks(version);
+                        WriteSettings(version.Folder);
+                    }
                 }
             }
         }

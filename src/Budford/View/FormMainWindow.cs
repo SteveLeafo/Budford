@@ -1551,7 +1551,7 @@ namespace Budford.View
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    FileManager.ImportShaderCache(Model, dlg.FileName);
+                    FileManager.ImportShaderCache(this, Model, dlg.FileName);
                 }
             }
         }
