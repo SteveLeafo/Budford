@@ -554,8 +554,10 @@
             this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
-            "Windowed",
-            "Full Screen"});
+            "Normal",
+            "Full Screen",
+            "Minimized",
+            "Maximized"});
             this.comboBox3.Location = new System.Drawing.Point(152, 8);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(260, 21);

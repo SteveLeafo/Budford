@@ -557,6 +557,7 @@ namespace Budford.Control
                 }
                 else if (game != null)
                 {
+                    start.WindowStyle = (ProcessWindowStyle)game.GameSetting.FullScreen;
                     if (forceFullScreen)
                     {
                         start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"";
