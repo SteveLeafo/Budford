@@ -14,6 +14,8 @@ namespace Budford.Model
 
         public string DefaultInstallFolder  = "Cemu";
 
+        public string MlcFolder = "";
+
         public string SavesFolder = "";
 
         public string DownloadsFolder = "";

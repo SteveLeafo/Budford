@@ -132,10 +132,17 @@ namespace Budford.View
                     lvi.SubItems.Add(v.Version);
                     lvi.SubItems.Add(v.HasFonts ? "Yes" : "No");
                     lvi.SubItems.Add(v.HasCemuHook ? "Yes" : "No");
-                    lvi.SubItems.Add(GetLinkType(v));
+                    lvi.SubItems.Add(GetLinkType(model, v));
                     lvi.SubItems.Add(v.HasPatch ? "Yes" : "No");
                     lvi.SubItems.Add(v.HasOnlineFiles ? "Yes" : "No");
-                    lvi.SubItems.Add(v.DlcSource == null ? "" : v.DlcSource);
+                    if (v.DlcType == 0)
+                    {
+                        lvi.SubItems.Add(model.Settings.MlcFolder == "" ? "" : model.Settings.MlcFolder);
+                    }
+                    else
+                    {
+                        lvi.SubItems.Add(v.DlcSource == null ? "" : v.DlcSource);
+                    }
                     listView1.Items.Add(lvi);
                 }
 
@@ -163,11 +170,11 @@ namespace Budford.View
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        private static string GetLinkType(InstalledVersion v)
+        private static string GetLinkType(Model.Model model, InstalledVersion v)
         {
             switch (v.DlcType)
             {
-                case 0: return "No";
+                case 0: return model.Settings.MlcFolder == "" ? "No" : v.VersionNumber >=  1100 ? "Mlc" : "";
                 case 1: return "Yes";
                 case 2: return "Link";
                 case 3: return "Dead";
@@ -324,6 +331,7 @@ namespace Budford.View
         private void button5_Click(object sender, EventArgs e)
         {
             CemuFeatures.RepairInstalledVersions(this, model);
+            button3_Click(null, null);
             PopulateList();
         }
 
@@ -567,7 +575,19 @@ namespace Budford.View
         {
             foreach (var v in model.Settings.InstalledVersions.OrderByDescending(version => version.VersionNumber))
             {
-                if (GetLinkType(v) == "Dead")
+                if (GetLinkType(model, v) == "Dead")
+                {
+                    JunctionPoint.Delete(Path.Combine(v.Folder, "mlc01", "usr", "title"));
+                }
+            }
+            button3_Click(null, null);
+        }
+
+        private void removeAllLinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var v in model.Settings.InstalledVersions.OrderByDescending(version => version.VersionNumber))
+            {
+                if (JunctionPoint.Exists(Path.Combine(v.Folder, "mlc01", "usr", "title")))
                 {
                     JunctionPoint.Delete(Path.Combine(v.Folder, "mlc01", "usr", "title"));
                 }

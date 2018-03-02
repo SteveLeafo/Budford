@@ -70,7 +70,9 @@
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.removeDeadLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeAllLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -397,7 +399,9 @@
             this.scanToolStripMenuItem,
             this.removeAllToolStripMenuItem,
             this.addNewInstanceToolStripMenuItem,
-            this.removeDeadLinksToolStripMenuItem});
+            this.toolStripSeparator3,
+            this.removeDeadLinksToolStripMenuItem,
+            this.removeAllLinksToolStripMenuItem});
             this.cemuToolStripMenuItem.Name = "cemuToolStripMenuItem";
             this.cemuToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.cemuToolStripMenuItem.Text = "Folder";
@@ -423,12 +427,24 @@
             this.addNewInstanceToolStripMenuItem.Text = "Add new instance...";
             this.addNewInstanceToolStripMenuItem.Click += new System.EventHandler(this.addNewInstanceToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(174, 6);
+            // 
             // removeDeadLinksToolStripMenuItem
             // 
             this.removeDeadLinksToolStripMenuItem.Name = "removeDeadLinksToolStripMenuItem";
             this.removeDeadLinksToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.removeDeadLinksToolStripMenuItem.Text = "Remove dead links";
             this.removeDeadLinksToolStripMenuItem.Click += new System.EventHandler(this.removeDeadLinksToolStripMenuItem_Click);
+            // 
+            // removeAllLinksToolStripMenuItem
+            // 
+            this.removeAllLinksToolStripMenuItem.Name = "removeAllLinksToolStripMenuItem";
+            this.removeAllLinksToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.removeAllLinksToolStripMenuItem.Text = "Remove all links";
+            this.removeAllLinksToolStripMenuItem.Click += new System.EventHandler(this.removeAllLinksToolStripMenuItem_Click);
             // 
             // FormEditInstalledVersions
             // 
@@ -495,5 +511,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem removeDeadLinksToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem removeAllLinksToolStripMenuItem;
     }
 }

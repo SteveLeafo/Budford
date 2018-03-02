@@ -172,17 +172,20 @@ namespace Budford.Control
                     }
                 }
 
-                if (!v.HasDlc)
+                if (v.VersionNumber < 1110 || model.Settings.MlcFolder == "")
                 {
-                    if (dlcSource != null)
+                    if (!v.HasDlc)
                     {
-                        try
+                        if (dlcSource != null)
                         {
-                            JunctionPoint.Create(Path.Combine(dlcSource.Folder,"mlc01", "usr", "title"), Path.Combine(v.Folder, "mlc01", "usr", "title"), true);
-                        }
-                        catch (Exception)
-                        {
-                            // No code
+                            try
+                            {
+                                JunctionPoint.Create(Path.Combine(dlcSource.Folder, "mlc01", "usr", "title"), Path.Combine(v.Folder, "mlc01", "usr", "title"), true);
+                            }
+                            catch (Exception)
+                            {
+                                // No code
+                            }
                         }
                     }
                 }

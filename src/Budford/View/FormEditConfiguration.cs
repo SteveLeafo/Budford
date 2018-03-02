@@ -37,6 +37,7 @@ namespace Budford.View
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
 
+            textBox4.Text = settings.MlcFolder;
             textBox2.Text = settings.SavesFolder;
             textBox3.Text = settings.DownloadsFolder;
 
@@ -188,6 +189,10 @@ namespace Budford.View
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
             settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
 
+            model.Settings.MlcFolder = textBox4.Text;
+            model.Settings.SavesFolder = textBox2.Text;
+            model.Settings.DownloadsFolder = textBox3.Text;
+
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
 
             model.Settings.WineExe = textBox1.Text;
@@ -300,6 +305,45 @@ namespace Budford.View
                 {
                     textBox1.Text = dlg.FileName;
                     model.Settings.WineExe = textBox1.Text;
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    textBox4.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    textBox2.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    textBox3.Text = fbd.SelectedPath;
                 }
             }
         }

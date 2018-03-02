@@ -542,7 +542,7 @@ namespace Budford.Control
             {
                 if (game != null)
                 {
-                    start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
+                    start.Arguments = "-nolegacy  -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                 }
                 if (Model.Settings.HideWindowWhenCaching)
                 {
@@ -553,21 +553,36 @@ namespace Budford.Control
             {
                 if (game != null && game.GameSetting.FullScreen == 1 && !shiftUp)
                 {
-                    start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"";
+                    start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                 }
                 else if (game != null)
                 {
                     start.WindowStyle = (ProcessWindowStyle)game.GameSetting.FullScreen;
                     if (forceFullScreen)
                     {
-                        start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"";
+                        start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                     }
                     else
                     {
-                        start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"";
+                        start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                     }
                 }
             }
+        }
+
+        private string GetMlcOption()
+        {
+            if (Model != null)
+            {
+                if (Model.Settings.MlcFolder != "")
+                {
+                    if (Directory.Exists(Model.Settings.MlcFolder))
+                    {
+                        return " -mlc \"" + Model.Settings.MlcFolder + "\"";
+                    }
+                }
+            }
+            return "";
         }
 
         /// <summary>
@@ -868,6 +883,10 @@ namespace Budford.Control
 
         private void SetCemuCpuPrioty(GameInformation game)
         {
+            if (runningProcess.HasExited)
+            {
+                return;
+            }
             try
             {
                 if (game != null)

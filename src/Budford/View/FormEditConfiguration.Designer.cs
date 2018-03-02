@@ -46,6 +46,9 @@
             this.label15 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -99,6 +102,7 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -187,29 +191,35 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox3, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox6, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox7, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox3, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox6, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox7, 1, 13);
             this.tableLayoutPanel1.Controls.Add(this.button2, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.button1, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button6, 5, 5);
-            this.tableLayoutPanel1.Controls.Add(this.button7, 5, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label14, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label15, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.button6, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.button7, 5, 8);
+            this.tableLayoutPanel1.Controls.Add(this.label14, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label15, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.textBox2, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.textBox3, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.button8, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.textBox4, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label16, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label17, 1, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 12;
+            this.tableLayoutPanel1.RowCount = 14;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -225,7 +235,7 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(8, 8);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(347, 190);
+            this.listView1.Size = new System.Drawing.Size(347, 141);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -272,7 +282,7 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.button2, 2);
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(280, 204);
+            this.button2.Location = new System.Drawing.Point(280, 155);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -283,7 +293,7 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(199, 204);
+            this.button1.Location = new System.Drawing.Point(199, 155);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -293,29 +303,29 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(323, 253);
+            this.button6.Location = new System.Drawing.Point(323, 263);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(32, 23);
             this.button6.TabIndex = 2;
             this.button6.Text = "[...]";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button2_Click);
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(323, 282);
+            this.button7.Location = new System.Drawing.Point(323, 292);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(32, 23);
             this.button7.TabIndex = 2;
             this.button7.Text = "[...]";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button2_Click);
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(8, 250);
+            this.label14.Location = new System.Drawing.Point(8, 260);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 29);
             this.label14.TabIndex = 5;
@@ -326,7 +336,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(8, 279);
+            this.label15.Location = new System.Drawing.Point(8, 289);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(60, 29);
             this.label15.TabIndex = 6;
@@ -336,8 +346,7 @@
             // textBox2
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBox2, 3);
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(74, 253);
+            this.textBox2.Location = new System.Drawing.Point(74, 263);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(243, 20);
             this.textBox2.TabIndex = 7;
@@ -346,10 +355,40 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBox3, 3);
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(74, 282);
+            this.textBox3.Location = new System.Drawing.Point(74, 292);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(243, 20);
             this.textBox3.TabIndex = 8;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(323, 234);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(32, 23);
+            this.button8.TabIndex = 2;
+            this.button8.Text = "[...]";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // textBox4
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox4, 3);
+            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox4.Location = new System.Drawing.Point(74, 234);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(243, 20);
+            this.textBox4.TabIndex = 7;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label16.Location = new System.Drawing.Point(8, 231);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(60, 29);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "-mlc Path";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button3
             // 
@@ -1213,6 +1252,19 @@
             this.comboBox6.Size = new System.Drawing.Size(240, 21);
             this.comboBox6.TabIndex = 1;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.label17, 5);
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Location = new System.Drawing.Point(8, 191);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(347, 40);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "Note: It isn\'t recommended to use an mlc path if you plan on using Cemu versions " +
+    "earlier than 1.11.0 as some older versions have different save folders and other" +
+    "s don\'t support the -mlc option.";
+            // 
             // FormEditConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1329,5 +1381,9 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
     }
 }
