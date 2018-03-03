@@ -1,5 +1,14 @@
 # Budford Change Log
 
+## V1.0.52
+- When importing a shader cache from a different region, you will now be prompted to chose your game.
+- Added two new windows style options Maximized and Minimized.
+- Added an option to set an mlc folder.  This will then be passed to Cemu via the -mlc parameter.  Note: only works on Cemu 1.10.0 and later
+- Added an option to configure the Download folder (Default is ProgramData)
+- Added an option to configure the Save folder (Default is My Documents)
+- Issue#4: Fixed the issue that was stopping the default resolution pack from working.
+- Issue#4: Fixed the issue where CPU priority sections weren't working
+
 ## V1.0.51
 - Removed the ability to choose which monitor Cemu will launch on for systems with multiple displays
 
