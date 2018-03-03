@@ -209,6 +209,11 @@ namespace Budford.View
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
 
+            settings.SingleCorePriority = comboBox3.SelectedIndex;
+            settings.DualCorePriority = comboBox4.SelectedIndex;
+            settings.TripleCorePriority = comboBox5.SelectedIndex;
+            settings.ShaderPriority = comboBox6.SelectedIndex;
+
             model.Settings.WineExe = textBox1.Text;
             model.Settings.StopHotkey = comboBox7.Text;
 
