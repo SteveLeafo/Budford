@@ -706,22 +706,24 @@ namespace Budford.Control
             {
                 using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
                 {
-                    dlc.ShowDialog(form);
-                    CemuFeatures.DownloadLatestGraphicPack(form, dlc.Result, showMessage);
-                    string pack = "";
-                    foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                    if (dlc.ShowDialog(form) == DialogResult.OK)
                     {
-                        string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                        if (folder.StartsWith("graphicPacks_2-"))
+                        CemuFeatures.DownloadLatestGraphicPack(form, dlc.Result, showMessage);
+                        string pack = "";
+                        foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                         {
-                            pack = folder.Replace("graphicPacks_2-", "");
+                            string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
+                            if (folder.StartsWith("graphicPacks_2-"))
+                            {
+                                pack = folder.Replace("graphicPacks_2-", "");
+                            }
                         }
-                    }
 
-                    if (pack != "")
-                    {
-                        modelIn.Settings.GraphicsPackRevision = pack;
-                        FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
+                        if (pack != "")
+                        {
+                            modelIn.Settings.GraphicsPackRevision = pack;
+                            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
+                        }
                     }
                 }
             }

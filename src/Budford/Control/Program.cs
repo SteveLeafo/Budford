@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using Budford.View;
 using Budford.Utilities;
+using Microsoft.Win32;
 
 namespace Budford.Control
 {
@@ -15,6 +16,11 @@ namespace Budford.Control
         static void Main()
         {
             var model = FormMainWindow.TransferLegacyModel();
+
+            if (!Get45or451FromRegistry())
+            {
+                MessageBox.Show("Needs .NET 4.5 or higher to run", "Please update your .NET run environment");
+            }
 
             SetDefaultFolder(model);
 
@@ -67,6 +73,51 @@ namespace Budford.Control
                     new Launcher(null).LaunchRpx(model, cmdLineFileName, cmdLineFullScreen);
                 }
             }
+        }
+
+        private static bool Get45or451FromRegistry()
+        {
+            try
+            {
+                using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full\\"))
+                {
+                    int releaseKey = Convert.ToInt32(ndpKey.GetValue("Release"));
+                    if (true)
+                    {
+                        return CheckFor45DotVersion(releaseKey);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        // Checking the version using >= will enable forward compatibility,  
+        // however you should always compile your code on newer versions of 
+        // the framework to ensure your app works the same. 
+        private static bool CheckFor45DotVersion(int releaseKey)
+        {
+            if (releaseKey >= 393273)
+            {
+                return true;
+            }
+            if ((releaseKey >= 379893))
+            {
+                return true;
+            }
+            if ((releaseKey >= 378675))
+            {
+                return true;
+            }
+            if ((releaseKey >= 378389))
+            {
+                return true;
+            }
+            // This line should never execute. A non-null release key should mean 
+            // that 4.5 or later is installed. 
+            return false;
         }
 
         /// <summary>

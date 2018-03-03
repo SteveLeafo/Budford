@@ -106,6 +106,10 @@ namespace Budford.Control
 
             if (runningVersion == null)
             {
+                if (parent != null)
+                {
+                    parent.ProcessExited();
+                }
                 return;
             }
 

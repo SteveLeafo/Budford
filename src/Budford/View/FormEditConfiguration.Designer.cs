@@ -49,16 +49,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -102,7 +96,22 @@
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -110,8 +119,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -123,6 +130,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -130,6 +141,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -390,6 +402,19 @@
             this.label16.Text = "-mlc Path";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.label17, 5);
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Location = new System.Drawing.Point(8, 191);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(347, 40);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "Note: It isn\'t recommended to use an mlc path if you plan on using Cemu versions " +
+    "earlier than 1.11.0 as some older versions have different save folders and other" +
+    "s don\'t support the -mlc option.";
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(302, 448);
@@ -414,264 +439,190 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel3.Controls.Add(this.groupBox2, 1, 0);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel3.Controls.Add(this.groupBox4, 1, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.48387F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.51613F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(391, 485);
             this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tableLayoutPanel4);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(13, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(365, 166);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Overrides";
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel4.Controls.Add(this.checkBox1, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.checkBox2, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.checkBox4, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.checkBox8, 1, 3);
-            this.tableLayoutPanel4.Controls.Add(this.checkBox9, 1, 4);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 6;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(359, 147);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(13, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(333, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Disable Shader Cache";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox2.Location = new System.Drawing.Point(13, 26);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(333, 17);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "Force Low Resolution Graphics Packs";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox4.Location = new System.Drawing.Point(13, 49);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(333, 17);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "Remove Intel GPU work arounds";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox8.Location = new System.Drawing.Point(13, 72);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(333, 17);
-            this.checkBox8.TabIndex = 0;
-            this.checkBox8.Text = "Automatically download latest graphics pack on start up";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox9.Location = new System.Drawing.Point(13, 95);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(333, 17);
-            this.checkBox9.TabIndex = 0;
-            this.checkBox9.Text = "Automatically download latest everything on startup";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel5);
-            this.groupBox4.Location = new System.Drawing.Point(13, 175);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(8, 8);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(362, 151);
+            this.groupBox4.Size = new System.Drawing.Size(375, 474);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Default Resolution";
+            this.groupBox4.Text = "Default Graphic Pack";
             // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 4;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel5.Controls.Add(this.label1, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton1, 2, 1);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton2, 2, 2);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton3, 2, 3);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton4, 2, 4);
-            this.tableLayoutPanel5.Controls.Add(this.label3, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton7, 1, 1);
-            this.tableLayoutPanel5.Controls.Add(this.label2, 1, 2);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton5, 1, 3);
-            this.tableLayoutPanel5.Controls.Add(this.radioButton6, 1, 4);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton1, 2, 5);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton2, 2, 6);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton3, 2, 7);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton4, 2, 8);
+            this.tableLayoutPanel5.Controls.Add(this.label1, 1, 15);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton5, 2, 11);
+            this.tableLayoutPanel5.Controls.Add(this.label2, 1, 5);
+            this.tableLayoutPanel5.Controls.Add(this.label3, 1, 3);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton7, 2, 3);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton8, 2, 15);
+            this.tableLayoutPanel5.Controls.Add(this.label18, 1, 11);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton10, 2, 16);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton9, 2, 17);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton6, 2, 13);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton11, 2, 12);
+            this.tableLayoutPanel5.Controls.Add(this.radioButton12, 2, 9);
+            this.tableLayoutPanel5.Controls.Add(this.label19, 1, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 11;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowCount = 19;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(356, 132);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(369, 455);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(181, 0);
+            this.label1.Location = new System.Drawing.Point(8, 322);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 13);
+            this.label1.Size = new System.Drawing.Size(119, 23);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Quality...";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Text = "Enthusiast";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(181, 16);
+            this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton1.Location = new System.Drawing.Point(133, 121);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(55, 17);
+            this.radioButton1.Size = new System.Drawing.Size(227, 17);
             this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "2160p";
+            this.radioButton1.Text = "3840x2160";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(181, 39);
+            this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton2.Location = new System.Drawing.Point(133, 144);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(55, 17);
+            this.radioButton2.Size = new System.Drawing.Size(227, 17);
             this.radioButton2.TabIndex = 0;
-            this.radioButton2.Text = "1800p";
+            this.radioButton2.Text = "3200x1800";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(181, 62);
+            this.radioButton3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton3.Location = new System.Drawing.Point(133, 167);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(55, 17);
+            this.radioButton3.Size = new System.Drawing.Size(227, 17);
             this.radioButton3.TabIndex = 0;
-            this.radioButton3.Text = "1440p";
+            this.radioButton3.Text = "2560x1440";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(181, 85);
+            this.radioButton4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton4.Location = new System.Drawing.Point(133, 190);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(55, 17);
+            this.radioButton4.Size = new System.Drawing.Size(227, 17);
             this.radioButton4.TabIndex = 0;
-            this.radioButton4.Text = "1080p";
+            this.radioButton4.Text = "1920x1080";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(8, 0);
+            this.label3.Location = new System.Drawing.Point(8, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(167, 13);
+            this.label3.Size = new System.Drawing.Size(119, 23);
             this.label3.TabIndex = 2;
             this.label3.Text = "Default";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
             this.radioButton7.Checked = true;
-            this.radioButton7.Location = new System.Drawing.Point(8, 16);
+            this.radioButton7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton7.Location = new System.Drawing.Point(133, 78);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(87, 17);
+            this.radioButton7.Size = new System.Drawing.Size(227, 17);
             this.radioButton7.TabIndex = 0;
             this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Cemu default";
-            this.radioButton7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButton7.Text = "No Graphic Pack";
             this.radioButton7.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(8, 36);
+            this.label2.Location = new System.Drawing.Point(8, 118);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 23);
+            this.label2.Size = new System.Drawing.Size(119, 23);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Performance";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label2.Text = "Quality";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(8, 62);
+            this.radioButton5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton5.Location = new System.Drawing.Point(133, 246);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(49, 17);
+            this.radioButton5.Size = new System.Drawing.Size(227, 17);
             this.radioButton5.TabIndex = 0;
-            this.radioButton5.Text = "540p";
+            this.radioButton5.Text = "960x540";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(8, 85);
+            this.radioButton6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton6.Location = new System.Drawing.Point(133, 292);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(49, 17);
+            this.radioButton6.Size = new System.Drawing.Size(227, 17);
             this.radioButton6.TabIndex = 0;
-            this.radioButton6.Text = "360p";
+            this.radioButton6.Text = "640x360";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // tabPage3
@@ -697,7 +648,7 @@
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 8;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -711,7 +662,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel6);
-            this.groupBox3.Location = new System.Drawing.Point(8, 13);
+            this.groupBox3.Location = new System.Drawing.Point(8, 8);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(369, 165);
             this.groupBox3.TabIndex = 3;
@@ -1038,7 +989,7 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel8);
-            this.groupBox5.Location = new System.Drawing.Point(8, 194);
+            this.groupBox5.Location = new System.Drawing.Point(8, 189);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(369, 134);
             this.groupBox5.TabIndex = 3;
@@ -1113,7 +1064,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel9);
-            this.groupBox6.Location = new System.Drawing.Point(8, 344);
+            this.groupBox6.Location = new System.Drawing.Point(8, 339);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(369, 134);
             this.groupBox6.TabIndex = 3;
@@ -1252,18 +1203,202 @@
             this.comboBox6.Size = new System.Drawing.Size(240, 21);
             this.comboBox6.TabIndex = 1;
             // 
-            // label17
+            // radioButton8
             // 
-            this.label17.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.label17, 5);
-            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(8, 191);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(347, 40);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "Note: It isn\'t recommended to use an mlc path if you plan on using Cemu versions " +
-    "earlier than 1.11.0 as some older versions have different save folders and other" +
-    "s don\'t support the -mlc option.";
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton8.Location = new System.Drawing.Point(133, 325);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(227, 17);
+            this.radioButton8.TabIndex = 0;
+            this.radioButton8.Text = "10240x5760";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton9.Location = new System.Drawing.Point(133, 371);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(227, 17);
+            this.radioButton9.TabIndex = 0;
+            this.radioButton9.Text = "5120x2880";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton10.Location = new System.Drawing.Point(133, 348);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(227, 17);
+            this.radioButton10.TabIndex = 0;
+            this.radioButton10.Text = "7680x4320";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(8, 243);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(119, 23);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Performance";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton11.Location = new System.Drawing.Point(133, 269);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(227, 17);
+            this.radioButton11.TabIndex = 0;
+            this.radioButton11.Text = "854x480";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButton12.Location = new System.Drawing.Point(133, 213);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(227, 17);
+            this.radioButton12.TabIndex = 0;
+            this.radioButton12.Text = "1600x900";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tableLayoutPanel10);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(391, 485);
+            this.tabPage4.TabIndex = 4;
+            this.tabPage4.Text = "Options";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 3;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel10.Controls.Add(this.groupBox2, 1, 1);
+            this.tableLayoutPanel10.Controls.Add(this.groupBox7, 0, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 2;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(391, 485);
+            this.tableLayoutPanel10.TabIndex = 0;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Location = new System.Drawing.Point(3, 3);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(1, 1);
+            this.groupBox7.TabIndex = 0;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "groupBox7";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel4.Controls.Add(this.checkBox1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.checkBox4, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.checkBox8, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.checkBox9, 1, 4);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 6;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(359, 115);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox9.Location = new System.Drawing.Point(13, 72);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(333, 17);
+            this.checkBox9.TabIndex = 0;
+            this.checkBox9.Text = "Automatically download latest everything on startup";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox8.Location = new System.Drawing.Point(13, 49);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(333, 17);
+            this.checkBox8.TabIndex = 0;
+            this.checkBox8.Text = "Automatically download latest graphics pack on start up";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox4.Location = new System.Drawing.Point(13, 26);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(333, 17);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "Remove Intel GPU work arounds";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox1.Location = new System.Drawing.Point(13, 3);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(333, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Disable Shader Cache";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tableLayoutPanel4);
+            this.groupBox2.Location = new System.Drawing.Point(8, 8);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(365, 134);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Options";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.tableLayoutPanel5.SetColumnSpan(this.label19, 2);
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label19.Location = new System.Drawing.Point(8, 20);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(352, 45);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Please note that not all games have graphics packs and those that do may not have" +
+    " the selected resolution.  The values set here will be overridden by the per gam" +
+    "e options.";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormEditConfiguration
             // 
@@ -1286,9 +1421,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
@@ -1304,6 +1436,11 @@
             this.groupBox6.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1319,10 +1456,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton radioButton6;
@@ -1342,7 +1475,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
@@ -1360,14 +1492,12 @@
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBox8;
         private System.Windows.Forms.ListView listView1;
@@ -1385,5 +1515,21 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.GroupBox groupBox7;
     }
 }

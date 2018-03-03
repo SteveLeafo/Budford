@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Budford.Control
 {
@@ -23,7 +24,9 @@ namespace Budford.Control
 
         readonly string[] supportedResolutions = new[]{
             "360",
+            "480",
             "540",
+            "900",
             "1080",
             "1440",
             "1800",
@@ -294,13 +297,31 @@ namespace Budford.Control
         /// </summary>
         internal void WriteSettingsBinFile()
         {
-            InstalledVersion version = GetVersion();
+            InstalledVersion version = null;
+            try
+            {
+                version = GetVersion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to set settings.bin offsets for " + version.Folder + "\r\n" + ex.Message, "Error!");
+                return;
+            }
 
             if (version != null)
             {
                 if (version.Folder != null)
                 {
-                    SetOffsets(version.Version);
+                    try
+                    {
+                        SetOffsets(version.Version);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Unable to set settings.bin offsets for " + version.Folder + "\r\n" + ex.Message, "Error!");
+                        return;
+                    }
+
 
                     try
                     {
@@ -309,29 +330,78 @@ namespace Budford.Control
                             File.Delete(Path.Combine(version.Folder, "settings.bin"));
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        MessageBox.Show("Unable to delete settings.bin file.\r\n" + ex.Message, "Error!");
                     }
-
-                    // No settings file, so lets build our own..
-                    if (!File.Exists(Path.Combine(version.Folder, "settings.bin")))
+                    bool canCreate = false;
+                    try
                     {
-                        using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
+                        canCreate = !File.Exists(Path.Combine(version.Folder, "settings.bin"));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Unable to access settings.bin file.\r\n" + ex.Message, "Error!");
+                        return;
+                    }
+                    try
+                    {
+                        if (canCreate)
                         {
-                            foreach (int file in settingsFile)
+                            // No settings file, so lets build our own..
+                            using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
                             {
-                                fn.WriteByte((byte)file);
+                                if (fn != null)
+                                {
+                                    foreach (int file in settingsFile)
+                                    {
+                                        fn.WriteByte((byte)file);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Unable to Create settings.bin file for " + version.Folder, "Error!");
+                                }
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Unable to Create settings.bin file for " + version.Folder + ex.Message, "Error!");
+                        return;
+                    }
 
-                    FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
+                    try
+                    {
+                        FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to grant all users access to settings.bin for " + version.Folder + ex.Message, "Warning");
+                        return;
+                    }
 
 
                     if (information != null)
                     {
-                        WriteGraphicsPacks(version);
-                        WriteSettings(version.Folder);
+                        try
+                        {
+                            WriteGraphicsPacks(version);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to write graphics pack hash to settings.bin for " + version.Folder + ex.Message, "Error!");
+                            return;
+                        }
+                        try
+                        {
+                            WriteSettings(version.Folder);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Failed to  write settings to settings.bin for " + version.Folder + ex.Message, "Error!");
+                            return;
+                        }
                     }
                 }
             }
@@ -449,6 +519,8 @@ namespace Budford.Control
             int packs = 0;
             if (resolutionPack != null)
             {
+                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
+                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
                 resolutionPack.PackId = packs;
                 packs++;
             }
@@ -599,7 +671,7 @@ namespace Budford.Control
             {
                 if (IsResolutionPack(pack.Title))
                 {
-                    if (pack.Title.Contains(model.Settings.DefaultResolution))
+                    if (pack.Title.Contains(model.Settings.DefaultResolution.Replace("p","")))
                     {
                         resolutionPack = new GraphicsPack()
                         {

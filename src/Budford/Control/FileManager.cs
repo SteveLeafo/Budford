@@ -164,7 +164,7 @@ namespace Budford.Control
             }
             else
             {
-                MessageBox.Show(Resources.FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__ + model.Settings.DefaultInstallFolder);
+                //MessageBox.Show(Resources.FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__ + model.Settings.DefaultInstallFolder);
             }
         }
 
@@ -247,7 +247,9 @@ namespace Budford.Control
             {
                 dl.ShowDialog(parent);
             }
-            
+
+            FileManager.SearchForInstalledVersions(model);
+
             if (Directory.Exists("graphicsPacks"))
             {
                 FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicsPacks")), model.GraphicsPacks);

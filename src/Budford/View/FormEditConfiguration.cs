@@ -29,7 +29,6 @@ namespace Budford.View
                 listView1.Items.Add(folder);
             }
             checkBox1.Checked = settings.DisableShaderCache;
-            checkBox2.Checked = settings.ForceLowResolutionGraphicsPacks;
             checkBox4.Checked = settings.LegacyIntelGpuMode;
             checkBox5.Checked = settings.UseGlobalVolumeSettings;
             checkBox6.Checked = settings.ScanGameFoldersOnStart;
@@ -71,9 +70,16 @@ namespace Budford.View
             radioButton2.Checked = settings.DefaultResolution == "1800p";
             radioButton3.Checked = settings.DefaultResolution == "1440p";
             radioButton4.Checked = settings.DefaultResolution == "1080p";
+            radioButton12.Checked = settings.DefaultResolution == "900p";
 
             radioButton5.Checked = settings.DefaultResolution == "540p";
+            radioButton11.Checked = settings.DefaultResolution == "480p";
             radioButton6.Checked = settings.DefaultResolution == "360p";
+
+            radioButton8.Checked = settings.DefaultResolution == "5760p";
+            radioButton10.Checked = settings.DefaultResolution == "4320p";
+            radioButton9.Checked = settings.DefaultResolution == "2880p";
+
 
             radioButton7.Checked = settings.DefaultResolution == "default";
 
@@ -175,12 +181,20 @@ namespace Budford.View
 
             HandleRemovedFolder();
 
+            if (radioButton8.Checked) settings.DefaultResolution = "5760p";
+            if (radioButton10.Checked) settings.DefaultResolution = "4320p";
+            if (radioButton9.Checked) settings.DefaultResolution = "2880p";
+
             if (radioButton1.Checked) settings.DefaultResolution = "2160p";
             if (radioButton2.Checked) settings.DefaultResolution = "1800p";
             if (radioButton3.Checked) settings.DefaultResolution = "1440p";
             if (radioButton4.Checked) settings.DefaultResolution = "1080p";
+            if (radioButton12.Checked) settings.DefaultResolution = "900p";
+
             if (radioButton5.Checked) settings.DefaultResolution = "540p";
+            if (radioButton11.Checked) settings.DefaultResolution = "480p";
             if (radioButton6.Checked) settings.DefaultResolution = "360p";
+
             if (radioButton7.Checked) settings.DefaultResolution = "default";
 
             settings.UseGlobalVolumeSettings = checkBox5.Checked;
@@ -264,16 +278,6 @@ namespace Budford.View
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             settings.DisableShaderCache = checkBox1.Checked;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            settings.ForceLowResolutionGraphicsPacks = checkBox2.Checked;
         }
 
         /// <summary>
