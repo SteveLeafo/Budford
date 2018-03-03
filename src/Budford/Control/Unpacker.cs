@@ -103,7 +103,7 @@ namespace Budford.Control
         /// </summary>
         /// <param name="file"></param>
         /// <param name="completeFileName"></param>
-        private static void ExtractFile(ZipArchiveEntry file, string completeFileName)
+        internal static void ExtractFile(ZipArchiveEntry file, string completeFileName)
         {
             try
             {

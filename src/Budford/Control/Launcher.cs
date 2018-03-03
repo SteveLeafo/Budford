@@ -532,6 +532,15 @@ namespace Budford.Control
             }
         }
 
+        string GetNoLegacyOption()
+        {
+            if (Model.Settings.LegacyIntelGpuMode)
+            {
+                return "-nolegacy";
+            }
+            return "";
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -546,7 +555,7 @@ namespace Budford.Control
             {
                 if (game != null)
                 {
-                    start.Arguments = "-nolegacy  -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                    start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                 }
                 if (Model.Settings.HideWindowWhenCaching)
                 {
@@ -557,18 +566,18 @@ namespace Budford.Control
             {
                 if (game != null && game.GameSetting.FullScreen == 1 && !shiftUp)
                 {
-                    start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                    start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                 }
                 else if (game != null)
                 {
                     start.WindowStyle = (ProcessWindowStyle)game.GameSetting.FullScreen;
                     if (forceFullScreen)
                     {
-                        start.Arguments = "-nolegacy -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                        start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                     }
                     else
                     {
-                        start.Arguments = "-nolegacy -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                        start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                     }
                 }
             }

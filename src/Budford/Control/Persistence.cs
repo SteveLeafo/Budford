@@ -46,6 +46,31 @@ namespace Budford.Control
         }
 
         /// <summary>
+        /// Save to XML
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        internal static Model.PlugIns.PlugIn LoadPlugin(string fileName)
+        {
+            Model.PlugIns.PlugIn plugin;
+
+            if (File.Exists(fileName))
+            {
+                XmlSerializer xsSubmit = new XmlSerializer(typeof(Model.PlugIns.PlugIn));
+
+                using (var sww = new StreamReader(fileName))
+                {
+                    XmlReader writer = XmlReader.Create(sww);
+                    plugin = (Model.PlugIns.PlugIn)xsSubmit.Deserialize(writer);
+                }
+
+                return plugin;
+            }
+            plugin = new Model.PlugIns.PlugIn();
+            return plugin;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="model"></param>

@@ -47,6 +47,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.refreshGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importShaderCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,6 +139,7 @@
             this.mergeShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToLaunchboxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plugInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -161,7 +163,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.refreshGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importBudfordPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -287,6 +289,7 @@
             this.viewToolStripMenuItem,
             this.userToolStripMenuItem,
             this.toolsToolStripMenuItem,
+            this.plugInsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -298,9 +301,10 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem,
-            this.toolStripSeparator10,
             this.refreshGameToolStripMenuItem,
+            this.toolStripSeparator10,
             this.importShaderCacheToolStripMenuItem,
+            this.importBudfordPluginToolStripMenuItem,
             this.toolStripSeparator9,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -310,31 +314,38 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.loadToolStripMenuItem.Text = "Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(191, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(204, 6);
+            // 
+            // refreshGameToolStripMenuItem
+            // 
+            this.refreshGameToolStripMenuItem.Name = "refreshGameToolStripMenuItem";
+            this.refreshGameToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.refreshGameToolStripMenuItem.Text = "Refresh Game List";
+            this.refreshGameToolStripMenuItem.Click += new System.EventHandler(this.refreshGameToolStripMenuItem_Click);
             // 
             // importShaderCacheToolStripMenuItem
             // 
             this.importShaderCacheToolStripMenuItem.Name = "importShaderCacheToolStripMenuItem";
-            this.importShaderCacheToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.importShaderCacheToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.importShaderCacheToolStripMenuItem.Text = "Import Shader Cache...";
             this.importShaderCacheToolStripMenuItem.Click += new System.EventHandler(this.importShaderCacheToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(191, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(204, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1004,6 +1015,13 @@
             this.exportToLaunchboxToolStripMenuItem.Text = "Export to Launchbox";
             this.exportToLaunchboxToolStripMenuItem.Click += new System.EventHandler(this.exportToLaunchboxToolStripMenuItem_Click);
             // 
+            // plugInsToolStripMenuItem
+            // 
+            this.plugInsToolStripMenuItem.Name = "plugInsToolStripMenuItem";
+            this.plugInsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.plugInsToolStripMenuItem.Text = "PlugIns";
+            this.plugInsToolStripMenuItem.Visible = false;
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1233,12 +1251,12 @@
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
             // 
-            // refreshGameToolStripMenuItem
+            // importBudfordPluginToolStripMenuItem
             // 
-            this.refreshGameToolStripMenuItem.Name = "refreshGameToolStripMenuItem";
-            this.refreshGameToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.refreshGameToolStripMenuItem.Text = "Refresh Game List";
-            this.refreshGameToolStripMenuItem.Click += new System.EventHandler(this.refreshGameToolStripMenuItem_Click);
+            this.importBudfordPluginToolStripMenuItem.Name = "importBudfordPluginToolStripMenuItem";
+            this.importBudfordPluginToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.importBudfordPluginToolStripMenuItem.Text = "Import Budford Plug-in...";
+            this.importBudfordPluginToolStripMenuItem.Click += new System.EventHandler(this.importBudfordPluginToolStripMenuItem_Click);
             // 
             // FormMainWindow
             // 
@@ -1404,6 +1422,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportToLaunchboxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openCompatibilityWikiEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plugInsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importBudfordPluginToolStripMenuItem;
     }
 }
 

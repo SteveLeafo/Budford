@@ -87,6 +87,8 @@
     <Compile Include="Control\WriteCemuHookIniFile.cs" />
     <Compile Include="Model\CemuHookSettings.cs" />
     <Compile Include="Model\LaunchPad.cs" />
+    <Compile Include="Model\PlugIns\File.cs" />
+    <Compile Include="Model\PlugIns\PlugIn.cs" />
     <Compile Include="Model\SaveDir.cs" />
     <Compile Include="Model\GameSettings.cs" />
     <Compile Include="Model\GraphicsPack.cs" />
@@ -121,6 +123,12 @@
     <Compile Include="Utilities\Xml.cs" />
     <Compile Include="View\CustomToolStripButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\FormExecutePlugIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormExecutePlugIn.Designer.cs">
+      <DependentUpon>FormExecutePlugIn.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormSelectGameForShaderImport.cs">
       <SubType>Form</SubType>
@@ -222,12 +230,21 @@
     <Compile Include="Control\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ListViewHelper.cs" />
+    <Compile Include="View\ManagedDumpedFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManagedDumpedFiles.Designer.cs">
+      <DependentUpon>ManagedDumpedFiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControlTiledView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\UserControlTiledView.Designer.cs">
       <DependentUpon>UserControlTiledView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\FormExecutePlugIn.resx">
+      <DependentUpon>FormExecutePlugIn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormSelectGameForShaderImport.resx">
       <DependentUpon>FormSelectGameForShaderImport.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,6 +297,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ManagedDumpedFiles.resx">
+      <DependentUpon>ManagedDumpedFiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserControlTiledView.resx">
       <DependentUpon>UserControlTiledView.cs</DependentUpon>

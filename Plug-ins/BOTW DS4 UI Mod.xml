@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PlugIn xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Breath of the Wild: DS4 UI Mod</Name>
+  <Type>ZipImport</Type>
+  <FileName>BOTW DS4 UI Mod.zip</FileName>
+  <Files>
+	<File>
+		<Name>Bootup.pack</Name>
+		<Operation>Copy</Operation>
+		<BackUp>true</BackUp>
+		<SourceFolder>EU</SourceFolder>
+		<CreateDestinationFolder>false</CreateDestinationFolder>
+		<DestinationFolder>mlc01\usr\title\00050000\101C9500\content\Pack</DestinationFolder>
+	</File>
+	<File>
+		<Name>Font_EU.sbfarc</Name>
+		<Operation>Copy</Operation>
+		<BackUp>true</BackUp>
+		<SourceFolder>EU</SourceFolder>
+		<CreateDestinationFolder>false</CreateDestinationFolder>
+		<DestinationFolder>mlc01\usr\title\00050000\101C9500\content\Font</DestinationFolder>
+	</File>
+	<File>
+		<Name>Bootup.pack</Name>
+		<Operation>Copy</Operation>
+		<BackUp>true</BackUp>
+		<SourceFolder>US</SourceFolder>
+		<CreateDestinationFolder>false</CreateDestinationFolder>
+		<DestinationFolder>mlc01\usr\title\00050000\101C9400\content\Pack</DestinationFolder>
+	</File>
+	<File>
+		<Name>Font_US.sbfarc</Name>
+		<Operation>Copy</Operation>
+		<BackUp>true</BackUp>
+		<SourceFolder>US</SourceFolder>
+		<CreateDestinationFolder>false</CreateDestinationFolder>
+		<DestinationFolder>mlc01\usr\title\00050000\101C9400\content\Font</DestinationFolder>
+	</File>
+		<File>
+		<Name>Bootup.pack</Name>
+		<Operation>Copy</Operation>
+		<BackUp>true</BackUp>
+		<SourceFolder>JP</SourceFolder>
+		<CreateDestinationFolder>false</CreateDestinationFolder>
+		<DestinationFolder>mlc01\usr\title\00050000\101C9300\content\Pack</DestinationFolder>
+	</File>
+	<File>
+		<Name>Font_JP.sbfarc</Name>
+		<Operation>Copy</Operation>
+		<BackUp>true</BackUp>
+		<SourceFolder>JP</SourceFolder>
+		<CreateDestinationFolder>false</CreateDestinationFolder>
+		<DestinationFolder>mlc01\usr\title\00050000\101C9300\content\Font</DestinationFolder>
+	</File>
+  </Files>
+</PlugIn>

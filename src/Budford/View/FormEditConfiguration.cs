@@ -29,6 +29,7 @@ namespace Budford.View
                 listView1.Items.Add(folder);
             }
             checkBox1.Checked = settings.DisableShaderCache;
+            checkBox2.Checked = settings.HideWindowWhenCaching;
             checkBox4.Checked = settings.LegacyIntelGpuMode;
             checkBox5.Checked = settings.UseGlobalVolumeSettings;
             checkBox6.Checked = settings.ScanGameFoldersOnStart;
@@ -197,6 +198,9 @@ namespace Budford.View
 
             if (radioButton7.Checked) settings.DefaultResolution = "default";
 
+            settings.DisableShaderCache = checkBox1.Checked;
+            settings.HideWindowWhenCaching = checkBox2.Checked;
+            settings.LegacyIntelGpuMode = checkBox4.Checked;
             settings.UseGlobalVolumeSettings = checkBox5.Checked;
             settings.ScanGameFoldersOnStart = checkBox6.Checked;
             settings.IncludeWiiULauncherRpx = checkBox7.Checked;
@@ -208,6 +212,8 @@ namespace Budford.View
             model.Settings.DownloadsFolder = textBox3.Text;
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
+
+            
 
             settings.SingleCorePriority = comboBox3.SelectedIndex;
             settings.DualCorePriority = comboBox4.SelectedIndex;
@@ -273,26 +279,6 @@ namespace Budford.View
                     model.GameData.Remove(key);
                 }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            settings.DisableShaderCache = checkBox1.Checked;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            settings.LegacyIntelGpuMode = checkBox4.Checked;
         }
 
         private void button4_Click(object sender, EventArgs e)

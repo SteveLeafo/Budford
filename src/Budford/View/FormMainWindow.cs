@@ -205,6 +205,8 @@ namespace Budford.View
             {
                 ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
             }
+
+            LoadPlugIns();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -255,6 +257,42 @@ namespace Budford.View
           
             return m;
 
+        }
+
+        List<Budford.Model.PlugIns.PlugIn> PlugIns = new List<Model.PlugIns.PlugIn>();
+
+        internal void LoadPlugIns()
+        {
+            if (Directory.Exists(SpecialFolders.PlugInFolder(Model)))
+            {
+                List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+
+                foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
+                {
+                    if (Path.GetExtension(file).ToLower().Contains("xml"))
+                    {
+                        plugInsToolStripMenuItem.Visible = true;
+
+                        Budford.Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
+                        PlugIns.Add(p);
+
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem
+                        {
+                            Text = p.Name,
+                            Tag = p
+                        };
+                        menuItem.Click += PlugIn_Click;
+                        items.Insert(0, menuItem);
+                    }
+                }
+
+                // Painful, but we want these added to the top of the list...
+                plugInsToolStripMenuItem.DropDownItems.Clear();
+                foreach (var item in items)
+                {
+                    plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
+                }
+            }
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -627,6 +665,30 @@ namespace Budford.View
                 }
                 UpdateMenuStrip(user);
                 UpdateContextMenuStrip(user);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PlugIn_Click(object sender, EventArgs e)
+        {
+            var toolStripMenuItem = sender as ToolStripMenuItem;
+            if (toolStripMenuItem != null)
+            {
+                Budford.Model.PlugIns.PlugIn plugIn = toolStripMenuItem.Tag as Budford.Model.PlugIns.PlugIn;
+                if (plugIn != null)
+                {
+                    using (FormExecutePlugIn executor = new FormExecutePlugIn(Model, plugIn))
+                    {
+                        if (executor.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                        {
+                            MessageBox.Show(plugIn.Name + " executed successfully", "Success");
+                        }
+                    }
+                }
             }
         }
 
@@ -2083,7 +2145,7 @@ namespace Budford.View
                 if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
                     GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    toolStripStatusLabel1.Text = game.Comments;
+                    toolStripStatusLabel1.Text = game.Comments.Replace("\r\n", " ");
                 }
             }
         }
@@ -2364,6 +2426,22 @@ namespace Budford.View
         private void refreshGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshGameList();
+        }
+
+        private void importBudfordPluginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Configure open file dialog box 
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "Budford Plug-in Files | *.xml;";
+
+                // Show open file dialog box 
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(Model), Path.GetFileName(dlg.FileName)), true);
+                    LoadPlugIns();
+                }
+            }
         }
     }
 }
