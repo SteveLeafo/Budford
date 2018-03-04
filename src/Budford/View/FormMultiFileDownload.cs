@@ -178,6 +178,23 @@ namespace Budford.View
         void DoTheCemu2()
         {
             unpacker.Unpack(fileNames[3], model.Settings.DefaultInstallFolder);
+            FileManager.SearchForInstalledVersions(model);
+            CemuFeatures.UpdateFeaturesForInstalledVersions(model);
+            int latestVersion = 0;
+            InstalledVersion latest = null;
+            foreach (var v in model.Settings.InstalledVersions)
+            {
+                if (v.VersionNumber > latestVersion)
+                {
+                    latestVersion = v.VersionNumber;
+                    latest = v;
+                    latest.IsLatest = false;
+                }
+            }
+            if (latest != null)
+            {
+                latest.IsLatest = true;
+            }
         }
 
         void DoTheCemuHook2()
@@ -186,7 +203,7 @@ namespace Budford.View
             if (ver != null)
             {
                 unpacker.Unpack(fileNames[4], ver.Folder);
-                File.Copy(fileNames[4], "cemu_hook.zip");
+                File.Copy(fileNames[4], "cemu_hook.zip", true);
                 CemuFeatures.RepairInstalledVersions(this, model);
             }
         }

@@ -496,6 +496,24 @@ namespace Budford.Control
         /// </summary>
         void WriteGraphicsPacks(InstalledVersion version)
         {
+            if (!Directory.Exists(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)))
+            {
+                string pack = "";
+                foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                {
+                    string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
+                    if (folder.StartsWith("graphicPacks_2-"))
+                    {
+                        pack = folder.Replace("graphicPacks_2-", "");
+                    }
+                }
+                if (pack != "")
+                {
+                    model.Settings.GraphicsPackRevision = pack;
+                    FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)), model.GraphicsPacks);
+                }
+            }
+
             EnableDefaultGraphicsPack();
             for (int i = 0; i < 100; ++i)
             {
@@ -633,7 +651,10 @@ namespace Budford.Control
                     string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, fpsPatchSpeed, "patches.txt");
                     if (!File.Exists(fpsPatch + ".bak"))
                     {
-                        File.Copy(fpsPatch, fpsPatch + ".bak");
+                        if (File.Exists(fpsPatch))
+                        {
+                            File.Copy(fpsPatch, fpsPatch + ".bak");
+                        }
                     }
                     if (File.Exists(fpsPatch + ".bak"))
                     {
@@ -650,7 +671,10 @@ namespace Budford.Control
                 string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
                 if (!File.Exists(fpsRules + ".bak"))
                 {
-                    File.Copy(fpsRules, fpsRules + ".bak");
+                    if (File.Exists(fpsRules))
+                    {
+                        File.Copy(fpsRules, fpsRules + ".bak");
+                    }
                 }
                 if (File.Exists(fpsRules + ".bak"))
                 {
