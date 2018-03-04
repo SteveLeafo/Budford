@@ -1,5 +1,8 @@
 # Budford Change Log
 
+## V1.0.54
+- Fixed an issue that was causing the settings file to not be updated correctly
+
 ## V1.0.53
 - Added an option to use borderless full screen when launching Cemu in full screen mode.
 - Added a plug-in mechanism that is handy for mods and added a couple of mod Plug-ins.
