@@ -7,14 +7,38 @@ using Microsoft.Win32;
 
 namespace Budford.Control
 {
-    static class Program
+    static internal class Program
     {
+        internal static bool IsInstalled = true;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            string programFiles = Environment.ExpandEnvironmentVariables("%ProgramW6432%");
+
+            var arguments = Environment.GetCommandLineArgs();
+
+            if (!arguments[0].Contains(programFiles))
+            {
+                if (arguments[0].Contains("Budford.exe"))
+                {
+                    //MessageBox.Show("Not Installed");
+                    IsInstalled = false;
+                }
+            }
+
+            //if (IsInstalled)
+            //{
+            //    MessageBox.Show("Installed");
+            //}
+
+            //MessageBox.Show(arguments[0]);
+
+            //return;
+
             var model = FormMainWindow.TransferLegacyModel();
 
             if (!Get45or451FromRegistry())
@@ -22,12 +46,14 @@ namespace Budford.Control
                 MessageBox.Show("Needs .NET 4.5 or higher to run", "Please update your .NET run environment");
             }
 
-            SetDefaultFolder(model);
+            if (IsInstalled)
+            {
+                SetDefaultFolder(model);
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var arguments = Environment.GetCommandLineArgs();
 
             bool cmdLineLaunch = false;
             bool cmdLineFullScreen = false;
@@ -143,7 +169,7 @@ namespace Budford.Control
                 Directory.CreateDirectory(model.Settings.DownloadsFolder);
             }
             Directory.SetCurrentDirectory(model.Settings.DownloadsFolder);
-            Persistence.Save(model, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
+            Persistence.Save(model, FormMainWindow.GetModelFileName());
         }
 
         /// <summary>

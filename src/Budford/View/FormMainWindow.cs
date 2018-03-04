@@ -232,23 +232,29 @@ namespace Budford.View
             base.OnLoad(e);
         }
 
+        internal static string GetModelFileName()
+        {
+            return Program.IsInstalled ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml") : "Model.xml";
+        }
+
         internal static Model.Model TransferLegacyModel()
         {
+
             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
             {
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
             }
 
-            if (!File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml")))
+            if (!File.Exists(GetModelFileName()))
             {
                 if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
                 {
-                    File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"),
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"), false);
+                    File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName(), false);
+                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
                 }
             }
 
-            Model.Model m = Persistence.Load(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
+            Model.Model m = Persistence.Load(GetModelFileName());
 
             if (m.Settings.SavesFolder == "")
             {
@@ -1503,7 +1509,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Persistence.Save(Model, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml"));
+            Persistence.Save(Model, GetModelFileName());
         }
 
         /// <summary>
@@ -1598,7 +1604,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void dumpSaveDirCodesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Persistence.Save(Model);
+            Persistence.Save(Model, GetModelFileName());
             MessageBox.Show(Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_SaveDirs_saved_successfully, Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
