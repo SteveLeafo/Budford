@@ -103,6 +103,7 @@ namespace Budford.Control
         /// <param name="forceFullScreen"></param>
         internal void LaunchCemu(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
         {
+            makeBorderLess = false;
             SetCemuVersion(modelIn, game);
 
             if (runningVersion == null)
@@ -542,6 +543,8 @@ namespace Budford.Control
             return "";
         }
 
+        bool makeBorderLess = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -571,11 +574,18 @@ namespace Budford.Control
                     {
                         start.Arguments = GetNoLegacyOption() + "-g \"" + game.LaunchFile + "\"" + GetMlcOption();
                         start.WindowStyle =  ProcessWindowStyle.Maximized;
+                        makeBorderLess = true;
                     }
                     else
                     {
                         start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
                     }
+                }
+                else if (game != null && game.GameSetting.FullScreen == 4 && !shiftUp)
+                {
+                    start.Arguments = GetNoLegacyOption() + "-g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                    start.WindowStyle = ProcessWindowStyle.Maximized;
+                    makeBorderLess = true;
                 }
                 else if (game != null)
                 {
@@ -798,6 +808,7 @@ namespace Budford.Control
         /// <param name="forceFullScreen"></param>
         internal void LaunchRpx(Model.Model model, string fileName, bool forceFullScreen = false)
         {
+            makeBorderLess = false;
             string cemuExe = "";
             var latest = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
             if (latest != null)
@@ -850,7 +861,7 @@ namespace Budford.Control
 
                 WaitForWindowTitleToAppear();
 
-                if (Model.Settings.BorderlessFullScreen)
+                if (makeBorderLess)
                 {
                     MakeBorderlessFullScreen();
                 }

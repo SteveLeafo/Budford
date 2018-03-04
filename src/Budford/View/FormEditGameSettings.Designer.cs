@@ -557,7 +557,8 @@
             "Normal",
             "Full Screen",
             "Minimized",
-            "Maximized"});
+            "Maximized",
+            "Borderless Full Screen "});
             this.comboBox3.Location = new System.Drawing.Point(152, 8);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(260, 21);
