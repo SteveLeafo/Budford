@@ -1,5 +1,10 @@
 # Budford Change Log
 
+## V1.0.53
+- Added an option to use borderless full screen when launching Cemu in full screen mode.
+- Added a plug-in mechanism that is handy for mods and added a couple of mod Plug-ins.
+- Changes to the way the settings are saved to make Budford more portable.
+
 ## V1.0.52
 - When importing a shader cache from a different region, you will now be prompted to chose your game.
 - Added two new windows style options Maximized and Minimized.
