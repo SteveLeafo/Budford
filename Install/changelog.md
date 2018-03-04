@@ -1,7 +1,11 @@
 # Budford Change Log
 
+## V1.0.55
+- Added a per game option to use borderless full screen.
+- Added the ability to configure the Cemu Hook server IP / port for motion controls.
+
 ## V1.0.54
-- Fixed an issue that was causing the settings file to not be updated correctly
+- Fixed an issue that was causing the settings file to not be updated correctly.
 
 ## V1.0.53
 - Added an option to use borderless full screen when launching Cemu in full screen mode.
@@ -11,24 +15,24 @@
 ## V1.0.52
 - When importing a shader cache from a different region, you will now be prompted to chose your game.
 - Added two new windows style options Maximized and Minimized.
-- Added an option to set an mlc folder.  This will then be passed to Cemu via the -mlc parameter.  Note: only works on Cemu 1.10.0 and later
-- Added an option to configure the Download folder (Default is ProgramData)
-- Added an option to configure the Save folder (Default is My Documents)
+- Added an option to set an mlc folder.  This will then be passed to Cemu via the -mlc parameter.  Note: only works on Cemu 1.10.0 and later.
+- Added an option to configure the Download folder (Default is ProgramData).
+- Added an option to configure the Save folder (Default is My Documents).
 - Issue#4: Fixed the issue that was stopping the default resolution pack from working.
-- Issue#4: Fixed the issue where CPU priority sections weren't working
+- Issue#4: Fixed the issue where CPU priority sections weren't working.
 
 ## V1.0.51
-- Removed the ability to choose which monitor Cemu will launch on for systems with multiple displays
+- Removed the ability to choose which monitor Cemu will launch on for systems with multiple displays.
 
 ## V1.0.50
-- Added the ability to choose which monitor Cemu will launch on for systems with multiple displays
+- Added the ability to choose which monitor Cemu will launch on for systems with multiple displays.
 
 ## V1.0.49
-- Added a notification if the official status of a game changes.  You can then see the old and new status of changed games
-- Added the ability to configure a hot key to Close Cemu
-- Added support for online file to the Cemu version manager
-- Improved the Cemu update form - you can now chose to automatically check for new Cemu and Cemu Hook release on start
-- Added a new welcome screen and simplified the initial setup for first time users
+- Added a notification if the official status of a game changes.  You can then see the old and new status of changed games.
+- Added the ability to configure a hot key to Close Cemu.
+- Added support for online file to the Cemu version manager.
+- Improved the Cemu update form - you can now chose to automatically check for new Cemu and Cemu Hook release on start.
+- Added a new welcome screen and simplified the initial setup for first time users.
 
 ## V1.0.46
 - New per game options: Controller Profile Overrides.  Can change the controller type or disable a controller per game.  Default is to do nothing.
