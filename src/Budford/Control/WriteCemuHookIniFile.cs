@@ -29,7 +29,7 @@ namespace Budford.Control
                     {
                         sw.WriteLine("serverIP = " + model.Settings.CemuHookServerIp);
                     }
-                    if (model.Settings.CemuHookServerIp != "")
+                    if (model.Settings.CemuHookServerPort != "")
                     {
                         sw.WriteLine("serverPort  = " + model.Settings.CemuHookServerPort);
                     }
