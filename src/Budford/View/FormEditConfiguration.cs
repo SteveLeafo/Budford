@@ -36,6 +36,7 @@ namespace Budford.View
             checkBox7.Checked = settings.IncludeWiiULauncherRpx;
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
+            checkBox10.Checked = settings.BorderlessFullScreen;
 
             textBox4.Text = settings.MlcFolder;
             textBox2.Text = settings.SavesFolder;
@@ -206,6 +207,7 @@ namespace Budford.View
             settings.IncludeWiiULauncherRpx = checkBox7.Checked;
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
             settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
+            settings.BorderlessFullScreen = checkBox10.Checked;
 
             model.Settings.MlcFolder = textBox4.Text;
             model.Settings.SavesFolder = textBox2.Text;

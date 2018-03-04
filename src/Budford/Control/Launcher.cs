@@ -8,6 +8,7 @@ using Budford.Properties;
 using System.Threading;
 using System.Runtime.InteropServices;
 using Budford.View;
+using System.Drawing;
 
 namespace Budford.Control
 {
@@ -115,7 +116,7 @@ namespace Budford.Control
 
             Model = modelIn;
 
-            if (game != null &&  !game.Exists)
+            if (game != null && !game.Exists)
             {
                 if (parentIn != null)
                 {
@@ -129,7 +130,7 @@ namespace Budford.Control
                     }
                 }
                 return;
-            }            
+            }
 
             if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
@@ -162,7 +163,7 @@ namespace Budford.Control
                 // Required since 1.11.2
                 if (runningVersion != null)
                 {
-                    start.WorkingDirectory = runningVersion.Folder;                    
+                    start.WorkingDirectory = runningVersion.Folder;
                 }
 
                 // Run the external process & wait for it to finish
@@ -244,7 +245,7 @@ namespace Budford.Control
                 if (game.GameSetting.UseCafeLibs == 1)
                 {
                     File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
-                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));                    
+                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));
                 }
             }
         }
@@ -299,7 +300,7 @@ namespace Budford.Control
             if (!game.SaveDir.StartsWith("??"))
             {
                 DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, game, ""));
-                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion,game));
+                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, game));
                 UpdateFolder(src, dest, true);
 
                 src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, game, ""));
@@ -328,7 +329,7 @@ namespace Budford.Control
             if (Directory.Exists(src.FullName))
             {
                 if (src.GetFiles().Any() || src.GetDirectories().Any())
-                {               
+                {
                     FileManager.CopyFilesRecursively(src, dest, false, true);
                 }
             }
@@ -397,7 +398,7 @@ namespace Budford.Control
             }
         }
 
-        
+
 
         /// <summary>
         /// 
@@ -405,8 +406,8 @@ namespace Budford.Control
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
-        {          
-            if (runningVersion!= null)
+        {
+            if (runningVersion != null)
             {
                 if (runningGame != null)
                 {
@@ -509,7 +510,7 @@ namespace Budford.Control
             if (Model.Settings.WineExe.Length > 1)
             {
                 start.FileName = Model.Settings.WineExe;
-                start.Arguments = Path.Combine(Directory.GetCurrentDirectory(), runningVersion.Folder ,cemuIn) + " " + start.Arguments;
+                start.Arguments = Path.Combine(Directory.GetCurrentDirectory(), runningVersion.Folder, cemuIn) + " " + start.Arguments;
             }
             else
             {
@@ -566,14 +567,31 @@ namespace Budford.Control
             {
                 if (game != null && game.GameSetting.FullScreen == 1 && !shiftUp)
                 {
-                    start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                    if (Model.Settings.BorderlessFullScreen)
+                    {
+                        start.Arguments = GetNoLegacyOption() + "-g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                        start.WindowStyle =  ProcessWindowStyle.Maximized;
+                    }
+                    else
+                    {
+                        start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                    }
                 }
                 else if (game != null)
                 {
                     start.WindowStyle = (ProcessWindowStyle)game.GameSetting.FullScreen;
                     if (forceFullScreen)
                     {
-                        start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                        if (Model.Settings.BorderlessFullScreen)
+                        {
+                            start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                            start.WindowStyle = ProcessWindowStyle.Maximized;
+                        }
+                        else
+                        {
+                            start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                        }
+
                     }
                     else
                     {
@@ -767,7 +785,7 @@ namespace Budford.Control
         {
             if (version != null)
             {
-                cemuIn = Path.Combine(version.Folder , CemuFeatures.Cemu);
+                cemuIn = Path.Combine(version.Folder, CemuFeatures.Cemu);
                 logfileIn = Path.Combine(version.Folder, "log.txt");
             }
         }
@@ -807,7 +825,7 @@ namespace Budford.Control
 
                 // Run the external process & wait for it to finish
                 startTime = DateTime.Now;
-                runningProcess = Process.Start(start);               
+                runningProcess = Process.Start(start);
             }
             else
             {
@@ -832,6 +850,10 @@ namespace Budford.Control
 
                 WaitForWindowTitleToAppear();
 
+                if (Model.Settings.BorderlessFullScreen)
+                {
+                    MakeBorderlessFullScreen();
+                }
                 SetCemuCpuPrioty(game);
 
                 SetGamePadViewIfDesired(game);
@@ -1011,6 +1033,34 @@ namespace Budford.Control
                 SendKeys.SendWait("+{PRTSC}");
                 Thread.Sleep(100);
                 SetForegroundWindow(parent.Handle);
+            }
+        }
+
+        internal void MakeBorderlessFullScreen()
+        {
+            var styleNewWindowStandard = NativeMethods.GetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyleFlags.Caption | NativeMethods.WindowStyleFlags.ThickFrame | NativeMethods.WindowStyleFlags.SystemMenu | NativeMethods.WindowStyleFlags.MaximizeBox | NativeMethods.WindowStyleFlags.MinimizeBox);
+
+            HideMenu();
+
+            NativeMethods.SetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style, styleNewWindowStandard);
+
+            Rectangle rect = Screen.FromHandle(runningProcess.MainWindowHandle).Bounds;
+            NativeMethods.SetWindowPos(runningProcess.MainWindowHandle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosFlags.ShowWindow | NativeMethods.SetWindowPosFlags.NoOwnerZOrder | NativeMethods.SetWindowPosFlags.NoSendChanging);
+        }
+
+        private void HideMenu()
+        {
+            var menuHandle = NativeMethods.GetMenu(runningProcess.MainWindowHandle);
+            if (menuHandle != IntPtr.Zero)
+            {
+                var menuItemCount = NativeMethods.GetMenuItemCount(menuHandle);
+
+                for (var i = 0; i < menuItemCount; i++)
+                {
+                    NativeMethods.RemoveMenu(menuHandle, 0, NativeMethods.MenuFlags.ByPosition | NativeMethods.MenuFlags.Remove);
+                }
+
+                NativeMethods.DrawMenuBar(runningProcess.MainWindowHandle);
             }
         }
     }

@@ -46,9 +46,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.importShaderCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importBudfordPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -163,7 +164,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.importBudfordPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -318,11 +318,6 @@
             this.loadToolStripMenuItem.Text = "Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(204, 6);
-            // 
             // refreshGameToolStripMenuItem
             // 
             this.refreshGameToolStripMenuItem.Name = "refreshGameToolStripMenuItem";
@@ -330,12 +325,24 @@
             this.refreshGameToolStripMenuItem.Text = "Refresh Game List";
             this.refreshGameToolStripMenuItem.Click += new System.EventHandler(this.refreshGameToolStripMenuItem_Click);
             // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(204, 6);
+            // 
             // importShaderCacheToolStripMenuItem
             // 
             this.importShaderCacheToolStripMenuItem.Name = "importShaderCacheToolStripMenuItem";
             this.importShaderCacheToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.importShaderCacheToolStripMenuItem.Text = "Import Shader Cache...";
             this.importShaderCacheToolStripMenuItem.Click += new System.EventHandler(this.importShaderCacheToolStripMenuItem_Click);
+            // 
+            // importBudfordPluginToolStripMenuItem
+            // 
+            this.importBudfordPluginToolStripMenuItem.Name = "importBudfordPluginToolStripMenuItem";
+            this.importBudfordPluginToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.importBudfordPluginToolStripMenuItem.Text = "Import Budford Plug-in...";
+            this.importBudfordPluginToolStripMenuItem.Click += new System.EventHandler(this.importBudfordPluginToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1250,13 +1257,6 @@
             this.imageList2.Images.SetKeyName(3, "loads.png");
             this.imageList2.Images.SetKeyName(4, "unplayable.png");
             this.imageList2.Images.SetKeyName(5, "notset.png");
-            // 
-            // importBudfordPluginToolStripMenuItem
-            // 
-            this.importBudfordPluginToolStripMenuItem.Name = "importBudfordPluginToolStripMenuItem";
-            this.importBudfordPluginToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.importBudfordPluginToolStripMenuItem.Text = "Import Budford Plug-in...";
-            this.importBudfordPluginToolStripMenuItem.Click += new System.EventHandler(this.importBudfordPluginToolStripMenuItem_Click);
             // 
             // FormMainWindow
             // 

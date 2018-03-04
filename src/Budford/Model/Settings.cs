@@ -24,6 +24,8 @@ namespace Budford.Model
 
         public string GraphicsPackRevision = "347";
 
+        public bool BorderlessFullScreen = false;
+
         public int CurrentSortColumn = 1;
 
         public int CurrentSortDirection = 0;
@@ -73,7 +75,8 @@ namespace Budford.Model
         internal bool AutoSizeColumns = true;
 
         public bool HideWindowWhenCaching = true;
-        public int Monitor = 2;
+
+        public int Monitor = 1;
 
         public enum ConsoleRegionType : byte
         {

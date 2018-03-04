@@ -10,7 +10,7 @@ using Budford.Model;
 using Budford.Properties;
 using Budford.Tools;
 using Budford.Utilities;
-using System.Runtime.InteropServices; 
+using System.Runtime.InteropServices;
 
 namespace Budford.View
 {
