@@ -25,6 +25,14 @@ namespace Budford.Control
                     sw.WriteLine("disableAVX =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
                     sw.WriteLine("[Input]");
                     sw.WriteLine("motionSource = " + GetMotionSource(gameInfo.CemuHookSetting.MotionSource));
+                    if (model.Settings.CemuHookServerIp != "")
+                    {
+                        sw.WriteLine("serverIP = " + model.Settings.CemuHookServerIp);
+                    }
+                    if (model.Settings.CemuHookServerIp != "")
+                    {
+                        sw.WriteLine("serverPort  = " + model.Settings.CemuHookServerPort);
+                    }
                     sw.WriteLine("[Debug]");
                     sw.WriteLine("mmTimerAccuracy = " + GetMmTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
                     sw.WriteLine("[Graphics]");

@@ -68,6 +68,9 @@ namespace Budford.View
             trackBar1.Maximum = 100;
             trackBar1.Value = settings.GlobalVolume;
 
+            textBox5.Text = settings.CemuHookServerIp;
+            textBox6.Text = settings.CemuHookServerPort;
+
             radioButton1.Checked = settings.DefaultResolution == "2160p";
             radioButton2.Checked = settings.DefaultResolution == "1800p";
             radioButton3.Checked = settings.DefaultResolution == "1440p";
@@ -215,7 +218,8 @@ namespace Budford.View
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
 
-            
+            settings.CemuHookServerIp = textBox5.Text;
+            settings.CemuHookServerPort = textBox6.Text;
 
             settings.SingleCorePriority = comboBox3.SelectedIndex;
             settings.DualCorePriority = comboBox4.SelectedIndex;

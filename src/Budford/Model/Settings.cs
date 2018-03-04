@@ -20,6 +20,10 @@ namespace Budford.Model
 
         public string DownloadsFolder = "";
 
+        public string CemuHookServerIp = "";
+
+        public string CemuHookServerPort = "";
+
         public string CurrentView  = "Detailed";
 
         public string GraphicsPackRevision = "347";
