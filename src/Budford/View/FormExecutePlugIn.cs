@@ -44,7 +44,7 @@ namespace Budford.View
                 }
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 DialogResult = System.Windows.Forms.DialogResult.Abort;
             }
