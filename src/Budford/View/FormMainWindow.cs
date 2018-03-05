@@ -294,7 +294,8 @@ namespace Budford.View
 
                 // Painful, but we want these added to the top of the list...
                 plugInsToolStripMenuItem.DropDownItems.Clear();
-                foreach (var item in items)
+                var v = (from i in items orderby ((Budford.Model.PlugIns.PlugIn)i.Tag).Type select i ).ToList();
+                foreach (var item in v)
                 {
                     plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
                 }
@@ -687,11 +688,20 @@ namespace Budford.View
                 Budford.Model.PlugIns.PlugIn plugIn = toolStripMenuItem.Tag as Budford.Model.PlugIns.PlugIn;
                 if (plugIn != null)
                 {
-                    using (FormExecutePlugIn executor = new FormExecutePlugIn(Model, plugIn))
+                    if (plugIn.Type == "ExternalTool")
                     {
-                        if (executor.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                        ProcessStartInfo start = new ProcessStartInfo();
+                        start.FileName = plugIn.FileName;
+                        var runningProcess = Process.Start(start);
+                    }
+                    else
+                    {
+                        using (FormExecutePlugIn executor = new FormExecutePlugIn(Model, plugIn))
                         {
-                            MessageBox.Show(plugIn.Name + " executed successfully", "Success");
+                            if (executor.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                            {
+                                MessageBox.Show(plugIn.Name + " executed successfully", "Success");
+                            }
                         }
                     }
                 }

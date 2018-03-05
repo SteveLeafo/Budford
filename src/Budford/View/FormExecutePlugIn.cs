@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO.Compression;
 using Budford.Control;
 using Budford.Model;
+using System.Diagnostics;
 
 namespace Budford.View
 {
@@ -40,14 +41,36 @@ namespace Budford.View
                 {
                     case "ZipImport":
                         ZipImport();
+                        DialogResult = System.Windows.Forms.DialogResult.OK;
+                        Close();
+                        break;
+                    case "ExternalTool":
+                        ExternalTool();
                         break;
                 }
-                DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             catch (Exception)
             {
                 DialogResult = System.Windows.Forms.DialogResult.Abort;
+                Close();
             }
+        }
+
+        private void ExternalTool()
+        {
+            if (File.Exists(plugIn.FileName))
+            {
+                this.Hide();
+                ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = plugIn.FileName;
+                var runningProcess = Process.Start(start);
+                runningProcess.Exited += runningProcess_Exited;
+            }
+        }
+
+        void runningProcess_Exited(object sender, EventArgs e)
+        {
+            DialogResult = System.Windows.Forms.DialogResult.Yes;
             Close();
         }
 
