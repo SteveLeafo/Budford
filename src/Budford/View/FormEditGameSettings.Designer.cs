@@ -181,6 +181,16 @@
             this.comboBox39 = new System.Windows.Forms.ComboBox();
             this.comboBox40 = new System.Windows.Forms.ComboBox();
             this.comboBox41 = new System.Windows.Forms.ComboBox();
+            this.comboBox42 = new System.Windows.Forms.ComboBox();
+            this.comboBox43 = new System.Windows.Forms.ComboBox();
+            this.comboBox44 = new System.Windows.Forms.ComboBox();
+            this.comboBox45 = new System.Windows.Forms.ComboBox();
+            this.comboBox46 = new System.Windows.Forms.ComboBox();
+            this.comboBox47 = new System.Windows.Forms.ComboBox();
+            this.comboBox48 = new System.Windows.Forms.ComboBox();
+            this.comboBox49 = new System.Windows.Forms.ComboBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1973,29 +1983,42 @@
             // 
             // tableLayoutPanel11
             // 
-            this.tableLayoutPanel11.ColumnCount = 2;
+            this.tableLayoutPanel11.ColumnCount = 3;
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Controls.Add(this.label53, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.label56, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.label57, 0, 2);
-            this.tableLayoutPanel11.Controls.Add(this.label58, 0, 3);
-            this.tableLayoutPanel11.Controls.Add(this.label59, 0, 4);
-            this.tableLayoutPanel11.Controls.Add(this.label60, 0, 5);
-            this.tableLayoutPanel11.Controls.Add(this.label61, 0, 6);
-            this.tableLayoutPanel11.Controls.Add(this.label62, 0, 7);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox34, 1, 0);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox35, 1, 1);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox36, 1, 2);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox37, 1, 3);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox38, 1, 4);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox39, 1, 5);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox40, 1, 6);
-            this.tableLayoutPanel11.Controls.Add(this.comboBox41, 1, 7);
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.Controls.Add(this.label53, 0, 2);
+            this.tableLayoutPanel11.Controls.Add(this.label56, 0, 3);
+            this.tableLayoutPanel11.Controls.Add(this.label57, 0, 4);
+            this.tableLayoutPanel11.Controls.Add(this.label58, 0, 5);
+            this.tableLayoutPanel11.Controls.Add(this.label59, 0, 6);
+            this.tableLayoutPanel11.Controls.Add(this.label60, 0, 7);
+            this.tableLayoutPanel11.Controls.Add(this.label61, 0, 8);
+            this.tableLayoutPanel11.Controls.Add(this.label62, 0, 9);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox34, 1, 2);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox35, 1, 3);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox36, 1, 4);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox37, 1, 5);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox38, 1, 6);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox39, 1, 7);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox40, 1, 8);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox41, 1, 9);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox42, 2, 2);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox43, 2, 3);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox44, 2, 4);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox45, 2, 5);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox46, 2, 6);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox47, 2, 7);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox48, 2, 8);
+            this.tableLayoutPanel11.Controls.Add(this.comboBox49, 2, 9);
+            this.tableLayoutPanel11.Controls.Add(this.label63, 1, 1);
+            this.tableLayoutPanel11.Controls.Add(this.label64, 2, 1);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 9;
+            this.tableLayoutPanel11.RowCount = 11;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -2012,7 +2035,7 @@
             // 
             this.label53.AutoSize = true;
             this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label53.Location = new System.Drawing.Point(3, 0);
+            this.label53.Location = new System.Drawing.Point(3, 23);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(60, 27);
             this.label53.TabIndex = 0;
@@ -2023,7 +2046,7 @@
             // 
             this.label56.AutoSize = true;
             this.label56.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label56.Location = new System.Drawing.Point(3, 27);
+            this.label56.Location = new System.Drawing.Point(3, 50);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(60, 27);
             this.label56.TabIndex = 0;
@@ -2034,7 +2057,7 @@
             // 
             this.label57.AutoSize = true;
             this.label57.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label57.Location = new System.Drawing.Point(3, 54);
+            this.label57.Location = new System.Drawing.Point(3, 77);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(60, 27);
             this.label57.TabIndex = 0;
@@ -2045,7 +2068,7 @@
             // 
             this.label58.AutoSize = true;
             this.label58.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label58.Location = new System.Drawing.Point(3, 81);
+            this.label58.Location = new System.Drawing.Point(3, 104);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(60, 27);
             this.label58.TabIndex = 0;
@@ -2056,7 +2079,7 @@
             // 
             this.label59.AutoSize = true;
             this.label59.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label59.Location = new System.Drawing.Point(3, 108);
+            this.label59.Location = new System.Drawing.Point(3, 131);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(60, 27);
             this.label59.TabIndex = 0;
@@ -2067,7 +2090,7 @@
             // 
             this.label60.AutoSize = true;
             this.label60.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label60.Location = new System.Drawing.Point(3, 135);
+            this.label60.Location = new System.Drawing.Point(3, 158);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(60, 27);
             this.label60.TabIndex = 0;
@@ -2078,7 +2101,7 @@
             // 
             this.label61.AutoSize = true;
             this.label61.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label61.Location = new System.Drawing.Point(3, 162);
+            this.label61.Location = new System.Drawing.Point(3, 185);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(60, 27);
             this.label61.TabIndex = 0;
@@ -2089,7 +2112,7 @@
             // 
             this.label62.AutoSize = true;
             this.label62.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label62.Location = new System.Drawing.Point(3, 189);
+            this.label62.Location = new System.Drawing.Point(3, 212);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(60, 27);
             this.label62.TabIndex = 0;
@@ -2107,9 +2130,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox34.Location = new System.Drawing.Point(69, 3);
+            this.comboBox34.Location = new System.Drawing.Point(69, 26);
             this.comboBox34.Name = "comboBox34";
-            this.comboBox34.Size = new System.Drawing.Size(349, 21);
+            this.comboBox34.Size = new System.Drawing.Size(171, 21);
             this.comboBox34.TabIndex = 1;
             // 
             // comboBox35
@@ -2123,9 +2146,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox35.Location = new System.Drawing.Point(69, 30);
+            this.comboBox35.Location = new System.Drawing.Point(69, 53);
             this.comboBox35.Name = "comboBox35";
-            this.comboBox35.Size = new System.Drawing.Size(349, 21);
+            this.comboBox35.Size = new System.Drawing.Size(171, 21);
             this.comboBox35.TabIndex = 1;
             // 
             // comboBox36
@@ -2139,9 +2162,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox36.Location = new System.Drawing.Point(69, 57);
+            this.comboBox36.Location = new System.Drawing.Point(69, 80);
             this.comboBox36.Name = "comboBox36";
-            this.comboBox36.Size = new System.Drawing.Size(349, 21);
+            this.comboBox36.Size = new System.Drawing.Size(171, 21);
             this.comboBox36.TabIndex = 1;
             // 
             // comboBox37
@@ -2155,9 +2178,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox37.Location = new System.Drawing.Point(69, 84);
+            this.comboBox37.Location = new System.Drawing.Point(69, 107);
             this.comboBox37.Name = "comboBox37";
-            this.comboBox37.Size = new System.Drawing.Size(349, 21);
+            this.comboBox37.Size = new System.Drawing.Size(171, 21);
             this.comboBox37.TabIndex = 1;
             // 
             // comboBox38
@@ -2171,9 +2194,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox38.Location = new System.Drawing.Point(69, 111);
+            this.comboBox38.Location = new System.Drawing.Point(69, 134);
             this.comboBox38.Name = "comboBox38";
-            this.comboBox38.Size = new System.Drawing.Size(349, 21);
+            this.comboBox38.Size = new System.Drawing.Size(171, 21);
             this.comboBox38.TabIndex = 1;
             // 
             // comboBox39
@@ -2187,9 +2210,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox39.Location = new System.Drawing.Point(69, 138);
+            this.comboBox39.Location = new System.Drawing.Point(69, 161);
             this.comboBox39.Name = "comboBox39";
-            this.comboBox39.Size = new System.Drawing.Size(349, 21);
+            this.comboBox39.Size = new System.Drawing.Size(171, 21);
             this.comboBox39.TabIndex = 1;
             // 
             // comboBox40
@@ -2203,9 +2226,9 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox40.Location = new System.Drawing.Point(69, 165);
+            this.comboBox40.Location = new System.Drawing.Point(69, 188);
             this.comboBox40.Name = "comboBox40";
-            this.comboBox40.Size = new System.Drawing.Size(349, 21);
+            this.comboBox40.Size = new System.Drawing.Size(171, 21);
             this.comboBox40.TabIndex = 1;
             // 
             // comboBox41
@@ -2219,10 +2242,144 @@
             "Wii U Classic Controller",
             "Wiimote",
             "Disable"});
-            this.comboBox41.Location = new System.Drawing.Point(69, 192);
+            this.comboBox41.Location = new System.Drawing.Point(69, 215);
             this.comboBox41.Name = "comboBox41";
-            this.comboBox41.Size = new System.Drawing.Size(349, 21);
+            this.comboBox41.Size = new System.Drawing.Size(171, 21);
             this.comboBox41.TabIndex = 1;
+            // 
+            // comboBox42
+            // 
+            this.comboBox42.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox42.FormattingEnabled = true;
+            this.comboBox42.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox42.Location = new System.Drawing.Point(246, 26);
+            this.comboBox42.Name = "comboBox42";
+            this.comboBox42.Size = new System.Drawing.Size(172, 21);
+            this.comboBox42.TabIndex = 1;
+            // 
+            // comboBox43
+            // 
+            this.comboBox43.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox43.FormattingEnabled = true;
+            this.comboBox43.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox43.Location = new System.Drawing.Point(246, 53);
+            this.comboBox43.Name = "comboBox43";
+            this.comboBox43.Size = new System.Drawing.Size(172, 21);
+            this.comboBox43.TabIndex = 1;
+            // 
+            // comboBox44
+            // 
+            this.comboBox44.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox44.FormattingEnabled = true;
+            this.comboBox44.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox44.Location = new System.Drawing.Point(246, 80);
+            this.comboBox44.Name = "comboBox44";
+            this.comboBox44.Size = new System.Drawing.Size(172, 21);
+            this.comboBox44.TabIndex = 1;
+            // 
+            // comboBox45
+            // 
+            this.comboBox45.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox45.FormattingEnabled = true;
+            this.comboBox45.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox45.Location = new System.Drawing.Point(246, 107);
+            this.comboBox45.Name = "comboBox45";
+            this.comboBox45.Size = new System.Drawing.Size(172, 21);
+            this.comboBox45.TabIndex = 1;
+            // 
+            // comboBox46
+            // 
+            this.comboBox46.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox46.FormattingEnabled = true;
+            this.comboBox46.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox46.Location = new System.Drawing.Point(246, 134);
+            this.comboBox46.Name = "comboBox46";
+            this.comboBox46.Size = new System.Drawing.Size(172, 21);
+            this.comboBox46.TabIndex = 1;
+            // 
+            // comboBox47
+            // 
+            this.comboBox47.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox47.FormattingEnabled = true;
+            this.comboBox47.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox47.Location = new System.Drawing.Point(246, 161);
+            this.comboBox47.Name = "comboBox47";
+            this.comboBox47.Size = new System.Drawing.Size(172, 21);
+            this.comboBox47.TabIndex = 1;
+            // 
+            // comboBox48
+            // 
+            this.comboBox48.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox48.FormattingEnabled = true;
+            this.comboBox48.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox48.Location = new System.Drawing.Point(246, 188);
+            this.comboBox48.Name = "comboBox48";
+            this.comboBox48.Size = new System.Drawing.Size(172, 21);
+            this.comboBox48.TabIndex = 1;
+            // 
+            // comboBox49
+            // 
+            this.comboBox49.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox49.FormattingEnabled = true;
+            this.comboBox49.Items.AddRange(new object[] {
+            "No",
+            "Swap A & B",
+            "Swap X & Y",
+            "Swap Both"});
+            this.comboBox49.Location = new System.Drawing.Point(246, 215);
+            this.comboBox49.Name = "comboBox49";
+            this.comboBox49.Size = new System.Drawing.Size(172, 21);
+            this.comboBox49.TabIndex = 1;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label63.Location = new System.Drawing.Point(69, 10);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(171, 13);
+            this.label63.TabIndex = 0;
+            this.label63.Text = "Controller Type";
+            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label64.Location = new System.Drawing.Point(246, 10);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(172, 13);
+            this.label64.TabIndex = 0;
+            this.label64.Text = "Swap Buttons";
+            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormEditGameSettings
             // 
@@ -2433,5 +2590,15 @@
         private System.Windows.Forms.ComboBox comboBox40;
         private System.Windows.Forms.ComboBox comboBox41;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.ComboBox comboBox42;
+        private System.Windows.Forms.ComboBox comboBox43;
+        private System.Windows.Forms.ComboBox comboBox44;
+        private System.Windows.Forms.ComboBox comboBox45;
+        private System.Windows.Forms.ComboBox comboBox46;
+        private System.Windows.Forms.ComboBox comboBox47;
+        private System.Windows.Forms.ComboBox comboBox48;
+        private System.Windows.Forms.ComboBox comboBox49;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label64;
     }
 }

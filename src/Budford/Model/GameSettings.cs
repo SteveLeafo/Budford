@@ -38,7 +38,17 @@ namespace Budford.Model
         public int ControllerOverride5 = 0; 
         public int ControllerOverride6 = 0; 
         public int ControllerOverride7 = 0; 
-        public int ControllerOverride8 = 0; 
+        public int ControllerOverride8 = 0;
+
+        // 0 = Don't Swap, 1 = Swap A+B, 2 = Swap X+Y, 3 = Swap Both
+        public int SwapButtons1 = 0;
+        public int SwapButtons2 = 0;
+        public int SwapButtons3 = 0;
+        public int SwapButtons4 = 0;
+        public int SwapButtons5 = 0;
+        public int SwapButtons6 = 0;
+        public int SwapButtons7 = 0;
+        public int SwapButtons8 = 0; 
 
         public int Fps = 30;
         public bool OverrideFps = false;

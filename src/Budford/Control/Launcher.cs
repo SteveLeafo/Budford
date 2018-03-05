@@ -657,50 +657,89 @@ namespace Budford.Control
                         SafeCopy(version, controller[0], controller[1]);
                     }
 
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride1, "controller0.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride2, "controller1.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride3, "controller2.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride4, "controller3.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride5, "controller4.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride6, "controller5.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride7, "controller6.txt");
-                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride8, "controller7.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride1, game.GameSetting.SwapButtons1, "controller0.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride2, game.GameSetting.SwapButtons2, "controller1.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride3, game.GameSetting.SwapButtons3, "controller2.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride4, game.GameSetting.SwapButtons4, "controller3.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride5, game.GameSetting.SwapButtons5, "controller4.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride6, game.GameSetting.SwapButtons6, "controller5.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride7, game.GameSetting.SwapButtons7, "controller6.txt");
+                    UpdateControllerProfiles(version, game.GameSetting.ControllerOverride8, game.GameSetting.SwapButtons8, "controller7.txt");
                 }
             }
         }
 
-        private static void UpdateControllerProfiles(InstalledVersion version, int ControllerOverride, string profileName)
+        private static void UpdateControllerProfiles(InstalledVersion version, int ControllerOverride, int SwapButtons, string profileName)
         {
             string fileName = Path.Combine(version.Folder, "controllerProfiles", profileName);
             if (File.Exists(fileName))
             {
                 string text = File.ReadAllText(fileName);
+                text = SwapControllerButtons(SwapButtons, text);
 
                 switch (ControllerOverride)
                 {
                     case 1:
                         text = text.Replace("Wii U Pro Controller", "Wii U GamePad");
                         text = text.Replace("Wii U Classic Controller", "Wii U GamePad");
-                        File.WriteAllText(fileName, text);
                         break;
                     case 2:
                         text = text.Replace("Wii U GamePad", "Wii U Pro Controller");
                         text = text.Replace("Wii U Classic Controller", "Wii U Pro Controller");
-                        File.WriteAllText(fileName, text);
                         break;
                     case 3:
                         text = text.Replace("Wii U GamePad", "Wii U Classic Controller");
                         text = text.Replace("Wii U Pro Controller", "Wii U Classic Controller");
-                        File.WriteAllText(fileName, text);
                         break;
                     case 5:
                         if (File.Exists(fileName))
                         {
                             File.Delete(fileName);
                         }
-                        break;
+                        return;
+                }
+                File.WriteAllText(fileName, text);
+            }
+        }
+
+        private static string SwapControllerButtons(int SwapButtons, string text)
+        {
+            string[] buttons = new string[4];
+            foreach (var line in text.Split('\n'))
+            {
+                if (line.StartsWith("1 = "))
+                {
+                    buttons[0] = line;
+                }
+                if (line.StartsWith("2 = "))
+                {
+                    buttons[1] = line;
+                }
+                if (line.StartsWith("3 = "))
+                {
+                    buttons[2] = line;
+                }
+                if (line.StartsWith("4 = "))
+                {
+                    buttons[3] = line;
                 }
             }
+
+            if (SwapButtons == 1 || SwapButtons == 3)
+            {
+                text = text.Replace(buttons[0], "ctrl1");
+                text = text.Replace(buttons[1], "ctrl2");
+                text = text.Replace("ctrl1", buttons[1].Replace("2 = ", "1 = "));
+                text = text.Replace("ctrl2", buttons[0].Replace("1 = ", "2 = "));
+            }
+            if (SwapButtons == 2 || SwapButtons == 3)
+            {
+                text = text.Replace(buttons[2], "ctrl3");
+                text = text.Replace(buttons[3], "ctrl4");
+                text = text.Replace("ctrl3", buttons[3].Replace("4 = ", "3 = "));
+                text = text.Replace("ctrl4", buttons[2].Replace("3 = ", "4 = "));
+            }
+            return text;
         }
 
         private static void SafeCopy(InstalledVersion version, string source, string destination)

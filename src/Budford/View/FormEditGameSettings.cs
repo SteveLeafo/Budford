@@ -156,6 +156,15 @@ namespace Budford.View
             comboBox40.SelectedIndex = information.GameSetting.ControllerOverride7;
             comboBox41.SelectedIndex = information.GameSetting.ControllerOverride8;
 
+            comboBox42.SelectedIndex = information.GameSetting.SwapButtons1;
+            comboBox43.SelectedIndex = information.GameSetting.SwapButtons2;
+            comboBox44.SelectedIndex = information.GameSetting.SwapButtons3;
+            comboBox45.SelectedIndex = information.GameSetting.SwapButtons4;
+            comboBox46.SelectedIndex = information.GameSetting.SwapButtons5;
+            comboBox47.SelectedIndex = information.GameSetting.SwapButtons6;
+            comboBox48.SelectedIndex = information.GameSetting.SwapButtons7;
+            comboBox49.SelectedIndex = information.GameSetting.SwapButtons8;
+
             numericUpDown1.Value = information.GameSetting.Fps;
             checkBox1.Checked = information.GameSetting.OverrideFps;
         }
@@ -223,6 +232,15 @@ namespace Budford.View
             information.GameSetting.ControllerOverride6 = comboBox39.SelectedIndex;
             information.GameSetting.ControllerOverride7 = comboBox40.SelectedIndex;
             information.GameSetting.ControllerOverride8 = comboBox41.SelectedIndex;
+
+            information.GameSetting.SwapButtons1 = comboBox42.SelectedIndex;
+            information.GameSetting.SwapButtons2 = comboBox43.SelectedIndex;
+            information.GameSetting.SwapButtons3 = comboBox44.SelectedIndex;
+            information.GameSetting.SwapButtons4 = comboBox45.SelectedIndex;
+            information.GameSetting.SwapButtons5 = comboBox46.SelectedIndex;
+            information.GameSetting.SwapButtons6 = comboBox47.SelectedIndex;
+            information.GameSetting.SwapButtons7 = comboBox48.SelectedIndex;
+            information.GameSetting.SwapButtons8 = comboBox49.SelectedIndex;
 
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;
