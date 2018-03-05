@@ -100,6 +100,7 @@
     <Compile Include="Model\SnapShot.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewFilters.cs" />
+    <Compile Include="Model\WiiU.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

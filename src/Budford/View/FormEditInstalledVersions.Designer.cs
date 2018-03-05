@@ -66,6 +66,7 @@
             this.downloadGraphicsPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.importGraphicsPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cemuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -329,7 +330,8 @@
             this.downloadOldCemuHookToolStripMenuItem,
             this.downloadGraphicsPacksToolStripMenuItem,
             this.toolStripSeparator2,
-            this.importGraphicsPackToolStripMenuItem});
+            this.importGraphicsPackToolStripMenuItem,
+            this.importCemuHookToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(51, 20);
             this.toolStripMenuItem1.Text = "Cemu";
@@ -392,6 +394,13 @@
             this.importGraphicsPackToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.importGraphicsPackToolStripMenuItem.Text = "Import Graphics Pack";
             this.importGraphicsPackToolStripMenuItem.Click += new System.EventHandler(this.importGraphicsPackToolStripMenuItem_Click);
+            // 
+            // importCemuHookToolStripMenuItem
+            // 
+            this.importCemuHookToolStripMenuItem.Name = "importCemuHookToolStripMenuItem";
+            this.importCemuHookToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.importCemuHookToolStripMenuItem.Text = "Import Cemu Hook";
+            this.importCemuHookToolStripMenuItem.Click += new System.EventHandler(this.importCemuHookToolStripMenuItem_Click);
             // 
             // cemuToolStripMenuItem
             // 
@@ -513,5 +522,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem removeAllLinksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importCemuHookToolStripMenuItem;
     }
 }

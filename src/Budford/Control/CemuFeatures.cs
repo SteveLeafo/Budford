@@ -134,6 +134,9 @@ namespace Budford.Control
             InstalledVersion onlineSource = GetLatestOnlineVersion(model);
             InstalledVersion patchSource = GetLatestPatchVersion(model);
 
+            PopulateBudfordDataBase(model);
+            PopulateBudfordVersions(model);
+
             foreach (var v in model.Settings.InstalledVersions)
             {
                 if (!v.HasPatch)
@@ -192,6 +195,115 @@ namespace Budford.Control
             }
 
             UpdateFeaturesForInstalledVersions(model);
+        }
+
+        private static void PopulateBudfordDataBase(Model.Model model)
+        {
+            foreach (var data in WiiU.Dumps)
+            {
+                if (!data[0].Contains("*"))
+                {
+                    string destinationFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
+                    string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
+                    if (!Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    if (!File.Exists(destinationFile))
+                    {
+                        foreach (var v in model.Settings.InstalledVersions)
+                        {
+                            string sourceFile = Path.Combine(v.Folder, data[2], data[0]);
+                            if (File.Exists(sourceFile))
+                            {
+                                File.Copy(sourceFile, destinationFile);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
+                    if (!Directory.Exists(destinationFolder))
+                    {
+                        Directory.CreateDirectory(destinationFolder);
+                    }
+                    foreach (var v in model.Settings.InstalledVersions)
+                    {
+                        string sourceFolder = Path.Combine(v.Folder, data[2]);
+                        if (Directory.Exists(sourceFolder))
+                        {
+                            foreach (var file in Directory.EnumerateFiles(sourceFolder))
+                            {
+                                string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                                if (!File.Exists(destinationFile))
+                                {
+                                    File.Copy(file, destinationFile);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void PopulateBudfordVersions(Model.Model model)
+        {
+            foreach (var data in WiiU.Dumps)
+            {
+                int minVersion = Convert.ToInt32(data[4]);
+                if (!data[0].Contains("*"))
+                {
+                    string sourceFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
+                    if (File.Exists(sourceFile))
+                    {
+                        foreach (var v in model.Settings.InstalledVersions)
+                        {
+                            if (v.VersionNumber >= minVersion)
+                            {
+                                string destinationFile = Path.Combine(v.Folder, data[2], data[0]);
+                                string destinationFolder = Path.Combine(v.Folder, data[2]);
+                                if (!Directory.Exists(destinationFolder))
+                                {
+                                    Directory.CreateDirectory(destinationFolder);
+                                }
+                                if (!File.Exists(destinationFile))
+                                {
+                                    File.Copy(sourceFile, destinationFile);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    string sourceFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
+                    if (Directory.Exists(sourceFolder))
+                    {
+                        foreach (var v in model.Settings.InstalledVersions)
+                        {
+                            if (v.VersionNumber >= minVersion)
+                            {
+                                string destinationFolder = Path.Combine(v.Folder, data[2]);
+                                if (!Directory.Exists(destinationFolder))
+                                {
+                                    Directory.CreateDirectory(destinationFolder);
+                                }
+
+                                foreach (var file in Directory.EnumerateFiles(sourceFolder))
+                                {
+                                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                                    if (!File.Exists(destinationFile))
+                                    {
+                                        File.Copy(file, destinationFile);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private static void CopyPatchFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)

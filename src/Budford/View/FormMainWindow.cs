@@ -2210,7 +2210,14 @@ namespace Budford.View
                                 {
                                     if (game.Value.GameSetting.PreferedVersion == "Latest")
                                     {
-                                        UpdateShaderCache(game);
+                                        try
+                                        {
+                                            UpdateShaderCache(game);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show(ex.Message);
+                                        }
                                     }
                                 }
                             }

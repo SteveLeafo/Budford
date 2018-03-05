@@ -134,6 +134,17 @@ namespace Budford.Control
         /// <param name="game"></param>
         /// <param name="snapShotDir"></param>
         /// <returns></returns>
+        internal static string BudfordDir(Model.Model model)
+        {
+            return Path.Combine(model.Settings.SavesFolder, "Budford");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="snapShotDir"></param>
+        /// <returns></returns>
         internal static string PlugInFolder(Model.Model model)
         {
             return Path.Combine(model.Settings.SavesFolder, "Budford", "PlugIns");
