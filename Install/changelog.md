@@ -1,5 +1,10 @@
 # Budford Change Log
 
+## V1.0.57
+- Added a per game option to swap a couple of buttons around (Don't Swap, Swap A&B, Swap X+Y, Swap Both) 
+- Added support for a new plug-in type - ExternalTool which basically just launches another program. (Examples in the plug-ins folder, use the import plug-in menu option)
+- Added an option to import Cemu Hook from the Manage Installed Versions tool.
+
 ## V1.0.55
 - Added a per game option to use borderless full screen.
 - Added the ability to configure the Cemu Hook server IP / port for motion controls.

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PlugIn xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Pad Test</Name>
+  <Type>ExternalTool</Type>
+  <FileName>C:\Users\steve\Downloads\PadTest_1011\PadTest.exe</FileName>
+</PlugIn>
