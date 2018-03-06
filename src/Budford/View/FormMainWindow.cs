@@ -670,6 +670,7 @@ namespace Budford.View
                 {
                     if (user.Name != Model.CurrentUser)
                     {
+                        DeleteAllLockFiles();
                         if (File.Exists(Path.Combine("Users", user.Image)))
                         {
                             using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
@@ -684,6 +685,31 @@ namespace Budford.View
                 }
                 UpdateMenuStrip(user);
                 UpdateContextMenuStrip(user);
+            }
+        }
+
+        private void DeleteAllLockFiles()
+        {
+            CopySaves cs = new CopySaves(Model);
+            cs.Execute();
+            foreach (var game in Model.GameData.OrderByDescending(gd => gd.Value.Name))
+            {
+                foreach (var version in Model.Settings.InstalledVersions)
+                {
+                    DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game.Value));
+
+                    string lockFileName = Path.Combine(dest.FullName, "Budford.lck");
+                    if (File.Exists(lockFileName))
+                    {
+                        try
+                        {
+                            File.Delete(lockFileName);
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
             }
         }
 

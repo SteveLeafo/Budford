@@ -301,12 +301,35 @@ namespace Budford.Control
             if (!game.SaveDir.StartsWith("??"))
             {
                 DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, game, ""));
-                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, game));
+                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(runningVersion, game));
+
+                string lockFileName = Path.Combine(dest.FullName, "Budford.lck");
+                if (File.Exists(lockFileName))
+                {
+                    // This save has been locked, which means budford launched the game, but wasn't running with it exitted.
+                    // In this case we won't overwrite the save as it is sure to be newer
+                    return;
+                }
+
                 UpdateFolder(src, dest, true);
 
                 src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, game, ""));
                 dest = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
                 UpdateFolder(src, dest);
+
+                CreateLockFile(lockFileName);
+            }
+        }
+
+        private static void CreateLockFile(string lockFileName)
+        {
+            try
+            {
+                File.Create(lockFileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed to create lock file");
             }
         }
 
@@ -442,12 +465,18 @@ namespace Budford.Control
         private void CopySaves()
         {
             // Copy saves
-            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, runningGame));
+            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(runningVersion, runningGame));
             DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, runningGame, ""));
             DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
             DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, runningGame, ""));
             if (Directory.Exists(src.FullName))
             {
+                if (File.Exists(Path.Combine(src.FullName, "Budford.lck")))
+                {
+                    // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
+                    File.Delete(Path.Combine(src.FullName, "Budford.lck"));
+                }
+
                 if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
                 {
                     if (!Directory.Exists(dest.FullName))
@@ -1042,7 +1071,7 @@ namespace Budford.Control
                 DirectoryInfo saveDir = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, "", game, ""));
                 string snapShotDir = "S_" + saveDir.EnumerateDirectories().Count();
 
-                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrenUserSaveDirCemu(runningVersion, game));
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(runningVersion, game));
                 DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, model.CurrentUser, game, snapShotDir));
                 UpdateFolder(src, dest);
 

@@ -63,7 +63,7 @@ namespace Budford.Control
         /// <param name="version"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static string CurrenUserSaveDirCemu(InstalledVersion version, GameInformation game)
+        internal static string CurrentUserSaveDirCemu(InstalledVersion version, GameInformation game)
         {
             string gameId = game.TitleId.Replace("00050000", "");
             if (version.VersionNumber >= 1110)
