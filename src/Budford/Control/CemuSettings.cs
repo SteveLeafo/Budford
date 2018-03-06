@@ -302,7 +302,7 @@ namespace Budford.Control
             {
                 version = GetVersion();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to get version", "Error!");
                 return;
