@@ -271,7 +271,9 @@ namespace Budford.View
         {
             if (Directory.Exists(SpecialFolders.PlugInFolder(Model)))
             {
-                List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+                List<ToolStripItem> items = new List<ToolStripItem>();
+
+                string currentType = "";
 
                 foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
                 {
@@ -282,13 +284,14 @@ namespace Budford.View
                         Budford.Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
                         PlugIns.Add(p);
 
+                     
                         ToolStripMenuItem menuItem = new ToolStripMenuItem
                         {
                             Text = p.Name,
                             Tag = p
                         };
                         menuItem.Click += PlugIn_Click;
-                        items.Insert(0, menuItem);
+                        items.Add(menuItem);
                     }
                 }
 
@@ -297,6 +300,15 @@ namespace Budford.View
                 var v = (from i in items orderby ((Budford.Model.PlugIns.PlugIn)i.Tag).Type select i ).ToList();
                 foreach (var item in v)
                 {
+                    Budford.Model.PlugIns.PlugIn p = (Budford.Model.PlugIns.PlugIn)item.Tag;
+                    if (p.Type != currentType)
+                    {
+                        if (currentType != "")
+                        {
+                            plugInsToolStripMenuItem.DropDownItems.Insert(0, new ToolStripSeparator());
+                        }
+                        currentType = p.Type;
+                    }
                     plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
                 }
             }
@@ -692,7 +704,7 @@ namespace Budford.View
                     {
                         ProcessStartInfo start = new ProcessStartInfo();
                         start.FileName = plugIn.FileName;
-                        var runningProcess = Process.Start(start);
+                        Process.Start(start);
                     }
                     else
                     {

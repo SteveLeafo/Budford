@@ -130,71 +130,97 @@ namespace Budford.Control
         {
             Unpacker unpacker = new Unpacker(form);
 
-            InstalledVersion dlcSource = GetLatestDlcVersion(model);
-            InstalledVersion onlineSource = GetLatestOnlineVersion(model);
-            InstalledVersion patchSource = GetLatestPatchVersion(model);
-
             PopulateBudfordDataBase(model);
             PopulateBudfordVersions(model);
 
             foreach (var v in model.Settings.InstalledVersions)
             {
-                if (!v.HasPatch)
-                {
-                    if (File.Exists("sys.zip"))
-                    {
-                        Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
-                    }
-                    else
-                    {
-                        if (onlineSource != null)
-                        {
-                            CopyPatchFiles(onlineSource, v);
-                        }
-                    }
-                }
+                RepairPatch(model, v);
 
-                if (!v.HasFonts)
-                {
-                    unpacker.Unpack("sharedFonts.zip", v.Folder);
-                }
+                RepairFonts(unpacker, v);
 
                 InstallCemuHook(unpacker, v);
 
-                if (!v.HasControllerProfiles)
-                {
-                    CopyLatestControllerProfiles(model, v);
-                }
+                RepairControllers(model, v);
 
+                RepairOnlineFiles(model, v);
 
-                if (!v.HasOnlineFiles)
+                RepairUpdateFolder(model, v);
+            }
+
+            UpdateFeaturesForInstalledVersions(model);
+        }
+
+        private static void RepairUpdateFolder(Model.Model model, InstalledVersion v)
+        {
+            InstalledVersion dlcSource = GetLatestDlcVersion(model);
+
+            if (v.VersionNumber < 1110 || model.Settings.MlcFolder == "")
+            {
+                if (!v.HasDlc)
                 {
-                    if (onlineSource != null)
+                    if (dlcSource != null)
                     {
-                        CopyOnlineFiles(onlineSource, v);
-                    }
-                }
-
-                if (v.VersionNumber < 1110 || model.Settings.MlcFolder == "")
-                {
-                    if (!v.HasDlc)
-                    {
-                        if (dlcSource != null)
+                        try
                         {
-                            try
-                            {
-                                JunctionPoint.Create(Path.Combine(dlcSource.Folder, "mlc01", "usr", "title"), Path.Combine(v.Folder, "mlc01", "usr", "title"), true);
-                            }
-                            catch (Exception)
-                            {
-                                // No code
-                            }
+                            JunctionPoint.Create(Path.Combine(dlcSource.Folder, "mlc01", "usr", "title"), Path.Combine(v.Folder, "mlc01", "usr", "title"), true);
+                        }
+                        catch (Exception)
+                        {
+                            // No code
                         }
                     }
                 }
             }
+        }
 
-            UpdateFeaturesForInstalledVersions(model);
+        private static void RepairOnlineFiles(Model.Model model, InstalledVersion v)
+        {
+            InstalledVersion onlineSource = GetLatestOnlineVersion(model);
+
+            if (!v.HasOnlineFiles)
+            {
+                if (onlineSource != null)
+                {
+                    CopyOnlineFiles(onlineSource, v);
+                }
+            }
+        }
+
+        private static void RepairControllers(Model.Model model, InstalledVersion v)
+        {
+            if (!v.HasControllerProfiles)
+            {
+                CopyLatestControllerProfiles(model, v);
+            }
+        }
+
+        private static void RepairFonts(Unpacker unpacker, InstalledVersion v)
+        {
+            if (!v.HasFonts)
+            {
+                unpacker.Unpack("sharedFonts.zip", v.Folder);
+            }
+        }
+
+        private static void RepairPatch(Model.Model model, InstalledVersion v)
+        {
+            InstalledVersion patchSource = GetLatestPatchVersion(model);
+
+            if (!v.HasPatch)
+            {
+                if (File.Exists("sys.zip"))
+                {
+                    Unpacker.ExtractToDirectory("sys.zip", Path.Combine(v.Folder, "mlc01"), true);
+                }
+                else
+                {
+                    if (patchSource != null)
+                    {
+                        CopyPatchFiles(patchSource, v);
+                    }
+                }
+            }
         }
 
         private static void PopulateBudfordDataBase(Model.Model model)
@@ -203,45 +229,55 @@ namespace Budford.Control
             {
                 if (!data[0].Contains("*"))
                 {
-                    string destinationFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
-                    string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
-                    if (!Directory.Exists(destinationFolder))
-                    {
-                        Directory.CreateDirectory(destinationFolder);
-                    }
-                    if (!File.Exists(destinationFile))
-                    {
-                        foreach (var v in model.Settings.InstalledVersions)
-                        {
-                            string sourceFile = Path.Combine(v.Folder, data[2], data[0]);
-                            if (File.Exists(sourceFile))
-                            {
-                                File.Copy(sourceFile, destinationFile);
-                                break;
-                            }
-                        }
-                    }
+                    CopySingleFileToCemu(model, data);
                 }
                 else
                 {
-                    string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
-                    if (!Directory.Exists(destinationFolder))
+                    CopyFolderToCemu(model, data);
+                }
+            }
+        }
+
+        private static void CopySingleFileToCemu(Model.Model model, string[] data)
+        {
+            string destinationFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
+            string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+            if (!File.Exists(destinationFile))
+            {
+                foreach (var v in model.Settings.InstalledVersions)
+                {
+                    string sourceFile = Path.Combine(v.Folder, data[2], data[0]);
+                    if (File.Exists(sourceFile))
                     {
-                        Directory.CreateDirectory(destinationFolder);
+                        File.Copy(sourceFile, destinationFile);
+                        break;
                     }
-                    foreach (var v in model.Settings.InstalledVersions)
+                }
+            }
+        }
+
+        private static void CopyFolderToCemu(Model.Model model, string[] data)
+        {
+            string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+            foreach (var v in model.Settings.InstalledVersions)
+            {
+                string sourceFolder = Path.Combine(v.Folder, data[2]);
+                if (Directory.Exists(sourceFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(sourceFolder))
                     {
-                        string sourceFolder = Path.Combine(v.Folder, data[2]);
-                        if (Directory.Exists(sourceFolder))
+                        string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                        if (!File.Exists(destinationFile))
                         {
-                            foreach (var file in Directory.EnumerateFiles(sourceFolder))
-                            {
-                                string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
-                                if (!File.Exists(destinationFile))
-                                {
-                                    File.Copy(file, destinationFile);
-                                }
-                            }
+                            File.Copy(file, destinationFile);
                         }
                     }
                 }
@@ -255,51 +291,61 @@ namespace Budford.Control
                 int minVersion = Convert.ToInt32(data[4]);
                 if (!data[0].Contains("*"))
                 {
-                    string sourceFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
-                    if (File.Exists(sourceFile))
+                    CopySingleFileToBudford(model, data, minVersion);
+                }
+                else
+                {
+                    CopyFolderToBudford(model, data, minVersion);
+                }
+            }
+        }
+
+        private static void CopyFolderToBudford(Model.Model model, string[] data, int minVersion)
+        {
+            string sourceFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
+            if (Directory.Exists(sourceFolder))
+            {
+                foreach (var v in model.Settings.InstalledVersions)
+                {
+                    if (v.VersionNumber >= minVersion)
                     {
-                        foreach (var v in model.Settings.InstalledVersions)
+                        string destinationFolder = Path.Combine(v.Folder, data[2]);
+                        if (!Directory.Exists(destinationFolder))
                         {
-                            if (v.VersionNumber >= minVersion)
+                            Directory.CreateDirectory(destinationFolder);
+                        }
+
+                        foreach (var file in Directory.EnumerateFiles(sourceFolder))
+                        {
+                            string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                            if (!File.Exists(destinationFile))
                             {
-                                string destinationFile = Path.Combine(v.Folder, data[2], data[0]);
-                                string destinationFolder = Path.Combine(v.Folder, data[2]);
-                                if (!Directory.Exists(destinationFolder))
-                                {
-                                    Directory.CreateDirectory(destinationFolder);
-                                }
-                                if (!File.Exists(destinationFile))
-                                {
-                                    File.Copy(sourceFile, destinationFile);
-                                }
+                                File.Copy(file, destinationFile);
                             }
                         }
                     }
                 }
-                else
-                {
-                    string sourceFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
-                    if (Directory.Exists(sourceFolder))
-                    {
-                        foreach (var v in model.Settings.InstalledVersions)
-                        {
-                            if (v.VersionNumber >= minVersion)
-                            {
-                                string destinationFolder = Path.Combine(v.Folder, data[2]);
-                                if (!Directory.Exists(destinationFolder))
-                                {
-                                    Directory.CreateDirectory(destinationFolder);
-                                }
+            }
+        }
 
-                                foreach (var file in Directory.EnumerateFiles(sourceFolder))
-                                {
-                                    string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
-                                    if (!File.Exists(destinationFile))
-                                    {
-                                        File.Copy(file, destinationFile);
-                                    }
-                                }
-                            }
+        private static void CopySingleFileToBudford(Model.Model model, string[] data, int minVersion)
+        {
+            string sourceFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
+            if (File.Exists(sourceFile))
+            {
+                foreach (var v in model.Settings.InstalledVersions)
+                {
+                    if (v.VersionNumber >= minVersion)
+                    {
+                        string destinationFile = Path.Combine(v.Folder, data[2], data[0]);
+                        string destinationFolder = Path.Combine(v.Folder, data[2]);
+                        if (!Directory.Exists(destinationFolder))
+                        {
+                            Directory.CreateDirectory(destinationFolder);
+                        }
+                        if (!File.Exists(destinationFile))
+                        {
+                            File.Copy(sourceFile, destinationFile);
                         }
                     }
                 }

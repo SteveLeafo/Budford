@@ -27,9 +27,9 @@ namespace Budford.Control
         }
 
         [Flags]
-        public enum WindowStyleFlags : uint
+        public enum WindowStyle : uint
         {
-            Overlapped = 0x00000000,
+            None = 0x00000000,
             Popup = 0x80000000,
             Child = 0x40000000,
             Minimize = 0x20000000,
@@ -51,12 +51,12 @@ namespace Budford.Control
             MaximizeBox = 0x00010000,
 
             Caption = Border | DialogFrame,
-            Tiled = Overlapped,
+            Tiled = None,
             Iconic = Minimize,
             SizeBox = ThickFrame,
-            TiledWindow = Overlapped,
+            TiledWindow = None,
 
-            OverlappedWindow = Overlapped | Caption | SystemMenu | ThickFrame | MinimizeBox | MaximizeBox,
+            OverlappedWindow = None | Caption | SystemMenu | ThickFrame | MinimizeBox | MaximizeBox,
             ChildWindow = Child,
 
             ExtendedDlgModalFrame = 0x00000001,
@@ -88,7 +88,7 @@ namespace Budford.Control
         }
 
         [Flags]
-        public enum SetWindowPosFlags
+        public enum SetWindowPosType
         {
             AsyncWindowPos = 0x4000,
             DeferBase = 0x2000,
@@ -108,7 +108,7 @@ namespace Budford.Control
         }
 
         [Flags]
-        public enum MenuFlags
+        public enum Menu
         {
             ByPosition = 0x00000400,
             Remove = 0x00001000
@@ -303,7 +303,7 @@ namespace Budford.Control
             IntPtr hTemplateFile);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosType uFlags);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr GetMenu(IntPtr hWnd);
@@ -315,29 +315,29 @@ namespace Budford.Control
         public static extern bool DrawMenuBar(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool RemoveMenu(IntPtr hMenu, uint uPosition, MenuFlags uFlags);
+        public static extern bool RemoveMenu(IntPtr hMenu, uint uPosition, Menu uFlags);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags wFlags);
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosType wFlags);
 
         [DllImport("user32.dll", EntryPoint = "GetWindowLong", SetLastError = true)]
-        private static extern WindowStyleFlags GetWindowLong32(IntPtr hWnd, WindowLongIndex nIndex);
+        private static extern WindowStyle GetWindowLong32(IntPtr hWnd, WindowLongIndex nIndex);
 
         [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr", SetLastError = true)]
-        private static extern WindowStyleFlags GetWindowLong64(IntPtr hWnd, WindowLongIndex nIndex);
+        private static extern WindowStyle GetWindowLong64(IntPtr hWnd, WindowLongIndex nIndex);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLong", SetLastError = true)]
-        private static extern WindowStyleFlags SetWindowLong32(IntPtr hWnd, WindowLongIndex nIndex, WindowStyleFlags dwNewLong);
+        private static extern WindowStyle SetWindowLong32(IntPtr hWnd, WindowLongIndex nIndex, WindowStyle dwNewLong);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr", SetLastError = true)]
-        private static extern WindowStyleFlags SetWindowLong64(IntPtr hWnd, WindowLongIndex nIndex, WindowStyleFlags dwNewLong);
+        private static extern WindowStyle SetWindowLong64(IntPtr hWnd, WindowLongIndex nIndex, WindowStyle dwNewLong);
 
-        public static WindowStyleFlags SetWindowLong(IntPtr hWnd, WindowLongIndex nIndex, WindowStyleFlags dwNewLong)
+        public static WindowStyle SetWindowLong(IntPtr hWnd, WindowLongIndex nIndex, WindowStyle dwNewLong)
         {
             return IntPtr.Size == 8 ? SetWindowLong64(hWnd, nIndex, dwNewLong) : SetWindowLong32(hWnd, nIndex, dwNewLong);
         }
 
-        public static WindowStyleFlags GetWindowLong(IntPtr hWnd, WindowLongIndex nIndex)
+        public static WindowStyle GetWindowLong(IntPtr hWnd, WindowLongIndex nIndex)
         {
             return IntPtr.Size == 8 ? GetWindowLong64(hWnd, nIndex) : GetWindowLong32(hWnd, nIndex);
         }

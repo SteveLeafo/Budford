@@ -919,21 +919,11 @@ namespace Budford.Control
         static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
 
 
-        const short SWP_NOMOVE = 0X2;
-        const short SWP_NOSIZE = 1;
-        const short SWP_NOZORDER = 0X4;
-        const int SWP_SHOWWINDOW = 0x0040;
-        const int SWP_NOREDRAW = 0x0008;
-
         public void MoveToMonitor(IntPtr windowHandle, int numberMonitor)
         {
             if (numberMonitor >= 1)
             {
-                if (Screen.AllScreens.Length < numberMonitor)
-                {
-                    //MessageBox.Show("The monitor doesn't exist");
-                }
-                else
+                if (Screen.AllScreens.Length >= numberMonitor)
                 {
                     numberMonitor--;
                     //Get the data of the monitor
@@ -1088,14 +1078,14 @@ namespace Budford.Control
 
         internal void MakeBorderlessFullScreen()
         {
-            var styleNewWindowStandard = NativeMethods.GetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyleFlags.Caption | NativeMethods.WindowStyleFlags.ThickFrame | NativeMethods.WindowStyleFlags.SystemMenu | NativeMethods.WindowStyleFlags.MaximizeBox | NativeMethods.WindowStyleFlags.MinimizeBox);
+            var styleNewWindowStandard = NativeMethods.GetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyle.Caption | NativeMethods.WindowStyle.ThickFrame | NativeMethods.WindowStyle.SystemMenu | NativeMethods.WindowStyle.MaximizeBox | NativeMethods.WindowStyle.MinimizeBox);
 
             HideMenu();
 
             NativeMethods.SetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style, styleNewWindowStandard);
 
             Rectangle rect = Screen.FromHandle(runningProcess.MainWindowHandle).Bounds;
-            NativeMethods.SetWindowPos(runningProcess.MainWindowHandle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosFlags.ShowWindow | NativeMethods.SetWindowPosFlags.NoOwnerZOrder | NativeMethods.SetWindowPosFlags.NoSendChanging);
+            NativeMethods.SetWindowPos(runningProcess.MainWindowHandle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosType.ShowWindow | NativeMethods.SetWindowPosType.NoOwnerZOrder | NativeMethods.SetWindowPosType.NoSendChanging);
         }
 
         private void HideMenu()
@@ -1107,7 +1097,7 @@ namespace Budford.Control
 
                 for (var i = 0; i < menuItemCount; i++)
                 {
-                    NativeMethods.RemoveMenu(menuHandle, 0, NativeMethods.MenuFlags.ByPosition | NativeMethods.MenuFlags.Remove);
+                    NativeMethods.RemoveMenu(menuHandle, 0, NativeMethods.Menu.ByPosition | NativeMethods.Menu.Remove);
                 }
 
                 NativeMethods.DrawMenuBar(runningProcess.MainWindowHandle);

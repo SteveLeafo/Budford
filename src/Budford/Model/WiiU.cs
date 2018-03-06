@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budford.Model
 {
-    class WiiU
+    static class WiiU
     {
         internal static readonly string[][] Dumps =
         {

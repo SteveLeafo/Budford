@@ -42,32 +42,37 @@ namespace Budford.Control
                         CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name), false, overrideit);
                     }
                 }
-                foreach (FileInfo file in source.GetFiles())
+                CopyFilesToFolder(source, target, overrideit);
+            }
+        }
+
+        private static void CopyFilesToFolder(DirectoryInfo source, DirectoryInfo target, bool overrideit)
+        {
+            foreach (FileInfo file in source.GetFiles())
+            {
+                if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                 {
-                    if (!File.Exists(Path.Combine(target.FullName, file.Name)))
+                    try
                     {
-                        try
+                        if (!Directory.Exists(target.FullName))
                         {
-                            if (!Directory.Exists(target.FullName))
-                            {
-                                Directory.CreateDirectory(target.FullName);
-                            }
-                            file.CopyTo(Path.Combine(target.FullName, file.Name));
+                            Directory.CreateDirectory(target.FullName);
                         }
-                        catch (Exception)
-                        {
-                            // ignored
-                        }
+                        file.CopyTo(Path.Combine(target.FullName, file.Name));
                     }
-                    else
+                    catch (Exception)
                     {
-                        if (overrideit)
+                        // ignored
+                    }
+                }
+                else
+                {
+                    if (overrideit)
+                    {
+                        FileInfo dest = new FileInfo(target.FullName);
+                        if (file.LastWriteTime > dest.LastWriteTime)
                         {
-                            FileInfo dest = new FileInfo(target.FullName);
-                            if (file.LastWriteTime > dest.LastWriteTime)
-                            {
-                                file.CopyTo(Path.Combine(target.FullName, file.Name), true);
-                            }
+                            file.CopyTo(Path.Combine(target.FullName, file.Name), true);
                         }
                     }
                 }
@@ -161,10 +166,6 @@ namespace Budford.Control
                         AddInstalledVersion(model, folder, version);
                     }
                 }
-            }
-            else
-            {
-                //MessageBox.Show(Resources.FileManager_SearchForInstalledVersions_Folder_doesn_t_exist__ + model.Settings.DefaultInstallFolder);
             }
         }
 

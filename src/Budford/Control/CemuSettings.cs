@@ -304,7 +304,7 @@ namespace Budford.Control
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to set settings.bin offsets for " + version.Folder + "\r\n" + ex.Message, "Error!");
+                MessageBox.Show("Unable to get version", "Error!");
                 return;
             }
 
@@ -351,16 +351,9 @@ namespace Budford.Control
                             // No settings file, so lets build our own..
                             using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
                             {
-                                if (fn != null)
+                                foreach (int file in settingsFile)
                                 {
-                                    foreach (int file in settingsFile)
-                                    {
-                                        fn.WriteByte((byte)file);
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Unable to Create settings.bin file for " + version.Folder, "Error!");
+                                    fn.WriteByte((byte)file);
                                 }
                             }
                         }
@@ -395,12 +388,12 @@ namespace Budford.Control
                         }
                         try
                         {
+                            WriteGameProfile(version.Folder);
                             WriteSettings(version.Folder);
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Failed to  write settings to settings.bin for " + version.Folder + ex.Message, "Error!");
-                            return;
                         }
                     }
                 }
@@ -414,26 +407,7 @@ namespace Budford.Control
         /// <param name="folder"></param>
         void WriteSettings(string folder)
         {
-            if (!Directory.Exists(Path.Combine(folder, "gameProfiles")))
-            {
-                Directory.CreateDirectory(Path.Combine(folder, "gameProfiles"));
-            }
-
             CurrentUserSecurity cs = new CurrentUserSecurity();
-
-            if (cs.HasAccess(new FileInfo(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini")), System.Security.AccessControl.FileSystemRights.Write))
-            {
-                using (StreamWriter writer = new StreamWriter(Path.Combine(folder, "gameProfiles",  information.TitleId + ".ini")))
-                {
-                    writer.WriteLine("[Graphics]");
-                    writer.WriteLine("accurateShaderMul = " + (settings.AccaccurateShaderMul == 1 ? "true" :  (settings.AccaccurateShaderMul == 0) ? "false" : "min"));
-                    writer.WriteLine("disableGPUFence =  " + (settings.DisableGpuFence == 1 ? "true" : "false"));
-                    writer.WriteLine("[CPU]");
-                    writer.WriteLine("emulateSinglePrecision = " + (settings.EmulateSinglePrecision == 1 ? "true" : "false"));
-                }
-            }
-
-            FileManager.GrantAccess(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini"));
 
             if (cs.HasAccess(new FileInfo(Path.Combine(folder, "settings.bin")), System.Security.AccessControl.FileSystemRights.Write))
             {
@@ -474,6 +448,31 @@ namespace Budford.Control
             }
         }
 
+        private CurrentUserSecurity WriteGameProfile(string folder)
+        {
+            if (!Directory.Exists(Path.Combine(folder, "gameProfiles")))
+            {
+                Directory.CreateDirectory(Path.Combine(folder, "gameProfiles"));
+            }
+
+            CurrentUserSecurity cs = new CurrentUserSecurity();
+
+            if (cs.HasAccess(new FileInfo(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini")), System.Security.AccessControl.FileSystemRights.Write))
+            {
+                using (StreamWriter writer = new StreamWriter(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini")))
+                {
+                    writer.WriteLine("[Graphics]");
+                    writer.WriteLine("accurateShaderMul = " + (settings.AccaccurateShaderMul == 1 ? "true" : (settings.AccaccurateShaderMul == 0) ? "false" : "min"));
+                    writer.WriteLine("disableGPUFence =  " + (settings.DisableGpuFence == 1 ? "true" : "false"));
+                    writer.WriteLine("[CPU]");
+                    writer.WriteLine("emulateSinglePrecision = " + (settings.EmulateSinglePrecision == 1 ? "true" : "false"));
+                }
+            }
+
+            FileManager.GrantAccess(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini"));
+            return cs;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -496,6 +495,129 @@ namespace Budford.Control
         /// </summary>
         void WriteGraphicsPacks(InstalledVersion version)
         {
+            EnsureGraphicPackExists();
+            EnableDefaultGraphicsPack();
+            DeleteBudfordPacks(version);
+
+            SetClarityPreset();
+            SetFps();
+
+            int packs = CopyBudfordPacks(version);
+
+            if (packs > 0)
+            {
+                int gfxPackStartOffset = SetNumberOfPacks(version, packs);
+
+                packIndex = 0;
+                foreach (var pack in settings.graphicsPacks)
+                {
+                    AppendGraphicsPack(version.Folder, gfxPackStartOffset, pack);
+                }
+
+                if (resolutionPack != null)
+                {
+                    AppendGraphicsPack(version.Folder, gfxPackStartOffset, resolutionPack);
+                }
+
+                PadWithZero(version, packs, gfxPackStartOffset);
+            }
+        }
+
+        private static void PadWithZero(InstalledVersion version, int packs, int gfxPackStartOffset)
+        {
+            using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
+            {
+                fn.Seek(gfxPackStartOffset + (9 * packs), SeekOrigin.Begin);
+                for (int i = 0; i < 137; ++i)
+                {
+                    fn.WriteByte(0);
+                }
+            }
+        }
+
+        private int SetNumberOfPacks(InstalledVersion version, int packs)
+        {
+            int gfxPackStartOffset;
+            using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
+            {
+
+                if (!graphicPackOffset.TryGetValue(version.VersionNumber, out gfxPackStartOffset))
+                {
+                    if (version.VersionNumber >= 1112)
+                    {
+                        gfxPackStartOffset = 0x7c;
+                    }
+                    else
+                    {
+                        gfxPackStartOffset = 0x23;
+                    }
+                }
+
+                if (version.VersionNumber >= 1112)
+                {
+                    fn.Seek(gfxPackStartOffset, SeekOrigin.Begin);
+                    fn.WriteByte((byte)packs);
+                    gfxPackStartOffset += 4;
+                }
+                else
+                {
+                    fn.Seek(0x23, SeekOrigin.Begin);
+                    gfxPackStartOffset = fn.ReadByte();
+                    fn.Seek(0x23, SeekOrigin.Begin);
+                    fn.WriteByte((byte)(gfxPackStartOffset + (9 * packs)));
+
+                    gfxPackStartOffset += 0x23 + 4;
+                    fn.Seek(gfxPackStartOffset - 4, SeekOrigin.Begin);
+                    fn.WriteByte((byte)packs);
+                }
+            }
+            return gfxPackStartOffset;
+        }
+
+        private int CopyBudfordPacks(InstalledVersion version)
+        {
+            int packs = 0;
+            if (resolutionPack != null)
+            {
+                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
+                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
+                resolutionPack.PackId = packs;
+                packs++;
+            }
+
+            foreach (var pack in settings.graphicsPacks)
+            {
+                if (pack.Active)
+                {
+                    FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, pack.Folder)),
+                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
+                    pack.PackId = packs;
+                    packs++;
+                }
+            }
+            return packs;
+        }
+
+        private static void DeleteBudfordPacks(InstalledVersion version)
+        {
+            for (int i = 0; i < 100; ++i)
+            {
+                try
+                {
+                    if (Directory.Exists(Path.Combine(version.Folder, "graphicPacks", "Budford_" + i)))
+                    {
+                        Directory.Delete(Path.Combine(version.Folder, "graphicPacks", "Budford_" + i), true);
+                    }
+                }
+                catch (Exception)
+                {
+                    // May be in use 
+                }
+            }
+        }
+
+        private void EnsureGraphicPackExists()
+        {
             if (!Directory.Exists(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)))
             {
                 string pack = "";
@@ -511,104 +633,6 @@ namespace Budford.Control
                 {
                     model.Settings.GraphicsPackRevision = pack;
                     FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)), model.GraphicsPacks);
-                }
-            }
-
-            EnableDefaultGraphicsPack();
-            for (int i = 0; i < 100; ++i)
-            {
-                try
-                {
-                    if (Directory.Exists(Path.Combine(version.Folder, "graphicPacks", "Budford_" + i)))
-                    {
-                        Directory.Delete(Path.Combine(version.Folder, "graphicPacks", "Budford_" + i), true);
-                    }
-                }
-                catch (Exception)
-                {
-                    // May be in use 
-                }
-            }
-
-            SetClarityPreset();
-            SetFps();
-
-
-            int packs = 0;
-            if (resolutionPack != null)
-            {
-                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
-                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
-                resolutionPack.PackId = packs;
-                packs++;
-            }
-
-            foreach (var pack in settings.graphicsPacks)
-            {
-                if (pack.Active)
-                {
-                    FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, pack.Folder)), 
-                        new DirectoryInfo(Path.Combine(version.Folder,  "graphicPacks", "Budford_" + packs)), false, true);
-                    pack.PackId = packs;
-                    packs++;
-                }
-            }
-
-            if (packs > 0)
-            {
-                int gfxPackStartOffset;
-                using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
-                {
-                    
-                    if (!graphicPackOffset.TryGetValue(version.VersionNumber, out gfxPackStartOffset))
-                    {
-                        if (version.VersionNumber >= 1112)
-                        {
-                            gfxPackStartOffset = 0x7c;
-                        }
-                        else
-                        {
-                            gfxPackStartOffset = 0x23;
-                        }
-                    }
-
-                    if (version.VersionNumber >= 1112)
-                    {
-                        fn.Seek(gfxPackStartOffset, SeekOrigin.Begin);
-                        fn.WriteByte((byte)packs);
-                        gfxPackStartOffset += 4;
-                    }
-                    else
-                    {
-                        fn.Seek(0x23, SeekOrigin.Begin);
-                        gfxPackStartOffset = fn.ReadByte();
-                        fn.Seek(0x23, SeekOrigin.Begin);
-                        fn.WriteByte((byte)(gfxPackStartOffset + (9 * packs)));
-
-                        gfxPackStartOffset += 0x23 + 4;
-                        fn.Seek(gfxPackStartOffset - 4, SeekOrigin.Begin);
-                        fn.WriteByte((byte)packs);
-                    }
-                }
-
-                packIndex = 0;
-                foreach (var pack in settings.graphicsPacks)
-                {
-                    AppendGraphicsPack(version.Folder, gfxPackStartOffset, pack);
-                }
-
-                if (resolutionPack != null)
-                {
-                    AppendGraphicsPack(version.Folder, gfxPackStartOffset, resolutionPack);
-                }
-
-                using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
-                {
-                    fn.Seek(gfxPackStartOffset + (9 * packs), SeekOrigin.Begin);
-                    for (int i = 0; i < 137; ++i)
-                    {
-                        fn.WriteByte(0);
-                    }
                 }
             }
         }

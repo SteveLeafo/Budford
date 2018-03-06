@@ -25,19 +25,9 @@ namespace Budford.Control
             {
                 if (arguments[0].Contains("Budford.exe"))
                 {
-                    //MessageBox.Show("Not Installed");
                     IsInstalled = false;
                 }
             }
-
-            //if (IsInstalled)
-            //{
-            //    MessageBox.Show("Installed");
-            //}
-
-            //MessageBox.Show(arguments[0]);
-
-            //return;
 
             var model = FormMainWindow.TransferLegacyModel();
 
@@ -116,6 +106,7 @@ namespace Budford.Control
             }
             catch (Exception)
             {
+                // Do nothing
             }
             return false;
         }
