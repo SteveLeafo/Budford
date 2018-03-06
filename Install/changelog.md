@@ -1,8 +1,11 @@
 # Budford Change Log
 
+## V1.0.58
+- Critical Bug Fix - Fixed an issue where save files would be overwritten with older version when Budford was launched from external applications such as LaunchBox.
+
 ## V1.0.57
-- Added a per game option to swap a couple of buttons around (Don't Swap, Swap A&B, Swap X+Y, Swap Both) 
-- Added support for a new plug-in type - ExternalTool which basically just launches another program. (Examples in the plug-ins folder, use the import plug-in menu option)
+- Added a per game option to swap a couple of buttons around (Don't Swap, Swap A&B, Swap X+Y, Swap Both).
+- Added support for a new plug-in type - ExternalTool which basically just launches another program. (Examples in the plug-ins folder, use the import plug-in menu option).
 - Added an option to import Cemu Hook from the Manage Installed Versions tool.
 
 ## V1.0.55
