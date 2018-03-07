@@ -7,16 +7,16 @@ namespace Budford.Utilities
 {
     public static class CurrentOs
     {
-        public static bool IsWindows { get; }
+        public static bool IsWindows { get; private set; }
         public static bool IsUnix { get; private set; }
         public static bool IsMac { get; private set; }
         public static bool IsLinux { get; private set; }
         public static bool IsUnknown { get; private set; }
-        public static bool Is32Bit { get; }
+        public static bool Is32Bit { get; private set; }
         public static bool Is64Bit { get; private set; }
         public static bool Is64BitProcess { get { return (IntPtr.Size == 8); } }
         public static bool Is32BitProcess { get { return (IntPtr.Size == 4); } }
-        public static string Name { get; }
+        public static string Name { get; private set; }
 
         [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]

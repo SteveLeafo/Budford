@@ -42,51 +42,58 @@ namespace Budford.View
                 if (emulator.Value == comboBox1.Text)
                 {
                     id = emulator.Key;
+                    string[] toks = comboBox1.Text.Split(':');
+                    if (toks.Length == 2)
+                    {
+                        string platformFileName = Path.Combine(Path.GetDirectoryName(textBox1.Text), "Data", "Platforms", toks[0] + ".xml");
+
+                        BackupPlatformFile(platformFileName);
+
+                        UpdatePlatformFile(id, toks, platformFileName);
+                    }
                 }
             }
+        }
 
-            if (id != "")
+        private static void BackupPlatformFile(string platformFileName)
+        {
+            if (File.Exists(platformFileName))
             {
-                string[] toks = comboBox1.Text.Split(':');
-                if (toks.Length == 2)
+                if (File.Exists(platformFileName + ".bak"))
                 {
-                    string platformFileName = Path.Combine(Path.GetDirectoryName(textBox1.Text), "Data", "Platforms", toks[0] + ".xml");
-                    if (File.Exists(platformFileName))
-                    {
-                        if (File.Exists(platformFileName + ".bak"))
-                        {
-                            File.Delete(platformFileName + ".bak");
-                        }
-                        File.Move(platformFileName, platformFileName + ".bak");
-                    }
+                    File.Delete(platformFileName + ".bak");
+                }
+                File.Move(platformFileName, platformFileName + ".bak");
+            }
+        }
 
-                    using (StreamWriter sw = new StreamWriter(platformFileName))
+        private void UpdatePlatformFile(string id, string[] toks, string platformFileName)
+        {
+            using (StreamWriter sw = new StreamWriter(platformFileName))
+            {
+                sw.WriteLine("<?xml version=\"1.0\" standalone=\"yes\"?>");
+                sw.WriteLine("<LaunchBox>");
+                int count = 0;
+                foreach (var game in model.GameData)
+                {
+                    if (games == null || games.Contains(game.Value.Name))
                     {
-                        sw.WriteLine("<?xml version=\"1.0\" standalone=\"yes\"?>");
-                        sw.WriteLine("<LaunchBox>");
-                        int count = 0;
-                        foreach (var game in model.GameData)
+                        if (LaunchPad.GetId(game.Value.Name) != "")
                         {
-                            if (games == null || games.Contains(game.Value.Name))
-                            {
-                                if (LaunchPad.GetId(game.Value.Name) != "")
-                                {
-                                    count++;
-                                    sw.WriteLine("<Game>");
-                                    sw.WriteLine("  <ApplicationPath>" + Xml.XmlEscape(game.Value.LaunchFile) + "</ApplicationPath>");
-                                    sw.WriteLine("  <Emulator>" + id + "</Emulator>");
-                                    sw.WriteLine("  <Platform>" + toks[0] + "</Platform>");
-                                    sw.WriteLine("  <Title>" + Xml.XmlEscape(game.Value.Name) + "</Title>");
-                                    sw.WriteLine("  <Id>" + LaunchPad.GetId(game.Value.Name) + "</Id>");
-                                    sw.WriteLine("  <PlayCount>" + game.Value.PlayCount + "</PlayCount>");
-                                    sw.WriteLine("</Game>");
-                                }
-                            }
+                            count++;
+                            sw.WriteLine("<Game>");
+                            sw.WriteLine("  <ApplicationPath>" + Xml.XmlEscape(game.Value.LaunchFile) + "</ApplicationPath>");
+                            sw.WriteLine("  <Emulator>" + id + "</Emulator>");
+                            sw.WriteLine("  <Platform>" + toks[0] + "</Platform>");
+                            sw.WriteLine("  <Title>" + Xml.XmlEscape(game.Value.Name) + "</Title>");
+                            sw.WriteLine("  <Id>" + LaunchPad.GetId(game.Value.Name) + "</Id>");
+                            sw.WriteLine("  <PlayCount>" + game.Value.PlayCount + "</PlayCount>");
+                            sw.WriteLine("</Game>");
                         }
-                        sw.WriteLine("</LaunchBox>");
-                        MessageBox.Show(Resources.FormLaunchboxExporter_button1_Click_Successfully_exported_ + count + Resources.FormLaunchboxExporter_button1_Click__games_to_LaunchBox);
                     }
                 }
+                sw.WriteLine("</LaunchBox>");
+                MessageBox.Show(Resources.FormLaunchboxExporter_button1_Click_Successfully_exported_ + count + Resources.FormLaunchboxExporter_button1_Click__games_to_LaunchBox);
             }
         }
 

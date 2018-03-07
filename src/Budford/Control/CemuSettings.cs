@@ -214,60 +214,70 @@ namespace Budford.Control
             currentCemuVersion = Regex.Replace(currentCemuVersion, "[A-Za-z ]", "").Replace("_","");
             if (settingsByVersion.TryGetValue(currentCemuVersion.Replace("-", "").Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", ""), out settingsOffsetsLocal))
             {
-                settingsFile = settingsOffsetsLocal.Item1;
-                settingsOffsets = settingsOffsetsLocal.Item2;
-                int version;
-                if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_", ""), out version))
-                {
-                    if (version >= 1113)
-                    {
-                        coreSettingsOffsets = coreSettingsV1113;
-                        if (version >= 1115)
-                        {
-                            coreSettingsOffsets = coreSettingsV1115;
-                        }
-                    }
-                    else
-                    {
-                        coreSettingsOffsets = coreSettings;
-                    }
-                }
+                SetOffsetsCurrentVersion(currentCemuVersion, settingsOffsetsLocal);
             }
             else
             {
-                int version;
-                if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_",""), out version))
+                SetOffsetsUnknownVersion(currentCemuVersion);
+            }
+        }
+
+        private void SetOffsetsUnknownVersion(string currentCemuVersion)
+        {
+            int version;
+            if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_", ""), out version))
+            {
+                if (version >= 1113)
                 {
-                    if (version >= 1113)
+                    coreSettingsOffsets = coreSettingsV1113;
+                    if (version >= 1115)
                     {
-                        coreSettingsOffsets = coreSettingsV1113;
-                        if (version >= 1115)
-                        {
-                            coreSettingsOffsets = coreSettingsV1115;
-                        }
+                        coreSettingsOffsets = coreSettingsV1115;
+                    }
+                }
+                else
+                {
+                    coreSettingsOffsets = coreSettings;
+                }
+                if (version > 191)
+                {
+                    if (version >= 1114)
+                    {
+                        settingsFile = CemuSettingsFiles.Settings1114Bin;
+                        settingsOffsets = v1114Settings;
                     }
                     else
                     {
-                        coreSettingsOffsets = coreSettings;
+                        settingsFile = CemuSettingsFiles.Settings1100Bin;
+                        settingsOffsets = v1100Settings;
                     }
-                    if (version > 191)
+                }
+                else
+                {
+                    settingsFile = CemuSettingsFiles.Settings160Bin;
+                    settingsOffsets = v160Settings;
+                }
+            }
+        }
+
+        private void SetOffsetsCurrentVersion(string currentCemuVersion, Tuple<int[], int[]> settingsOffsetsLocal)
+        {
+            settingsFile = settingsOffsetsLocal.Item1;
+            settingsOffsets = settingsOffsetsLocal.Item2;
+            int version;
+            if (int.TryParse(currentCemuVersion.Replace(".", "").Replace("Cemu_", ""), out version))
+            {
+                if (version >= 1113)
+                {
+                    coreSettingsOffsets = coreSettingsV1113;
+                    if (version >= 1115)
                     {
-                         if (version >= 1114)
-                         {
-                            settingsFile = CemuSettingsFiles.Settings1114Bin;
-                            settingsOffsets = v1114Settings;
-                         }
-                         else
-                         {
-                            settingsFile = CemuSettingsFiles.Settings1100Bin;
-                            settingsOffsets = v1100Settings;
-                         }
+                        coreSettingsOffsets = coreSettingsV1115;
                     }
-                    else
-                    {
-                        settingsFile = CemuSettingsFiles.Settings160Bin;
-                        settingsOffsets = v160Settings;
-                    }
+                }
+                else
+                {
+                    coreSettingsOffsets = coreSettings;
                 }
             }
         }
@@ -345,23 +355,9 @@ namespace Budford.Control
                         MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                         return;
                     }
-                    try
+
+                    if (!CreateSettingsBin(version, canCreate))
                     {
-                        if (canCreate)
-                        {
-                            // No settings file, so lets build our own..
-                            using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
-                            {
-                                foreach (int file in settingsFile)
-                                {
-                                    fn.WriteByte((byte)file);
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_Create_settings_bin_file_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                         return;
                     }
 
@@ -375,30 +371,58 @@ namespace Budford.Control
                         return;
                     }
 
+                    UpdateSettings(version);
+                }
+            }
+        }
 
-                    if (information != null)
+        private void UpdateSettings(InstalledVersion version)
+        {
+            if (information != null)
+            {
+                try
+                {
+                    WriteGraphicsPacks(version);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to_write_graphics_pack_hash_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                    return;
+                }
+                try
+                {
+                    WriteGameProfile(version.Folder);
+                    WriteSettings(version.Folder);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to__write_settings_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                }
+            }
+        }
+
+        private bool CreateSettingsBin(InstalledVersion version, bool canCreate)
+        {
+            try
+            {
+                if (canCreate)
+                {
+                    // No settings file, so lets build our own..
+                    using (FileStream fn = new FileStream(Path.Combine(version.Folder, "settings.bin"), FileMode.Create, FileAccess.ReadWrite))
                     {
-                        try
+                        foreach (int file in settingsFile)
                         {
-                            WriteGraphicsPacks(version);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to_write_graphics_pack_hash_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
-                            return;
-                        }
-                        try
-                        {
-                            WriteGameProfile(version.Folder);
-                            WriteSettings(version.Folder);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to__write_settings_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                            fn.WriteByte((byte)file);
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_Create_settings_bin_file_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                return false;
+            }
+            return true;
         }
 
 

@@ -57,65 +57,19 @@ namespace Budford.Utilities
             // Compare the two items
             if (SortType == 1)
             {
-                int a = 0, b = 0;
-
-                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
-                {
-                    if (ColumnToSort < listviewX.SubItems.Count)
-                    {
-                        int.TryParse(listviewX.SubItems[ColumnToSort].Text, out a);
-                        if (listviewY != null) int.TryParse(listviewY.SubItems[ColumnToSort].Text, out b);
-                    }
-                }
-
-                compareResult = b.CompareTo(a);
+                compareResult = CompareInts(listviewX, listviewY);
             }
             else if (SortType == 2)
             {
-                int a = 0, b = 0;
-
-                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
-                {
-                    if (ColumnToSort < listviewX.SubItems.Count)
-                    {
-                        int.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
-                        if (listviewY != null)
-                        {
-                            int.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
-                        }
-                    }
-                }
-                compareResult = b.CompareTo(a);
+                compareResult = CompareSizes(listviewX, listviewY);
             }
             else if (SortType == 3)
             {
-                DateTime a = DateTime.MinValue, b = DateTime.MinValue;
-                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
-                {
-                    if (ColumnToSort < listviewX.SubItems.Count)
-                    {
-                        DateTime.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
-                        if (listviewY != null)
-                        {
-                            DateTime.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
-                        }
-                    }
-                }
-
-                compareResult = b.CompareTo(a);
+                compareResult = CompareDates(listviewX, listviewY);
             }
             else
             {
-                if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
-                {
-                    if (ColumnToSort < listviewX.SubItems.Count)
-                    {
-                        if (listviewY != null)
-                        { 
-                            compareResult = objectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
-                        }
-                    }
-                }
+                compareResult = CompareStrings(listviewX, listviewY);
             }
 
             // Calculate correct return value based on object comparison
@@ -129,11 +83,74 @@ namespace Budford.Utilities
                 // Descending sort is selected, return negative result of compare operation
                 return (-compareResult);
             }
-            else
+            return 0;
+        }
+
+        private int CompareStrings(ListViewItem listviewX, ListViewItem listviewY)
+        {
+            if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
             {
-                // Return '0' to indicate they are equal
-                return 0;
+                if (ColumnToSort < listviewX.SubItems.Count)
+                {
+                    if (listviewY != null)
+                    {
+                        return objectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+                    }
+                }
             }
+            return 0;
+        }
+
+        private int CompareDates(ListViewItem listviewX, ListViewItem listviewY)
+        {
+            DateTime a = DateTime.MinValue, b = DateTime.MinValue;
+            if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
+            {
+                if (ColumnToSort < listviewX.SubItems.Count)
+                {
+                    DateTime.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
+                    if (listviewY != null)
+                    {
+                        DateTime.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+                    }
+                }
+            }
+
+            return b.CompareTo(a);
+        }
+
+        private int CompareSizes(ListViewItem listviewX, ListViewItem listviewY)
+        {
+            int a = 0, b = 0;
+
+            if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
+            {
+                if (ColumnToSort < listviewX.SubItems.Count)
+                {
+                    int.TryParse(listviewX.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out a);
+                    if (listviewY != null)
+                    {
+                        int.TryParse(listviewY.SubItems[ColumnToSort].Text.Replace(" MB", "").Replace(",", ""), out b);
+                    }
+                }
+            }
+            return b.CompareTo(a);
+        }
+
+        private int CompareInts(ListViewItem listviewX, ListViewItem listviewY)
+        {
+            int a = 0, b = 0;
+
+            if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)
+            {
+                if (ColumnToSort < listviewX.SubItems.Count)
+                {
+                    int.TryParse(listviewX.SubItems[ColumnToSort].Text, out a);
+                    if (listviewY != null) int.TryParse(listviewY.SubItems[ColumnToSort].Text, out b);
+                }
+            }
+
+            return b.CompareTo(a);
         }
     }
 }

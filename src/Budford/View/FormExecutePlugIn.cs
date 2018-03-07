@@ -77,41 +77,51 @@ namespace Budford.View
             {
                 string pluginFileName = Path.Combine(SpecialFolders.PlugInFolder(model), plugIn.FileName);
 
-                if (!File.Exists(pluginFileName))
-                {
-                    using (OpenFileDialog dlg = new OpenFileDialog())
-                    {
-                        dlg.Filter = plugIn.FileName + Resources.FormExecutePlugIn_ZipImport____ + plugIn.FileName + Resources.FormExecutePlugIn_ZipImport__;
+                CheckZipFileExists(pluginFileName);
 
-                        // Show open file dialog box 
-                        if (dlg.ShowDialog() == DialogResult.OK)
+                ExtractZipFile(version, pluginFileName);
+            }
+        }
+
+        private void ExtractZipFile(InstalledVersion version, string pluginFileName)
+        {
+            if (File.Exists(pluginFileName))
+            {
+                ZipArchive zipArchive = ZipFile.OpenRead(pluginFileName);
+                foreach (var file in plugIn.Files)
+                {
+                    if (File.Exists(Path.Combine(version.Folder, file.DestinationFolder, file.Name)))
+                    {
+                        if (!File.Exists(Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name)))
                         {
-                            if (File.Exists(dlg.FileName))
-                            {
-                                File.Copy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(model), plugIn.FileName));
-                            }
+                            File.Move(Path.Combine(version.Folder, file.DestinationFolder, file.Name), Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name));
+                        }
+                    }
+                    foreach (ZipArchiveEntry zippedFile in zipArchive.Entries)
+                    {
+                        if (zippedFile.FullName.Contains(file.SourceFolder + "/" + file.Name))
+                        {
+                            Unpacker.ExtractFile(zippedFile, Path.Combine(version.Folder, file.DestinationFolder, file.Name));
                         }
                     }
                 }
+            }
+        }
 
-                if (File.Exists(pluginFileName))
+        private void CheckZipFileExists(string pluginFileName)
+        {
+            if (!File.Exists(pluginFileName))
+            {
+                using (OpenFileDialog dlg = new OpenFileDialog())
                 {
-                    ZipArchive zipArchive = ZipFile.OpenRead(pluginFileName);
-                    foreach (var file in plugIn.Files)
+                    dlg.Filter = plugIn.FileName + Resources.FormExecutePlugIn_ZipImport____ + plugIn.FileName + Resources.FormExecutePlugIn_ZipImport__;
+
+                    // Show open file dialog box 
+                    if (dlg.ShowDialog() == DialogResult.OK)
                     {
-                        if (File.Exists(Path.Combine(version.Folder, file.DestinationFolder, file.Name)))
+                        if (File.Exists(dlg.FileName))
                         {
-                            if (!File.Exists(Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name)))
-                            {
-                                File.Move(Path.Combine(version.Folder, file.DestinationFolder, file.Name), Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name));
-                            }
-                        }
-                        foreach (ZipArchiveEntry zippedFile in zipArchive.Entries)
-                        {
-                            if (zippedFile.FullName.Contains(file.SourceFolder + "/" + file.Name))
-                            {
-                                Unpacker.ExtractFile(zippedFile, Path.Combine(version.Folder, file.DestinationFolder, file.Name));
-                            }
+                            File.Copy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(model), plugIn.FileName));
                         }
                     }
                 }

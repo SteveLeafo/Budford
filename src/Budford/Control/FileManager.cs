@@ -94,42 +94,14 @@ namespace Budford.Control
 
                 string budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", id);
 
-                if (!Directory.Exists(budfordFolder))
-                {
-                    using (FormSelectGameForShaderImport selectGame = new FormSelectGameForShaderImport(model))
-                    {
-                        if (selectGame.ShowDialog(parent) == DialogResult.OK)
-                        {
-                            budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", selectGame.Id);
-                        }
-                    }
-                }
+                budfordFolder = CheckGameExists(parent, model, budfordFolder);
 
                 if (Directory.Exists(budfordFolder))
                 {
-                    bool copy = false;
-                    string destination = Path.Combine(budfordFolder, "post_180.bin");
-                    if (!File.Exists(destination))
-                    {
-                        copy = true;
-                    }
-                    else
-                    {
-                        FileInfo srcInfo = new FileInfo(fileName);
-                        FileInfo destInfo = new FileInfo(destination);
+                    bool copy;
+                    string destination;
+                    CheckShouldImport(fileName, budfordFolder, out copy, out destination);
 
-                        if (srcInfo.Length > destInfo.Length)
-                        {
-                            copy = true;
-                        }
-                        else
-                        {
-                            if (MessageBox.Show(Resources.FileManager_ImportShaderCache_The_shader_cache_file_is_smaller_than_the_current_file__are_you_sure_want_to_over_ride_it_, Resources.FileManager_ImportShaderCache_Are_you_sure, MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            {
-                                copy = true;
-                            }
-                        }
-                    }
                     if (copy)
                     {
                         string message = "Shader cache import succesfull";
@@ -149,6 +121,48 @@ namespace Budford.Control
                     }
                 }
             }
+        }
+
+        private static void CheckShouldImport(string fileName, string budfordFolder, out bool copy, out string destination)
+        {
+            copy = false;
+            destination = Path.Combine(budfordFolder, "post_180.bin");
+            if (!File.Exists(destination))
+            {
+                copy = true;
+            }
+            else
+            {
+                FileInfo srcInfo = new FileInfo(fileName);
+                FileInfo destInfo = new FileInfo(destination);
+
+                if (srcInfo.Length > destInfo.Length)
+                {
+                    copy = true;
+                }
+                else
+                {
+                    if (MessageBox.Show(Resources.FileManager_ImportShaderCache_The_shader_cache_file_is_smaller_than_the_current_file__are_you_sure_want_to_over_ride_it_, Resources.FileManager_ImportShaderCache_Are_you_sure, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        copy = true;
+                    }
+                }
+            }
+        }
+
+        private static string CheckGameExists(Form parent, Model.Model model, string budfordFolder)
+        {
+            if (!Directory.Exists(budfordFolder))
+            {
+                using (FormSelectGameForShaderImport selectGame = new FormSelectGameForShaderImport(model))
+                {
+                    if (selectGame.ShowDialog(parent) == DialogResult.OK)
+                    {
+                        budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", selectGame.Id);
+                    }
+                }
+            }
+            return budfordFolder;
         }
 
         /// <summary>

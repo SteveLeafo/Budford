@@ -106,30 +106,9 @@ namespace Budford.Control
             makeBorderLess = false;
             SetCemuVersion(modelIn, game);
 
-            if (runningVersion == null)
+            if (!GameIsPlayable(parentIn, modelIn, game))
             {
-                if (parent != null)
-                {
-                    parent.ProcessExited();
-                }
-                return;
-            }
-
-            Model = modelIn;
-
-            if (game != null && !game.Exists)
-            {
-                if (parentIn != null)
-                {
-                    if (!parentIn.InvokeRequired)
-                    {
-                        MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again, Resources.Launcher_LaunchCemu_Can_not_find_file);
-                        if (parent != null)
-                        {
-                            parent.ProcessExited();
-                        }
-                    }
-                }
+                TriggerEarlyExit();
                 return;
             }
 
@@ -176,59 +155,92 @@ namespace Budford.Control
                 startTime = DateTime.Now;
                 if (File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
                 {
-                    runningProcess = Process.Start(start);
-
-                    if (runningProcess != null)
-                    {
-                        runningProcess.EnableRaisingEvents = true;
-                        runningProcess.Exited += proc_Exited;
-
-                        runningGame = game;
-
-                        if (parentIn != null)
-                        {
-                            try
-                            {
-                                parentIn.SetParent(runningProcess);
-                            }
-                            catch (Exception)
-                            {
-                                // Dies in Linux
-                            }
-                        }
-                        parentProcess.PriorityClass = original;
-
-                        // Allow the process to finish starting.
-                        if (runningProcess != null)
-                        {
-                            try
-                            {
-                                runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
-                            }
-                            catch (Exception)
-                            {
-                                // Probably not enough permissions...
-                            }
-                            WaitForProcess(modelIn, game, getSaveDir, cemuOnly);
-                        }
-                    }
+                    StartCemuProcess(parentIn, modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
                 }
                 else
                 {
-                    if (parent != null)
-                    {
-                        parent.ProcessExited();
-                    }
+                    TriggerEarlyExit();
                 }
             }
             else
             {
                 MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
+                TriggerEarlyExit();
+            }
+        }
+
+        private void StartCemuProcess(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, ProcessStartInfo start, Process parentProcess, ProcessPriorityClass original)
+        {
+            runningProcess = Process.Start(start);
+
+            runningProcess.EnableRaisingEvents = true;
+            runningProcess.Exited += proc_Exited;
+
+            runningGame = game;
+
+            if (parentIn != null)
+            {
+                try
+                {
+                    parentIn.SetParent(runningProcess);
+                }
+                catch (Exception)
+                {
+                    // Dies in Linux
+                }
+            }
+            parentProcess.PriorityClass = original;
+
+            // Allow the process to finish starting.
+            try
+            {
+                runningProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+            }
+            catch (Exception)
+            {
+                // Probably not enough permissions...
+            }
+            WaitForProcess(modelIn, game, getSaveDir, cemuOnly);
+        }
+
+        private void TriggerEarlyExit()
+        {
+            if (parent != null)
+            {
+                parent.ProcessExited();
+            }
+        }
+
+        private bool GameIsPlayable(FormMainWindow parentIn, Model.Model modelIn, GameInformation game)
+        {
+
+            if (runningVersion == null)
+            {
                 if (parent != null)
                 {
                     parent.ProcessExited();
                 }
+                return false;
             }
+
+            Model = modelIn;
+
+            if (game != null && !game.Exists)
+            {
+                if (parentIn != null)
+                {
+                    if (!parentIn.InvokeRequired)
+                    {
+                        MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_If_you_are_using_a_removable_storage_device_check_it_is_plugged_in_and_try_again, Resources.Launcher_LaunchCemu_Can_not_find_file);
+                        if (parent != null)
+                        {
+                            parent.ProcessExited();
+                        }
+                    }
+                }
+                return false;
+            }
+            return true;
         }
 
         private static void SetupCafeLibs(Model.Model model, GameInformation game)
@@ -925,7 +937,10 @@ namespace Budford.Control
         {
             try
             {
-                //MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+                if (Model.Settings.Monitor == -1)
+                {
+                    MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+                }
 
                 WaitForWindowTitleToAppear();
 
@@ -1107,14 +1122,14 @@ namespace Budford.Control
 
         internal void MakeBorderlessFullScreen()
         {
-            var styleNewWindowStandard = NativeMethods.GetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyle.Caption | NativeMethods.WindowStyle.ThickFrame | NativeMethods.WindowStyle.SystemMenu | NativeMethods.WindowStyle.MaximizeBox | NativeMethods.WindowStyle.MinimizeBox);
+            var styleNewWindowStandard = NativeMethods.GetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyles.Caption | NativeMethods.WindowStyles.ThickFrame | NativeMethods.WindowStyles.SystemMenu | NativeMethods.WindowStyles.MaximizeBox | NativeMethods.WindowStyles.MinimizeBox);
 
             HideMenu();
 
             NativeMethods.SetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style, styleNewWindowStandard);
 
             Rectangle rect = Screen.FromHandle(runningProcess.MainWindowHandle).Bounds;
-            NativeMethods.SetWindowPos(runningProcess.MainWindowHandle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosType.ShowWindow | NativeMethods.SetWindowPosType.NoOwnerZOrder | NativeMethods.SetWindowPosType.NoSendChanging);
+            NativeMethods.SetWindowPos(runningProcess.MainWindowHandle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosTypes.ShowWindow | NativeMethods.SetWindowPosTypes.NoOwnerZOrder | NativeMethods.SetWindowPosTypes.NoSendChanging);
         }
 
         private void HideMenu()
@@ -1126,7 +1141,7 @@ namespace Budford.Control
 
                 for (var i = 0; i < menuItemCount; i++)
                 {
-                    NativeMethods.RemoveMenu(menuHandle, 0, NativeMethods.Menu.ByPosition | NativeMethods.Menu.Remove);
+                    NativeMethods.RemoveMenu(menuHandle, 0, NativeMethods.Menus.ByPosition | NativeMethods.Menus.Remove);
                 }
 
                 NativeMethods.DrawMenuBar(runningProcess.MainWindowHandle);

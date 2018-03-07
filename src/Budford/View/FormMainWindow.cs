@@ -239,7 +239,7 @@ namespace Budford.View
 
         internal static string GetModelFileName()
         {
-            return Program.IsInstalled ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml") : "Model.xml";
+            return Program.IsInstalled() ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml") : "Model.xml";
         }
 
         internal static Model.Model TransferLegacyModel()
@@ -2249,35 +2249,41 @@ namespace Budford.View
         /// <param name="stateInfo"></param>
         void ThreadProc2(Object stateInfo)
         {
-            if (iv1 != null)
+            foreach (var game in Model.GameData)
             {
-                foreach (var game in Model.GameData)
+                if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    if (!game.Value.SaveDir.StartsWith("??"))
+                    if (IsPlayable(game.Value.GameSetting.EmulationState))
                     {
-                        if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.NotSet)
+                        if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
-                            if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+                            try
                             {
-                                if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable)
-                                {
-                                    if (game.Value.GameSetting.PreferedVersion == "Latest")
-                                    {
-                                        try
-                                        {
-                                            UpdateShaderCache(game);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show(ex.Message);
-                                        }
-                                    }
-                                }
+                                UpdateShaderCache(game);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
                             }
                         }
                     }
                 }
             }
+        }
+
+        bool IsPlayable(GameSettings.EmulationStateType emulationState)
+        {
+            if (emulationState != GameSettings.EmulationStateType.NotSet)
+            {
+                if (emulationState != GameSettings.EmulationStateType.Loads)
+                {
+                    if (emulationState != GameSettings.EmulationStateType.Unplayable)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void UpdateShaderCache(KeyValuePair<string, GameInformation> game)

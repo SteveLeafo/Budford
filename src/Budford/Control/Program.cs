@@ -10,7 +10,11 @@ namespace Budford.Control
 {
     internal static class Program
     {
-        internal static bool IsInstalled = true;
+        private static bool isInstalled = true;
+        internal static bool IsInstalled()
+        {
+            return isInstalled;
+        }
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,7 +30,7 @@ namespace Budford.Control
             {
                 if (arguments[0].Contains("Budford.exe"))
                 {
-                    IsInstalled = false;
+                    isInstalled = false;
                 }
             }
 
@@ -37,7 +41,7 @@ namespace Budford.Control
                 MessageBox.Show(Resources.Program_Main_Needs__NET_4_5_or_higher_to_run, Resources.Program_Main_Please_update_your__NET_run_environment);
             }
 
-            if (IsInstalled)
+            if (IsInstalled())
             {
                 SetDefaultFolder(model);
             }

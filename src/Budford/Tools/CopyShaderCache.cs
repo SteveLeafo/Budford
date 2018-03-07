@@ -27,29 +27,34 @@ namespace Budford.Tools
 
                         if (File.Exists(src))
                         {
-                            if (File.Exists(dest))
-                            {
-                                FileInfo srcFi = new FileInfo(src);
-                                FileInfo destFi = new FileInfo(dest);
-                                if (srcFi.Length > destFi.Length)
-                                {
-                                    // Always keep a copy of the largest
-                                    File.Copy(src, dest, true);
-                                }
-                            }
-                            else                            
-                            {
-                                if (!Directory.Exists(saveFolder + folder))
-                                {
-                                    Directory.CreateDirectory(saveFolder + folder);
-                                }
-                                File.Copy(src, dest, true);
-                            }
+                            CopyFile(folder, saveFolder, src, dest);
                         }
                     }
                 }
             }
             return true;
+        }
+
+        private static void CopyFile(string folder, string saveFolder, string src, string dest)
+        {
+            if (File.Exists(dest))
+            {
+                FileInfo srcFi = new FileInfo(src);
+                FileInfo destFi = new FileInfo(dest);
+                if (srcFi.Length > destFi.Length)
+                {
+                    // Always keep a copy of the largest
+                    File.Copy(src, dest, true);
+                }
+            }
+            else
+            {
+                if (!Directory.Exists(saveFolder + folder))
+                {
+                    Directory.CreateDirectory(saveFolder + folder);
+                }
+                File.Copy(src, dest, true);
+            }
         }
     }
 }
