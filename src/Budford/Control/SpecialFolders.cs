@@ -1,5 +1,4 @@
 ﻿using Budford.Model;
-using System;
 using System.IO;
 
 namespace Budford.Control
@@ -11,6 +10,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="currentUser"></param>
         /// <param name="game"></param>
         /// <param name="snapShotDir"></param>
@@ -28,6 +28,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <param name="snapShotDir"></param>
         /// <returns></returns>
@@ -108,6 +109,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
         internal static string ShaderCacheBudford(Model.Model model, GameInformation game)
@@ -120,8 +122,6 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="game"></param>
-        /// <param name="snapShotDir"></param>
         /// <returns></returns>
         internal static string CafeLibDirBudford(Model.Model model)
         {
@@ -131,8 +131,6 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="game"></param>
-        /// <param name="snapShotDir"></param>
         /// <returns></returns>
         internal static string BudfordDir(Model.Model model)
         {
@@ -142,8 +140,6 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="game"></param>
-        /// <param name="snapShotDir"></param>
         /// <returns></returns>
         internal static string PlugInFolder(Model.Model model)
         {

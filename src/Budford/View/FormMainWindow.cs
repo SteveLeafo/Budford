@@ -16,8 +16,9 @@ namespace Budford.View
 {
     public partial class FormMainWindow : Form
     {
+        // ReSharper disable once InconsistentNaming
         public string launchGame = "";
-        public bool launchFull = true;
+        public bool LaunchFull = true;
 
         [DllImport("user32.dll")]
         internal static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
@@ -25,14 +26,20 @@ namespace Budford.View
         [DllImport("user32.dll")]
         internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        const int MYACTION_HOTKEY_ID = 1;
+        private readonly List<Model.PlugIns.PlugIn> plugIns = new List<Model.PlugIns.PlugIn>();
+
+        const int MyactionHotkeyId = 1;
 
         enum KeyModifier
         {
             None = 0,
+            // ReSharper disable once UnusedMember.Local
             Alt = 1,
+            // ReSharper disable once UnusedMember.Local
             Control = 2,
+            // ReSharper disable once UnusedMember.Local
             Shift = 4,
+            // ReSharper disable once UnusedMember.Local
             WinKey = 8
         }
 
@@ -56,8 +63,6 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SetCemuFolder()
         {
             using (var fbd = new FolderBrowserDialog())
@@ -213,16 +218,16 @@ namespace Budford.View
         {
             if (launchGame != "")
             {
-                this.WindowState = FormWindowState.Minimized;
-                this.Visible = false;
-                this.Hide();
+                WindowState = FormWindowState.Minimized;
+                Visible = false;
+                Hide();
                 foreach (var game in Model.GameData)
                 {
                     if (game.Value.LaunchFile.ToLower() == launchGame.ToLower())
                     {
                         RegisterStopHotKey(Model);
                         game.Value.Exists = true;
-                        launcher.LaunchCemu(this, Model, game.Value, false, false, false, launchFull);
+                        launcher.LaunchCemu(this, Model, game.Value, false, false, false, LaunchFull);
                         break;
                     }
                 }
@@ -265,7 +270,6 @@ namespace Budford.View
 
         }
 
-        List<Budford.Model.PlugIns.PlugIn> PlugIns = new List<Model.PlugIns.PlugIn>();
 
         internal void LoadPlugIns()
         {
@@ -277,12 +281,13 @@ namespace Budford.View
 
                 foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
                 {
-                    if (Path.GetExtension(file).ToLower().Contains("xml"))
+                    var extension = Path.GetExtension(file);
+                    if (extension != null && extension.ToLower().Contains("xml"))
                     {
                         plugInsToolStripMenuItem.Visible = true;
 
-                        Budford.Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
-                        PlugIns.Add(p);
+                        Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
+                        plugIns.Add(p);
 
                      
                         ToolStripMenuItem menuItem = new ToolStripMenuItem
@@ -297,10 +302,10 @@ namespace Budford.View
 
                 // Painful, but we want these added to the top of the list...
                 plugInsToolStripMenuItem.DropDownItems.Clear();
-                var v = (from i in items orderby ((Budford.Model.PlugIns.PlugIn)i.Tag).Type select i ).ToList();
+                var v = (from i in items orderby ((Model.PlugIns.PlugIn)i.Tag).Type select i ).ToList();
                 foreach (var item in v)
                 {
-                    Budford.Model.PlugIns.PlugIn p = (Budford.Model.PlugIns.PlugIn)item.Tag;
+                    Model.PlugIns.PlugIn p = (Model.PlugIns.PlugIn)item.Tag;
                     if (p.Type != currentType)
                     {
                         if (currentType != "")
@@ -707,6 +712,7 @@ namespace Budford.View
                         }
                         catch (Exception)
                         {
+                            // ignored
                         }
                     }
                 }
@@ -723,22 +729,21 @@ namespace Budford.View
             var toolStripMenuItem = sender as ToolStripMenuItem;
             if (toolStripMenuItem != null)
             {
-                Budford.Model.PlugIns.PlugIn plugIn = toolStripMenuItem.Tag as Budford.Model.PlugIns.PlugIn;
+                Model.PlugIns.PlugIn plugIn = toolStripMenuItem.Tag as Model.PlugIns.PlugIn;
                 if (plugIn != null)
                 {
                     if (plugIn.Type == "ExternalTool")
                     {
-                        ProcessStartInfo start = new ProcessStartInfo();
-                        start.FileName = plugIn.FileName;
+                        ProcessStartInfo start = new ProcessStartInfo {FileName = plugIn.FileName};
                         Process.Start(start);
                     }
                     else
                     {
                         using (FormExecutePlugIn executor = new FormExecutePlugIn(Model, plugIn))
                         {
-                            if (executor.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                            if (executor.ShowDialog(this) == DialogResult.OK)
                             {
-                                MessageBox.Show(plugIn.Name + " executed successfully", "Success");
+                                MessageBox.Show(plugIn.Name + Resources.FormMainWindow_PlugIn_Click__executed_successfully, Resources.FormMainWindow_PlugIn_Click_Success);
                             }
                         }
                     }
@@ -1809,7 +1814,7 @@ namespace Budford.View
             if (model.Settings.StopHotkey != "None")
             {
                 Keys key = GetHotKey(model.Settings.StopHotkey);
-                RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, (int)KeyModifier.None, key.GetHashCode());
+                RegisterHotKey(Handle, MyactionHotkeyId, (int)KeyModifier.None, key.GetHashCode());
             }
         }
 
@@ -1829,7 +1834,7 @@ namespace Budford.View
             {
                 if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
                 {
-                    MessageBox.Show("The status of one or more games have changed.\n\nTheir status will be set as New Status <- Old Status untill you restart or re-download the status", "Exciting news");
+                    MessageBox.Show(Resources.FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_, Resources.FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_Exciting_news);
                     break;
                 }
             }
@@ -2387,7 +2392,7 @@ namespace Budford.View
             }
             else
             {
-                UnregisterHotKey(this.Handle, MYACTION_HOTKEY_ID);
+                UnregisterHotKey(Handle, MyactionHotkeyId);
                 EnableControlsForGameExitted();
                 if (launchGame != "")
                 {
@@ -2478,7 +2483,7 @@ namespace Budford.View
                     GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                     if (game.GameSetting.CompatibilityUrl != "")
                     {
-                        System.Diagnostics.Process.Start(game.GameSetting.CompatibilityUrl);
+                        Process.Start(game.GameSetting.CompatibilityUrl);
                     }
                 }
             }
@@ -2494,7 +2499,7 @@ namespace Budford.View
             // Configure open file dialog box 
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "Budford Plug-in Files | *.xml;";
+                dlg.Filter = Resources.FormMainWindow_importBudfordPluginToolStripMenuItem_Click_Budford_Plug_in_Files_____xml_;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)

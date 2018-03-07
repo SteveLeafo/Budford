@@ -298,4 +298,82 @@ Click on OK to continue</value>
   <data name="FormLaunchboxExporter_button1_Click__games_to_LaunchBox" xml:space="preserve">
     <value> games to LaunchBox</value>
   </data>
+  <data name="Program_Main_Needs__NET_4_5_or_higher_to_run" xml:space="preserve">
+    <value>Needs .NET 4.5 or higher to run</value>
+  </data>
+  <data name="Program_Main_Please_update_your__NET_run_environment" xml:space="preserve">
+    <value>Please update your .NET run environment</value>
+  </data>
+  <data name="Launcher_CreateLockFile_Failed_to_create_lock_file" xml:space="preserve">
+    <value>Failed to create lock file</value>
+  </data>
+  <data name="FileManager_ImportShaderCache_The_shader_cache_file_is_smaller_than_the_current_file__are_you_sure_want_to_over_ride_it_" xml:space="preserve">
+    <value>The shader cache file is smaller than the current file, are you sure want to over ride it?</value>
+  </data>
+  <data name="FileManager_ImportShaderCache_Are_you_sure" xml:space="preserve">
+    <value>Are you sure</value>
+  </data>
+  <data name="FileManager_ImportShaderCache_Invalid_Shader_Cache" xml:space="preserve">
+    <value>Invalid Shader Cache</value>
+  </data>
+  <data name="FileManager_ImportShaderCache_Imported_OK" xml:space="preserve">
+    <value>Imported OK</value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Unable_to_get_version" xml:space="preserve">
+    <value>Unable to get version</value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Error_" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Unable_to_set_settings_bin_offsets_for_" xml:space="preserve">
+    <value>Unable to set settings.bin offsets for </value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_" xml:space="preserve">
+    <value>
+</value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Unable_to_Create_settings_bin_file_for_" xml:space="preserve">
+    <value>Unable to Create settings.bin file for </value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Failed_to_grant_all_users_access_to_settings_bin_for_" xml:space="preserve">
+    <value>Failed to grant all users access to settings.bin for </value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Failed_to_write_graphics_pack_hash_to_settings_bin_for_" xml:space="preserve">
+    <value>Failed to write graphics pack hash to settings.bin for </value>
+  </data>
+  <data name="CemuSettings_WriteSettingsBinFile_Failed_to__write_settings_to_settings_bin_for_" xml:space="preserve">
+    <value>Failed to  write settings to settings.bin for </value>
+  </data>
+  <data name="FormEditConfiguration_button5_Click_Wine_Executeable______" xml:space="preserve">
+    <value>Wine Executeable| *.*;</value>
+  </data>
+  <data name="FormEditInstalledVersions_importCemuHookToolStripMenuItem_Click_Cemu_Hook_____zip_" xml:space="preserve">
+    <value>Cemu Hook | *.zip;</value>
+  </data>
+  <data name="FormExecutePlugIn_ZipImport____" xml:space="preserve">
+    <value> | </value>
+  </data>
+  <data name="FormExecutePlugIn_ZipImport__" xml:space="preserve">
+    <value>;</value>
+  </data>
+  <data name="FormMainWindow_PlugIn_Click__executed_successfully" xml:space="preserve">
+    <value> executed successfully</value>
+  </data>
+  <data name="FormMainWindow_PlugIn_Click_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_" xml:space="preserve">
+    <value>The status of one or more games have changed.
+
+Their status will be set as New Status &lt;- Old Status untill you restart or re-download the status</value>
+  </data>
+  <data name="FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_Exciting_news" xml:space="preserve">
+    <value>Exciting news</value>
+  </data>
+  <data name="FormMainWindow_importBudfordPluginToolStripMenuItem_Click_Budford_Plug_in_Files_____xml_" xml:space="preserve">
+    <value>Budford Plug-in Files | *.xml;</value>
+  </data>
 </root>

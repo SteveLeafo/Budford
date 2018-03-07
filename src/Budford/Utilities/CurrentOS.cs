@@ -1,32 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Budford.Utilities
 {
-    public static class CurrentOS
+    public static class CurrentOs
     {
-        public static bool IsWindows { get; private set; }
+        public static bool IsWindows { get; }
         public static bool IsUnix { get; private set; }
         public static bool IsMac { get; private set; }
         public static bool IsLinux { get; private set; }
         public static bool IsUnknown { get; private set; }
-        public static bool Is32bit { get; private set; }
-        public static bool Is64bit { get; private set; }
+        public static bool Is32Bit { get; }
+        public static bool Is64Bit { get; private set; }
         public static bool Is64BitProcess { get { return (IntPtr.Size == 8); } }
         public static bool Is32BitProcess { get { return (IntPtr.Size == 4); } }
-        public static string Name { get; private set; }
+        public static string Name { get; }
 
         [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool IsWow64Process([In] IntPtr hProcess, [Out] out bool wow64Process);
 
-        private static bool Is64bitWindows
+        private static bool Is64BitWindows
         {
             get
             {
@@ -43,7 +39,7 @@ namespace Budford.Utilities
             }
         }
 
-        static CurrentOS()
+        static CurrentOs()
         {
             IsWindows = Path.DirectorySeparatorChar == '\\';
             if (IsWindows)
@@ -59,17 +55,17 @@ namespace Budford.Utilities
                 Name = Name.Replace("NT 6.1", "7 %bit 6.1");
                 Name = Name.Replace("NT 6.0", "Vista %bit 6.0");
                 Name = Name.Replace("NT 5.", "XP %bit 5.");
-                Name = Name.Replace("%bit", (Is64bitWindows ? "64bit" : "32bit"));
+                Name = Name.Replace("%bit", (Is64BitWindows ? "64bit" : "32bit"));
 
-                if (Is64bitWindows)
-                    Is64bit = true;
+                if (Is64BitWindows)
+                    Is64Bit = true;
                 else
-                    Is32bit = true;
+                    Is32Bit = true;
             }
             else
             {
-                string UnixName = ReadProcessOutput("uname");
-                if (UnixName.Contains("Darwin"))
+                string unixName = ReadProcessOutput("uname");
+                if (unixName.Contains("Darwin"))
                 {
                     IsUnix = true;
                     IsMac = true;
@@ -79,30 +75,30 @@ namespace Budford.Utilities
 
                     string machine = ReadProcessOutput("uname", "-m");
                     if (machine.Contains("x86_64"))
-                        Is64bit = true;
+                        Is64Bit = true;
                     else
-                        Is32bit = true;
+                        Is32Bit = true;
 
-                    Name += " " + (Is32bit ? "32bit" : "64bit");
+                    Name += " " + (Is32Bit ? "32bit" : "64bit");
                 }
-                else if (UnixName.Contains("Linux"))
+                else if (unixName.Contains("Linux"))
                 {
                     IsUnix = true;
                     IsLinux = true;
 
                     Name = ReadProcessOutput("lsb_release", "-d");
-                    Name = Name.Substring(Name.IndexOf(":") + 1);
+                    Name = Name.Substring(Name.IndexOf(":", StringComparison.Ordinal) + 1);
                     Name = Name.Trim();
 
                     string machine = ReadProcessOutput("uname", "-m");
                     if (machine.Contains("x86_64"))
-                        Is64bit = true;
+                        Is64Bit = true;
                     else
-                        Is32bit = true;
+                        Is32Bit = true;
 
-                    Name += " " + (Is32bit ? "32bit" : "64bit");
+                    Name += " " + (Is32Bit ? "32bit" : "64bit");
                 }
-                else if (UnixName != "")
+                else if (unixName != "")
                 {
                     IsUnix = true;
                 }
@@ -113,26 +109,25 @@ namespace Budford.Utilities
             }
         }
 
-        private static string ReadProcessOutput(string name)
-        {
-            return ReadProcessOutput(name, null);
-        }
-
-        private static string ReadProcessOutput(string name, string args)
+        private static string ReadProcessOutput(string name, string args = null)
         {
             try
             {
-                Process p = new Process();
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                if (args != null && args != "") p.StartInfo.Arguments = " " + args;
+                Process p = new Process
+                {
+                    StartInfo =
+                    {
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true
+                    }
+                };
+                if (!string.IsNullOrEmpty(args)) p.StartInfo.Arguments = " " + args;
                 p.StartInfo.FileName = name;
                 p.Start();
 
                 // Read the output stream first and then wait.
                 string output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
-                if (output == null) output = "";
                 output = output.Trim();
                 return output;
             }

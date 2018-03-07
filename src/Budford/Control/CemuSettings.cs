@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Budford.Properties;
 
 namespace Budford.Control
 {
@@ -297,14 +298,14 @@ namespace Budford.Control
         /// </summary>
         internal void WriteSettingsBinFile()
         {
-            InstalledVersion version = null;
+            InstalledVersion version;
             try
             {
                 version = GetVersion();
             }
             catch (Exception)
             {
-                MessageBox.Show("Unable to get version", "Error!");
+                MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_get_version, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                 return;
             }
 
@@ -318,7 +319,7 @@ namespace Budford.Control
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to set settings.bin offsets for " + version.Folder + "\r\n" + ex.Message, "Error!");
+                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_set_settings_bin_offsets_for_ + version.Folder + Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                         return;
                     }
 
@@ -332,16 +333,16 @@ namespace Budford.Control
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to delete settings.bin file.\r\n" + ex.Message, "Error!");
+                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                     }
-                    bool canCreate = false;
+                    bool canCreate;
                     try
                     {
                         canCreate = !File.Exists(Path.Combine(version.Folder, "settings.bin"));
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to access settings.bin file.\r\n" + ex.Message, "Error!");
+                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                         return;
                     }
                     try
@@ -360,7 +361,7 @@ namespace Budford.Control
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to Create settings.bin file for " + version.Folder + ex.Message, "Error!");
+                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_Create_settings_bin_file_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                         return;
                     }
 
@@ -370,7 +371,7 @@ namespace Budford.Control
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Failed to grant all users access to settings.bin for " + version.Folder + ex.Message, "Warning");
+                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to_grant_all_users_access_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Warning);
                         return;
                     }
 
@@ -383,7 +384,7 @@ namespace Budford.Control
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Failed to write graphics pack hash to settings.bin for " + version.Folder + ex.Message, "Error!");
+                            MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to_write_graphics_pack_hash_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                             return;
                         }
                         try
@@ -393,7 +394,7 @@ namespace Budford.Control
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Failed to  write settings to settings.bin for " + version.Folder + ex.Message, "Error!");
+                            MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to__write_settings_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
                         }
                     }
                 }
@@ -448,7 +449,7 @@ namespace Budford.Control
             }
         }
 
-        private CurrentUserSecurity WriteGameProfile(string folder)
+        private void WriteGameProfile(string folder)
         {
             if (!Directory.Exists(Path.Combine(folder, "gameProfiles")))
             {
@@ -470,7 +471,6 @@ namespace Budford.Control
             }
 
             FileManager.GrantAccess(Path.Combine(folder, "gameProfiles", information.TitleId + ".ini"));
-            return cs;
         }
 
         /// <summary>

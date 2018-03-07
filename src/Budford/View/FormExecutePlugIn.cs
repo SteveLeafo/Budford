@@ -1,24 +1,19 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Compression;
 using Budford.Control;
 using Budford.Model;
 using System.Diagnostics;
+using Budford.Properties;
 
 namespace Budford.View
 {
     public partial class FormExecutePlugIn : Form
     {
-        Model.PlugIns.PlugIn plugIn;
-        Model.Model model;
+        readonly Model.PlugIns.PlugIn plugIn;
+        readonly Model.Model model;
 
         public FormExecutePlugIn()
         {
@@ -41,7 +36,7 @@ namespace Budford.View
                 {
                     case "ZipImport":
                         ZipImport();
-                        DialogResult = System.Windows.Forms.DialogResult.OK;
+                        DialogResult = DialogResult.OK;
                         Close();
                         break;
                     case "ExternalTool":
@@ -51,7 +46,7 @@ namespace Budford.View
             }
             catch (Exception)
             {
-                DialogResult = System.Windows.Forms.DialogResult.Abort;
+                DialogResult = DialogResult.Abort;
                 Close();
             }
         }
@@ -60,17 +55,16 @@ namespace Budford.View
         {
             if (File.Exists(plugIn.FileName))
             {
-                this.Hide();
-                ProcessStartInfo start = new ProcessStartInfo();
-                start.FileName = plugIn.FileName;
+                Hide();
+                ProcessStartInfo start = new ProcessStartInfo {FileName = plugIn.FileName};
                 var runningProcess = Process.Start(start);
-                runningProcess.Exited += runningProcess_Exited;
+                if (runningProcess != null) runningProcess.Exited += runningProcess_Exited;
             }
         }
 
         void runningProcess_Exited(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.Yes;
+            DialogResult = DialogResult.Yes;
             Close();
         }
 
@@ -87,7 +81,7 @@ namespace Budford.View
                 {
                     using (OpenFileDialog dlg = new OpenFileDialog())
                     {
-                        dlg.Filter = plugIn.FileName + " | " + plugIn.FileName + ";";
+                        dlg.Filter = plugIn.FileName + Resources.FormExecutePlugIn_ZipImport____ + plugIn.FileName + Resources.FormExecutePlugIn_ZipImport__;
 
                         // Show open file dialog box 
                         if (dlg.ShowDialog() == DialogResult.OK)

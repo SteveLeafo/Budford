@@ -1,4 +1,4 @@
-﻿namespace Budford
+﻿namespace Budford.Control
 {
     internal static class CemuSettingsFiles
     {

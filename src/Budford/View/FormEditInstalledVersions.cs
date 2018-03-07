@@ -168,6 +168,7 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="v"></param>
         /// <returns></returns>
         private static string GetLinkType(Model.Model model, InstalledVersion v)
@@ -565,7 +566,7 @@ namespace Budford.View
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "Cemu Hook | *.zip;";
+                dlg.Filter = Resources.FormEditInstalledVersions_importCemuHookToolStripMenuItem_Click_Cemu_Hook_____zip_;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)

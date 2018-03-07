@@ -1,15 +1,11 @@
 ﻿using Budford.Model;
-using Budford.Utilities;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Budford.Properties;
-using Budford.View;
 using Budford.Control;
 using System.Net;
 using System.ComponentModel;
@@ -42,8 +38,8 @@ namespace Budford.View
         // Where the web pages end up
         internal string Result = "";
 
-        Model.Model model;
-        Unpacker unpacker;
+        readonly Model.Model model;
+        readonly Unpacker unpacker;
         /// <summary>
         ///
         /// </summary>
@@ -269,7 +265,6 @@ namespace Budford.View
         /// Returns true if requested version is installed
         /// </summary>
         /// <param name="versionNo"></param>
-        /// <param name="settings"></param>
         /// <returns></returns>
         bool IsInstalled(int versionNo)
         {

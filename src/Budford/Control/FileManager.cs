@@ -3,9 +3,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Budford.Properties;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using Budford.Properties;
 using Budford.View;
 using Budford.Utilities;
 
@@ -82,70 +82,73 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="parent"></param>
         /// <param name="model"></param>
         /// <param name="fileName"></param>
         internal static void ImportShaderCache(Form parent, Model.Model model, string fileName)
         {
             string id = Path.GetFileNameWithoutExtension(fileName);
-            id = id.Replace("(1)", "").Replace("(2)", "").Replace("(3)", "").Replace("(4)", "").Replace(" - Copy", "");
-
-            string budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", id);
-
-            if (!Directory.Exists(budfordFolder))
+            if (id != null)
             {
-                using (FormSelectGameForShaderImport selectGame = new FormSelectGameForShaderImport(model))
+                id = id.Replace("(1)", "").Replace("(2)", "").Replace("(3)", "").Replace("(4)", "").Replace(" - Copy", "");
+
+                string budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", id);
+
+                if (!Directory.Exists(budfordFolder))
                 {
-                    if (selectGame.ShowDialog(parent) == DialogResult.OK)
+                    using (FormSelectGameForShaderImport selectGame = new FormSelectGameForShaderImport(model))
                     {
-                        budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", selectGame.Id);
+                        if (selectGame.ShowDialog(parent) == DialogResult.OK)
+                        {
+                            budfordFolder = Path.Combine(model.Settings.SavesFolder, "Budford", selectGame.Id);
+                        }
                     }
                 }
-            }
 
-            if (Directory.Exists(budfordFolder))
-            {
-                bool copy = false;
-                string destination = Path.Combine(budfordFolder, "post_180.bin");
-                if (!File.Exists(destination))
+                if (Directory.Exists(budfordFolder))
                 {
-                    copy = true;
-                }
-                else
-                {
-                    FileInfo srcInfo = new FileInfo(fileName);
-                    FileInfo DestInfo = new FileInfo(destination);
-
-                    if (srcInfo.Length > DestInfo.Length)
+                    bool copy = false;
+                    string destination = Path.Combine(budfordFolder, "post_180.bin");
+                    if (!File.Exists(destination))
                     {
                         copy = true;
                     }
                     else
                     {
-                        if (MessageBox.Show("The shader cache file is smaller than the current file, are you sure want to over ride it?", "Are you sure", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        FileInfo srcInfo = new FileInfo(fileName);
+                        FileInfo destInfo = new FileInfo(destination);
+
+                        if (srcInfo.Length > destInfo.Length)
                         {
                             copy = true;
                         }
-                    }
-                }
-                if (copy)
-                {
-                    string message = "Shader cache import succesfull";
-                    if (File.Exists(destination))
-                    {
-                        FileCache srcCache = FileCache.fileCache_openExisting(fileName, 1);
-                        if (srcCache == null)
+                        else
                         {
-                            MessageBox.Show("The file doesn't appear to be a valid shader cache.\r\nPlease check the file and try again.", "Invalid Shader Cache");
-                            return;
+                            if (MessageBox.Show(Resources.FileManager_ImportShaderCache_The_shader_cache_file_is_smaller_than_the_current_file__are_you_sure_want_to_over_ride_it_, Resources.FileManager_ImportShaderCache_Are_you_sure, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                copy = true;
+                            }
                         }
-                        FileCache destCache = FileCache.fileCache_openExisting(destination, 1);
-                        message = message + "\r\n\r\nExisting cache: " + destCache.FileTableEntryCount + " shaders.\r\nNew Cache: " + srcCache.FileTableEntryCount + " shaders.";
                     }
-                    File.Copy(fileName, destination, true);
-                    MessageBox.Show(message, "Imported OK");
+                    if (copy)
+                    {
+                        string message = "Shader cache import succesfull";
+                        if (File.Exists(destination))
+                        {
+                            FileCache srcCache = FileCache.fileCache_openExisting(fileName, 1);
+                            if (srcCache == null)
+                            {
+                                MessageBox.Show(Resources.FileManager_ImportShaderCache_, Resources.FileManager_ImportShaderCache_Invalid_Shader_Cache);
+                                return;
+                            }
+                            FileCache destCache = FileCache.fileCache_openExisting(destination, 1);
+                            message = message + "\r\n\r\nExisting cache: " + destCache.FileTableEntryCount + " shaders.\r\nNew Cache: " + srcCache.FileTableEntryCount + " shaders.";
+                        }
+                        File.Copy(fileName, destination, true);
+                        MessageBox.Show(message, Resources.FileManager_ImportShaderCache_Imported_OK);
+                    }
                 }
             }
-
         }
 
         /// <summary>
@@ -249,7 +252,7 @@ namespace Budford.Control
                 dl.ShowDialog(parent);
             }
 
-            FileManager.SearchForInstalledVersions(model);
+            SearchForInstalledVersions(model);
 
             if (Directory.Exists("graphicsPacks"))
             {
@@ -259,11 +262,11 @@ namespace Budford.Control
             CemuFeatures.UpdateFeaturesForInstalledVersions(model);
         }
 
-        static internal bool ClearFolder(string folderName)
+        internal static bool ClearFolder(string folderName)
         {
             try
             {
-                System.IO.DirectoryInfo di = new DirectoryInfo(folderName);
+                var di = new DirectoryInfo(folderName);
 
                 foreach (FileInfo file in di.GetFiles())
                 {
@@ -281,7 +284,7 @@ namespace Budford.Control
             return true;
         }
 
-        static internal void DeleteShaderCache(InstalledVersion version)
+        internal static void DeleteShaderCache(InstalledVersion version)
         {
             DirectoryInfo di1 = new DirectoryInfo(Path.Combine(version.Folder, "shaderCache", "transferable"));
             foreach (FileInfo file in di1.GetFiles())

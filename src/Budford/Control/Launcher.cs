@@ -51,7 +51,7 @@ namespace Budford.Control
         static string cemu = "";
         static string logfile = "";
 
-        static string[][] contollerFileNames = 
+        static readonly string[][] ContollerFileNames = 
         {
             new[] { "controller0.txt", "controller0.bfb" },
             new[] { "controller1.txt", "controller1.bfb" },
@@ -329,7 +329,7 @@ namespace Budford.Control
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Failed to create lock file");
+                MessageBox.Show(ex.Message, Resources.Launcher_CreateLockFile_Failed_to_create_lock_file);
             }
         }
 
@@ -435,7 +435,7 @@ namespace Budford.Control
             {
                 if (runningGame != null)
                 {
-                    foreach (var controller in contollerFileNames)
+                    foreach (var controller in ContollerFileNames)
                     {
                         SafeCopy(runningVersion, controller[1], controller[0]);
                     }
@@ -572,7 +572,7 @@ namespace Budford.Control
             return "";
         }
 
-        bool makeBorderLess = false;
+        bool makeBorderLess;
 
         /// <summary>
         /// 
@@ -673,7 +673,7 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="version"></param>
         /// <param name="game"></param>
         private static void CreateDefaultSettingsFile(InstalledVersion version, GameInformation game)
         {
@@ -681,7 +681,7 @@ namespace Budford.Control
             {
                 if (version != null)
                 {
-                    foreach (var controller in contollerFileNames)
+                    foreach (var controller in ContollerFileNames)
                     {
                         SafeCopy(version, controller[0], controller[1]);
                     }
@@ -698,15 +698,15 @@ namespace Budford.Control
             }
         }
 
-        private static void UpdateControllerProfiles(InstalledVersion version, int ControllerOverride, int SwapButtons, string profileName)
+        private static void UpdateControllerProfiles(InstalledVersion version, int controllerOverride, int swapButtons, string profileName)
         {
             string fileName = Path.Combine(version.Folder, "controllerProfiles", profileName);
             if (File.Exists(fileName))
             {
                 string text = File.ReadAllText(fileName);
-                text = SwapControllerButtons(SwapButtons, text);
+                text = SwapControllerButtons(swapButtons, text);
 
-                switch (ControllerOverride)
+                switch (controllerOverride)
                 {
                     case 1:
                         text = text.Replace("Wii U Pro Controller", "Wii U GamePad");
@@ -731,7 +731,7 @@ namespace Budford.Control
             }
         }
 
-        private static string SwapControllerButtons(int SwapButtons, string text)
+        private static string SwapControllerButtons(int swapButtons, string text)
         {
             string[] buttons = new string[4];
             foreach (var line in text.Split('\n'))
@@ -754,14 +754,14 @@ namespace Budford.Control
                 }
             }
 
-            if (SwapButtons == 1 || SwapButtons == 3)
+            if (swapButtons == 1 || swapButtons == 3)
             {
                 text = text.Replace(buttons[0], "ctrl1");
                 text = text.Replace(buttons[1], "ctrl2");
                 text = text.Replace("ctrl1", buttons[1].Replace("2 = ", "1 = "));
                 text = text.Replace("ctrl2", buttons[0].Replace("1 = ", "2 = "));
             }
-            if (SwapButtons == 2 || SwapButtons == 3)
+            if (swapButtons == 2 || swapButtons == 3)
             {
                 text = text.Replace(buttons[2], "ctrl3");
                 text = text.Replace(buttons[3], "ctrl4");
@@ -945,7 +945,7 @@ namespace Budford.Control
         }
 
         [DllImport("user32.dll")]
-        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
 
 
         public void MoveToMonitor(IntPtr windowHandle, int numberMonitor)

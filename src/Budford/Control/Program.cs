@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using Budford.Properties;
 using Budford.View;
 using Budford.Utilities;
 using Microsoft.Win32;
 
 namespace Budford.Control
 {
-    static internal class Program
+    internal static class Program
     {
         internal static bool IsInstalled = true;
 
@@ -31,9 +32,9 @@ namespace Budford.Control
 
             var model = FormMainWindow.TransferLegacyModel();
 
-            if (!Get45or451FromRegistry())
+            if (!Get45Or451FromRegistry())
             {
-                MessageBox.Show("Needs .NET 4.5 or higher to run", "Please update your .NET run environment");
+                MessageBox.Show(Resources.Program_Main_Needs__NET_4_5_or_higher_to_run, Resources.Program_Main_Please_update_your__NET_run_environment);
             }
 
             if (IsInstalled)
@@ -67,7 +68,7 @@ namespace Budford.Control
                 if (model.Settings.StopHotkey != "None")
                 {
                     mainForm.launchGame = cmdLineFileName;
-                    mainForm.launchFull = cmdLineFullScreen;
+                    mainForm.LaunchFull = cmdLineFullScreen;
 
                     Application.Run(mainForm);
                 }
@@ -91,15 +92,15 @@ namespace Budford.Control
             }
         }
 
-        private static bool Get45or451FromRegistry()
+        private static bool Get45Or451FromRegistry()
         {
             try
             {
                 using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full\\"))
                 {
-                    int releaseKey = Convert.ToInt32(ndpKey.GetValue("Release"));
-                    if (true)
+                    if (ndpKey != null)
                     {
+                        int releaseKey = Convert.ToInt32(ndpKey.GetValue("Release"));
                         return CheckFor45DotVersion(releaseKey);
                     }
                 }
@@ -144,7 +145,7 @@ namespace Budford.Control
         {
             if (model.Settings.DownloadsFolder == "")
             {
-                if (!CurrentOS.IsWindows)
+                if (!CurrentOs.IsWindows)
                 {
                     model.Settings.DownloadsFolder = "Budford";
                 }

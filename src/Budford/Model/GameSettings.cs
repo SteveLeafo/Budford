@@ -10,6 +10,7 @@ namespace Budford.Model
         public EmulationStateType OfficialEmulationState = EmulationStateType.NotSet;
         internal EmulationStateType PreviousOfficialEmulationState;
         public string CompatibilityUrl = "";
+        // ReSharper disable once InconsistentNaming
         public HashSet<GraphicsPack> graphicsPacks = new HashSet<GraphicsPack>();
         internal HashSet<string> GraphicsPacksFolders = new HashSet<string>();
 

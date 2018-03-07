@@ -99,6 +99,90 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///.
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Error_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Error_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to  write settings to settings.bin for .
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Failed_to__write_settings_to_settings_bin_for_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Failed_to__write_settings_to_settings_bin_for_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to grant all users access to settings.bin for .
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Failed_to_grant_all_users_access_to_settings_bin_for_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Failed_to_grant_all_users_access_to_settings_bi" +
+                        "n_for_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to write graphics pack hash to settings.bin for .
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Failed_to_write_graphics_pack_hash_to_settings_bin_for_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Failed_to_write_graphics_pack_hash_to_settings_" +
+                        "bin_for_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to Create settings.bin file for .
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Unable_to_Create_settings_bin_file_for_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Unable_to_Create_settings_bin_file_for_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to get version.
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Unable_to_get_version {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Unable_to_get_version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to set settings.bin offsets for .
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Unable_to_set_settings_bin_offsets_for_ {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Unable_to_set_settings_bin_offsets_for_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        internal static string CemuSettings_WriteSettingsBinFile_Warning {
+            get {
+                return ResourceManager.GetString("CemuSettings_WriteSettingsBinFile_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap eu_flag {
@@ -173,11 +257,48 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure.
+        /// </summary>
+        internal static string FileManager_ImportShaderCache_Are_you_sure {
+            get {
+                return ResourceManager.GetString("FileManager_ImportShaderCache_Are_you_sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
         internal static string FileManager_ImportShaderCache_Continue {
             get {
                 return ResourceManager.GetString("FileManager_ImportShaderCache_Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imported OK.
+        /// </summary>
+        internal static string FileManager_ImportShaderCache_Imported_OK {
+            get {
+                return ResourceManager.GetString("FileManager_ImportShaderCache_Imported_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Shader Cache.
+        /// </summary>
+        internal static string FileManager_ImportShaderCache_Invalid_Shader_Cache {
+            get {
+                return ResourceManager.GetString("FileManager_ImportShaderCache_Invalid_Shader_Cache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The shader cache file is smaller than the current file, are you sure want to over ride it?.
+        /// </summary>
+        internal static string FileManager_ImportShaderCache_The_shader_cache_file_is_smaller_than_the_current_file__are_you_sure_want_to_over_ride_it_ {
+            get {
+                return ResourceManager.GetString("FileManager_ImportShaderCache_The_shader_cache_file_is_smaller_than_the_current_f" +
+                        "ile__are_you_sure_want_to_over_ride_it_", resourceCulture);
             }
         }
         
@@ -265,12 +386,49 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wine Executeable| *.*;.
+        /// </summary>
+        internal static string FormEditConfiguration_button5_Click_Wine_Executeable______ {
+            get {
+                return ResourceManager.GetString("FormEditConfiguration_button5_Click_Wine_Executeable______", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cemu Hook | *.zip;.
+        /// </summary>
+        internal static string FormEditInstalledVersions_importCemuHookToolStripMenuItem_Click_Cemu_Hook_____zip_ {
+            get {
+                return ResourceManager.GetString("FormEditInstalledVersions_importCemuHookToolStripMenuItem_Click_Cemu_Hook_____zip" +
+                        "_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Graphic Packs| *.zip;.
         /// </summary>
         internal static string FormEditInstalledVersions_importGraphicsPackToolStripMenuItem_Click_Graphic_Packs____zip_ {
             get {
                 return ResourceManager.GetString("FormEditInstalledVersions_importGraphicsPackToolStripMenuItem_Click_Graphic_Packs" +
                         "____zip_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ;.
+        /// </summary>
+        internal static string FormExecutePlugIn_ZipImport__ {
+            get {
+                return ResourceManager.GetString("FormExecutePlugIn_ZipImport__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  | .
+        /// </summary>
+        internal static string FormExecutePlugIn_ZipImport____ {
+            get {
+                return ResourceManager.GetString("FormExecutePlugIn_ZipImport____", resourceCulture);
             }
         }
         
@@ -302,6 +460,26 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The status of one or more games have changed.
+        ///
+        ///Their status will be set as New Status &lt;- Old Status untill you restart or re-download the status.
+        /// </summary>
+        internal static string FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_ {
+            get {
+                return ResourceManager.GetString("FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exciting news.
+        /// </summary>
+        internal static string FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_Exciting_news {
+            get {
+                return ResourceManager.GetString("FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_Exciting_news", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to download graphic packs at this time.  Try again later or upgrate to latest version of Budford.
         /// </summary>
         internal static string FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford {
@@ -312,11 +490,39 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Budford Plug-in Files | *.xml;.
+        /// </summary>
+        internal static string FormMainWindow_importBudfordPluginToolStripMenuItem_Click_Budford_Plug_in_Files_____xml_ {
+            get {
+                return ResourceManager.GetString("FormMainWindow_importBudfordPluginToolStripMenuItem_Click_Budford_Plug_in_Files__" +
+                        "___xml_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         internal static string FormMainWindow_mi_Click_Hello {
             get {
                 return ResourceManager.GetString("FormMainWindow_mi_Click_Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  executed successfully.
+        /// </summary>
+        internal static string FormMainWindow_PlugIn_Click__executed_successfully {
+            get {
+                return ResourceManager.GetString("FormMainWindow_PlugIn_Click__executed_successfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string FormMainWindow_PlugIn_Click_Success {
+            get {
+                return ResourceManager.GetString("FormMainWindow_PlugIn_Click_Success", resourceCulture);
             }
         }
         
@@ -420,6 +626,15 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to create lock file.
+        /// </summary>
+        internal static string Launcher_CreateLockFile_Failed_to_create_lock_file {
+            get {
+                return ResourceManager.GetString("Launcher_CreateLockFile_Failed_to_create_lock_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not find file.
         /// </summary>
         internal static string Launcher_LaunchCemu_Can_not_find_file {
@@ -463,6 +678,24 @@ namespace Budford.Properties {
             get {
                 object obj = ResourceManager.GetObject("oz_flag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Needs .NET 4.5 or higher to run.
+        /// </summary>
+        internal static string Program_Main_Needs__NET_4_5_or_higher_to_run {
+            get {
+                return ResourceManager.GetString("Program_Main_Needs__NET_4_5_or_higher_to_run", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please update your .NET run environment.
+        /// </summary>
+        internal static string Program_Main_Please_update_your__NET_run_environment {
+            get {
+                return ResourceManager.GetString("Program_Main_Please_update_your__NET_run_environment", resourceCulture);
             }
         }
         

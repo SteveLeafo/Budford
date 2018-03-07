@@ -368,17 +368,17 @@ namespace Budford.Control
                 File.Copy(Path.Combine(onlineSource.Folder, "otp.bin"), Path.Combine(onlineDestination.Folder, "otp.bin"), true);
                 File.Copy(Path.Combine(onlineSource.Folder, "seeprom.bin"), Path.Combine(onlineDestination.Folder, "seeprom.bin"), true);
 
-                Directory.CreateDirectory(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001"}));
-                File.Copy(Path.Combine(new[] { onlineSource.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat" }), Path.Combine(new[] { onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat" }), true);
+                Directory.CreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001"));
+                File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), true);
 
-                Directory.CreateDirectory(Path.Combine(new[] { onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts" }));
-                DirectoryInfo s1 = new DirectoryInfo(Path.Combine(new[] { onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts" }));
-                DirectoryInfo d1 = new DirectoryInfo(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts" }));
+                Directory.CreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
+                DirectoryInfo s1 = new DirectoryInfo(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
+                DirectoryInfo d1 = new DirectoryInfo(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
                 FileManager.CopyFilesRecursively(s1, d1);
 
-                Directory.CreateDirectory(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" }));
-                DirectoryInfo s2 = new DirectoryInfo(Path.Combine(new[] { onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" }));
-                DirectoryInfo d2 = new DirectoryInfo(Path.Combine(new[] { onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" }));
+                Directory.CreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
+                DirectoryInfo s2 = new DirectoryInfo(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
+                DirectoryInfo d2 = new DirectoryInfo(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
                 FileManager.CopyFilesRecursively(s2, d2);
             }
         }
@@ -602,11 +602,11 @@ namespace Budford.Control
             {
                 if (File.Exists(Path.Combine(folder, "seeprom.bin")))
                 {
-                    if (File.Exists(Path.Combine(new [] {folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"})))
+                    if (File.Exists(Path.Combine(folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat")))
                     {                        
-                        if (Directory.Exists(Path.Combine(new [] {folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"})))
+                        if (Directory.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts")))
                         {
-                            if (Directory.Exists(Path.Combine(new[] { folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts" })))
+                            if (Directory.Exists(Path.Combine(folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts")))
                             {
                                 return true;
                             }
@@ -752,7 +752,7 @@ namespace Budford.Control
                     if (line.Contains("<td class=\"title\">"))
                     {
                         string name = line.Substring(line.LastIndexOf("\">", StringComparison.Ordinal) + 2, line.LastIndexOf("/a", StringComparison.Ordinal) - line.LastIndexOf("\">", StringComparison.Ordinal) - 3).Replace("&amp;", "&");
-                        url = line.Substring(line.IndexOf("http"), (line.LastIndexOf("\">", StringComparison.Ordinal) - line.IndexOf("http"))).Replace("&amp;", "&");
+                        url = line.Substring(line.IndexOf("http", StringComparison.Ordinal), (line.LastIndexOf("\">", StringComparison.Ordinal) - line.IndexOf("http", StringComparison.Ordinal))).Replace("&amp;", "&");
                         currentGames = Persistence.GetGames(model, name);
                     }
                     if (line.Contains("<td class=\"rating\">"))
@@ -773,6 +773,7 @@ namespace Budford.Control
         /// </summary>
         /// <param name="currentGames"></param>
         /// <param name="rating"></param>
+        /// <param name="url"></param>
         private static void SetGameStatus(List<GameInformation> currentGames, string rating, string url)
         {
             GameSettings.EmulationStateType state;
@@ -847,7 +848,7 @@ namespace Budford.Control
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = Path.GetFileName(dir);
-                if (folder.StartsWith("graphicPacks_2-"))
+                if (folder != null && folder.StartsWith("graphicPacks_2-"))
                 {
                     if (pack == folder)
                     {
@@ -858,7 +859,7 @@ namespace Budford.Control
             return false;
         }
 
-        static internal void DownloadLatestGraphicsPack(Form form, Model.Model modelIn, bool showMessage = true)
+        internal static void DownloadLatestGraphicsPack(Form form, Model.Model modelIn, bool showMessage = true)
         {
             try
             {
@@ -866,7 +867,7 @@ namespace Budford.Control
                 {
                     if (dlc.ShowDialog(form) == DialogResult.OK)
                     {
-                        CemuFeatures.DownloadLatestGraphicPack(form, dlc.Result, showMessage);
+                        DownloadLatestGraphicPack(form, dlc.Result, showMessage);
                         string pack = "";
                         foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                         {

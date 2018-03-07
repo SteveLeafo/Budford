@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Budford.Model;
+using Budford.Properties;
+using Settings = Budford.Model.Settings;
 
 namespace Budford.View
 {
@@ -299,7 +300,7 @@ namespace Budford.View
         {
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
-                dlg.Filter = "Wine Executeable| *.*;";
+                dlg.Filter = Resources.FormEditConfiguration_button5_Click_Wine_Executeable______;
 
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
