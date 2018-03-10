@@ -81,6 +81,8 @@ namespace Budford.Model
         public bool HideWindowWhenCaching = true;
 
         public int Monitor = 1;
+        public static string CommonKey;
+        public string WiiUCommonKey;
 
         public enum ConsoleRegionType : byte
         {

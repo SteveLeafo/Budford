@@ -176,7 +176,14 @@ namespace Budford.Control
             {
                 if (gd.Value.SaveDir.StartsWith("??") || gd.Value.SaveDir.Contains("."))
                 {
-                    gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
+                    if (!gd.Value.Image)
+                    {
+                        gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
+                    }
+                    else
+                    {
+                        gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.RpxFile).ToString("x8");
+                    }
                 }
 
                 gd.Value.GameSetting.PreviousOfficialEmulationState = gd.Value.GameSetting.OfficialEmulationState;

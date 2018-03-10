@@ -9,6 +9,7 @@ using Budford.Control;
 using Budford.Model;
 using Budford.Properties;
 using Budford.Utilities;
+using CNUSLib;
 
 namespace Budford.View
 {
@@ -17,13 +18,14 @@ namespace Budford.View
         readonly string romFolder;
         readonly Dictionary<string, GameInformation> gameData;
         readonly BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-
+        Model.Model model;
         /// <summary>
         ///
         /// </summary>
-        public FormScanRomFolder(string romFolderIn, Dictionary<string, GameInformation> gameDataIn)
+        public FormScanRomFolder(Model.Model modelIn, string romFolderIn, Dictionary<string, GameInformation> gameDataIn)
         {
             InitializeComponent();
+            model = modelIn;
             romFolder = romFolderIn;
             gameData = gameDataIn;
             Text = Resources.fScanRomFolder_fScanRomFolder_Scanning_ + romFolder + Resources.fScanRomFolder_fScanRomFolder_____;
@@ -79,6 +81,8 @@ namespace Budford.View
         {
             if (Directory.Exists(romFolder))
             {
+                CheckForImageFiles();
+
                 if (Directory.Exists(Path.Combine(romFolder, "code")))
                 {
                     CheckFolder(romFolder);
@@ -100,6 +104,164 @@ namespace Budford.View
                     currentFolder++;
                 }
             }
+        }
+
+        private void CheckForImageFiles()
+        {
+            foreach (var file in Directory.EnumerateFiles(romFolder))
+            { 
+                 var extension = Path.GetExtension(file);
+                 if (extension != null && extension.ToUpper() == ".WUD")
+                 {
+                     if (GrabKeys())
+                     {
+                         string folder = decryptFile(file, "WudData", "/code/.*.rpx", true, null);
+                         if (folder == "")
+                         {
+                             foreach (var key in keys)
+                             {
+                                 folder = decryptFile(file, "WudData", "/code/.*.rpx", true, key);
+                                 if (folder != "")
+                                 {
+                                     decryptFile(file, "WudData", "/meta/meta.xml", true, key);
+                                     decryptFile(file, "WudData", "/meta/iconTex.tga", true, key);
+                                     decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, key);
+                                     GameInformation gi = CheckWudFolder(Path.Combine("WudData", folder));
+                                     if (gi != null)
+                                     {
+                                         gi.LaunchFile = file;
+                                         gi.LaunchFileName = Path.GetFileName(file);
+                                         gi.Image = true;
+                                         foreach (var rpxFile in Directory.EnumerateFiles(Path.Combine("WudData", folder, "code")))
+                                         {
+                                             if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
+                                             {
+                                                 gi.RpxFile = rpxFile;
+                                             }
+                                         }
+                                     }
+                                     break;
+                                 }
+                             }
+                         }
+                         else
+                         {
+                             decryptFile(file, "WudData", "/meta/meta.xml", true, null);
+                             decryptFile(file, "WudData", "/meta/iconTex.tga", true, null);
+                             decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, null);
+                             
+                             GameInformation gi = CheckWudFolder(Path.Combine("WudData", folder));
+                             if (gi != null)
+                             {
+                                 gi.LaunchFile = file;
+                                 gi.LaunchFileName = Path.GetFileName(file);
+                                 gi.Image = true;
+                                 foreach (var rpxFile in Directory.EnumerateFiles(Path.Combine("WudData", folder, "code")))
+                                {
+                                    if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
+                                    {
+                                        gi.RpxFile = rpxFile;
+                                    }
+                                }
+
+                             }
+                         }
+                     }
+                     else
+                     {
+                         break;
+                     }
+                 }
+            }
+        }
+
+        bool GrabKeys()
+        {
+            if (CNUSLib.Settings.commonKey != null)
+            {
+                String commonKey = model.Settings.WiiUCommonKey;
+                if (commonKey == null || commonKey == "")
+                {
+                    MessageBox.Show("No Common Key found, please set you Wii U common key in the Budford configuration form");
+                    return false;
+                }
+                LoadKeysFromCemu();
+                byte[] key = Utils.StringToByteArray(commonKey);
+                CNUSLib.Settings.commonKey = key;
+            }
+            return true;
+        }
+
+        List<byte[]> keys = new List<byte[]>();
+        void LoadKeysFromCemu()
+        {
+            keys.Clear();
+            var version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
+            string  keysFile = Path.Combine(version.Folder, "keys.txt");
+            if (File.Exists(keysFile))
+            {
+                string[] lines = File.ReadAllLines(keysFile);
+                foreach (string line in lines)
+                {
+                    string keyEntry = "";
+                    if (line.Contains("#"))
+                    {
+                        string[] toks = line.Split('#');
+                        if (toks.Length > 0)
+                        {
+                            keyEntry = toks[0].Trim();
+                        }
+                    }
+                    else
+                    {
+                        keyEntry = line.Trim();
+                    }
+                    if (keyEntry.Length == 32)
+                    {
+                        byte[] key = Utils.StringToByteArray(keyEntry);
+                        keys.Add(key);
+                    }
+                }
+            }
+        }
+
+
+        private static string decryptFile(String input, String output, String regex, bool overwrite, byte[] titlekey)
+        {
+            if (input == null)
+            {
+                MessageBox.Show("You need to provide an input file");
+            }
+            FileInfo inputFile = new FileInfo(input);
+
+            //MessageBox.Show("Decrypting: " + inputFile.FullName);
+
+            NUSTitle title = NUSTitleLoaderWUD.loadNUSTitle(inputFile.FullName, titlekey);
+            if (title == null)
+            {
+                return "";
+            }
+
+
+            if (output == null)
+            {
+                output = title.TMD.titleID.ToString("X16");
+            }
+            else
+            {
+                output += Path.DirectorySeparatorChar + title.TMD.titleID.ToString("X16");
+            }
+
+            FileInfo outputFolder = new FileInfo(output);
+
+            //MessageBox.Show("To the folder: " + outputFolder.FullName);
+            title.skipExistingFiles = (!overwrite);
+            DecryptionService decryption = DecryptionService.getInstance(title);
+
+
+            decryption.decryptFSTEntriesTo(regex, outputFolder.FullName);
+            //MessageBox.Show("Decryption done");
+            return title.TMD.titleID.ToString("X16");
         }
 
         /// <summary>
@@ -126,6 +288,28 @@ namespace Budford.View
                 }
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folder"></param>
+        private GameInformation CheckWudFolder(string folder)
+        {
+            if (Directory.Exists(Path.Combine(folder, "meta")))
+            {
+                if (Directory.Exists(Path.Combine(folder, "meta")))
+                {
+                    if (File.Exists(Path.Combine(folder, Path.Combine("meta", "meta.xml"))))
+                    {
+                        XDocument xDoc = XDocument.Load(Path.Combine(folder, Path.Combine("meta", "meta.xml")));
+                        XElement xElement = XElement.Parse(xDoc.ToString());
+
+                        return ReadMetaData(folder, Path.Combine(folder, Path.Combine("meta", "meta.xml")), xElement);
+                    }
+                }
+            }
+            return null;
+        }
+
 
         /// <summary>
         /// 
@@ -133,7 +317,7 @@ namespace Budford.View
         /// <param name="folder"></param>
         /// <param name="file"></param>
         /// <param name="xElement"></param>
-        private void ReadMetaData(string folder, string file, XElement xElement)
+        private GameInformation ReadMetaData(string folder, string file, XElement xElement)
         {
             var productCode = Xml.GetValue(xElement, "product_code");
             if (productCode != null)
@@ -173,10 +357,11 @@ namespace Budford.View
                         game.LaunchFile = file;
                         game.LaunchFileName = Path.GetFileName(file);
                     }
-
+                    return game;
                    
                 }
             }
+            return null;
         }
 
         // Back on the 'UI' thread so we can update the progress bar

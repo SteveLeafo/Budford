@@ -42,6 +42,7 @@ namespace Budford.View
             textBox4.Text = settings.MlcFolder;
             textBox2.Text = settings.SavesFolder;
             textBox3.Text = settings.DownloadsFolder;
+            textBox7.Text = settings.WiiUCommonKey;
 
             for (int i = 0; i < Screen.AllScreens.Length; ++i)
             {
@@ -216,6 +217,7 @@ namespace Budford.View
             model.Settings.MlcFolder = textBox4.Text;
             model.Settings.SavesFolder = textBox2.Text;
             model.Settings.DownloadsFolder = textBox3.Text;
+            model.Settings.WiiUCommonKey = textBox7.Text.Trim();
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
 

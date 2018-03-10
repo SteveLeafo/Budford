@@ -1,5 +1,6 @@
 ﻿using Budford.Model;
 using Budford.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -67,15 +68,40 @@ namespace Budford.View
 
             linkLabel1.Text = information.GameSetting.CompatibilityUrl;
 
-            string iconFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "iconTex.tga");
-            string logoFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "bootLogoTex.tga");
+            string iconFile;
+            string logoFile;
+
+            if (information.Image)
+            {
+                string folder = Path.GetDirectoryName(information.RpxFile);
+                folder = Path.GetDirectoryName(folder);
+                iconFile = Path.Combine(folder, "meta" , "iconTex.tga");
+                logoFile = Path.Combine(folder, "meta", "bootLogoTex.tga");
+            }
+            else
+            {
+                iconFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "iconTex.tga");
+                logoFile = information.LaunchFile.Replace(information.LaunchFileName, "").Replace("code" + Path.DirectorySeparatorChar, "meta" + Path.DirectorySeparatorChar + "bootLogoTex.tga");
+            }
             if (File.Exists(iconFile))
             {
-                pictureBox1.Image = TgaReader.Load(iconFile);
+                try
+                {
+                    pictureBox1.Image = TgaReader.Load(iconFile);
+                }
+                catch (Exception)
+                {
+                }
             }
             if (File.Exists(logoFile))
             {
-                pictureBox2.Image = TgaReader.Load(logoFile);
+                try
+                {
+                    pictureBox2.Image = TgaReader.Load(logoFile);
+                }
+                catch (Exception)
+                {
+                }
             }
 
             trackBar1.Value = information.GameSetting.Volume;

@@ -29,5 +29,7 @@ namespace Budford.Model
         public GameSettings GameSetting;
         public CemuHookSettings CemuHookSetting =new CemuHookSettings();
         internal bool Exists = false;
+        public bool Image;
+        public string RpxFile;
     }
 }

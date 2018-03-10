@@ -223,6 +223,7 @@ Function InstallBudfordFiles
 	SetOutPath "$INSTDIR"
 	File "Budford.exe"
 	File "Budford.ico"
+	File "CNUSLib.dll"
 FunctionEnd
 
 ;*********************************************************************

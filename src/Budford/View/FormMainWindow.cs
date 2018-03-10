@@ -114,7 +114,7 @@ namespace Budford.View
             {
                 foreach (var folder in Model.Settings.RomFolders)
                 {
-                    using (FormScanRomFolder scanner = new FormScanRomFolder(folder, Model.GameData))
+                    using (FormScanRomFolder scanner = new FormScanRomFolder(Model, folder, Model.GameData))
                     {
                         scanner.ShowDialog(this);
                     }
@@ -879,17 +879,26 @@ namespace Budford.View
         /// </summary>
         private void ResizeColumns()
         {
-            if (listView1.Columns.Count > 0)
+            try
             {
-                listView1.Columns[0].Width = 36;
-                if (Model.Settings.AutoSizeColumns)
+                if (listView1.Columns.Count > 0)
                 {
-                    for (int c = 4; c < listView1.Columns.Count; ++c)
+                    listView1.Columns[0].Width = 36;
+                    if (Model.Settings.AutoSizeColumns)
                     {
-                        listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        for (int c = 4; c < listView1.Columns.Count; ++c)
+                        {
+                            if (!listView1.IsDisposed)
+                            {
+                                listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.ColumnContent);
+                                listView1.AutoResizeColumn(c, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            }
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -1339,7 +1348,7 @@ namespace Budford.View
         {
             foreach (var folder in Model.Settings.RomFolders)
             {
-                using (FormScanRomFolder scanner = new FormScanRomFolder(folder, Model.GameData))
+                using (FormScanRomFolder scanner = new FormScanRomFolder(Model, folder, Model.GameData))
                 {
                     scanner.ShowDialog(this);
                 }
