@@ -1,6 +1,10 @@
 # Budford Change Log
 
-## V1.0.58
+
+## V1.0.60
+- Issue#8: Added support for WUD files.  
+
+## V1.0.59
 - Issue#10: Fixed an issue that was preventing Cemu from launching with a visible window when launching with Budford from the command line
 
 ## V1.0.58
