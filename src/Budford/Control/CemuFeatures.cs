@@ -822,12 +822,18 @@ namespace Budford.Control
 
                 if (!IsGraphicPackInstalled(packName))
                 {
-                    if (File.Exists("tempGraphicPack.zip"))
+                    try
                     {
-                        File.Delete("tempGraphicPack.zip");
+                        if (File.Exists("tempGraphicPack.zip"))
+                        {
+                            File.Delete("tempGraphicPack.zip");
+                        }
+                        var unpacker = new Unpacker(parent);
+                        unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, Path.Combine("graphicsPacks", packName), "Graphic Pack");
                     }
-                    var unpacker = new Unpacker(parent);
-                    unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, Path.Combine("graphicsPacks", packName), "Graphic Pack");                    
+                    catch (Exception)
+                    {
+                    }
                 }
                 else
                 {

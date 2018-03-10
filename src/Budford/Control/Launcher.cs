@@ -486,7 +486,13 @@ namespace Budford.Control
                 if (File.Exists(Path.Combine(src.FullName, "Budford.lck")))
                 {
                     // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
-                    File.Delete(Path.Combine(src.FullName, "Budford.lck"));
+                    try
+                    {
+                        File.Delete(Path.Combine(src.FullName, "Budford.lck"));
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
 
                 if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))

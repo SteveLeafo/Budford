@@ -68,31 +68,10 @@ namespace Budford.Control
             }
             else
             {
+                mainForm.launchGame = cmdLineFileName;
+                mainForm.LaunchFull = cmdLineFullScreen;
 
-                if (model.Settings.StopHotkey != "None")
-                {
-                    mainForm.launchGame = cmdLineFileName;
-                    mainForm.LaunchFull = cmdLineFullScreen;
-
-                    Application.Run(mainForm);
-                }
-                else
-                {
-                    if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
-                    {
-                        CemuFeatures.DownloadLatestGraphicsPack(null, model, false);
-                    }
-                    foreach (var game in model.GameData)
-                    {
-                        if (game.Value.LaunchFile.ToLower() == cmdLineFileName.ToLower())
-                        {
-                            game.Value.Exists = true;
-                            new Launcher(null).LaunchCemu(null, model, game.Value, false, false, true, cmdLineFullScreen);
-                            return;
-                        }
-                    }
-                    new Launcher(null).LaunchRpx(model, cmdLineFileName, cmdLineFullScreen);
-                }
+                Application.Run(mainForm);
             }
         }
 

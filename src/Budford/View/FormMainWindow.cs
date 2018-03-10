@@ -221,6 +221,7 @@ namespace Budford.View
                 WindowState = FormWindowState.Minimized;
                 Visible = false;
                 Hide();
+                bool launched = false;
                 foreach (var game in Model.GameData)
                 {
                     if (game.Value.LaunchFile.ToLower() == launchGame.ToLower())
@@ -228,10 +229,16 @@ namespace Budford.View
                         RegisterStopHotKey(Model);
                         game.Value.Exists = true;
                         launcher.LaunchCemu(this, Model, game.Value, false, false, false, LaunchFull);
+                        launched = true;
                         break;
                     }
                 }
-                return;
+                if (!launched)
+                {
+                    // Game wasn't in library, so just launch with current settings.
+                    new Launcher(null).LaunchRpx(Model, launchGame, LaunchFull);
+                }
+                Close();
             }
             
             base.OnLoad(e);
