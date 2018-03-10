@@ -2429,11 +2429,14 @@ namespace Budford.View
             }
             else
             {
-                UnregisterHotKey(Handle, MyactionHotkeyId);
-                EnableControlsForGameExitted();
                 if (launchGame != "")
                 {
-                    Close();
+                    if (Model.Settings.StopHotkey == "None")
+                    {
+                        UnregisterHotKey(Handle, MyactionHotkeyId);
+                        EnableControlsForGameExitted();
+                        Close();
+                    }
                 }
             }
         }
