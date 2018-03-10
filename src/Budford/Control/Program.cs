@@ -68,6 +68,7 @@ namespace Budford.Control
             }
             else
             {
+                mainForm.WindowState = FormWindowState.Minimized;
                 mainForm.launchGame = cmdLineFileName;
                 mainForm.LaunchFull = cmdLineFullScreen;
 

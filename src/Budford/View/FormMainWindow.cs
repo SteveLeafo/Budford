@@ -181,6 +181,7 @@ namespace Budford.View
             pictureBox1.Visible = Model.Settings.ShowToolBar;
             showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
             listView1.KeyDown += listView1_KeyDown;
+            this.Resize += FormMainWindow_Resize;
 
             Model.Settings.CurrentView = "Detailed";
 
@@ -214,6 +215,21 @@ namespace Budford.View
             LoadPlugIns();
         }
 
+        void FormMainWindow_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                notifyIcon1.Visible = true;
+                //notifyIcon1.ShowBalloonTip(500);
+                this.Hide();
+            }
+
+            else if (FormWindowState.Normal == this.WindowState)
+            {
+                notifyIcon1.Visible = false;
+            }
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             if (launchGame != "")
@@ -238,7 +254,6 @@ namespace Budford.View
                     // Game wasn't in library, so just launch with current settings.
                     new Launcher(null).LaunchRpx(Model, launchGame, LaunchFull);
                 }
-                Close();
             }
             
             base.OnLoad(e);
@@ -2404,8 +2419,24 @@ namespace Budford.View
             CemuFeatures.DownloadLatestGraphicsPack(this, Model);
         }
 
-     
 
+
+        internal void ProcessRunning()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(ProcessRunning));
+            }
+            else
+            {
+                UnregisterHotKey(Handle, MyactionHotkeyId);
+                EnableControlsForGameExitted();
+                if (launchGame != "")
+                {
+                    Close();
+                }
+            }
+        }
         internal void ProcessExited()
         {
             if (InvokeRequired)

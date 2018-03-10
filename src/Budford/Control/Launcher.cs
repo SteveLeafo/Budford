@@ -958,6 +958,10 @@ namespace Budford.Control
 
                 SetGamePadViewIfDesired(game);
 
+                if (parent != null)
+                {
+                    parent.ProcessRunning();
+                }
             }
             catch (Exception)
             {
