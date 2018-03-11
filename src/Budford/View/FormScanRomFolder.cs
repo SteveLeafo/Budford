@@ -111,7 +111,7 @@ namespace Budford.View
             foreach (var file in Directory.EnumerateFiles(romFolder))
             { 
                  var extension = Path.GetExtension(file);
-                 if (extension != null && extension.ToUpper() == ".WUD")
+                 if (extension != null && (extension.ToUpper() == ".WUD" || extension.ToUpper() == ".WUX"))
                  {
                      if (GrabKeys())
                      {
