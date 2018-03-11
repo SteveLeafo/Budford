@@ -2560,6 +2560,10 @@ namespace Budford.View
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    if (!Directory.Exists(SpecialFolders.PlugInFolder(Model)))
+                    {
+                        Directory.CreateDirectory(SpecialFolders.PlugInFolder(Model));
+                    }
                     File.Copy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(Model), Path.GetFileName(dlg.FileName)), true);
                     LoadPlugIns();
                 }
