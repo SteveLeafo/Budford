@@ -1,5 +1,8 @@
 # Budford Change Log
 
+## V1.0.63
+- Upgraded to the latest version of CNUSLib which fixes the issue where the icon file wasn't displaying on the game information form for WUD files.
+
 ## V1.0.62
 - Issue#12: Fixed an issue where Borderless Fullscreen mode wasn't working when using Budford to launch games via the command line.
 
