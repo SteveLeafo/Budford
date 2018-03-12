@@ -140,6 +140,8 @@ namespace Budford.View
                                              if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
                                              {
                                                  gi.RpxFile = rpxFile;
+                                                 FileInfo fi = new FileInfo(file);
+                                                 gi.Size = (fi.Length / 1024 / 1024).ToString("N0") + " MB";
                                              }
                                          }
                                      }
@@ -164,6 +166,8 @@ namespace Budford.View
                                     if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
                                     {
                                         gi.RpxFile = rpxFile;
+                                        FileInfo fi = new FileInfo(file);
+                                        gi.Size = (fi.Length / 1024 / 1024).ToString("N0") + " MB";
                                     }
                                 }
 
