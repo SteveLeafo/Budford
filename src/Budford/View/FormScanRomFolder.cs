@@ -79,9 +79,10 @@ namespace Budford.View
         /// <param name="e"></param>
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            showCommonKeyError = true;
             if (Directory.Exists(romFolder))
             {
-                CheckForImageFiles();
+                CheckForImageFiles(romFolder);
 
                 if (Directory.Exists(Path.Combine(romFolder, "code")))
                 {
@@ -94,6 +95,8 @@ namespace Budford.View
 
                 foreach (var folder in Directory.EnumerateDirectories(romFolder))
                 {
+                    CheckForImageFiles(folder);
+
                     if (Directory.Exists(Path.Combine(folder, "code")))
                     {
                         CheckFolder(folder);
@@ -106,9 +109,9 @@ namespace Budford.View
             }
         }
 
-        private void CheckForImageFiles()
+        private void CheckForImageFiles(string folderIn)
         {
-            foreach (var file in Directory.EnumerateFiles(romFolder))
+            foreach (var file in Directory.EnumerateFiles(folderIn))
             { 
                  var extension = Path.GetExtension(file);
                  if (extension != null && (extension.ToUpper() == ".WUD" || extension.ToUpper() == ".WUX"))
@@ -175,6 +178,7 @@ namespace Budford.View
             }
         }
 
+        bool showCommonKeyError = true;
         bool GrabKeys()
         {
             if (CNUSLib.Settings.commonKey != null)
@@ -182,7 +186,11 @@ namespace Budford.View
                 String commonKey = model.Settings.WiiUCommonKey;
                 if (commonKey == null || commonKey == "")
                 {
-                    MessageBox.Show("No Common Key found, please set you Wii U common key in the Budford configuration form");
+                    if (showCommonKeyError)
+                    {
+                        MessageBox.Show("No Common Key found, please set you Wii U common key in the Budford configuration form");
+                        showCommonKeyError = false;
+                    }
                     return false;
                 }
                 LoadKeysFromCemu();
