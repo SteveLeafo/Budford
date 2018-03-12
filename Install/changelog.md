@@ -1,5 +1,12 @@
 # Budford Change Log
 
+## V1.0.64
+- Fixed a minor issue where the file size was reported incorrectly for .WUD and .WUX files.
+- Budford will now search sub-folders for .WUD and .WUX files.
+- Fixed an issue where importing a plug-in would crash if the Plug-ins folder didn't exist.
+- Added support for .WUX files
+- Upgraded to the latest version of CNUSLib.
+
 ## V1.0.63
 - Upgraded to the latest version of CNUSLib which fixes the issue where the icon file wasn't displaying on the game information form for WUD files.
 
@@ -7,7 +14,7 @@
 - Issue#12: Fixed an issue where Borderless Fullscreen mode wasn't working when using Budford to launch games via the command line.
 
 ## V1.0.60
-- Issue#8: Added support for WUD files.  
+- Issue#8: Added support for .WUD files.  
 
 ## V1.0.59
 - Issue#10: Fixed an issue that was preventing Cemu from launching with a visible window when launching with Budford from the command line.
