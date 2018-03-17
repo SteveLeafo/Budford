@@ -315,39 +315,53 @@ namespace Budford.Control
         internal static List<GameInformation> GetGames(Model.Model model, string name)
         {
             List<GameInformation> games = new List<GameInformation>();
+            string orgName = name;
             name = SetCleanName(name);
 
-            if (name.Contains("KART"))
+            if (name.Contains("DEUS"))
             {
                 name = name.ToUpper();
             }
 
             foreach (var g in model.GameData)
             {
+                if (g.Value.CleanName.Contains("DEUS"))
+                {
+                    name = name.ToUpper();
+                }
                 if (name == g.Value.CleanName)
                 {
                     games.Add(g.Value);
+                    g.Value.CleanName = "ZZZZ";
                 }
             }
 
             if (games.Count == 0)
             {
                 int levenshteinTolerence = 5;
-                //for (int levenshteinTolerence = 5; levenshteinTolerence < 10; levenshteinTolerence += 2)
+                //for (int levenshteinTolerence = 5; levenshteinTolerence < 8; levenshteinTolerence += 2)
                 {
                     foreach (var g in model.GameData)
                     {
                         if (name == g.Value.CleanName)
                         {
                             games.Add(g.Value);
+                            g.Value.CleanName = "ZZZZ";
                         }
-                        else if (g.Value.CleanName == name || g.Value.CleanName.StartsWith(name))
+                        else if (g.Value.CleanName.StartsWith(name))
                         {
                             games.Add(g.Value);
+                            g.Value.CleanName = "ZZZZ";
                         }
                         else if (name.Length > 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
                         {
                             games.Add(g.Value);
+                            g.Value.CleanName = "ZZZZ";
+                        }
+                        else if (name.Length <= 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < 2)
+                        {
+                            games.Add(g.Value);
+                            g.Value.CleanName = "ZZZZ";
                         }
                     }
                     //if (games.Count > 0)
@@ -355,20 +369,7 @@ namespace Budford.Control
                     //    break;
                     //}
                 }
-            }
-            if (games.Count == 0)
-            {
-                foreach (var g in model.GameData)
-                {
-                    if (name.StartsWith(g.Value.CleanName))
-                    {
-                        if (g.Value.CleanName.Length > 12)
-                        {
-                            games.Add(g.Value);
-                        }
-                    }
-                }
-            }
+            }            
 
             if (games.Count == 0)
             {
@@ -377,10 +378,30 @@ namespace Budford.Control
                     if (g.Value.CleanName.Contains(name))
                     {
                         games.Add(g.Value);
+                        g.Value.CleanName = "ZZZZ";
                     }
                 }
             }
 
+            if (games.Count == 0)
+            {
+                foreach (var g in model.GameData)
+                {
+                    if (name.StartsWith(g.Value.CleanName))
+                    {
+                        if (g.Value.CleanName.Length > 8)
+                        {
+                            games.Add(g.Value);
+                            g.Value.CleanName = "ZZZZ";
+                        }
+                    }
+                }
+            }
+
+            if (games.Count == 0)
+            {
+                return games;
+            }
             return games;
         }
 
@@ -447,15 +468,30 @@ namespace Budford.Control
         private static string SetCleanName(string name)
         {
             string cleanName = name.ToUpper();
+            if (cleanName == "DISNEY INFINITY")
+            {
+                cleanName = "INFINITY DISNEY";
+            }
+            cleanName = cleanName.Replace("TOM CLANCY'S", "");
+            cleanName = cleanName.Replace("REV.", "Revolution");
             cleanName = cleanName.Replace(":", "");
+            cleanName = cleanName.Replace("®", "");
             cleanName = cleanName.Replace("®", "");
             cleanName = cleanName.Replace("™", "");
             cleanName = cleanName.Replace("!", "");
             cleanName = cleanName.Replace("+", "");
+            cleanName = cleanName.Replace("[", "");
+            cleanName = cleanName.Replace("]", "");
+            cleanName = cleanName.Replace(".", "");
             cleanName = cleanName.Replace("’", "");
             cleanName = cleanName.Replace("'", "");
             cleanName = cleanName.Replace("-", "");
-            cleanName = cleanName.Replace("REV.", "Revolution");
+            cleanName = cleanName.Replace("REMIX 1", "REMIX");
+            cleanName = cleanName.Replace("ADVENTURES 1", "ADVENTURES");
+            cleanName = cleanName.Replace("MARIO & SONIC", "M & S");
+            cleanName = cleanName.Replace("PAINTBRUSH", "");
+            cleanName = cleanName.Replace("FOR", "");
+            cleanName = cleanName.Replace("WII", "");
             cleanName = cleanName.Replace(" EP ", " Extended Play ");
             cleanName = cleanName.Replace("  ", " ");
             cleanName = cleanName.Replace("  ", " ");

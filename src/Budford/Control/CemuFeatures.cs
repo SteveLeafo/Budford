@@ -783,11 +783,18 @@ namespace Budford.Control
 
                 Persistence.SetCleanNames(model);
 
+                string name = "";
+
+                foreach (var g in model.GameData)
+                {
+                    //g.Value.Publisher = "";
+                    g.Value.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.NotSet;
+                }
                 foreach (var line in dlc.Result.Split('\n'))
                 {
                     if (line.Contains("<td class=\"title\">"))
                     {
-                        string name = line.Substring(line.LastIndexOf("\">", StringComparison.Ordinal) + 2, line.LastIndexOf("/a", StringComparison.Ordinal) - line.LastIndexOf("\">", StringComparison.Ordinal) - 3).Replace("&amp;", "&");
+                        name = line.Substring(line.LastIndexOf("\">", StringComparison.Ordinal) + 2, line.LastIndexOf("/a", StringComparison.Ordinal) - line.LastIndexOf("\">", StringComparison.Ordinal) - 3).Replace("&amp;", "&");
                         url = line.Substring(line.IndexOf("http", StringComparison.Ordinal), (line.LastIndexOf("\">", StringComparison.Ordinal) - line.IndexOf("http", StringComparison.Ordinal))).Replace("&amp;", "&");
                         currentGames = Persistence.GetGames(model, name);
                     }
@@ -797,6 +804,11 @@ namespace Budford.Control
                         if (currentGames != null)
                         {
                             SetGameStatus(currentGames, rating, url);
+                            //foreach (var g in currentGames)
+                            //{
+                            //    g.Publisher = name;
+                            //}
+                            name = "";
                             currentGames.Clear();
                         }
                     }
