@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Budford.Control;
+using System.IO;
 
 namespace Budford.Tools
 {
@@ -44,7 +45,7 @@ namespace Budford.Tools
                 if (srcFi.Length > destFi.Length)
                 {
                     // Always keep a copy of the largest
-                    File.Copy(src, dest, true);
+                    FileManager.SafeCopy(src, dest, true);
                 }
             }
             else
@@ -53,7 +54,7 @@ namespace Budford.Tools
                 {
                     Directory.CreateDirectory(saveFolder + folder);
                 }
-                File.Copy(src, dest, true);
+                FileManager.SafeCopy(src, dest, true);
             }
         }
     }

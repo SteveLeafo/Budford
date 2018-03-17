@@ -459,10 +459,7 @@ namespace Budford.View
                             if (p > -1)
                             {
                                 string cemuHook = s.Substring(0, p);
-                                if (File.Exists("cemu_hook.zip"))
-                                {
-                                    File.Delete("cemu_hook.zip");
-                                }
+                                FileManager.SafeDelete("cemu_hook.zip");
                                 unpacker.DownloadAndUnpack("cemu_hook.zip", "https://files.sshnuke.net/" + cemuHook, "Downloads", "CEMU Hook");
                                 return ;
                             }
@@ -571,8 +568,8 @@ namespace Budford.View
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    File.Copy(dlg.FileName, Path.GetFileName(dlg.FileName), true);
-                    File.Copy(dlg.FileName, "cemu_hook.zip", true);
+                    FileManager.SafeCopy(dlg.FileName, Path.GetFileName(dlg.FileName), true);
+                    FileManager.SafeCopy(dlg.FileName, "cemu_hook.zip", true);
                     CemuFeatures.RepairInstalledVersions(this, model);
                     button3_Click(null, null);
                     PopulateList();

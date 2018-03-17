@@ -94,7 +94,7 @@ namespace Budford.View
                     {
                         if (!File.Exists(Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name)))
                         {
-                            File.Move(Path.Combine(version.Folder, file.DestinationFolder, file.Name), Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name));
+                            FileManager.SafeMove(Path.Combine(version.Folder, file.DestinationFolder, file.Name), Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name));
                         }
                     }
                     foreach (ZipArchiveEntry zippedFile in zipArchive.Entries)
@@ -121,7 +121,7 @@ namespace Budford.View
                     {
                         if (File.Exists(dlg.FileName))
                         {
-                            File.Copy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(model), plugIn.FileName));
+                            FileManager.SafeCopy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(model), plugIn.FileName));
                         }
                     }
                 }

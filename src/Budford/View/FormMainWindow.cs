@@ -75,15 +75,16 @@ namespace Budford.View
                 }
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public FormMainWindow()
+        public FormMainWindow(Model.Model modelIn)
         {
             InitializeComponent();
 
-            Model = TransferLegacyModel();
-
+            //Model = TransferLegacyModel();
+            Model = modelIn;
             UsbNotification.RegisterUsbDeviceNotification(Handle);
 
             unpacker = new Unpacker(this);
@@ -276,8 +277,8 @@ namespace Budford.View
             {
                 if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
                 {
-                    File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName(), false);
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
+                    FileManager.SafeCopy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName(), false);
+                    FileManager.SafeDelete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
                 }
             }
 
@@ -726,17 +727,7 @@ namespace Budford.View
                     DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game.Value));
 
                     string lockFileName = Path.Combine(dest.FullName, "Budford.lck");
-                    if (File.Exists(lockFileName))
-                    {
-                        try
-                        {
-                            File.Delete(lockFileName);
-                        }
-                        catch (Exception)
-                        {
-                            // ignored
-                        }
-                    }
+                    FileManager.SafeDelete(lockFileName);
                 }
             }
         }
@@ -949,7 +940,8 @@ namespace Budford.View
             }
             else
             {
-                lvi.SubItems.Add(game.Value.Publisher);
+                //lvi.SubItems.Add(game.Value.Publisher);
+                lvi.SubItems.Add(game.Value.Schmooker);
             }
             lvi.SubItems.Add(game.Value.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + game.Value.CompanyCode + "       ");
             lvi.SubItems.Add(game.Value.Size);
@@ -1869,6 +1861,19 @@ namespace Budford.View
                     break;
                 }
             }
+            foreach (var game in Model.GameData)
+            {
+                if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
+                {
+                    StatusUpdate su = new StatusUpdate()
+                    {
+                        UpdateDate = DateTime.Now.Ticks.ToString(),
+                        Status = game.Value.GameSetting.OfficialEmulationState
+
+                    };
+                    game.Value.StatusUpdates.Add(su);
+                }
+            }
             PopulateListView();
             ResizeColumnHeaders();
         }
@@ -2564,7 +2569,7 @@ namespace Budford.View
                     {
                         Directory.CreateDirectory(SpecialFolders.PlugInFolder(Model));
                     }
-                    File.Copy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(Model), Path.GetFileName(dlg.FileName)), true);
+                    FileManager.SafeCopy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(Model), Path.GetFileName(dlg.FileName)), true);
                     LoadPlugIns();
                 }
             }

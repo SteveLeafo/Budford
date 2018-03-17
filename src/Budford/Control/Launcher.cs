@@ -9,6 +9,8 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using Budford.View;
 using System.Drawing;
+using SharpPresence;
+using System.Text;
 
 namespace Budford.Control
 {
@@ -114,6 +116,8 @@ namespace Budford.Control
 
             if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
+                DiscordRichPresence.Update(game);
+
                 DeleteLogFile(modelIn, logfile);
                 SetupCafeLibs(modelIn, game);
                 if (game != null)
@@ -167,6 +171,21 @@ namespace Budford.Control
                 MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
                 TriggerEarlyExit();
             }
+        }
+
+        public static string ToReadableString(TimeSpan span)
+        {
+            string formatted = string.Format("{0}{1}{2}{3}",
+                span.Duration().Days > 0 ? string.Format("{0:2} : ", span.Days) : string.Empty,
+                span.Duration().Hours > 0 ? string.Format("{0:2} : ", span.Hours) : string.Empty,
+                span.Duration().Minutes > 0 ? string.Format("{0:2} : ", span.Minutes) : string.Empty,
+                span.Duration().Seconds > 0 ? string.Format("{0:2} :", span.Seconds) : string.Empty);
+
+            if (formatted.EndsWith(", ")) formatted = formatted.Substring(0, formatted.Length - 2);
+
+            if (string.IsNullOrEmpty(formatted)) formatted = "0 seconds";
+
+            return formatted;
         }
 
         private void StartCemuProcess(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, ProcessStartInfo start, Process parentProcess, ProcessPriorityClass original)
@@ -257,8 +276,8 @@ namespace Budford.Control
             {
                 if (game.GameSetting.UseCafeLibs == 1)
                 {
-                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
-                    File.Copy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));
+                    FileManager.SafeCopy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snd_user.rpl"), Path.Combine(cafeLibs, "snd_user.rpl"));
+                    FileManager.SafeCopy(Path.Combine(SpecialFolders.CafeLibDirBudford(model), "snduser2.rpl"), Path.Combine(cafeLibs, "snduser2.rpl"));
                 }
             }
         }
@@ -297,7 +316,7 @@ namespace Budford.Control
                         FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
                         if (!File.Exists(dest.FullName) || dest.Length < src.Length)
                         {
-                            File.Copy(src.FullName, dest.FullName, true);
+                            FileManager.SafeCopy(src.FullName, dest.FullName, true);
                         }
                     }
                 }
@@ -443,6 +462,7 @@ namespace Budford.Control
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
         {
+            DiscordRichPresence.EndGame();
             if (runningVersion != null)
             {
                 if (runningGame != null)
@@ -488,7 +508,7 @@ namespace Budford.Control
                     // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
                     try
                     {
-                        File.Delete(Path.Combine(src.FullName, "Budford.lck"));
+                        FileManager.SafeDelete("Budford.lck");
                     }
                     catch (Exception)
                     {
@@ -526,7 +546,7 @@ namespace Budford.Control
                     {
                         if (folder != null) Directory.CreateDirectory(folder);
                     }
-                    File.Copy(srcFile.FullName, destFile.FullName, true);
+                    FileManager.SafeCopy(srcFile.FullName, destFile.FullName, true);
                 }
             }
         }
@@ -739,10 +759,7 @@ namespace Budford.Control
                         text = text.Replace("Wii U Pro Controller", "Wii U Classic Controller");
                         break;
                     case 5:
-                        if (File.Exists(fileName))
-                        {
-                            File.Delete(fileName);
-                        }
+                        FileManager.SafeDelete(fileName);
                         return;
                 }
                 File.WriteAllText(fileName, text);
@@ -795,7 +812,7 @@ namespace Budford.Control
             if (File.Exists(fileName))
             {
                 string backUpFileName = Path.Combine(version.Folder, "controllerProfiles", destination);
-                File.Copy(fileName, backUpFileName, true);
+                FileManager.SafeCopy(fileName, backUpFileName, true);
             }
         }
 
@@ -811,12 +828,12 @@ namespace Budford.Control
                 DirectoryInfo di1 = new DirectoryInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), "transferable"));
                 foreach (FileInfo file in di1.GetFiles())
                 {
-                    file.Delete();
+                    FileManager.SafeDelete(file.FullName);
                 }
                 DirectoryInfo di2 = new DirectoryInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), "shaderCache", "precompiled"));
                 foreach (FileInfo file in di2.GetFiles())
                 {
-                    file.Delete();
+                    FileManager.SafeDelete(file.FullName);
                 }
             }
         }
@@ -830,10 +847,7 @@ namespace Budford.Control
         {
             try
             {
-                if (File.Exists(logfileIn))
-                {
-                    File.Delete(logfileIn);
-                }
+                FileManager.SafeDelete(logfile);
             }
             catch (Exception ex)
             {

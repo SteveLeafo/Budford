@@ -199,7 +199,7 @@ namespace Budford.View
             if (ver != null)
             {
                 unpacker.Unpack(fileNames[4], ver.Folder);
-                File.Copy(fileNames[4], "cemu_hook.zip", true);
+                FileManager.SafeCopy(fileNames[4], "cemu_hook.zip", true);
                 CemuFeatures.RepairInstalledVersions(this, model);
             }
         }
@@ -251,10 +251,7 @@ namespace Budford.View
 
                 if (!CemuFeatures.IsGraphicPackInstalled(packName))
                 {
-                    if (File.Exists("tempGraphicPack.zip"))
-                    {
-                        File.Delete("tempGraphicPack.zip");
-                    }
+                    FileManager.SafeDelete("tempGraphicPack.zip");
                     uris[5] = uri;
                     fileNames[5] = "tempGraphicPack.zip";
                 }

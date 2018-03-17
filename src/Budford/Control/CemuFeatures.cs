@@ -143,6 +143,8 @@ namespace Budford.Control
 
                 RepairControllers(model, v);
 
+                CopyLargestKeysDotText(model, v);
+
                 RepairOnlineFiles(model, v);
 
                 RepairUpdateFolder(model, v);
@@ -253,7 +255,7 @@ namespace Budford.Control
                     string sourceFile = Path.Combine(v.Folder, data[2], data[0]);
                     if (File.Exists(sourceFile))
                     {
-                        File.Copy(sourceFile, destinationFile);
+                        FileManager.SafeCopy(sourceFile, destinationFile);
                         break;
                     }
                 }
@@ -277,7 +279,7 @@ namespace Budford.Control
                         string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
                         if (!File.Exists(destinationFile))
                         {
-                            File.Copy(file, destinationFile);
+                            FileManager.SafeCopy(file, destinationFile);
                         }
                     }
                 }
@@ -320,7 +322,7 @@ namespace Budford.Control
                             string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
                             if (!File.Exists(destinationFile))
                             {
-                                File.Copy(file, destinationFile);
+                                FileManager.SafeCopy(file, destinationFile);
                             }
                         }
                     }
@@ -345,7 +347,7 @@ namespace Budford.Control
                         }
                         if (!File.Exists(destinationFile))
                         {
-                            File.Copy(sourceFile, destinationFile);
+                            FileManager.SafeCopy(sourceFile, destinationFile);
                         }
                     }
                 }
@@ -355,21 +357,21 @@ namespace Budford.Control
         private static void CopyPatchFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)
         {
             Directory.CreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content"));
-            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), true);
-            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), true);
-            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), true);
-            File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"), true);
+            FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), true);
+            FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), true);
+            FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), true);
+            FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddleLG.dat"), true);
         }
 
         private static void CopyOnlineFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)
         {
             if (onlineDestination.VersionNumber > 1110)
             {
-                File.Copy(Path.Combine(onlineSource.Folder, "otp.bin"), Path.Combine(onlineDestination.Folder, "otp.bin"), true);
-                File.Copy(Path.Combine(onlineSource.Folder, "seeprom.bin"), Path.Combine(onlineDestination.Folder, "seeprom.bin"), true);
+                FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "otp.bin"), Path.Combine(onlineDestination.Folder, "otp.bin"), true);
+                FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "seeprom.bin"), Path.Combine(onlineDestination.Folder, "seeprom.bin"), true);
 
                 Directory.CreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001"));
-                File.Copy(Path.Combine(onlineSource.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), true);
+                FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), true);
 
                 Directory.CreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
                 DirectoryInfo s1 = new DirectoryInfo(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
@@ -713,6 +715,38 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        internal static void CopyLargestKeysDotText(Model.Model model, InstalledVersion installedVersion)
+        {
+            int latestVersionWithProfiles = -1;
+            long maxSize = 0;
+            InstalledVersion versionWithTheMostKeys = null;
+
+            foreach (var v in model.Settings.InstalledVersions)
+            {
+                FileInfo keysFile = new FileInfo(Path.Combine(v.Folder, "keys.txt"));
+                if (keysFile.Exists)
+                {
+                    if (keysFile.Length > maxSize)
+                    {
+                        if (v.VersionNumber > latestVersionWithProfiles)
+                        {
+                            latestVersionWithProfiles = v.VersionNumber;
+                            versionWithTheMostKeys = v;
+                            maxSize = keysFile.Length;
+                        }
+                    }
+                }
+            }
+
+            if (versionWithTheMostKeys != null)
+            {
+                FileManager.SafeCopy(Path.Combine(versionWithTheMostKeys.Folder, "keys.txt"), Path.Combine(installedVersion.Folder, "keys.txt"), true);               
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="unpacker"></param>
         /// <param name="v"></param>
         internal static void InstallCemuHook(Unpacker unpacker, InstalledVersion v)
@@ -746,6 +780,8 @@ namespace Budford.Control
 
                 List<GameInformation> currentGames = null;
                 string url = "";
+
+                Persistence.SetCleanNames(model);
 
                 foreach (var line in dlc.Result.Split('\n'))
                 {
@@ -824,10 +860,7 @@ namespace Budford.Control
                 {
                     try
                     {
-                        if (File.Exists("tempGraphicPack.zip"))
-                        {
-                            File.Delete("tempGraphicPack.zip");
-                        }
+                        FileManager.SafeDelete("tempGraphicPack.zip");
                         var unpacker = new Unpacker(parent);
                         unpacker.DownloadAndUnpack("tempGraphicPack.zip", uri, Path.Combine("graphicsPacks", packName), "Graphic Pack");
                     }

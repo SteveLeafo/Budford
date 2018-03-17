@@ -5,6 +5,13 @@ using Budford.Properties;
 using Budford.View;
 using Budford.Utilities;
 using Microsoft.Win32;
+using Budford.Tools;
+using System.Collections.Generic;
+using Budford.Model;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Text;
 
 namespace Budford.Control
 {
@@ -15,7 +22,7 @@ namespace Budford.Control
         {
             return isInstalled;
         }
-
+     
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -60,8 +67,7 @@ namespace Budford.Control
                 cmdLineLaunch = true;
             }
 
-            FormMainWindow mainForm = new FormMainWindow();
-
+            FormMainWindow mainForm = new FormMainWindow(model);
             if (cmdLineFileName == string.Empty || !cmdLineLaunch)
             {
                 Application.Run(mainForm);

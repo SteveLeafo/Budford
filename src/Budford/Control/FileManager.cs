@@ -58,7 +58,10 @@ namespace Budford.Control
                         {
                             Directory.CreateDirectory(target.FullName);
                         }
-                        file.CopyTo(Path.Combine(target.FullName, file.Name));
+                        if (!Path.GetFileName(file.Name).Contains("Budford"))
+                        {
+                            file.CopyTo(Path.Combine(target.FullName, file.Name));
+                        }
                     }
                     catch (Exception)
                     {
@@ -116,7 +119,7 @@ namespace Budford.Control
                             FileCache destCache = FileCache.fileCache_openExisting(destination, 1);
                             message = message + "\r\n\r\nExisting cache: " + destCache.FileTableEntryCount + " shaders.\r\nNew Cache: " + srcCache.FileTableEntryCount + " shaders.";
                         }
-                        File.Copy(fileName, destination, true);
+                        FileManager.SafeCopy(fileName, destination, true);
                         MessageBox.Show(message, Resources.FileManager_ImportShaderCache_Imported_OK);
                     }
                 }
@@ -284,7 +287,7 @@ namespace Budford.Control
 
                 foreach (FileInfo file in di.GetFiles())
                 {
-                    file.Delete();
+                    SafeDelete(file.FullName); 
                 }
                 foreach (DirectoryInfo dir in di.GetDirectories())
                 {
@@ -303,14 +306,66 @@ namespace Budford.Control
             DirectoryInfo di1 = new DirectoryInfo(Path.Combine(version.Folder, "shaderCache", "transferable"));
             foreach (FileInfo file in di1.GetFiles())
             {
-                file.Delete();
+                SafeDelete(file.FullName);
             }
             DirectoryInfo di2 = new DirectoryInfo(Path.Combine(version.Folder, "shaderCache", "precompiled"));
             foreach (FileInfo file in di2.GetFiles())
             {
-                file.Delete();
+                SafeDelete(file.FullName);
             }
         }
 
+
+        internal static bool SafeCopy(string sourceFileName, string destinationFileName, bool overwrite = false)
+        {
+            try
+            {
+                if (File.Exists(sourceFileName))
+                {
+                    File.Copy(sourceFileName, destinationFileName, overwrite);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                // TODO - Log this?
+            }
+            return false;
+        }
+
+        internal static bool SafeDelete(string fileName)
+        {
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                // TODO - Log this?
+            }
+            return false;
+        }
+
+
+        internal static bool SafeMove(string originalFileName, string newFileName)
+        {
+            try
+            {
+                if (File.Exists(originalFileName))
+                {
+                    File.Move(originalFileName, newFileName);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                // TODO - Log this?
+            }
+            return false;
+        }
     }   
 }

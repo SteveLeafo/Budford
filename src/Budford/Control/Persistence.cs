@@ -80,6 +80,16 @@ namespace Budford.Control
             {
                 string key = gd.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + gd.CompanyCode;
 
+                if (gd.StatusUpdates.Count == 0)
+                {
+                    StatusUpdate su = new StatusUpdate()
+                    {
+                        UpdateDate = DateTime.Now.Ticks.ToString(),
+                        Status = gd.GameSetting.OfficialEmulationState
+
+                    };
+                   gd.StatusUpdates.Add(su);
+                }
                 if (gd.SaveDir.Contains("??") )
                 {
                     //model.Sa
@@ -305,7 +315,8 @@ namespace Budford.Control
         internal static List<GameInformation> GetGames(Model.Model model, string name)
         {
             List<GameInformation> games = new List<GameInformation>();
-            if (name.Contains("hovel"))
+            name = SetCleanName(name);
+            if (name.ToUpper().Contains("BATMAN"))
             {
                 name = name.ToUpper();
             }
@@ -313,13 +324,17 @@ namespace Budford.Control
             {
                 foreach (var g in model.GameData)
                 {
-                    if (g.Value.Name.ToUpper() == name.ToUpper() || g.Value.Name.ToUpper().StartsWith(name.ToUpper()))
+                    if (g.Value.CleanName.Contains("BATMAN"))
+                    {
+                        name = name.ToUpper();
+                    }
+                    if (g.Value.CleanName == name || g.Value.CleanName.StartsWith(name))
                     {
                         games.Add(g.Value);
                     }
-                    else if (LevenshteinDistance.Compute(g.Value.Name.ToUpper(), name.ToUpper()) < levenshteinTolerence)
+                    else if (LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
                     {
-                        if (g.Value.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.NotSet)
+                        //if (g.Value.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.NotSet)
                         {
                             games.Add(g.Value);
                         }
@@ -334,13 +349,103 @@ namespace Budford.Control
             {
                 foreach (var g in model.GameData)
                 {
-                    if (name.ToUpper().StartsWith(g.Value.Name.ToUpper()))
+                    if (name.StartsWith(g.Value.CleanName))
+                    {
+                        if (g.Value.CleanName.Length > 12)
+                        {
+                            games.Add(g.Value);
+                        }
+                    }
+                }
+            }
+
+            if (games.Count == 0)
+            {
+                foreach (var g in model.GameData)
+                {
+                    if (g.Value.CleanName.Contains(name))
                     {
                         games.Add(g.Value);
                     }
                 }
             }
+
             return games;
         }
+
+        /// <summary>
+        /// Returns a list of games with matching titles
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        internal static GameInformation GetClosestMatchingGame(Model.Model model, string name)
+        {
+            name = SetCleanName(name);
+            foreach (var g in model.GameData)
+            {
+                if (name == g.Value.CleanName)
+                {
+                    return g.Value;
+                }
+            }
+            for (int levenshteinTolerence = 5; levenshteinTolerence < 10; levenshteinTolerence += 2)
+            {
+                foreach (var g in model.GameData)
+                {
+                    if (g.Value.CleanName == name || g.Value.CleanName.StartsWith(name))
+                    {
+                        return g.Value;
+                    }
+                    else if (LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
+                    {
+                        return g.Value;
+                    }
+                }
+            }
+            foreach (var g in model.GameData)
+            {
+                if (name.StartsWith(g.Value.CleanName))
+                {
+                    if (g.Value.CleanName.Length > 12)
+                    {
+                        return g.Value;
+                    }
+                }
+            }
+
+            foreach (var g in model.GameData)
+            {
+                if (g.Value.CleanName.Contains(name))
+                {
+                    return g.Value;
+                }
+            }
+
+            return null;
+        }
+
+        internal static void SetCleanNames(Model.Model model)
+        {
+            foreach (var g in model.GameData)
+            {
+                g.Value.CleanName = SetCleanName(g.Value.Name);
+            }
+        }
+
+        private static string SetCleanName(string name)
+        {
+            string cleanName = name.ToUpper();
+            cleanName = cleanName.Replace(":", "");
+            cleanName = cleanName.Replace("®", "");
+            cleanName = cleanName.Replace("™", "");
+            cleanName = cleanName.Replace("!", "");
+            cleanName = cleanName.Replace("'", "");
+            cleanName = cleanName.Replace("REV.", "Revolution");
+            cleanName = cleanName.Replace(" EP ", " Extended Play ");
+            cleanName = cleanName.ToUpper();
+            return cleanName;
+        }
+    
     }
 }

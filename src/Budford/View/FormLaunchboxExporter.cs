@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Budford.Properties;
+using Budford.Control;
 
 namespace Budford.View
 {
@@ -59,11 +60,8 @@ namespace Budford.View
         {
             if (File.Exists(platformFileName))
             {
-                if (File.Exists(platformFileName + ".bak"))
-                {
-                    File.Delete(platformFileName + ".bak");
-                }
-                File.Move(platformFileName, platformFileName + ".bak");
+                FileManager.SafeDelete(platformFileName + ".bak");
+                FileManager.SafeMove(platformFileName, platformFileName + ".bak");
             }
         }
 

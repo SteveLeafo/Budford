@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Budford.Model
 {
     public class GameInformation
     {
         public string Name  = "";
+        internal string Schmooker = "";
         public string Region  = "";
         public string Publisher  = "";
         public string ProductCode  = "";
@@ -27,9 +29,11 @@ namespace Budford.Model
         public int PlayCount = 0;
         public int GraphicsPacksCount = 0;
         public GameSettings GameSetting;
-        public CemuHookSettings CemuHookSetting =new CemuHookSettings();
+        public CemuHookSettings CemuHookSetting = new CemuHookSettings();
+        public List<StatusUpdate> StatusUpdates = new List<StatusUpdate>();
         internal bool Exists = false;
         public bool Image;
         public string RpxFile;
+        internal string CleanName;
     }
 }

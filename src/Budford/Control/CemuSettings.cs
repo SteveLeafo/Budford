@@ -336,10 +336,7 @@ namespace Budford.Control
 
                     try
                     {
-                        if (File.Exists(Path.Combine(version.Folder, "settings.bin")))
-                        {
-                            File.Delete(Path.Combine(version.Folder, "settings.bin"));
-                        }
+                        FileManager.SafeDelete(Path.Combine(version.Folder, "settings.bin"));
                     }
                     catch (Exception ex)
                     {

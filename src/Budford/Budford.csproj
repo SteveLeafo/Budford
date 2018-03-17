@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Control\CemuFeatures.cs" />
     <Compile Include="Control\CemuSettingsFiles.cs" />
+    <Compile Include="Control\DiscordRichPresence.cs" />
     <Compile Include="Control\FileManager.cs" />
     <Compile Include="Control\FolderScanner.cs" />
     <Compile Include="Control\Launcher.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Model\SaveDirs.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\SnapShot.cs" />
+    <Compile Include="Model\StatusUpdate.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewFilters.cs" />
     <Compile Include="Model\WiiU.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Utilities\CurrentOS.cs" />
     <Compile Include="Utilities\CurrentUserSecurity.cs" />
+    <Compile Include="Utilities\Discord.cs" />
     <Compile Include="Utilities\FileCache.cs" />
     <Compile Include="Utilities\FileCacheEntry.cs" />
     <Compile Include="Utilities\IconHelper.cs" />
@@ -297,6 +300,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormMainWindow.resx">
       <DependentUpon>FormMainWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
