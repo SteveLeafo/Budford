@@ -193,11 +193,7 @@ namespace Budford.Control
 
         private void StartCemuProcess(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, ProcessStartInfo start, Process parentProcess, ProcessPriorityClass original)
         {
-            runningProcess = Process.Start(start);
-
-            runningProcess.EnableRaisingEvents = true;
-            runningProcess.Exited += proc_Exited;
-
+            StartCemuProcess(start);
             runningGame = game;
 
             if (parentIn != null)
@@ -465,10 +461,14 @@ namespace Budford.Control
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
         {
-            if (Model.Settings.UpdateDiscordPresence)
+            if (Model != null)
             {
-                DiscordRichPresence.EndGame();
+                if (Model.Settings.UpdateDiscordPresence)
+                {
+                    DiscordRichPresence.EndGame();
+                }
             }
+
             if (runningVersion != null)
             {
                 if (runningGame != null)
@@ -941,8 +941,7 @@ namespace Budford.Control
                 };
 
                 // Run the external process & wait for it to finish
-                startTime = DateTime.Now;
-                runningProcess = Process.Start(start);
+                StartCemuProcess(start);
             }
             else
             {
@@ -952,6 +951,14 @@ namespace Budford.Control
                     parent.ProcessExited();
                 }
             }
+        }
+
+        private void StartCemuProcess(ProcessStartInfo start)
+        {
+            startTime = DateTime.Now;
+            runningProcess = Process.Start(start);
+            runningProcess.EnableRaisingEvents = true;
+            runningProcess.Exited += proc_Exited;
         }
 
 

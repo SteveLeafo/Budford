@@ -25,23 +25,26 @@ namespace Budford.Control
 
         static internal void StartGame(GameInformation game)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(game.Name);
-            string fileName = Tools.HashGenerator.GenerateHashFromRpxRawData(bytes, bytes.Length).ToString("x8");
-
-            if (!LargeImages.Contains(fileName))
+            if (game != null)
             {
-                fileName = "cemul";
-            }
+                byte[] bytes = Encoding.UTF8.GetBytes(game.Name);
+                string fileName = Tools.HashGenerator.GenerateHashFromRpxRawData(bytes, bytes.Length).ToString("x8");
 
-            presence.details = game.Name;
-            presence.largeImageKey = fileName;
-            presence.smallImageKey = "cemus";
-            presence.state = "In Game";
-            presence.partySize = 0;
-            presence.partyMax = 0;
-            presence.instance = 0;
-            presence.startTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-            Discord.UpdatePresence(presence);
+                if (!LargeImages.Contains(fileName))
+                {
+                    fileName = "cemul";
+                }
+
+                presence.details = game.Name;
+                presence.largeImageKey = fileName;
+                presence.smallImageKey = "cemus";
+                presence.state = "In Game";
+                presence.partySize = 0;
+                presence.partyMax = 0;
+                presence.instance = 0;
+                presence.startTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+                Discord.UpdatePresence(presence);
+            }
         }
 
         static internal void EndGame()
