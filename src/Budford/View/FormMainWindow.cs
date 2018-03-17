@@ -942,8 +942,7 @@ namespace Budford.View
             }
             else
             {
-                //lvi.SubItems.Add(game.Value.Publisher);
-                lvi.SubItems.Add(game.Value.Schmooker);
+                lvi.SubItems.Add(game.Value.Publisher);
             }
             lvi.SubItems.Add(game.Value.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + game.Value.CompanyCode + "       ");
             lvi.SubItems.Add(game.Value.Size);
