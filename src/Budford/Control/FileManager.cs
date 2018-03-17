@@ -60,7 +60,7 @@ namespace Budford.Control
                         }
                         if (!Path.GetFileName(file.Name).Contains("Budford"))
                         {
-                            file.CopyTo(Path.Combine(target.FullName, file.Name));
+                            FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name));
                         }
                     }
                     catch (Exception)
@@ -72,10 +72,13 @@ namespace Budford.Control
                 {
                     if (overrideit)
                     {
-                        FileInfo dest = new FileInfo(target.FullName);
-                        if (file.LastWriteTime > dest.LastWriteTime)
+                        if (!Path.GetFileName(file.Name).Contains("Budford"))
                         {
-                            file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                            FileInfo dest = new FileInfo(target.FullName);
+                            if (file.LastWriteTime > dest.LastWriteTime)
+                            {
+                                FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name), true);
+                            }
                         }
                     }
                 }
