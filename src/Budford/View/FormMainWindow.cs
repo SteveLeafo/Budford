@@ -87,6 +87,8 @@ namespace Budford.View
             Model = modelIn;
             UsbNotification.RegisterUsbDeviceNotification(Handle);
 
+            DiscordRichPresence.Initialize();
+
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
 
@@ -1586,6 +1588,7 @@ namespace Budford.View
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             Persistence.Save(Model, GetModelFileName());
+            DiscordRichPresence.ShutDown();
         }
 
         /// <summary>

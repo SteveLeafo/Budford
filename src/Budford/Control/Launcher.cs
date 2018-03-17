@@ -118,7 +118,7 @@ namespace Budford.Control
             {
                 if (modelIn.Settings.UpdateDiscordPresence)
                 {
-                    DiscordRichPresence.Update(game);
+                    DiscordRichPresence.StartGame(game);
                 }
 
                 DeleteLogFile(modelIn, logfile);
