@@ -29,6 +29,9 @@ namespace Budford.Control
             presence.largeImageKey = fileName;
             presence.smallImageKey = "cemus";
             presence.state = "In Game";
+            presence.partySize = 0;
+            presence.partyMax = 0;
+            presence.instance = 0;
             presence.startTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
             Discord.UpdatePresence(presence);
         }

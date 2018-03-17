@@ -21,32 +21,32 @@ namespace SharpPresence
 
         //--------------------------------------------------------------------------------
 
-        public struct RichPresence
+        public class RichPresence
         {
             public string state;
             public string details;
             public Int64 startTimestamp;
-            public Int64 endTimestamp;
+            public Int64 endTimestamp = 0;
             public string largeImageKey;
-            public string largeImageText;
+            public string largeImageText = "";
             public string smallImageKey;
-            public string smallImageText;
-            public string partyId;
+            public string smallImageText = "";
+            public string partyId = "";
             public int partySize;
             public int partyMax;
-            public string matchSecret;
-            public string joinSecret;
-            public string spectateSecret;
+            public string matchSecret = "";
+            public string joinSecret = "";
+            public string spectateSecret = "";
             public sbyte instance;
         }
 
         //--------------------------------------------------------------------------------
 
-        public struct JoinRequest
+        public class JoinRequest
         {
-            public string userId;
-            public string username;
-            public string avatar;
+            public string userId = "";
+            public string username = "";
+            public string avatar = "";
         }
 
         //--------------------------------------------------------------------------------
