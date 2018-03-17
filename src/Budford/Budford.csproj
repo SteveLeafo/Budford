@@ -52,6 +52,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <NoWarn>649</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>View\budford.ico</ApplicationIcon>
