@@ -38,7 +38,7 @@ namespace Budford.Control
             presence.details = "Bewteen Games";
             presence.largeImageKey = "cemul";
             presence.smallImageKey = "cemus";
-            presence.state = "In Menu";
+            presence.state = "Using Budford";
             presence.startTimestamp = 0;
             Discord.UpdatePresence(presence);
             Discord.Shutdown();

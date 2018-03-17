@@ -224,6 +224,7 @@ Function InstallBudfordFiles
 	File "Budford.exe"
 	File "Budford.ico"
 	File "CNUSLib.dll"
+	File "discord-rpc.dll"
 FunctionEnd
 
 ;*********************************************************************

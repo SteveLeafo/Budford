@@ -38,6 +38,7 @@ namespace Budford.View
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
             checkBox10.Checked = settings.BorderlessFullScreen;
+            checkBox11.Checked = settings.UpdateDiscordPresence;
 
             textBox4.Text = settings.MlcFolder;
             textBox2.Text = settings.SavesFolder;
@@ -213,6 +214,7 @@ namespace Budford.View
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
             settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
             settings.BorderlessFullScreen = checkBox10.Checked;
+            settings.UpdateDiscordPresence = checkBox11.Checked;
 
             model.Settings.MlcFolder = textBox4.Text;
             model.Settings.SavesFolder = textBox2.Text;

@@ -44,6 +44,8 @@ namespace Budford.Model
 
         public int ShaderPriority = 2;
 
+        public bool UpdateDiscordPresence = false;
+
         public bool ShowToolBar  = true;
 
         public bool ShowStausBar  = true;

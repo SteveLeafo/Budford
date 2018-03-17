@@ -116,7 +116,10 @@ namespace Budford.Control
 
             if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
             {
-                DiscordRichPresence.Update(game);
+                if (modelIn.Settings.UpdateDiscordPresence)
+                {
+                    DiscordRichPresence.Update(game);
+                }
 
                 DeleteLogFile(modelIn, logfile);
                 SetupCafeLibs(modelIn, game);
@@ -462,7 +465,10 @@ namespace Budford.Control
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
         {
-            DiscordRichPresence.EndGame();
+            if (Model.Settings.UpdateDiscordPresence)
+            {
+                DiscordRichPresence.EndGame();
+            }
             if (runningVersion != null)
             {
                 if (runningGame != null)
