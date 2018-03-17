@@ -316,33 +316,44 @@ namespace Budford.Control
         {
             List<GameInformation> games = new List<GameInformation>();
             name = SetCleanName(name);
-            if (name.ToUpper().Contains("BATMAN"))
+
+            if (name.Contains("KART"))
             {
                 name = name.ToUpper();
             }
-            for (int levenshteinTolerence = 5; levenshteinTolerence < 10; levenshteinTolerence += 2)
+
+            foreach (var g in model.GameData)
             {
-                foreach (var g in model.GameData)
+                if (name == g.Value.CleanName)
                 {
-                    if (g.Value.CleanName.Contains("BATMAN"))
+                    games.Add(g.Value);
+                }
+            }
+
+            if (games.Count == 0)
+            {
+                int levenshteinTolerence = 5;
+                //for (int levenshteinTolerence = 5; levenshteinTolerence < 10; levenshteinTolerence += 2)
+                {
+                    foreach (var g in model.GameData)
                     {
-                        name = name.ToUpper();
-                    }
-                    if (g.Value.CleanName == name || g.Value.CleanName.StartsWith(name))
-                    {
-                        games.Add(g.Value);
-                    }
-                    else if (LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
-                    {
-                        //if (g.Value.GameSetting.OfficialEmulationState == GameSettings.EmulationStateType.NotSet)
+                        if (name == g.Value.CleanName)
+                        {
+                            games.Add(g.Value);
+                        }
+                        else if (g.Value.CleanName == name || g.Value.CleanName.StartsWith(name))
+                        {
+                            games.Add(g.Value);
+                        }
+                        else if (name.Length > 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
                         {
                             games.Add(g.Value);
                         }
                     }
-                }
-                if (games.Count > 0)
-                {
-                    break;
+                    //if (games.Count > 0)
+                    //{
+                    //    break;
+                    //}
                 }
             }
             if (games.Count == 0)
@@ -440,10 +451,16 @@ namespace Budford.Control
             cleanName = cleanName.Replace("®", "");
             cleanName = cleanName.Replace("™", "");
             cleanName = cleanName.Replace("!", "");
+            cleanName = cleanName.Replace("+", "");
+            cleanName = cleanName.Replace("’", "");
             cleanName = cleanName.Replace("'", "");
+            cleanName = cleanName.Replace("-", "");
             cleanName = cleanName.Replace("REV.", "Revolution");
             cleanName = cleanName.Replace(" EP ", " Extended Play ");
+            cleanName = cleanName.Replace("  ", " ");
+            cleanName = cleanName.Replace("  ", " ");
             cleanName = cleanName.ToUpper();
+            cleanName = cleanName.Trim();
             return cleanName;
         }
     
