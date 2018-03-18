@@ -188,7 +188,7 @@ namespace Budford.Control
             {
                 if (gd.Value.SaveDir.StartsWith("??") || gd.Value.SaveDir.Contains("."))
                 {
-                    if (!gd.Value.Image)
+                    if (!gd.Value.Image || gd.Value.LaunchFile.ToUpper().Contains("RPX"))
                     {
                         gd.Value.SaveDir = Tools.HashGenerator.GetHash(gd.Value.LaunchFile).ToString("x8");
                     }
