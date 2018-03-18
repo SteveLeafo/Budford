@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Budford.Control
 {
-    internal class DiscordRichPresence
+    internal static class DiscordRichPresence
     {
         static SharpPresence.Discord.EventHandlers handlers = new SharpPresence.Discord.EventHandlers();
         static SharpPresence.Discord.RichPresence presence = new SharpPresence.Discord.RichPresence();

@@ -331,7 +331,7 @@ namespace Budford.Control
             }
             catch (Exception)
             {
-                // TODO - Log this?
+                // No code
             }
             return false;
         }
@@ -348,7 +348,7 @@ namespace Budford.Control
             }
             catch (Exception)
             {
-                // TODO - Log this?
+                // No code
             }
             return false;
         }
@@ -366,7 +366,7 @@ namespace Budford.Control
             }
             catch (Exception)
             {
-                // TODO - Log this?
+                // No code
             }
             return false;
         }

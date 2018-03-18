@@ -518,6 +518,7 @@ namespace Budford.Control
                     }
                     catch (Exception)
                     {
+                        // No code
                     }
                 }
 
@@ -853,7 +854,7 @@ namespace Budford.Control
         {
             try
             {
-                FileManager.SafeDelete(logfile);
+                FileManager.SafeDelete(logfileIn);
             }
             catch (Exception ex)
             {

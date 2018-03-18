@@ -83,7 +83,6 @@ namespace Budford.View
         {
             InitializeComponent();
 
-            //Model = TransferLegacyModel();
             Model = modelIn;
             UsbNotification.RegisterUsbDeviceNotification(Handle);
 
@@ -223,7 +222,6 @@ namespace Budford.View
             if (FormWindowState.Minimized == this.WindowState)
             {
                 notifyIcon1.Visible = true;
-                //notifyIcon1.ShowBalloonTip(500);
                 this.Hide();
             }
 
@@ -907,6 +905,7 @@ namespace Budford.View
             }
             catch (Exception)
             {
+                // No code
             }
         }
 

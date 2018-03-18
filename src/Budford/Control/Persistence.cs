@@ -12,6 +12,8 @@ namespace Budford.Control
 {
     internal static class Persistence
     {
+        const int LevenshteinTolerence = 5;
+
         /// <summary>
         /// Save to XML
         /// </summary>
@@ -315,59 +317,41 @@ namespace Budford.Control
         internal static List<GameInformation> GetGames(Model.Model model, string name)
         {
             List<GameInformation> games = new List<GameInformation>();
-            string orgName = name;
             name = SetCleanName(name);
-
-            if (name.Contains("DEUS"))
-            {
-                name = name.ToUpper();
-            }
 
             foreach (var g in model.GameData)
             {
-                if (g.Value.CleanName.Contains("DEUS"))
-                {
-                    name = name.ToUpper();
-                }
                 if (name == g.Value.CleanName)
                 {
                     games.Add(g.Value);
-                    g.Value.CleanName = "ZZZZ";
+                    g.Value.CleanName = "";
                 }
             }
 
             if (games.Count == 0)
             {
-                int levenshteinTolerence = 5;
-                //for (int levenshteinTolerence = 5; levenshteinTolerence < 8; levenshteinTolerence += 2)
+                foreach (var g in model.GameData)
                 {
-                    foreach (var g in model.GameData)
+                    if (name == g.Value.CleanName)
                     {
-                        if (name == g.Value.CleanName)
-                        {
-                            games.Add(g.Value);
-                            g.Value.CleanName = "ZZZZ";
-                        }
-                        else if (g.Value.CleanName.StartsWith(name))
-                        {
-                            games.Add(g.Value);
-                            g.Value.CleanName = "ZZZZ";
-                        }
-                        else if (name.Length > 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
-                        {
-                            games.Add(g.Value);
-                            g.Value.CleanName = "ZZZZ";
-                        }
-                        else if (name.Length <= 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < 2)
-                        {
-                            games.Add(g.Value);
-                            g.Value.CleanName = "ZZZZ";
-                        }
+                        games.Add(g.Value);
+                        g.Value.CleanName = "";
                     }
-                    //if (games.Count > 0)
-                    //{
-                    //    break;
-                    //}
+                    else if (g.Value.CleanName.StartsWith(name))
+                    {
+                        games.Add(g.Value);
+                        g.Value.CleanName = "";
+                    }
+                    else if (name.Length > 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < LevenshteinTolerence)
+                    {
+                        games.Add(g.Value);
+                        g.Value.CleanName = "";
+                    }
+                    else if (name.Length <= 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < 2)
+                    {
+                        games.Add(g.Value);
+                        g.Value.CleanName = "";
+                    }
                 }
             }            
 
@@ -378,7 +362,7 @@ namespace Budford.Control
                     if (g.Value.CleanName.Contains(name))
                     {
                         games.Add(g.Value);
-                        g.Value.CleanName = "ZZZZ";
+                        g.Value.CleanName = "";
                     }
                 }
             }
@@ -392,16 +376,12 @@ namespace Budford.Control
                         if (g.Value.CleanName.Length > 8)
                         {
                             games.Add(g.Value);
-                            g.Value.CleanName = "ZZZZ";
+                            g.Value.CleanName = "";
                         }
                     }
                 }
             }
 
-            if (games.Count == 0)
-            {
-                return games;
-            }
             return games;
         }
 

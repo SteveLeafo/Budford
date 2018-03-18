@@ -129,22 +129,9 @@ namespace Budford.View
                                      decryptFile(file, "WudData", "/meta/meta.xml", true, key);
                                      decryptFile(file, "WudData", "/meta/iconTex.tga", true, key);
                                      decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, key);
-                                     GameInformation gi = CheckWudFolder(Path.Combine("WudData", folder));
-                                     if (gi != null)
-                                     {
-                                         gi.LaunchFile = file;
-                                         gi.LaunchFileName = Path.GetFileName(file);
-                                         gi.Image = true;
-                                         foreach (var rpxFile in Directory.EnumerateFiles(Path.Combine("WudData", folder, "code")))
-                                         {
-                                             if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
-                                             {
-                                                 gi.RpxFile = rpxFile;
-                                                 FileInfo fi = new FileInfo(file);
-                                                 gi.Size = (fi.Length / 1024 / 1024).ToString("N0") + " MB";
-                                             }
-                                         }
-                                     }
+
+                                     ProcessImageFile(file, folder);
+
                                      break;
                                  }
                              }
@@ -154,24 +141,8 @@ namespace Budford.View
                              decryptFile(file, "WudData", "/meta/meta.xml", true, null);
                              decryptFile(file, "WudData", "/meta/iconTex.tga", true, null);
                              decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, null);
-                             
-                             GameInformation gi = CheckWudFolder(Path.Combine("WudData", folder));
-                             if (gi != null)
-                             {
-                                 gi.LaunchFile = file;
-                                 gi.LaunchFileName = Path.GetFileName(file);
-                                 gi.Image = true;
-                                 foreach (var rpxFile in Directory.EnumerateFiles(Path.Combine("WudData", folder, "code")))
-                                {
-                                    if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
-                                    {
-                                        gi.RpxFile = rpxFile;
-                                        FileInfo fi = new FileInfo(file);
-                                        gi.Size = (fi.Length / 1024 / 1024).ToString("N0") + " MB";
-                                    }
-                                }
 
-                             }
+                             ProcessImageFile(file, folder);
                          }
                      }
                      else
@@ -179,6 +150,26 @@ namespace Budford.View
                          break;
                      }
                  }
+            }
+        }
+
+        private void ProcessImageFile(string file, string folder)
+        {
+            GameInformation gi = CheckWudFolder(Path.Combine("WudData", folder));
+            if (gi != null)
+            {
+                gi.LaunchFile = file;
+                gi.LaunchFileName = Path.GetFileName(file);
+                gi.Image = true;
+                foreach (var rpxFile in Directory.EnumerateFiles(Path.Combine("WudData", folder, "code")))
+                {
+                    if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
+                    {
+                        gi.RpxFile = rpxFile;
+                        FileInfo fi = new FileInfo(file);
+                        gi.Size = (fi.Length / 1024 / 1024).ToString("N0") + " MB";
+                    }
+                }
             }
         }
 
@@ -199,9 +190,14 @@ namespace Budford.View
                 }
                 LoadKeysFromCemu();
                 byte[] key = Utils.StringToByteArray(commonKey);
-                CNUSLib.Settings.commonKey = key;
+                SetCommonKey(key);
             }
             return true;
+        }
+
+        private static void SetCommonKey(byte[] key)
+        {
+            CNUSLib.Settings.commonKey = key;
         }
 
         List<byte[]> keys = new List<byte[]>();
@@ -246,8 +242,6 @@ namespace Budford.View
             }
             FileInfo inputFile = new FileInfo(input);
 
-            //MessageBox.Show("Decrypting: " + inputFile.FullName);
-
             NUSTitle title = NUSTitleLoaderWUD.loadNUSTitle(inputFile.FullName, titlekey);
             if (title == null)
             {
@@ -266,13 +260,12 @@ namespace Budford.View
 
             FileInfo outputFolder = new FileInfo(output);
 
-            //MessageBox.Show("To the folder: " + outputFolder.FullName);
             title.skipExistingFiles = (!overwrite);
             DecryptionService decryption = DecryptionService.getInstance(title);
 
 
             decryption.decryptFSTEntriesTo(regex, outputFolder.FullName);
-            //MessageBox.Show("Decryption done");
+
             return title.TMD.titleID.ToString("X16");
         }
 

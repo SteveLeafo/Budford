@@ -42,16 +42,7 @@ namespace SharpPresence
 
         //--------------------------------------------------------------------------------
 
-        public struct JoinRequest
-        {
-            public string userId;
-            public string username;
-            public string avatar;
-        }
-
-        //--------------------------------------------------------------------------------
-
-        public enum Reply : int
+        public enum Reply
         {
             No = 0,
             Yes = 1,

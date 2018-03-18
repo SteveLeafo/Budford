@@ -91,6 +91,7 @@ namespace Budford.View
                 }
                 catch (Exception)
                 {
+                    // No code
                 }
             }
             if (File.Exists(logoFile))
@@ -101,6 +102,7 @@ namespace Budford.View
                 }
                 catch (Exception)
                 {
+                    // No code
                 }
             }
 

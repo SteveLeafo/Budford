@@ -787,7 +787,6 @@ namespace Budford.Control
 
                 foreach (var g in model.GameData)
                 {
-                    //g.Value.Publisher = "";
                     g.Value.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.NotSet;
                 }
                 foreach (var line in dlc.Result.Split('\n'))
@@ -804,11 +803,6 @@ namespace Budford.Control
                         if (currentGames != null)
                         {
                             SetGameStatus(currentGames, rating, url);
-                            //foreach (var g in currentGames)
-                            //{
-                            //    g.Publisher = name;
-                            //}
-                            name = "";
                             currentGames.Clear();
                         }
                     }
@@ -878,6 +872,7 @@ namespace Budford.Control
                     }
                     catch (Exception)
                     {
+                        // No code
                     }
                 }
                 else
