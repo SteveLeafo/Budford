@@ -121,28 +121,11 @@ namespace Budford.View
                          string folder = decryptFile(file, "WudData", "/code/.*.rpx", true, null);
                          if (folder == "")
                          {
-                             foreach (var key in keys)
-                             {
-                                 folder = decryptFile(file, "WudData", "/code/.*.rpx", true, key);
-                                 if (folder != "")
-                                 {
-                                     decryptFile(file, "WudData", "/meta/meta.xml", true, key);
-                                     decryptFile(file, "WudData", "/meta/iconTex.tga", true, key);
-                                     decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, key);
-
-                                     ProcessImageFile(file, folder);
-
-                                     break;
-                                 }
-                             }
+                             TryCemuKeys(file, folder);
                          }
                          else
                          {
-                             decryptFile(file, "WudData", "/meta/meta.xml", true, null);
-                             decryptFile(file, "WudData", "/meta/iconTex.tga", true, null);
-                             decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, null);
-
-                             ProcessImageFile(file, folder);
+                             UseProvidedKey(file, folder);
                          }
                      }
                      else
@@ -150,6 +133,33 @@ namespace Budford.View
                          break;
                      }
                  }
+            }
+        }
+
+        private void UseProvidedKey(string file, string folder)
+        {
+            decryptFile(file, "WudData", "/meta/meta.xml", true, null);
+            decryptFile(file, "WudData", "/meta/iconTex.tga", true, null);
+            decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, null);
+
+            ProcessImageFile(file, folder);
+        }
+
+        private void TryCemuKeys(string file, string folder)
+        {
+            foreach (var key in keys)
+            {
+                folder = decryptFile(file, "WudData", "/code/.*.rpx", true, key);
+                if (folder != "")
+                {
+                    decryptFile(file, "WudData", "/meta/meta.xml", true, key);
+                    decryptFile(file, "WudData", "/meta/iconTex.tga", true, key);
+                    decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, key);
+
+                    ProcessImageFile(file, folder);
+
+                    break;
+                }
             }
         }
 

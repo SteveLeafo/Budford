@@ -44,68 +44,100 @@ namespace Budford.Utilities
             IsWindows = Path.DirectorySeparatorChar == '\\';
             if (IsWindows)
             {
-                Name = Environment.OSVersion.VersionString;
-
-                Name = Name.Replace("Microsoft ", "");
-                Name = Name.Replace("  ", " ");
-                Name = Name.Replace(" )", ")");
-                Name = Name.Trim();
-
-                Name = Name.Replace("NT 6.2", "8 %bit 6.2");
-                Name = Name.Replace("NT 6.1", "7 %bit 6.1");
-                Name = Name.Replace("NT 6.0", "Vista %bit 6.0");
-                Name = Name.Replace("NT 5.", "XP %bit 5.");
-                Name = Name.Replace("%bit", (Is64BitWindows ? "64bit" : "32bit"));
-
-                if (Is64BitWindows)
-                    Is64Bit = true;
-                else
-                    Is32Bit = true;
+                CheckWindows();
             }
             else
             {
-                string unixName = ReadProcessOutput("uname");
-                if (unixName.Contains("Darwin"))
-                {
-                    IsUnix = true;
-                    IsMac = true;
+                CheckNonWindows();
+            }
+        }
 
-                    Name = "MacOS X " + ReadProcessOutput("sw_vers", "-productVersion");
-                    Name = Name.Trim();
+        private static void CheckNonWindows()
+        {
+            string unixName = ReadProcessOutput("uname");
+            if (unixName.Contains("Darwin"))
+            {
+                CheckMaxOs();
+            }
+            else if (unixName.Contains("Linux"))
+            {
+                CheckLinux();
+            }
+            else if (unixName != "")
+            {
+                IsUnix = true;
+            }
+            else
+            {
+                IsUnknown = true;
+            }
+        }
 
-                    string machine = ReadProcessOutput("uname", "-m");
-                    if (machine.Contains("x86_64"))
-                        Is64Bit = true;
-                    else
-                        Is32Bit = true;
+        private static void CheckLinux()
+        {
+            IsUnix = true;
+            IsLinux = true;
 
-                    Name += " " + (Is32Bit ? "32bit" : "64bit");
-                }
-                else if (unixName.Contains("Linux"))
-                {
-                    IsUnix = true;
-                    IsLinux = true;
+            Name = ReadProcessOutput("lsb_release", "-d");
+            Name = Name.Substring(Name.IndexOf(":", StringComparison.Ordinal) + 1);
+            Name = Name.Trim();
 
-                    Name = ReadProcessOutput("lsb_release", "-d");
-                    Name = Name.Substring(Name.IndexOf(":", StringComparison.Ordinal) + 1);
-                    Name = Name.Trim();
+            string machine = ReadProcessOutput("uname", "-m");
+            if (machine.Contains("x86_64"))
+            {
+                Is64Bit = true;
+            }
+            else
+            {
+                Is32Bit = true;
+            }
 
-                    string machine = ReadProcessOutput("uname", "-m");
-                    if (machine.Contains("x86_64"))
-                        Is64Bit = true;
-                    else
-                        Is32Bit = true;
+            Name += " " + (Is32Bit ? "32bit" : "64bit");
+        }
 
-                    Name += " " + (Is32Bit ? "32bit" : "64bit");
-                }
-                else if (unixName != "")
-                {
-                    IsUnix = true;
-                }
-                else
-                {
-                    IsUnknown = true;
-                }
+        private static void CheckMaxOs()
+        {
+            IsUnix = true;
+            IsMac = true;
+
+            Name = "MacOS X " + ReadProcessOutput("sw_vers", "-productVersion");
+            Name = Name.Trim();
+
+            string machine = ReadProcessOutput("uname", "-m");
+            if (machine.Contains("x86_64"))
+            {
+                Is64Bit = true;
+            }
+            else
+            {
+                Is32Bit = true;
+            }
+
+            Name += " " + (Is32Bit ? "32bit" : "64bit");
+        }
+
+        private static void CheckWindows()
+        {
+            Name = Environment.OSVersion.VersionString;
+
+            Name = Name.Replace("Microsoft ", "");
+            Name = Name.Replace("  ", " ");
+            Name = Name.Replace(" )", ")");
+            Name = Name.Trim();
+
+            Name = Name.Replace("NT 6.2", "8 %bit 6.2");
+            Name = Name.Replace("NT 6.1", "7 %bit 6.1");
+            Name = Name.Replace("NT 6.0", "Vista %bit 6.0");
+            Name = Name.Replace("NT 5.", "XP %bit 5.");
+            Name = Name.Replace("%bit", (Is64BitWindows ? "64bit" : "32bit"));
+
+            if (Is64BitWindows)
+            {
+                Is64Bit = true;
+            }
+            else
+            {
+                Is32Bit = true;
             }
         }
 

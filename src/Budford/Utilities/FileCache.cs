@@ -228,6 +228,37 @@ namespace Budford.Utilities
             EnterCriticalSection();
             // find free entry in file table
             Int32 entryIndex = -1;
+            entryIndex = ScanForExistingEntry(fileCache, name1, name2, entryIndex);
+            entryIndex = GetNextEntryIndex(fileCache, name1, name2, entryIndex);
+            // find free space
+            UInt64 currentStartOffset = 0;
+            int s0 = 0;
+            while (true)
+            {
+                bool hasCollision = false;
+                UInt64 currentEndOffset = currentStartOffset + (UInt64)fileSize;
+
+                int entry = s0;
+                int entryLast = (int)fileCache.FileTableEntryCount;
+                GetNextEntry(fileCache, ref currentStartOffset, ref s0, ref hasCollision, currentEndOffset, ref entry, entryLast);
+                // special logic to speed up scanning for free offsets
+                // assumes that most of the time entries are stored in direct succession (unless entries are frequently deleted)
+                if (hasCollision && (entry + 1) < entryLast)
+                {
+                    ScanForFreeOffset(fileCache, ref currentStartOffset, ref entry, entryLast);
+                }
+                // retry in case of collision
+                if (!hasCollision)
+                {
+                    break;
+                }
+
+            }
+            UpdateFileTableEntry(fileCache, name1, name2, fileData, fileSize, extraReserved, entryIndex, currentStartOffset);
+        }
+
+        private static int ScanForExistingEntry(FileCache fileCache, UInt64 name1, UInt64 name2, Int32 entryIndex)
+        {
             // scan for already existing entry
             for (Int32 i = 0; i < fileCache.FileTableEntryCount; i++)
             {
@@ -238,6 +269,11 @@ namespace Budford.Utilities
                     break;
                 }
             }
+            return entryIndex;
+        }
+
+        private static int GetNextEntryIndex(FileCache fileCache, UInt64 name1, UInt64 name2, Int32 entryIndex)
+        {
             if (entryIndex == -1)
             {
                 while (true)
@@ -267,61 +303,52 @@ namespace Budford.Utilities
                     }
                 }
             }
-            // find free space
-            UInt64 currentStartOffset = 0;
-            int s0 = 0;
-            while (true)
-            {
-                bool hasCollision = false;
-                UInt64 currentEndOffset = currentStartOffset + (UInt64)fileSize;
+            return entryIndex;
+        }
 
-                int entry = s0;
-                int entryLast = (int)fileCache.FileTableEntryCount;
-                while (entry < entryLast)
-                {
-                    if (fileCache.FileTableEntries[entry].Name1 == FilecacheFiletableFreeName && fileCache.FileTableEntries[entry].Name2 == FilecacheFiletableFreeName)
-                    {
-                        entry++;
-                        continue;
-                    }
-                    if (currentEndOffset >= fileCache.FileTableEntries[entry].FileOffset && currentStartOffset < fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize)
-                    {
-                        currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
-                        hasCollision = true;
-                        s0 = 0;
-                        break;
-                    }
-                    s0 = entry;
-                    entry++;
-                }
-                // special logic to speed up scanning for free offsets
-                // assumes that most of the time entries are stored in direct succession (unless entries are frequently deleted)
-                if (hasCollision && (entry + 1) < entryLast)
+        private static void GetNextEntry(FileCache fileCache, ref UInt64 currentStartOffset, ref int s0, ref bool hasCollision, UInt64 currentEndOffset, ref int entry, int entryLast)
+        {
+            while (entry < entryLast)
+            {
+                if (fileCache.FileTableEntries[entry].Name1 == FilecacheFiletableFreeName && fileCache.FileTableEntries[entry].Name2 == FilecacheFiletableFreeName)
                 {
                     entry++;
-                    while (entry < entryLast)
-                    {
-                        if (fileCache.FileTableEntries[entry].Name1 == FilecacheFiletableFreeName && fileCache.FileTableEntries[entry].Name2 == FilecacheFiletableFreeName)
-                        {
-                            entry++;
-                            continue;
-                        }
-                        if (fileCache.FileTableEntries[entry].FileOffset == currentStartOffset)
-                        {
-                            currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
-                            entry++;
-                            continue;
-                        }
-                        entry = entryLast;
-                    }
+                    continue;
                 }
-                // retry in case of collision
-                if (!hasCollision)
+                if (currentEndOffset >= fileCache.FileTableEntries[entry].FileOffset && currentStartOffset < fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize)
                 {
+                    currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
+                    hasCollision = true;
+                    s0 = 0;
                     break;
                 }
-
+                s0 = entry;
+                entry++;
             }
+        }
+
+        private static void ScanForFreeOffset(FileCache fileCache, ref UInt64 currentStartOffset, ref int entry, int entryLast)
+        {
+            entry++;
+            while (entry < entryLast)
+            {
+                if (fileCache.FileTableEntries[entry].Name1 == FilecacheFiletableFreeName && fileCache.FileTableEntries[entry].Name2 == FilecacheFiletableFreeName)
+                {
+                    entry++;
+                    continue;
+                }
+                if (fileCache.FileTableEntries[entry].FileOffset == currentStartOffset)
+                {
+                    currentStartOffset = fileCache.FileTableEntries[entry].FileOffset + fileCache.FileTableEntries[entry].FileSize;
+                    entry++;
+                    continue;
+                }
+                entry = entryLast;
+            }
+        }
+
+        private static void UpdateFileTableEntry(FileCache fileCache, UInt64 name1, UInt64 name2, byte[] fileData, Int32 fileSize, UInt32 extraReserved, Int32 entryIndex, UInt64 currentStartOffset)
+        {
             // update file table entry
             fileCache.FileTableEntries[entryIndex].Name1 = name1;
             fileCache.FileTableEntries[entryIndex].Name2 = name2;

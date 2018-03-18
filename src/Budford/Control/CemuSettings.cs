@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Budford.Properties;
+using System.Text;
 
 namespace Budford.Control
 {
@@ -510,6 +511,48 @@ namespace Budford.Control
                 fn.Flush();
             }
         }
+
+        void SetResolution(string p, out string width, out string height)
+        {
+            width = "";
+            height = p.Replace("p","");
+            switch (p)
+            {
+                case "5760p":
+                    width = "10240";
+                    break;
+                case "4320p":
+                    width = "7680";
+                    break;
+                case "2880p":
+                    width = "5120";
+                    break;
+                case "2160p":
+                    width = "3840";
+                    break;
+                case "1800p":
+                    width = "3200";
+                    break;
+                case "1440p":
+                    width = "2560";
+                    break;
+                case "1080p":
+                    width = "1920";
+                    break;
+                case "900p":
+                    width = "1600";
+                    break;
+                case "540p":
+                    width = "960";
+                    break;
+                case "480p":
+                    width = "854";
+                    break;
+                case "360p":
+                    width = "640";
+                    break;
+            }
+        }
         
         /// <summary>
         /// 
@@ -524,6 +567,18 @@ namespace Budford.Control
             SetFps();
 
             int packs = CopyBudfordPacks(version);
+
+            if (packs == 0)
+            {
+                if (resolutionPack == null)
+                {
+                    if (model.Settings.DefaultResolution != "default")
+                    {
+                        // We need to create a resolution pack
+                        CreateCustomGraphicPack(version, ref packs);
+                    }
+                }
+            }
 
             if (packs > 0)
             {
@@ -542,6 +597,81 @@ namespace Budford.Control
 
                 PadWithZero(version, packs, gfxPackStartOffset);
             }
+        }
+
+        private void CreateCustomGraphicPack(InstalledVersion version, ref int packs)
+        {
+            string width;
+            string height;
+            SetResolution(model.Settings.DefaultResolution, out width, out height);
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[Definition]\r\n");
+            sb.Append("titleIds = " + information.TitleId + "\r\n");
+            sb.Append("name = \"" + information.Name + " - " + width + "x" + height + " \"\r\n");
+            sb.Append("version = 2\r\n");
+            sb.Append("\r\n");
+            sb.Append("[TextureRedefine] # tv\r\n");
+
+            if (IsTen80(information.TitleId))
+            {
+                sb.Append("width = 1920\r\n");
+                sb.Append("height = 1080\r\n");
+            }
+            else
+            {
+                sb.Append("width = 1280\r\n");
+                sb.Append("height = 720\r\n");
+            }
+            sb.Append("overwriteWidth = " + width + "\r\n");
+            sb.Append("overwriteHeight = " + height + "\r\n");
+            sb.Append("	\r\n");
+            sb.Append("[TextureRedefine] # gamepad\r\n");
+            if (IsTen80(information.TitleId))
+            {
+                sb.Append("width = 960\r\n");
+                sb.Append("height = 540\r\n");
+            }
+            else
+            {
+                sb.Append("width = 854\r\n");
+                sb.Append("height = 480\r\n");
+            }
+            sb.Append("overwriteWidth = " + width + "\r\n");
+            sb.Append("overwriteHeight = " + height + "\r\n");
+            string folderName = Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs);
+            string fileName = Path.Combine(folderName, "rules.txt");
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+            File.WriteAllText(fileName, sb.ToString());
+            resolutionPack = new GraphicsPack()
+            {
+                Active = true,
+                File = "rules.txt",
+                Folder = "Budford_0",
+                Title = "Budford Generated " + model.Settings.DefaultResolution,
+                PackId = 0
+            };
+            packs++;
+        }
+
+        private bool IsTen80(string p)
+        {
+            switch (p)
+            {
+                case "0005000010140000":
+                case "000500001018D800":
+                case "00050000101Ce000":
+                case "00050000101F4000":
+                case "0005000010198F00":
+                case "00050000101A3700":
+                case "0005000010149100":
+                case "0005000010193300":
+                case "000500001016a200":
+                return true;
+            }
+            return false;
         }
 
         private static void PadWithZero(InstalledVersion version, int packs, int gfxPackStartOffset)
@@ -689,43 +819,52 @@ namespace Budford.Control
         {
             if (settings.OverrideFps)
             {
-                float fps = settings.Fps;
-                string[] fpsPatches = new[] { "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30" };
-                foreach (var fpsPatchSpeed in fpsPatches)
-                {
-                    string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, fpsPatchSpeed, "patches.txt");
-                    if (!File.Exists(fpsPatch + ".bak"))
-                    {
-                        if (File.Exists(fpsPatch))
-                        {
-                            File.Copy(fpsPatch, fpsPatch + ".bak");
-                        }
-                    }
-                    if (File.Exists(fpsPatch + ".bak"))
-                    {
-                        string text = File.ReadAllText(fpsPatch + ".bak");
-                        if (text.Contains("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667"))
-                        {
-                            text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / fps));
-                        }
-                        text = text.Replace("0x18 = .float 30", "0x18 = .float " + (fps));
-                        File.WriteAllText(fpsPatch, text);
-                    }
-                }
+                SetFpsPatches();
 
-                string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
-                if (!File.Exists(fpsRules + ".bak"))
+                SetFpsRules();
+            }
+        }
+
+        private void SetFpsRules()
+        {
+            string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
+            if (!File.Exists(fpsRules + ".bak"))
+            {
+                if (File.Exists(fpsRules))
                 {
-                    if (File.Exists(fpsRules))
+                    File.Copy(fpsRules, fpsRules + ".bak");
+                }
+            }
+            if (File.Exists(fpsRules + ".bak"))
+            {
+                string text = File.ReadAllText(fpsRules + ".bak");
+                text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (settings.Fps));
+                File.WriteAllText(fpsRules, text);
+            }
+        }
+
+        private void SetFpsPatches()
+        {
+            string[] fpsPatches = new[] { "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30" };
+            foreach (var fpsPatchSpeed in fpsPatches)
+            {
+                string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, fpsPatchSpeed, "patches.txt");
+                if (!File.Exists(fpsPatch + ".bak"))
+                {
+                    if (File.Exists(fpsPatch))
                     {
-                        File.Copy(fpsRules, fpsRules + ".bak");
+                        File.Copy(fpsPatch, fpsPatch + ".bak");
                     }
                 }
-                if (File.Exists(fpsRules + ".bak"))
+                if (File.Exists(fpsPatch + ".bak"))
                 {
-                    string text = File.ReadAllText(fpsRules + ".bak");
-                    text = text.Replace("vsyncFrequency = 30", "vsyncFrequency = " + (fps));
-                    File.WriteAllText(fpsRules, text);
+                    string text = File.ReadAllText(fpsPatch + ".bak");
+                    if (text.Contains("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667"))
+                    {
+                        text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / settings.Fps));
+                    }
+                    text = text.Replace("0x18 = .float 30", "0x18 = .float " + (settings.Fps));
+                    File.WriteAllText(fpsPatch, text);
                 }
             }
         }

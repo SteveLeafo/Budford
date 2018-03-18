@@ -317,56 +317,22 @@ namespace Budford.Control
         internal static List<GameInformation> GetGames(Model.Model model, string name)
         {
             List<GameInformation> games = new List<GameInformation>();
+
             name = SetCleanName(name);
 
-            foreach (var g in model.GameData)
-            {
-                if (name == g.Value.CleanName)
-                {
-                    games.Add(g.Value);
-                    g.Value.CleanName = "";
-                }
-            }
+            CheckForExactMatches(model, name, games);
 
-            if (games.Count == 0)
-            {
-                foreach (var g in model.GameData)
-                {
-                    if (name == g.Value.CleanName)
-                    {
-                        games.Add(g.Value);
-                        g.Value.CleanName = "";
-                    }
-                    else if (g.Value.CleanName.StartsWith(name))
-                    {
-                        games.Add(g.Value);
-                        g.Value.CleanName = "";
-                    }
-                    else if (name.Length > 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < LevenshteinTolerence)
-                    {
-                        games.Add(g.Value);
-                        g.Value.CleanName = "";
-                    }
-                    else if (name.Length <= 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < 2)
-                    {
-                        games.Add(g.Value);
-                        g.Value.CleanName = "";
-                    }
-                }
-            }            
+            CheckForCloseMatches(model, name, games);
 
-            if (games.Count == 0)
-            {
-                foreach (var g in model.GameData)
-                {
-                    if (g.Value.CleanName.Contains(name))
-                    {
-                        games.Add(g.Value);
-                        g.Value.CleanName = "";
-                    }
-                }
-            }
+            CheckForContainedMatches(model, name, games);
 
+            CheckForStartingMatches(model, name, games);
+
+            return games;
+        }
+
+        private static void CheckForStartingMatches(Model.Model model, string name, List<GameInformation> games)
+        {
             if (games.Count == 0)
             {
                 foreach (var g in model.GameData)
@@ -381,8 +347,61 @@ namespace Budford.Control
                     }
                 }
             }
+        }
 
-            return games;
+        private static void CheckForContainedMatches(Model.Model model, string name, List<GameInformation> games)
+        {
+            if (games.Count == 0)
+            {
+                foreach (var g in model.GameData)
+                {
+                    if (g.Value.CleanName.Contains(name))
+                    {
+                        games.Add(g.Value);
+                        g.Value.CleanName = "";
+                    }
+                }
+            }
+        }
+
+        private static void CheckForCloseMatches(Model.Model model, string name, List<GameInformation> games)
+        {
+            if (games.Count == 0)
+            {
+                foreach (var g in model.GameData)
+                {
+                    bool add = false;
+                    if (g.Value.CleanName.StartsWith(name))
+                    {
+                        add = true;
+                    }
+                    else if (name.Length > 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < LevenshteinTolerence)
+                    {
+                        add = true;
+                    }
+                    else if (name.Length <= 10 && LevenshteinDistance.Compute(g.Value.CleanName, name) < 2)
+                    {
+                        add = true;
+                    }
+                    if (add)
+                    {
+                        games.Add(g.Value);
+                        g.Value.CleanName = "";
+                    }
+                }
+            }
+        }
+
+        private static void CheckForExactMatches(Model.Model model, string name, List<GameInformation> games)
+        {
+            foreach (var g in model.GameData)
+            {
+                if (name == g.Value.CleanName)
+                {
+                    games.Add(g.Value);
+                    g.Value.CleanName = "";
+                }
+            }
         }
 
         /// <summary>

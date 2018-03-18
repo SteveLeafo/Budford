@@ -631,29 +631,13 @@ namespace Budford.Control
         {
             if (getSaveDir)
             {
-                if (game != null)
-                {
-                    start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
-                }
-                if (Model.Settings.HideWindowWhenCaching)
-                {
-                    start.WindowStyle = ProcessWindowStyle.Minimized;
-                }
+                SetupForShaderCaching(game, start);
             }
             else
             {
                 if (game != null && game.GameSetting.FullScreen == 1 && !shiftUp)
                 {
-                    if (Model.Settings.BorderlessFullScreen)
-                    {
-                        start.Arguments = GetNoLegacyOption() + "-g \"" + game.LaunchFile + "\"" + GetMlcOption();
-                        start.WindowStyle =  ProcessWindowStyle.Maximized;
-                        makeBorderLess = true;
-                    }
-                    else
-                    {
-                        start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
-                    }
+                    SetupNoGameFullScreen(game, start);
                 }
                 else if (game != null && game.GameSetting.FullScreen == 4 && !shiftUp)
                 {
@@ -663,25 +647,56 @@ namespace Budford.Control
                 }
                 else if (game != null)
                 {
-                    start.WindowStyle = (ProcessWindowStyle)game.GameSetting.FullScreen;
-                    if (forceFullScreen)
-                    {
-                        if (Model.Settings.BorderlessFullScreen)
-                        {
-                            start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
-                            start.WindowStyle = ProcessWindowStyle.Maximized;
-                        }
-                        else
-                        {
-                            start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
-                        }
-
-                    }
-                    else
-                    {
-                        start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
-                    }
+                    SetupNoGame(game, start, forceFullScreen);
                 }
+            }
+        }
+
+        private void SetupForShaderCaching(GameInformation game, ProcessStartInfo start)
+        {
+            if (game != null)
+            {
+                start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+            }
+            if (Model.Settings.HideWindowWhenCaching)
+            {
+                start.WindowStyle = ProcessWindowStyle.Minimized;
+            }
+        }
+
+        private void SetupNoGame(GameInformation game, ProcessStartInfo start, bool forceFullScreen)
+        {
+            start.WindowStyle = (ProcessWindowStyle)game.GameSetting.FullScreen;
+            if (forceFullScreen)
+            {
+                if (Model.Settings.BorderlessFullScreen)
+                {
+                    start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                    start.WindowStyle = ProcessWindowStyle.Maximized;
+                }
+                else
+                {
+                    start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                }
+
+            }
+            else
+            {
+                start.Arguments = GetNoLegacyOption() + " -g \"" + game.LaunchFile + "\"" + GetMlcOption();
+            }
+        }
+
+        private void SetupNoGameFullScreen(GameInformation game, ProcessStartInfo start)
+        {
+            if (Model.Settings.BorderlessFullScreen)
+            {
+                start.Arguments = GetNoLegacyOption() + "-g \"" + game.LaunchFile + "\"" + GetMlcOption();
+                start.WindowStyle = ProcessWindowStyle.Maximized;
+                makeBorderLess = true;
+            }
+            else
+            {
+                start.Arguments = GetNoLegacyOption() + " -f -g \"" + game.LaunchFile + "\"" + GetMlcOption();
             }
         }
 

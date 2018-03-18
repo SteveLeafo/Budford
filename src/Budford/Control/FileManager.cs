@@ -52,36 +52,46 @@ namespace Budford.Control
             {
                 if (!File.Exists(Path.Combine(target.FullName, file.Name)))
                 {
-                    try
-                    {
-                        if (!Directory.Exists(target.FullName))
-                        {
-                            Directory.CreateDirectory(target.FullName);
-                        }
-                        if (!Path.GetFileName(file.Name).Contains("Budford"))
-                        {
-                            FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name));
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
+                    CopyFiles(target, file);
                 }
                 else
                 {
-                    if (overrideit)
+                    CopyFilesOverrideExisting(target, overrideit, file);
+                }
+            }
+        }
+
+        private static void CopyFilesOverrideExisting(DirectoryInfo target, bool overrideit, FileInfo file)
+        {
+            if (overrideit)
+            {
+                if (!Path.GetFileName(file.Name).Contains("Budford"))
+                {
+                    FileInfo dest = new FileInfo(target.FullName);
+                    if (file.LastWriteTime > dest.LastWriteTime)
                     {
-                        if (!Path.GetFileName(file.Name).Contains("Budford"))
-                        {
-                            FileInfo dest = new FileInfo(target.FullName);
-                            if (file.LastWriteTime > dest.LastWriteTime)
-                            {
-                                FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name), true);
-                            }
-                        }
+                        FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name), true);
                     }
                 }
+            }
+        }
+
+        private static void CopyFiles(DirectoryInfo target, FileInfo file)
+        {
+            try
+            {
+                if (!Directory.Exists(target.FullName))
+                {
+                    Directory.CreateDirectory(target.FullName);
+                }
+                if (!Path.GetFileName(file.Name).Contains("Budford"))
+                {
+                    FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name));
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
