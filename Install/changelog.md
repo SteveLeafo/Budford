@@ -1,5 +1,11 @@
 # Budford Change Log
 
+## V1.0.71
+- Added support for Discord Rich Presence
+- Will now generate graphics packs on the fly if a graphic pack for the selected resolution doesn't exist
+- Improvements to name matching with the Compatibility Wiki
+- Fixed a potential crash when copying save files
+
 ## V1.0.64
 - Fixed a minor issue where the file size was reported incorrectly for .WUD and .WUX files.
 - Budford will now search sub-folders for .WUD and .WUX files.
