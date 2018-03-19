@@ -11,6 +11,7 @@ using Budford.View;
 using System.Drawing;
 using SharpPresence;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Budford.Control
 {
@@ -977,6 +978,7 @@ namespace Budford.Control
             runningProcess.Exited += proc_Exited;
         }
 
+        IntPtr childWindowHandle = IntPtr.Zero;
 
         /// <summary>
         /// Launches CEMU and tries to extract the SaveDir from the windows title
@@ -986,17 +988,22 @@ namespace Budford.Control
         {
             try
             {
-                if (Model.Settings.Monitor == -1)
-                {
-                    MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
-                }
-
                 WaitForWindowTitleToAppear();
 
-                if (makeBorderLess)
+                SetGamePadWindowHandle();
+
+                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+
+                if (runningGame != null)
                 {
-                    MakeBorderlessFullScreen();
+                    if (runningGame.GameSetting.SeparateGamePadView == 1)
+                    {
+                        MoveToMonitor(childWindowHandle, Model.Settings.GamePadMonitor);
+                    }
                 }
+
+                MakeBorderlessFullscreen();
+
                 SetCemuCpuPrioty(game);
 
                 SetGamePadViewIfDesired(game);
@@ -1012,9 +1019,46 @@ namespace Budford.Control
             }
         }
 
+        private void MakeBorderlessFullscreen()
+        {
+            if (makeBorderLess)
+            {
+                MakeBorderlessFullScreen(runningProcess.MainWindowHandle);
+                if (childWindowHandle != IntPtr.Zero)
+                {
+                    MakeBorderlessFullScreen(childWindowHandle);
+                }
+            }
+            else if (childWindowHandle != IntPtr.Zero)
+            {
+                if (runningGame != null)
+                {
+                    if (runningGame.GameSetting.FullScreen == 1)
+                    {
+                        MakeBorderlessFullScreen(runningProcess.MainWindowHandle);
+                    }
+                }
+            }
+        }
+
+        private void SetGamePadWindowHandle()
+        {
+            if (runningGame != null)
+            {
+                if (runningGame.GameSetting.SeparateGamePadView == 1)
+                {
+                    childWindowHandle = IntPtr.Zero;
+                    IEnumerable<IntPtr> gamePadWindows = NativeMethods.FindWindowsWithText(runningGame.SaveDir);
+                    if (gamePadWindows.Count() > 0)
+                    {
+                        childWindowHandle = gamePadWindows.First();
+                    }
+                }
+            }
+        }
+
         [DllImport("user32.dll")]
         static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
-
 
         public void MoveToMonitor(IntPtr windowHandle, int numberMonitor)
         {
@@ -1025,6 +1069,7 @@ namespace Budford.Control
                     numberMonitor--;
                     //Get the data of the monitor
                     var monitor = Screen.AllScreens[numberMonitor].WorkingArea;
+
                     //change the window to the second monitor
                     SetWindowPos(windowHandle, IntPtr.Zero,
                     monitor.Left, monitor.Top, monitor.Width,
@@ -1094,6 +1139,13 @@ namespace Budford.Control
                     {
                         runningProcess.Refresh();
                         i = runningProcess.MainWindowTitle.IndexOf("Title", StringComparison.Ordinal);
+                        if (i == -1)
+                        {
+                            if (runningProcess.MainWindowTitle.Contains("FPS"))
+                            {
+                                i = 0;
+                            }
+                        }
                     }
                     else
                     {
@@ -1173,21 +1225,21 @@ namespace Budford.Control
             }
         }
 
-        internal void MakeBorderlessFullScreen()
+        internal void MakeBorderlessFullScreen(IntPtr handle)
         {
-            var styleNewWindowStandard = NativeMethods.GetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyles.Caption | NativeMethods.WindowStyles.ThickFrame | NativeMethods.WindowStyles.SystemMenu | NativeMethods.WindowStyles.MaximizeBox | NativeMethods.WindowStyles.MinimizeBox);
+            var styleNewWindowStandard = NativeMethods.GetWindowLong(handle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyles.Caption | NativeMethods.WindowStyles.ThickFrame | NativeMethods.WindowStyles.SystemMenu | NativeMethods.WindowStyles.MaximizeBox | NativeMethods.WindowStyles.MinimizeBox);
 
-            HideMenu();
+            HideMenu(handle);
 
-            NativeMethods.SetWindowLong(runningProcess.MainWindowHandle, NativeMethods.WindowLongIndex.Style, styleNewWindowStandard);
+            NativeMethods.SetWindowLong(handle, NativeMethods.WindowLongIndex.Style, styleNewWindowStandard);
 
-            Rectangle rect = Screen.FromHandle(runningProcess.MainWindowHandle).Bounds;
-            NativeMethods.SetWindowPos(runningProcess.MainWindowHandle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosTypes.ShowWindow | NativeMethods.SetWindowPosTypes.NoOwnerZOrder | NativeMethods.SetWindowPosTypes.NoSendChanging);
+            Rectangle rect = Screen.FromHandle(handle).Bounds;
+            NativeMethods.SetWindowPos(handle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosTypes.ShowWindow | NativeMethods.SetWindowPosTypes.NoOwnerZOrder | NativeMethods.SetWindowPosTypes.NoSendChanging);
         }
 
-        private void HideMenu()
+        private void HideMenu(IntPtr handle)
         {
-            var menuHandle = NativeMethods.GetMenu(runningProcess.MainWindowHandle);
+            var menuHandle = NativeMethods.GetMenu(handle);
             if (menuHandle != IntPtr.Zero)
             {
                 var menuItemCount = NativeMethods.GetMenuItemCount(menuHandle);
@@ -1197,8 +1249,15 @@ namespace Budford.Control
                     NativeMethods.RemoveMenu(menuHandle, 0, NativeMethods.Menus.ByPosition | NativeMethods.Menus.Remove);
                 }
 
-                NativeMethods.DrawMenuBar(runningProcess.MainWindowHandle);
+                NativeMethods.DrawMenuBar(handle);
             }
         }
-    }
+
+     
+
+       
+
+
+
+    }    
 }

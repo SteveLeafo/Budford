@@ -48,12 +48,19 @@ namespace Budford.View
             for (int i = 0; i < Screen.AllScreens.Length; ++i)
             {
                 comboBox8.Items.Add("Monitor " + (i + 1));
+                comboBox9.Items.Add("Monitor " + (i + 1));
             }
 
             comboBox8.SelectedIndex = 0;
             if (model.Settings.Monitor - 1 < comboBox8.Items.Count)
             {
                 comboBox8.SelectedIndex = model.Settings.Monitor - 1;
+            }
+
+            comboBox9.SelectedIndex = 0;
+            if (model.Settings.GamePadMonitor - 1 < comboBox9.Items.Count)
+            {
+                comboBox9.SelectedIndex = model.Settings.GamePadMonitor - 1;
             }
 
             textBox1.Text = model.Settings.WineExe;
@@ -222,6 +229,7 @@ namespace Budford.View
             model.Settings.WiiUCommonKey = textBox7.Text.Trim();
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
+            model.Settings.GamePadMonitor = comboBox9.SelectedIndex + 1;
 
             settings.CemuHookServerIp = textBox5.Text;
             settings.CemuHookServerPort = textBox6.Text;

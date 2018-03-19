@@ -84,6 +84,8 @@ namespace Budford.Model
 
         public int Monitor = 1;
 
+        public int GamePadMonitor = 1;
+
         public string WiiUCommonKey;
 
         public enum ConsoleRegionType : byte
