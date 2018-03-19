@@ -404,57 +404,6 @@ namespace Budford.Control
             }
         }
 
-        /// <summary>
-        /// Returns a list of games with matching titles
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        internal static GameInformation GetClosestMatchingGame(Model.Model model, string name)
-        {
-            name = SetCleanName(name);
-            foreach (var g in model.GameData)
-            {
-                if (name == g.Value.CleanName)
-                {
-                    return g.Value;
-                }
-            }
-            for (int levenshteinTolerence = 5; levenshteinTolerence < 10; levenshteinTolerence += 2)
-            {
-                foreach (var g in model.GameData)
-                {
-                    if (g.Value.CleanName == name || g.Value.CleanName.StartsWith(name))
-                    {
-                        return g.Value;
-                    }
-                    else if (LevenshteinDistance.Compute(g.Value.CleanName, name) < levenshteinTolerence)
-                    {
-                        return g.Value;
-                    }
-                }
-            }
-            foreach (var g in model.GameData)
-            {
-                if (name.StartsWith(g.Value.CleanName))
-                {
-                    if (g.Value.CleanName.Length > 12)
-                    {
-                        return g.Value;
-                    }
-                }
-            }
-
-            foreach (var g in model.GameData)
-            {
-                if (g.Value.CleanName.Contains(name))
-                {
-                    return g.Value;
-                }
-            }
-
-            return null;
-        }
 
         internal static void SetCleanNames(Model.Model model)
         {

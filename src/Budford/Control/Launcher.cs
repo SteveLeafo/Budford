@@ -143,36 +143,41 @@ namespace Budford.Control
 
                     CreateDefaultSettingsFile(modelIn, game);
                 }
-                // Prepare the process to run
-                ProcessStartInfo start = new ProcessStartInfo();
-
-                PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
-
-                // Required since 1.11.2
-                if (runningVersion != null)
-                {
-                    start.WorkingDirectory = runningVersion.Folder;
-                }
-
-                // Run the external process & wait for it to finish
-                var parentProcess = Process.GetCurrentProcess();
-                var original = parentProcess.PriorityClass;
-
-                parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
-
-                startTime = DateTime.Now;
-                if (File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
-                {
-                    StartCemuProcess(parentIn, modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
-                }
-                else
-                {
-                    TriggerEarlyExit();
-                }
+                StartCemuProcess(parentIn, modelIn, game, getSaveDir, cemuOnly, shiftUp, forceFullScreen);
             }
             else
             {
                 MessageBox.Show(parentIn, Resources.Launcher_LaunchCemu_Please_install_CEMU, Resources.Launcher_LaunchCemu_CEMU_is_not_installed);
+                TriggerEarlyExit();
+            }
+        }
+
+        private void StartCemuProcess(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, bool shiftUp, bool forceFullScreen)
+        {
+            // Prepare the process to run
+            ProcessStartInfo start = new ProcessStartInfo();
+
+            PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
+
+            // Required since 1.11.2
+            if (runningVersion != null)
+            {
+                start.WorkingDirectory = runningVersion.Folder;
+            }
+
+            // Run the external process & wait for it to finish
+            var parentProcess = Process.GetCurrentProcess();
+            var original = parentProcess.PriorityClass;
+
+            parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+
+            startTime = DateTime.Now;
+            if (File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
+            {
+                StartCemuProcess(parentIn, modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+            }
+            else
+            {
                 TriggerEarlyExit();
             }
         }
@@ -510,18 +515,7 @@ namespace Budford.Control
             DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, runningGame, ""));
             if (Directory.Exists(src.FullName))
             {
-                if (File.Exists(Path.Combine(src.FullName, "Budford.lck")))
-                {
-                    // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
-                    try
-                    {
-                        FileManager.SafeDelete("Budford.lck");
-                    }
-                    catch (Exception)
-                    {
-                        // No code
-                    }
-                }
+                DeleteLockFile(src);
 
                 if (src.GetDirectories().Any() || src.GetFiles().Any() || (Directory.Exists(src255.FullName) && (src255.GetFiles().Any() || src255.GetDirectories().Any())))
                 {
@@ -536,6 +530,22 @@ namespace Budford.Control
 
                     FileManager.CopyFilesRecursively(src, dest, false, true);
                     FileManager.CopyFilesRecursively(src255, dest255, false, true);
+                }
+            }
+        }
+
+        private static void DeleteLockFile(DirectoryInfo src)
+        {
+            if (File.Exists(Path.Combine(src.FullName, "Budford.lck")))
+            {
+                // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
+                try
+                {
+                    FileManager.SafeDelete("Budford.lck");
+                }
+                catch (Exception)
+                {
+                    // No code
                 }
             }
         }
@@ -1049,7 +1059,7 @@ namespace Budford.Control
                 {
                     childWindowHandle = IntPtr.Zero;
                     IEnumerable<IntPtr> gamePadWindows = NativeMethods.FindWindowsWithText(runningGame.SaveDir);
-                    if (gamePadWindows.Count() > 0)
+                    if (gamePadWindows.Any())
                     {
                         childWindowHandle = gamePadWindows.First();
                     }

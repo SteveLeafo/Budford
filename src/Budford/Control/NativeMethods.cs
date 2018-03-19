@@ -375,7 +375,6 @@ namespace Budford.Control
         ///    not be returned </param>
         public static IEnumerable<IntPtr> FindWindows(EnumWindowsProc filter)
         {
-            IntPtr found = IntPtr.Zero;
             List<IntPtr> windows = new List<IntPtr>();
 
             EnumWindows(delegate(IntPtr wnd, IntPtr param)

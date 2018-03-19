@@ -121,7 +121,7 @@ namespace Budford.View
                          string folder = decryptFile(file, "WudData", "/code/.*.rpx", true, null);
                          if (folder == "")
                          {
-                             TryCemuKeys(file, folder);
+                             TryCemuKeys(file);
                          }
                          else
                          {
@@ -145,11 +145,11 @@ namespace Budford.View
             ProcessImageFile(file, folder);
         }
 
-        private void TryCemuKeys(string file, string folder)
+        private void TryCemuKeys(string file)
         {
             foreach (var key in keys)
             {
-                folder = decryptFile(file, "WudData", "/code/.*.rpx", true, key);
+                string folder = decryptFile(file, "WudData", "/code/.*.rpx", true, key);
                 if (folder != "")
                 {
                     decryptFile(file, "WudData", "/meta/meta.xml", true, key);

@@ -324,54 +324,52 @@ namespace Budford.Control
             {
                 if (version.Folder != null)
                 {
-                    try
-                    {
-                        SetOffsets(version.Version);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_set_settings_bin_offsets_for_ + version.Folder + Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
-                        return;
-                    }
-
-
-                    try
-                    {
-                        FileManager.SafeDelete(Path.Combine(version.Folder, "settings.bin"));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
-                    }
-                    bool canCreate;
-                    try
-                    {
-                        canCreate = !File.Exists(Path.Combine(version.Folder, "settings.bin"));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
-                        return;
-                    }
-
-                    if (!CreateSettingsBin(version, canCreate))
-                    {
-                        return;
-                    }
-
-                    try
-                    {
-                        FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to_grant_all_users_access_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Warning);
-                        return;
-                    }
-
-                    UpdateSettings(version);
+                    CreateSettingsFile(version);
                 }
             }
+        }
+
+        private void CreateSettingsFile(InstalledVersion version)
+        {
+            try
+            {
+                SetOffsets(version.Version);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_set_settings_bin_offsets_for_ + version.Folder + Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                return;
+            }
+
+            FileManager.SafeDelete(Path.Combine(version.Folder, "settings.bin"));
+
+            bool canCreate;
+            try
+            {
+                canCreate = !File.Exists(Path.Combine(version.Folder, "settings.bin"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_ + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                return;
+            }
+
+            if (!CreateSettingsBin(version, canCreate))
+            {
+                return;
+            }
+
+            try
+            {
+                FileManager.GrantAccess(Path.Combine(version.Folder, "settings.bin"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Failed_to_grant_all_users_access_to_settings_bin_for_ + version.Folder + ex.Message, Resources.CemuSettings_WriteSettingsBinFile_Warning);
+                return;
+            }
+
+            UpdateSettings(version);
         }
 
         private void UpdateSettings(InstalledVersion version)

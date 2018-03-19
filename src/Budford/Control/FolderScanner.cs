@@ -239,48 +239,59 @@ namespace Budford.Control
             {
                 GraphicsPack pack = new GraphicsPack { File = file.FullName };
 
-                string[] ids = null;
-
-                foreach (string line in sr.ReadToEnd().Split('\n'))
-                {
-                    if (line.Contains("titleIds"))
-                    {
-                        ids = ExtractTitleIds(ids, line);
-                    }
-
-                    if (line.Contains("name = "))
-                    {
-                        ExtractName(pack, line);
-                    }
-                }
+                string[] ids = ExtractIds(sr, pack);
 
                 if (ids != null)
                 {
-                    foreach (string i in ids)
-                    {
-                        string id = i.ToUpper();
-                        if (id.Length == 15)
-                        {
-                            id = "0" + id;
-                        }
-
-                        if (file.DirectoryName != null)
-                        {
-                            pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf(Path.DirectorySeparatorChar));
-                        }
-
-                        if (!graphicsPacks.ContainsKey(id))
-                        {
-                            graphicsPacks.Add(id, new List<GraphicsPack>());
-                        }
-
-                        if (!IsContained(graphicsPacks[id], pack))
-                        {
-                            graphicsPacks[id].Add(pack);
-                        }
-                    }
+                    AssignIdsToPack(file, graphicsPacks, pack, ids);
                 }
             }
+        }
+
+        private static void AssignIdsToPack(FileInfo file, Dictionary<string, List<GraphicsPack>> graphicsPacks, GraphicsPack pack, string[] ids)
+        {
+            foreach (string i in ids)
+            {
+                string id = i.ToUpper();
+                if (id.Length == 15)
+                {
+                    id = "0" + id;
+                }
+
+                if (file.DirectoryName != null)
+                {
+                    pack.Folder = file.DirectoryName.Substring(1 + file.DirectoryName.LastIndexOf(Path.DirectorySeparatorChar));
+                }
+
+                if (!graphicsPacks.ContainsKey(id))
+                {
+                    graphicsPacks.Add(id, new List<GraphicsPack>());
+                }
+
+                if (!IsContained(graphicsPacks[id], pack))
+                {
+                    graphicsPacks[id].Add(pack);
+                }
+            }
+        }
+
+        private static string[] ExtractIds(StreamReader sr, GraphicsPack pack)
+        {
+            string[] ids = null;
+
+            foreach (string line in sr.ReadToEnd().Split('\n'))
+            {
+                if (line.Contains("titleIds"))
+                {
+                    ids = ExtractTitleIds(ids, line);
+                }
+
+                if (line.Contains("name = "))
+                {
+                    ExtractName(pack, line);
+                }
+            }
+            return ids;
         }
 
         private static bool IsContained(List<GraphicsPack> list, GraphicsPack pack)

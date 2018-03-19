@@ -128,40 +128,50 @@ namespace Budford.View
                         Tag = v,
                         Checked = v.IsLatest
                     };
-                    lvi.SubItems.Add(v.Name);
-                    lvi.SubItems.Add(v.Version);
-                    lvi.SubItems.Add(v.HasFonts ? "Yes" : "No");
-                    lvi.SubItems.Add(v.HasCemuHook ? "Yes" : "No");
-                    lvi.SubItems.Add(GetLinkType(model, v));
-                    lvi.SubItems.Add(v.HasPatch ? "Yes" : "No");
-                    lvi.SubItems.Add(v.HasOnlineFiles ? "Yes" : "No");
-                    if (v.DlcType == 0)
-                    {
-                        lvi.SubItems.Add(model.Settings.MlcFolder == "" ? "" : model.Settings.MlcFolder);
-                    }
-                    else
-                    {
-                        lvi.SubItems.Add(v.DlcSource == null ? "" : v.DlcSource);
-                    }
+                    AddSubItems(v, lvi);
                     listView1.Items.Add(lvi);
                 }
 
-                if (autoSize)
-                {
-                    listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                    listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-                }
-                else
-                {
-                    listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.None);
-                    listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.None);
-                }
+                AutoSizeListView();
                 listView1.Sort();
             }
             finally
             {
                 updating = false;
                 listView1.EndUpdate();
+            }
+        }
+
+        private void AutoSizeListView()
+        {
+            if (autoSize)
+            {
+                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
+            else
+            {
+                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.None);
+                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.None);
+            }
+        }
+
+        private void AddSubItems(InstalledVersion v, ListViewItem lvi)
+        {
+            lvi.SubItems.Add(v.Name);
+            lvi.SubItems.Add(v.Version);
+            lvi.SubItems.Add(v.HasFonts ? "Yes" : "No");
+            lvi.SubItems.Add(v.HasCemuHook ? "Yes" : "No");
+            lvi.SubItems.Add(GetLinkType(model, v));
+            lvi.SubItems.Add(v.HasPatch ? "Yes" : "No");
+            lvi.SubItems.Add(v.HasOnlineFiles ? "Yes" : "No");
+            if (v.DlcType == 0)
+            {
+                lvi.SubItems.Add(model.Settings.MlcFolder == "" ? "" : model.Settings.MlcFolder);
+            }
+            else
+            {
+                lvi.SubItems.Add(v.DlcSource == null ? "" : v.DlcSource);
             }
         }
 

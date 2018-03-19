@@ -141,33 +141,38 @@ namespace Budford.Utilities
 
                 stream_setSeek64(streamFile, fileCache.DataOffset + fileCache.FileTableOffset);
 
-                if (isV1)
-                {
-                    // read file table entries in old format
-                    for (UInt32 i = 0; i < fileTableEntryCount; i++)
-                    {
-                        UInt64 name1 = stream_readU64(streamFile);
-                        UInt64 name2 = stream_readU64(streamFile);
-                        UInt32 fileOffset = stream_readU32(streamFile);
-                        UInt32 fileSize = stream_readU32(streamFile);
-                        fileCache.FileTableEntries[i].Name1 = name1;
-                        fileCache.FileTableEntries[i].Name2 = name2;
-                        fileCache.FileTableEntries[i].FileOffset = fileOffset;
-                        fileCache.FileTableEntries[i].FileSize = fileSize;
-                        fileCache.FileTableEntries[i].ExtraReserved = 0;
-                    }
-                }
-                else
-                {
-                    stream_readData(streamFile, fileCache.FileTableEntries, fileTableEntryCount);
-                }
-                // upgrade file table and header if V1
-                if (isV1)
-                {
-                    fileCache_updateFiletable(fileCache, 0);
-                }
+                ReadTableEntries(fileCache, streamFile, isV1, fileTableEntryCount);
             }
             return fileCache;
+        }
+
+        private static void ReadTableEntries(FileCache fileCache, BinaryReader streamFile, bool isV1, UInt32 fileTableEntryCount)
+        {
+            if (isV1)
+            {
+                // read file table entries in old format
+                for (UInt32 i = 0; i < fileTableEntryCount; i++)
+                {
+                    UInt64 name1 = stream_readU64(streamFile);
+                    UInt64 name2 = stream_readU64(streamFile);
+                    UInt32 fileOffset = stream_readU32(streamFile);
+                    UInt32 fileSize = stream_readU32(streamFile);
+                    fileCache.FileTableEntries[i].Name1 = name1;
+                    fileCache.FileTableEntries[i].Name2 = name2;
+                    fileCache.FileTableEntries[i].FileOffset = fileOffset;
+                    fileCache.FileTableEntries[i].FileSize = fileSize;
+                    fileCache.FileTableEntries[i].ExtraReserved = 0;
+                }
+            }
+            else
+            {
+                stream_readData(streamFile, fileCache.FileTableEntries, fileTableEntryCount);
+            }
+            // upgrade file table and header if V1
+            if (isV1)
+            {
+                fileCache_updateFiletable(fileCache, 0);
+            }
         }
 
         private static void fileCache_updateFiletable(FileCache fileCache, Int32 extraEntriesToAllocate)
@@ -229,7 +234,7 @@ namespace Budford.Utilities
             // find free entry in file table
             Int32 entryIndex = -1;
             entryIndex = ScanForExistingEntry(fileCache, name1, name2, entryIndex);
-            entryIndex = GetNextEntryIndex(fileCache, name1, name2, entryIndex);
+            entryIndex = GetNextEntryIndex(fileCache, entryIndex);
             // find free space
             UInt64 currentStartOffset = 0;
             int s0 = 0;
@@ -272,7 +277,7 @@ namespace Budford.Utilities
             return entryIndex;
         }
 
-        private static int GetNextEntryIndex(FileCache fileCache, UInt64 name1, UInt64 name2, Int32 entryIndex)
+        private static int GetNextEntryIndex(FileCache fileCache, Int32 entryIndex)
         {
             if (entryIndex == -1)
             {
@@ -289,10 +294,6 @@ namespace Budford.Utilities
                     }
                     if (entryIndex == -1)
                     {
-                        if (name1 == FilecacheFiletableName1 && name2 == FilecacheFiletableName2)
-                        {
-                            __debugbreak();
-                        }
                         // no free entry, recreate file table with bigger size
                         fileCache_updateFiletable(fileCache, 64);
                         // try again

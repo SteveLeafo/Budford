@@ -22,20 +22,7 @@ namespace Budford.Tools
                 {
                     Model.InstalledVersion latest = null;
                     FileInfo latestFile = null;
-                    foreach (var version in model.Settings.InstalledVersions)
-                    {
-                        DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game.Value));
-                        FileInfo fi = GetNewestFile(src);
-                        if (fi != null)
-                        {
-                            if (latestFile == null || latestFile.LastWriteTime < fi.LastWriteTime)
-                            { 
-                                latestFile = fi;
-                                latest = version;
-                            }
-                        }
-
-                    }
+                    GetLatestVersion(game.Value, ref latest, ref latestFile);
                     if (latest != null)
                     {
                         CopySaveFolder(game.Value, latest);
@@ -43,6 +30,23 @@ namespace Budford.Tools
                 }
             }
             return true;
+        }
+
+        private void GetLatestVersion(Budford.Model.GameInformation game, ref Model.InstalledVersion latest, ref FileInfo latestFile)
+        {
+            foreach (var version in model.Settings.InstalledVersions)
+            {
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game));
+                FileInfo fi = GetNewestFile(src);
+                if (fi != null)
+                {
+                    if (latestFile == null || latestFile.LastWriteTime < fi.LastWriteTime)
+                    {
+                        latestFile = fi;
+                        latest = version;
+                    }
+                }
+            }
         }
 
         public static FileInfo GetNewestFile(DirectoryInfo directory)

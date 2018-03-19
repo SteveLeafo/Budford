@@ -91,6 +91,52 @@ namespace Budford.View
             unpacker = new Unpacker(this);
             launcher = new Launcher(this);
 
+            PerformWelcomeActions();
+
+            PerformAutoOptionsOnStart();
+
+            Model.OldVersions.Clear();
+
+
+            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
+
+            Persistence.LoadFromXml(Model.OldVersions);
+
+            FolderScanner.AddGraphicsPacksToGames(Model);
+
+            SetupCurrentUser();
+            Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
+
+            AddUserMenuItems();
+            SetupShowRegionMenuItems();
+
+            SetVisibility();
+
+            Model.Settings.CurrentView = "Detailed";
+
+            if (Model.Settings.CurrentView == "Detailed")
+            {
+                detailsToolStripMenuItem_Click(null, null);
+            }
+            else
+            {
+                tToolStripMenuItem_Click(null, null);
+            }
+
+            // Create an instance of a ListView column sorter and assign it 
+            // to the ListView control.
+            lvwColumnSorter = new ListViewColumnSorter {ColumnToSort = -1};
+            listView1.ListViewItemSorter = lvwColumnSorter;
+
+            EnableDoubleBuffering();
+
+            RegisterEvents();
+
+            LoadPlugIns();
+        }
+
+        private void PerformWelcomeActions()
+        {
             if (!Directory.Exists(Model.Settings.DefaultInstallFolder))
             {
                 using (FormFirstTimeWindow fftw = new FormFirstTimeWindow())
@@ -111,7 +157,63 @@ namespace Budford.View
                 FileManager.SearchForInstalledVersions(Model);
                 FolderScanner.GetGameInformation(null, "", "");
             }
+        }
 
+        private void SetupCurrentUser()
+        {
+            if (Model.Users.Count == 0)
+            {
+                Model.Users.Add(new User() { Name = "Default", Image = "default.png" });
+                Model.CurrentUser = "Default";
+            }
+
+            var firstOrDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
+            if (firstOrDefault != null && File.Exists(Path.Combine("Users", firstOrDefault.Image)))
+            {
+                var orDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
+                if (orDefault != null)
+                {
+                    using (FileStream stream = new FileStream(Path.Combine("Users", orDefault.Image), FileMode.Open, FileAccess.Read))
+                    {
+                        pictureBox1.Image = Image.FromStream(stream);
+                    }
+                }
+            }
+        }
+
+        private void RegisterEvents()
+        {
+            listView1.KeyDown += listView1_KeyDown;
+            this.Resize += FormMainWindow_Resize;
+            listView1.DrawColumnHeader += ListView1_DrawColumnHeader;
+            listView1.DrawSubItem += ListView1_DrawSubItem;
+            listView1.ColumnClick += ListView1_ColumnClick;
+
+            ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
+            if (Model.Settings.CurrentSortDirection == 1)
+            {
+                ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
+            }
+        }
+
+        private void EnableDoubleBuffering()
+        {
+            listView1.DoubleBuffered(true);
+            pictureBox1.DoubleBuffered(true);
+            DoubleBuffered = true;
+        }
+
+        private void SetVisibility()
+        {
+            showStatusToolStripMenuItem1.Checked = Model.Settings.ShowStausBar;
+            statusStrip1.Visible = Model.Settings.ShowStausBar;
+            toolStrip1.Visible = Model.Settings.ShowToolBar;
+            pictureBox1.Visible = Model.Settings.ShowToolBar;
+            showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
+        }
+
+        private void PerformAutoOptionsOnStart()
+        {
             if (Model.Settings.ScanGameFoldersOnStart)
             {
                 foreach (var folder in Model.Settings.RomFolders)
@@ -122,8 +224,6 @@ namespace Budford.View
                     }
                 }
             }
-
-            Model.OldVersions.Clear();
 
             if (Model.Settings.AutomaticallyDownloadLatestEverythingOnStart)
             {
@@ -147,74 +247,6 @@ namespace Budford.View
                     // No code
                 }
             }
-
-            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
-
-            Persistence.LoadFromXml(Model.OldVersions);
-
-            FolderScanner.AddGraphicsPacksToGames(Model);
-
-            if (Model.Users.Count == 0)
-            {
-                Model.Users.Add(new User() { Name = "Default", Image = "default.png" });
-                Model.CurrentUser = "Default";
-            }
-
-            var firstOrDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
-            if (firstOrDefault != null && File.Exists(Path.Combine("Users", firstOrDefault.Image)))
-            {
-                var orDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
-                if (orDefault != null)
-                {
-                    using (FileStream stream = new FileStream(Path.Combine("Users", orDefault.Image), FileMode.Open, FileAccess.Read))
-                    {
-                        pictureBox1.Image = Image.FromStream(stream);
-                    }
-                }
-            }
-            Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
-
-            AddUserMenuItems();
-            SetupShowRegionMenuItems();
-
-            showStatusToolStripMenuItem1.Checked = Model.Settings.ShowStausBar;
-            statusStrip1.Visible = Model.Settings.ShowStausBar;
-            toolStrip1.Visible = Model.Settings.ShowToolBar;
-            pictureBox1.Visible = Model.Settings.ShowToolBar;
-            showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
-            listView1.KeyDown += listView1_KeyDown;
-            this.Resize += FormMainWindow_Resize;
-
-            Model.Settings.CurrentView = "Detailed";
-
-            if (Model.Settings.CurrentView == "Detailed")
-            {
-                detailsToolStripMenuItem_Click(null, null);
-            }
-            else
-            {
-                tToolStripMenuItem_Click(null, null);
-            }
-
-            // Create an instance of a ListView column sorter and assign it 
-            // to the ListView control.
-            lvwColumnSorter = new ListViewColumnSorter {ColumnToSort = -1};
-            listView1.ListViewItemSorter = lvwColumnSorter;
-
-            listView1.DoubleBuffered(true);
-            pictureBox1.DoubleBuffered(true);
-            DoubleBuffered = true;
-            listView1.DrawColumnHeader += ListView1_DrawColumnHeader;
-            listView1.DrawSubItem += ListView1_DrawSubItem;
-            listView1.ColumnClick += ListView1_ColumnClick;
-
-            ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
-            if (Model.Settings.CurrentSortDirection == 1)
-            {
-                ListView1_ColumnClick(this, new ColumnClickEventArgs(Model.Settings.CurrentSortColumn));
-            }
-
-            LoadPlugIns();
         }
 
         void FormMainWindow_Resize(object sender, EventArgs e)
@@ -302,42 +334,52 @@ namespace Budford.View
 
                 string currentType = "";
 
-                foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
+                SearchForPlugins(items);
+
+                AddPlugInsToMenu(items, currentType);
+            }
+        }
+
+        private void AddPlugInsToMenu(List<ToolStripItem> items, string currentType)
+        {
+            // Painful, but we want these added to the top of the list...
+            plugInsToolStripMenuItem.DropDownItems.Clear();
+            var v = (from i in items orderby ((Model.PlugIns.PlugIn)i.Tag).Type select i).ToList();
+            foreach (var item in v)
+            {
+                Model.PlugIns.PlugIn p = (Model.PlugIns.PlugIn)item.Tag;
+                if (p.Type != currentType)
                 {
-                    var extension = Path.GetExtension(file);
-                    if (extension != null && extension.ToLower().Contains("xml"))
+                    if (currentType != "")
                     {
-                        plugInsToolStripMenuItem.Visible = true;
-
-                        Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
-                        plugIns.Add(p);
-
-                     
-                        ToolStripMenuItem menuItem = new ToolStripMenuItem
-                        {
-                            Text = p.Name,
-                            Tag = p
-                        };
-                        menuItem.Click += PlugIn_Click;
-                        items.Add(menuItem);
+                        plugInsToolStripMenuItem.DropDownItems.Insert(0, new ToolStripSeparator());
                     }
+                    currentType = p.Type;
                 }
+                plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
+            }
+        }
 
-                // Painful, but we want these added to the top of the list...
-                plugInsToolStripMenuItem.DropDownItems.Clear();
-                var v = (from i in items orderby ((Model.PlugIns.PlugIn)i.Tag).Type select i ).ToList();
-                foreach (var item in v)
+        private void SearchForPlugins(List<ToolStripItem> items)
+        {
+            foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
+            {
+                var extension = Path.GetExtension(file);
+                if (extension != null && extension.ToLower().Contains("xml"))
                 {
-                    Model.PlugIns.PlugIn p = (Model.PlugIns.PlugIn)item.Tag;
-                    if (p.Type != currentType)
+                    plugInsToolStripMenuItem.Visible = true;
+
+                    Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
+                    plugIns.Add(p);
+
+
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem
                     {
-                        if (currentType != "")
-                        {
-                            plugInsToolStripMenuItem.DropDownItems.Insert(0, new ToolStripSeparator());
-                        }
-                        currentType = p.Type;
-                    }
-                    plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
+                        Text = p.Name,
+                        Tag = p
+                    };
+                    menuItem.Click += PlugIn_Click;
+                    items.Add(menuItem);
                 }
             }
         }
@@ -378,36 +420,11 @@ namespace Budford.View
             if (e.Column == lvwColumnSorter.ColumnToSort)
             {
                 // Reverse the current sort direction for this column.
-                if (lvwColumnSorter.OrderOfSort == SortOrder.Ascending)
-                {
-                    lvwColumnSorter.OrderOfSort = SortOrder.Descending;
-                }
-                else
-                {
-                    lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
-                }
+                ReverseCurrentSort();
             }
             else
             {
-                // Set the column number that is to be sorted; default to ascending.
-                lvwColumnSorter.ColumnToSort = e.Column;
-                lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
-                if (e.Column == 13 || e.Column == 14 || e.Column == 15)
-                {
-                    lvwColumnSorter.SortType = 1;
-                }
-                else if (e.Column == 5)
-                {
-                    lvwColumnSorter.SortType = 2;
-                }
-                else if (e.Column == 12)
-                {
-                    lvwColumnSorter.SortType = 3;
-                }
-                else
-                {
-                    lvwColumnSorter.SortType = 0;
-                }
+                SetSortType(e);
             }
 
             Model.Settings.CurrentSortColumn = e.Column;
@@ -416,6 +433,46 @@ namespace Budford.View
             // Perform the sort with these new sort options.
             listView1.Sort();
 
+            MakeBackgroundStripy();
+        }
+
+        private void ReverseCurrentSort()
+        {
+            if (lvwColumnSorter.OrderOfSort == SortOrder.Ascending)
+            {
+                lvwColumnSorter.OrderOfSort = SortOrder.Descending;
+            }
+            else
+            {
+                lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
+            }
+        }
+
+        private void SetSortType(ColumnClickEventArgs e)
+        {
+            // Set the column number that is to be sorted; default to ascending.
+            lvwColumnSorter.ColumnToSort = e.Column;
+            lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
+            if (e.Column == 13 || e.Column == 14 || e.Column == 15)
+            {
+                lvwColumnSorter.SortType = 1;
+            }
+            else if (e.Column == 5)
+            {
+                lvwColumnSorter.SortType = 2;
+            }
+            else if (e.Column == 12)
+            {
+                lvwColumnSorter.SortType = 3;
+            }
+            else
+            {
+                lvwColumnSorter.SortType = 0;
+            }
+        }
+
+        private void MakeBackgroundStripy()
+        {
             for (int i = 0; i < listView1.Items.Count; i++)
             {
                 if (i % 2 == 0)
@@ -2261,23 +2318,32 @@ namespace Budford.View
             {
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.NotSet)
+                    if (IsPlayable(game.Value))
                     {
-                        if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+                        if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
-                            if (game.Value.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable)
-                            {
-                                if (game.Value.GameSetting.PreferedVersion == "Latest")
-                                {
-                                    launcher.CopyLargestShaderCacheToCemu(game.Value);
-                                }
-                            }
+                            launcher.CopyLargestShaderCacheToCemu(game.Value);
                         }
                     }
                 }
             }
 
             System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc2);
+        }
+
+        bool IsPlayable(GameInformation game)
+        {
+            if (game.GameSetting.EmulationState != GameSettings.EmulationStateType.NotSet)
+            {
+                if (game.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
+                {
+                    if (game.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         /// <summary>

@@ -311,23 +311,34 @@ namespace Budford.Control
                 {
                     if (v.VersionNumber >= minVersion)
                     {
-                        string destinationFolder = Path.Combine(v.Folder, data[2]);
-                        if (!Directory.Exists(destinationFolder))
-                        {
-                            Directory.CreateDirectory(destinationFolder);
-                        }
+                        string destinationFolder = EnsureDestinationExists(data, v);
 
-                        foreach (var file in Directory.EnumerateFiles(sourceFolder))
-                        {
-                            string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
-                            if (!File.Exists(destinationFile))
-                            {
-                                FileManager.SafeCopy(file, destinationFile);
-                            }
-                        }
+                        CopyFilesToDestination(sourceFolder, destinationFolder);
                     }
                 }
             }
+        }
+
+        private static void CopyFilesToDestination(string sourceFolder, string destinationFolder)
+        {
+            foreach (var file in Directory.EnumerateFiles(sourceFolder))
+            {
+                string destinationFile = Path.Combine(destinationFolder, Path.GetFileName(file));
+                if (!File.Exists(destinationFile))
+                {
+                    FileManager.SafeCopy(file, destinationFile);
+                }
+            }
+        }
+
+        private static string EnsureDestinationExists(string[] data, InstalledVersion v)
+        {
+            string destinationFolder = Path.Combine(v.Folder, data[2]);
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+            return destinationFolder;
         }
 
         private static void CopySingleFileToBudford(Model.Model model, string[] data, int minVersion)
@@ -466,29 +477,32 @@ namespace Budford.Control
             int latestVersion = 0;
             foreach (var v in model.Settings.InstalledVersions)
             {
-                int version = v.VersionNumber;
+                CheckVersion(maxVersion, ref latest, ref latestVersion, v);
+            }
+            return latest;
+        }
 
-                if (v.VersionNumber >= latestVersion)
+        private static void CheckVersion(int maxVersion, ref InstalledVersion latest, ref int latestVersion, InstalledVersion v)
+        {
+            if (v.VersionNumber >= latestVersion)
+            {
+                if (v.VersionNumber < maxVersion)
                 {
-                    if (v.VersionNumber < maxVersion)
+                    if (v.VersionNumber == latestVersion)
                     {
-                        if (version == latestVersion)
-                        {
-                            if (v.IsLatest)
-                            {
-                                latest = v;
-                                latestVersion = v.VersionNumber;
-                            }
-                        }
-                        else
+                        if (v.IsLatest)
                         {
                             latest = v;
-                            latestVersion = version;
+                            latestVersion = v.VersionNumber;
                         }
+                    }
+                    else
+                    {
+                        latest = v;
+                        latestVersion = v.VersionNumber;
                     }
                 }
             }
-            return latest;
         }
 
         internal static bool DownloadLatestVersion(Form parent, Settings settings)

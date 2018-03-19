@@ -90,13 +90,7 @@ namespace Budford.View
                 ZipArchive zipArchive = ZipFile.OpenRead(pluginFileName);
                 foreach (var file in plugIn.Files)
                 {
-                    if (File.Exists(Path.Combine(version.Folder, file.DestinationFolder, file.Name)))
-                    {
-                        if (!File.Exists(Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name)))
-                        {
-                            FileManager.SafeMove(Path.Combine(version.Folder, file.DestinationFolder, file.Name), Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name));
-                        }
-                    }
+                    CreateBackup(version, file);
                     foreach (ZipArchiveEntry zippedFile in zipArchive.Entries)
                     {
                         if (zippedFile.FullName.Contains(file.SourceFolder + "/" + file.Name))
@@ -104,6 +98,17 @@ namespace Budford.View
                             Unpacker.ExtractFile(zippedFile, Path.Combine(version.Folder, file.DestinationFolder, file.Name));
                         }
                     }
+                }
+            }
+        }
+
+        private static void CreateBackup(InstalledVersion version, Model.PlugIns.File file)
+        {
+            if (File.Exists(Path.Combine(version.Folder, file.DestinationFolder, file.Name)))
+            {
+                if (!File.Exists(Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name)))
+                {
+                    FileManager.SafeMove(Path.Combine(version.Folder, file.DestinationFolder, file.Name), Path.Combine(version.Folder, file.DestinationFolder, "_" + file.Name));
                 }
             }
         }
