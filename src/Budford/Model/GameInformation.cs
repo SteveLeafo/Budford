@@ -17,6 +17,7 @@ namespace Budford.Model
         public string SaveDir  = "??      ";
         public string TitleId  = "";
         public string GroupId  = "";
+        public int TitleVersion = int.MaxValue;
         public string Type = "";
         internal string UnplayableReason = "Playable";
         public int Rating = 1;

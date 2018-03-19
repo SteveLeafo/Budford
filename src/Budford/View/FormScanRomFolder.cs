@@ -344,6 +344,10 @@ namespace Budford.View
 
                     GameInformation game;
 
+                    string version = Xml.GetValue(xElement, "title_version");
+                    int titleVersion;
+                    int.TryParse(version, out titleVersion);
+
                     if (!gameData.ContainsKey(key))
                     {
                         game = new GameInformation { GameSetting = new GameSettings() };
@@ -354,6 +358,7 @@ namespace Budford.View
                         game.ProductCode = productCode;
                         game.CompanyCode = companyCode;
                         game.TitleId = Xml.GetValue(xElement, "title_id").ToUpper();
+                        game.TitleVersion = titleVersion;
                         game.GroupId = Xml.GetValue(xElement, "group_id").ToUpper();
                         game.Size = (FolderScanner.GetDirectorySize(folder) / 1024 / 1024).ToString("N0") + " MB";
                         game.LaunchFile = file;
@@ -362,15 +367,19 @@ namespace Budford.View
                     else
                     {
                         game = gameData[key];
-                        game.Name = Xml.GetValue(xElement, "longname_en").Replace("\n", " ");
-                        game.Region = Nintendo.GetRegion(Xml.GetValue(xElement, "region"));
-                        game.Publisher = Xml.GetValue(xElement, "publisher_en");
-                        game.ProductCode = productCode;
-                        game.CompanyCode = companyCode;
-                        game.TitleId = Xml.GetValue(xElement, "title_id").ToUpper();
-                        game.GroupId = Xml.GetValue(xElement, "group_id").ToUpper();
-                        game.LaunchFile = file;
-                        game.LaunchFileName = Path.GetFileName(file);
+                        if (titleVersion < game.TitleVersion)
+                        {
+                            game.SaveDir = "??";
+                            game.Name = Xml.GetValue(xElement, "longname_en").Replace("\n", " ");
+                            game.Region = Nintendo.GetRegion(Xml.GetValue(xElement, "region"));
+                            game.Publisher = Xml.GetValue(xElement, "publisher_en");
+                            game.ProductCode = productCode;
+                            game.CompanyCode = companyCode;
+                            game.TitleId = Xml.GetValue(xElement, "title_id").ToUpper();
+                            game.GroupId = Xml.GetValue(xElement, "group_id").ToUpper();
+                            game.LaunchFile = file;
+                            game.LaunchFileName = Path.GetFileName(file);
+                        }
                     }
                     return game;
                    
