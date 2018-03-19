@@ -1,5 +1,9 @@
 # Budford Change Log
 
+## V1.0.72
+- Added the ability to select which monitor to use for both TV and GamePad views
+- Now checks the Title Version when searching for games and always uses the earliest version when calculating the SaveDir
+
 ## V1.0.71
 - Added support for Discord Rich Presence
 - Will now generate graphics packs on the fly if a graphic pack for the selected resolution doesn't exist
