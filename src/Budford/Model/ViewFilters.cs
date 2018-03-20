@@ -1,4 +1,5 @@
 ﻿using Budford.View;
+using System.Windows.Forms;
 namespace Budford.Model
 {
     public class ViewFilters
@@ -243,5 +244,78 @@ namespace Budford.Model
 
             mainWindow.PopulateListView();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal static void UpdateMenuItemChecks(Model Model, FormMainWindow mainWindow)
+        {
+            mainWindow.UsaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
+            mainWindow.EuropeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
+
+            mainWindow.WiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
+            mainWindow.EShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
+            mainWindow.ChannelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
+            mainWindow.VirtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
+            
+            mainWindow.Rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
+            mainWindow.Rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
+            mainWindow.Rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
+            mainWindow.Rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
+            mainWindow.Rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
+            
+            mainWindow.PerfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
+            mainWindow.PlayableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
+            mainWindow.RunsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
+            mainWindow.LoadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
+            mainWindow.UnplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
+            mainWindow.NotSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
+            
+            mainWindow.OfficiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
+            mainWindow.OfficiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
+            mainWindow.OfficiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
+            mainWindow.OfficiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
+            mainWindow.OfficiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
+            mainWindow.OfficiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal static void UpdateFiltersItems(Model Model, FormMainWindow mainWindow)
+        {
+            Model.Filters.ViewRegionUsa = mainWindow.UsaToolStripMenuItem.Checked;
+            Model.Filters.ViewRegionEur = mainWindow.EuropeToolStripMenuItem.Checked;
+            Model.Filters.ViewRegionJap = mainWindow.JapanToolStripMenuItem.Checked;
+
+            Model.Filters.ViewTypeWiiU = mainWindow.WiiUToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeEshop = mainWindow.EShopToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeChannel = mainWindow.ChannelToolStripMenuItem.Checked;
+            Model.Filters.ViewTypeVc = mainWindow.VirtualConsoleToolStripMenuItem.Checked;
+
+            Model.Filters.ViewRating5 = mainWindow.Rating5ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating4 = mainWindow.Rating4ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating3 = mainWindow.Rating3ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating2 = mainWindow.Rating2ToolStripMenuItem.Checked;
+            Model.Filters.ViewRating1 = mainWindow.Rating1ToolStripMenuItem.Checked;
+
+            Model.Filters.ViewStatusPerfect = mainWindow.PerfectToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusPlayable = mainWindow.PlayableToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusRuns = mainWindow.RunsToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusLoads = mainWindow.LoadsToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusUnplayable = mainWindow.UnplayableToolStripMenuItem.Checked;
+            Model.Filters.ViewStatusNotSet = mainWindow.NotSetToolStripMenuItem.Checked;
+
+            Model.Filters.ViewOfficialStatusPerfect = mainWindow.OfficiallyPerfectToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusPlayable = mainWindow.OfficiallyPlayableToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusRuns = mainWindow.OfficiallyRunsToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusLoads = mainWindow.OfficiallyLoadsToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusUnplayable = mainWindow.OfficiallyUnplayableToolStripMenuItem.Checked;
+            Model.Filters.ViewOfficialStatusNotSet = mainWindow.OfficiallyNotSetToolStripMenuItem.Checked;
+
+            mainWindow.PopulateListView();
+        }   
     }
 }

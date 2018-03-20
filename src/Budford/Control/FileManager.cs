@@ -8,6 +8,7 @@ using System.Security.Principal;
 using Budford.Properties;
 using Budford.View;
 using Budford.Utilities;
+using System.Diagnostics;
 
 namespace Budford.Control
 {
@@ -379,6 +380,47 @@ namespace Budford.Control
                 // No code
             }
             return false;
+        }
+
+        internal static void OpenSaveFileLocation(Model.Model Model, InstalledVersion version)
+        {
+            if (version.VersionNumber < 1110)
+            {
+                if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir)))
+                {
+                    Directory.CreateDirectory(Path.Combine(version.Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
+                }
+                Process.Start(Path.Combine(version.Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
+            }
+            else
+            {
+                string gameId = Model.GameData[Model.CurrentId].TitleId.Replace("00050000", "");
+
+                if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user")))
+                {
+                    Directory.CreateDirectory(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
+                }
+                Process.Start(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
+            }
+        }
+
+        internal static void OpenShaderCacheFolder(Model.Model Model, InstalledVersion version)
+        {
+            if (Directory.Exists(Path.Combine(version.Folder, "shaderCache", "transferable")))
+            {
+                if (File.Exists(Path.Combine(version.Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin")))
+                {
+                    Process.Start("explorer.exe", "/select, " + Path.Combine(version.Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin"));
+                }
+                else
+                {
+                    Process.Start("explorer.exe", "/select, " + Path.Combine(version.Folder, "shaderCache", "transferable"));
+                }
+            }
+            else
+            {
+                MessageBox.Show(Resources.fMainWindow_openSaveFileLocationToolStripMenuItem_Click_, Resources.fMainWindow_openSaveFileLocationToolStripMenuItem_Click_Folder_not_found, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }   
 }

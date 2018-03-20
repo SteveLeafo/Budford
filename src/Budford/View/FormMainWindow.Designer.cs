@@ -122,13 +122,6 @@
             this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.installVS2015RedistributablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.installVS2015RedistributablesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.installVS2012RedistributablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.installVS2012RedistributablesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.installVS2012RedistributablesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.installVS2012RedistributablesToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.dumpSaveDirCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.linkDLCFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixUnityGameSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -870,13 +863,6 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.installVS2015RedistributablesToolStripMenuItem,
-            this.installVS2015RedistributablesToolStripMenuItem1,
-            this.installVS2012RedistributablesToolStripMenuItem,
-            this.installVS2012RedistributablesToolStripMenuItem1,
-            this.installVS2012RedistributablesToolStripMenuItem2,
-            this.installVS2012RedistributablesToolStripMenuItem3,
-            this.toolStripSeparator8,
             this.dumpSaveDirCodesToolStripMenuItem,
             this.linkDLCFoldersToolStripMenuItem,
             this.fixUnityGameSettingsToolStripMenuItem,
@@ -891,60 +877,6 @@
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // installVS2015RedistributablesToolStripMenuItem
-            // 
-            this.installVS2015RedistributablesToolStripMenuItem.Name = "installVS2015RedistributablesToolStripMenuItem";
-            this.installVS2015RedistributablesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.installVS2015RedistributablesToolStripMenuItem.Text = "Install VS2015 Redistributables";
-            this.installVS2015RedistributablesToolStripMenuItem.Visible = false;
-            this.installVS2015RedistributablesToolStripMenuItem.Click += new System.EventHandler(this.installVS2015RedistributablesToolStripMenuItem_Click);
-            // 
-            // installVS2015RedistributablesToolStripMenuItem1
-            // 
-            this.installVS2015RedistributablesToolStripMenuItem1.Name = "installVS2015RedistributablesToolStripMenuItem1";
-            this.installVS2015RedistributablesToolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
-            this.installVS2015RedistributablesToolStripMenuItem1.Text = "Install VS2013 Redistributables";
-            this.installVS2015RedistributablesToolStripMenuItem1.Visible = false;
-            this.installVS2015RedistributablesToolStripMenuItem1.Click += new System.EventHandler(this.installVS2015RedistributablesToolStripMenuItem1_Click);
-            // 
-            // installVS2012RedistributablesToolStripMenuItem
-            // 
-            this.installVS2012RedistributablesToolStripMenuItem.Name = "installVS2012RedistributablesToolStripMenuItem";
-            this.installVS2012RedistributablesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.installVS2012RedistributablesToolStripMenuItem.Text = "Install VS2012 Redistributables";
-            this.installVS2012RedistributablesToolStripMenuItem.Visible = false;
-            this.installVS2012RedistributablesToolStripMenuItem.Click += new System.EventHandler(this.installVS2012RedistributablesToolStripMenuItem_Click);
-            // 
-            // installVS2012RedistributablesToolStripMenuItem1
-            // 
-            this.installVS2012RedistributablesToolStripMenuItem1.Name = "installVS2012RedistributablesToolStripMenuItem1";
-            this.installVS2012RedistributablesToolStripMenuItem1.Size = new System.Drawing.Size(250, 22);
-            this.installVS2012RedistributablesToolStripMenuItem1.Text = "Install VS2010 Redistributables";
-            this.installVS2012RedistributablesToolStripMenuItem1.Visible = false;
-            this.installVS2012RedistributablesToolStripMenuItem1.Click += new System.EventHandler(this.installVS2012RedistributablesToolStripMenuItem1_Click);
-            // 
-            // installVS2012RedistributablesToolStripMenuItem2
-            // 
-            this.installVS2012RedistributablesToolStripMenuItem2.Name = "installVS2012RedistributablesToolStripMenuItem2";
-            this.installVS2012RedistributablesToolStripMenuItem2.Size = new System.Drawing.Size(250, 22);
-            this.installVS2012RedistributablesToolStripMenuItem2.Text = "Install VS2008 Redistributables";
-            this.installVS2012RedistributablesToolStripMenuItem2.Visible = false;
-            this.installVS2012RedistributablesToolStripMenuItem2.Click += new System.EventHandler(this.installVS2012RedistributablesToolStripMenuItem2_Click);
-            // 
-            // installVS2012RedistributablesToolStripMenuItem3
-            // 
-            this.installVS2012RedistributablesToolStripMenuItem3.Name = "installVS2012RedistributablesToolStripMenuItem3";
-            this.installVS2012RedistributablesToolStripMenuItem3.Size = new System.Drawing.Size(250, 22);
-            this.installVS2012RedistributablesToolStripMenuItem3.Text = "Install VS2005 Redistributables";
-            this.installVS2012RedistributablesToolStripMenuItem3.Visible = false;
-            this.installVS2012RedistributablesToolStripMenuItem3.Click += new System.EventHandler(this.installVS2012RedistributablesToolStripMenuItem3_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(247, 6);
-            this.toolStripSeparator8.Visible = false;
             // 
             // dumpSaveDirCodesToolStripMenuItem
             // 
@@ -1341,13 +1273,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem showStatusToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem installVS2015RedistributablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem installVS2015RedistributablesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem installVS2012RedistributablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem installVS2012RedistributablesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem installVS2012RedistributablesToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem installVS2012RedistributablesToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem dumpSaveDirCodesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem importShaderCacheToolStripMenuItem;

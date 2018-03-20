@@ -130,6 +130,51 @@ namespace Budford.Model
             Unplayable = 5
         }
 
-      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="imageIndex"></param>
+        /// <returns></returns>
+        internal static int GetStatusImageIndex(string status)
+        {
+            int imageIndex = 5;
+            switch (status)
+            {
+                case "Perfect":
+                    imageIndex = 0;
+                    break;
+                case "Playable":
+                    imageIndex = 1;
+                    break;
+                case "Runs":
+                    imageIndex = 2;
+                    break;
+                case "Loads":
+                    imageIndex = 3;
+                    break;
+                case "Unplayable":
+                    imageIndex = 4;
+                    break;
+            }
+
+            return imageIndex;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        internal static int GetRegionImageIndex(KeyValuePair<string, GameInformation> game)
+        {
+            switch (game.Value.Region)
+            {
+                case "EUR": return 0;
+                case "JPN": return 1;
+                case "USA": return 2;
+                default: return 4;
+            }
+        }
     }
 }

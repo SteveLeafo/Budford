@@ -47,6 +47,40 @@ namespace Budford.Control
             return model;
         }
 
+        internal static Model.Model TransferLegacyModel()
+        {
+
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
+            }
+
+            if (!File.Exists(GetModelFileName()))
+            {
+                if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
+                {
+                    FileManager.SafeCopy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName(), false);
+                    FileManager.SafeDelete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
+                }
+            }
+
+            Model.Model m = Persistence.Load(GetModelFileName());
+
+            if (m.Settings.SavesFolder == "")
+            {
+                m.Settings.SavesFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+
+            return m;
+
+        }
+
+        internal static string GetModelFileName()
+        {
+            return Program.IsInstalled() ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml") : "Model.xml";
+        }
+
+
         /// <summary>
         /// Save to XML
         /// </summary>

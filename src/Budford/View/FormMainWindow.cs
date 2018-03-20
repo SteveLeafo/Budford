@@ -305,40 +305,6 @@ namespace Budford.View
             base.OnLoad(e);
         }
 
-        internal static string GetModelFileName()
-        {
-            return Program.IsInstalled() ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford", "Model.xml") : "Model.xml";
-        }
-
-        internal static Model.Model TransferLegacyModel()
-        {
-
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
-            {
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
-            }
-
-            if (!File.Exists(GetModelFileName()))
-            {
-                if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
-                {
-                    FileManager.SafeCopy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName(), false);
-                    FileManager.SafeDelete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
-                }
-            }
-
-            Model.Model m = Persistence.Load(GetModelFileName());
-
-            if (m.Settings.SavesFolder == "")
-            {
-                m.Settings.SavesFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            }
-          
-            return m;
-
-        }
-
-
         internal void LoadPlugIns()
         {
             if (Directory.Exists(SpecialFolders.PlugInFolder(Model)))
@@ -523,8 +489,7 @@ namespace Budford.View
                     int x = e.SubItem.Bounds.Location.X + (e.SubItem.Bounds.Width / 2) - (imageList1.Images[0].Width / 2);
                     int y = e.SubItem.Bounds.Location.Y + (e.SubItem.Bounds.Height / 2) - (imageList1.Images[0].Height / 2);
 
-                    int imageIndex = 5;
-                    imageIndex = GetStatusImageIndex(e, imageIndex);
+                    int imageIndex = GameSettings.GetStatusImageIndex(e.SubItem.Text.Trim());
                     e.Graphics.DrawImage(imageList2.Images[imageIndex], x, y);
                 }
                 else
@@ -534,35 +499,7 @@ namespace Budford.View
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        /// <param name="imageIndex"></param>
-        /// <returns></returns>
-        private static int GetStatusImageIndex(DrawListViewSubItemEventArgs e, int imageIndex)
-        {
-            switch (e.SubItem.Text.Trim())
-            {
-                case "Perfect":
-                    imageIndex = 0;
-                    break;
-                case "Playable":
-                    imageIndex = 1;
-                    break;
-                case "Runs":
-                    imageIndex = 2;
-                    break;
-                case "Loads":
-                    imageIndex = 3;
-                    break;
-                case "Unplayable":
-                    imageIndex = 4;
-                    break;
-            }
-
-            return imageIndex;
-        }
+       
 
         /// <summary>
         /// 
@@ -579,58 +516,36 @@ namespace Budford.View
         /// </summary>
         private void SetupShowRegionMenuItems()
         {
-            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
             usaToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
             europeToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            japanToolStripMenuItem .Checked = Model.Filters.ViewRegionJap;
             japanToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
             wiiUToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
             eShopToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
             channelToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
             virtualConsoleToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
             rating5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
             rating4ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
             rating3ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
             rating2ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
             rating1ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
             perfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
             playableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
             runsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
             loadsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
             unplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
             notSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
-            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
             officiallyPerfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
             officiallyPlayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
             officiallyRunsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
             officiallyLoadsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
             officiallyUnplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;
-            officiallyNotSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;           
+            officiallyNotSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+
+            ViewFilters.UpdateMenuItemChecks(Model, this);
 
         }
 
@@ -642,37 +557,7 @@ namespace Budford.View
         private void UsaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
-
-            Model.Filters.ViewRegionUsa = usaToolStripMenuItem.Checked;
-            Model.Filters.ViewRegionEur = europeToolStripMenuItem.Checked;
-            Model.Filters.ViewRegionJap = japanToolStripMenuItem.Checked;
-
-            Model.Filters.ViewTypeWiiU = wiiUToolStripMenuItem.Checked;
-            Model.Filters.ViewTypeEshop = eShopToolStripMenuItem.Checked;
-            Model.Filters.ViewTypeChannel = channelToolStripMenuItem.Checked;
-            Model.Filters.ViewTypeVc = virtualConsoleToolStripMenuItem.Checked;
-
-            Model.Filters.ViewRating5 = rating5ToolStripMenuItem.Checked;
-            Model.Filters.ViewRating4 = rating4ToolStripMenuItem.Checked;
-            Model.Filters.ViewRating3 = rating3ToolStripMenuItem.Checked;
-            Model.Filters.ViewRating2 = rating2ToolStripMenuItem.Checked;
-            Model.Filters.ViewRating1 = rating1ToolStripMenuItem.Checked;
-
-            Model.Filters.ViewStatusPerfect = perfectToolStripMenuItem.Checked;
-            Model.Filters.ViewStatusPlayable = playableToolStripMenuItem.Checked;
-            Model.Filters.ViewStatusRuns = runsToolStripMenuItem.Checked;
-            Model.Filters.ViewStatusLoads = loadsToolStripMenuItem.Checked;
-            Model.Filters.ViewStatusUnplayable = unplayableToolStripMenuItem.Checked;
-            Model.Filters.ViewStatusNotSet = notSetToolStripMenuItem.Checked;
-
-            Model.Filters.ViewOfficialStatusPerfect = officiallyPerfectToolStripMenuItem.Checked;
-            Model.Filters.ViewOfficialStatusPlayable = officiallyPlayableToolStripMenuItem.Checked;
-            Model.Filters.ViewOfficialStatusRuns = officiallyRunsToolStripMenuItem.Checked;
-            Model.Filters.ViewOfficialStatusLoads = officiallyLoadsToolStripMenuItem.Checked;
-            Model.Filters.ViewOfficialStatusUnplayable = officiallyUnplayableToolStripMenuItem.Checked;
-            Model.Filters.ViewOfficialStatusNotSet = officiallyNotSetToolStripMenuItem.Checked;
-
-            PopulateListView();
+            ViewFilters.UpdateFiltersItems(Model, this);
         }           
 
         /// <summary>
@@ -873,7 +758,7 @@ namespace Budford.View
                         ListViewItem lvi = new ListViewItem();
                         PopulateSubItems(game, lvi);
 
-                        lvi.ImageIndex = GetRegionImageIndex(game);
+                        lvi.ImageIndex = GameSettings.GetRegionImageIndex(game);
                         lvi.Tag = game.Value;
 
                         listView1.Items.Add(lvi);
@@ -938,21 +823,6 @@ namespace Budford.View
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private static int GetRegionImageIndex(KeyValuePair<string, GameInformation> game)
-        {
-            switch (game.Value.Region)
-            {
-                case "EUR": return 0;
-                case "JPN": return 1;
-                case "USA": return 2;
-                default: return 4;
-            }
-        }
 
         /// <summary>
         /// 
@@ -993,10 +863,6 @@ namespace Budford.View
             lvi.SubItems.Add(game.Value.Rating + "                 "); 
             lvi.SubItems.Add(game.Value.Comments + "                 ");
         }
-
-      
-
-        
 
         /// <summary>
         /// 
@@ -1369,27 +1235,11 @@ namespace Budford.View
             if (listView1.SelectedItems.Count == 1)
             {
                 Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-
-                if (GetCurrentVersion().VersionNumber < 1110)
-                {
-                    if (!Directory.Exists(Path.Combine(GetCurrentVersion().Folder,  "mlc01", "emulatorSave",  Model.GameData[Model.CurrentId].SaveDir)))
-                    {
-                        Directory.CreateDirectory(Path.Combine(GetCurrentVersion().Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
-                    }
-                    Process.Start(Path.Combine(GetCurrentVersion().Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
-                }
-                else
-                {
-                    string gameId = Model.GameData[Model.CurrentId].TitleId.Replace("00050000", "");
-
-                    if (!Directory.Exists(Path.Combine(GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId, "user")))
-                    {
-                        Directory.CreateDirectory(Path.Combine(GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
-                    }
-                    Process.Start(Path.Combine(GetCurrentVersion().Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
-                }
+                FileManager.OpenSaveFileLocation(Model, GetCurrentVersion());
             }
         }
+
+       
 
         /// <summary>
         /// 
@@ -1419,23 +1269,11 @@ namespace Budford.View
             if (listView1.SelectedItems.Count == 1)
             {
                 Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                if (Directory.Exists(Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable")))
-                {
-                    if (File.Exists(Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin")))
-                    {
-                        Process.Start("explorer.exe", "/select, " + Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin"));
-                    }
-                    else
-                    {
-                        Process.Start("explorer.exe", "/select, " + Path.Combine(GetCurrentVersion().Folder, "shaderCache", "transferable"));
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(Resources.fMainWindow_openSaveFileLocationToolStripMenuItem_Click_, Resources.fMainWindow_openSaveFileLocationToolStripMenuItem_Click_Folder_not_found, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                FileManager.OpenShaderCacheFolder(Model, GetCurrentVersion());
             }
         }
+
+       
        
         /// <summary>
         /// 
@@ -1444,7 +1282,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Persistence.Save(Model, GetModelFileName());
+            Persistence.Save(Model, Persistence.GetModelFileName());
             DiscordRichPresence.ShutDown();
         }
 
@@ -1472,67 +1310,7 @@ namespace Budford.View
             toolStrip1.Visible = showToolbarToolStripMenuItem.Checked;
             Model.Settings.ShowToolBar = showToolbarToolStripMenuItem.Checked;             
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installVS2015RedistributablesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            WindowsOs.IsVc2013RedistInstalled();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installVS2015RedistributablesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            WindowsOs.IsVc2015RedistInstalled();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installVS2012RedistributablesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            WindowsOs.IsVc2012RedistInstalled();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installVS2012RedistributablesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            WindowsOs.IsVc2010RedistInstalled();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installVS2012RedistributablesToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            WindowsOs.IsVc2008RedistInstalled();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void installVS2012RedistributablesToolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            WindowsOs.IsVc2005RedistInstalled();
-        }
-
+       
         /// <summary>
         /// 
         /// </summary>
@@ -1540,7 +1318,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void dumpSaveDirCodesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Persistence.Save(Model, GetModelFileName());
+            Persistence.Save(Model, Persistence.GetModelFileName());
             MessageBox.Show(Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_SaveDirs_saved_successfully, Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

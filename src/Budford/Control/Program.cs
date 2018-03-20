@@ -41,7 +41,7 @@ namespace Budford.Control
                 }
             }
 
-            var model = FormMainWindow.TransferLegacyModel();
+            var model = Persistence.TransferLegacyModel();
 
             if (!Get45Or451FromRegistry())
             {
@@ -151,7 +151,7 @@ namespace Budford.Control
                 Directory.CreateDirectory(model.Settings.DownloadsFolder);
             }
             Directory.SetCurrentDirectory(model.Settings.DownloadsFolder);
-            Persistence.Save(model, FormMainWindow.GetModelFileName());
+            Persistence.Save(model, Persistence.GetModelFileName());
         }
 
         /// <summary>
