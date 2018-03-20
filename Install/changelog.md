@@ -1,5 +1,8 @@
 # Budford Change Log
 
+## V1.0.73
+- Fixed an issue where Cemu was getting starved of mouse events.
+
 ## V1.0.72
 - Added the ability to select which monitor to use for both TV and GamePad views
 - Now checks the Title Version when searching for games and always uses the earliest version when calculating the SaveDir
