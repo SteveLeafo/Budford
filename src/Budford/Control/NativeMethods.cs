@@ -7,6 +7,19 @@ namespace Budford.Control
 {
     internal class NativeMethods
     {
+        public enum KeyModifiers
+        {
+            None = 0,
+            // ReSharper disable once UnusedMember.Local
+            Alt = 1,
+            // ReSharper disable once UnusedMember.Local
+            Control = 2,
+            // ReSharper disable once UnusedMember.Local
+            Shift = 4,
+            // ReSharper disable once UnusedMember.Local
+            WinKey = 8
+        }
+
         [Flags]
         public enum ErrorModes : uint
         {
@@ -115,6 +128,12 @@ namespace Budford.Control
             ByPosition = 0x00000400,
             Remove = 0x00001000
         }
+
+        [DllImport("user32.dll")]
+        internal static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+
+        [DllImport("user32.dll")]
+        internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         [DllImport("kernel32.dll")]
         static extern ErrorModes SetErrorMode(ErrorModes uMode);

@@ -16,32 +16,43 @@ namespace Budford.View
 {
     public partial class FormMainWindow : Form
     {
+        internal ToolStripMenuItem OfficiallyPerfectToolStripMenuItem { get { return officiallyPerfectToolStripMenuItem; } }
+        internal ToolStripMenuItem OfficiallyPlayableToolStripMenuItem { get { return officiallyPlayableToolStripMenuItem; } }
+        internal ToolStripMenuItem OfficiallyRunsToolStripMenuItem { get { return officiallyRunsToolStripMenuItem; } }
+        internal ToolStripMenuItem OfficiallyLoadsToolStripMenuItem { get { return officiallyLoadsToolStripMenuItem; } }
+        internal ToolStripMenuItem OfficiallyUnplayableToolStripMenuItem { get { return officiallyUnplayableToolStripMenuItem; } }
+        internal ToolStripMenuItem OfficiallyNotSetToolStripMenuItem { get { return officiallyNotSetToolStripMenuItem; } }
+
+        internal ToolStripMenuItem Rating1ToolStripMenuItem { get { return rating1ToolStripMenuItem; } }
+        internal ToolStripMenuItem Rating2ToolStripMenuItem { get { return rating2ToolStripMenuItem; } }
+        internal ToolStripMenuItem Rating3ToolStripMenuItem { get { return rating3ToolStripMenuItem; } }
+        internal ToolStripMenuItem Rating4ToolStripMenuItem { get { return rating4ToolStripMenuItem; } }
+        internal ToolStripMenuItem Rating5ToolStripMenuItem { get { return rating5ToolStripMenuItem; } }
+
+        internal ToolStripMenuItem WiiUToolStripMenuItem { get { return wiiUToolStripMenuItem; } }
+        internal ToolStripMenuItem EShopToolStripMenuItem { get { return eShopToolStripMenuItem; } }
+        internal ToolStripMenuItem ChannelToolStripMenuItem { get { return channelToolStripMenuItem; } }
+        internal ToolStripMenuItem VirtualConsoleToolStripMenuItem { get { return virtualConsoleToolStripMenuItem; } }
+
+        internal ToolStripMenuItem UsaToolStripMenuItem { get { return usaToolStripMenuItem; } }
+        internal ToolStripMenuItem EuropeToolStripMenuItem { get { return europeToolStripMenuItem; } }
+        internal ToolStripMenuItem JapanToolStripMenuItem { get { return japanToolStripMenuItem; } }
+
+        internal ToolStripMenuItem PerfectToolStripMenuItem { get { return perfectToolStripMenuItem; } }
+        internal ToolStripMenuItem PlayableToolStripMenuItem { get { return playableToolStripMenuItem; } }
+        internal ToolStripMenuItem RunsToolStripMenuItem { get { return runsToolStripMenuItem; } }
+        internal ToolStripMenuItem LoadsToolStripMenuItem { get { return loadsToolStripMenuItem; } }
+        internal ToolStripMenuItem UnplayableToolStripMenuItem { get { return unplayableToolStripMenuItem; } }
+        internal ToolStripMenuItem NotSetToolStripMenuItem { get { return notSetToolStripMenuItem; } }
+
         // ReSharper disable once InconsistentNaming
         public string launchGame = "";
         public bool LaunchFull = true;
 
-        [DllImport("user32.dll")]
-        internal static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
-
-        [DllImport("user32.dll")]
-        internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
+      
         private readonly List<Model.PlugIns.PlugIn> plugIns = new List<Model.PlugIns.PlugIn>();
 
         const int MyactionHotkeyId = 1;
-
-        enum KeyModifier
-        {
-            None = 0,
-            // ReSharper disable once UnusedMember.Local
-            Alt = 1,
-            // ReSharper disable once UnusedMember.Local
-            Control = 2,
-            // ReSharper disable once UnusedMember.Local
-            Shift = 4,
-            // ReSharper disable once UnusedMember.Local
-            WinKey = 8
-        }
 
 
         // All of our data...
@@ -185,6 +196,8 @@ namespace Budford.View
         {
             listView1.KeyDown += listView1_KeyDown;
             this.Resize += FormMainWindow_Resize;
+
+            listView1.OwnerDraw = false;
             listView1.DrawColumnHeader += ListView1_DrawColumnHeader;
             listView1.DrawSubItem += ListView1_DrawSubItem;
             listView1.ColumnClick += ListView1_ColumnClick;
@@ -394,6 +407,7 @@ namespace Budford.View
                 {
                     if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                     {
+                        EnableControlsForGameRunning();
                         GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                         Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                         RegisterStopHotKey(Model);
@@ -420,11 +434,11 @@ namespace Budford.View
             if (e.Column == lvwColumnSorter.ColumnToSort)
             {
                 // Reverse the current sort direction for this column.
-                ReverseCurrentSort();
+                lvwColumnSorter.ReverseCurrentSort();
             }
             else
             {
-                SetSortType(e);
+                lvwColumnSorter.SetSortType(e);
             }
 
             Model.Settings.CurrentSortColumn = e.Column;
@@ -435,42 +449,7 @@ namespace Budford.View
 
             MakeBackgroundStripy();
         }
-
-        private void ReverseCurrentSort()
-        {
-            if (lvwColumnSorter.OrderOfSort == SortOrder.Ascending)
-            {
-                lvwColumnSorter.OrderOfSort = SortOrder.Descending;
-            }
-            else
-            {
-                lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
-            }
-        }
-
-        private void SetSortType(ColumnClickEventArgs e)
-        {
-            // Set the column number that is to be sorted; default to ascending.
-            lvwColumnSorter.ColumnToSort = e.Column;
-            lvwColumnSorter.OrderOfSort = SortOrder.Ascending;
-            if (e.Column == 13 || e.Column == 14 || e.Column == 15)
-            {
-                lvwColumnSorter.SortType = 1;
-            }
-            else if (e.Column == 5)
-            {
-                lvwColumnSorter.SortType = 2;
-            }
-            else if (e.Column == 12)
-            {
-                lvwColumnSorter.SortType = 3;
-            }
-            else
-            {
-                lvwColumnSorter.SortType = 0;
-            }
-        }
-
+             
         private void MakeBackgroundStripy()
         {
             for (int i = 0; i < listView1.Items.Count; i++)
@@ -517,11 +496,13 @@ namespace Budford.View
         /// <param name="e"></param>
         private void ListView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
-            if ((e.Item.SubItems[9] == e.SubItem))
+            if ((e.Item.SubItems[0] == e.SubItem))
+            {
+                e.DrawDefault = true;
+            }
+            else
             {
                 e.DrawDefault = false;
-                e.DrawBackground();
-                e.DrawFocusRectangle(e.SubItem.Bounds);
                 if ((e.ItemState & ListViewItemStates.Selected) == ListViewItemStates.Selected)
                 {
                     Rectangle r = new Rectangle(e.SubItem.Bounds.Left, e.SubItem.Bounds.Top, e.SubItem.Bounds.Width, e.SubItem.Bounds.Height);
@@ -530,20 +511,26 @@ namespace Budford.View
                 }
                 else
                 {
-                    e.SubItem.ForeColor = SystemColors.WindowText;
+                    if (e.Item.BackColor != Color.White)
+                    {
+                        Rectangle r = new Rectangle(e.SubItem.Bounds.Left, e.SubItem.Bounds.Top, e.SubItem.Bounds.Width, e.SubItem.Bounds.Height);
+                        e.Graphics.FillRectangle(new SolidBrush(e.Item.BackColor), r);
+                    }
                 }
 
-                int x = e.SubItem.Bounds.Location.X + (e.SubItem.Bounds.Width / 2) - (imageList1.Images[0].Width / 2);
-                int y = e.SubItem.Bounds.Location.Y + (e.SubItem.Bounds.Height / 2) - (imageList1.Images[0].Height / 2);
+                if ((e.Item.SubItems[9] == e.SubItem) || (e.Item.SubItems[8] == e.SubItem))
+                {
+                    int x = e.SubItem.Bounds.Location.X + (e.SubItem.Bounds.Width / 2) - (imageList1.Images[0].Width / 2);
+                    int y = e.SubItem.Bounds.Location.Y + (e.SubItem.Bounds.Height / 2) - (imageList1.Images[0].Height / 2);
 
-                int imageIndex = 5;
-                imageIndex = GetStatusImageIndex(e, imageIndex);
-                e.Graphics.DrawImage(imageList2.Images[imageIndex], x, y);
-                DrawText(e);
-            }
-            else
-            {
-                e.DrawDefault = true;
+                    int imageIndex = 5;
+                    imageIndex = GetStatusImageIndex(e, imageIndex);
+                    e.Graphics.DrawImage(imageList2.Images[imageIndex], x, y);
+                }
+                else
+                {
+                    e.DrawText(TextFormatFlags.VerticalCenter);
+                }
             }
         }
 
@@ -575,21 +562,6 @@ namespace Budford.View
             }
 
             return imageIndex;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        void DrawText(DrawListViewSubItemEventArgs e)
-        {
-            RectangleF rect = new RectangleF(e.SubItem.Bounds.X + imageList1.Images[0].Width, e.SubItem.Bounds.Y, e.SubItem.Bounds.Width - imageList1.Images[0].Width, e.SubItem.Bounds.Height);
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Near;
-                sf.LineAlignment = StringAlignment.Center;
-                e.Graphics.DrawString(e.SubItem.Text, e.SubItem.Font, new SolidBrush(e.SubItem.ForeColor), rect, sf);
-            }
         }
 
         /// <summary>
@@ -886,7 +858,7 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
-        private void PopulateListView()
+        internal void PopulateListView()
         {
             listView1.BeginUpdate();
             try
@@ -896,7 +868,7 @@ namespace Budford.View
 
                 foreach (var game in Model.GameData.OrderByDescending(gd => gd.Value.Name))
                 {
-                    if (FilterCheckedOut(game.Value))
+                    if (GameFilter.FilterCheckedOut(Model, game.Value))
                     {
                         ListViewItem lvi = new ListViewItem();
                         PopulateSubItems(game, lvi);
@@ -1022,179 +994,9 @@ namespace Budford.View
             lvi.SubItems.Add(game.Value.Comments + "                 ");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private bool FilterCheckedOut(GameInformation game)
-        {
-            if (!Model.Settings.IncludeWiiULauncherRpx)
-            {
-                if (game.LaunchFile.Contains("WiiULauncher.rpx"))
-                {
-                    return false;
-                }
-            }
+      
 
-            if (CheckRegionFilter(game))
-            {
-                if (CheckStatusFilter(game))
-                {
-                    if (CheckOfficialStatusFilter(game))
-                    {
-                        if (CheckRatingFilter(game))
-                        {
-                            return CheckTypeFilter(game);
-                        }
-                    }
-                }
-            }
-           
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private bool CheckStatusFilter(GameInformation game)
-        {
-            switch (game.GameSetting.EmulationState)
-            {
-                case GameSettings.EmulationStateType.NotSet:
-                    if (!Model.Filters.ViewStatusNotSet) return false;
-                    break;
-                case GameSettings.EmulationStateType.Perfect:
-                    if (!Model.Filters.ViewStatusPerfect) return false;
-                    break;
-                case GameSettings.EmulationStateType.Playable:
-                    if (!Model.Filters.ViewStatusPlayable) return false;
-                    break;
-                case GameSettings.EmulationStateType.Runs:
-                    if (!Model.Filters.ViewStatusRuns) return false;
-                    break;
-                case GameSettings.EmulationStateType.Loads:
-                    if (!Model.Filters.ViewStatusLoads) return false;
-                    break;
-                case GameSettings.EmulationStateType.Unplayable:
-                    if (!Model.Filters.ViewStatusUnplayable) return false;
-                    break;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private bool CheckOfficialStatusFilter(GameInformation game)
-        {
-            switch (game.GameSetting.OfficialEmulationState)
-            {
-                case GameSettings.EmulationStateType.NotSet:
-                    if (!Model.Filters.ViewOfficialStatusNotSet) return false;
-                    break;
-                case GameSettings.EmulationStateType.Perfect:
-                    if (!Model.Filters.ViewOfficialStatusPerfect) return false;
-                    break;
-                case GameSettings.EmulationStateType.Playable:
-                    if (!Model.Filters.ViewOfficialStatusPlayable) return false;
-                    break;
-                case GameSettings.EmulationStateType.Runs:
-                    if (!Model.Filters.ViewOfficialStatusRuns) return false;
-                    break;
-                case GameSettings.EmulationStateType.Loads:
-                    if (!Model.Filters.ViewOfficialStatusLoads) return false;
-                    break;
-                case GameSettings.EmulationStateType.Unplayable:
-                    if (!Model.Filters.ViewOfficialStatusUnplayable) return false;
-                    break;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private bool CheckRegionFilter(GameInformation game)
-        {
-            switch (game.Region)
-            {
-                case "USA":
-                    if (!Model.Filters.ViewRegionUsa) return false;
-                    break;
-                case "EUR":
-                    if (!Model.Filters.ViewRegionEur) return false;
-                    break;
-                case "JAP":
-                    if (!Model.Filters.ViewRegionJap) return false;
-                    break;
-                case "ALL":
-                    if (!Model.Filters.ViewRegionAll) return false;
-                    break;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private bool CheckTypeFilter(GameInformation game)
-        {
-            switch (game.Type)
-            {
-                case "WiiU":
-                    if (!Model.Filters.ViewTypeWiiU) return false;
-                    break;
-                case "eShop":
-                    if (!Model.Filters.ViewTypeEshop) return false;
-                    break;
-                case "Channel":
-                    if (!Model.Filters.ViewTypeChannel) return false;
-                    break;
-                default:
-                    if (!Model.Filters.ViewTypeVc) return false;
-                    break;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <returns></returns>
-        private bool CheckRatingFilter(GameInformation game)
-        {
-            switch (game.Rating)
-            {
-                case 5:
-                    if (!Model.Filters.ViewRating5) return false;
-                    break;
-                case 4:
-                    if (!Model.Filters.ViewRating4) return false;
-                    break;
-                case 3:
-                    if (!Model.Filters.ViewRating3) return false;
-                    break;
-                case 2:
-                    if (!Model.Filters.ViewRating2) return false;
-                    break;
-                case 1:
-                    if (!Model.Filters.ViewRating1) return false;
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
+        
 
         /// <summary>
         /// 
@@ -1895,7 +1697,7 @@ namespace Budford.View
             if (model.Settings.StopHotkey != "None")
             {
                 Keys key = GetHotKey(model.Settings.StopHotkey);
-                RegisterHotKey(Handle, MyactionHotkeyId, (int)KeyModifier.None, key.GetHashCode());
+                NativeMethods.RegisterHotKey(Handle, MyactionHotkeyId, (int)NativeMethods.KeyModifiers.None, key.GetHashCode());
             }
         }
 
@@ -2068,22 +1870,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // All
-            Model.Filters.ViewStatusPerfect = true;
-            Model.Filters.ViewStatusPlayable = true;
-            Model.Filters.ViewStatusRuns = true;
-            Model.Filters.ViewStatusLoads = true;
-            Model.Filters.ViewStatusUnplayable = true;
-            Model.Filters.ViewStatusNotSet = true;
-
-            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
-            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
-            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
-            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
-            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
-            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
-
-            PopulateListView();
+            ViewFilters.AllStatus(Model, this);
         }
 
         /// <summary>
@@ -2093,22 +1880,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void noneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // None
-            Model.Filters.ViewStatusPerfect = false;
-            Model.Filters.ViewStatusPlayable = false;
-            Model.Filters.ViewStatusRuns = false;
-            Model.Filters.ViewStatusLoads = false;
-            Model.Filters.ViewStatusUnplayable = false;
-            Model.Filters.ViewStatusNotSet = false;
-
-            perfectToolStripMenuItem.Checked = Model.Filters.ViewStatusPerfect;
-            playableToolStripMenuItem.Checked = Model.Filters.ViewStatusPlayable;
-            runsToolStripMenuItem.Checked = Model.Filters.ViewStatusRuns;
-            loadsToolStripMenuItem.Checked = Model.Filters.ViewStatusLoads;
-            unplayableToolStripMenuItem.Checked = Model.Filters.ViewStatusUnplayable;
-            notSetToolStripMenuItem.Checked = Model.Filters.ViewStatusNotSet;
-
-            PopulateListView();
+            ViewFilters.NoStatus(Model, this);
         }
 
         /// <summary>
@@ -2118,22 +1890,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void allToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            // Officially all
-            Model.Filters.ViewOfficialStatusPerfect = true;
-            Model.Filters.ViewOfficialStatusPlayable = true;
-            Model.Filters.ViewOfficialStatusRuns = true;
-            Model.Filters.ViewOfficialStatusLoads = true;
-            Model.Filters.ViewOfficialStatusUnplayable = true;
-            Model.Filters.ViewOfficialStatusNotSet = true;
-
-            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
-            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
-            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
-            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
-            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
-            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;
-
-            PopulateListView();
+            ViewFilters.OfficiallyAll(Model, this);
         }
 
         /// <summary>
@@ -2143,22 +1900,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void noneToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            // Officially none
-            Model.Filters.ViewOfficialStatusPerfect = false;
-            Model.Filters.ViewOfficialStatusPlayable = false;
-            Model.Filters.ViewOfficialStatusRuns = false;
-            Model.Filters.ViewOfficialStatusLoads = false;
-            Model.Filters.ViewOfficialStatusUnplayable = false;
-            Model.Filters.ViewOfficialStatusNotSet = false;
-
-            officiallyPerfectToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPerfect;
-            officiallyPlayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusPlayable;
-            officiallyRunsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusRuns;
-            officiallyLoadsToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusLoads;
-            officiallyUnplayableToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusUnplayable;
-            officiallyNotSetToolStripMenuItem.Checked = Model.Filters.ViewOfficialStatusNotSet;
-
-            PopulateListView();
+            ViewFilters.OfficiallyNone(Model, this);
         }
 
         /// <summary>
@@ -2168,16 +1910,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void allToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            // All regions
-            Model.Filters.ViewRegionUsa = true;
-            Model.Filters.ViewRegionEur = true;
-            Model.Filters.ViewRegionJap = true;
-
-            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
-            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
-            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap;
-
-            PopulateListView();
+            ViewFilters.AllRegions(Model, this);
         }
         
         /// <summary>
@@ -2187,16 +1920,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void noneToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            // No regions
-            Model.Filters.ViewRegionUsa = false;
-            Model.Filters.ViewRegionEur = false;
-            Model.Filters.ViewRegionJap = false;
-
-            usaToolStripMenuItem.Checked = Model.Filters.ViewRegionUsa;
-            europeToolStripMenuItem.Checked = Model.Filters.ViewRegionEur;
-            japanToolStripMenuItem.Checked = Model.Filters.ViewRegionJap;
-
-            PopulateListView();
+            ViewFilters.NoRegions(Model, this);
         }
 
         /// <summary>
@@ -2206,18 +1930,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void allToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            // All types
-            Model.Filters.ViewTypeWiiU = true;
-            Model.Filters.ViewTypeEshop = true;
-            Model.Filters.ViewTypeChannel = true;
-            Model.Filters.ViewTypeVc = true;
-
-            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
-            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
-            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
-            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
-
-            PopulateListView();
+            ViewFilters.AllTypes(Model, this);
         }
         
         /// <summary>
@@ -2227,18 +1940,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void noneToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            // No types
-            Model.Filters.ViewTypeWiiU = false;
-            Model.Filters.ViewTypeEshop = false;
-            Model.Filters.ViewTypeChannel = false;
-            Model.Filters.ViewTypeVc = false;
-
-            wiiUToolStripMenuItem.Checked = Model.Filters.ViewTypeWiiU;
-            eShopToolStripMenuItem.Checked = Model.Filters.ViewTypeEshop;
-            channelToolStripMenuItem.Checked = Model.Filters.ViewTypeChannel;
-            virtualConsoleToolStripMenuItem.Checked = Model.Filters.ViewTypeVc;
-
-            PopulateListView();
+            ViewFilters.NoTypes(Model, this);
         }
 
         /// <summary>
@@ -2248,20 +1950,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void allToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-             // No types
-            Model.Filters.ViewRating5 = true;
-            Model.Filters.ViewRating4 = true;
-            Model.Filters.ViewRating3 = true;
-            Model.Filters.ViewRating2 = true;
-            Model.Filters.ViewRating1 = true;
-
-            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
-            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
-            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
-            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
-            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
-
-            PopulateListView();
+            ViewFilters.AllRatings(Model, this);
         }
 
         /// <summary>
@@ -2271,19 +1960,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void noneToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            Model.Filters.ViewRating5 = false;
-            Model.Filters.ViewRating4 = false;
-            Model.Filters.ViewRating3 = false;
-            Model.Filters.ViewRating2 = false;
-            Model.Filters.ViewRating1 = false;
-
-            rating5ToolStripMenuItem.Checked = Model.Filters.ViewRating5;
-            rating4ToolStripMenuItem.Checked = Model.Filters.ViewRating4;
-            rating3ToolStripMenuItem.Checked = Model.Filters.ViewRating3;
-            rating2ToolStripMenuItem.Checked = Model.Filters.ViewRating2;
-            rating1ToolStripMenuItem.Checked = Model.Filters.ViewRating1;
-
-            PopulateListView();
+            ViewFilters.NoRatings(Model, this);
         }
 
         /// <summary>
@@ -2318,7 +1995,7 @@ namespace Budford.View
             {
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    if (IsPlayable(game.Value))
+                    if (IsPlayable(game.Value.GameSetting.EmulationState))
                     {
                         if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
@@ -2329,21 +2006,6 @@ namespace Budford.View
             }
 
             System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc2);
-        }
-
-        bool IsPlayable(GameInformation game)
-        {
-            if (game.GameSetting.EmulationState != GameSettings.EmulationStateType.NotSet)
-            {
-                if (game.GameSetting.EmulationState != GameSettings.EmulationStateType.Loads)
-                {
-                    if (game.GameSetting.EmulationState != GameSettings.EmulationStateType.Unplayable)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
 
         /// <summary>
@@ -2505,7 +2167,7 @@ namespace Budford.View
                 {
                     if (Model.Settings.StopHotkey == "None")
                     {
-                        UnregisterHotKey(Handle, MyactionHotkeyId);
+                        NativeMethods.UnregisterHotKey(Handle, MyactionHotkeyId);
                         EnableControlsForGameExitted();
                         Close();
                     }
@@ -2520,7 +2182,7 @@ namespace Budford.View
             }
             else
             {
-                UnregisterHotKey(Handle, MyactionHotkeyId);
+                NativeMethods.UnregisterHotKey(Handle, MyactionHotkeyId);
                 EnableControlsForGameExitted();
                 if (launchGame != "")
                 {
@@ -2588,18 +2250,6 @@ namespace Budford.View
             }
             FormLaunchboxExporter flbe = new FormLaunchboxExporter(Model, games);
             flbe.ShowDialog(this);
-        }
-
-        internal void SetParent(Process runningProcess)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new MethodInvoker(() => { SetParent(runningProcess); }));
-            }
-            else
-            {
-                NativeMethods.SetParent(runningProcess.Handle, Handle);
-            }
         }
 
         private void openCompatibilityWikiEntryToolStripMenuItem_Click(object sender, EventArgs e)

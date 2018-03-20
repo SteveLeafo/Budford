@@ -86,6 +86,41 @@ namespace Budford.Utilities
             return 0;
         }
 
+        internal void SetSortType(ColumnClickEventArgs e)
+        {
+            // Set the column number that is to be sorted; default to ascending.
+            ColumnToSort = e.Column;
+            OrderOfSort = SortOrder.Ascending;
+            if (e.Column == 13 || e.Column == 14 || e.Column == 15)
+            {
+                SortType = 1;
+            }
+            else if (e.Column == 5)
+            {
+                SortType = 2;
+            }
+            else if (e.Column == 12)
+            {
+                SortType = 3;
+            }
+            else
+            {
+                SortType = 0;
+            }
+        }
+
+        internal void ReverseCurrentSort()
+        {
+            if (OrderOfSort == SortOrder.Ascending)
+            {
+                OrderOfSort = SortOrder.Descending;
+            }
+            else
+            {
+                OrderOfSort = SortOrder.Ascending;
+            }
+        }
+
         private int CompareStrings(ListViewItem listviewX, ListViewItem listviewY)
         {
             if (listviewX != null && ColumnToSort < listviewX.SubItems.Count)

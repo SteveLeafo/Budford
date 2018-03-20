@@ -143,7 +143,7 @@ namespace Budford.Control
 
                     CreateDefaultSettingsFile(modelIn, game);
                 }
-                StartCemuProcess(parentIn, modelIn, game, getSaveDir, cemuOnly, shiftUp, forceFullScreen);
+                StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, shiftUp, forceFullScreen);
             }
             else
             {
@@ -152,7 +152,7 @@ namespace Budford.Control
             }
         }
 
-        private void StartCemuProcess(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, bool shiftUp, bool forceFullScreen)
+        private void StartCemuProcess(Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, bool shiftUp, bool forceFullScreen)
         {
             // Prepare the process to run
             ProcessStartInfo start = new ProcessStartInfo();
@@ -174,7 +174,7 @@ namespace Budford.Control
             startTime = DateTime.Now;
             if (File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
             {
-                StartCemuProcess(parentIn, modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+                StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
             }
             else
             {
@@ -197,22 +197,11 @@ namespace Budford.Control
             return formatted;
         }
 
-        private void StartCemuProcess(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, ProcessStartInfo start, Process parentProcess, ProcessPriorityClass original)
+        private void StartCemuProcess(Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, ProcessStartInfo start, Process parentProcess, ProcessPriorityClass original)
         {
             StartCemuProcess(start);
             runningGame = game;
 
-            if (parentIn != null)
-            {
-                try
-                {
-                    parentIn.SetParent(runningProcess);
-                }
-                catch (Exception)
-                {
-                    // Dies in Linux
-                }
-            }
             parentProcess.PriorityClass = original;
 
             // Allow the process to finish starting.

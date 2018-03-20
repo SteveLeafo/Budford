@@ -83,6 +83,7 @@
     <Compile Include="Control\DiscordRichPresence.cs" />
     <Compile Include="Control\FileManager.cs" />
     <Compile Include="Control\FolderScanner.cs" />
+    <Compile Include="Control\GameFilter.cs" />
     <Compile Include="Control\Launcher.cs" />
     <Compile Include="Control\NativeMethods.cs" />
     <Compile Include="Control\Persistence.cs" />
