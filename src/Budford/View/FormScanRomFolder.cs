@@ -15,23 +15,33 @@ namespace Budford.View
 {
     public partial class FormScanRomFolder : Form
     {
-        readonly string romFolder;
         readonly Dictionary<string, GameInformation> gameData;
         readonly BackgroundWorker backgroundWorker1 = new BackgroundWorker();
         Model.Model model;
         /// <summary>
         ///
         /// </summary>
-        public FormScanRomFolder(Model.Model modelIn, string romFolderIn, Dictionary<string, GameInformation> gameDataIn)
+        public FormScanRomFolder(Model.Model modelIn, Dictionary<string, GameInformation> gameDataIn)
         {
             InitializeComponent();
             model = modelIn;
-            romFolder = romFolderIn;
             gameData = gameDataIn;
-            Text = Resources.fScanRomFolder_fScanRomFolder_Scanning_ + romFolder + Resources.fScanRomFolder_fScanRomFolder_____;
+            Text = Resources.fScanRomFolder_fScanRomFolder_Scanning_ +  Resources.fScanRomFolder_fScanRomFolder_____;
             label1.Text = Text;
         }
 
+        void UpdateDisplay(string romFolder)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(() => { UpdateDisplay(romFolder); }));
+            }
+            else
+            {
+                Text = Resources.fScanRomFolder_fScanRomFolder_Scanning_ + romFolder + Resources.fScanRomFolder_fScanRomFolder_____;
+                label1.Text = Text;
+            }
+        }
 
         /// <summary>
         /// 
@@ -69,6 +79,10 @@ namespace Budford.View
         /// <param name="e"></param>
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            Persistence.SetSaveDirs(model);
+            Persistence.SetGameTypes(model);
+            FolderScanner.AddGraphicsPacksToGames(model);
+
             Close();
         }
 
@@ -80,33 +94,51 @@ namespace Budford.View
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             showCommonKeyError = true;
-            if (Directory.Exists(romFolder))
+
+            int folderCount = GetFolderCount();
+            int currentFolder = 0;
+
+            foreach (var romFolder in model.Settings.RomFolders)
             {
-                CheckForImageFiles(romFolder);
-
-                if (Directory.Exists(Path.Combine(romFolder, "code")))
+                if (Directory.Exists(romFolder))
                 {
-                    CheckFolder(romFolder);
-                }
+                    UpdateDisplay(romFolder);
 
-                int currentFolder = 0;
+                    CheckForImageFiles(romFolder);
 
-                int folderCount = Directory.EnumerateDirectories(romFolder).Count();
-
-                foreach (var folder in Directory.EnumerateDirectories(romFolder))
-                {
-                    CheckForImageFiles(folder);
-
-                    if (Directory.Exists(Path.Combine(folder, "code")))
+                    if (Directory.Exists(Path.Combine(romFolder, "code")))
                     {
-                        CheckFolder(folder);
+                        CheckFolder(romFolder);
                     }
 
-                    float percent = currentFolder / (float)folderCount * 100.0f;
-                    backgroundWorker1.ReportProgress((int)percent);
-                    currentFolder++;
+                    foreach (var folder in Directory.EnumerateDirectories(romFolder))
+                    {
+                        CheckForImageFiles(folder);
+
+                        if (Directory.Exists(Path.Combine(folder, "code")))
+                        {
+                            CheckFolder(folder);
+                        }
+
+                        float percent = currentFolder / (float)folderCount * 100.0f;
+                        backgroundWorker1.ReportProgress((int)percent);
+                        currentFolder++;
+                    }
                 }
             }
+        }
+
+        private int GetFolderCount()
+        {
+            int folderCount = 0;
+            foreach (var romFolder in model.Settings.RomFolders)
+            {
+                if (Directory.Exists(romFolder))
+                {
+                    folderCount += Directory.EnumerateDirectories(romFolder).Count();
+                }
+            }
+            return folderCount;
         }
 
         private void CheckForImageFiles(string folderIn)
@@ -369,7 +401,7 @@ namespace Budford.View
                         game = gameData[key];
                         if (titleVersion < game.TitleVersion)
                         {
-                            game.SaveDir = "??";
+                            ClearSaveDir(game, titleVersion);
                             game.Name = Xml.GetValue(xElement, "longname_en").Replace("\n", " ");
                             game.Region = Nintendo.GetRegion(Xml.GetValue(xElement, "region"));
                             game.Publisher = Xml.GetValue(xElement, "publisher_en");
@@ -386,6 +418,14 @@ namespace Budford.View
                 }
             }
             return null;
+        }
+
+        private static void ClearSaveDir(GameInformation game, int titleVersion)
+        {
+            if (titleVersion != 0 && game.TitleVersion != int.MaxValue)
+            {
+                game.SaveDir = "??";
+            }
         }
 
         // Back on the 'UI' thread so we can update the progress bar

@@ -114,20 +114,14 @@
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.allToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.noneToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.detailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpSaveDirCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkDLCFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fixUnityGameSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copySavesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyShadersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpTestingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.updateShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeShaderCachesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,8 +148,6 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.uTiledView1 = new Budford.View.UserControlTiledView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip2.SuspendLayout();
@@ -163,7 +155,6 @@
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
@@ -173,9 +164,9 @@
             this.listView1.ContextMenuStrip = this.contextMenuStrip2;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.ImeMode = System.Windows.Forms.ImeMode.Alpha;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.Location = new System.Drawing.Point(0, 79);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1025, 242);
+            this.listView1.Size = new System.Drawing.Size(1031, 497);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -469,10 +460,7 @@
             this.showOfficialStatusToolStripMenuItem,
             this.showStatusToolStripMenuItem,
             this.fixToolStripMenuItem,
-            this.showTypeToolStripMenuItem,
-            this.toolStripSeparator11,
-            this.detailsToolStripMenuItem,
-            this.tToolStripMenuItem});
+            this.showTypeToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -809,28 +797,6 @@
             this.noneToolStripMenuItem3.Text = "None";
             this.noneToolStripMenuItem3.Click += new System.EventHandler(this.noneToolStripMenuItem3_Click);
             // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(176, 6);
-            this.toolStripSeparator11.Visible = false;
-            // 
-            // detailsToolStripMenuItem
-            // 
-            this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.detailsToolStripMenuItem.Text = "Detailed View";
-            this.detailsToolStripMenuItem.Visible = false;
-            this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
-            // 
-            // tToolStripMenuItem
-            // 
-            this.tToolStripMenuItem.Name = "tToolStripMenuItem";
-            this.tToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.tToolStripMenuItem.Text = "Tiled View";
-            this.tToolStripMenuItem.Visible = false;
-            this.tToolStripMenuItem.Click += new System.EventHandler(this.tToolStripMenuItem_Click);
-            // 
             // userToolStripMenuItem
             // 
             this.userToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -862,12 +828,9 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dumpSaveDirCodesToolStripMenuItem,
-            this.linkDLCFoldersToolStripMenuItem,
             this.fixUnityGameSettingsToolStripMenuItem,
             this.copySavesToolStripMenuItem,
             this.copyShadersToolStripMenuItem,
-            this.dumpTestingResultsToolStripMenuItem,
             this.toolStripSeparator19,
             this.updateShaderCachesToolStripMenuItem,
             this.mergeShaderCachesToolStripMenuItem,
@@ -876,22 +839,6 @@
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // dumpSaveDirCodesToolStripMenuItem
-            // 
-            this.dumpSaveDirCodesToolStripMenuItem.Name = "dumpSaveDirCodesToolStripMenuItem";
-            this.dumpSaveDirCodesToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.dumpSaveDirCodesToolStripMenuItem.Text = "Dump SaveDir Codes";
-            this.dumpSaveDirCodesToolStripMenuItem.Visible = false;
-            this.dumpSaveDirCodesToolStripMenuItem.Click += new System.EventHandler(this.dumpSaveDirCodesToolStripMenuItem_Click);
-            // 
-            // linkDLCFoldersToolStripMenuItem
-            // 
-            this.linkDLCFoldersToolStripMenuItem.Name = "linkDLCFoldersToolStripMenuItem";
-            this.linkDLCFoldersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.linkDLCFoldersToolStripMenuItem.Text = "Link DLC Folders";
-            this.linkDLCFoldersToolStripMenuItem.Visible = false;
-            this.linkDLCFoldersToolStripMenuItem.Click += new System.EventHandler(this.linkDLCFoldersToolStripMenuItem_Click);
             // 
             // fixUnityGameSettingsToolStripMenuItem
             // 
@@ -914,14 +861,6 @@
             this.copyShadersToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.copyShadersToolStripMenuItem.Text = "Copy Shaders";
             this.copyShadersToolStripMenuItem.Click += new System.EventHandler(this.copyShadersToolStripMenuItem_Click);
-            // 
-            // dumpTestingResultsToolStripMenuItem
-            // 
-            this.dumpTestingResultsToolStripMenuItem.Name = "dumpTestingResultsToolStripMenuItem";
-            this.dumpTestingResultsToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.dumpTestingResultsToolStripMenuItem.Text = "Dump Testing Results";
-            this.dumpTestingResultsToolStripMenuItem.Visible = false;
-            this.dumpTestingResultsToolStripMenuItem.Click += new System.EventHandler(this.dumpTestingResultsToolStripMenuItem_Click);
             // 
             // toolStripSeparator19
             // 
@@ -1155,30 +1094,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.uTiledView1, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 79);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1031, 497);
-            this.tableLayoutPanel1.TabIndex = 6;
-            // 
-            // uTiledView1
-            // 
-            this.uTiledView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uTiledView1.Location = new System.Drawing.Point(4, 252);
-            this.uTiledView1.Margin = new System.Windows.Forms.Padding(4);
-            this.uTiledView1.Name = "uTiledView1";
-            this.uTiledView1.Size = new System.Drawing.Size(1023, 241);
-            this.uTiledView1.TabIndex = 1;
-            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -1200,7 +1115,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 598);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -1220,7 +1135,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1272,7 +1186,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem showStatusToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dumpSaveDirCodesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem importShaderCacheToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emulationToolStripMenuItem;
@@ -1280,12 +1193,6 @@
         private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullScreenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem takeScreenshotToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem detailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private View.UserControlTiledView uTiledView1;
-        private System.Windows.Forms.ToolStripMenuItem linkDLCFoldersToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.ToolStripMenuItem showTypeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wiiUToolStripMenuItem;
@@ -1311,7 +1218,6 @@
         private System.Windows.Forms.ToolStripMenuItem officiallyLoadsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem officiallyUnplayableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem officiallyNotSetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dumpTestingResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem2;

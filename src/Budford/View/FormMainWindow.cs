@@ -57,17 +57,16 @@ namespace Budford.View
 
         ViewPlugin viewPlugIn;
         ViewUsers viewUsers;
-
+        ViewShaderCache viewShaderCache;
+ 
         // For downloading and extracing.
         readonly Unpacker unpacker;
 
         // For launching the games.
-        readonly Launcher launcher;
+        readonly internal Launcher launcher;
 
         // Used for column sorting when clicking on a header
         private readonly ListViewColumnSorter lvwColumnSorter;
-
-        InstalledVersion iv1;
 
         readonly bool comments = false;
 
@@ -108,7 +107,6 @@ namespace Budford.View
 
             Model.OldVersions.Clear();
 
-
             FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
 
             Persistence.LoadFromXml(Model.OldVersions);
@@ -120,20 +118,11 @@ namespace Budford.View
             viewUsers = new ViewUsers(Model, this, contextMenuStrip1, userToolStripMenuItem, pictureBox1);
             this.addNewToolStripMenuItem.Click += new System.EventHandler(viewUsers.addNewToolStripMenuItem_Click);
 
+            viewShaderCache = new ViewShaderCache(this, Model);
+
             SetupShowRegionMenuItems();
 
             SetVisibility();
-
-            Model.Settings.CurrentView = "Detailed";
-
-            if (Model.Settings.CurrentView == "Detailed")
-            {
-                detailsToolStripMenuItem_Click(null, null);
-            }
-            else
-            {
-                tToolStripMenuItem_Click(null, null);
-            }
 
             // Create an instance of a ListView column sorter and assign it 
             // to the ListView control.
@@ -224,12 +213,9 @@ namespace Budford.View
         {
             if (Model.Settings.ScanGameFoldersOnStart)
             {
-                foreach (var folder in Model.Settings.RomFolders)
+                using (FormScanRomFolder scanner = new FormScanRomFolder(Model, Model.GameData))
                 {
-                    using (FormScanRomFolder scanner = new FormScanRomFolder(Model, folder, Model.GameData))
-                    {
-                        scanner.ShowDialog(this);
-                    }
+                    scanner.ShowDialog(this);
                 }
             }
 
@@ -572,14 +558,9 @@ namespace Budford.View
                         {
                             lvi.ForeColor = Color.Red;
                         }
-
                     }
                 }
-
-                for (int i = 0; i < listView1.Items.Count; i += 2)
-                {
-                    listView1.Items[i].BackColor = Color.FromArgb(240, 240, 240);
-                }
+                MakeBackgroundStripy();
 
                 ResizeColumns();
 
@@ -813,57 +794,12 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            LaunchConfigurationForm(0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tabPageIndex"></param>
-        private void LaunchConfigurationForm(int tabPageIndex)
-        {
-            using (FormEditConfiguration configurationForm = new FormEditConfiguration(Model, tabPageIndex))
-            {
-                List<string> oldRomFolder = new List<string>(Model.Settings.RomFolders.ToArray());
-                configurationForm.ShowDialog(this);
-                if (oldRomFolder.Count == Model.Settings.RomFolders.Count)
-                {
-                    for (int i = 0; i < oldRomFolder.Count; ++i)
-                    {
-                        if (oldRomFolder[i] != Model.Settings.RomFolders[i])
-                        {
-                            RefreshGameList();
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    RefreshGameList();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void RefreshGameList()
         {
-            foreach (var folder in Model.Settings.RomFolders)
+            using (FormScanRomFolder scanner = new FormScanRomFolder(Model, Model.GameData))
             {
-                using (FormScanRomFolder scanner = new FormScanRomFolder(Model, folder, Model.GameData))
-                {
-                    scanner.ShowDialog(this);
-                }
+                scanner.ShowDialog(this);
             }
-
-            Persistence.SetSaveDirs(Model);
-            Persistence.SetGameTypes(Model);
-            FolderScanner.AddGraphicsPacksToGames(Model);
 
             PopulateListView();
             ResizeColumnHeaders();
@@ -912,25 +848,19 @@ namespace Budford.View
             // Game Properties
             if (listView1.SelectedItems.Count == 1)
             {
-                if (listView1.SelectedItems.Count == 1)
+                Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                var game = Model.GameData[Model.CurrentId];
+                try
                 {
-                    Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                    var game = Model.GameData[Model.CurrentId];
-                    try
+                    using (FormEditGameSettings editGameSettings = new FormEditGameSettings(game, Model.Settings.InstalledVersions))
                     {
-                        using (FormEditGameSettings aboutBox = new FormEditGameSettings(game, Model.Settings.InstalledVersions))
-                        {
-                            aboutBox.ShowDialog(this);
-                            if (listView1.SelectedItems.Count == 1)
-                            {
-                                RefreshList(game);
-                            }
-                        }
+                        editGameSettings.ShowDialog(this);
+                        RefreshList(game);
                     }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
+                }
+                catch (Exception)
+                {
+                    // ignored
                 }
             }
         }
@@ -1036,17 +966,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void importShaderCacheToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Configure open file dialog box 
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Filter = Resources.fMainWindow_importShaderCacheToolStripMenuItem_Click_Shader_Cache_Files_____bin_;
-
-                // Show open file dialog box 
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    FileManager.ImportShaderCache(this, Model, dlg.FileName);
-                }
-            }
+            viewShaderCache.importShaderCacheToolStripMenuItem_Click();
         }
 
         /// <summary>
@@ -1087,43 +1007,15 @@ namespace Budford.View
             }
             return Keys.None;
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            Model.Settings.CurrentView = "Tiled";
-            tToolStripMenuItem.Checked = true;
-            detailsToolStripMenuItem.Checked = false;
-            tableLayoutPanel1.RowStyles[0].Height = 0;
-            tableLayoutPanel1.RowStyles[1].Height = tableLayoutPanel1.Parent.Height;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Model.Settings.CurrentView = "Detailed";
-            tToolStripMenuItem.Checked = false;
-            detailsToolStripMenuItem.Checked = true;
-            tableLayoutPanel1.RowStyles[1].Height = 0;
-            tableLayoutPanel1.RowStyles[0].Height = tableLayoutPanel1.Parent.Height;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void linkDLCFoldersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            JunctionPoint.Create(@"C:\Games\Emulators\cemu_1.8.2b\mlc01\usr\title", @"C:\Games\Emulators\cemu_1.9.1\mlc01\usr\title", true);
+            LaunchConfigurationForm(0);
         }
 
         /// <summary>
@@ -1149,8 +1041,36 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="tabPageIndex"></param>
+        private void LaunchConfigurationForm(int tabPageIndex)
+        {
+            using (FormEditConfiguration configurationForm = new FormEditConfiguration(Model, tabPageIndex))
+            {
+                List<string> oldRomFolder = new List<string>(Model.Settings.RomFolders.ToArray());
+                configurationForm.ShowDialog(this);
+                if (oldRomFolder.Count == Model.Settings.RomFolders.Count)
+                {
+                    for (int i = 0; i < oldRomFolder.Count; ++i)
+                    {
+                        if (oldRomFolder[i] != Model.Settings.RomFolders[i])
+                        {
+                            RefreshGameList();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    RefreshGameList();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
-        InstalledVersion GetCurrentVersion()
+        internal InstalledVersion GetCurrentVersion()
         {
             if (listView1.SelectedItems.Count == 1)
             {
@@ -1344,24 +1264,6 @@ namespace Budford.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dumpTestingResultsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var cv = GetCurrentVersion();
-            if (cv != null)
-            {
-                foreach (var gd in Model.GameData)
-                {
-                    GameInformation gi = gd.Value;
-                    gi.GameSetting.UseRtdsc = 1;
-                }
-            }     
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ViewFilters.AllStatus(Model, this);
@@ -1474,82 +1376,14 @@ namespace Budford.View
             }
         }
 
-        /// <summary>
+          /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void updateShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            iv1 = GetCurrentVersion();
-
-            launcher.Model = Model;
-
-            foreach (var game in Model.GameData)
-            {
-                if (!game.Value.SaveDir.StartsWith("??"))
-                {
-                    if (GameSettings.IsPlayable(game.Value.GameSetting.EmulationState))
-                    {
-                        if (game.Value.GameSetting.PreferedVersion == "Latest")
-                        {
-                            launcher.CopyLargestShaderCacheToCemu(game.Value);
-                        }
-                    }
-                }
-            }
-
-            System.Threading.ThreadPool.QueueUserWorkItem(ThreadProc2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stateInfo"></param>
-        void ThreadProc2(Object stateInfo)
-        {
-            foreach (var game in Model.GameData)
-            {
-                if (!game.Value.SaveDir.StartsWith("??"))
-                {
-                    if (GameSettings.IsPlayable(game.Value.GameSetting.EmulationState))
-                    {
-                        if (game.Value.GameSetting.PreferedVersion == "Latest")
-                        {
-                            try
-                            {
-                                UpdateShaderCache(game);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        private void UpdateShaderCache(KeyValuePair<string, GameInformation> game)
-        {
-            FileInfo transferableShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "transferable", game.Value.SaveDir + ".bin"));
-            FileInfo precompiledShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "precompiled", game.Value.SaveDir + ".bin"));
-
-            if (!File.Exists(precompiledShader.FullName))
-            {
-                if (File.Exists(transferableShader.FullName))
-                {
-                    if (transferableShader.Length > 1000000)
-                    {
-                        Model.CurrentId = game.Key;
-                        launcher.LaunchCemu(this, Model, game.Value, true);
-                    }
-                }
-            }
+            viewShaderCache.updateShaderCachesToolStripMenuItem_Click();
         }
 
         /// <summary>
@@ -1559,10 +1393,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void mergeShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormShaderMerger merger = new FormShaderMerger())
-            {
-                merger.ShowDialog(this);
-            }
+            viewShaderCache.mergeShaderCachesToolStripMenuItem_Click();
         }
 
         /// <summary>
