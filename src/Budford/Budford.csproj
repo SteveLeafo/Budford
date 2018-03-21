@@ -108,6 +108,8 @@
     <Compile Include="Model\StatusUpdate.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewFilters.cs" />
+    <Compile Include="Model\ViewPlugin.cs" />
+    <Compile Include="Model\ViewUsers.cs" />
     <Compile Include="Model\WiiU.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

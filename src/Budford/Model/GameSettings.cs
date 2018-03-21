@@ -176,5 +176,20 @@ namespace Budford.Model
                 default: return 4;
             }
         }
+
+        internal static bool IsPlayable(GameSettings.EmulationStateType emulationState)
+        {
+            if (emulationState != GameSettings.EmulationStateType.NotSet)
+            {
+                if (emulationState != GameSettings.EmulationStateType.Loads)
+                {
+                    if (emulationState != GameSettings.EmulationStateType.Unplayable)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

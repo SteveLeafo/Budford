@@ -21,7 +21,7 @@ namespace Budford.Model
         public bool ViewStatusPerfect  = true;
         public bool ViewStatusPlayable  = true;
         public bool ViewStatusRuns  = true;
-        public bool ViewStatusLoads  = true;
+        public bool ViewStatusLoads = true;
         public bool ViewStatusUnplayable  = true;
 
         // Official Status

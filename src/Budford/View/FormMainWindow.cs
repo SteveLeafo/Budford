@@ -49,14 +49,14 @@ namespace Budford.View
         public string launchGame = "";
         public bool LaunchFull = true;
 
-      
-        private readonly List<Model.PlugIns.PlugIn> plugIns = new List<Model.PlugIns.PlugIn>();
-
         const int MyactionHotkeyId = 1;
 
 
         // All of our data...
         internal readonly Model.Model Model;
+
+        ViewPlugin viewPlugIn;
+        ViewUsers viewUsers;
 
         // For downloading and extracing.
         readonly Unpacker unpacker;
@@ -114,11 +114,12 @@ namespace Budford.View
             Persistence.LoadFromXml(Model.OldVersions);
 
             FolderScanner.AddGraphicsPacksToGames(Model);
-
-            SetupCurrentUser();
+            
             Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
 
-            AddUserMenuItems();
+            viewUsers = new ViewUsers(Model, this, contextMenuStrip1, userToolStripMenuItem, pictureBox1);
+            this.addNewToolStripMenuItem.Click += new System.EventHandler(viewUsers.addNewToolStripMenuItem_Click);
+
             SetupShowRegionMenuItems();
 
             SetVisibility();
@@ -143,9 +144,13 @@ namespace Budford.View
 
             RegisterEvents();
 
-            LoadPlugIns();
+            viewPlugIn = new ViewPlugin(Model, this, plugInsToolStripMenuItem);
+            viewPlugIn.LoadPlugIns();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PerformWelcomeActions()
         {
             if (!Directory.Exists(Model.Settings.DefaultInstallFolder))
@@ -170,28 +175,9 @@ namespace Budford.View
             }
         }
 
-        private void SetupCurrentUser()
-        {
-            if (Model.Users.Count == 0)
-            {
-                Model.Users.Add(new User() { Name = "Default", Image = "default.png" });
-                Model.CurrentUser = "Default";
-            }
-
-            var firstOrDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
-            if (firstOrDefault != null && File.Exists(Path.Combine("Users", firstOrDefault.Image)))
-            {
-                var orDefault = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
-                if (orDefault != null)
-                {
-                    using (FileStream stream = new FileStream(Path.Combine("Users", orDefault.Image), FileMode.Open, FileAccess.Read))
-                    {
-                        pictureBox1.Image = Image.FromStream(stream);
-                    }
-                }
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void RegisterEvents()
         {
             listView1.KeyDown += listView1_KeyDown;
@@ -209,6 +195,9 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void EnableDoubleBuffering()
         {
             listView1.DoubleBuffered(true);
@@ -216,6 +205,9 @@ namespace Budford.View
             DoubleBuffered = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void SetVisibility()
         {
             showStatusToolStripMenuItem1.Checked = Model.Settings.ShowStausBar;
@@ -225,6 +217,9 @@ namespace Budford.View
             showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PerformAutoOptionsOnStart()
         {
             if (Model.Settings.ScanGameFoldersOnStart)
@@ -262,6 +257,11 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void FormMainWindow_Resize(object sender, EventArgs e)
         {
             if (FormWindowState.Minimized == this.WindowState)
@@ -276,6 +276,10 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
         {
             if (launchGame != "")
@@ -305,69 +309,32 @@ namespace Budford.View
             base.OnLoad(e);
         }
 
-        internal void LoadPlugIns()
-        {
-            if (Directory.Exists(SpecialFolders.PlugInFolder(Model)))
-            {
-                List<ToolStripItem> items = new List<ToolStripItem>();
-
-                string currentType = "";
-
-                SearchForPlugins(items);
-
-                AddPlugInsToMenu(items, currentType);
-            }
-        }
-
-        private void AddPlugInsToMenu(List<ToolStripItem> items, string currentType)
-        {
-            // Painful, but we want these added to the top of the list...
-            plugInsToolStripMenuItem.DropDownItems.Clear();
-            var v = (from i in items orderby ((Model.PlugIns.PlugIn)i.Tag).Type select i).ToList();
-            foreach (var item in v)
-            {
-                Model.PlugIns.PlugIn p = (Model.PlugIns.PlugIn)item.Tag;
-                if (p.Type != currentType)
-                {
-                    if (currentType != "")
-                    {
-                        plugInsToolStripMenuItem.DropDownItems.Insert(0, new ToolStripSeparator());
-                    }
-                    currentType = p.Type;
-                }
-                plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
-            }
-        }
-
-        private void SearchForPlugins(List<ToolStripItem> items)
-        {
-            foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
-            {
-                var extension = Path.GetExtension(file);
-                if (extension != null && extension.ToLower().Contains("xml"))
-                {
-                    plugInsToolStripMenuItem.Visible = true;
-
-                    Model.PlugIns.PlugIn p = Persistence.LoadPlugin(file);
-                    plugIns.Add(p);
-
-
-                    ToolStripMenuItem menuItem = new ToolStripMenuItem
-                    {
-                        Text = p.Name,
-                        Tag = p
-                    };
-                    menuItem.Click += PlugIn_Click;
-                    items.Add(menuItem);
-                }
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void listView1_KeyDown(object sender, KeyEventArgs e)
         {
             KeysConverter kc = new KeysConverter();
             string keyChar = kc.ConvertToString(e.KeyData);
             if (keyChar == "Enter")
+            {
+                LaunchGame();
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = FindMyString(keyChar);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LaunchGame()
+        {
+            if (toolStripButton3.Enabled)
             {
                 if (listView1.SelectedItems.Count == 1)
                 {
@@ -377,15 +344,10 @@ namespace Budford.View
                         GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
                         Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                         RegisterStopHotKey(Model);
-    
+
                         launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
-                        e.Handled = true;
                     }
                 }
-            }
-            else
-            {
-                e.Handled = FindMyString(keyChar);
             }
         }
 
@@ -415,7 +377,10 @@ namespace Budford.View
 
             MakeBackgroundStripy();
         }
-             
+           
+        /// <summary>
+        /// 
+        /// </summary>
         private void MakeBackgroundStripy()
         {
             for (int i = 0; i < listView1.Items.Count; i++)
@@ -451,6 +416,7 @@ namespace Budford.View
             }
             if (m.Msg == 0x0312)
             {
+                // Hot key was pressed
                 launcher.KillCurrentProcess();
             }
         }
@@ -497,9 +463,7 @@ namespace Budford.View
                     e.DrawText(TextFormatFlags.VerticalCenter);
                 }
             }
-        }
-
-       
+        }       
 
         /// <summary>
         /// 
@@ -546,7 +510,6 @@ namespace Budford.View
             officiallyNotSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
             ViewFilters.UpdateMenuItemChecks(Model, this);
-
         }
 
         /// <summary>
@@ -558,174 +521,8 @@ namespace Budford.View
         {
             ((ToolStripMenuItem)sender).Checked = !((ToolStripMenuItem)sender).Checked;
             ViewFilters.UpdateFiltersItems(Model, this);
-        }           
-
-        /// <summary>
-        /// 
-        /// </summary>
-        void AddUserMenuItems()
-        {
-            List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
-            foreach (var user in Model.Users)
-            {
-                ToolStripMenuItem menuItem = new ToolStripMenuItem
-                {
-                    Text = user.Name,
-                    Tag = user
-                };
-                menuItem.Click += User_Click;
-                items.Insert(0, menuItem);
-
-                ToolStripMenuItem menuItem2 = new ToolStripMenuItem
-                {
-                    Text = user.Name,
-                    Tag = user
-                };
-                menuItem2.Click += User_Click;
-                contextMenuStrip1.Items.Add(menuItem2);
-                if (user.Name == Model.CurrentUser)
-                {
-                    menuItem2.Checked = true;
-                    menuItem.Checked = true;
-                }
-            }
-
-            // Painful, but we want these added to the top of the list...
-            foreach (var item in items)
-            {
-                userToolStripMenuItem.DropDownItems.Insert(0, item);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void User_Click(object sender, EventArgs e)
-        {
-            var toolStripMenuItem = sender as ToolStripMenuItem;
-            if (toolStripMenuItem != null)
-            {
-                User user = toolStripMenuItem.Tag as User;
-                if (user != null)
-                {
-                    if (user.Name != Model.CurrentUser)
-                    {
-                        DeleteAllLockFiles();
-                        if (File.Exists(Path.Combine("Users", user.Image)))
-                        {
-                            using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
-                            {
-                                pictureBox1.Image = Image.FromStream(stream);
-                            }
-
-                        }
-                        Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + user.Name;
-                        Model.CurrentUser = user.Name;
-                    }
-                }
-                UpdateMenuStrip(user);
-                UpdateContextMenuStrip(user);
-            }
-        }
-
-        private void DeleteAllLockFiles()
-        {
-            CopySaves cs = new CopySaves(Model);
-            cs.Execute();
-            foreach (var game in Model.GameData.OrderByDescending(gd => gd.Value.Name))
-            {
-                foreach (var version in Model.Settings.InstalledVersions)
-                {
-                    DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game.Value));
-
-                    string lockFileName = Path.Combine(dest.FullName, "Budford.lck");
-                    FileManager.SafeDelete(lockFileName);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PlugIn_Click(object sender, EventArgs e)
-        {
-            var toolStripMenuItem = sender as ToolStripMenuItem;
-            if (toolStripMenuItem != null)
-            {
-                Model.PlugIns.PlugIn plugIn = toolStripMenuItem.Tag as Model.PlugIns.PlugIn;
-                if (plugIn != null)
-                {
-                    if (plugIn.Type == "ExternalTool")
-                    {
-                        ProcessStartInfo start = new ProcessStartInfo {FileName = plugIn.FileName};
-                        Process.Start(start);
-                    }
-                    else
-                    {
-                        using (FormExecutePlugIn executor = new FormExecutePlugIn(Model, plugIn))
-                        {
-                            if (executor.ShowDialog(this) == DialogResult.OK)
-                            {
-                                MessageBox.Show(plugIn.Name + Resources.FormMainWindow_PlugIn_Click__executed_successfully, Resources.FormMainWindow_PlugIn_Click_Success);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user"></param>
-        private void UpdateContextMenuStrip(User user)
-        {
-            foreach (ToolStripItem menu in contextMenuStrip1.Items)
-            {
-                var item = menu as ToolStripMenuItem;
-                if (item != null)
-                {
-                    item.Checked = false;
-                }
-                if (menu.Text == Model.CurrentUser)
-                {
-                    ((ToolStripMenuItem)menu).Checked = true;
-                    if (user != null)
-                    {
-                        menu.Text = user.Name;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user"></param>
-        private void UpdateMenuStrip(User user)
-        {
-            foreach (ToolStripItem menu in userToolStripMenuItem.DropDownItems)
-            {
-                var item = menu as ToolStripMenuItem;
-                if (item != null)
-                {
-                    item.Checked = false;
-                }
-                if (menu.Text == Model.CurrentUser)
-                {
-                    ((ToolStripMenuItem)menu).Checked = true;
-                    if (user != null)
-                    {
-                        menu.Text = user.Name;
-                    }
-                }
-            }
-        }       
-
+        }  
+        
         /// <summary>
         /// 
         /// </summary>
@@ -822,7 +619,6 @@ namespace Budford.View
                 // No code
             }
         }
-
 
         /// <summary>
         /// 
@@ -950,27 +746,6 @@ namespace Budford.View
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             LaunchGame();
-        }
-
-        private void LaunchGame()
-        {
-            if (toolStripButton3.Enabled)
-            {
-                if (listView1.SelectedItems.Count == 1)
-                {
-                    if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
-                    {
-                        EnableControlsForGameRunning();
-
-
-                        GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                        Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
-                        RegisterStopHotKey(Model);
-
-                        launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -1111,73 +886,9 @@ namespace Budford.View
         /// <param name="e"></param>
         private void editCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            User user = Model.Users.FirstOrDefault(u => u.Name == Model.CurrentUser);
-            using (FormEditUser editUser = new FormEditUser(user))
-            {
-                editUser.ShowDialog(this);
-            }
-
-            if (user != null && File.Exists(Path.Combine("Users", user.Image)))
-            {
-                using (FileStream stream = new FileStream(Path.Combine("Users", user.Image), FileMode.Open, FileAccess.Read))
-                {
-                    pictureBox1.Image = Image.FromStream(stream);
-                }
-            }
-
-            if (user != null && Model.CurrentUser != user.Name)
-            {
-                if (Directory.Exists(Path.Combine("Users", Model.CurrentUser)))
-                {
-                    try
-                    {
-                        Directory.Move(Path.Combine("Users", Model.CurrentUser), Path.Combine("Users", user.Name));
-                    }
-                    catch (Exception ex)
-                    {
-                        Model.Errors.Add(ex.Message);
-                    }
-                }
-                UpdateMenuStrip(user);
-                UpdateContextMenuStrip(user);
-              
-                Model.CurrentUser = user.Name;
-                Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
-            }
+            viewUsers.EditCurrentUser();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            User newUser = new User() { Name = "User " + (Model.Users.Count + 1), Image = "default.png" };
-            using (FormEditUser editUser = new FormEditUser(newUser))
-            {
-                if (editUser.ShowDialog(this) == DialogResult.OK)
-                {
-                    Model.Users.Add(newUser);
-                    ToolStripMenuItem menuItem = new ToolStripMenuItem
-                    {
-                        Text = newUser.Name,
-                        Tag = newUser
-                    };
-                    menuItem.Click += User_Click;
-                    userToolStripMenuItem.DropDownItems.Insert(0, menuItem);
-
-                    ToolStripMenuItem menuItem2 = new ToolStripMenuItem
-                    {
-                        Text = newUser.Name,
-                        Tag = newUser
-                    };
-                    menuItem2.Click += User_Click;
-                    contextMenuStrip1.Items.Add(menuItem2);
-                }
-            }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -1238,9 +949,7 @@ namespace Budford.View
                 FileManager.OpenSaveFileLocation(Model, GetCurrentVersion());
             }
         }
-
-       
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -1272,9 +981,7 @@ namespace Budford.View
                 FileManager.OpenShaderCacheFolder(Model, GetCurrentVersion());
             }
         }
-
-       
-       
+        
         /// <summary>
         /// 
         /// </summary>
@@ -1363,6 +1070,11 @@ namespace Budford.View
             LaunchGame();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         Keys GetHotKey(string key)
         {
             var values = Enum.GetValues(typeof(Keys));
@@ -1470,6 +1182,10 @@ namespace Budford.View
             launcher.LaunchCemu(this, Model, null, false, true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
         public void RegisterStopHotKey(Model.Model model)
         {
             if (model.Settings.StopHotkey != "None")
@@ -1773,7 +1489,7 @@ namespace Budford.View
             {
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    if (IsPlayable(game.Value.GameSetting.EmulationState))
+                    if (GameSettings.IsPlayable(game.Value.GameSetting.EmulationState))
                     {
                         if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
@@ -1796,7 +1512,7 @@ namespace Budford.View
             {
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
-                    if (IsPlayable(game.Value.GameSetting.EmulationState))
+                    if (GameSettings.IsPlayable(game.Value.GameSetting.EmulationState))
                     {
                         if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
@@ -1814,21 +1530,10 @@ namespace Budford.View
             }
         }
 
-        bool IsPlayable(GameSettings.EmulationStateType emulationState)
-        {
-            if (emulationState != GameSettings.EmulationStateType.NotSet)
-            {
-                if (emulationState != GameSettings.EmulationStateType.Loads)
-                {
-                    if (emulationState != GameSettings.EmulationStateType.Unplayable)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
         private void UpdateShaderCache(KeyValuePair<string, GameInformation> game)
         {
             FileInfo transferableShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "transferable", game.Value.SaveDir + ".bin"));
@@ -1925,14 +1630,20 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void downloadLatestGraphicPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Graphic Packs
             CemuFeatures.DownloadLatestGraphicsPack(this, Model);
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
         internal void ProcessRunning()
         {
             if (InvokeRequired)
@@ -1952,6 +1663,10 @@ namespace Budford.View
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         internal void ProcessExited()
         {
             if (InvokeRequired)
@@ -1969,6 +1684,9 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void EnableControlsForGameExitted()
         {
             toolStripButton1.Enabled = true;
@@ -1985,6 +1703,9 @@ namespace Budford.View
             takeScreenshotToolStripMenuItem.Enabled = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void EnableControlsForGameRunning()
         {
             toolStripButton1.Enabled = false;
@@ -2002,6 +1723,11 @@ namespace Budford.View
             takeScreenshotToolStripMenuItem.Enabled = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
             if (launcher != null)
@@ -2010,6 +1736,11 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
             if (launcher != null)
@@ -2018,6 +1749,11 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exportToLaunchboxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HashSet<string> games = new HashSet<string>();
@@ -2030,6 +1766,11 @@ namespace Budford.View
             flbe.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openCompatibilityWikiEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 1)
@@ -2045,29 +1786,24 @@ namespace Budford.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void refreshGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshGameList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void importBudfordPluginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Configure open file dialog box 
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Filter = Resources.FormMainWindow_importBudfordPluginToolStripMenuItem_Click_Budford_Plug_in_Files_____xml_;
-
-                // Show open file dialog box 
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    if (!Directory.Exists(SpecialFolders.PlugInFolder(Model)))
-                    {
-                        Directory.CreateDirectory(SpecialFolders.PlugInFolder(Model));
-                    }
-                    FileManager.SafeCopy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(Model), Path.GetFileName(dlg.FileName)), true);
-                    LoadPlugIns();
-                }
-            }
+            viewPlugIn.ImportPlugIn();
         }
     }
 }

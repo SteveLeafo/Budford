@@ -851,7 +851,6 @@
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
             this.addNewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.addNewToolStripMenuItem.Text = "Add new...";
-            this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
             // 
             // editCurrentToolStripMenuItem
             // 
