@@ -1056,6 +1056,22 @@ namespace Budford.Control
             }
         }
 
+        private void SetGamePadWindowHandle2()
+        {
+            if (runningGame != null)
+            {
+                if (runningGame.GameSetting.SeparateGamePadView == 1)
+                {
+                    childWindowHandle = IntPtr.Zero;
+                    IEnumerable<IntPtr> gamePadWindows = NativeMethods.FindWindowsWithText("GamePad");
+                    if (gamePadWindows.Any())
+                    {
+                        childWindowHandle = gamePadWindows.First();
+                    }
+                }
+            }
+        }
+
         [DllImport("user32.dll")]
         static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
 
@@ -1128,12 +1144,25 @@ namespace Budford.Control
         {
             int i = runningProcess.MainWindowTitle.IndexOf("SaveDir", StringComparison.Ordinal);
             int c = 0;
+            bool done = false;
             while (i == -1 && c < 50000)
             {
                 try
                 {
                     Thread.Sleep(100);
-                    Thread.Sleep(100);
+
+                    if (!done)
+                    {
+                        if (runningGame != null)
+                        {
+                            if (runningGame.GameSetting.SeparateGamePadView == 1)
+                            {
+                                done = true;
+                                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+                            }
+                        }
+                    }
+
                     if (!runningProcess.HasExited)
                     {
                         runningProcess.Refresh();
