@@ -991,13 +991,16 @@ namespace Budford.Control
 
                 SetGamePadWindowHandle();
 
-                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+                if (runningGame != null)
+                {
+                    MoveToMonitor(runningProcess.MainWindowHandle, runningGame.GameSetting.SeparateGamePadView == 1 ? Model.Settings.GamePadMonitor : Model.Settings.Monitor);
+                }
 
                 if (runningGame != null)
                 {
                     if (runningGame.GameSetting.SeparateGamePadView == 1)
                     {
-                        MoveToMonitor(childWindowHandle, Model.Settings.GamePadMonitor);
+                        MoveToMonitor(childWindowHandle, Model.Settings.Monitor);
                     }
                 }
 
@@ -1158,7 +1161,7 @@ namespace Budford.Control
                             if (runningGame.GameSetting.SeparateGamePadView == 1)
                             {
                                 done = true;
-                                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.Monitor);
+                                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.GamePadMonitor);
                             }
                         }
                     }
