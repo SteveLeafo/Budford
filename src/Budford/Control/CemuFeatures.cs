@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using Budford.Properties;
 using Budford.View;
 using Settings = Budford.Model.Settings;
+using System.Diagnostics;
 
 namespace Budford.Control
 {
@@ -786,8 +787,9 @@ namespace Budford.Control
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="model"></param>
-        internal static void DownloadCompatibilityStatus(Form parent, Model.Model model)
+        internal static void DownloadCompatibilityStatus(Form parent, Model.Model model, bool suppressMessages = false)
         {
+            SetPreviousState(model);
             using (FormWebpageDownload dlc = new FormWebpageDownload("http://compat.cemu.info/", "Game Status"))
             {
                 dlc.ShowDialog(parent);
@@ -817,6 +819,48 @@ namespace Budford.Control
                             SetGameStatus(currentGames, rating, url);
                             currentGames.Clear();
                         }
+                    }
+                }
+            }
+            CheckForUpdates(model, suppressMessages);
+            TrackHistory(model);
+        }
+
+        private static void SetPreviousState(Model.Model model)
+        {
+            foreach (var game in model.GameData)
+            {
+                game.Value.GameSetting.PreviousOfficialEmulationState = game.Value.GameSetting.OfficialEmulationState;
+            }
+        }
+
+        private static void TrackHistory(Model.Model model)
+        {
+            foreach (var game in model.GameData)
+            {
+                if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
+                {
+                    StatusUpdate su = new StatusUpdate()
+                    {
+                        UpdateDate = DateTime.Now.Ticks.ToString(),
+                        Status = game.Value.GameSetting.OfficialEmulationState
+
+                    };
+                    game.Value.StatusUpdates.Add(su);
+                }
+            }
+        }
+
+        private static void CheckForUpdates(Model.Model model, bool suppressMessages)
+        {
+            if (!suppressMessages)
+            {
+                foreach (var game in model.GameData)
+                {
+                    if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
+                    {
+                        MessageBox.Show(Resources.FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_, Resources.FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_Exciting_news);
+                        break;
                     }
                 }
             }
@@ -947,6 +991,83 @@ namespace Budford.Control
             catch (Exception)
             {
                 MessageBox.Show(Resources.FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford);
+            }
+        }
+
+        internal static void OpenCompatibilityEntry(string gameId, Model.Model model, Form parent)
+        {
+            if (model.GameData.ContainsKey(gameId))
+            {
+                GameInformation game = model.GameData[gameId];
+                if (game.GameSetting.CompatibilityUrl != "")
+                {
+                    Process.Start(game.GameSetting.CompatibilityUrl);
+                }
+                else
+                {
+                    CemuFeatures.DownloadCompatibilityStatus(parent, model, true);
+                    if (game.GameSetting.CompatibilityUrl != "")
+                    {
+                        Process.Start(game.GameSetting.CompatibilityUrl);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Budford ould not find an entry for this game\r\non the Cemu comaptibility website", "Game not found");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal static void SetCemuFolder(Model.Model model)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    model.Settings.DefaultInstallFolder = fbd.SelectedPath;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal static void PerformAutoOptionsOnStart(Model.Model model, Form parent)
+        {
+            if (model.Settings.ScanGameFoldersOnStart)
+            {
+                using (FormScanRomFolder scanner = new FormScanRomFolder(model, model.GameData))
+                {
+                    scanner.ShowDialog(parent);
+                }
+            }
+
+            if (model.Settings.AutomaticallyDownloadLatestEverythingOnStart)
+            {
+                try
+                {
+                    FileManager.DownloadCemu(parent, model);
+                }
+                catch (Exception)
+                {
+                    // No code
+                }
+            }
+            else if (model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
+            {
+                try
+                {
+                    CemuFeatures.DownloadLatestGraphicsPack(parent, model, false);
+                }
+                catch (Exception)
+                {
+                    // No code
+                }
             }
         }
     }

@@ -276,7 +276,7 @@ namespace Budford.Control
             }
         }
 
-        internal static void DownloadCemu(Form parent, Unpacker unpacker, Model.Model model)
+        internal static void DownloadCemu(Form parent, Model.Model model)
         {
             using (FormMultiFileDownload dl = new FormMultiFileDownload(model))
             {

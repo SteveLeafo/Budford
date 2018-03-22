@@ -51,13 +51,14 @@ namespace Budford.View
         /// <param name="modelIn"></param>
         /// <param name="unpackerIn"></param>
         /// <param name="launcherIn"></param>
-        internal FormEditInstalledVersions(Model.Model modelIn, Unpacker unpackerIn, Launcher launcherIn)
+        internal FormEditInstalledVersions(Form parent, Model.Model modelIn, Launcher launcherIn)
         {
             InitializeComponent();
 
             model = modelIn;
-            unpacker = unpackerIn;
             launcher = launcherIn;
+
+            unpacker = new Unpacker(parent);
 
             Initialise(); 
         }
@@ -420,7 +421,7 @@ namespace Budford.View
         {
             if (CemuFeatures.DownloadLatestVersion(this, model.Settings))
             {
-                FileManager.DownloadCemu(this, unpacker, model);
+                FileManager.DownloadCemu(this, model);
             }
         }
 

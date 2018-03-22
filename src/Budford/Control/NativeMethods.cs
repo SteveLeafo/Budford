@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Budford.Control
 {
@@ -422,6 +423,24 @@ namespace Budford.Control
             {
                 return GetWindowText(wnd).Contains(titleText);
             });
-        } 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        internal static Keys GetHotKey(string key)
+        {
+            var values = Enum.GetValues(typeof(Keys));
+            foreach (Keys value in values)
+            {
+                if (value.ToString() == key)
+                {
+                    return value;
+                }
+            }
+            return Keys.None;
+        }
     }
 }

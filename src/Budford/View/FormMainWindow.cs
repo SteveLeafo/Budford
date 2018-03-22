@@ -58,32 +58,11 @@ namespace Budford.View
         readonly ViewUsers viewUsers;
         readonly ViewShaderCache viewShaderCache;
  
-        // For downloading and extracing.
-        readonly Unpacker unpacker;
-
         // For launching the games.
         internal readonly Launcher Launcher;
 
         // Used for column sorting when clicking on a header
         private readonly ListViewColumnSorter lvwColumnSorter;
-
-        readonly bool comments = false;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void SetCemuFolder()
-        {
-            using (var fbd = new FolderBrowserDialog())
-            {
-                DialogResult result = fbd.ShowDialog();
-
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    Model.Settings.DefaultInstallFolder = fbd.SelectedPath;
-                }
-            }
-        }
 
         /// <summary>
         /// 
@@ -97,12 +76,11 @@ namespace Budford.View
 
             DiscordRichPresence.Initialize();
 
-            unpacker = new Unpacker(this);
             Launcher = new Launcher(this);
 
             PerformWelcomeActions();
 
-            PerformAutoOptionsOnStart();
+            CemuFeatures.PerformAutoOptionsOnStart(Model, this);
 
             Model.OldVersions.Clear();
 
@@ -148,10 +126,10 @@ namespace Budford.View
                     switch (fftw.ShowDialog(this))
                     {
                         case DialogResult.OK:
-                            FileManager.DownloadCemu(this, unpacker, Model);
+                            FileManager.DownloadCemu(this, Model);
                             break;
                         case DialogResult.Yes:
-                            SetCemuFolder();
+                            CemuFeatures.SetCemuFolder(Model);
                             break;
                     }
                 }
@@ -203,43 +181,6 @@ namespace Budford.View
             toolStrip1.Visible = Model.Settings.ShowToolBar;
             pictureBox1.Visible = Model.Settings.ShowToolBar;
             showToolbarToolStripMenuItem.Checked = Model.Settings.ShowToolBar;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void PerformAutoOptionsOnStart()
-        {
-            if (Model.Settings.ScanGameFoldersOnStart)
-            {
-                using (FormScanRomFolder scanner = new FormScanRomFolder(Model, Model.GameData))
-                {
-                    scanner.ShowDialog(this);
-                }
-            }
-
-            if (Model.Settings.AutomaticallyDownloadLatestEverythingOnStart)
-            {
-                try
-                {
-                    FileManager.DownloadCemu(this, unpacker, Model);
-                }
-                catch (Exception)
-                {
-                    // No code
-                }
-            }
-            else if (Model.Settings.AutomaticallyDownloadGraphicsPackOnStart)
-            {
-                try
-                {
-                    CemuFeatures.DownloadLatestGraphicsPack(this, Model, false);
-                }
-                catch (Exception)
-                {
-                    // No code
-                }
-            }
         }
 
         /// <summary>
@@ -518,8 +459,6 @@ namespace Budford.View
             InitialiseListView();
 
             PopulateListView();
-
-            ResizeColumnHeaders();
         }
 
         /// <summary>
@@ -569,6 +508,7 @@ namespace Budford.View
             {
                 listView1.EndUpdate();
             }
+            ResizeColumnHeaders();
         }
 
         /// <summary>
@@ -610,14 +550,7 @@ namespace Budford.View
         {
             lvi.SubItems.Add(game.Value.Name);
             lvi.SubItems.Add(game.Value.Region + "     ");
-            if (comments)
-            {
-                lvi.SubItems.Add(game.Value.Comments);
-            }
-            else
-            {
-                lvi.SubItems.Add(game.Value.Publisher);
-            }
+            lvi.SubItems.Add(game.Value.Publisher);
             lvi.SubItems.Add(game.Value.ProductCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + game.Value.CompanyCode + "       ");
             lvi.SubItems.Add(game.Value.Size);
             lvi.SubItems.Add(game.Value.LaunchFileName);
@@ -761,10 +694,6 @@ namespace Budford.View
             {
                 if (listView1.SelectedItems.Count > 0)
                 {
-                    if (comments)
-                    {
-                        listView1.SelectedItems[0].SubItems[3].Text = game.Comments;
-                    }
                     listView1.SelectedItems[0].SubItems[7].Text = game.GameSetting.PreferedVersion;
                     listView1.SelectedItems[0].SubItems[8].Text = game.GameSetting.OfficialEmulationState.ToString();
                     listView1.SelectedItems[0].SubItems[9].Text = game.GameSetting.EmulationState.ToString();
@@ -801,7 +730,6 @@ namespace Budford.View
             }
 
             PopulateListView();
-            ResizeColumnHeaders();
         }
 
         /// <summary>
@@ -981,24 +909,6 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        Keys GetHotKey(string key)
-        {
-            var values = Enum.GetValues(typeof(Keys));
-            foreach (Keys value in values)
-            {
-                if (value.ToString() == key)
-                {
-                    return value;
-                }
-            }
-            return Keys.None;
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -1098,7 +1008,7 @@ namespace Budford.View
         {
             if (model.Settings.StopHotkey != "None")
             {
-                Keys key = GetHotKey(model.Settings.StopHotkey);
+                Keys key = NativeMethods.GetHotKey(model.Settings.StopHotkey);
                 NativeMethods.RegisterHotKey(Handle, MyactionHotkeyId, (int)NativeMethods.KeyModifiers.None, key.GetHashCode());
             }
         }
@@ -1110,34 +1020,8 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadCompatabilityStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var game in Model.GameData)
-            {
-                game.Value.GameSetting.PreviousOfficialEmulationState = game.Value.GameSetting.OfficialEmulationState;
-            }
-            CemuFeatures.DownloadCompatibilityStatus(this, Model);
-            foreach (var game in Model.GameData)
-            {
-                if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
-                {
-                    MessageBox.Show(Resources.FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_, Resources.FormMainWindow_downloadCompatabilityStatusToolStripMenuItem_Click_Exciting_news);
-                    break;
-                }
-            }
-            foreach (var game in Model.GameData)
-            {
-                if (game.Value.GameSetting.PreviousOfficialEmulationState != game.Value.GameSetting.OfficialEmulationState)
-                {
-                    StatusUpdate su = new StatusUpdate()
-                    {
-                        UpdateDate = DateTime.Now.Ticks.ToString(),
-                        Status = game.Value.GameSetting.OfficialEmulationState
-
-                    };
-                    game.Value.StatusUpdates.Add(su);
-                }
-            }
+            CemuFeatures.DownloadCompatibilityStatus(this, Model);           
             PopulateListView();
-            ResizeColumnHeaders();
         }
 
         /// <summary>
@@ -1209,7 +1093,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void manageInstalledVersionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(Model, unpacker, Launcher))
+            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(this, Model, Launcher))
             {
                 installedVersions.ShowDialog(this);
             }
@@ -1222,7 +1106,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadLatestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileManager.DownloadCemu(this, unpacker, Model);
+            FileManager.DownloadCemu(this, Model);
         }
 
         /// <summary>
@@ -1536,7 +1420,6 @@ namespace Budford.View
             toolStripButton8.Enabled = true;
             toolStripButton9.Enabled = true;
 
-
             stopToolStripMenuItem.Enabled = true;
             fullScreenToolStripMenuItem.Enabled = true;
             takeScreenshotToolStripMenuItem.Enabled = true;
@@ -1594,14 +1477,8 @@ namespace Budford.View
         {
             if (listView1.SelectedItems.Count == 1)
             {
-                if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
-                {
-                    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    if (game.GameSetting.CompatibilityUrl != "")
-                    {
-                        Process.Start(game.GameSetting.CompatibilityUrl);
-                    }
-                }
+                string gameId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
+                CemuFeatures.OpenCompatibilityEntry(gameId, Model, this);
             }
         }
 
