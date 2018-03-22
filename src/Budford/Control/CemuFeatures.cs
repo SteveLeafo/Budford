@@ -797,8 +797,6 @@ namespace Budford.Control
 
                 Persistence.SetCleanNames(model);
 
-                string name = "";
-
                 foreach (var g in model.GameData)
                 {
                     g.Value.GameSetting.OfficialEmulationState = GameSettings.EmulationStateType.NotSet;
@@ -807,7 +805,7 @@ namespace Budford.Control
                 {
                     if (line.Contains("<td class=\"title\">"))
                     {
-                        name = line.Substring(line.LastIndexOf("\">", StringComparison.Ordinal) + 2, line.LastIndexOf("/a", StringComparison.Ordinal) - line.LastIndexOf("\">", StringComparison.Ordinal) - 3).Replace("&amp;", "&");
+                        var name = line.Substring(line.LastIndexOf("\">", StringComparison.Ordinal) + 2, line.LastIndexOf("/a", StringComparison.Ordinal) - line.LastIndexOf("\">", StringComparison.Ordinal) - 3).Replace("&amp;", "&");
                         url = line.Substring(line.IndexOf("http", StringComparison.Ordinal), (line.LastIndexOf("\">", StringComparison.Ordinal) - line.IndexOf("http", StringComparison.Ordinal))).Replace("&amp;", "&");
                         currentGames = Persistence.GetGames(model, name);
                     }

@@ -71,7 +71,7 @@ namespace Budford.Control
                     FileInfo dest = new FileInfo(target.FullName);
                     if (file.LastWriteTime > dest.LastWriteTime)
                     {
-                        FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name), true);
+                        SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name), true);
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace Budford.Control
                 }
                 if (!Path.GetFileName(file.Name).Contains("Budford"))
                 {
-                    FileManager.SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name));
+                    SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name));
                 }
             }
             catch (Exception)
@@ -133,7 +133,7 @@ namespace Budford.Control
                             FileCache destCache = FileCache.fileCache_openExisting(destination, 1);
                             message = message + "\r\n\r\nExisting cache: " + destCache.FileTableEntryCount + " shaders.\r\nNew Cache: " + srcCache.FileTableEntryCount + " shaders.";
                         }
-                        FileManager.SafeCopy(fileName, destination, true);
+                        SafeCopy(fileName, destination, true);
                         MessageBox.Show(message, Resources.FileManager_ImportShaderCache_Imported_OK);
                     }
                 }
@@ -382,19 +382,19 @@ namespace Budford.Control
             return false;
         }
 
-        internal static void OpenSaveFileLocation(Model.Model Model, InstalledVersion version)
+        internal static void OpenSaveFileLocation(Model.Model model, InstalledVersion version)
         {
             if (version.VersionNumber < 1110)
             {
-                if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir)))
+                if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir)))
                 {
-                    Directory.CreateDirectory(Path.Combine(version.Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
+                    Directory.CreateDirectory(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
                 }
-                Process.Start(Path.Combine(version.Folder, "mlc01", "emulatorSave", Model.GameData[Model.CurrentId].SaveDir));
+                Process.Start(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
             }
             else
             {
-                string gameId = Model.GameData[Model.CurrentId].TitleId.Replace("00050000", "");
+                string gameId = model.GameData[model.CurrentId].TitleId.Replace("00050000", "");
 
                 if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user")))
                 {
@@ -404,13 +404,13 @@ namespace Budford.Control
             }
         }
 
-        internal static void OpenShaderCacheFolder(Model.Model Model, InstalledVersion version)
+        internal static void OpenShaderCacheFolder(Model.Model model, InstalledVersion version)
         {
             if (Directory.Exists(Path.Combine(version.Folder, "shaderCache", "transferable")))
             {
-                if (File.Exists(Path.Combine(version.Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin")))
+                if (File.Exists(Path.Combine(version.Folder, "shaderCache", "transferable", model.GameData[model.CurrentId].SaveDir + ".bin")))
                 {
-                    Process.Start("explorer.exe", "/select, " + Path.Combine(version.Folder, "shaderCache", "transferable", Model.GameData[Model.CurrentId].SaveDir + ".bin"));
+                    Process.Start("explorer.exe", "/select, " + Path.Combine(version.Folder, "shaderCache", "transferable", model.GameData[model.CurrentId].SaveDir + ".bin"));
                 }
                 else
                 {

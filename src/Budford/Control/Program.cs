@@ -5,13 +5,6 @@ using Budford.Properties;
 using Budford.View;
 using Budford.Utilities;
 using Microsoft.Win32;
-using Budford.Tools;
-using System.Collections.Generic;
-using Budford.Model;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Text;
 
 namespace Budford.Control
 {

@@ -1,21 +1,19 @@
 ﻿using Budford.Model;
-using SharpPresence;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Budford.Utilities;
 
 namespace Budford.Control
 {
     internal static class DiscordRichPresence
     {
-        static SharpPresence.Discord.EventHandlers handlers = new SharpPresence.Discord.EventHandlers();
-        static SharpPresence.Discord.RichPresence presence = new SharpPresence.Discord.RichPresence();
+        static readonly Discord.EventHandlers Handlers = new Discord.EventHandlers();
+        static Discord.RichPresence presence;
 
         static internal void Initialize()
         {
-            Discord.Initialize("424321820498329610", handlers);
+            Discord.Initialize("424321820498329610", Handlers);
         }
 
         static internal void ShutDown()
@@ -35,25 +33,25 @@ namespace Budford.Control
                     fileName = "cemul";
                 }
 
-                presence.details = game.Name;
-                presence.largeImageKey = fileName;
-                presence.smallImageKey = "cemus";
-                presence.state = "In Game";
-                presence.partySize = 0;
-                presence.partyMax = 0;
-                presence.instance = 0;
-                presence.startTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
+                presence.Details = game.Name;
+                presence.LargeImageKey = fileName;
+                presence.SmallImageKey = "cemus";
+                presence.State = "In Game";
+                presence.PartySize = 0;
+                presence.PartyMax = 0;
+                presence.Instance = 0;
+                presence.StartTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
                 Discord.UpdatePresence(presence);
             }
         }
 
         static internal void EndGame()
         {
-            presence.details = "Bewteen Games";
-            presence.largeImageKey = "cemul";
-            presence.smallImageKey = "cemus";
-            presence.state = "Using Budford";
-            presence.startTimestamp = 0;
+            presence.Details = "Bewteen Games";
+            presence.LargeImageKey = "cemul";
+            presence.SmallImageKey = "cemus";
+            presence.State = "Using Budford";
+            presence.StartTimestamp = 0;
             Discord.UpdatePresence(presence);
         }
 

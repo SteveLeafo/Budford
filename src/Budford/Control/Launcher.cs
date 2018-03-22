@@ -6,20 +6,14 @@ using System.Linq;
 using System.Windows.Forms;
 using Budford.Properties;
 using System.Threading;
-using System.Runtime.InteropServices;
 using Budford.View;
 using System.Drawing;
-using SharpPresence;
-using System.Text;
 using System.Collections.Generic;
 
 namespace Budford.Control
 {
     internal class Launcher
     {
-        // import the function in your class
-        [DllImport("User32.dll")]
-        static extern int SetForegroundWindow(IntPtr point);
 
         /// <summary>
         /// 
@@ -172,7 +166,7 @@ namespace Budford.Control
             parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
 
             startTime = DateTime.Now;
-            if (File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
+            if (runningVersion != null && File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
             {
                 StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
             }
@@ -973,8 +967,11 @@ namespace Budford.Control
         {
             startTime = DateTime.Now;
             runningProcess = Process.Start(start);
-            runningProcess.EnableRaisingEvents = true;
-            runningProcess.Exited += proc_Exited;
+            if (runningProcess != null)
+            {
+                runningProcess.EnableRaisingEvents = true;
+                runningProcess.Exited += proc_Exited;
+            }
         }
 
         IntPtr childWindowHandle = IntPtr.Zero;
@@ -1051,32 +1048,14 @@ namespace Budford.Control
                 {
                     childWindowHandle = IntPtr.Zero;
                     IEnumerable<IntPtr> gamePadWindows = NativeMethods.FindWindowsWithText(runningGame.SaveDir);
-                    if (gamePadWindows.Any())
+                    var padWindows = gamePadWindows as IntPtr[] ?? gamePadWindows.ToArray();
+                    if (padWindows.Any())
                     {
-                        childWindowHandle = gamePadWindows.First();
+                        childWindowHandle = padWindows.First();
                     }
                 }
             }
         }
-
-        private void SetGamePadWindowHandle2()
-        {
-            if (runningGame != null)
-            {
-                if (runningGame.GameSetting.SeparateGamePadView == 1)
-                {
-                    childWindowHandle = IntPtr.Zero;
-                    IEnumerable<IntPtr> gamePadWindows = NativeMethods.FindWindowsWithText("GamePad");
-                    if (gamePadWindows.Any())
-                    {
-                        childWindowHandle = gamePadWindows.First();
-                    }
-                }
-            }
-        }
-
-        [DllImport("user32.dll")]
-        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
 
         public void MoveToMonitor(IntPtr windowHandle, int numberMonitor)
         {
@@ -1089,7 +1068,7 @@ namespace Budford.Control
                     var monitor = Screen.AllScreens[numberMonitor].WorkingArea;
 
                     //change the window to the second monitor
-                    SetWindowPos(windowHandle, IntPtr.Zero,
+                    NativeMethods.SetWindowPos(windowHandle, IntPtr.Zero,
                     monitor.Left, monitor.Top, monitor.Width,
                     monitor.Height, 0);
                 }
@@ -1105,7 +1084,7 @@ namespace Budford.Control
                     if (game.GameSetting.DefaultView == 1)
                     {
                         IntPtr h = runningProcess.MainWindowHandle;
-                        SetForegroundWindow(h);
+                        NativeMethods.SetForegroundWindow(h);
                         SendKeys.SendWait("^{TAB}");
                     }
                 }
@@ -1154,17 +1133,7 @@ namespace Budford.Control
                 {
                     Thread.Sleep(100);
 
-                    if (!done)
-                    {
-                        if (runningGame != null)
-                        {
-                            if (runningGame.GameSetting.SeparateGamePadView == 1)
-                            {
-                                done = true;
-                                MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.GamePadMonitor);
-                            }
-                        }
-                    }
+                    done = MoveGamePadWindow(done);
 
                     if (!runningProcess.HasExited)
                     {
@@ -1190,6 +1159,22 @@ namespace Budford.Control
                     break;
                 }
             }
+        }
+
+        private bool MoveGamePadWindow(bool done)
+        {
+            if (!done)
+            {
+                if (runningGame != null)
+                {
+                    if (runningGame.GameSetting.SeparateGamePadView == 1)
+                    {
+                        done = true;
+                        MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.GamePadMonitor);
+                    }
+                }
+            }
+            return done;
         }
 
         /// <summary>
@@ -1238,7 +1223,7 @@ namespace Budford.Control
             if (runningProcess != null)
             {
                 IntPtr h = runningProcess.MainWindowHandle;
-                SetForegroundWindow(h);
+                NativeMethods.SetForegroundWindow(h);
                 SendKeys.SendWait("%{ENTER}");
             }
         }
@@ -1248,11 +1233,11 @@ namespace Budford.Control
             if (runningProcess != null)
             {
                 IntPtr h = runningProcess.MainWindowHandle;
-                SetForegroundWindow(h);
+                NativeMethods.SetForegroundWindow(h);
                 Thread.Sleep(100);
                 SendKeys.SendWait("+{PRTSC}");
                 Thread.Sleep(100);
-                SetForegroundWindow(parent.Handle);
+                NativeMethods.SetForegroundWindow(parent.Handle);
             }
         }
 

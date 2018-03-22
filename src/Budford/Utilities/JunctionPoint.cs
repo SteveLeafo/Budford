@@ -48,15 +48,17 @@ namespace Budford.Utilities
             {
                 byte[] sourceDirBytes = Encoding.Unicode.GetBytes(NativeMethods.NonInterpretedPathPrefix + Path.GetFullPath(sourceDir));
 
-                NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer();
+                NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer
+                {
+                    ReparseTag = NativeMethods.IoReparseTagMountPoint,
+                    ReparseDataLength = (ushort) (sourceDirBytes.Length + 12),
+                    SubstituteNameOffset = 0,
+                    SubstituteNameLength = (ushort) sourceDirBytes.Length,
+                    PrintNameOffset = (ushort) (sourceDirBytes.Length + 2),
+                    PrintNameLength = 0,
+                    PathBuffer = new byte[0x3ff0]
+                };
 
-                reparseDataBuffer.ReparseTag = NativeMethods.IoReparseTagMountPoint;
-                reparseDataBuffer.ReparseDataLength = (ushort)(sourceDirBytes.Length + 12);
-                reparseDataBuffer.SubstituteNameOffset = 0;
-                reparseDataBuffer.SubstituteNameLength = (ushort)sourceDirBytes.Length;
-                reparseDataBuffer.PrintNameOffset = (ushort)(sourceDirBytes.Length + 2);
-                reparseDataBuffer.PrintNameLength = 0;
-                reparseDataBuffer.PathBuffer = new byte[0x3ff0];
                 Array.Copy(sourceDirBytes, reparseDataBuffer.PathBuffer, sourceDirBytes.Length);
 
                 int inBufferSize = Marshal.SizeOf(reparseDataBuffer);
@@ -104,11 +106,13 @@ namespace Budford.Utilities
 
             using (SafeFileHandle handle = OpenReparsePoint(junctionPoint, NativeMethods.FileAccess.GenericWrite))
             {
-                NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer();
+                NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer
+                {
+                    ReparseTag = NativeMethods.IoReparseTagMountPoint,
+                    ReparseDataLength = 0,
+                    PathBuffer = new byte[0x3ff0]
+                };
 
-                reparseDataBuffer.ReparseTag = NativeMethods.IoReparseTagMountPoint;
-                reparseDataBuffer.ReparseDataLength = 0;
-                reparseDataBuffer.PathBuffer = new byte[0x3ff0];
 
                 int inBufferSize = Marshal.SizeOf(reparseDataBuffer);
                 IntPtr inBuffer = Marshal.AllocHGlobal(inBufferSize);

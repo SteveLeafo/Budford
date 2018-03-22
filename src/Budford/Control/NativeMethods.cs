@@ -150,6 +150,9 @@ namespace Budford.Control
         [DllImport("user32.dll")]
         private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
 
+        [DllImport("User32.dll")]
+        internal static extern int SetForegroundWindow(IntPtr point);
+
         // Delegate to filter which windows to include 
         public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
         /// <summary>

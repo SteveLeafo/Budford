@@ -294,7 +294,7 @@ namespace Budford.View
             base.OnFormClosed(e);
         }
 
-        private void pictureBox1_Click(object sender, System.EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             FileStream stream = File.Create("C:\\Development\\icontest.ico");
             IconHelper helper = new IconHelper();
@@ -340,7 +340,7 @@ namespace Budford.View
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             numericUpDown1.Enabled = checkBox1.Checked;
         }

@@ -32,7 +32,7 @@ namespace Budford.Tools
             return true;
         }
 
-        private void GetLatestVersion(Budford.Model.GameInformation game, ref Model.InstalledVersion latest, ref FileInfo latestFile)
+        private void GetLatestVersion(Model.GameInformation game, ref Model.InstalledVersion latest, ref FileInfo latestFile)
         {
             foreach (var version in model.Settings.InstalledVersions)
             {

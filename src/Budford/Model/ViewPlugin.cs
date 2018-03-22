@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Budford.Model
@@ -18,7 +16,7 @@ namespace Budford.Model
         private readonly List<PlugIns.PlugIn> plugIns = new List<PlugIns.PlugIn>();
 
         // The data model
-        private readonly Model Model;
+        private readonly Model model;
 
         // A menu to add plug-ins to
         private readonly ToolStripMenuItem plugInsToolStripMenuItem;
@@ -29,12 +27,12 @@ namespace Budford.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="ModelIn"></param>
+        /// <param name="modelIn"></param>
         /// <param name="parentIn"></param>
         /// <param name="plugInsToolStripMenuItemIn"></param>
-        internal ViewPlugin(Model ModelIn, Form parentIn, ToolStripMenuItem plugInsToolStripMenuItemIn)
+        internal ViewPlugin(Model modelIn, Form parentIn, ToolStripMenuItem plugInsToolStripMenuItemIn)
         {
-            Model = ModelIn;
+            model = modelIn;
             parent = parentIn;
             plugInsToolStripMenuItem = plugInsToolStripMenuItemIn;
         }
@@ -44,7 +42,7 @@ namespace Budford.Model
         /// </summary>
         internal void LoadPlugIns()
         {
-            if (Directory.Exists(SpecialFolders.PlugInFolder(Model)))
+            if (Directory.Exists(SpecialFolders.PlugInFolder(model)))
             {
                 List<ToolStripItem> items = new List<ToolStripItem>();
 
@@ -69,11 +67,11 @@ namespace Budford.Model
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    if (!Directory.Exists(SpecialFolders.PlugInFolder(Model)))
+                    if (!Directory.Exists(SpecialFolders.PlugInFolder(model)))
                     {
-                        Directory.CreateDirectory(SpecialFolders.PlugInFolder(Model));
+                        Directory.CreateDirectory(SpecialFolders.PlugInFolder(model));
                     }
-                    FileManager.SafeCopy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(Model), Path.GetFileName(dlg.FileName)), true);
+                    FileManager.SafeCopy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(model), Path.GetFileName(dlg.FileName)), true);
                     LoadPlugIns();
                 }
             }
@@ -110,7 +108,7 @@ namespace Budford.Model
         /// <param name="items"></param>
         private void SearchForPlugins(List<ToolStripItem> items)
         {
-            foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(Model)))
+            foreach (var file in Directory.EnumerateFiles(SpecialFolders.PlugInFolder(model)))
             {
                 var extension = Path.GetExtension(file);
                 if (extension != null && extension.ToLower().Contains("xml"))
@@ -152,7 +150,7 @@ namespace Budford.Model
                     }
                     else
                     {
-                        using (FormExecutePlugIn executor = new FormExecutePlugIn(Model, plugIn))
+                        using (FormExecutePlugIn executor = new FormExecutePlugIn(model, plugIn))
                         {
                             if (executor.ShowDialog(parent) == DialogResult.OK)
                             {

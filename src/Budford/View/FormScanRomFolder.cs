@@ -17,7 +17,7 @@ namespace Budford.View
     {
         readonly Dictionary<string, GameInformation> gameData;
         readonly BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-        Model.Model model;
+        readonly Model.Model model;
         /// <summary>
         ///
         /// </summary>
@@ -150,7 +150,7 @@ namespace Budford.View
                  {
                      if (GrabKeys())
                      {
-                         string folder = decryptFile(file, "WudData", "/code/.*.rpx", true, null);
+                         string folder = DecryptFile(file, "WudData", "/code/.*.rpx", true, null);
                          if (folder == "")
                          {
                              TryCemuKeys(file);
@@ -170,9 +170,9 @@ namespace Budford.View
 
         private void UseProvidedKey(string file, string folder)
         {
-            decryptFile(file, "WudData", "/meta/meta.xml", true, null);
-            decryptFile(file, "WudData", "/meta/iconTex.tga", true, null);
-            decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, null);
+            DecryptFile(file, "WudData", "/meta/meta.xml", true, null);
+            DecryptFile(file, "WudData", "/meta/iconTex.tga", true, null);
+            DecryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, null);
 
             ProcessImageFile(file, folder);
         }
@@ -181,12 +181,12 @@ namespace Budford.View
         {
             foreach (var key in keys)
             {
-                string folder = decryptFile(file, "WudData", "/code/.*.rpx", true, key);
+                string folder = DecryptFile(file, "WudData", "/code/.*.rpx", true, key);
                 if (folder != "")
                 {
-                    decryptFile(file, "WudData", "/meta/meta.xml", true, key);
-                    decryptFile(file, "WudData", "/meta/iconTex.tga", true, key);
-                    decryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, key);
+                    DecryptFile(file, "WudData", "/meta/meta.xml", true, key);
+                    DecryptFile(file, "WudData", "/meta/iconTex.tga", true, key);
+                    DecryptFile(file, "WudData", "/meta/bootLogoTex.tga", true, key);
 
                     ProcessImageFile(file, folder);
 
@@ -205,7 +205,8 @@ namespace Budford.View
                 gi.Image = true;
                 foreach (var rpxFile in Directory.EnumerateFiles(Path.Combine("WudData", folder, "code")))
                 {
-                    if (Path.GetExtension(rpxFile).ToLower().Contains("rpx"))
+                    var extension = Path.GetExtension(rpxFile);
+                    if (extension != null && extension.ToLower().Contains("rpx"))
                     {
                         gi.RpxFile = rpxFile;
                         FileInfo fi = new FileInfo(file);
@@ -221,11 +222,11 @@ namespace Budford.View
             if (CNUSLib.Settings.commonKey != null)
             {
                 String commonKey = model.Settings.WiiUCommonKey;
-                if (commonKey == null || commonKey == "")
+                if (string.IsNullOrEmpty(commonKey))
                 {
                     if (showCommonKeyError)
                     {
-                        MessageBox.Show("No Common Key found, please set you Wii U common key in the Budford configuration form");
+                        MessageBox.Show(Resources.FormScanRomFolder_GrabKeys_No_Common_Key_found__please_set_you_Wii_U_common_key_in_the_Budford_configuration_form);
                         showCommonKeyError = false;
                     }
                     return false;
@@ -242,45 +243,53 @@ namespace Budford.View
             CNUSLib.Settings.commonKey = key;
         }
 
-        List<byte[]> keys = new List<byte[]>();
+        readonly List<byte[]> keys = new List<byte[]>();
         void LoadKeysFromCemu()
         {
             keys.Clear();
             var version = model.Settings.InstalledVersions.FirstOrDefault(v => v.IsLatest);
-            string  keysFile = Path.Combine(version.Folder, "keys.txt");
-            if (File.Exists(keysFile))
+            if (version != null)
             {
-                string[] lines = File.ReadAllLines(keysFile);
-                foreach (string line in lines)
+                string  keysFile = Path.Combine(version.Folder, "keys.txt");
+                if (File.Exists(keysFile))
                 {
-                    string keyEntry = "";
-                    if (line.Contains("#"))
+                    string[] lines = File.ReadAllLines(keysFile);
+                    foreach (string line in lines)
                     {
-                        string[] toks = line.Split('#');
-                        if (toks.Length > 0)
-                        {
-                            keyEntry = toks[0].Trim();
-                        }
-                    }
-                    else
-                    {
-                        keyEntry = line.Trim();
-                    }
-                    if (keyEntry.Length == 32)
-                    {
-                        byte[] key = Utils.StringToByteArray(keyEntry);
-                        keys.Add(key);
+                        ParseKeyFileEntry(line);
                     }
                 }
             }
         }
 
+        private void ParseKeyFileEntry(string line)
+        {
+            string keyEntry = "";
+            if (line.Contains("#"))
+            {
+                string[] toks = line.Split('#');
+                if (toks.Length > 0)
+                {
+                    keyEntry = toks[0].Trim();
+                }
+            }
+            else
+            {
+                keyEntry = line.Trim();
+            }
+            if (keyEntry.Length == 32)
+            {
+                byte[] key = Utils.StringToByteArray(keyEntry);
+                keys.Add(key);
+            }
+        }
 
-        private static string decryptFile(String input, String output, String regex, bool overwrite, byte[] titlekey)
+
+        private static string DecryptFile(String input, String output, String regex, bool overwrite, byte[] titlekey)
         {
             if (input == null)
             {
-                MessageBox.Show("You need to provide an input file");
+                MessageBox.Show(Resources.FormScanRomFolder_DecryptFile_You_need_to_provide_an_input_file);
             }
             FileInfo inputFile = new FileInfo(input);
 

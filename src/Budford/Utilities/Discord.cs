@@ -1,43 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SharpPresence
+namespace Budford.Utilities
 {
     internal class Discord
     {
         public struct EventHandlers
         {
-            public IntPtr ready;
-            public IntPtr disconnected;
-            public IntPtr errored;
-            public IntPtr joinGame;
-            public IntPtr spectateGame;
-            public IntPtr joinRequest;
+            public IntPtr Ready;
+            public IntPtr Disconnected;
+            public IntPtr Errored;
+            public IntPtr JoinGame;
+            public IntPtr SpectateGame;
+            public IntPtr JoinRequest;
         }
 
         //--------------------------------------------------------------------------------
 
         public struct RichPresence
         {
-            public string state;
-            public string details;
-            public Int64 startTimestamp;
-            public Int64 endTimestamp;
-            public string largeImageKey;
-            public string largeImageText;
-            public string smallImageKey;
-            public string smallImageText;
-            public string partyId;
-            public int partySize;
-            public int partyMax;
-            public string matchSecret;
-            public string joinSecret;
-            public string spectateSecret;
-            public sbyte instance;
+            public string State;
+            public string Details;
+            public Int64 StartTimestamp;
+            public Int64 EndTimestamp;
+            public string LargeImageKey;
+            public string LargeImageText;
+            public string SmallImageKey;
+            public string SmallImageText;
+            public string PartyId;
+            public int PartySize;
+            public int PartyMax;
+            public string MatchSecret;
+            public string JoinSecret;
+            public string SpectateSecret;
+            public sbyte Instance;
         }
 
         //--------------------------------------------------------------------------------
@@ -52,14 +48,14 @@ namespace SharpPresence
         //--------------------------------------------------------------------------------
 
         [DllImport("discord-rpc.dll")]
-        private static extern void Discord_Initialize([MarshalAs(UnmanagedType.LPStr)]string applicationID,
+        private static extern void Discord_Initialize([MarshalAs(UnmanagedType.LPStr)]string applicationId,
             ref EventHandlers handlers,
             int autoRegister,
             [MarshalAs(UnmanagedType.LPStr)]string optionalSteamId);
 
-        public static void Initialize(string appID, EventHandlers handlers)
+        public static void Initialize(string appId, EventHandlers handlers)
         {
-            Discord_Initialize(appID, ref handlers, 1, String.Empty);
+            Discord_Initialize(appId, ref handlers, 1, String.Empty);
         }
 
         //--------------------------------------------------------------------------------
@@ -108,9 +104,9 @@ namespace SharpPresence
         [DllImport("discord-rpc.dll")]
         private static extern void Discord_Respond(string userId, int reply);
 
-        public static void Respond(string userID, Reply reply)
+        public static void Respond(string userId, Reply reply)
         {
-            Discord_Respond(userID, (int)reply);
+            Discord_Respond(userId, (int)reply);
         }
     }
 }

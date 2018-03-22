@@ -10,7 +10,6 @@ using Budford.Model;
 using Budford.Properties;
 using Budford.Tools;
 using Budford.Utilities;
-using System.Runtime.InteropServices;
 
 namespace Budford.View
 {
@@ -55,15 +54,15 @@ namespace Budford.View
         // All of our data...
         internal readonly Model.Model Model;
 
-        ViewPlugin viewPlugIn;
-        ViewUsers viewUsers;
-        ViewShaderCache viewShaderCache;
+        readonly ViewPlugin viewPlugIn;
+        readonly ViewUsers viewUsers;
+        readonly ViewShaderCache viewShaderCache;
  
         // For downloading and extracing.
         readonly Unpacker unpacker;
 
         // For launching the games.
-        readonly internal Launcher launcher;
+        internal readonly Launcher Launcher;
 
         // Used for column sorting when clicking on a header
         private readonly ListViewColumnSorter lvwColumnSorter;
@@ -99,7 +98,7 @@ namespace Budford.View
             DiscordRichPresence.Initialize();
 
             unpacker = new Unpacker(this);
-            launcher = new Launcher(this);
+            Launcher = new Launcher(this);
 
             PerformWelcomeActions();
 
@@ -116,7 +115,7 @@ namespace Budford.View
             Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
 
             viewUsers = new ViewUsers(Model, this, contextMenuStrip1, userToolStripMenuItem, pictureBox1);
-            this.addNewToolStripMenuItem.Click += new System.EventHandler(viewUsers.addNewToolStripMenuItem_Click);
+            addNewToolStripMenuItem.Click += viewUsers.addNewToolStripMenuItem_Click;
 
             viewShaderCache = new ViewShaderCache(this, Model);
 
@@ -170,7 +169,7 @@ namespace Budford.View
         private void RegisterEvents()
         {
             listView1.KeyDown += listView1_KeyDown;
-            this.Resize += FormMainWindow_Resize;
+            Resize += FormMainWindow_Resize;
 
             listView1.OwnerDraw = false;
             listView1.DrawColumnHeader += ListView1_DrawColumnHeader;
@@ -250,13 +249,13 @@ namespace Budford.View
         /// <param name="e"></param>
         void FormMainWindow_Resize(object sender, EventArgs e)
         {
-            if (FormWindowState.Minimized == this.WindowState)
+            if (FormWindowState.Minimized == WindowState)
             {
                 notifyIcon1.Visible = true;
-                this.Hide();
+                Hide();
             }
 
-            else if (FormWindowState.Normal == this.WindowState)
+            else if (FormWindowState.Normal == WindowState)
             {
                 notifyIcon1.Visible = false;
             }
@@ -280,7 +279,7 @@ namespace Budford.View
                     {
                         RegisterStopHotKey(Model);
                         game.Value.Exists = true;
-                        launcher.LaunchCemu(this, Model, game.Value, false, false, false, LaunchFull);
+                        Launcher.LaunchCemu(this, Model, game.Value, false, false, false, LaunchFull);
                         launched = true;
                         break;
                     }
@@ -331,7 +330,7 @@ namespace Budford.View
                         Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                         RegisterStopHotKey(Model);
 
-                        launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
+                        Launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
                     }
                 }
             }
@@ -403,7 +402,7 @@ namespace Budford.View
             if (m.Msg == 0x0312)
             {
                 // Hot key was pressed
-                launcher.KillCurrentProcess();
+                Launcher.KillCurrentProcess();
             }
         }
 
@@ -784,7 +783,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (launcher.Open(Model))
+            if (Launcher.Open(Model))
             {
                 RegisterStopHotKey(Model);
                 EnableControlsForGameRunning();
@@ -812,7 +811,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            launcher.KillCurrentProcess();
+            Launcher.KillCurrentProcess();
         }
 
         /// <summary>
@@ -946,17 +945,6 @@ namespace Budford.View
             toolStrip1.Visible = showToolbarToolStripMenuItem.Checked;
             toolStrip1.Visible = showToolbarToolStripMenuItem.Checked;
             Model.Settings.ShowToolBar = showToolbarToolStripMenuItem.Checked;             
-        }
-       
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dumpSaveDirCodesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Persistence.Save(Model, Persistence.GetModelFileName());
-            MessageBox.Show(Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_SaveDirs_saved_successfully, Resources.fMainWindow_dumpSaveDirCodesToolStripMenuItem_Click_Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -1099,7 +1087,7 @@ namespace Budford.View
         private void launchCemuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RegisterStopHotKey(Model);
-            launcher.LaunchCemu(this, Model, null, false, true);
+            Launcher.LaunchCemu(this, Model, null, false, true);
         }
 
         /// <summary>
@@ -1221,7 +1209,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void manageInstalledVersionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(Model, unpacker, launcher))
+            using (FormEditInstalledVersions installedVersions = new FormEditInstalledVersions(Model, unpacker, Launcher))
             {
                 installedVersions.ShowDialog(this);
             }
@@ -1408,7 +1396,7 @@ namespace Budford.View
                 if (Model.GameData.ContainsKey(listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')))
                 {
                     GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
-                    launcher.CreateSaveSnapshot(Model, game);
+                    Launcher.CreateSaveSnapshot(Model, game);
                 }
             }
         }
@@ -1561,9 +1549,9 @@ namespace Budford.View
         /// <param name="e"></param>
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            if (launcher != null)
+            if (Launcher != null)
             {
-                launcher.FullScreen();
+                Launcher.FullScreen();
             }
         }
 
@@ -1574,9 +1562,9 @@ namespace Budford.View
         /// <param name="e"></param>
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            if (launcher != null)
+            if (Launcher != null)
             {
-                launcher.ScreenShot();
+                Launcher.ScreenShot();
             }
         }
 

@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Budford.Model
@@ -33,13 +31,14 @@ namespace Budford.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="ModelIn"></param>
+        /// <param name="modelIn"></param>
         /// <param name="mainFormIn"></param>
         /// <param name="contextMenuStrip1In"></param>
         /// <param name="userToolStripMenuItemIn"></param>
-        internal ViewUsers(Model ModelIn, FormMainWindow mainFormIn, ContextMenuStrip contextMenuStrip1In, ToolStripMenuItem userToolStripMenuItemIn, PictureBox pictureBox1In)
+        /// <param name="pictureBox1In"></param>
+        internal ViewUsers(Model modelIn, FormMainWindow mainFormIn, ContextMenuStrip contextMenuStrip1In, ToolStripMenuItem userToolStripMenuItemIn, PictureBox pictureBox1In)
         {
-            model = ModelIn;
+            model = modelIn;
             mainForm = mainFormIn;
             contextMenuStrip1 = contextMenuStrip1In;
             userToolStripMenuItem = userToolStripMenuItemIn;

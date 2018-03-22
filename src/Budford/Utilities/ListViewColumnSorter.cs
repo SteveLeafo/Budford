@@ -23,7 +23,7 @@ namespace Budford.Utilities
         /// </summary>
         private readonly CaseInsensitiveComparer objectCompare;
 
-        internal int SortType = 0;
+        internal int SortType;
 
         /// <summary>
         /// Class constructor.  Initializes various elements
@@ -48,7 +48,7 @@ namespace Budford.Utilities
         /// <returns>The result of the comparison. "0" if equal, negative if 'x' is less than 'y' and positive if 'x' is greater than 'y'</returns>
         public int Compare(object x, object y)
         {
-            int compareResult = 0;
+            int compareResult;
 
             // Cast the objects to be compared to ListViewItem objects
             var listviewX = (ListViewItem)x;

@@ -36,13 +36,11 @@ namespace Budford.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string id = "";
-
             foreach (var emulator in emulators)
             {
                 if (emulator.Value == comboBox1.Text)
                 {
-                    id = emulator.Key;
+                    var id = emulator.Key;
                     string[] toks = comboBox1.Text.Split(':');
                     if (toks.Length == 2)
                     {

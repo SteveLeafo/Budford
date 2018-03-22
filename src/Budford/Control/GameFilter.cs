@@ -1,10 +1,4 @@
 ﻿using Budford.Model;
-using Budford.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Budford.Control
 {
@@ -13,11 +7,12 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static bool FilterCheckedOut(Model.Model Model, GameInformation game)
+        internal static bool FilterCheckedOut(Model.Model model, GameInformation game)
         {
-            if (!Model.Settings.IncludeWiiULauncherRpx)
+            if (!model.Settings.IncludeWiiULauncherRpx)
             {
                 if (game.LaunchFile.Contains("WiiULauncher.rpx"))
                 {
@@ -25,15 +20,15 @@ namespace Budford.Control
                 }
             }
 
-            if (CheckRegionFilter(Model, game))
+            if (CheckRegionFilter(model, game))
             {
-                if (CheckStatusFilter(Model, game))
+                if (CheckStatusFilter(model, game))
                 {
-                    if (CheckOfficialStatusFilter(Model, game))
+                    if (CheckOfficialStatusFilter(model, game))
                     {
-                        if (CheckRatingFilter(Model, game))
+                        if (CheckRatingFilter(model, game))
                         {
-                            return CheckTypeFilter(Model, game);
+                            return CheckTypeFilter(model, game);
                         }
                     }
                 }
@@ -45,23 +40,24 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static bool CheckRegionFilter(Model.Model Model, GameInformation game)
+        internal static bool CheckRegionFilter(Model.Model model, GameInformation game)
         {
             switch (game.Region)
             {
                 case "USA":
-                    if (!Model.Filters.ViewRegionUsa) return false;
+                    if (!model.Filters.ViewRegionUsa) return false;
                     break;
                 case "EUR":
-                    if (!Model.Filters.ViewRegionEur) return false;
+                    if (!model.Filters.ViewRegionEur) return false;
                     break;
                 case "JAP":
-                    if (!Model.Filters.ViewRegionJap) return false;
+                    if (!model.Filters.ViewRegionJap) return false;
                     break;
                 case "ALL":
-                    if (!Model.Filters.ViewRegionAll) return false;
+                    if (!model.Filters.ViewRegionAll) return false;
                     break;
             }
             return true;
@@ -70,29 +66,30 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static bool CheckStatusFilter(Model.Model Model, GameInformation game)
+        internal static bool CheckStatusFilter(Model.Model model, GameInformation game)
         {
             switch (game.GameSetting.EmulationState)
             {
                 case GameSettings.EmulationStateType.NotSet:
-                    if (!Model.Filters.ViewStatusNotSet) return false;
+                    if (!model.Filters.ViewStatusNotSet) return false;
                     break;
                 case GameSettings.EmulationStateType.Perfect:
-                    if (!Model.Filters.ViewStatusPerfect) return false;
+                    if (!model.Filters.ViewStatusPerfect) return false;
                     break;
                 case GameSettings.EmulationStateType.Playable:
-                    if (!Model.Filters.ViewStatusPlayable) return false;
+                    if (!model.Filters.ViewStatusPlayable) return false;
                     break;
                 case GameSettings.EmulationStateType.Runs:
-                    if (!Model.Filters.ViewStatusRuns) return false;
+                    if (!model.Filters.ViewStatusRuns) return false;
                     break;
                 case GameSettings.EmulationStateType.Loads:
-                    if (!Model.Filters.ViewStatusLoads) return false;
+                    if (!model.Filters.ViewStatusLoads) return false;
                     break;
                 case GameSettings.EmulationStateType.Unplayable:
-                    if (!Model.Filters.ViewStatusUnplayable) return false;
+                    if (!model.Filters.ViewStatusUnplayable) return false;
                     break;
             }
             return true;
@@ -101,23 +98,24 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static bool CheckTypeFilter(Model.Model Model, GameInformation game)
+        internal static bool CheckTypeFilter(Model.Model model, GameInformation game)
         {
             switch (game.Type)
             {
                 case "WiiU":
-                    if (!Model.Filters.ViewTypeWiiU) return false;
+                    if (!model.Filters.ViewTypeWiiU) return false;
                     break;
                 case "eShop":
-                    if (!Model.Filters.ViewTypeEshop) return false;
+                    if (!model.Filters.ViewTypeEshop) return false;
                     break;
                 case "Channel":
-                    if (!Model.Filters.ViewTypeChannel) return false;
+                    if (!model.Filters.ViewTypeChannel) return false;
                     break;
                 default:
-                    if (!Model.Filters.ViewTypeVc) return false;
+                    if (!model.Filters.ViewTypeVc) return false;
                     break;
             }
             return true;
@@ -126,26 +124,27 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static bool CheckRatingFilter(Model.Model Model, GameInformation game)
+        internal static bool CheckRatingFilter(Model.Model model, GameInformation game)
         {
             switch (game.Rating)
             {
                 case 5:
-                    if (!Model.Filters.ViewRating5) return false;
+                    if (!model.Filters.ViewRating5) return false;
                     break;
                 case 4:
-                    if (!Model.Filters.ViewRating4) return false;
+                    if (!model.Filters.ViewRating4) return false;
                     break;
                 case 3:
-                    if (!Model.Filters.ViewRating3) return false;
+                    if (!model.Filters.ViewRating3) return false;
                     break;
                 case 2:
-                    if (!Model.Filters.ViewRating2) return false;
+                    if (!model.Filters.ViewRating2) return false;
                     break;
                 case 1:
-                    if (!Model.Filters.ViewRating1) return false;
+                    if (!model.Filters.ViewRating1) return false;
                     break;
                 default:
                     return false;
@@ -156,29 +155,30 @@ namespace Budford.Control
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static bool CheckOfficialStatusFilter(Model.Model Model, GameInformation game)
+        internal static bool CheckOfficialStatusFilter(Model.Model model, GameInformation game)
         {
             switch (game.GameSetting.OfficialEmulationState)
             {
                 case GameSettings.EmulationStateType.NotSet:
-                    if (!Model.Filters.ViewOfficialStatusNotSet) return false;
+                    if (!model.Filters.ViewOfficialStatusNotSet) return false;
                     break;
                 case GameSettings.EmulationStateType.Perfect:
-                    if (!Model.Filters.ViewOfficialStatusPerfect) return false;
+                    if (!model.Filters.ViewOfficialStatusPerfect) return false;
                     break;
                 case GameSettings.EmulationStateType.Playable:
-                    if (!Model.Filters.ViewOfficialStatusPlayable) return false;
+                    if (!model.Filters.ViewOfficialStatusPlayable) return false;
                     break;
                 case GameSettings.EmulationStateType.Runs:
-                    if (!Model.Filters.ViewOfficialStatusRuns) return false;
+                    if (!model.Filters.ViewOfficialStatusRuns) return false;
                     break;
                 case GameSettings.EmulationStateType.Loads:
-                    if (!Model.Filters.ViewOfficialStatusLoads) return false;
+                    if (!model.Filters.ViewOfficialStatusLoads) return false;
                     break;
                 case GameSettings.EmulationStateType.Unplayable:
-                    if (!Model.Filters.ViewOfficialStatusUnplayable) return false;
+                    if (!model.Filters.ViewOfficialStatusUnplayable) return false;
                     break;
             }
             return true;

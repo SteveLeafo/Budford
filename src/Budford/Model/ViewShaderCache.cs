@@ -4,9 +4,6 @@ using Budford.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Budford.Model
@@ -14,24 +11,23 @@ namespace Budford.Model
     internal class ViewShaderCache
     {
         private InstalledVersion iv1;
-        readonly private Model model;
-        readonly private FormMainWindow mainForm;
+        private readonly Model model;
+        private readonly FormMainWindow mainForm;
 
         internal ViewShaderCache(FormMainWindow mainFormIn, Model modelIn)
         {
             mainForm = mainFormIn;
             model = modelIn;
         }
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         internal void updateShaderCachesToolStripMenuItem_Click()
         {
             iv1 = mainForm.GetCurrentVersion();
 
-            mainForm.launcher.Model = model;
+            mainForm.Launcher.Model = model;
 
             foreach (var game in model.GameData)
             {
@@ -41,7 +37,7 @@ namespace Budford.Model
                     {
                         if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
-                            mainForm.launcher.CopyLargestShaderCacheToCemu(game.Value);
+                            mainForm.Launcher.CopyLargestShaderCacheToCemu(game.Value);
                         }
                     }
                 }
@@ -53,8 +49,6 @@ namespace Budford.Model
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         internal void importShaderCacheToolStripMenuItem_Click()
         {
             // Configure open file dialog box 
@@ -73,8 +67,6 @@ namespace Budford.Model
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         internal void mergeShaderCachesToolStripMenuItem_Click()
         {
             using (FormShaderMerger merger = new FormShaderMerger())
@@ -127,22 +119,9 @@ namespace Budford.Model
                     if (transferableShader.Length > 1000000)
                     {
                         model.CurrentId = game.Key;
-                        mainForm.launcher.LaunchCemu(mainForm, model, game.Value, true);
+                        mainForm.Launcher.LaunchCemu(mainForm, model, game.Value, true);
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mergeShaderCachesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (FormShaderMerger merger = new FormShaderMerger())
-            {
-                merger.ShowDialog(mainForm);
             }
         }
     }

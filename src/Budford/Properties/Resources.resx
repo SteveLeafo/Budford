@@ -376,4 +376,10 @@ Their status will be set as New Status &lt;- Old Status untill you restart or re
   <data name="FormMainWindow_importBudfordPluginToolStripMenuItem_Click_Budford_Plug_in_Files_____xml_" xml:space="preserve">
     <value>Budford Plug-in Files | *.xml;</value>
   </data>
+  <data name="FormScanRomFolder_GrabKeys_No_Common_Key_found__please_set_you_Wii_U_common_key_in_the_Budford_configuration_form" xml:space="preserve">
+    <value>No Common Key found, please set you Wii U common key in the Budford configuration form</value>
+  </data>
+  <data name="FormScanRomFolder_DecryptFile_You_need_to_provide_an_input_file" xml:space="preserve">
+    <value>You need to provide an input file</value>
+  </data>
 </root>

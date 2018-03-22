@@ -133,8 +133,7 @@ namespace Budford.Model
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="imageIndex"></param>
+        /// <param name="status"></param>
         /// <returns></returns>
         internal static int GetStatusImageIndex(string status)
         {
@@ -177,13 +176,13 @@ namespace Budford.Model
             }
         }
 
-        internal static bool IsPlayable(GameSettings.EmulationStateType emulationState)
+        internal static bool IsPlayable(EmulationStateType emulationState)
         {
-            if (emulationState != GameSettings.EmulationStateType.NotSet)
+            if (emulationState != EmulationStateType.NotSet)
             {
-                if (emulationState != GameSettings.EmulationStateType.Loads)
+                if (emulationState != EmulationStateType.Loads)
                 {
-                    if (emulationState != GameSettings.EmulationStateType.Unplayable)
+                    if (emulationState != EmulationStateType.Unplayable)
                     {
                         return true;
                     }

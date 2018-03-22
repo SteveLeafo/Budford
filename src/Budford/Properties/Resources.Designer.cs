@@ -554,6 +554,25 @@ namespace Budford.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to provide an input file.
+        /// </summary>
+        internal static string FormScanRomFolder_DecryptFile_You_need_to_provide_an_input_file {
+            get {
+                return ResourceManager.GetString("FormScanRomFolder_DecryptFile_You_need_to_provide_an_input_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Common Key found, please set you Wii U common key in the Budford configuration form.
+        /// </summary>
+        internal static string FormScanRomFolder_GrabKeys_No_Common_Key_found__please_set_you_Wii_U_common_key_in_the_Budford_configuration_form {
+            get {
+                return ResourceManager.GetString("FormScanRomFolder_GrabKeys_No_Common_Key_found__please_set_you_Wii_U_common_key_i" +
+                        "n_the_Budford_configuration_form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shader Cache Files| *.bin;.
         /// </summary>
         internal static string FormShaderMerger_openToolStripMenuItem_Click_Shader_Cache_Files____bin_ {

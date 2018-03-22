@@ -59,12 +59,12 @@ namespace Budford.Control
             {
                 if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml")))
                 {
-                    FileManager.SafeCopy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName(), false);
+                    FileManager.SafeCopy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"), GetModelFileName());
                     FileManager.SafeDelete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Model.xml"));
                 }
             }
 
-            Model.Model m = Persistence.Load(GetModelFileName());
+            Model.Model m = Load(GetModelFileName());
 
             if (m.Settings.SavesFolder == "")
             {
