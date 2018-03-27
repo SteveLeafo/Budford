@@ -524,7 +524,7 @@ namespace Budford.Control
                 // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
                 try
                 {
-                    FileManager.SafeDelete("Budford.lck");
+                    FileManager.SafeDelete(Path.Combine(src.FullName, "Budford.lck"));
                 }
                 catch (Exception)
                 {
