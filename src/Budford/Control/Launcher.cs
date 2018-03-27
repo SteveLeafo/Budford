@@ -769,6 +769,7 @@ namespace Budford.Control
                     case 2:
                         text = text.Replace("Wii U GamePad", "Wii U Pro Controller");
                         text = text.Replace("Wii U Classic Controller", "Wii U Pro Controller");
+                        text = FixProControllerNumbers(text);
                         break;
                     case 3:
                         text = text.Replace("Wii U GamePad", "Wii U Classic Controller");
@@ -780,6 +781,15 @@ namespace Budford.Control
                 }
                 File.WriteAllText(fileName, text);
             }
+        }
+
+        private static string FixProControllerNumbers(string text)
+        {
+            for (int i = 27; i > 10; i--)
+            {
+                text = text.Replace(i.ToString() + " = ", (i + 1).ToString() + " = ");
+            }
+            return text;
         }
 
         private static string SwapControllerButtons(int swapButtons, string text)
