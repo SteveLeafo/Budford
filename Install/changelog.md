@@ -1,17 +1,25 @@
 # Budford Change Log
 
+## V1.0.80
+- Changes to support Cemu 1.11.6.
+- Fixed an issue where Budford was minimising to tray.
+- Fixed a bug where the lock file wasn't getting deleted correctly.
+- When opening the compatibility wiki entry for a game - Budford will now update to the latest status, if the status is "not set".
+- Fixed a minor issue where the GamePad and TV monitors were switched.
+- Improvements to the way the GamePad view works with multiple monitors.
+
 ## V1.0.73
 - Fixed an issue where Cemu was getting starved of mouse events.
 
 ## V1.0.72
-- Added the ability to select which monitor to use for both TV and GamePad views
-- Now checks the Title Version when searching for games and always uses the earliest version when calculating the SaveDir
+- Added the ability to select which monitor to use for both TV and GamePad views.
+- Now checks the Title Version when searching for games and always uses the earliest version when calculating the SaveDir.
 
 ## V1.0.71
-- Added support for Discord Rich Presence
-- Will now generate graphics packs on the fly if a graphic pack for the selected resolution doesn't exist
-- Improvements to name matching with the Compatibility Wiki
-- Fixed a potential crash when copying save files
+- Added support for Discord Rich Presence.
+- Will now generate graphics packs on the fly if a graphic pack for the selected resolution doesn't exist.
+- Improvements to name matching with the Compatibility Wiki.
+- Fixed a potential crash when copying save files.
 
 ## V1.0.64
 - Fixed a minor issue where the file size was reported incorrectly for .WUD and .WUX files.
