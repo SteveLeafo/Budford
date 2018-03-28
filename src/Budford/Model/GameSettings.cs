@@ -18,6 +18,7 @@ namespace Budford.Model
         public byte FullScreen  = 1;
         public byte EnableVSync  = 0;
         public UpscaleFilterType UpscaleFilter  = UpscaleFilterType.Bicubic;
+        public byte UseSeperableShaders = 1;
         public FullScreenScalingType FullScreenScaling  = FullScreenScalingType.KeepAspectRatio;
         public GpuBufferCacheAccuracyType GpuBufferCacheAccuracy  = GpuBufferCacheAccuracyType.High;
 

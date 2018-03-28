@@ -13,11 +13,13 @@ namespace Budford.Control
 
         static internal void Initialize()
         {
+            Logger.Log("DiscordRichPresence: Initialize");
             Discord.Initialize("424321820498329610", Handlers);
         }
 
         static internal void ShutDown()
         {
+            Logger.Log("DiscordRichPresence: ShutDown");
             Discord.Shutdown();
         }
 
@@ -25,6 +27,7 @@ namespace Budford.Control
         {
             if (game != null)
             {
+                Logger.Log("DiscordRichPresence: StartGame: " + game.TitleId);
                 byte[] bytes = Encoding.UTF8.GetBytes(game.Name);
                 string fileName = Tools.HashGenerator.GenerateHashFromRpxRawData(bytes, bytes.Length).ToString("x8");
 
@@ -47,6 +50,7 @@ namespace Budford.Control
 
         static internal void EndGame()
         {
+            Logger.Log("DiscordRichPresence: EndGame");
             presence.Details = "Bewteen Games";
             presence.LargeImageKey = "cemul";
             presence.SmallImageKey = "cemus";

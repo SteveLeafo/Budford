@@ -75,15 +75,8 @@ namespace Budford.View
                 DialogResult = DialogResult.OK;
             }
 
-            if (folder != null)
-            {
-                if (Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-
-                Unpacker.ExtractToDirectory(fileName, folder, true);
-            }
+            FileManager.SafeCreateDirectory(folder);
+            Unpacker.ExtractToDirectory(fileName, folder, true);
 
             Close();
         }

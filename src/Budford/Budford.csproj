@@ -85,6 +85,7 @@
     <Compile Include="Control\FolderScanner.cs" />
     <Compile Include="Control\GameFilter.cs" />
     <Compile Include="Control\Launcher.cs" />
+    <Compile Include="Control\Logger.cs" />
     <Compile Include="Control\NativeMethods.cs" />
     <Compile Include="Control\Persistence.cs" />
     <Compile Include="Control\SpecialFolders.cs" />

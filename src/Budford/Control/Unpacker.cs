@@ -36,6 +36,7 @@ namespace Budford.Control
             }
             else
             {
+                Logger.Log("Downloading " + uri);
                 using (FormFileDownload fileDownload = new FormFileDownload(uri, fileName, folder))
                 {
                     fileDownload.ShowDialog(owner);
@@ -50,10 +51,7 @@ namespace Budford.Control
         /// <param name="folder"></param>
         internal void Unpack(string fileName, string folder)
         {
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
+            FileManager.SafeCreateDirectory(folder);
 
             if (File.Exists(fileName))
             {
@@ -86,10 +84,7 @@ namespace Budford.Control
                 string completeFileName = Path.Combine(destinationDirectoryName, file.FullName);
                 string directory = Path.GetDirectoryName(completeFileName);
 
-                if (!Directory.Exists(directory))
-                {
-                    if (directory != null) Directory.CreateDirectory(directory);
-                }
+                FileManager.SafeCreateDirectory(directory);
 
                 if (file.Name != "")
                 {

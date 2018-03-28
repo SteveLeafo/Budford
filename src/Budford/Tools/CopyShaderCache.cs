@@ -50,10 +50,7 @@ namespace Budford.Tools
             }
             else
             {
-                if (!Directory.Exists(saveFolder + folder))
-                {
-                    Directory.CreateDirectory(saveFolder + folder);
-                }
+                FileManager.SafeCreateDirectory(saveFolder + folder);
                 FileManager.SafeCopy(src, dest, true);
             }
         }

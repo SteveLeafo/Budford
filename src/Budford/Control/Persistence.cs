@@ -49,11 +49,7 @@ namespace Budford.Control
 
         internal static Model.Model TransferLegacyModel()
         {
-
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford")))
-            {
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
-            }
+            FileManager.SafeCreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Budford"));
 
             if (!File.Exists(GetModelFileName()))
             {

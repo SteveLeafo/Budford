@@ -100,6 +100,10 @@ namespace Budford.Control
         /// <param name="forceFullScreen"></param>
         internal void LaunchCemu(FormMainWindow parentIn, Model.Model modelIn, GameInformation game, bool getSaveDir = false, bool cemuOnly = false, bool shiftUp = true, bool forceFullScreen = false)
         {
+            if (game != null)
+            {
+                Logger.Log("Launcher: LaunchCemu - " + game.TitleId);
+            }
             makeBorderLess = false;
             SetCemuVersion(modelIn, game);
 
@@ -131,7 +135,7 @@ namespace Budford.Control
 
                 if (!getSaveDir)
                 {
-                    CreateDefaultSettingsFile(runningVersion, game);
+                    UpdateControllers(runningVersion, game);
 
                     DeleteShaderCacheIfRequired(modelIn, runningVersion);
 
@@ -254,10 +258,7 @@ namespace Budford.Control
         {
             string cafeLibs = Path.Combine(runningVersion.Folder, "cafeLibs");
 
-            if (!Directory.Exists(cafeLibs))
-            {
-                Directory.CreateDirectory(cafeLibs);
-            }
+            FileManager.SafeCreateDirectory(cafeLibs);
             FileManager.ClearFolder(cafeLibs);
 
             if (game != null)
@@ -327,6 +328,7 @@ namespace Budford.Control
                 {
                     // This save has been locked, which means budford launched the game, but wasn't running with it exitted.
                     // In this case we won't overwrite the save as it is sure to be newer
+                    Logger.Log("Lock file exists, aborting save file copy");
                     return;
                 }
 
@@ -344,7 +346,8 @@ namespace Budford.Control
         {
             try
             {
-                File.Create(lockFileName);
+                Logger.Log("Creating lock file");
+                File.Create(lockFileName).Close();
             }
             catch (Exception ex)
             {
@@ -450,6 +453,7 @@ namespace Budford.Control
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
         {
+            Logger.Log("Launcher: proc_Exited");
             if (Model != null)
             {
                 if (Model.Settings.UpdateDiscordPresence)
@@ -519,18 +523,7 @@ namespace Budford.Control
 
         private static void DeleteLockFile(DirectoryInfo src)
         {
-            if (File.Exists(Path.Combine(src.FullName, "Budford.lck")))
-            {
-                // Delete the lock file, to allow Budford to overwrite the Cemu save in future.
-                try
-                {
-                    FileManager.SafeDelete(Path.Combine(src.FullName, "Budford.lck"));
-                }
-                catch (Exception)
-                {
-                    // No code
-                }
-            }
+            FileManager.SafeDelete(Path.Combine(src.FullName, "Budford.lck"));
         }
 
         private void CopyShaderCaches()
@@ -543,10 +536,7 @@ namespace Budford.Control
                 if (!File.Exists(destFile.FullName) || destFile.Length < srcFile.Length)
                 {
                     string folder = Path.GetDirectoryName(destFile.FullName);
-                    if (!Directory.Exists(folder))
-                    {
-                        if (folder != null) Directory.CreateDirectory(folder);
-                    }
+                    FileManager.SafeCreateDirectory(folder);
                     FileManager.SafeCopy(srcFile.FullName, destFile.FullName, true);
                 }
             }
@@ -729,7 +719,7 @@ namespace Budford.Control
         /// </summary>
         /// <param name="version"></param>
         /// <param name="game"></param>
-        private static void CreateDefaultSettingsFile(InstalledVersion version, GameInformation game)
+        private static void UpdateControllers(InstalledVersion version, GameInformation game)
         {
             if (game != null)
             {
@@ -769,7 +759,10 @@ namespace Budford.Control
                     case 2:
                         text = text.Replace("Wii U GamePad", "Wii U Pro Controller");
                         text = text.Replace("Wii U Classic Controller", "Wii U Pro Controller");
-                        text = FixProControllerNumbers(text);
+                        if (version.VersionNumber > 1115)
+                        {
+                            text = FixProControllerNumbers(text);
+                        }
                         break;
                     case 3:
                         text = text.Replace("Wii U GamePad", "Wii U Classic Controller");
@@ -1169,6 +1162,7 @@ namespace Budford.Control
                     break;
                 }
             }
+            Logger.Log("Cemu title has appeared");
         }
 
         private bool MoveGamePadWindow(bool done)
@@ -1179,6 +1173,7 @@ namespace Budford.Control
                 {
                     if (runningGame.GameSetting.SeparateGamePadView == 1)
                     {
+                        Logger.Log("Moving game pad to monitor: " + Model.Settings.GamePadMonitor);
                         done = true;
                         MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.GamePadMonitor);
                     }
@@ -1235,6 +1230,7 @@ namespace Budford.Control
                 IntPtr h = runningProcess.MainWindowHandle;
                 NativeMethods.SetForegroundWindow(h);
                 SendKeys.SendWait("%{ENTER}");
+                Logger.Log("Setting Cemu to full screen");
             }
         }
 
@@ -1248,11 +1244,13 @@ namespace Budford.Control
                 SendKeys.SendWait("+{PRTSC}");
                 Thread.Sleep(100);
                 NativeMethods.SetForegroundWindow(parent.Handle);
+                Logger.Log("Taking Cemu screen shot");
             }
         }
 
         internal void MakeBorderlessFullScreen(IntPtr handle)
         {
+            Logger.Log("Launcher: MakeBorderlessFullScreen");
             var styleNewWindowStandard = NativeMethods.GetWindowLong(handle, NativeMethods.WindowLongIndex.Style) & ~(NativeMethods.WindowStyles.Caption | NativeMethods.WindowStyles.ThickFrame | NativeMethods.WindowStyles.SystemMenu | NativeMethods.WindowStyles.MaximizeBox | NativeMethods.WindowStyles.MinimizeBox);
 
             HideMenu(handle);
@@ -1278,12 +1276,5 @@ namespace Budford.Control
                 NativeMethods.DrawMenuBar(handle);
             }
         }
-
-     
-
-       
-
-
-
     }    
 }

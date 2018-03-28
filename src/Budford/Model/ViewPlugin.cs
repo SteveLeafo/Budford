@@ -67,10 +67,7 @@ namespace Budford.Model
                 // Show open file dialog box 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    if (!Directory.Exists(SpecialFolders.PlugInFolder(model)))
-                    {
-                        Directory.CreateDirectory(SpecialFolders.PlugInFolder(model));
-                    }
+                    FileManager.SafeCreateDirectory(SpecialFolders.PlugInFolder(model));
                     FileManager.SafeCopy(dlg.FileName, Path.Combine(SpecialFolders.PlugInFolder(model), Path.GetFileName(dlg.FileName)), true);
                     LoadPlugIns();
                 }

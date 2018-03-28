@@ -43,7 +43,9 @@ namespace Budford.Control
 
             if (IsInstalled())
             {
+                Logger.Clear();
                 SetDefaultFolder(model);
+                Logger.Clear();
             }
 
             Application.EnableVisualStyles();
@@ -70,7 +72,7 @@ namespace Budford.Control
                 mainForm.WindowState = FormWindowState.Minimized;
                 mainForm.launchGame = cmdLineFileName;
                 mainForm.LaunchFull = cmdLineFullScreen;
-
+                mainForm.MinimizeToTray = true;
                 Application.Run(mainForm);
             }
         }
@@ -139,10 +141,7 @@ namespace Budford.Control
 
             }
 
-            if (!Directory.Exists(model.Settings.DownloadsFolder))
-            {
-                Directory.CreateDirectory(model.Settings.DownloadsFolder);
-            }
+            FileManager.SafeCreateDirectory(model.Settings.DownloadsFolder);
             Directory.SetCurrentDirectory(model.Settings.DownloadsFolder);
             Persistence.Save(model, Persistence.GetModelFileName());
         }

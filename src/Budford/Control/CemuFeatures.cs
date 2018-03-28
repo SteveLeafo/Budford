@@ -245,10 +245,7 @@ namespace Budford.Control
         {
             string destinationFile = Path.Combine(SpecialFolders.BudfordDir(model), data[1], data[0]);
             string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
-            if (!Directory.Exists(destinationFolder))
-            {
-                Directory.CreateDirectory(destinationFolder);
-            }
+            FileManager.SafeCreateDirectory(destinationFolder);
             if (!File.Exists(destinationFile))
             {
                 foreach (var v in model.Settings.InstalledVersions)
@@ -266,10 +263,7 @@ namespace Budford.Control
         private static void CopyFolderToCemu(Model.Model model, string[] data)
         {
             string destinationFolder = Path.Combine(SpecialFolders.BudfordDir(model), data[1]);
-            if (!Directory.Exists(destinationFolder))
-            {
-                Directory.CreateDirectory(destinationFolder);
-            }
+            FileManager.SafeCreateDirectory(destinationFolder);
             foreach (var v in model.Settings.InstalledVersions)
             {
                 string sourceFolder = Path.Combine(v.Folder, data[2]);
@@ -335,10 +329,7 @@ namespace Budford.Control
         private static string EnsureDestinationExists(string[] data, InstalledVersion v)
         {
             string destinationFolder = Path.Combine(v.Folder, data[2]);
-            if (!Directory.Exists(destinationFolder))
-            {
-                Directory.CreateDirectory(destinationFolder);
-            }
+            FileManager.SafeCreateDirectory(destinationFolder);
             return destinationFolder;
         }
 
@@ -353,14 +344,8 @@ namespace Budford.Control
                     {
                         string destinationFile = Path.Combine(v.Folder, data[2], data[0]);
                         string destinationFolder = Path.Combine(v.Folder, data[2]);
-                        if (!Directory.Exists(destinationFolder))
-                        {
-                            Directory.CreateDirectory(destinationFolder);
-                        }
-                        if (!File.Exists(destinationFile))
-                        {
-                            FileManager.SafeCopy(sourceFile, destinationFile);
-                        }
+                        FileManager.SafeCreateDirectory(destinationFolder);
+                        FileManager.SafeCopy(sourceFile, destinationFile);
                     }
                 }
             }
@@ -368,7 +353,7 @@ namespace Budford.Control
 
         private static void CopyPatchFiles(InstalledVersion onlineSource, InstalledVersion onlineDestination)
         {
-            Directory.CreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content"));
+            FileManager.SafeCreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content"));
             FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHigh.dat"), true);
             FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResHighLG.dat"), true);
             FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10056000", "content", "FFLResMiddle.dat"), true);
@@ -382,15 +367,15 @@ namespace Budford.Control
                 FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "otp.bin"), Path.Combine(onlineDestination.Folder, "otp.bin"), true);
                 FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "seeprom.bin"), Path.Combine(onlineDestination.Folder, "seeprom.bin"), true);
 
-                Directory.CreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001"));
+                FileManager.SafeCreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001"));
                 FileManager.SafeCopy(Path.Combine(onlineSource.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), Path.Combine(onlineDestination.Folder, "mlc01", "usr", "save", "system", "act", "80000001", "account.dat"), true);
 
-                Directory.CreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
+                FileManager.SafeCreateDirectory(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
                 DirectoryInfo s1 = new DirectoryInfo(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
                 DirectoryInfo d1 = new DirectoryInfo(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "ccerts"));
                 FileManager.CopyFilesRecursively(s1, d1);
 
-                Directory.CreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
+                FileManager.SafeCreateDirectory(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
                 DirectoryInfo s2 = new DirectoryInfo(Path.Combine(onlineSource.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
                 DirectoryInfo d2 = new DirectoryInfo(Path.Combine(onlineDestination.Folder, "mlc01", "sys", "title", "0005001b", "10054000", "content", "scerts"));
                 FileManager.CopyFilesRecursively(s2, d2);
@@ -943,10 +928,7 @@ namespace Budford.Control
 
         internal static bool IsGraphicPackInstalled(string pack)
         {
-            if (!Directory.Exists("graphicsPacks"))
-            {
-                Directory.CreateDirectory("graphicsPacks");
-            }
+            FileManager.SafeCreateDirectory("graphicsPacks");
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = Path.GetFileName(dir);
@@ -965,6 +947,7 @@ namespace Budford.Control
         {
             try
             {
+                Logger.Log("Checking for updated graphic packs");
                 using (FormWebpageDownload dlc = new FormWebpageDownload("https://api.github.com/repos/slashiee/cemu_graphic_packs/releases/latest", "Latest Graphic Pack"))
                 {
                     if (dlc.ShowDialog(form) == DialogResult.OK)
@@ -982,6 +965,7 @@ namespace Budford.Control
 
                         if (pack != "")
                         {
+                            Logger.Log("Graphics pack revision changed to: " + pack);
                             modelIn.Settings.GraphicsPackRevision = pack;
                             FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
                         }

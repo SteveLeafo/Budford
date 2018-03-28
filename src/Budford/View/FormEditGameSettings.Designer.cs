@@ -191,6 +191,8 @@
             this.comboBox49 = new System.Windows.Forms.ComboBox();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.comboBox50 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1278,6 +1280,8 @@
             this.tableLayoutPanel7.Controls.Add(this.comboBox12, 2, 2);
             this.tableLayoutPanel7.Controls.Add(this.comboBox13, 2, 3);
             this.tableLayoutPanel7.Controls.Add(this.comboBox14, 2, 4);
+            this.tableLayoutPanel7.Controls.Add(this.label65, 1, 5);
+            this.tableLayoutPanel7.Controls.Add(this.comboBox50, 2, 5);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -1287,8 +1291,9 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 174);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
@@ -2381,6 +2386,28 @@
             this.label64.Text = "Swap Buttons";
             this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label65.Location = new System.Drawing.Point(3, 113);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(166, 27);
+            this.label65.TabIndex = 3;
+            this.label65.Text = "Use Separable Shaders";
+            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox50
+            // 
+            this.comboBox50.FormattingEnabled = true;
+            this.comboBox50.Items.AddRange(new object[] {
+            "No",
+            "Yes"});
+            this.comboBox50.Location = new System.Drawing.Point(175, 116);
+            this.comboBox50.Name = "comboBox50";
+            this.comboBox50.Size = new System.Drawing.Size(238, 21);
+            this.comboBox50.TabIndex = 7;
+            // 
             // FormEditGameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2600,5 +2627,7 @@
         private System.Windows.Forms.ComboBox comboBox49;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.ComboBox comboBox50;
     }
 }

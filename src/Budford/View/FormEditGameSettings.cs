@@ -154,6 +154,7 @@ namespace Budford.View
             comboBox12.SelectedIndex = information.GameSetting.DisableAudio;
             comboBox13.SelectedIndex = information.GameSetting.EnableBoTwCrashWorkaround;
             comboBox14.SelectedIndex = information.GameSetting.FullSyncAtGx2DrawDone;
+            comboBox50.SelectedIndex = information.GameSetting.UseSeperableShaders;
 
             comboBox15.SelectedIndex = information.GameSetting.AccaccurateShaderMul;
             comboBox16.SelectedIndex = information.GameSetting.DisableGpuFence;
@@ -240,6 +241,7 @@ namespace Budford.View
             information.GameSetting.DisableAudio = (byte)comboBox12.SelectedIndex;
             information.GameSetting.EnableBoTwCrashWorkaround = (byte)comboBox13.SelectedIndex;
             information.GameSetting.FullSyncAtGx2DrawDone = (byte)comboBox14.SelectedIndex;
+            information.GameSetting.UseSeperableShaders = (byte)comboBox50.SelectedIndex;
 
             information.GameSetting.AccaccurateShaderMul = (byte)comboBox15.SelectedIndex;
             information.GameSetting.DisableGpuFence = (byte)comboBox16.SelectedIndex;

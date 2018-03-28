@@ -109,6 +109,7 @@ namespace Budford.View
             {
                 comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
                 model.Settings.GraphicsPackRevision = pack;
+                Logger.Log("Graphics pack revision changed to: " + pack);
             }
         }
 
@@ -596,6 +597,7 @@ namespace Budford.View
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             model.Settings.GraphicsPackRevision = comboBox1.Text;
+            Logger.Log("Graphics pack revision changed to: " + comboBox1.Text);
         }
 
         private void removeDeadLinksToolStripMenuItem_Click(object sender, EventArgs e)

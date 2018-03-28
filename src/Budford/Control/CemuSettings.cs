@@ -52,6 +52,7 @@ namespace Budford.Control
             SeparateGamepadViewOffset = 10,       // 1 = On
             UseRtdscOffset = 11,                  // 3 = On / 2 = Off
             EnableOnLineModeOffset = 12,          // 3 = On / 2 = Off
+            UseSeperableShaders = 13,
         }
 
         enum CoreSettings : byte
@@ -75,21 +76,21 @@ namespace Budford.Control
         readonly int[] coreSettingsV1113 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2c, 0x2d, 0x00, 0x00, 0x00, 0x00 };
         readonly int[] coreSettings = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
 
-
-        readonly int[] v1115Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
-        readonly int[] v1114Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
-        readonly int[] v1113Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
-        readonly int[] v1112Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a };
-        readonly int[] v1110Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a };
-        readonly int[] v1100Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a };
-        readonly int[] v191Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x00, 0x00 };
-        readonly int[] v190Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00 };
-        readonly int[] v182Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        readonly int[] v174Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        readonly int[] v173Settings = new[] { 0x30, 0x31, 0x32, 0x33, 0x35, 0x36, 0x37, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        readonly int[] v171Settings = new[] { 0x30, 0x31, 0x32, 0x00, 0x34, 0x35, 0x36, 0x37, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        readonly int[] v163Settings = new[] { 0x00, 0x30, 0x00, 0x00, 0x32, 0x33, 0x34, 0x35, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        readonly int[] v160Settings = new[] { 0x00, 0x00, 0x00, 0x00, 0x31, 0x32, 0x33, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v1116Settings = new[] { 0x30, 0x49, 0x4a, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x54, 0x6b, 0x4b };
+        readonly int[] v1115Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a, 0x00 };
+        readonly int[] v1114Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a, 0x00 };
+        readonly int[] v1113Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a, 0x00 };
+        readonly int[] v1112Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a, 0x00 };
+        readonly int[] v1110Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a, 0x00 };
+        readonly int[] v1100Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x6a, 0x00 };
+        readonly int[] v191Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x00, 0x00, 0x00 };
+        readonly int[] v190Settings = new[] { 0x2f, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v182Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v174Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4d, 0x4e, 0x4f, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v173Settings = new[] { 0x30, 0x31, 0x32, 0x33, 0x35, 0x36, 0x37, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v171Settings = new[] { 0x30, 0x31, 0x32, 0x00, 0x34, 0x35, 0x36, 0x37, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v163Settings = new[] { 0x00, 0x30, 0x00, 0x00, 0x32, 0x33, 0x34, 0x35, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        readonly int[] v160Settings = new[] { 0x00, 0x00, 0x00, 0x00, 0x31, 0x32, 0x33, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
         readonly Model.Model model;
 
@@ -153,9 +154,9 @@ namespace Budford.Control
                 {"1.11.3", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1113Bin, v1113Settings) },
                 {"1.11.4", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
                 {"1.11.5", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1115Settings) },
-                {"1.11.6", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
-                {"1.12.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) },
-                {"2.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1114Settings) }
+                {"1.11.6", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) },
+                {"1.12.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) },
+                {"2.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) }
             };
 
             graphicPackOffset = new Dictionary<int, int>
@@ -201,7 +202,11 @@ namespace Budford.Control
                 {1110, 0x7c },
                 {1112, 0X6f },
                 {1113, 0x7c },
-                {1114, 0x7c }
+                {1114, 0x7c },
+                {1115, 0x7c },
+                {1116, 0x7d },
+                {1117, 0x7d },
+                {1120, 0x7d }
             };
         }
 
@@ -453,6 +458,7 @@ namespace Budford.Control
 
                     WriteByte(fn, settingsOffsets[(int)Settings.GpuBufferAccuractOffset], (byte)settings.GpuBufferCacheAccuracy);
                     WriteByte(fn, settingsOffsets[(int)Settings.UpscaleFilterOffset], (byte)settings.UpscaleFilter);
+                    WriteByte(fn, settingsOffsets[(int)Settings.UseSeperableShaders], (byte)settings.UseSeperableShaders);
                     WriteByte(fn, settingsOffsets[(int)Settings.FullScreenScalingOffset], (byte)settings.FullScreenScaling);
                     WriteByte(fn, settingsOffsets[(int)Settings.VSyncOffset], settings.EnableVSync);
 
@@ -471,10 +477,7 @@ namespace Budford.Control
 
         private void WriteGameProfile(string folder)
         {
-            if (!Directory.Exists(Path.Combine(folder, "gameProfiles")))
-            {
-                Directory.CreateDirectory(Path.Combine(folder, "gameProfiles"));
-            }
+            FileManager.SafeCreateDirectory(Path.Combine(folder, "gameProfiles"));
 
             CurrentUserSecurity cs = new CurrentUserSecurity();
 
@@ -638,10 +641,7 @@ namespace Budford.Control
             sb.Append("overwriteHeight = " + height + "\r\n");
             string folderName = Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs);
             string fileName = Path.Combine(folderName, "rules.txt");
-            if (!Directory.Exists(folderName))
-            {
-                Directory.CreateDirectory(folderName);
-            }
+            FileManager.SafeCreateDirectory(folderName);
             File.WriteAllText(fileName, sb.ToString());
             resolutionPack = new GraphicsPack()
             {
@@ -781,6 +781,7 @@ namespace Budford.Control
                 if (pack != "")
                 {
                     model.Settings.GraphicsPackRevision = pack;
+                    Logger.Log("Graphics pack revision changed to: " + pack);
                     FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)), model.GraphicsPacks);
                 }
             }
@@ -830,7 +831,7 @@ namespace Budford.Control
             {
                 if (File.Exists(fpsRules))
                 {
-                    File.Copy(fpsRules, fpsRules + ".bak");
+                    FileManager.SafeCopy(fpsRules, fpsRules + ".bak");
                 }
             }
             if (File.Exists(fpsRules + ".bak"))
@@ -851,7 +852,7 @@ namespace Budford.Control
                 {
                     if (File.Exists(fpsPatch))
                     {
-                        File.Copy(fpsPatch, fpsPatch + ".bak");
+                        FileManager.SafeCopy(fpsPatch, fpsPatch + ".bak");
                     }
                 }
                 if (File.Exists(fpsPatch + ".bak"))

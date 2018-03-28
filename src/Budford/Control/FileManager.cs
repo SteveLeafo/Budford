@@ -25,10 +25,7 @@ namespace Budford.Control
         {
             if (Directory.Exists(source.FullName))
             {
-                if (!Directory.Exists(target.FullName))
-                {
-                    Directory.CreateDirectory(target.FullName);
-                }
+                FileManager.SafeCreateDirectory(target.FullName);
                 foreach (DirectoryInfo dir in source.GetDirectories())
                 {
                     if (ten80P)
@@ -81,10 +78,7 @@ namespace Budford.Control
         {
             try
             {
-                if (!Directory.Exists(target.FullName))
-                {
-                    Directory.CreateDirectory(target.FullName);
-                }
+                FileManager.SafeCreateDirectory(target.FullName);
                 if (!Path.GetFileName(file.Name).Contains("Budford"))
                 {
                     SafeCopy(file.FullName, Path.Combine(target.FullName, file.Name));
@@ -329,11 +323,11 @@ namespace Budford.Control
             }
         }
 
-
         internal static bool SafeCopy(string sourceFileName, string destinationFileName, bool overwrite = false)
         {
             try
             {
+                Logger.Log("Copying " + sourceFileName + " to " + destinationFileName);
                 if (File.Exists(sourceFileName))
                 {
                     File.Copy(sourceFileName, destinationFileName, overwrite);
@@ -351,6 +345,7 @@ namespace Budford.Control
         {
             try
             {
+                Logger.Log("Deleting " + fileName);
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
@@ -369,6 +364,7 @@ namespace Budford.Control
         {
             try
             {
+                Logger.Log("Moving " + originalFileName + " to " + newFileName);
                 if (File.Exists(originalFileName))
                 {
                     File.Move(originalFileName, newFileName);
@@ -382,24 +378,40 @@ namespace Budford.Control
             return false;
         }
 
+        internal static bool SafeCreateDirectory(string newDirectory)
+        {
+            if (newDirectory == null)
+            {
+                return false;
+            }
+            try
+            {
+                Logger.Log("Creating new directory: " + newDirectory);
+                if (!Directory.Exists(newDirectory))
+                {
+                    DirectorySecurity ds = new DirectorySecurity();
+                    ds.AddAccessRule(new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Allow));
+                    Directory.CreateDirectory(newDirectory, ds);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
         internal static void OpenSaveFileLocation(Model.Model model, InstalledVersion version)
         {
             if (version.VersionNumber < 1110)
             {
-                if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir)))
-                {
-                    Directory.CreateDirectory(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
-                }
+                FileManager.SafeCreateDirectory(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
                 Process.Start(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
             }
             else
             {
                 string gameId = model.GameData[model.CurrentId].TitleId.Replace("00050000", "");
-
-                if (!Directory.Exists(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user")))
-                {
-                    Directory.CreateDirectory(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
-                }
+                FileManager.SafeCreateDirectory(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
                 Process.Start(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
             }
         }

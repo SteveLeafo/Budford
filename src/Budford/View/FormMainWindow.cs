@@ -64,6 +64,8 @@ namespace Budford.View
         // Used for column sorting when clicking on a header
         private readonly ListViewColumnSorter lvwColumnSorter;
 
+        internal bool MinimizeToTray = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -94,6 +96,7 @@ namespace Budford.View
 
             viewUsers = new ViewUsers(Model, this, contextMenuStrip1, userToolStripMenuItem, pictureBox1);
             addNewToolStripMenuItem.Click += viewUsers.addNewToolStripMenuItem_Click;
+            notifyIcon1.DoubleClick += notifyIcon1_DoubleClick;
 
             viewShaderCache = new ViewShaderCache(this, Model);
 
@@ -112,6 +115,13 @@ namespace Budford.View
 
             viewPlugIn = new ViewPlugin(Model, this, plugInsToolStripMenuItem);
             viewPlugIn.LoadPlugIns();
+        }
+
+        void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            notifyIcon1.Visible = false;
+            Show();
         }
 
         /// <summary>
@@ -190,15 +200,18 @@ namespace Budford.View
         /// <param name="e"></param>
         void FormMainWindow_Resize(object sender, EventArgs e)
         {
-            if (FormWindowState.Minimized == WindowState)
+            if (MinimizeToTray)
             {
-                notifyIcon1.Visible = true;
-                Hide();
-            }
+                if (FormWindowState.Minimized == WindowState)
+                {
+                    notifyIcon1.Visible = true;
+                    Hide();
+                }
 
-            else if (FormWindowState.Normal == WindowState)
-            {
-                notifyIcon1.Visible = false;
+                else if (FormWindowState.Normal == WindowState)
+                {
+                    notifyIcon1.Visible = false;
+                }
             }
         }
 
