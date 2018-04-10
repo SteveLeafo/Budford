@@ -993,7 +993,10 @@ namespace Budford.Control
 
                 if (runningGame != null)
                 {
-                    MoveToMonitor(runningProcess.MainWindowHandle, runningGame.GameSetting.SeparateGamePadView == 1 ? Model.Settings.GamePadMonitor : Model.Settings.Monitor);
+                    if (Model.Settings.Monitor != 1 || Model.Settings.GamePadMonitor != 1)
+                    {
+                        MoveToMonitor(runningProcess.MainWindowHandle, runningGame.GameSetting.SeparateGamePadView == 1 ? Model.Settings.GamePadMonitor : Model.Settings.Monitor);
+                    }
                 }
 
                 if (runningGame != null)
@@ -1060,8 +1063,15 @@ namespace Budford.Control
             }
         }
 
-        public void MoveToMonitor(IntPtr windowHandle, int numberMonitor)
+        const int SW_MAXIMIZE = 3;
+
+        public void MoveToMonitor(IntPtr windowHandle, int numberMonitor, bool maximised = false)
         {
+            if (Screen.AllScreens.Length == 1)
+            {
+                return;
+            }
+
             if (numberMonitor >= 1)
             {
                 if (Screen.AllScreens.Length >= numberMonitor)
@@ -1073,7 +1083,11 @@ namespace Budford.Control
                     //change the window to the second monitor
                     NativeMethods.SetWindowPos(windowHandle, IntPtr.Zero,
                     monitor.Left, monitor.Top, monitor.Width,
-                    monitor.Height, 0);
+                    monitor.Height, NativeMethods.SetWindowPosTypes.NoSize);
+                    if (maximised)
+                    {
+                        NativeMethods.ShowWindow(windowHandle, SW_MAXIMIZE);
+                    }
                 }
             }
         }
@@ -1165,7 +1179,7 @@ namespace Budford.Control
             Logger.Log("Cemu title has appeared");
         }
 
-        private bool MoveGamePadWindow(bool done)
+        private bool MoveGamePadWindow(bool done, bool maximised = false)
         {
             if (!done)
             {
@@ -1175,7 +1189,7 @@ namespace Budford.Control
                     {
                         Logger.Log("Moving game pad to monitor: " + Model.Settings.GamePadMonitor);
                         done = true;
-                        MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.GamePadMonitor);
+                        MoveToMonitor(runningProcess.MainWindowHandle, Model.Settings.GamePadMonitor, maximised);
                     }
                 }
             }

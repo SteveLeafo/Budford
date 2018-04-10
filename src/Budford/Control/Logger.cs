@@ -17,6 +17,7 @@ namespace Budford.Control
             }
             catch (Exception)
             {
+                // No Code
             }
         }
 

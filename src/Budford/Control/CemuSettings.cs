@@ -458,7 +458,7 @@ namespace Budford.Control
 
                     WriteByte(fn, settingsOffsets[(int)Settings.GpuBufferAccuractOffset], (byte)settings.GpuBufferCacheAccuracy);
                     WriteByte(fn, settingsOffsets[(int)Settings.UpscaleFilterOffset], (byte)settings.UpscaleFilter);
-                    WriteByte(fn, settingsOffsets[(int)Settings.UseSeperableShaders], (byte)settings.UseSeperableShaders);
+                    WriteByte(fn, settingsOffsets[(int)Settings.UseSeperableShaders], settings.UseSeperableShaders);
                     WriteByte(fn, settingsOffsets[(int)Settings.FullScreenScalingOffset], (byte)settings.FullScreenScaling);
                     WriteByte(fn, settingsOffsets[(int)Settings.VSyncOffset], settings.EnableVSync);
 
