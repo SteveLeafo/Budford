@@ -14,7 +14,7 @@ ren "Budford - Setup.exe" "Budford - Setup - V1.0.%Build%.exe"
 "C:\Program Files\7-Zip\7z.exe" a "Budford - V1.0.%Build%.zip" discord-rpc.dll
 
 set /a Build=%Build%+1
-echo %Build% > ver.txt
+echo %Build%> ver.txt
 
 git commit -m "New release" ver.txt
 git status
