@@ -778,9 +778,12 @@ namespace Budford.Control
 
         private static string FixProControllerNumbers(string text)
         {
-            for (int i = 27; i > 10; i--)
+            if (text.Contains("11 = "))
             {
-                text = text.Replace(i.ToString() + " = ", (i + 1).ToString() + " = ");
+                for (int i = 27; i > 10; i--)
+                {
+                    text = text.Replace(i.ToString() + " = ", (i + 1).ToString() + " = ");
+                }
             }
             return text;
         }
