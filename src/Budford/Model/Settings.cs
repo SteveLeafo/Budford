@@ -18,6 +18,10 @@ namespace Budford.Model
 
         public string SavesFolder = "";
 
+        public string Html5App = "chrome";
+
+        public string Html5AppArgs = "--incognito --start-fullscreen --kiosk";
+
         public string DownloadsFolder = "";
 
         public string CemuHookServerIp = "";

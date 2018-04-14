@@ -132,6 +132,7 @@
     <Compile Include="Utilities\LevenshteinDistance.cs" />
     <Compile Include="Utilities\ListViewColumnSorter.cs" />
     <Compile Include="Utilities\Nintendo.cs" />
+    <Compile Include="Utilities\SimpleHttpServer.cs" />
     <Compile Include="Utilities\TgaReader.cs" />
     <Compile Include="Utilities\UsbNotification.cs" />
     <Compile Include="Utilities\Xml.cs" />

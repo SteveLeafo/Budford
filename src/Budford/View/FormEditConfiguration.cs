@@ -34,7 +34,6 @@ namespace Budford.View
             checkBox4.Checked = settings.LegacyIntelGpuMode;
             checkBox5.Checked = settings.UseGlobalVolumeSettings;
             checkBox6.Checked = settings.ScanGameFoldersOnStart;
-            checkBox7.Checked = settings.IncludeWiiULauncherRpx;
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
             checkBox10.Checked = settings.BorderlessFullScreen;
@@ -95,8 +94,10 @@ namespace Budford.View
             radioButton10.Checked = settings.DefaultResolution == "4320p";
             radioButton9.Checked = settings.DefaultResolution == "2880p";
 
-
             radioButton7.Checked = settings.DefaultResolution == "default";
+
+            textBox8.Text = settings.Html5App;
+            textBox9.Text = settings.Html5AppArgs;
 
             if (modeIn == 1)
             {
@@ -217,7 +218,6 @@ namespace Budford.View
             settings.LegacyIntelGpuMode = checkBox4.Checked;
             settings.UseGlobalVolumeSettings = checkBox5.Checked;
             settings.ScanGameFoldersOnStart = checkBox6.Checked;
-            settings.IncludeWiiULauncherRpx = checkBox7.Checked;
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
             settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
             settings.BorderlessFullScreen = checkBox10.Checked;
@@ -227,6 +227,9 @@ namespace Budford.View
             model.Settings.SavesFolder = textBox2.Text;
             model.Settings.DownloadsFolder = textBox3.Text;
             model.Settings.WiiUCommonKey = textBox7.Text.Trim();
+
+            settings.Html5App = textBox8.Text;
+            settings.Html5AppArgs = textBox9.Text;
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
             model.Settings.GamePadMonitor = comboBox9.SelectedIndex + 1;

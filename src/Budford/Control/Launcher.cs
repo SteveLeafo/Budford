@@ -9,6 +9,8 @@ using System.Threading;
 using Budford.View;
 using System.Drawing;
 using System.Collections.Generic;
+using Budford.Utilities;
+using System.Xml.Linq;
 
 namespace Budford.Control
 {
@@ -150,34 +152,110 @@ namespace Budford.Control
             }
         }
 
+        SimpleHTTPServer myServer;
+
         private void StartCemuProcess(Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, bool shiftUp, bool forceFullScreen)
         {
             // Prepare the process to run
             ProcessStartInfo start = new ProcessStartInfo();
 
-            PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
-
-            // Required since 1.11.2
-            if (runningVersion != null)
+            if (game != null)
             {
-                start.WorkingDirectory = runningVersion.Folder;
+                game.PlayCount++;
+
+                game.LastPlayed = DateTime.Now;
+
+                if (parent != null)
+                {
+                    parent.RefreshList(game);
+                }
             }
 
-            // Run the external process & wait for it to finish
-            var parentProcess = Process.GetCurrentProcess();
-            var original = parentProcess.PriorityClass;
-
-            parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
-
-            startTime = DateTime.Now;
-            if (runningVersion != null && File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
+            if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx"))
             {
-                StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+                myServer = new SimpleHTTPServer(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))), 8086);
+
+                string startPage = GetStartPage(game);
+                start.FileName = modelIn.Settings.Html5App;
+                start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:8086/" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "/content/app/" + startPage + "\"";
+
+                startTime = DateTime.Now;
+                try
+                {
+                    runningProcess = Process.Start(start);
+                }
+                catch (Exception)
+                {
+                    TriggerEarlyExit();
+                }
+                if (runningProcess != null)
+                {
+                    runningProcess.EnableRaisingEvents = true;
+                    runningProcess.Exited += proc_Exited;
+                }
             }
             else
             {
-                TriggerEarlyExit();
+                PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
+
+                // Required since 1.11.2
+                if (runningVersion != null)
+                {
+                    start.WorkingDirectory = runningVersion.Folder;
+                }
+
+                // Run the external process & wait for it to finish
+                var parentProcess = Process.GetCurrentProcess();
+                var original = parentProcess.PriorityClass;
+
+                parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+
+                startTime = DateTime.Now;
+                if (runningVersion != null && File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
+                {
+                    StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+                }
+                else
+                {
+                    TriggerEarlyExit();
+                }
             }
+        }
+
+        private string GetStartPage(GameInformation game)
+        {
+            string folder = Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile)) + "/content/app/";
+
+            if (File.Exists(Path.Combine(folder, "menu.html")))
+            {
+                return "menu.html";
+            }
+
+            if (File.Exists(Path.Combine(folder, "config.xml")))
+            {
+                XElement xElement = XElement.Parse(XDocument.Load(Path.Combine(folder, "config.xml")).ToString());
+                var el = xElement.Elements("{http://www.w3.org/ns/widgets}content");
+                foreach (XElement ee in el)
+                {
+                    string src = ee.Attribute("src").Value;
+                    XName ns = XName.Get("display", "http://www.nintendo.com/ns/widgets");
+                    string disp = ee.Attribute(ns).Value;
+                    if (disp == "gp" || disp == "shared")
+                    {
+                        if (src.ToUpper().Contains("HTML"))
+                        {
+                            return src.TrimStart('/');
+                        }
+                    }
+                }
+            }
+
+            if (File.Exists(Path.Combine(folder, "TV.html")))
+            {
+                return "TV.html";
+            }
+
+            return "index.html";
         }
 
         public static string ToReadableString(TimeSpan span)
@@ -453,6 +531,11 @@ namespace Budford.Control
         /// <param name="e"></param>
         void proc_Exited(object sender, EventArgs e)
         {
+            if (myServer != null)
+            {
+                myServer.Stop();
+                myServer = null;
+            }
             Logger.Log("Launcher: proc_Exited");
             if (Model != null)
             {
@@ -577,19 +660,7 @@ namespace Budford.Control
             }
 
             // Do you want to show a console window?
-            start.CreateNoWindow = true;
-
-            if (game != null)
-            {
-                game.PlayCount++;
-
-                game.LastPlayed = DateTime.Now;
-
-                if (parent != null)
-                {
-                    parent.RefreshList(game);
-                }
-            }
+            start.CreateNoWindow = true;            
         }
 
         string GetNoLegacyOption()

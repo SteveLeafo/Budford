@@ -16,6 +16,10 @@ namespace Budford.Model
         public bool ViewTypeChannel = true;
         public bool ViewTypeVc = true;
 
+        // Type
+        public bool ViewPlatformWiiU = true;
+        public bool ViewPlatformHtml5 = true;
+
         // Status
         public bool ViewStatusNotSet = true;
         public bool ViewStatusPerfect = true;
@@ -156,6 +160,38 @@ namespace Budford.Model
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
+        /// <param name="mainWindow"></param>
+        internal static void AllPlatforms(Model model, FormMainWindow mainWindow)
+        {
+            model.Filters.ViewPlatformWiiU = true;
+            model.Filters.ViewPlatformHtml5 = true;
+
+            mainWindow.PlatWiiUToolStripMenuItem.Checked = model.Filters.ViewPlatformWiiU;
+            mainWindow.PlatHtml5ToolStripMenuItem.Checked = model.Filters.ViewPlatformHtml5;
+
+            mainWindow.PopulateListView();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="mainWindow"></param>
+        internal static void NoPlatforms(Model model, FormMainWindow mainWindow)
+        {
+            model.Filters.ViewPlatformWiiU = false;
+            model.Filters.ViewPlatformHtml5 = false;
+
+            mainWindow.PlatWiiUToolStripMenuItem.Checked = model.Filters.ViewPlatformWiiU;
+            mainWindow.PlatHtml5ToolStripMenuItem.Checked = model.Filters.ViewPlatformHtml5;
+
+            mainWindow.PopulateListView();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="model" />
         /// <param name="mainWindow"></param>
         internal static void AllRatings(Model model, FormMainWindow mainWindow)
@@ -258,6 +294,9 @@ namespace Budford.Model
             mainWindow.ChannelToolStripMenuItem.Checked = model.Filters.ViewTypeChannel;
             mainWindow.VirtualConsoleToolStripMenuItem.Checked = model.Filters.ViewTypeVc;
 
+            mainWindow.PlatWiiUToolStripMenuItem.Checked = model.Filters.ViewPlatformWiiU;
+            mainWindow.PlatHtml5ToolStripMenuItem.Checked = model.Filters.ViewPlatformHtml5;
+
             mainWindow.Rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5;
             mainWindow.Rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4;
             mainWindow.Rating3ToolStripMenuItem.Checked = model.Filters.ViewRating3;
@@ -289,6 +328,9 @@ namespace Budford.Model
             model.Filters.ViewRegionUsa = mainWindow.UsaToolStripMenuItem.Checked;
             model.Filters.ViewRegionEur = mainWindow.EuropeToolStripMenuItem.Checked;
             model.Filters.ViewRegionJap = mainWindow.JapanToolStripMenuItem.Checked;
+
+            model.Filters.ViewPlatformWiiU = mainWindow.PlatWiiUToolStripMenuItem.Checked;
+            model.Filters.ViewPlatformHtml5 = mainWindow.PlatHtml5ToolStripMenuItem.Checked;
 
             model.Filters.ViewTypeWiiU = mainWindow.WiiUToolStripMenuItem.Checked;
             model.Filters.ViewTypeEshop = mainWindow.EShopToolStripMenuItem.Checked;

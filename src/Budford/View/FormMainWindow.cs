@@ -33,6 +33,9 @@ namespace Budford.View
         internal ToolStripMenuItem ChannelToolStripMenuItem { get { return channelToolStripMenuItem; } }
         internal ToolStripMenuItem VirtualConsoleToolStripMenuItem { get { return virtualConsoleToolStripMenuItem; } }
 
+        internal ToolStripMenuItem PlatWiiUToolStripMenuItem { get { return platWiiUToolStripMenuItem; } }
+        internal ToolStripMenuItem PlatHtml5ToolStripMenuItem { get { return platHtml5ToolStripMenuItem; } }
+
         internal ToolStripMenuItem UsaToolStripMenuItem { get { return usaToolStripMenuItem; } }
         internal ToolStripMenuItem EuropeToolStripMenuItem { get { return europeToolStripMenuItem; } }
         internal ToolStripMenuItem JapanToolStripMenuItem { get { return japanToolStripMenuItem; } }
@@ -244,10 +247,16 @@ namespace Budford.View
                     new Launcher(null).LaunchRpx(Model, launchGame, LaunchFull);
                 }
             }
-            
+            else
+            {
+                //create server with given port
+                //myServer = new SimpleHTTPServer(@"C:\Development\DontCrash\content\app", 8084);
+                //myServer = new SimpleHTTPServer(@"D:\Wii-U\GAMES\Hold Your Fire [AHGE]\content\app", 8085);
+            }
             base.OnLoad(e);
         }
 
+        SimpleHTTPServer myServer;
         /// <summary>
         /// 
         /// </summary>
@@ -427,6 +436,9 @@ namespace Budford.View
             eShopToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             channelToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             virtualConsoleToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+
+            platHtml5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            wiiUNativeToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
             rating5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             rating4ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
@@ -860,6 +872,8 @@ namespace Budford.View
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             Persistence.Save(Model, Persistence.GetModelFileName());
+            //stop server
+            //myServer.Stop();
             DiscordRichPresence.ShutDown();
         }
 
@@ -1513,6 +1527,16 @@ namespace Budford.View
         private void importBudfordPluginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             viewPlugIn.ImportPlugIn();
+        }
+
+        private void allToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            ViewFilters.AllPlatforms(Model, this);
+        }
+
+        private void noneToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            ViewFilters.NoPlatforms(Model, this);
         }
     }
 }

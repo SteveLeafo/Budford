@@ -12,23 +12,18 @@ namespace Budford.Control
         /// <returns></returns>
         internal static bool FilterCheckedOut(Model.Model model, GameInformation game)
         {
-            if (!model.Settings.IncludeWiiULauncherRpx)
+            if (CheckPlatformFilter(model, game))
             {
-                if (game.LaunchFile.Contains("WiiULauncher.rpx"))
+                if (CheckRegionFilter(model, game))
                 {
-                    return false;
-                }
-            }
-
-            if (CheckRegionFilter(model, game))
-            {
-                if (CheckStatusFilter(model, game))
-                {
-                    if (CheckOfficialStatusFilter(model, game))
+                    if (CheckStatusFilter(model, game))
                     {
-                        if (CheckRatingFilter(model, game))
+                        if (CheckOfficialStatusFilter(model, game))
                         {
-                            return CheckTypeFilter(model, game);
+                            if (CheckRatingFilter(model, game))
+                            {
+                                return CheckTypeFilter(model, game);
+                            }
                         }
                     }
                 }
@@ -119,6 +114,28 @@ namespace Budford.Control
                     break;
             }
             return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        internal static bool CheckPlatformFilter(Model.Model model, GameInformation game)
+        {
+            if (game.LaunchFileName == "WiiULauncher.rpx")
+            {
+                if (game.Name.ToUpper().Contains("SONIC"))
+                {
+                    return model.Filters.ViewPlatformWiiU;
+                }
+                return model.Filters.ViewPlatformHtml5;
+            }
+            else
+            {
+                return model.Filters.ViewPlatformWiiU;
+            }
         }
 
         /// <summary>

@@ -114,6 +114,12 @@
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.allToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.noneToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.platWiiUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wiiUNativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.platHtml5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.allToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -460,7 +466,8 @@
             this.showOfficialStatusToolStripMenuItem,
             this.showStatusToolStripMenuItem,
             this.fixToolStripMenuItem,
-            this.showTypeToolStripMenuItem});
+            this.showTypeToolStripMenuItem,
+            this.platWiiUToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -796,6 +803,49 @@
             this.noneToolStripMenuItem3.Size = new System.Drawing.Size(154, 22);
             this.noneToolStripMenuItem3.Text = "None";
             this.noneToolStripMenuItem3.Click += new System.EventHandler(this.noneToolStripMenuItem3_Click);
+            // 
+            // platWiiUToolStripMenuItem
+            // 
+            this.platWiiUToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wiiUNativeToolStripMenuItem,
+            this.platHtml5ToolStripMenuItem,
+            this.toolStripSeparator8,
+            this.allToolStripMenuItem5,
+            this.noneToolStripMenuItem5});
+            this.platWiiUToolStripMenuItem.Name = "platWiiUToolStripMenuItem";
+            this.platWiiUToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.platWiiUToolStripMenuItem.Text = "Show Platform";
+            // 
+            // wiiUNativeToolStripMenuItem
+            // 
+            this.wiiUNativeToolStripMenuItem.Name = "wiiUNativeToolStripMenuItem";
+            this.wiiUNativeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wiiUNativeToolStripMenuItem.Text = "WiiU Native";
+            // 
+            // platHtml5ToolStripMenuItem
+            // 
+            this.platHtml5ToolStripMenuItem.Name = "platHtml5ToolStripMenuItem";
+            this.platHtml5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.platHtml5ToolStripMenuItem.Text = "HTML 5";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
+            // 
+            // allToolStripMenuItem5
+            // 
+            this.allToolStripMenuItem5.Name = "allToolStripMenuItem5";
+            this.allToolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.allToolStripMenuItem5.Text = "All";
+            this.allToolStripMenuItem5.Click += new System.EventHandler(this.allToolStripMenuItem5_Click);
+            // 
+            // noneToolStripMenuItem5
+            // 
+            this.noneToolStripMenuItem5.Name = "noneToolStripMenuItem5";
+            this.noneToolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem5.Text = "None";
+            this.noneToolStripMenuItem5.Click += new System.EventHandler(this.noneToolStripMenuItem5_Click);
             // 
             // userToolStripMenuItem
             // 
@@ -1261,6 +1311,12 @@
         private System.Windows.Forms.ToolStripMenuItem plugInsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importBudfordPluginToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ToolStripMenuItem platWiiUToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wiiUNativeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem platHtml5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem5;
     }
 }
 
