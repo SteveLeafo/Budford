@@ -147,7 +147,7 @@ namespace Budford.Utilities
                     HttpListenerContext context = _listener.GetContext();
                     Process(context);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
@@ -208,7 +208,7 @@ namespace Budford.Utilities
                         context.Response.OutputStream.Flush();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 }

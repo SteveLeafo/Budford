@@ -256,7 +256,6 @@ namespace Budford.View
             base.OnLoad(e);
         }
 
-        SimpleHTTPServer myServer;
         /// <summary>
         /// 
         /// </summary>
