@@ -51,6 +51,10 @@
             this.label17 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -125,10 +129,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -242,6 +244,8 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox9, 2, 11);
             this.tableLayoutPanel1.Controls.Add(this.label24, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.label25, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label26, 4, 10);
+            this.tableLayoutPanel1.Controls.Add(this.textBox10, 5, 10);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -310,9 +314,9 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.button2, 2);
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(280, 106);
+            this.button2.Location = new System.Drawing.Point(223, 106);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(132, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "Remove";
             this.button2.UseVisualStyleBackColor = true;
@@ -321,7 +325,7 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(199, 106);
+            this.button1.Location = new System.Drawing.Point(142, 106);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -331,7 +335,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(323, 214);
+            this.button6.Location = new System.Drawing.Point(255, 214);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(32, 23);
             this.button6.TabIndex = 2;
@@ -341,7 +345,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(323, 243);
+            this.button7.Location = new System.Drawing.Point(255, 243);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(32, 23);
             this.button7.TabIndex = 2;
@@ -376,7 +380,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.textBox2, 3);
             this.textBox2.Location = new System.Drawing.Point(112, 214);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(205, 20);
+            this.textBox2.Size = new System.Drawing.Size(137, 20);
             this.textBox2.TabIndex = 7;
             // 
             // textBox3
@@ -385,12 +389,12 @@
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox3.Location = new System.Drawing.Point(112, 243);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(205, 20);
+            this.textBox3.Size = new System.Drawing.Size(137, 20);
             this.textBox3.TabIndex = 8;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(323, 185);
+            this.button8.Location = new System.Drawing.Point(255, 185);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(32, 23);
             this.button8.TabIndex = 2;
@@ -404,7 +408,7 @@
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox4.Location = new System.Drawing.Point(112, 185);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(205, 20);
+            this.textBox4.Size = new System.Drawing.Size(137, 20);
             this.textBox4.TabIndex = 7;
             // 
             // label16
@@ -449,6 +453,46 @@
             this.label22.TabIndex = 6;
             this.label22.Text = "Wii U Common Key";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox8
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox8, 2);
+            this.textBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox8.Location = new System.Drawing.Point(112, 298);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(105, 20);
+            this.textBox8.TabIndex = 8;
+            // 
+            // textBox9
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.textBox9, 4);
+            this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox9.Location = new System.Drawing.Point(112, 324);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(243, 20);
+            this.textBox9.TabIndex = 8;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label24.Location = new System.Drawing.Point(8, 295);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(98, 26);
+            this.label24.TabIndex = 6;
+            this.label24.Text = "HTML5 Application";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label25.Location = new System.Drawing.Point(8, 321);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(98, 26);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "HTML5 Arguments";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button3
             // 
@@ -507,7 +551,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16F));
             this.tableLayoutPanel5.Controls.Add(this.radioButton1, 2, 5);
             this.tableLayoutPanel5.Controls.Add(this.radioButton2, 2, 6);
             this.tableLayoutPanel5.Controls.Add(this.radioButton3, 2, 7);
@@ -555,7 +599,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton1.Location = new System.Drawing.Point(130, 121);
+            this.radioButton1.Location = new System.Drawing.Point(129, 121);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(220, 17);
             this.radioButton1.TabIndex = 0;
@@ -566,7 +610,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton2.Location = new System.Drawing.Point(130, 144);
+            this.radioButton2.Location = new System.Drawing.Point(129, 144);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(220, 17);
             this.radioButton2.TabIndex = 0;
@@ -577,7 +621,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton3.Location = new System.Drawing.Point(130, 167);
+            this.radioButton3.Location = new System.Drawing.Point(129, 167);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(220, 17);
             this.radioButton3.TabIndex = 0;
@@ -588,7 +632,7 @@
             // 
             this.radioButton4.AutoSize = true;
             this.radioButton4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton4.Location = new System.Drawing.Point(130, 190);
+            this.radioButton4.Location = new System.Drawing.Point(129, 190);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(220, 17);
             this.radioButton4.TabIndex = 0;
@@ -601,7 +645,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(8, 322);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 23);
+            this.label1.Size = new System.Drawing.Size(115, 23);
             this.label1.TabIndex = 2;
             this.label1.Text = "Enthusiast";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -610,7 +654,7 @@
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton5.Location = new System.Drawing.Point(130, 246);
+            this.radioButton5.Location = new System.Drawing.Point(129, 246);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(220, 17);
             this.radioButton5.TabIndex = 0;
@@ -623,7 +667,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(8, 118);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 23);
+            this.label2.Size = new System.Drawing.Size(115, 23);
             this.label2.TabIndex = 2;
             this.label2.Text = "Quality";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -634,7 +678,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(8, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 23);
+            this.label3.Size = new System.Drawing.Size(115, 23);
             this.label3.TabIndex = 2;
             this.label3.Text = "Default";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -644,7 +688,7 @@
             this.radioButton7.AutoSize = true;
             this.radioButton7.Checked = true;
             this.radioButton7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton7.Location = new System.Drawing.Point(130, 78);
+            this.radioButton7.Location = new System.Drawing.Point(129, 78);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(220, 17);
             this.radioButton7.TabIndex = 0;
@@ -656,7 +700,7 @@
             // 
             this.radioButton8.AutoSize = true;
             this.radioButton8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton8.Location = new System.Drawing.Point(130, 325);
+            this.radioButton8.Location = new System.Drawing.Point(129, 325);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(220, 17);
             this.radioButton8.TabIndex = 0;
@@ -669,7 +713,7 @@
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.Location = new System.Drawing.Point(8, 243);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(116, 23);
+            this.label18.Size = new System.Drawing.Size(115, 23);
             this.label18.TabIndex = 2;
             this.label18.Text = "Performance";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -678,7 +722,7 @@
             // 
             this.radioButton10.AutoSize = true;
             this.radioButton10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton10.Location = new System.Drawing.Point(130, 348);
+            this.radioButton10.Location = new System.Drawing.Point(129, 348);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(220, 17);
             this.radioButton10.TabIndex = 0;
@@ -689,7 +733,7 @@
             // 
             this.radioButton9.AutoSize = true;
             this.radioButton9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton9.Location = new System.Drawing.Point(130, 371);
+            this.radioButton9.Location = new System.Drawing.Point(129, 371);
             this.radioButton9.Name = "radioButton9";
             this.radioButton9.Size = new System.Drawing.Size(220, 17);
             this.radioButton9.TabIndex = 0;
@@ -700,7 +744,7 @@
             // 
             this.radioButton6.AutoSize = true;
             this.radioButton6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton6.Location = new System.Drawing.Point(130, 292);
+            this.radioButton6.Location = new System.Drawing.Point(129, 292);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(220, 17);
             this.radioButton6.TabIndex = 0;
@@ -711,7 +755,7 @@
             // 
             this.radioButton11.AutoSize = true;
             this.radioButton11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton11.Location = new System.Drawing.Point(130, 269);
+            this.radioButton11.Location = new System.Drawing.Point(129, 269);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(220, 17);
             this.radioButton11.TabIndex = 0;
@@ -722,7 +766,7 @@
             // 
             this.radioButton12.AutoSize = true;
             this.radioButton12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton12.Location = new System.Drawing.Point(130, 213);
+            this.radioButton12.Location = new System.Drawing.Point(129, 213);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(220, 17);
             this.radioButton12.TabIndex = 0;
@@ -736,7 +780,7 @@
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(8, 20);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(342, 45);
+            this.label19.Size = new System.Drawing.Size(341, 45);
             this.label19.TabIndex = 2;
             this.label19.Text = "Please note that not all games have graphics packs and those that do may not have" +
     " the selected resolution.  The values set here will be overridden by the per gam" +
@@ -1585,45 +1629,24 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
-            // textBox8
+            // label26
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox8, 4);
-            this.textBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox8.Location = new System.Drawing.Point(112, 298);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(243, 20);
-            this.textBox8.TabIndex = 8;
+            this.label26.AutoSize = true;
+            this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label26.Location = new System.Drawing.Point(223, 295);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(26, 26);
+            this.label26.TabIndex = 6;
+            this.label26.Text = "Port";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox9
+            // textBox10
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox9, 4);
-            this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox9.Location = new System.Drawing.Point(112, 324);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(243, 20);
-            this.textBox9.TabIndex = 8;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(8, 295);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(98, 26);
-            this.label24.TabIndex = 6;
-            this.label24.Text = "HTML5 Application";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(8, 321);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(98, 26);
-            this.label25.TabIndex = 6;
-            this.label25.Text = "HTML5 Arguments";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.textBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox10.Location = new System.Drawing.Point(255, 298);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 20);
+            this.textBox10.TabIndex = 8;
             // 
             // FormEditConfiguration
             // 
@@ -1776,5 +1799,7 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBox10;
     }
 }

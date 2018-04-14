@@ -98,6 +98,7 @@ namespace Budford.View
 
             textBox8.Text = settings.Html5App;
             textBox9.Text = settings.Html5AppArgs;
+            textBox10.Text = settings.HtmlServerPort.ToString();
 
             if (modeIn == 1)
             {
@@ -230,6 +231,7 @@ namespace Budford.View
 
             settings.Html5App = textBox8.Text;
             settings.Html5AppArgs = textBox9.Text;
+            Int32.TryParse(textBox10.Text, out settings.HtmlServerPort);
 
             model.Settings.Monitor = comboBox8.SelectedIndex + 1;
             model.Settings.GamePadMonitor = comboBox9.SelectedIndex + 1;

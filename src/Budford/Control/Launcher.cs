@@ -173,11 +173,11 @@ namespace Budford.Control
 
             if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx"))
             {
-                myServer = new SimpleHTTPServer(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))), 8086);
+                myServer = new SimpleHTTPServer(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))), modelIn.Settings.HtmlServerPort);
 
                 string startPage = GetStartPage(game);
                 start.FileName = modelIn.Settings.Html5App;
-                start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:8086/" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "/content/app/" + startPage + "\"";
+                start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "/content/app/" + startPage + "\"";
 
                 startTime = DateTime.Now;
                 try
