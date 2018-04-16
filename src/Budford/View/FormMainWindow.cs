@@ -437,7 +437,7 @@ namespace Budford.View
             virtualConsoleToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
             platHtml5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
-            wiiUNativeToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            platWiiUToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
             rating5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             rating4ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;

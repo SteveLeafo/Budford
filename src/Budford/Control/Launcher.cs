@@ -173,11 +173,21 @@ namespace Budford.Control
 
             if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx"))
             {
-                myServer = new SimpleHTTPServer(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))), modelIn.Settings.HtmlServerPort);
-
+                string s = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\content\\app\\";
                 string startPage = GetStartPage(game);
+                s += Path.GetDirectoryName(startPage);
+                if (File.Exists(Path.Combine(s, "TV.html")))
+                {
+                    startPage = "TV.html";
+                }
+                myServer = new SimpleHTTPServer(s, modelIn.Settings.HtmlServerPort);
+
+                //myServer = new SimpleHTTPServer(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))), modelIn.Settings.HtmlServerPort);
+
+
                 start.FileName = modelIn.Settings.Html5App;
-                start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "/content/app/" + startPage + "\"";
+                //start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "/content/app/" + startPage + "\"";
+                start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(startPage) + "\"";
 
                 startTime = DateTime.Now;
                 try
@@ -193,6 +203,8 @@ namespace Budford.Control
                     runningProcess.EnableRaisingEvents = true;
                     runningProcess.Exited += proc_Exited;
                 }
+
+                runningProcess.WaitForInputIdle();
             }
             else
             {

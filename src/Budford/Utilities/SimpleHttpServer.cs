@@ -10,6 +10,7 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using Budford.Control;
 
 namespace Budford.Utilities
 {
@@ -206,6 +207,7 @@ namespace Budford.Utilities
 
                         context.Response.StatusCode = (int)HttpStatusCode.OK;
                         context.Response.OutputStream.Flush();
+                        Logger.Log("Sending: " + filename);
                     }
                 }
                 catch (Exception)
@@ -216,6 +218,7 @@ namespace Budford.Utilities
             else
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                Logger.Log("File not found: " + filename);
                 //context.Response.StatusCode = (int)HttpStatusCode.NotFound;
             }
 

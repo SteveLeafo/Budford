@@ -114,8 +114,8 @@
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.allToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.noneToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.platWiiUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wiiUNativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.platWiiUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.platHtml5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.allToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -467,7 +467,7 @@
             this.showStatusToolStripMenuItem,
             this.fixToolStripMenuItem,
             this.showTypeToolStripMenuItem,
-            this.platWiiUToolStripMenuItem});
+            this.wiiUNativeToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -804,23 +804,23 @@
             this.noneToolStripMenuItem3.Text = "None";
             this.noneToolStripMenuItem3.Click += new System.EventHandler(this.noneToolStripMenuItem3_Click);
             // 
-            // platWiiUToolStripMenuItem
+            // wiiUNativeToolStripMenuItem
             // 
-            this.platWiiUToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wiiUNativeToolStripMenuItem,
+            this.wiiUNativeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.platWiiUToolStripMenuItem,
             this.platHtml5ToolStripMenuItem,
             this.toolStripSeparator8,
             this.allToolStripMenuItem5,
             this.noneToolStripMenuItem5});
-            this.platWiiUToolStripMenuItem.Name = "platWiiUToolStripMenuItem";
-            this.platWiiUToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.platWiiUToolStripMenuItem.Text = "Show Platform";
-            // 
-            // wiiUNativeToolStripMenuItem
-            // 
             this.wiiUNativeToolStripMenuItem.Name = "wiiUNativeToolStripMenuItem";
-            this.wiiUNativeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.wiiUNativeToolStripMenuItem.Text = "WiiU Native";
+            this.wiiUNativeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.wiiUNativeToolStripMenuItem.Text = "Show Platform";
+            // 
+            // platWiiUToolStripMenuItem
+            // 
+            this.platWiiUToolStripMenuItem.Name = "platWiiUToolStripMenuItem";
+            this.platWiiUToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.platWiiUToolStripMenuItem.Text = "WiiU Native";
             // 
             // platHtml5ToolStripMenuItem
             // 
@@ -860,18 +860,18 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // addNewToolStripMenuItem
             // 
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addNewToolStripMenuItem.Text = "Add new...";
             // 
             // editCurrentToolStripMenuItem
             // 
             this.editCurrentToolStripMenuItem.Name = "editCurrentToolStripMenuItem";
-            this.editCurrentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.editCurrentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editCurrentToolStripMenuItem.Text = "Edit Current...";
             this.editCurrentToolStripMenuItem.Click += new System.EventHandler(this.editCurrentToolStripMenuItem_Click);
             // 
@@ -1311,8 +1311,8 @@
         private System.Windows.Forms.ToolStripMenuItem plugInsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importBudfordPluginToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.ToolStripMenuItem platWiiUToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wiiUNativeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem platWiiUToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem platHtml5ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem5;
