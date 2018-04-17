@@ -1,5 +1,12 @@
 # Budford Change Log
 
+## V1.0.90
+- New Feature! Budford can now launch games independently of Cemu.  Games with WiiULauncher.rpx as their launch file such as Star Sky 1 + 2 and Toon Tanks can now be played via your web browser.  Use the following options:
+   - Chrome (Default)  -> chrome --incognito --start-fullscreen --kiosk
+   - Internet Explorer -> iexplore -k
+- Issue #17 - Fixed an issue where code to move Cemu to another monitor was causing problems on systems with only one monitor.
+- Issue #16 - Fixed an issue where pro controller buttons not set correct when launching CEMU 1.11.6 from Budford
+ 
 ## V1.0.80
 - Changes to support Cemu 1.11.6.
 - Fixed an issue where Budford was minimising to tray.
