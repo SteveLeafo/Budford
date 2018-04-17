@@ -225,6 +225,8 @@ Function InstallBudfordFiles
 	File "Budford.ico"
 	File "CNUSLib.dll"
 	File "discord-rpc.dll"
+
+    ExecWait 'netsh anetsh http add urlacl url=http://*:8086/ user=everyone'
 FunctionEnd
 
 ;*********************************************************************
