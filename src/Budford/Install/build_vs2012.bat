@@ -12,6 +12,7 @@ ren "Budford - Setup.exe" "Budford - Setup - V1.0.%Build%.exe"
 "C:\Program Files\7-Zip\7z.exe" a "Budford - V1.0.%Build%.zip" Budford.exe
 "C:\Program Files\7-Zip\7z.exe" a "Budford - V1.0.%Build%.zip" CNUSLib.dll
 "C:\Program Files\7-Zip\7z.exe" a "Budford - V1.0.%Build%.zip" discord-rpc.dll
+"C:\Program Files\7-Zip\7z.exe" a "Budford - V1.0.%Build%.zip" runmeonce.bat
 
 set /a Build=%Build%+1
 echo %Build%> ver.txt
