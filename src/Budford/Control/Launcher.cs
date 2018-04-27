@@ -182,11 +182,7 @@ namespace Budford.Control
                 }
                 myServer = new SimpleHTTPServer(s, modelIn.Settings.HtmlServerPort);
 
-                //myServer = new SimpleHTTPServer(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))), modelIn.Settings.HtmlServerPort);
-
-
                 start.FileName = modelIn.Settings.Html5App;
-                //start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "/content/app/" + startPage + "\"";
                 start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(startPage) + "\"";
 
                 startTime = DateTime.Now;
