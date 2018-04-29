@@ -1,5 +1,9 @@
 # Budford Change Log
 
+## V1.0.92
+- Added a menu item to launch Wii-U apps directly.  Any apps found in mlc01\sys\title\00050030 will be added to the menu. (Handy for friends list in 1.12.0)
+- Added the motionSourceIsBtnSource = true option to Cemu hook.ini for that controllers can be hot swappable.
+
 ## V1.0.90
 - New Feature! Budford can now launch games independently of Cemu.  Games with WiiULauncher.rpx as their launch file such as Star Sky 1 + 2 and Toon Tanks can now be played via your web browser.  Use the following options:
    - Chrome (Default)  -> chrome --incognito --start-fullscreen --kiosk
