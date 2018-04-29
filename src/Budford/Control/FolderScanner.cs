@@ -11,74 +11,8 @@ namespace Budford.Control
     {
         internal static readonly Dictionary<string, string> Regions = new Dictionary<string, string>();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="romFolder"></param>
-        /// <param name="gameData"></param>
-        internal static void LoadFromRomFolder(string romFolder, Dictionary<string, GameInformation> gameData)
-        {
-            if (Directory.Exists(romFolder))
-            {
-                foreach (var folder in Directory.EnumerateDirectories(romFolder))
-                {
-                    if (Directory.Exists(Path.Combine(folder, "code")))
-                    {
-                        foreach (var file in Directory.EnumerateFiles(Path.Combine(folder, "code")))
-                        {
-                            if (file.ToUpper().EndsWith(".RPX"))
-                            {
-                                AddGame(gameData, folder, file);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gameData"></param>
-        /// <param name="folder"></param>
-        /// <param name="launchFile"></param>
-        private static void AddGame(Dictionary<string, GameInformation> gameData, string folder, string launchFile)
-        {
-            if (File.Exists(Path.Combine(folder, "meta", "meta.xml")))
-            {
-                XElement xElement = XElement.Parse(XDocument.Load(Path.Combine(folder, "meta", "meta.xml")).ToString());
-
-                var productCode = Xml.GetValue(xElement, "product_code");
-                if (productCode != null)
-                {
-                    var companyCode = Xml.GetValue(xElement, "company_code");
-                    if (companyCode != null)
-                    {
-                        string key = productCode.Replace("WUP-P-", "").Replace("WUP-U-", "").Replace("WUP-N-", "") + companyCode;
-
-                        GameInformation game;
-
-                        if (!gameData.TryGetValue(key, out game))
-                        {
-                            game = new GameInformation { GameSetting = new GameSettings() };
-                            gameData.Add(key, game);
-                        }
-
-                        game.Name = Xml.GetValue(xElement, "longname_en");
-                        game.Region = Nintendo.GetRegion(Xml.GetValue(xElement, "region"));
-                        game.Publisher = Xml.GetValue(xElement, "publisher_en");
-                        game.ProductCode = productCode;
-                        game.CompanyCode = companyCode;
-                        game.TitleId = Xml.GetValue(xElement, "title_id").ToUpper();
-                        game.GroupId = Xml.GetValue(xElement, "group_id").ToUpper();
-                        game.Size = (GetDirectorySize(folder) / 1024 / 1024).ToString("N0") + " MB";
-                        game.LaunchFile = launchFile;
-                        game.LaunchFileName = Path.GetFileName(launchFile);
-                    }
-                }
-            }
-        }
+      
 
         /// <summary>
         /// 

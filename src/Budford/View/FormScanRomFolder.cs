@@ -18,15 +18,19 @@ namespace Budford.View
         readonly Dictionary<string, GameInformation> gameData;
         readonly BackgroundWorker backgroundWorker1 = new BackgroundWorker();
         readonly Model.Model model;
+        List<string> searchFolders;
         /// <summary>
         ///
         /// </summary>
-        public FormScanRomFolder(Model.Model modelIn, Dictionary<string, GameInformation> gameDataIn)
+        public FormScanRomFolder(Model.Model modelIn, Dictionary<string, GameInformation> gameDataIn, List<string> searchFoldersIn)
         {
             InitializeComponent();
+
             model = modelIn;
             gameData = gameDataIn;
-            Text = Resources.fScanRomFolder_fScanRomFolder_Scanning_ +  Resources.fScanRomFolder_fScanRomFolder_____;
+            searchFolders = searchFoldersIn;
+
+            Text = Resources.fScanRomFolder_fScanRomFolder_Scanning_ + Resources.fScanRomFolder_fScanRomFolder_____;
             label1.Text = Text;
         }
 
@@ -98,7 +102,7 @@ namespace Budford.View
             int folderCount = GetFolderCount();
             int currentFolder = 0;
 
-            foreach (var romFolder in model.Settings.RomFolders)
+            foreach (var romFolder in searchFolders)
             {
                 if (Directory.Exists(romFolder))
                 {
@@ -131,7 +135,7 @@ namespace Budford.View
         private int GetFolderCount()
         {
             int folderCount = 0;
-            foreach (var romFolder in model.Settings.RomFolders)
+            foreach (var romFolder in searchFolders)
             {
                 if (Directory.Exists(romFolder))
                 {

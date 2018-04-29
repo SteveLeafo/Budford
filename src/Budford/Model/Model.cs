@@ -34,6 +34,8 @@ namespace Budford.Model
         // Lookup table for game data
         internal Dictionary<string, GameInformation> GameData = new Dictionary<string, GameInformation>();
 
+        internal Dictionary<string, GameInformation> WiiUApps = new Dictionary<string, GameInformation>();
+
         // Lookup table for graphic packs
         internal Dictionary<string, List<GraphicsPack>> GraphicsPacks = new Dictionary<string, List<GraphicsPack>>();
     }

@@ -86,7 +86,7 @@ namespace Budford.View
             PerformWelcomeActions();
 
             CemuFeatures.PerformAutoOptionsOnStart(Model, this);
-
+           
             Model.OldVersions.Clear();
 
             FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
@@ -118,6 +118,41 @@ namespace Budford.View
 
             viewPlugIn = new ViewPlugin(Model, this, plugInsToolStripMenuItem);
             viewPlugIn.LoadPlugIns();
+
+            var verrsion = GetCurrentVersion();
+            if (verrsion != null)
+            {
+                string path = Path.Combine(new string[]{verrsion.Folder, "mlc01", "sys", "title", "00050030"});
+                string[] paths = new string[]{path};
+                using (FormScanRomFolder scanner = new FormScanRomFolder(Model, Model.WiiUApps, new List<string>(paths)))
+                {
+                    scanner.ShowDialog(this);
+                    foreach (var game in Model.WiiUApps)
+                    {
+                        wiiUAppsToolStripMenuItem.Visible = true;
+
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem
+                        {
+                            Text = game.Value.Name,
+                            Tag = game.Value
+                        };
+                        menuItem.Click += menuItem_Click;
+                        wiiUAppsToolStripMenuItem.DropDownItems.Insert(0, menuItem);
+                    }                 
+                }
+            }
+        }
+
+        void menuItem_Click(object sender, EventArgs e)
+        {
+             var toolStripMenuItem = sender as ToolStripMenuItem;
+             if (toolStripMenuItem != null)
+             {
+                 GameInformation game = toolStripMenuItem.Tag as GameInformation;
+                 game.Exists = true;
+                 game.GameSetting.Online = 1;
+                 Launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
+             }
         }
 
         void notifyIcon1_DoubleClick(object sender, EventArgs e)
@@ -748,7 +783,7 @@ namespace Budford.View
         /// </summary>
         private void RefreshGameList()
         {
-            using (FormScanRomFolder scanner = new FormScanRomFolder(Model, Model.GameData))
+            using (FormScanRomFolder scanner = new FormScanRomFolder(Model, Model.GameData, Model.Settings.RomFolders))
             {
                 scanner.ShowDialog(this);
             }

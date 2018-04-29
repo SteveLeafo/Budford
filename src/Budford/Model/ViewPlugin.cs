@@ -50,7 +50,7 @@ namespace Budford.Model
 
                 SearchForPlugins(items);
 
-                AddPlugInsToMenu(items, currentType);
+                AddPlugInsToMenu(items, currentType, plugInsToolStripMenuItem);
             }
         }
 
@@ -79,10 +79,10 @@ namespace Budford.Model
         /// </summary>
         /// <param name="items"></param>
         /// <param name="currentType"></param>
-        private void AddPlugInsToMenu(List<ToolStripItem> items, string currentType)
+        internal static void AddPlugInsToMenu(List<ToolStripItem> items, string currentType, ToolStripMenuItem toolStripMenuItem)
         {
             // Painful, but we want these added to the top of the list...
-            plugInsToolStripMenuItem.DropDownItems.Clear();
+            toolStripMenuItem.DropDownItems.Clear();
             var v = (from i in items orderby ((PlugIns.PlugIn)i.Tag).Type select i).ToList();
             foreach (var item in v)
             {
@@ -91,11 +91,11 @@ namespace Budford.Model
                 {
                     if (currentType != "")
                     {
-                        plugInsToolStripMenuItem.DropDownItems.Insert(0, new ToolStripSeparator());
+                        toolStripMenuItem.DropDownItems.Insert(0, new ToolStripSeparator());
                     }
                     currentType = p.Type;
                 }
-                plugInsToolStripMenuItem.DropDownItems.Insert(0, item);
+                toolStripMenuItem.DropDownItems.Insert(0, item);
             }
         }
 

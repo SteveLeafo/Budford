@@ -134,6 +134,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToLaunchboxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plugInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wiiUAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -281,6 +282,7 @@
             this.userToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.plugInsToolStripMenuItem,
+            this.wiiUAppsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -950,6 +952,13 @@
             this.plugInsToolStripMenuItem.Text = "PlugIns";
             this.plugInsToolStripMenuItem.Visible = false;
             // 
+            // wiiUAppsToolStripMenuItem
+            // 
+            this.wiiUAppsToolStripMenuItem.Name = "wiiUAppsToolStripMenuItem";
+            this.wiiUAppsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.wiiUAppsToolStripMenuItem.Text = "Wii-U";
+            this.wiiUAppsToolStripMenuItem.Visible = false;
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1309,6 +1318,7 @@
         private System.Windows.Forms.ToolStripMenuItem openCompatibilityWikiEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem plugInsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wiiUAppsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importBudfordPluginToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ToolStripMenuItem wiiUNativeToolStripMenuItem;

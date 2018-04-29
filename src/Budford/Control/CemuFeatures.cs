@@ -1025,7 +1025,7 @@ namespace Budford.Control
         {
             if (model.Settings.ScanGameFoldersOnStart)
             {
-                using (FormScanRomFolder scanner = new FormScanRomFolder(model, model.GameData))
+                using (FormScanRomFolder scanner = new FormScanRomFolder(model, model.GameData, model.Settings.RomFolders))
                 {
                     scanner.ShowDialog(parent);
                 }
