@@ -1,5 +1,9 @@
 # Budford Change Log
 
+## V1.0.93
+- Added an experimental option to delete the shader cache when launching a game.
+- Issue #18 - Added an option for Cemu Hook's MotionSourceIsBtnSource
+
 ## V1.0.92
 - Added a menu item to launch Wii-U apps directly.  Any apps found in mlc01\sys\title\00050030 will be added to the menu. (Handy for friends list in 1.12.0)
 - Added the motionSourceIsBtnSource = true option to Cemu hook.ini for that controllers can be hot swappable.
