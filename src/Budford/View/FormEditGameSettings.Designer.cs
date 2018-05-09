@@ -1428,7 +1428,6 @@
             this.label66.TabIndex = 3;
             this.label66.Text = "Clear Shader Cache";
             this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label66.Visible = false;
             // 
             // comboBox51
             // 
@@ -1440,7 +1439,6 @@
             this.comboBox51.Name = "comboBox51";
             this.comboBox51.Size = new System.Drawing.Size(238, 21);
             this.comboBox51.TabIndex = 7;
-            this.comboBox51.Visible = false;
             // 
             // groupBox3
             // 

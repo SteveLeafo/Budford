@@ -54,6 +54,7 @@ namespace Budford.Model
 
         public int Fps = 30;
         public bool OverrideFps = false;
+        public bool DeleteShaderCache = false;
 
         public byte DebugGx2ApiOffset;
         public byte DebugUnsupportedApiCallsOffset ;

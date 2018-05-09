@@ -385,13 +385,22 @@ namespace Budford.Control
             {
                 if (!game.SaveDir.StartsWith("??"))
                 {
-                    FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(Model, game));
-                    if (File.Exists(src.FullName))
+                    FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
+                    if (game.GameSetting.DeleteShaderCache)
                     {
-                        FileInfo dest = new FileInfo(SpecialFolders.ShaderCacheCemu(runningVersion, game));
-                        if (!File.Exists(dest.FullName) || dest.Length < src.Length)
+                        FileManager.SafeDelete(dest.FullName);
+                        FileManager.SafeDelete(Path.Combine(runningVersion.Folder, "_dbghelp.dll"));
+                        FileManager.SafeMove(Path.Combine(runningVersion.Folder, "dbghelp.dll"), Path.Combine(runningVersion.Folder, "_dbghelp.dll"));
+                    }
+                    else
+                    {
+                        FileInfo src = new FileInfo(SpecialFolders.ShaderCacheBudford(Model, game));
+                        if (File.Exists(src.FullName))
                         {
-                            FileManager.SafeCopy(src.FullName, dest.FullName, true);
+                            if (!File.Exists(dest.FullName) || dest.Length < src.Length)
+                            {
+                                FileManager.SafeCopy(src.FullName, dest.FullName, true);
+                            }
                         }
                     }
                 }
