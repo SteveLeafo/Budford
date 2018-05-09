@@ -155,6 +155,7 @@ namespace Budford.View
             comboBox13.SelectedIndex = information.GameSetting.EnableBoTwCrashWorkaround;
             comboBox14.SelectedIndex = information.GameSetting.FullSyncAtGx2DrawDone;
             comboBox50.SelectedIndex = information.GameSetting.UseSeperableShaders;
+            comboBox51.SelectedIndex = information.GameSetting.DeleteShaderCache ? 1 : 0;
 
             comboBox15.SelectedIndex = information.GameSetting.AccaccurateShaderMul;
             comboBox16.SelectedIndex = information.GameSetting.DisableGpuFence;
@@ -173,6 +174,7 @@ namespace Budford.View
             comboBox24.SelectedIndex = information.CemuHookSetting.DisableLzcnt ? 1 : 0;
             comboBox25.SelectedIndex = information.CemuHookSetting.DisableMovbe ? 1 : 0;
             comboBox26.SelectedIndex = information.CemuHookSetting.MotionSource;
+            comboBox52.SelectedIndex = information.CemuHookSetting.MotionSourceIsBtnSource ? 1 : 0;
             comboBox27.SelectedIndex = information.CemuHookSetting.MmTimerAccuracy;
             comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
@@ -242,6 +244,8 @@ namespace Budford.View
             information.GameSetting.EnableBoTwCrashWorkaround = (byte)comboBox13.SelectedIndex;
             information.GameSetting.FullSyncAtGx2DrawDone = (byte)comboBox14.SelectedIndex;
             information.GameSetting.UseSeperableShaders = (byte)comboBox50.SelectedIndex;
+            information.GameSetting.DeleteShaderCache = comboBox51.SelectedIndex != 0;
+            
 
             information.GameSetting.AccaccurateShaderMul = (byte)comboBox15.SelectedIndex;
             information.GameSetting.DisableGpuFence = (byte)comboBox16.SelectedIndex;
@@ -277,6 +281,7 @@ namespace Budford.View
             information.CemuHookSetting.DisableAvx = comboBox23.SelectedIndex != 0;
             information.CemuHookSetting.DisableLzcnt = comboBox24.SelectedIndex != 0;
             information.CemuHookSetting.DisableMovbe = comboBox25.SelectedIndex != 0;
+            information.CemuHookSetting.MotionSourceIsBtnSource = comboBox52.SelectedIndex != 0;
             information.CemuHookSetting.MotionSource = comboBox26.SelectedIndex;
             information.CemuHookSetting.MmTimerAccuracy = comboBox27.SelectedIndex;
             information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox28.SelectedIndex != 0;

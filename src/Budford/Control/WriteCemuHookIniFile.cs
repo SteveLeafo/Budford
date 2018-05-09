@@ -24,7 +24,7 @@ namespace Budford.Control
                     sw.WriteLine("disableMOVBE =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
                     sw.WriteLine("disableAVX =  " + (gameInfo.CemuHookSetting.DisableLzcnt ? "true" : "false"));
                     sw.WriteLine("[Input]");
-                    sw.WriteLine("motionSourceIsBtnSource = true");
+                    sw.WriteLine("motionSourceIsBtnSource = " + (gameInfo.CemuHookSetting.MotionSourceIsBtnSource ? "true" : "false"));
                     sw.WriteLine("motionSource = " + GetMotionSource(gameInfo.CemuHookSetting.MotionSource));
                     if (model.Settings.CemuHookServerIp != "")
                     {

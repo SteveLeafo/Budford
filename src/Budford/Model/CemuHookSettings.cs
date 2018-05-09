@@ -9,6 +9,7 @@
         public bool DisableAvx = false;
         public bool IgnorePrecompiledShaderCache = false;
         public int MotionSource = 0;
+        public bool MotionSourceIsBtnSource = true;
         public int MmTimerAccuracy = 0;
     }
 }
