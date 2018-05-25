@@ -72,10 +72,13 @@ namespace Budford.Control
         int[] coreSettingsOffsets;
         int[] settingsFile;
 
+
+        readonly int[] coreSettingsV1121 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x5e, 0x62, 0x63, 0x00, 0x00, 0x00, 0x00 };
         readonly int[] coreSettingsV1115 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2c, 0x2d, 0x00, 0x00, 0x00, 0x00 };
         readonly int[] coreSettingsV1113 = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2c, 0x2d, 0x00, 0x00, 0x00, 0x00 };
         readonly int[] coreSettings = new[] { 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1e, 0x28, 0x2b, 0x2c, 0x00, 0x00, 0x00, 0x00 };
 
+        readonly int[] v1121Settings = new[] { 0x66, 0x7f, 0x80, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0xa1, 0x81 };
         readonly int[] v1116Settings = new[] { 0x30, 0x49, 0x4a, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x54, 0x6b, 0x4b };
         readonly int[] v1115Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a, 0x00 };
         readonly int[] v1114Settings = new[] { 0x30, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x6a, 0x00 };
@@ -156,7 +159,9 @@ namespace Budford.Control
                 {"1.11.5", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1114Bin, v1115Settings) },
                 {"1.11.6", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) },
                 {"1.12.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) },
-                {"2.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) }
+                {"1.12.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.12.2", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"12.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) }
             };
 
             graphicPackOffset = new Dictionary<int, int>
@@ -206,7 +211,8 @@ namespace Budford.Control
                 {1115, 0x7c },
                 {1116, 0x7d },
                 {1117, 0x7d },
-                {1120, 0x7d }
+                {1120, 0x7d },
+                {1121, 0xb3 }
             };
         }
 
@@ -239,6 +245,10 @@ namespace Budford.Control
                     if (version >= 1115)
                     {
                         coreSettingsOffsets = coreSettingsV1115;
+                    }
+                    if (version >= 1121)
+                    {
+                        coreSettingsOffsets = coreSettingsV1121;
                     }
                 }
                 else
@@ -279,6 +289,10 @@ namespace Budford.Control
                     if (version >= 1115)
                     {
                         coreSettingsOffsets = coreSettingsV1115;
+                        if (version >= 1121)
+                        {
+                            coreSettingsOffsets = coreSettingsV1121;
+                        }
                     }
                 }
                 else
