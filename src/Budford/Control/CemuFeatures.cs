@@ -903,6 +903,11 @@ namespace Budford.Control
 
                 string packName = Path.GetFileNameWithoutExtension(uri);
 
+                if (packName.Contains("_Uncommon"))
+                {
+                    packName = packName.Replace("graphicPacks", "graphicPacks_2-10").Replace("_Uncommon", "");
+                }
+
                 if (!IsGraphicPackInstalled(packName))
                 {
                     try
