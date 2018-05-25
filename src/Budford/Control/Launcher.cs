@@ -901,17 +901,23 @@ namespace Budford.Control
 
             if (swapButtons == 1 || swapButtons == 3)
             {
-                text = text.Replace(buttons[0], "ctrl1");
-                text = text.Replace(buttons[1], "ctrl2");
-                text = text.Replace("ctrl1", buttons[1].Replace("2 = ", "1 = "));
-                text = text.Replace("ctrl2", buttons[0].Replace("1 = ", "2 = "));
+                if (buttons[0] != null)
+                {
+                    text = text.Replace(buttons[0], "ctrl1");
+                    text = text.Replace(buttons[1], "ctrl2");
+                    text = text.Replace("ctrl1", buttons[1].Replace("2 = ", "1 = "));
+                    text = text.Replace("ctrl2", buttons[0].Replace("1 = ", "2 = "));
+                }
             }
             if (swapButtons == 2 || swapButtons == 3)
             {
-                text = text.Replace(buttons[2], "ctrl3");
-                text = text.Replace(buttons[3], "ctrl4");
-                text = text.Replace("ctrl3", buttons[3].Replace("4 = ", "3 = "));
-                text = text.Replace("ctrl4", buttons[2].Replace("3 = ", "4 = "));
+                if (buttons[2] != null)
+                {
+                    text = text.Replace(buttons[2], "ctrl3");
+                    text = text.Replace(buttons[3], "ctrl4");
+                    text = text.Replace("ctrl3", buttons[3].Replace("4 = ", "3 = "));
+                    text = text.Replace("ctrl4", buttons[2].Replace("3 = ", "4 = "));
+                }
             }
             return text;
         }
