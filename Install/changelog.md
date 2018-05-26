@@ -1,5 +1,10 @@
 # Budford Change Log
 
+## V1.0.94
+- Updated to support Cemu 1.12.1
+- Support the latest changes to the community graphic packs
+- Fixed a crash that could occur if you were swapping buttons on certain controller types.
+
 ## V1.0.93
 - Added an experimental option to delete the shader cache when launching a game.
 - Issue #18 - Added an option for Cemu Hook's MotionSourceIsBtnSource
