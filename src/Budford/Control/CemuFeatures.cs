@@ -751,18 +751,32 @@ namespace Budford.Control
         /// <param name="v"></param>
         internal static void InstallCemuHook(Unpacker unpacker, InstalledVersion v)
         {
-            if (v.VersionNumber >= 181)
+            if (v.VersionNumber >= 1121)
             {
                 if (File.Exists("cemu_hook.zip"))
                 {
                     unpacker.Unpack("cemu_hook.zip", v.Folder);
                 }
             }
+            else if (v.VersionNumber >= 1120)
+            {
+                if (File.Exists("cemuhook_1116_0564.zip"))
+                {
+                    unpacker.Unpack("cemuhook_1116_0564.zip", v.Folder);
+                }
+            }
+            else if (v.VersionNumber >= 181)
+            {
+                if (File.Exists("cemuhook_1112_0554.zip"))
+                {
+                    unpacker.Unpack("cemuhook_1112_0554.zip", v.Folder);
+                }
+            }
             else if (v.VersionNumber >= 173)
             {
-                if (File.Exists("OldCemuHook.zip"))
+                if (File.Exists("cemuhook_174d_0410.zip"))
                 {
-                    unpacker.Unpack("OldCemuHook.zip", v.Folder);
+                    unpacker.Unpack("cemuhook_174d_0410.zip", v.Folder);
                 }
             }
         }
@@ -889,7 +903,7 @@ namespace Budford.Control
             }
         }
 
-        internal static void DownloadLatestGraphicPack(Form parent, string jsonString, bool showMessage = true)
+        internal static bool DownloadLatestGraphicPack(Form parent, string jsonString, bool showMessage = true)
         {
             // For that you will need to add reference to System.Runtime.Serialization
             var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(jsonString.ToCharArray()), new System.Xml.XmlDictionaryReaderQuotas());
@@ -927,8 +941,10 @@ namespace Budford.Control
                     {
                         MessageBox.Show(Resources.CemuFeatures_DownloadLatestGraphicPack_Latest_version_is_already_installed);
                     }
+                    return false;
                 }
             }
+            return true;
         }
 
         internal static bool IsGraphicPackInstalled(string pack)
@@ -957,22 +973,24 @@ namespace Budford.Control
                 {
                     if (dlc.ShowDialog(form) == DialogResult.OK)
                     {
-                        DownloadLatestGraphicPack(form, dlc.Result, showMessage);
-                        string pack = "";
-                        foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                        if (DownloadLatestGraphicPack(form, dlc.Result, showMessage))
                         {
-                            string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                            if (folder.StartsWith("graphicPacks_2-"))
+                            string pack = "";
+                            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                             {
-                                pack = folder.Replace("graphicPacks_2-", "");
+                                string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
+                                if (folder.StartsWith("graphicPacks_2-"))
+                                {
+                                    pack = folder.Replace("graphicPacks_2-", "");
+                                }
                             }
-                        }
 
-                        if (pack != "")
-                        {
-                            Logger.Log("Graphics pack revision changed to: " + pack);
-                            modelIn.Settings.GraphicsPackRevision = pack;
-                            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
+                            if (pack != "")
+                            {
+                                Logger.Log("Graphics pack revision changed to: " + pack);
+                                modelIn.Settings.GraphicsPackRevision = pack;
+                                FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
+                            }
                         }
                     }
                 }

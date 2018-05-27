@@ -78,6 +78,16 @@ namespace Budford.Control
                 return;
             }
 
+            if (destinationDirectoryName == null)
+            {
+                return;
+            }
+
+            if (archive == null)
+            {
+                return;
+            }
+
             ZipArchive zipArchive = ZipFile.OpenRead(archive);
             foreach (ZipArchiveEntry file in zipArchive.Entries)
             {

@@ -488,9 +488,12 @@ namespace Budford.View
         /// <param name="e"></param>
         private void downloadOldCemuHookToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormFileDownload dlc = new FormFileDownload("https://files.sshnuke.net/cemuhook_174d_0410.zip", "OldCemuHook.zip"))
+            if (!File.Exists("cemuhook_174d_0410.zip"))
             {
-                dlc.ShowDialog(this);
+                using (FormFileDownload dlc = new FormFileDownload("https://files.sshnuke.net/cemuhook_174d_0410.zip", "cemuhook_174d_0410.zip"))
+                {
+                    dlc.ShowDialog(this);
+                }
             }
         }
 
@@ -622,6 +625,24 @@ namespace Budford.View
                 }
             }
             button3_Click(null, null);
+        }
+
+        private void downloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists("cemuhook_1112_0554.zip"))
+            {
+                using (FormFileDownload dlc = new FormFileDownload("https://files.sshnuke.net/cemuhook_1112_0554", "cemuhook_1112_0554.zip"))
+                {
+                    dlc.ShowDialog(this);
+                }
+            }
+            if (!File.Exists("cemuhook_1116_0564.zip"))
+            {
+                using (FormFileDownload dlc = new FormFileDownload("https://files.sshnuke.net/cemuhook_1116_0564.zip", "cemuhook_1116_0564.zip"))
+                {
+                    dlc.ShowDialog(this);
+                }
+            }
         }
     }
 }

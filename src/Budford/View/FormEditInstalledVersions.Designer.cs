@@ -62,6 +62,7 @@
             this.downloadLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oldVersionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadOldCemuHookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadGraphicsPacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -327,6 +328,7 @@
             this.downloadLatestToolStripMenuItem,
             this.oldVersionsToolStripMenuItem,
             this.downloadCemuHookToolStripMenuItem,
+            this.downloadToolStripMenuItem,
             this.downloadOldCemuHookToolStripMenuItem,
             this.downloadGraphicsPacksToolStripMenuItem,
             this.toolStripSeparator2,
@@ -339,66 +341,73 @@
             // launchCEMUToolStripMenuItem
             // 
             this.launchCEMUToolStripMenuItem.Name = "launchCEMUToolStripMenuItem";
-            this.launchCEMUToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.launchCEMUToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.launchCEMUToolStripMenuItem.Text = "Launch Cemu";
             this.launchCEMUToolStripMenuItem.Click += new System.EventHandler(this.launchCEMUToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(214, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(248, 6);
             // 
             // downloadLatestToolStripMenuItem
             // 
             this.downloadLatestToolStripMenuItem.Name = "downloadLatestToolStripMenuItem";
-            this.downloadLatestToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.downloadLatestToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.downloadLatestToolStripMenuItem.Text = "Download Latest";
             this.downloadLatestToolStripMenuItem.Click += new System.EventHandler(this.downloadLatestToolStripMenuItem_Click);
             // 
             // oldVersionsToolStripMenuItem
             // 
             this.oldVersionsToolStripMenuItem.Name = "oldVersionsToolStripMenuItem";
-            this.oldVersionsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.oldVersionsToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.oldVersionsToolStripMenuItem.Text = "Download Old Releases";
             this.oldVersionsToolStripMenuItem.Click += new System.EventHandler(this.oldVersionsToolStripMenuItem_Click);
             // 
             // downloadCemuHookToolStripMenuItem
             // 
             this.downloadCemuHookToolStripMenuItem.Name = "downloadCemuHookToolStripMenuItem";
-            this.downloadCemuHookToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.downloadCemuHookToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.downloadCemuHookToolStripMenuItem.Text = "Download Cemu Hook";
             this.downloadCemuHookToolStripMenuItem.Click += new System.EventHandler(this.downloadCemuHookToolStripMenuItem_Click);
+            // 
+            // downloadToolStripMenuItem
+            // 
+            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.downloadToolStripMenuItem.Text = "Download Old Cemu Hook";
+            this.downloadToolStripMenuItem.Click += new System.EventHandler(this.downloadToolStripMenuItem_Click);
             // 
             // downloadOldCemuHookToolStripMenuItem
             // 
             this.downloadOldCemuHookToolStripMenuItem.Name = "downloadOldCemuHookToolStripMenuItem";
-            this.downloadOldCemuHookToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.downloadOldCemuHookToolStripMenuItem.Text = "Download Old Cemu Hook";
+            this.downloadOldCemuHookToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.downloadOldCemuHookToolStripMenuItem.Text = "Download Really Old Cemu Hook";
             this.downloadOldCemuHookToolStripMenuItem.Click += new System.EventHandler(this.downloadOldCemuHookToolStripMenuItem_Click);
             // 
             // downloadGraphicsPacksToolStripMenuItem
             // 
             this.downloadGraphicsPacksToolStripMenuItem.Name = "downloadGraphicsPacksToolStripMenuItem";
-            this.downloadGraphicsPacksToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.downloadGraphicsPacksToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.downloadGraphicsPacksToolStripMenuItem.Text = "Download Graphics Packs";
             this.downloadGraphicsPacksToolStripMenuItem.Click += new System.EventHandler(this.downloadGraphicsPacksToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(248, 6);
             // 
             // importGraphicsPackToolStripMenuItem
             // 
             this.importGraphicsPackToolStripMenuItem.Name = "importGraphicsPackToolStripMenuItem";
-            this.importGraphicsPackToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.importGraphicsPackToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.importGraphicsPackToolStripMenuItem.Text = "Import Graphics Pack";
             this.importGraphicsPackToolStripMenuItem.Click += new System.EventHandler(this.importGraphicsPackToolStripMenuItem_Click);
             // 
             // importCemuHookToolStripMenuItem
             // 
             this.importCemuHookToolStripMenuItem.Name = "importCemuHookToolStripMenuItem";
-            this.importCemuHookToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.importCemuHookToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.importCemuHookToolStripMenuItem.Text = "Import Cemu Hook";
             this.importCemuHookToolStripMenuItem.Click += new System.EventHandler(this.importCemuHookToolStripMenuItem_Click);
             // 
@@ -523,5 +532,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem removeAllLinksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importCemuHookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
     }
 }

@@ -324,6 +324,7 @@ namespace Budford.View
                     {
                         EnableControlsForGameRunning();
                         GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                        Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser + "\t        Running: " + game.Name;
                         Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                         RegisterStopHotKey(Model);
 
@@ -1465,6 +1466,8 @@ namespace Budford.View
             stopToolStripMenuItem.Enabled = false;
             fullScreenToolStripMenuItem.Enabled = false;
             takeScreenshotToolStripMenuItem.Enabled = false;
+
+            Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser;
         }
 
         /// <summary>
@@ -1571,6 +1574,33 @@ namespace Budford.View
         private void noneToolStripMenuItem5_Click(object sender, EventArgs e)
         {
             ViewFilters.NoPlatforms(Model, this);
+        }
+
+        private void compareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Model.Model temp = Persistence.Load(@"C:\Users\steve\Documents\New folder (2)\Model-1.12.0.xml");
+            for (int i = 0; i < temp.GameData2.Count; ++i)
+            {
+                if (temp.GameData2[i].GameSetting.EmulationState != Model.GameData2[i].GameSetting.EmulationState)
+                {
+                    string s = temp.GameData2[i].Name;
+                }
+            }
+        }
+
+        private void cemuWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://cemu.info");
+        }
+
+        private void budfordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://compat.cemu.info/wiki/Main_Page");
+        }
+
+        private void githubRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/SteveLeafo/Budford");
         }
     }
 }

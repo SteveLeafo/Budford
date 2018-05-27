@@ -171,7 +171,7 @@ namespace Budford.Control
                 }
             }
 
-            if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx"))
+            if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx") && !game.LaunchFile.Contains("Sonic Boom"))
             {
                 string s = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\content\\app\\";
                 string startPage = GetStartPage(game);
@@ -180,7 +180,7 @@ namespace Budford.Control
                 {
                     startPage = "TV.html";
                 }
-                myServer = new SimpleHTTPServer(s, modelIn.Settings.HtmlServerPort);
+                myServer = new SimpleHTTPServer(s, modelIn.Settings.HtmlServerPort);        
 
                 start.FileName = modelIn.Settings.Html5App;
                 start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(startPage) + "\"";
