@@ -348,7 +348,14 @@ namespace Budford.Control
         {
             List<GameInformation> games = new List<GameInformation>();
 
-            name = SetCleanName(name);
+            if (name.ToUpper().Contains("MARIO BROS"))
+            {
+                name = SetCleanName(name);
+            }
+            else
+            {
+                name = SetCleanName(name);
+            }
 
             CheckForExactMatches(model, name, games);
 
@@ -381,15 +388,27 @@ namespace Budford.Control
 
         private static void CheckForContainedMatches(Model.Model model, string name, List<GameInformation> games)
         {
-            if (games.Count == 0)
+            if (games.Count == 0 || name.Contains("BROS") || name.Contains("REAVER") || name.Contains("RACING"))
             {
                 foreach (var g in model.GameData)
                 {
-                    if (g.Value.CleanName.Contains(name))
+                    if (g.Value.CleanName.Contains("BROS"))
                     {
-                        games.Add(g.Value);
-                        g.Value.CleanName = "";
+                        if (g.Value.CleanName.Contains(name))
+                        {
+                            games.Add(g.Value);
+                            g.Value.CleanName = "";
+                        }
                     }
+                    else
+                    {
+                        if (g.Value.CleanName.Contains(name))
+                        {
+                            games.Add(g.Value);
+                            g.Value.CleanName = "";
+                        }
+                    }
+
                 }
             }
         }
@@ -452,6 +471,8 @@ namespace Budford.Control
             }
             cleanName = cleanName.Replace("TOM CLANCY'S", "");
             cleanName = cleanName.Replace("REV.", "Revolution");
+            cleanName = cleanName.Replace("&EACUTE;", "E");
+            cleanName = cleanName.Replace("&OUML;", "O"); 
             cleanName = cleanName.Replace(":", "");
             cleanName = cleanName.Replace("®", "");
             cleanName = cleanName.Replace("®", "");

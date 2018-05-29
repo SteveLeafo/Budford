@@ -137,6 +137,10 @@
             this.plugInsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wiiUAppsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cemuWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.budfordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -153,10 +157,10 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.cemuWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.budfordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.githubRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.nintendo64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sNESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nintendoDSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new Budford.View.CustomToolStripButton();
             this.toolStripButton3 = new Budford.View.CustomToolStripButton();
             this.toolStripButton4 = new Budford.View.CustomToolStripButton();
@@ -816,6 +820,10 @@
             this.wiiUNativeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.platWiiUToolStripMenuItem,
             this.platHtml5ToolStripMenuItem,
+            this.nintendo64ToolStripMenuItem,
+            this.nintendoDSToolStripMenuItem,
+            this.sNESToolStripMenuItem,
+            this.nESToolStripMenuItem,
             this.toolStripSeparator8,
             this.allToolStripMenuItem5,
             this.noneToolStripMenuItem5});
@@ -826,31 +834,31 @@
             // platWiiUToolStripMenuItem
             // 
             this.platWiiUToolStripMenuItem.Name = "platWiiUToolStripMenuItem";
-            this.platWiiUToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.platWiiUToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.platWiiUToolStripMenuItem.Text = "WiiU Native";
             // 
             // platHtml5ToolStripMenuItem
             // 
             this.platHtml5ToolStripMenuItem.Name = "platHtml5ToolStripMenuItem";
-            this.platHtml5ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.platHtml5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.platHtml5ToolStripMenuItem.Text = "HTML 5";
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
             // 
             // allToolStripMenuItem5
             // 
             this.allToolStripMenuItem5.Name = "allToolStripMenuItem5";
-            this.allToolStripMenuItem5.Size = new System.Drawing.Size(136, 22);
+            this.allToolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
             this.allToolStripMenuItem5.Text = "All";
             this.allToolStripMenuItem5.Click += new System.EventHandler(this.allToolStripMenuItem5_Click);
             // 
             // noneToolStripMenuItem5
             // 
             this.noneToolStripMenuItem5.Name = "noneToolStripMenuItem5";
-            this.noneToolStripMenuItem5.Size = new System.Drawing.Size(136, 22);
+            this.noneToolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
             this.noneToolStripMenuItem5.Text = "None";
             this.noneToolStripMenuItem5.Click += new System.EventHandler(this.noneToolStripMenuItem5_Click);
             // 
@@ -983,6 +991,32 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // cemuWebsiteToolStripMenuItem
+            // 
+            this.cemuWebsiteToolStripMenuItem.Name = "cemuWebsiteToolStripMenuItem";
+            this.cemuWebsiteToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.cemuWebsiteToolStripMenuItem.Text = "Cemu";
+            this.cemuWebsiteToolStripMenuItem.Click += new System.EventHandler(this.cemuWebsiteToolStripMenuItem_Click);
+            // 
+            // budfordToolStripMenuItem
+            // 
+            this.budfordToolStripMenuItem.Name = "budfordToolStripMenuItem";
+            this.budfordToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.budfordToolStripMenuItem.Text = "Cemu Wiki";
+            this.budfordToolStripMenuItem.Click += new System.EventHandler(this.budfordToolStripMenuItem_Click);
+            // 
+            // githubRepositoryToolStripMenuItem
+            // 
+            this.githubRepositoryToolStripMenuItem.Name = "githubRepositoryToolStripMenuItem";
+            this.githubRepositoryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.githubRepositoryToolStripMenuItem.Text = "Github Repository";
+            this.githubRepositoryToolStripMenuItem.Click += new System.EventHandler(this.githubRepositoryToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(166, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -1128,31 +1162,29 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Budford is running in the background.";
             // 
-            // cemuWebsiteToolStripMenuItem
+            // nintendo64ToolStripMenuItem
             // 
-            this.cemuWebsiteToolStripMenuItem.Name = "cemuWebsiteToolStripMenuItem";
-            this.cemuWebsiteToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.cemuWebsiteToolStripMenuItem.Text = "Cemu";
-            this.cemuWebsiteToolStripMenuItem.Click += new System.EventHandler(this.cemuWebsiteToolStripMenuItem_Click);
+            this.nintendo64ToolStripMenuItem.Name = "nintendo64ToolStripMenuItem";
+            this.nintendo64ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nintendo64ToolStripMenuItem.Text = "Nintendo 64";
             // 
-            // budfordToolStripMenuItem
+            // sNESToolStripMenuItem
             // 
-            this.budfordToolStripMenuItem.Name = "budfordToolStripMenuItem";
-            this.budfordToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.budfordToolStripMenuItem.Text = "Cemu Wiki";
-            this.budfordToolStripMenuItem.Click += new System.EventHandler(this.budfordToolStripMenuItem_Click);
+            this.sNESToolStripMenuItem.Name = "sNESToolStripMenuItem";
+            this.sNESToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sNESToolStripMenuItem.Text = "Super NES";
             // 
-            // githubRepositoryToolStripMenuItem
+            // nESToolStripMenuItem
             // 
-            this.githubRepositoryToolStripMenuItem.Name = "githubRepositoryToolStripMenuItem";
-            this.githubRepositoryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.githubRepositoryToolStripMenuItem.Text = "Github Repository";
-            this.githubRepositoryToolStripMenuItem.Click += new System.EventHandler(this.githubRepositoryToolStripMenuItem_Click);
+            this.nESToolStripMenuItem.Name = "nESToolStripMenuItem";
+            this.nESToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nESToolStripMenuItem.Text = "NES";
             // 
-            // toolStripSeparator11
+            // nintendoDSToolStripMenuItem
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(166, 6);
+            this.nintendoDSToolStripMenuItem.Name = "nintendoDSToolStripMenuItem";
+            this.nintendoDSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nintendoDSToolStripMenuItem.Text = "Nintendo DS";
             // 
             // toolStripButton1
             // 
@@ -1375,6 +1407,10 @@
         private System.Windows.Forms.ToolStripMenuItem budfordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem githubRepositoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem nintendo64ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nintendoDSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sNESToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nESToolStripMenuItem;
     }
 }
 

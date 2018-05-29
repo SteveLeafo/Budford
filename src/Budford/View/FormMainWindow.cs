@@ -35,7 +35,11 @@ namespace Budford.View
 
         internal ToolStripMenuItem PlatWiiUToolStripMenuItem { get { return platWiiUToolStripMenuItem; } }
         internal ToolStripMenuItem PlatHtml5ToolStripMenuItem { get { return platHtml5ToolStripMenuItem; } }
-
+        internal ToolStripMenuItem PlatNintendo64ToolStripMenuItem { get { return nintendo64ToolStripMenuItem; } }
+        internal ToolStripMenuItem PlatNintendoDsToolStripMenuItem { get { return nintendoDSToolStripMenuItem; } }
+        internal ToolStripMenuItem PlatNESToolStripMenuItem { get { return nESToolStripMenuItem; } }
+        internal ToolStripMenuItem PlatSNESToolStripMenuItem { get { return sNESToolStripMenuItem; } }
+        
         internal ToolStripMenuItem UsaToolStripMenuItem { get { return usaToolStripMenuItem; } }
         internal ToolStripMenuItem EuropeToolStripMenuItem { get { return europeToolStripMenuItem; } }
         internal ToolStripMenuItem JapanToolStripMenuItem { get { return japanToolStripMenuItem; } }
@@ -474,6 +478,10 @@ namespace Budford.View
 
             platHtml5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             platWiiUToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            nintendo64ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            nintendoDSToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            sNESToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
+            nESToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
             rating5ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             rating4ToolStripMenuItem.Click += UsaToolStripMenuItem_Click;

@@ -19,6 +19,10 @@ namespace Budford.Model
         // Type
         public bool ViewPlatformWiiU = true;
         public bool ViewPlatformHtml5 = true;
+        public bool ViewPlatformNes = true;
+        public bool ViewPlatformSnes = true;
+        public bool ViewPlatformDs = true;
+        public bool ViewPlatformN64 = true;
 
         // Status
         public bool ViewStatusNotSet = true;
@@ -166,9 +170,17 @@ namespace Budford.Model
         {
             model.Filters.ViewPlatformWiiU = true;
             model.Filters.ViewPlatformHtml5 = true;
+            model.Filters.ViewPlatformNes = true;
+            model.Filters.ViewPlatformSnes = true;
+            model.Filters.ViewPlatformDs = true;
+            model.Filters.ViewPlatformN64 = true;
 
             mainWindow.PlatWiiUToolStripMenuItem.Checked = model.Filters.ViewPlatformWiiU;
             mainWindow.PlatHtml5ToolStripMenuItem.Checked = model.Filters.ViewPlatformHtml5;
+            mainWindow.PlatNintendo64ToolStripMenuItem.Checked = model.Filters.ViewPlatformN64;
+            mainWindow.PlatNintendoDsToolStripMenuItem.Checked = model.Filters.ViewPlatformDs;
+            mainWindow.PlatNESToolStripMenuItem.Checked = model.Filters.ViewPlatformNes;
+            mainWindow.PlatSNESToolStripMenuItem.Checked = model.Filters.ViewPlatformSnes;
 
             mainWindow.PopulateListView();
         }
@@ -182,9 +194,17 @@ namespace Budford.Model
         {
             model.Filters.ViewPlatformWiiU = false;
             model.Filters.ViewPlatformHtml5 = false;
+            model.Filters.ViewPlatformNes = false;
+            model.Filters.ViewPlatformSnes = false;
+            model.Filters.ViewPlatformDs = false;
+            model.Filters.ViewPlatformN64 = false;
 
             mainWindow.PlatWiiUToolStripMenuItem.Checked = model.Filters.ViewPlatformWiiU;
             mainWindow.PlatHtml5ToolStripMenuItem.Checked = model.Filters.ViewPlatformHtml5;
+            mainWindow.PlatNintendo64ToolStripMenuItem.Checked = model.Filters.ViewPlatformN64;
+            mainWindow.PlatNintendoDsToolStripMenuItem.Checked = model.Filters.ViewPlatformDs;
+            mainWindow.PlatNESToolStripMenuItem.Checked = model.Filters.ViewPlatformNes;
+            mainWindow.PlatSNESToolStripMenuItem.Checked = model.Filters.ViewPlatformSnes;
 
             mainWindow.PopulateListView();
         }
@@ -296,6 +316,10 @@ namespace Budford.Model
 
             mainWindow.PlatWiiUToolStripMenuItem.Checked = model.Filters.ViewPlatformWiiU;
             mainWindow.PlatHtml5ToolStripMenuItem.Checked = model.Filters.ViewPlatformHtml5;
+            mainWindow.PlatNintendo64ToolStripMenuItem.Checked = model.Filters.ViewPlatformDs;
+            mainWindow.PlatNintendoDsToolStripMenuItem.Checked = model.Filters.ViewPlatformN64;
+            mainWindow.PlatNESToolStripMenuItem.Checked = model.Filters.ViewPlatformNes;
+            mainWindow.PlatSNESToolStripMenuItem.Checked = model.Filters.ViewPlatformSnes;
 
             mainWindow.Rating5ToolStripMenuItem.Checked = model.Filters.ViewRating5;
             mainWindow.Rating4ToolStripMenuItem.Checked = model.Filters.ViewRating4;
@@ -331,6 +355,10 @@ namespace Budford.Model
 
             model.Filters.ViewPlatformWiiU = mainWindow.PlatWiiUToolStripMenuItem.Checked;
             model.Filters.ViewPlatformHtml5 = mainWindow.PlatHtml5ToolStripMenuItem.Checked;
+            model.Filters.ViewPlatformN64 = mainWindow.PlatNintendo64ToolStripMenuItem.Checked;
+            model.Filters.ViewPlatformDs = mainWindow.PlatNintendoDsToolStripMenuItem.Checked;
+            model.Filters.ViewPlatformNes = mainWindow.PlatNESToolStripMenuItem.Checked;
+            model.Filters.ViewPlatformSnes = mainWindow.PlatSNESToolStripMenuItem.Checked;
 
             model.Filters.ViewTypeWiiU = mainWindow.WiiUToolStripMenuItem.Checked;
             model.Filters.ViewTypeEshop = mainWindow.EShopToolStripMenuItem.Checked;

@@ -132,6 +132,22 @@ namespace Budford.Control
                 }
                 return model.Filters.ViewPlatformHtml5;
             }
+            else if (game.LaunchFileName == "VESSEL.rpx")
+            {
+                return model.Filters.ViewPlatformN64;
+            }
+            else if (game.LaunchFileName.StartsWith("WUP-F"))
+            {
+                return model.Filters.ViewPlatformNes;
+            }
+            else if (game.LaunchFileName.StartsWith("WUP-J"))
+            {
+                return model.Filters.ViewPlatformSnes;
+            }
+            else if (game.LaunchFileName == "hachihachi_ntr.rpx")
+            {
+                return model.Filters.ViewPlatformDs;
+            }
             else
             {
                 return model.Filters.ViewPlatformWiiU;
