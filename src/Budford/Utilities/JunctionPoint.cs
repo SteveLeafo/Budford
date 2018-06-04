@@ -25,62 +25,68 @@ namespace Budford.Utilities
         /// an existing directory was found and <paramref name="overwrite" /> if false</exception>
         public static void Create(string sourceDir, string targetDir, bool overwrite)
         {
-            sourceDir = Path.GetFullPath(sourceDir);
-
-            if (!Directory.Exists(sourceDir))
+            try
             {
-                throw new IOException("Source path does not exist or is not a directory.");
-            }
+                sourceDir = Path.GetFullPath(sourceDir);
 
-            if (Directory.Exists(targetDir))
-            {
-                if (!overwrite)
+                if (!Directory.Exists(sourceDir))
                 {
-                    throw new IOException("Directory '{targetDir}' already exists.");
+                    throw new IOException("Source path does not exist or is not a directory.");
                 }
-            }
-            else
-            {
-                Directory.CreateDirectory(targetDir);
-            }
 
-            using (SafeFileHandle handle = OpenReparsePoint(targetDir, NativeMethods.FileAccess.GenericWrite))
-            {
-                byte[] sourceDirBytes = Encoding.Unicode.GetBytes(NativeMethods.NonInterpretedPathPrefix + Path.GetFullPath(sourceDir));
-
-                NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer
+                if (Directory.Exists(targetDir))
                 {
-                    ReparseTag = NativeMethods.IoReparseTagMountPoint,
-                    ReparseDataLength = (ushort) (sourceDirBytes.Length + 12),
-                    SubstituteNameOffset = 0,
-                    SubstituteNameLength = (ushort) sourceDirBytes.Length,
-                    PrintNameOffset = (ushort) (sourceDirBytes.Length + 2),
-                    PrintNameLength = 0,
-                    PathBuffer = new byte[0x3ff0]
-                };
-
-                Array.Copy(sourceDirBytes, reparseDataBuffer.PathBuffer, sourceDirBytes.Length);
-
-                int inBufferSize = Marshal.SizeOf(reparseDataBuffer);
-                IntPtr inBuffer = Marshal.AllocHGlobal(inBufferSize);
-
-                try
-                {
-                    Marshal.StructureToPtr(reparseDataBuffer, inBuffer, false);
-
-                    int bytesReturned;
-                    bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FsctlSetReparsePoint,
-                        inBuffer, sourceDirBytes.Length + 20, IntPtr.Zero, 0, out bytesReturned, IntPtr.Zero);
-
-                    if (!result)
+                    if (!overwrite)
                     {
-                        ThrowLastWin32Error("Unable to create junction point '{sourceDir}' -> '{targetDir}'.");
+                        throw new IOException("Directory '{targetDir}' already exists.");
                     }
                 }
-                finally
+                else
                 {
-                    Marshal.FreeHGlobal(inBuffer);
+                    Directory.CreateDirectory(targetDir);
                 }
+
+                using (SafeFileHandle handle = OpenReparsePoint(targetDir, NativeMethods.FileAccess.GenericWrite))
+                {
+                    byte[] sourceDirBytes = Encoding.Unicode.GetBytes(NativeMethods.NonInterpretedPathPrefix + Path.GetFullPath(sourceDir));
+
+                    NativeMethods.ReparseDataBuffer reparseDataBuffer = new NativeMethods.ReparseDataBuffer
+                    {
+                        ReparseTag = NativeMethods.IoReparseTagMountPoint,
+                        ReparseDataLength = (ushort)(sourceDirBytes.Length + 12),
+                        SubstituteNameOffset = 0,
+                        SubstituteNameLength = (ushort)sourceDirBytes.Length,
+                        PrintNameOffset = (ushort)(sourceDirBytes.Length + 2),
+                        PrintNameLength = 0,
+                        PathBuffer = new byte[0x3ff0]
+                    };
+
+                    Array.Copy(sourceDirBytes, reparseDataBuffer.PathBuffer, sourceDirBytes.Length);
+
+                    int inBufferSize = Marshal.SizeOf(reparseDataBuffer);
+                    IntPtr inBuffer = Marshal.AllocHGlobal(inBufferSize);
+
+                    try
+                    {
+                        Marshal.StructureToPtr(reparseDataBuffer, inBuffer, false);
+
+                        int bytesReturned;
+                        bool result = NativeMethods.DeviceIoControl(handle.DangerousGetHandle(), NativeMethods.FsctlSetReparsePoint,
+                            inBuffer, sourceDirBytes.Length + 20, IntPtr.Zero, 0, out bytesReturned, IntPtr.Zero);
+
+                        if (!result)
+                        {
+                            ThrowLastWin32Error("Unable to create junction point '{sourceDir}' -> '{targetDir}'.");
+                        }
+                    }
+                    finally
+                    {
+                        Marshal.FreeHGlobal(inBuffer);
+                    }
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -154,15 +160,22 @@ namespace Budford.Utilities
         /// or some other error occurs</exception>
         public static bool Exists(string path)
         {
-            if (!Directory.Exists(path))
+            try
+            {
+                if (!Directory.Exists(path))
+                {
+                    return false;
+                }
+
+                using (SafeFileHandle handle = OpenReparsePoint(path, NativeMethods.FileAccess.GenericRead))
+                {
+                    string target = InternalGetTarget(handle);
+                    return target != null;
+                }
+            }
+            catch (Exception)
             {
                 return false;
-            }
-
-            using (SafeFileHandle handle = OpenReparsePoint(path, NativeMethods.FileAccess.GenericRead))
-            {
-                string target = InternalGetTarget(handle);
-                return target != null;
             }
         }
 
@@ -218,16 +231,14 @@ namespace Budford.Utilities
                     ThrowLastWin32Error("Unable to get information about junction point.");
                 }
 
-                NativeMethods.ReparseDataBuffer reparseDataBuffer = (NativeMethods.ReparseDataBuffer)
-                    Marshal.PtrToStructure(outBuffer, typeof(NativeMethods.ReparseDataBuffer));
+                NativeMethods.ReparseDataBuffer reparseDataBuffer = (NativeMethods.ReparseDataBuffer) Marshal.PtrToStructure(outBuffer, typeof(NativeMethods.ReparseDataBuffer));
 
                 if (reparseDataBuffer.ReparseTag != NativeMethods.IoReparseTagMountPoint)
                 {
                     return null;
                 }
 
-                string targetDir = Encoding.Unicode.GetString(reparseDataBuffer.PathBuffer, 
-                    reparseDataBuffer.SubstituteNameOffset, reparseDataBuffer.SubstituteNameLength);
+                string targetDir = Encoding.Unicode.GetString(reparseDataBuffer.PathBuffer, reparseDataBuffer.SubstituteNameOffset, reparseDataBuffer.SubstituteNameLength);
 
                 if (targetDir.StartsWith(NativeMethods.NonInterpretedPathPrefix))
                 {

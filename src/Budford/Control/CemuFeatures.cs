@@ -83,41 +83,46 @@ namespace Budford.Control
         {
             foreach (var version in model.Settings.InstalledVersions)
             {
-                version.HasFonts = HasFontsInstalled(version.Folder);
-                version.HasOnlineFiles = HasOnlineFiles(version.Folder);
-                version.HasCemuHook = HasCemuHookInstalled(version.Folder);
-                version.HasPatch = HasPatchInstalled(version.Folder);
-                version.HasDlc = HasDlcInstalled(version.Folder);
-                version.HasControllerProfiles = HasControllerProfiles(version.Folder);
-                if (version.HasDlc)
+                try
                 {
-                    version.DlcSource = JunctionPoint.GetTarget(Path.Combine(version.Folder, "mlc01", "usr", "title"));
-                    if (JunctionPoint.Exists(Path.Combine(version.Folder, "mlc01", "usr", "title")))
+                    version.HasFonts = HasFontsInstalled(version.Folder);
+                    version.HasOnlineFiles = HasOnlineFiles(version.Folder);
+                    version.HasCemuHook = HasCemuHookInstalled(version.Folder);
+                    version.HasPatch = HasPatchInstalled(version.Folder);
+                    version.HasDlc = HasDlcInstalled(version.Folder);
+                    version.HasControllerProfiles = HasControllerProfiles(version.Folder);
+                    if (version.HasDlc)
                     {
-                        if (Directory.Exists(version.DlcSource))
+                        version.DlcSource = JunctionPoint.GetTarget(Path.Combine(version.Folder, "mlc01", "usr", "title"));
+                        if (JunctionPoint.Exists(Path.Combine(version.Folder, "mlc01", "usr", "title")))
                         {
-                            version.DlcType = 2;
+                            if (Directory.Exists(version.DlcSource))
+                            {
+                                version.DlcType = 2;
+                            }
+                            else
+                            {
+                                version.DlcType = 3;
+                            }
                         }
                         else
                         {
-                            version.DlcType = 3;
+                            version.DlcType = 1;
                         }
-
                     }
                     else
                     {
-                        version.DlcType = 1;
+                        version.DlcType = 0;
+                        version.DlcSource = "";
+                    }
+
+                    if (version.Version.StartsWith("cemu"))
+                    {
+                        version.Version = version.Name.Replace("cemu_", "").Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", "");
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    version.DlcType = 0;
-                    version.DlcSource = "";
-                }
-
-                if (version.Version.StartsWith("cemu"))
-                {
-                    version.Version = version.Name.Replace("cemu_", "").Replace("a", "").Replace("b", "").Replace("c", "").Replace("d", "").Replace("e", "").Replace("f", "").Replace("g", "");
                 }
             }
         }

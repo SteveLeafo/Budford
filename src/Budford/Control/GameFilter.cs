@@ -22,7 +22,11 @@ namespace Budford.Control
                         {
                             if (CheckRatingFilter(model, game))
                             {
-                                return CheckTypeFilter(model, game);
+                                if (CheckTypeFilter(model, game))
+                                {
+                                    //if (game.GameSetting.EmulationState != game.GameSetting.OfficialEmulationState)
+                                        return true;
+                                }
                             }
                         }
                     }
