@@ -156,6 +156,7 @@ namespace Budford.View
             comboBox14.SelectedIndex = information.GameSetting.FullSyncAtGx2DrawDone;
             comboBox50.SelectedIndex = information.GameSetting.UseSeperableShaders;
             comboBox51.SelectedIndex = information.GameSetting.DeleteShaderCache ? 1 : 0;
+            comboBox53.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
 
             comboBox15.SelectedIndex = information.GameSetting.AccaccurateShaderMul;
             comboBox16.SelectedIndex = information.GameSetting.DisableGpuFence;
@@ -351,5 +352,37 @@ namespace Budford.View
         {
             numericUpDown1.Enabled = checkBox1.Checked;
         }
+
+        private void comboBox53_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (noise) return;
+            noise = true;
+            try
+            {
+                information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox53.SelectedIndex != 0;
+                comboBox28.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
+            }
+            finally
+            {
+                noise = false;
+            }
+        }
+
+        private void comboBox28_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (noise) return;
+            noise = true;
+            try
+            {
+                information.CemuHookSetting.IgnorePrecompiledShaderCache = comboBox28.SelectedIndex != 0;
+                comboBox53.SelectedIndex = information.CemuHookSetting.IgnorePrecompiledShaderCache ? 1 : 0;
+            }
+            finally
+            {
+                noise = false;
+            }
+        }
+
+        bool noise = false;
     }
 }

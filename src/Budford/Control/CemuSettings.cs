@@ -501,7 +501,8 @@ namespace Budford.Control
                 {
                     writer.WriteLine("[Graphics]");
                     writer.WriteLine("accurateShaderMul = " + (settings.AccaccurateShaderMul == 1 ? "true" : (settings.AccaccurateShaderMul == 0) ? "false" : "min"));
-                    writer.WriteLine("disableGPUFence =  " + (settings.DisableGpuFence == 1 ? "true" : "false"));
+                    writer.WriteLine("disableGPUFence = " + (settings.DisableGpuFence == 1 ? "true" : "false"));
+                    writer.WriteLine("disablePrecompiledShaders = " + (information.CemuHookSetting.IgnorePrecompiledShaderCache ? "true" : "false"));
                     writer.WriteLine("[CPU]");
                     writer.WriteLine("emulateSinglePrecision = " + (settings.EmulateSinglePrecision == 1 ? "true" : "false"));
                 }
