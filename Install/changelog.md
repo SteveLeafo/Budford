@@ -1,5 +1,11 @@
 # Budford Change Log
 
+## V1.0.99
+- Added simultaneous support for disablePrecompiledShaders and Cemu Hook's IgnorePrecompiledShaderCache
+- Changes to make Budford run on non NTFS file systems
+- Can now separate platforms for virtual console games i.e. N64 DS etc.
+- Now shows the title of the running game in the windows title bar
+
 ## V1.0.94
 - Updated to support Cemu 1.12.1
 - Support the latest changes to the community graphic packs
