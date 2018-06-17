@@ -11,9 +11,6 @@ namespace Budford.Control
     {
         internal static readonly Dictionary<string, string> Regions = new Dictionary<string, string>();
 
-
-      
-
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +61,7 @@ namespace Budford.Control
                     FindGraphicsPacks(dir, graphicsPacks);
                 }
 
-                foreach (FileInfo file in source.GetFiles())
+                foreach (FileInfo file in source.GetFiles("rules.txt"))
                 {
                     ParseGraphicsPack(file, graphicsPacks);
                 }

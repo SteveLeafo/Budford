@@ -212,7 +212,9 @@ namespace Budford.Control
                 {1116, 0x7d },
                 {1117, 0x7d },
                 {1120, 0x7d },
-                {1121, 0xb3 }
+                {1121, 0xb3 },
+                {1122, 0xb3 },
+                {1123, 0xb3 }
             };
         }
 
@@ -710,6 +712,10 @@ namespace Budford.Control
                     if (version.VersionNumber >= 1112)
                     {
                         gfxPackStartOffset = 0x7c;
+                        if (version.VersionNumber >= 1121)
+                        {
+                            gfxPackStartOffset = 0xb3;
+                        }
                     }
                     else
                     {
@@ -875,7 +881,7 @@ namespace Budford.Control
                     string text = File.ReadAllText(fpsPatch + ".bak");
                     if (text.Contains("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667"))
                     {
-                        text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / settings.Fps));
+                        text = text.Replace("0x00000000 = .float 1 # = 30FPS / TARGET FPS, e.g. 30FPS / 18FPS = 1.66667", "0x00000000 = .float " + (30.0f / settings.Fps * 1.5));
                     }
                     text = text.Replace("0x18 = .float 30", "0x18 = .float " + (settings.Fps));
                     File.WriteAllText(fpsPatch, text);
