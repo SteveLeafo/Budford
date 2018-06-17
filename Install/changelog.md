@@ -1,5 +1,9 @@
 # Budford Change Log
 
+## V1.0.101
+- Support for 1.12.2
+- Slightly faster load times
+
 ## V1.0.99
 - Added simultaneous support for disablePrecompiledShaders and Cemu Hook's IgnorePrecompiledShaderCache
 - Changes to make Budford run on non NTFS file systems
