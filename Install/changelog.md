@@ -1,5 +1,8 @@
 # Budford Change Log
 
+## V1.0.102
+- Issue #17 - Fixed an issue where graphics packs were not always displaying in the game properties tab
+
 ## V1.0.101
 - Support for 1.12.2
 - Slightly faster load times
