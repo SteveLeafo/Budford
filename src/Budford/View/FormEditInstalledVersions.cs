@@ -508,6 +508,7 @@ namespace Budford.View
             {
                 dlc.ShowDialog(this);
                 CemuFeatures.DownloadLatestGraphicPack(this, dlc.Result);
+                FolderScanner.SearchForInstalledGraphicPacks(model);
                 UpdateGraphicsPackCombo(true);
             }
         }

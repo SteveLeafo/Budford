@@ -48,6 +48,36 @@ namespace Budford.Control
         }
 
         /// <summary>
+        /// Tries to find the most recently downloaded graphic pack to use
+        /// </summary>
+        /// <param name="Model"></param>
+        internal static void SearchForInstalledGraphicPacks(Model.Model Model)
+        {
+            FileManager.SafeCreateDirectory("graphicsPacks");
+            int packRevision = 0;
+            string packFolder = "";
+            foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+            {
+                string folder = Path.GetFileName(dir);
+                if (folder != null && folder.StartsWith("graphicPacks"))
+                {
+                    string tempfolder = folder.Replace("graphicPacks", "").Replace("_Uncommon", "").Replace("_2", "").Replace("_Common", "").Replace("-", "");
+                    int tempRevision;
+                    if (int.TryParse(tempfolder, out tempRevision))
+                    {
+                        if (tempRevision > packRevision)
+                        {
+                            packRevision = tempRevision;
+                            Model.Settings.GraphicsPackRevision = tempfolder;
+                            packFolder = folder;
+                        }
+                    }
+                }
+            }
+
+            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", packFolder)), Model.GraphicsPacks);
+        }
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="source"></param>

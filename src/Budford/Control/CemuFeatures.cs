@@ -1004,6 +1004,7 @@ namespace Budford.Control
             {
                 MessageBox.Show(Resources.FormMainWindow_DownloadLatestGraphicsPack_Unable_to_download_graphic_packs_at_this_time___Try_again_later_or_upgrate_to_latest_version_of_Budford);
             }
+            FolderScanner.SearchForInstalledGraphicPacks(modelIn);
         }
 
         internal static void OpenCompatibilityEntry(string gameId, Model.Model model, Form parent)

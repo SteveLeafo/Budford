@@ -93,7 +93,7 @@ namespace Budford.View
            
             Model.OldVersions.Clear();
 
-            FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-") + Model.Settings.GraphicsPackRevision), Model.GraphicsPacks);
+            FolderScanner.SearchForInstalledGraphicPacks(Model);
 
             Persistence.LoadFromXml(Model.OldVersions);
 
