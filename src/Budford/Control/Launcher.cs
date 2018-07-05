@@ -941,12 +941,13 @@ namespace Budford.Control
         {
             if (model.Settings.DisableShaderCache)
             {
-                DirectoryInfo di1 = new DirectoryInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), "transferable"));
+                DirectoryInfo di1 = new DirectoryInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), "..", "transferable"));
                 foreach (FileInfo file in di1.GetFiles())
                 {
                     FileManager.SafeDelete(file.FullName);
                 }
-                DirectoryInfo di2 = new DirectoryInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), "shaderCache", "precompiled"));
+
+                DirectoryInfo di2 = new DirectoryInfo(Path.Combine(SpecialFolders.ShaderCacheFolderCemu(version), "..", "precompiled"));
                 foreach (FileInfo file in di2.GetFiles())
                 {
                     FileManager.SafeDelete(file.FullName);
