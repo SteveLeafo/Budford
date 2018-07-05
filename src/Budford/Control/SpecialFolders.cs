@@ -103,7 +103,14 @@ namespace Budford.Control
         /// <returns></returns>
         internal static string ShaderCacheCemu(InstalledVersion version, GameInformation game)
         {
-            return Path.Combine(ShaderCacheFolderCemu(version),  game.SaveDir + ".bin");
+            string suffix = "";
+
+            if (game.GameSetting.UseSeperableShaders == 0)
+            {
+                suffix = "_j";
+            }
+
+            return Path.Combine(ShaderCacheFolderCemu(version),  game.SaveDir + suffix + ".bin");
         }
 
         /// <summary>
@@ -114,7 +121,14 @@ namespace Budford.Control
         /// <returns></returns>
         internal static string ShaderCacheBudford(Model.Model model, GameInformation game)
         {
-            return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "post_180.bin");
+            string suffix = "";
+
+            if (game.GameSetting.UseSeperableShaders == 0)
+            {
+                suffix = "_j";
+            }
+
+            return Path.Combine(model.Settings.SavesFolder, "Budford", game.SaveDir, "post_180" + suffix + ".bin");
         }
 
         #endregion

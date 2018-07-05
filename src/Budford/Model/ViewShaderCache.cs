@@ -109,18 +109,19 @@ namespace Budford.Model
         /// <param name="game"></param>
         private void UpdateShaderCache(KeyValuePair<string, GameInformation> game)
         {
-            FileInfo transferableShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "transferable", game.Value.SaveDir + ".bin"));
-            FileInfo precompiledShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "precompiled", game.Value.SaveDir + ".bin"));
 
-            if (!File.Exists(precompiledShader.FullName))
+            FileInfo transferableSeperableShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "transferable", game.Value.SaveDir + ".bin"));
+            FileInfo precompiledSeperableShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "precompiled", game.Value.SaveDir + ".bin"));
+
+            FileInfo transferableConventionalShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "transferable", game.Value.SaveDir + "_j.bin"));
+            FileInfo precompiledConventionalShader = new FileInfo(Path.Combine(iv1.Folder, "shaderCache", "precompiled", game.Value.SaveDir + "_j.bin"));
+
+            if ((!File.Exists(precompiledSeperableShader.FullName) && File.Exists(transferableSeperableShader.FullName)) || (!File.Exists(precompiledConventionalShader.FullName) && File.Exists(transferableConventionalShader.FullName)))
             {
-                if (File.Exists(transferableShader.FullName))
+                if (transferableSeperableShader.Length > 1000000 || transferableConventionalShader.Length > 1000000)
                 {
-                    if (transferableShader.Length > 1000000)
-                    {
-                        model.CurrentId = game.Key;
-                        mainForm.Launcher.LaunchCemu(mainForm, model, game.Value, true);
-                    }
+                    model.CurrentId = game.Key;
+                    mainForm.Launcher.LaunchCemu(mainForm, model, game.Value, true);
                 }
             }
         }

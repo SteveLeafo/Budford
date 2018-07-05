@@ -30,6 +30,14 @@ namespace Budford.Tools
                         {
                             CopyFile(folder, saveFolder, src, dest);
                         }
+
+                        src = Path.Combine(latest.Folder, "shaderCache", "transferable", game.Value.SaveDir + "_j.bin");
+                        dest = Path.Combine(saveFolder, folder, "post_180_j.bin");
+
+                        if (File.Exists(src))
+                        {
+                            CopyFile(folder, saveFolder, src, dest);
+                        }
                     }
                 }
             }

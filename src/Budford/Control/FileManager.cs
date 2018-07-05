@@ -136,8 +136,16 @@ namespace Budford.Control
 
         private static void CheckShouldImport(string fileName, string budfordFolder, out bool copy, out string destination)
         {
+            string suffix = "";
+
+            if (fileName.Contains("_j"))
+            {
+                suffix = "_j";
+            }
+
             copy = false;
-            destination = Path.Combine(budfordFolder, "post_180.bin");
+            destination = Path.Combine(budfordFolder, "post_180" + suffix + ".bin");
+            
             if (!File.Exists(destination))
             {
                 copy = true;
