@@ -35,7 +35,7 @@ namespace Budford.Control
                         sw.WriteLine("serverPort  = " + model.Settings.CemuHookServerPort);
                     }
                     sw.WriteLine("[Debug]");
-                    sw.WriteLine("mmTimerAccuracy = " + GetMmTimerAccuracy(gameInfo.CemuHookSetting.MotionSource));
+                    sw.WriteLine("mmTimerAccuracy = " + GetMmTimerAccuracy(gameInfo.CemuHookSetting.MmTimerAccuracy));
                     sw.WriteLine("[Graphics]");
                     sw.WriteLine("ignorePrecompiledShaderCache = " + (gameInfo.CemuHookSetting.IgnorePrecompiledShaderCache ? "true" : "false"));
                 }
@@ -106,7 +106,7 @@ namespace Budford.Control
             {
                 case 0: return "default";
                 case 1: return "max";
-                case 2: return "1";
+                case 2: return "1ms";
             }
             return "default";
         }
