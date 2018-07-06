@@ -83,7 +83,7 @@ namespace Budford.Control
         /// </summary>
         /// <param name="version"></param>
         /// <returns></returns>
-        internal static string ShaderCacheFolderCemu(InstalledVersion version)
+        internal static string ShaderTransferableCacheFolderCemu(InstalledVersion version)
         {
             if (version != null)
             {
@@ -99,11 +99,28 @@ namespace Budford.Control
         /// 
         /// </summary>
         /// <param name="version"></param>
+        /// <returns></returns>
+        internal static string ShaderPrecompiledCacheFolderCemu(InstalledVersion version)
+        {
+            if (version != null)
+            {
+                return Path.Combine(version.Folder, "shaderCache", "precompiled");
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
         /// <param name="game"></param>
         /// <returns></returns>
         internal static string ShaderCacheCemu(InstalledVersion version, GameInformation game)
         {
-            return Path.Combine(ShaderCacheFolderCemu(version),  game.SaveDir + ".bin");
+            return Path.Combine(ShaderTransferableCacheFolderCemu(version),  game.SaveDir + ".bin");
         }
 
         /// <summary>
