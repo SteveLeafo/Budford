@@ -189,7 +189,10 @@ namespace Budford.View
                         string platform = o.Value;
                         if (emulator.Length > 0)
                         {
-                            emulators.Add(emulator, platform);
+                            if (!emulators.ContainsKey(emulator))
+                            {
+                                emulators.Add(emulator, platform);
+                            }
                         }
                     }
                 }
