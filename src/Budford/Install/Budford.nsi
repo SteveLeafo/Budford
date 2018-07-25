@@ -222,6 +222,7 @@ Function InstallBudfordFiles
     CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
 	File "Budford.exe"
+	File "BudfordsAssassin.exe"
 	File "Budford.ico"
 	File "CNUSLib.dll"
 	File "discord-rpc.dll"

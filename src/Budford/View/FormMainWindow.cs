@@ -156,6 +156,13 @@ namespace Budford.View
                  game.Exists = true;
                  game.GameSetting.Online = 1;
                  Launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
+                 if (Model.Settings.CloseCemuOnExit)
+                 {
+                     if (File.Exists("BudfordsAssassin.exe"))
+                     {
+                         Process.Start("BudfordsAssassin.exe");
+                     }
+                 }
              }
         }
 
@@ -267,7 +274,7 @@ namespace Budford.View
             {
                 WindowState = FormWindowState.Minimized;
                 Visible = false;
-                Hide();
+                //Hide();
                 bool launched = false;
                 foreach (var game in Model.GameData)
                 {
@@ -276,6 +283,13 @@ namespace Budford.View
                         RegisterStopHotKey(Model);
                         game.Value.Exists = true;
                         Launcher.LaunchCemu(this, Model, game.Value, false, false, false, LaunchFull);
+                        if (Model.Settings.CloseCemuOnExit)
+                        {
+                            if (File.Exists("BudfordsAssassin.exe"))
+                            {
+                                Process.Start("BudfordsAssassin.exe");
+                            }
+                        }
                         launched = true;
                         break;
                     }
@@ -283,16 +297,17 @@ namespace Budford.View
                 if (!launched)
                 {
                     // Game wasn't in library, so just launch with current settings.
-                    Launcher = new Launcher(this);
                     Launcher.LaunchRpx(Model, launchGame, LaunchFull);
+                    if (Model.Settings.CloseCemuOnExit)
+                    {
+                        if (File.Exists("BudfordsAssassin.exe"))
+                        {
+                            Process.Start("BudfordsAssassin.exe");
+                        }
+                    }
                 }
             }
-            else
-            {
-                //create server with given port
-                //myServer = new SimpleHTTPServer(@"C:\Development\DontCrash\content\app", 8084);
-                //myServer = new SimpleHTTPServer(@"D:\Wii-U\GAMES\Hold Your Fire [AHGE]\content\app", 8085);
-            }
+
             base.OnLoad(e);
         }
 
@@ -334,6 +349,14 @@ namespace Budford.View
                         RegisterStopHotKey(Model);
 
                         Launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
+                        if (Model.Settings.CloseCemuOnExit)
+                        {
+                            if (File.Exists("BudfordsAssassin.exe"))
+                            {
+                                Process.Start("BudfordsAssassin.exe");
+                            }
+                        }
+
                     }
                 }
             }
@@ -717,6 +740,7 @@ namespace Budford.View
         /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Logger.Log("Close 2");
             Close();
         }
        
@@ -917,10 +941,12 @@ namespace Budford.View
         {
             Persistence.Save(Model, Persistence.GetModelFileName());
             DiscordRichPresence.ShutDown();
-            if (Model.Settings.CloseCemuOnExit)
-            {
-                Launcher.KillCurrentProcess();
-            }
+            Logger.Log("Budford is closing");
+            //if (Model.Settings.CloseCemuOnExit)
+            //{
+            //    Logger.Log("Budford is closing - trying to bring Cemu down with it"); 
+            //    Launcher.KillCurrentProcess();
+            //}
         }
 
         /// <summary>
@@ -1071,6 +1097,13 @@ namespace Budford.View
         {
             RegisterStopHotKey(Model);
             Launcher.LaunchCemu(this, Model, null, false, true);
+            if (Model.Settings.CloseCemuOnExit)
+            {
+                if (File.Exists("BudfordsAssassin.exe"))
+                {
+                    Process.Start("BudfordsAssassin.exe");
+                }
+            }
         }
 
         /// <summary>
@@ -1426,18 +1459,6 @@ namespace Budford.View
             {
                 Invoke(new MethodInvoker(ProcessRunning));
             }
-            else
-            {
-                if (launchGame != "")
-                {
-                    if (Model.Settings.StopHotkey == "None")
-                    {
-                        NativeMethods.UnregisterHotKey(Handle, MyactionHotkeyId);
-                        EnableControlsForGameExitted();
-                        Close();
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -1453,8 +1474,10 @@ namespace Budford.View
             {
                 NativeMethods.UnregisterHotKey(Handle, MyactionHotkeyId);
                 EnableControlsForGameExitted();
+                Logger.Log("Cemu process has exited");
                 if (launchGame != "")
                 {
+                    Logger.Log("Close 1");
                     Close();
                 }
             }
@@ -1612,6 +1635,11 @@ namespace Budford.View
         private void githubRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/SteveLeafo/Budford");
+        }
+
+        private void FormMainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Logger.Log("Closed");
         }
     }
 }

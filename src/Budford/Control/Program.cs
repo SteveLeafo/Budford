@@ -22,6 +22,8 @@ namespace Budford.Control
         [STAThread]
         static void Main()
         {
+            Microsoft.Win32.SystemEvents.SessionEnding += new Microsoft.Win32.SessionEndingEventHandler(SystemEvents_SessionEnding);
+
             string programFiles = Environment.ExpandEnvironmentVariables("%ProgramW6432%");
 
             var arguments = Environment.GetCommandLineArgs();
@@ -69,12 +71,17 @@ namespace Budford.Control
             }
             else
             {
-                mainForm.WindowState = FormWindowState.Minimized;
+                //mainForm.WindowState = FormWindowState.Minimized;
                 mainForm.launchGame = cmdLineFileName;
                 mainForm.LaunchFull = cmdLineFullScreen;
-                mainForm.MinimizeToTray = true;
+                //mainForm.MinimizeToTray = true;
                 Application.Run(mainForm);
             }
+        }
+
+        static void SystemEvents_SessionEnding(object sender, Microsoft.Win32.SessionEndingEventArgs e)
+        {
+            Logger.Log(e.Reason.ToString());
         }
 
         private static bool Get45Or451FromRegistry()

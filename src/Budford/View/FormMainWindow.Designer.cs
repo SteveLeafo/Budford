@@ -1261,6 +1261,7 @@
             this.Name = "FormMainWindow";
             this.Text = "Budford - Cemu Configuration Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fMainWindow_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMainWindow_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

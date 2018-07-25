@@ -302,6 +302,7 @@ namespace Budford.Control
 
         private void TriggerEarlyExit()
         {
+            MessageBox.Show("Early Exit");
             if (parent != null)
             {
                 parent.ProcessExited();
@@ -1111,6 +1112,8 @@ namespace Budford.Control
 
                 SetGamePadViewIfDesired(game);
 
+                Logger.Log("Cemu process is up and running");
+
                 if (parent != null)
                 {
                     parent.ProcessRunning();
@@ -1305,6 +1308,14 @@ namespace Budford.Control
                 {
                     runningProcess.Kill();
                 }
+                else
+                {
+                    Logger.Log("Cannot kill current process as it has already exitied");
+                }
+            }
+            else
+            {
+                Logger.Log("Cannot kill current process as it was null");
             }
         }
 
