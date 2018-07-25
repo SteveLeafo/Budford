@@ -915,9 +915,11 @@ namespace Budford.View
         private void fMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             Persistence.Save(Model, Persistence.GetModelFileName());
-            //stop server
-            //myServer.Stop();
             DiscordRichPresence.ShutDown();
+            if (Model.Settings.CloseCemuOnExit)
+            {
+                Launcher.KillCurrentProcess();
+            }
         }
 
         /// <summary>

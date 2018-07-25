@@ -66,6 +66,8 @@ namespace Budford.Model
 
         public bool ScanGameFoldersOnStart = false;
 
+        public bool CloseCemuOnExit = false;
+
         public bool IncludeWiiULauncherRpx = true;
 
         public bool AutomaticallyDownloadGraphicsPackOnStart = false;

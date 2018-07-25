@@ -34,6 +34,7 @@ namespace Budford.View
             checkBox4.Checked = settings.LegacyIntelGpuMode;
             checkBox5.Checked = settings.UseGlobalVolumeSettings;
             checkBox6.Checked = settings.ScanGameFoldersOnStart;
+            checkBox7.Checked = settings.CloseCemuOnExit;
             checkBox8.Checked = settings.AutomaticallyDownloadGraphicsPackOnStart;
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
             checkBox10.Checked = settings.BorderlessFullScreen;
@@ -219,6 +220,7 @@ namespace Budford.View
             settings.LegacyIntelGpuMode = checkBox4.Checked;
             settings.UseGlobalVolumeSettings = checkBox5.Checked;
             settings.ScanGameFoldersOnStart = checkBox6.Checked;
+            settings.CloseCemuOnExit = checkBox7.Checked;
             settings.AutomaticallyDownloadGraphicsPackOnStart = checkBox8.Checked;
             settings.AutomaticallyDownloadLatestEverythingOnStart = checkBox9.Checked;
             settings.BorderlessFullScreen = checkBox10.Checked;
