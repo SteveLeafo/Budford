@@ -66,7 +66,7 @@ namespace Budford.View
         readonly ViewShaderCache viewShaderCache;
  
         // For launching the games.
-        internal readonly Launcher Launcher;
+        internal Launcher Launcher;
 
         // Used for column sorting when clicking on a header
         private readonly ListViewColumnSorter lvwColumnSorter;
@@ -283,7 +283,8 @@ namespace Budford.View
                 if (!launched)
                 {
                     // Game wasn't in library, so just launch with current settings.
-                    new Launcher(null).LaunchRpx(Model, launchGame, LaunchFull);
+                    Launcher = new Launcher(this);
+                    Launcher.LaunchRpx(Model, launchGame, LaunchFull);
                 }
             }
             else
