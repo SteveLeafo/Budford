@@ -161,7 +161,11 @@ namespace Budford.Control
                 {"1.12.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1116Bin, v1116Settings) },
                 {"1.12.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.12.2", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
-                {"12.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) }
+                {"1.13.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.13.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1130Bin, v1121Settings) },
+                {"1.14.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1130Bin, v1121Settings) },
+                {"1.14.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1130Bin, v1121Settings) },
+                {"12.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1130Bin, v1121Settings) }
             };
 
             graphicPackOffset = new Dictionary<int, int>
@@ -214,7 +218,11 @@ namespace Budford.Control
                 {1120, 0x7d },
                 {1121, 0xb3 },
                 {1122, 0xb3 },
-                {1123, 0xb3 }
+                {1123, 0xb3 },
+                {1130, 0xb3 },
+                {1131, 0xb3 },
+                {1140, 0xb3 },
+                {1141, 0xb3 }
             };
         }
 
