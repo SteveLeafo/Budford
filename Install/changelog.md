@@ -1,5 +1,12 @@
 # Budford Change Log
 
+## V1.0.108
+- Updated to support Cemu 1.13.0
+- Added an option to also close Cemu when Budford closes
+- Fixed an issue where Budford would sometimes crash when running the LaunchBox exporter
+- Pull Request #22 (jdsmith2816) Fixed an issue where mmTimerAccuracy was not persisting correctly
+- Pull Request #23 (jdsmith2816) Fixed an issue with the shadercache folder construction
+
 ## V1.0.102
 - Issue #17 - Fixed an issue where graphics packs were not always displaying in the game properties tab
 
