@@ -184,7 +184,9 @@ namespace Budford.Control
                     if (!model.Filters.ViewRating1) return false;
                     break;
                 default:
-                    return false;
+                    game.Rating = 1;
+                    if (!model.Filters.ViewRating1) return false;
+                    break;
             }
             return true;
         }

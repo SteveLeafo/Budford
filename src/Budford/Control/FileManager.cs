@@ -330,7 +330,10 @@ namespace Budford.Control
                 Logger.Log("Copying " + sourceFileName + " to " + destinationFileName);
                 if (File.Exists(sourceFileName))
                 {
-                    File.Copy(sourceFileName, destinationFileName, overwrite);
+                    if (overwrite || !File.Exists(destinationFileName))
+                    {
+                        File.Copy(sourceFileName, destinationFileName, overwrite);
+                    }
                     return true;
                 }
             }
