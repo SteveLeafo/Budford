@@ -302,7 +302,6 @@ namespace Budford.Control
 
         private void TriggerEarlyExit()
         {
-            MessageBox.Show("Early Exit");
             if (parent != null)
             {
                 parent.ProcessExited();
