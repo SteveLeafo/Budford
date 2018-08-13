@@ -913,7 +913,10 @@ namespace Budford.View
                 Model.CurrentId = listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ');
                 if (Directory.Exists(Path.Combine(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile), "..", "..")))
                 {
-                    Process.Start((Path.Combine(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile), "..", "..")));
+                    if (File.Exists(Model.GameData[Model.CurrentId].LaunchFile))
+                    {
+                        Process.Start((Path.Combine(Path.GetDirectoryName(Model.GameData[Model.CurrentId].LaunchFile), "..", "..")));
+                    }
                 }
             }
         }
