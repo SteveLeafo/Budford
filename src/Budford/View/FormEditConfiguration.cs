@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Budford.Properties;
 using Settings = Budford.Model.Settings;
+using System.IO;
 
 namespace Budford.View
 {
@@ -298,12 +299,26 @@ namespace Budford.View
                             keysToRemove.Add(game.Key);
                         }
                     }
+                    if (!File.Exists(game.Value.LaunchFile))
+                    {
+                       if (!keysToRemove.Contains(game.Key))
+                       {
+                           keysToRemove.Add(game.Key);
+                       }
+                    }
                 }
 
                 foreach (var key in keysToRemove)
                 {
                     model.GameData.Remove(key);
                 }
+
+                model.GameData2 = new List<Budford.Model.GameInformation>();
+                foreach (var gd in model.GameData)
+                {
+                    model.GameData2.Add(gd.Value);
+                }
+
             }
         }
 
