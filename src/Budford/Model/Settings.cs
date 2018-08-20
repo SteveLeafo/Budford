@@ -30,6 +30,8 @@ namespace Budford.Model
 
         public string CemuHookServerPort = "";
 
+        public bool UseGraphicPacks = true;
+
         public string CurrentView  = "Detailed";
 
         public string GraphicsPackRevision = "347";

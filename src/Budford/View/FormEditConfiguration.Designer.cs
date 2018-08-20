@@ -132,6 +132,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.checkBox12 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -571,7 +572,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel5.Controls.Add(this.radioButton1, 2, 5);
             this.tableLayoutPanel5.Controls.Add(this.radioButton2, 2, 6);
             this.tableLayoutPanel5.Controls.Add(this.radioButton3, 2, 7);
@@ -619,7 +620,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton1.Location = new System.Drawing.Point(128, 121);
+            this.radioButton1.Location = new System.Drawing.Point(127, 121);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(216, 17);
             this.radioButton1.TabIndex = 0;
@@ -630,7 +631,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton2.Location = new System.Drawing.Point(128, 144);
+            this.radioButton2.Location = new System.Drawing.Point(127, 144);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(216, 17);
             this.radioButton2.TabIndex = 0;
@@ -641,7 +642,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton3.Location = new System.Drawing.Point(128, 167);
+            this.radioButton3.Location = new System.Drawing.Point(127, 167);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(216, 17);
             this.radioButton3.TabIndex = 0;
@@ -652,7 +653,7 @@
             // 
             this.radioButton4.AutoSize = true;
             this.radioButton4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton4.Location = new System.Drawing.Point(128, 190);
+            this.radioButton4.Location = new System.Drawing.Point(127, 190);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(216, 17);
             this.radioButton4.TabIndex = 0;
@@ -665,7 +666,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(8, 322);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 23);
+            this.label1.Size = new System.Drawing.Size(113, 23);
             this.label1.TabIndex = 2;
             this.label1.Text = "Enthusiast";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -674,7 +675,7 @@
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton5.Location = new System.Drawing.Point(128, 246);
+            this.radioButton5.Location = new System.Drawing.Point(127, 246);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(216, 17);
             this.radioButton5.TabIndex = 0;
@@ -687,7 +688,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(8, 118);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 23);
+            this.label2.Size = new System.Drawing.Size(113, 23);
             this.label2.TabIndex = 2;
             this.label2.Text = "Quality";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -698,7 +699,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(8, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 23);
+            this.label3.Size = new System.Drawing.Size(113, 23);
             this.label3.TabIndex = 2;
             this.label3.Text = "Default";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -708,7 +709,7 @@
             this.radioButton7.AutoSize = true;
             this.radioButton7.Checked = true;
             this.radioButton7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton7.Location = new System.Drawing.Point(128, 78);
+            this.radioButton7.Location = new System.Drawing.Point(127, 78);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(216, 17);
             this.radioButton7.TabIndex = 0;
@@ -720,7 +721,7 @@
             // 
             this.radioButton8.AutoSize = true;
             this.radioButton8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton8.Location = new System.Drawing.Point(128, 325);
+            this.radioButton8.Location = new System.Drawing.Point(127, 325);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(216, 17);
             this.radioButton8.TabIndex = 0;
@@ -733,7 +734,7 @@
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.Location = new System.Drawing.Point(8, 243);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(114, 23);
+            this.label18.Size = new System.Drawing.Size(113, 23);
             this.label18.TabIndex = 2;
             this.label18.Text = "Performance";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -742,7 +743,7 @@
             // 
             this.radioButton10.AutoSize = true;
             this.radioButton10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton10.Location = new System.Drawing.Point(128, 348);
+            this.radioButton10.Location = new System.Drawing.Point(127, 348);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(216, 17);
             this.radioButton10.TabIndex = 0;
@@ -753,7 +754,7 @@
             // 
             this.radioButton9.AutoSize = true;
             this.radioButton9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton9.Location = new System.Drawing.Point(128, 371);
+            this.radioButton9.Location = new System.Drawing.Point(127, 371);
             this.radioButton9.Name = "radioButton9";
             this.radioButton9.Size = new System.Drawing.Size(216, 17);
             this.radioButton9.TabIndex = 0;
@@ -764,7 +765,7 @@
             // 
             this.radioButton6.AutoSize = true;
             this.radioButton6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton6.Location = new System.Drawing.Point(128, 292);
+            this.radioButton6.Location = new System.Drawing.Point(127, 292);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(216, 17);
             this.radioButton6.TabIndex = 0;
@@ -775,7 +776,7 @@
             // 
             this.radioButton11.AutoSize = true;
             this.radioButton11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton11.Location = new System.Drawing.Point(128, 269);
+            this.radioButton11.Location = new System.Drawing.Point(127, 269);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(216, 17);
             this.radioButton11.TabIndex = 0;
@@ -786,7 +787,7 @@
             // 
             this.radioButton12.AutoSize = true;
             this.radioButton12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioButton12.Location = new System.Drawing.Point(128, 213);
+            this.radioButton12.Location = new System.Drawing.Point(127, 213);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(216, 17);
             this.radioButton12.TabIndex = 0;
@@ -800,7 +801,7 @@
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(8, 20);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(336, 45);
+            this.label19.Size = new System.Drawing.Size(335, 45);
             this.label19.TabIndex = 2;
             this.label19.Text = "Please note that not all games have graphics packs and those that do may not have" +
     " the selected resolution.  The values set here will be overridden by the per gam" +
@@ -1367,16 +1368,18 @@
             this.tableLayoutPanel4.Controls.Add(this.checkBox8, 1, 3);
             this.tableLayoutPanel4.Controls.Add(this.checkBox9, 1, 4);
             this.tableLayoutPanel4.Controls.Add(this.checkBox2, 1, 5);
-            this.tableLayoutPanel4.Controls.Add(this.label20, 1, 9);
-            this.tableLayoutPanel4.Controls.Add(this.label21, 1, 10);
-            this.tableLayoutPanel4.Controls.Add(this.textBox5, 2, 9);
-            this.tableLayoutPanel4.Controls.Add(this.textBox6, 2, 10);
+            this.tableLayoutPanel4.Controls.Add(this.label20, 1, 10);
+            this.tableLayoutPanel4.Controls.Add(this.label21, 1, 11);
+            this.tableLayoutPanel4.Controls.Add(this.textBox5, 2, 10);
+            this.tableLayoutPanel4.Controls.Add(this.textBox6, 2, 11);
             this.tableLayoutPanel4.Controls.Add(this.checkBox11, 1, 7);
             this.tableLayoutPanel4.Controls.Add(this.checkBox7, 1, 6);
+            this.tableLayoutPanel4.Controls.Add(this.checkBox12, 1, 8);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 12;
+            this.tableLayoutPanel4.RowCount = 13;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1455,7 +1458,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(13, 181);
+            this.label20.Location = new System.Drawing.Point(13, 204);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(110, 13);
             this.label20.TabIndex = 1;
@@ -1465,7 +1468,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(13, 207);
+            this.label21.Location = new System.Drawing.Point(13, 230);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(119, 13);
             this.label21.TabIndex = 1;
@@ -1475,7 +1478,7 @@
             // textBox5
             // 
             this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox5.Location = new System.Drawing.Point(184, 184);
+            this.textBox5.Location = new System.Drawing.Point(184, 207);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(172, 20);
             this.textBox5.TabIndex = 2;
@@ -1483,7 +1486,7 @@
             // textBox6
             // 
             this.textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox6.Location = new System.Drawing.Point(184, 210);
+            this.textBox6.Location = new System.Drawing.Point(184, 233);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(172, 20);
             this.textBox6.TabIndex = 3;
@@ -1491,7 +1494,6 @@
             // checkBox11
             // 
             this.checkBox11.AutoSize = true;
-            this.checkBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox11.Location = new System.Drawing.Point(13, 141);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(165, 17);
@@ -1662,6 +1664,16 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
+            // checkBox12
+            // 
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Location = new System.Drawing.Point(13, 164);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(123, 17);
+            this.checkBox12.TabIndex = 0;
+            this.checkBox12.Text = "Use Graphics Packs";
+            this.checkBox12.UseVisualStyleBackColor = true;
+            // 
             // FormEditConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1816,5 +1828,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox checkBox12;
     }
 }

@@ -332,6 +332,7 @@ namespace Budford.Control
                 {
                     if (overwrite || !File.Exists(destinationFileName))
                     {
+                        SafeCreateDirectory(Path.GetDirectoryName(destinationFileName));
                         File.Copy(sourceFileName, destinationFileName, overwrite);
                     }
                     return true;

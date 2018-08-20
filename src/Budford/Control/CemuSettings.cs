@@ -407,7 +407,10 @@ namespace Budford.Control
             {
                 try
                 {
-                    WriteGraphicsPacks(version);
+                    if (model.Settings.UseGraphicPacks)
+                    {
+                        WriteGraphicsPacks(version);
+                    }
                 }
                 catch (Exception ex)
                 {
