@@ -1,5 +1,11 @@
 # Budford Change Log
 
+## V1.0.112
+ - Added the ability to turn on some logging
+ - Added an option to disable all graphic packs
+ - Fixed an issue where Budford would crash if you tried to navigate to a folder of a game that didn't exist
+ - Fixed an issue where removing games that had been deleted wasn't working
+
 ## V1.0.108
 - Updated to support Cemu 1.13.0
 - Added an option to also close Cemu when Budford closes
