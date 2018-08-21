@@ -197,8 +197,20 @@ namespace Budford.View
             comboBox48.SelectedIndex = information.GameSetting.SwapButtons7;
             comboBox49.SelectedIndex = information.GameSetting.SwapButtons8;
 
+            comboBox54.SelectedIndex = information.GameSetting.DebugUnsupportedApiCalls;
+            comboBox55.SelectedIndex = information.GameSetting.DebugCoreInitFileAccess;
+            comboBox56.SelectedIndex = information.GameSetting.DebugThreadSynchronisationApi;
+            comboBox57.SelectedIndex = information.GameSetting.DebugCoreInitMemoryApi;
+            comboBox58.SelectedIndex = information.GameSetting.DebugGx2Api;
+            comboBox59.SelectedIndex = information.GameSetting.DebugAudioApi;
+            comboBox60.SelectedIndex = information.GameSetting.DebugInputApi;
+            comboBox61.SelectedIndex = information.GameSetting.DebugSocketApi;
+            comboBox62.SelectedIndex = information.GameSetting.DebugSaveApi;
+            comboBox63.SelectedIndex = information.GameSetting.DebugH264Api;
+
             numericUpDown1.Value = information.GameSetting.Fps;
             checkBox1.Checked = information.GameSetting.OverrideFps;
+            checkBox2.Checked = information.GameSetting.EnableLogging;
         }
 
         /// <summary>
@@ -277,6 +289,18 @@ namespace Budford.View
             information.GameSetting.SwapButtons7 = comboBox48.SelectedIndex;
             information.GameSetting.SwapButtons8 = comboBox49.SelectedIndex;
 
+            information.GameSetting.DebugUnsupportedApiCalls = (byte)comboBox54.SelectedIndex;
+            information.GameSetting.DebugCoreInitFileAccess = (byte)comboBox55.SelectedIndex;
+            information.GameSetting.DebugThreadSynchronisationApi = (byte)comboBox56.SelectedIndex;
+            information.GameSetting.DebugCoreInitMemoryApi = (byte)comboBox57.SelectedIndex;
+            information.GameSetting.DebugGx2Api = (byte)comboBox58.SelectedIndex;
+            information.GameSetting.DebugAudioApi = (byte)comboBox59.SelectedIndex;
+            information.GameSetting.DebugInputApi = (byte)comboBox60.SelectedIndex;
+            information.GameSetting.DebugSocketApi = (byte)comboBox61.SelectedIndex;
+            information.GameSetting.DebugSaveApi = (byte)comboBox62.SelectedIndex;
+            information.GameSetting.DebugH264Api = (byte)comboBox63.SelectedIndex;
+
+
             information.CemuHookSetting.CustomTimerMode = comboBox21.SelectedIndex;
             information.CemuHookSetting.CustomTimerMultiplier = comboBox22.SelectedIndex;
             information.CemuHookSetting.DisableAvx = comboBox23.SelectedIndex != 0;
@@ -289,6 +313,7 @@ namespace Budford.View
 
             information.GameSetting.Fps = (int)numericUpDown1.Value;
             information.GameSetting.OverrideFps = checkBox1.Checked;
+            information.GameSetting.EnableLogging = checkBox2.Checked;
 
             foreach (ListViewItem lvi in listView1.Items)
             {

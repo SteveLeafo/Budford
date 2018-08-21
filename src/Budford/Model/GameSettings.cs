@@ -56,11 +56,18 @@ namespace Budford.Model
         public bool OverrideFps = false;
         public bool DeleteShaderCache = false;
 
-        public byte DebugGx2ApiOffset;
-        public byte DebugUnsupportedApiCallsOffset ;
-        public byte DebugThreadSynchronisationApiOffset ;
-        public byte DebugAudioApiOffset ;
-        public byte DebugInputApiOffset ;
+        public bool EnableLogging;
+        public byte DebugUnsupportedApiCalls;
+        public byte DebugCoreInitFileAccess;
+        public byte DebugThreadSynchronisationApi;
+        public byte DebugCoreInitMemoryApi;
+        public byte DebugGx2Api;
+        public byte DebugAudioApi;
+        public byte DebugInputApi;
+        public byte DebugSocketApi;
+        public byte DebugSaveApi;      
+        public byte DebugH264Api;
+
 
         public byte EnableDebugOffset;
 

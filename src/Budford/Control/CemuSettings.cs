@@ -65,8 +65,25 @@ namespace Budford.Control
             EnableDebugOffset = 5,          // 1 = Enabled
             VolumeOffset = 6,               // Volume 0 -> 0x64
             CpuModeOffset = 7,              // 1 = Fast
-            CpuTimerOffset = 8              // 1 = Host
+            CpuTimerOffset = 8,             // 1 = Host
+            DebugCoreInitFileAccessOffset = 9,
+            DebugCoreInitMemoryApiOffset = 10,
+            DebugSocketApiOffset = 11,
+            DebugSaveApiOffset = 12,
+            DebugH264ApiOffset = 13
         }
+
+        public byte DebugUnsupportedApiCalls;
+        public byte DebugCoreInitFileAccess;
+        public byte DebugThreadSynchronisationApi;
+        public byte DebugCoreInitMemoryApi;
+        public byte DebugGx2Api;
+        public byte DebugAudioApi;
+        public byte DebugInputApi;
+        public byte DebugSocketApi;
+        public byte DebugSaveApi;
+        public byte DebugH264Api;
+
 
         int[] settingsOffsets;
         int[] coreSettingsOffsets;
@@ -466,12 +483,15 @@ namespace Budford.Control
             {
                 using (FileStream fn = new FileStream(Path.Combine(folder, "settings.bin"), FileMode.Open, FileAccess.ReadWrite))
                 {
-                    WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugGx2ApiOffset], settings.DebugGx2ApiOffset);
-                    WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugUnsupportedApiCallsOffset], settings.DebugUnsupportedApiCallsOffset);
-                    WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugThreadSynchronisationApiOffset], settings.DebugThreadSynchronisationApiOffset);
-                    WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugAudioApiOffset], settings.DebugAudioApiOffset);
-                    WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugInputApiOffset], settings.DebugInputApiOffset);
-
+                    if (settings.EnableLogging)
+                    {
+                        WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugGx2ApiOffset], settings.DebugGx2Api);
+                        WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugUnsupportedApiCallsOffset], settings.DebugUnsupportedApiCalls);
+                        WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugThreadSynchronisationApiOffset], settings.DebugThreadSynchronisationApi);
+                        WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugAudioApiOffset], settings.DebugAudioApi);
+                        WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.DebugInputApiOffset], settings.DebugInputApi);
+                        WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.EnableDebugOffset], 1);
+                    }
                     byte volume = settings.Volume;
                     if (model.Settings.UseGlobalVolumeSettings)
                     {
@@ -479,7 +499,7 @@ namespace Budford.Control
                     }
 
                     WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.VolumeOffset], volume);
-                    WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.EnableDebugOffset], settings.EnableDebugOffset);
+                    
                     WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.CpuModeOffset], (byte)settings.CpuMode);
                     WriteByte(fn, coreSettingsOffsets[(int)CoreSettings.CpuTimerOffset], (byte)settings.CpuTimer);
 
