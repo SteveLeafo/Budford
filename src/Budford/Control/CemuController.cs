@@ -21,8 +21,10 @@ namespace Budford.Control
         internal CemuController(IntPtr hWnd)
         {
             cemuHandle = hWnd;
+       
             menuHandles = GetMenuLookupTable(NativeMethods.GetMenu(cemuHandle));
         }
+
 
         /// <summary>
         /// 
@@ -38,6 +40,7 @@ namespace Budford.Control
             }
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +53,7 @@ namespace Budford.Control
 
             for (int i = 0; i < itemCount; ++i)
             {
-                TraverseSubMenus(sysMenu, i, menuHandles);
+                ShmookSubMenus(sysMenu, i, menuHandles);
             }
             return menuHandles;
         }
@@ -61,7 +64,7 @@ namespace Budford.Control
         /// <param name="handle"></param>
         /// <param name="pos"></param>
         /// <param name="menuHandles"></param>
-        void TraverseSubMenus(IntPtr handle, int pos, Dictionary<string, int> menuHandles)
+        void ShmookSubMenus(IntPtr handle, int pos, Dictionary<string, int> menuHandles)
         {
             var menu = NativeMethods.GetSubMenu(handle, pos);
             GetMenuCaption(menuHandles, pos, handle);
@@ -71,8 +74,9 @@ namespace Budford.Control
             {
                 var subMenu = NativeMethods.GetSubMenu(handle, pos);
                 GetMenuCaption(menuHandles, i, subMenu);
-                TraverseSubMenus(menu, i, menuHandles);
+                ShmookSubMenus(menu, i, menuHandles);
             }
+
         }
 
         /// <summary>
@@ -104,7 +108,15 @@ namespace Budford.Control
                 {
                     return "";
                 }
-                caption = Marshal.PtrToStringUni(mif.dwTypeData);               
+                caption = Marshal.PtrToStringUni(mif.dwTypeData);
+                int id = NativeMethods.GetMenuItemID(subMenu, i);
+                if (caption != "")
+                {
+                    if (!menuHandles.ContainsKey(caption))
+                    {
+                        menuHandles.Add(caption, id);
+                    }
+                }
             }
             finally
             {
