@@ -1076,6 +1076,7 @@ namespace Budford.Control
         }
 
         IntPtr childWindowHandle = IntPtr.Zero;
+        internal CemuController cemuController;
 
         /// <summary>
         /// Launches CEMU and tries to extract the SaveDir from the windows title
@@ -1086,6 +1087,8 @@ namespace Budford.Control
             try
             {
                 WaitForWindowTitleToAppear();
+
+                cemuController = new CemuController(runningProcess.MainWindowHandle);
 
                 SetGamePadWindowHandle();
 

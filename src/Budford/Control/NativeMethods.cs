@@ -42,6 +42,28 @@ namespace Budford.Control
             WindowProc = -4
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public class MENUITEMINFO
+        {
+            public int cbSize;
+            public uint fMask;
+            public uint fType;
+            public uint fState;
+            public uint wID;
+            public IntPtr hSubMenu;
+            public IntPtr hbmpChecked;
+            public IntPtr hbmpUnchecked;
+            public IntPtr dwItemData;
+            public IntPtr dwTypeData;
+            public uint cch;
+            public IntPtr hbmpItem;
+
+            public MENUITEMINFO()
+            {
+                cbSize = Marshal.SizeOf(typeof(MENUITEMINFO));
+            }
+        }
+
         [Flags]
         public enum WindowStyles : uint
         {
@@ -218,6 +240,21 @@ namespace Budford.Control
         /// </summary>
         internal const string NonInterpretedPathPrefix = @"\??\";
 
+        /// <summary>
+        /// Menu stuff
+        /// </summary>
+        internal const int MIIM_STRING = 64;
+
+        /// <summary>
+        /// Windows message pump ID 
+        /// </summary>
+        internal const int WM_COMMAND = 273;
+
+        /// <summary>
+        /// Menu stuff
+        /// </summary>
+        internal const int MFT_STRING = 0;
+
         [Flags]
         internal enum FileAccess : uint
         {
@@ -370,6 +407,21 @@ namespace Budford.Control
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr", SetLastError = true)]
         private static extern WindowStyles SetWindowLong64(IntPtr hWnd, WindowLongIndex nIndex, WindowStyles dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern bool InsertMenu(IntPtr hMenu, Int32 wPosition, Int32 wFlags, Int32 wIDNewItem, string lpNewItem);
+
+        [DllImport("user32.dll")]
+        public static extern int GetMenuItemID(IntPtr hMenu, int nPos);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern bool GetMenuItemInfo(IntPtr hMenu, int uItem, bool fByPosition, MENUITEMINFO lpmii);
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetSubMenu(IntPtr hMenu, int nPos);
 
         public static WindowStyles SetWindowLong(IntPtr hWnd, WindowLongIndex nIndex, WindowStyles dwNewLong)
         {

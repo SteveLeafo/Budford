@@ -331,6 +331,8 @@ namespace Budford.View
             }
         }
 
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+
         /// <summary>
         /// 
         /// </summary>
@@ -349,6 +351,14 @@ namespace Budford.View
                         RegisterStopHotKey(Model);
 
                         Launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
+                        if (game.GameSetting.EnableLogging)
+                        {
+                            // We have enabled logging as a work around, this timer will turn in off once the game starts
+                            timer = new System.Windows.Forms.Timer();
+                            timer.Tick += timer_Tick;
+                            timer.Interval = 20000;
+                            timer.Start();
+                        }
                         if (Model.Settings.CloseCemuOnExit)
                         {
                             if (File.Exists("BudfordsAssassin.exe"))
@@ -360,6 +370,12 @@ namespace Budford.View
                     }
                 }
             }
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            Launcher.cemuController.ToggleLogging();
+            timer.Stop();
         }
 
         /// <summary>
