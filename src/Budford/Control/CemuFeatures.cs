@@ -904,6 +904,10 @@ namespace Budford.Control
             foreach (var currentGame in currentGames)
             {
                 currentGame.GameSetting.OfficialEmulationState = state;
+                if (currentGame.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
+                {
+                    currentGame.GameSetting.EmulationState = state;
+                }
                 currentGame.GameSetting.CompatibilityUrl = url;
             }
         }
