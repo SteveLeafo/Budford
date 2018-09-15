@@ -121,6 +121,7 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox12 = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
@@ -132,7 +133,29 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.label27 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.checkBox13 = new System.Windows.Forms.CheckBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.checkBox14 = new System.Windows.Forms.CheckBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.comboBox11 = new System.Windows.Forms.ComboBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.checkBox15 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -157,6 +180,10 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -165,6 +192,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -572,7 +600,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel5.Controls.Add(this.radioButton1, 2, 5);
             this.tableLayoutPanel5.Controls.Add(this.radioButton2, 2, 6);
             this.tableLayoutPanel5.Controls.Add(this.radioButton3, 2, 7);
@@ -622,7 +650,7 @@
             this.radioButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton1.Location = new System.Drawing.Point(127, 121);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(216, 17);
+            this.radioButton1.Size = new System.Drawing.Size(215, 17);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.Text = "3840x2160";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -633,7 +661,7 @@
             this.radioButton2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton2.Location = new System.Drawing.Point(127, 144);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(216, 17);
+            this.radioButton2.Size = new System.Drawing.Size(215, 17);
             this.radioButton2.TabIndex = 0;
             this.radioButton2.Text = "3200x1800";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -644,7 +672,7 @@
             this.radioButton3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton3.Location = new System.Drawing.Point(127, 167);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(216, 17);
+            this.radioButton3.Size = new System.Drawing.Size(215, 17);
             this.radioButton3.TabIndex = 0;
             this.radioButton3.Text = "2560x1440";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -655,7 +683,7 @@
             this.radioButton4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton4.Location = new System.Drawing.Point(127, 190);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(216, 17);
+            this.radioButton4.Size = new System.Drawing.Size(215, 17);
             this.radioButton4.TabIndex = 0;
             this.radioButton4.Text = "1920x1080";
             this.radioButton4.UseVisualStyleBackColor = true;
@@ -677,7 +705,7 @@
             this.radioButton5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton5.Location = new System.Drawing.Point(127, 246);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(216, 17);
+            this.radioButton5.Size = new System.Drawing.Size(215, 17);
             this.radioButton5.TabIndex = 0;
             this.radioButton5.Text = "960x540";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -711,7 +739,7 @@
             this.radioButton7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton7.Location = new System.Drawing.Point(127, 78);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(216, 17);
+            this.radioButton7.Size = new System.Drawing.Size(215, 17);
             this.radioButton7.TabIndex = 0;
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "No Graphic Pack";
@@ -723,7 +751,7 @@
             this.radioButton8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton8.Location = new System.Drawing.Point(127, 325);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(216, 17);
+            this.radioButton8.Size = new System.Drawing.Size(215, 17);
             this.radioButton8.TabIndex = 0;
             this.radioButton8.Text = "10240x5760";
             this.radioButton8.UseVisualStyleBackColor = true;
@@ -745,7 +773,7 @@
             this.radioButton10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton10.Location = new System.Drawing.Point(127, 348);
             this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(216, 17);
+            this.radioButton10.Size = new System.Drawing.Size(215, 17);
             this.radioButton10.TabIndex = 0;
             this.radioButton10.Text = "7680x4320";
             this.radioButton10.UseVisualStyleBackColor = true;
@@ -756,7 +784,7 @@
             this.radioButton9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton9.Location = new System.Drawing.Point(127, 371);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(216, 17);
+            this.radioButton9.Size = new System.Drawing.Size(215, 17);
             this.radioButton9.TabIndex = 0;
             this.radioButton9.Text = "5120x2880";
             this.radioButton9.UseVisualStyleBackColor = true;
@@ -767,7 +795,7 @@
             this.radioButton6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton6.Location = new System.Drawing.Point(127, 292);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(216, 17);
+            this.radioButton6.Size = new System.Drawing.Size(215, 17);
             this.radioButton6.TabIndex = 0;
             this.radioButton6.Text = "640x360";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -778,7 +806,7 @@
             this.radioButton11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton11.Location = new System.Drawing.Point(127, 269);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(216, 17);
+            this.radioButton11.Size = new System.Drawing.Size(215, 17);
             this.radioButton11.TabIndex = 0;
             this.radioButton11.Text = "854x480";
             this.radioButton11.UseVisualStyleBackColor = true;
@@ -789,7 +817,7 @@
             this.radioButton12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radioButton12.Location = new System.Drawing.Point(127, 213);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(216, 17);
+            this.radioButton12.Size = new System.Drawing.Size(215, 17);
             this.radioButton12.TabIndex = 0;
             this.radioButton12.Text = "1600x900";
             this.radioButton12.UseVisualStyleBackColor = true;
@@ -801,7 +829,7 @@
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(8, 20);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(335, 45);
+            this.label19.Size = new System.Drawing.Size(334, 45);
             this.label19.TabIndex = 2;
             this.label19.Text = "Please note that not all games have graphics packs and those that do may not have" +
     " the selected resolution.  The values set here will be overridden by the per gam" +
@@ -1512,6 +1540,16 @@
             this.checkBox7.Text = "Close Cemu on Exit";
             this.checkBox7.UseVisualStyleBackColor = true;
             // 
+            // checkBox12
+            // 
+            this.checkBox12.AutoSize = true;
+            this.checkBox12.Location = new System.Drawing.Point(13, 164);
+            this.checkBox12.Name = "checkBox12";
+            this.checkBox12.Size = new System.Drawing.Size(123, 17);
+            this.checkBox12.TabIndex = 0;
+            this.checkBox12.Text = "Use Graphics Packs";
+            this.checkBox12.UseVisualStyleBackColor = true;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.tableLayoutPanel9);
@@ -1664,15 +1702,286 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
-            // checkBox12
+            // tabPage5
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(13, 164);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(123, 17);
-            this.checkBox12.TabIndex = 0;
-            this.checkBox12.Text = "Use Graphics Packs";
-            this.checkBox12.UseVisualStyleBackColor = true;
+            this.tabPage5.Controls.Add(this.tableLayoutPanel12);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(391, 485);
+            this.tabPage5.TabIndex = 5;
+            this.tabPage5.Text = "Decaf";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 3;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel12.Controls.Add(this.groupBox10, 1, 0);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 3;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(391, 485);
+            this.tableLayoutPanel12.TabIndex = 0;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.tableLayoutPanel13);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox10.Location = new System.Drawing.Point(8, 3);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(375, 303);
+            this.groupBox10.TabIndex = 0;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Options";
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 5;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
+            this.tableLayoutPanel13.Controls.Add(this.label27, 1, 4);
+            this.tableLayoutPanel13.Controls.Add(this.textBox11, 2, 4);
+            this.tableLayoutPanel13.Controls.Add(this.button9, 3, 4);
+            this.tableLayoutPanel13.Controls.Add(this.label28, 1, 5);
+            this.tableLayoutPanel13.Controls.Add(this.label29, 1, 6);
+            this.tableLayoutPanel13.Controls.Add(this.label30, 1, 7);
+            this.tableLayoutPanel13.Controls.Add(this.checkBox13, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.textBox12, 2, 5);
+            this.tableLayoutPanel13.Controls.Add(this.textBox13, 2, 6);
+            this.tableLayoutPanel13.Controls.Add(this.textBox14, 2, 7);
+            this.tableLayoutPanel13.Controls.Add(this.checkBox14, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label31, 1, 9);
+            this.tableLayoutPanel13.Controls.Add(this.label32, 1, 10);
+            this.tableLayoutPanel13.Controls.Add(this.comboBox10, 2, 9);
+            this.tableLayoutPanel13.Controls.Add(this.comboBox11, 2, 10);
+            this.tableLayoutPanel13.Controls.Add(this.button10, 3, 5);
+            this.tableLayoutPanel13.Controls.Add(this.button11, 3, 6);
+            this.tableLayoutPanel13.Controls.Add(this.button12, 3, 7);
+            this.tableLayoutPanel13.Controls.Add(this.checkBox15, 1, 2);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 12;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(369, 284);
+            this.tableLayoutPanel13.TabIndex = 0;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label27.Location = new System.Drawing.Point(13, 89);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(149, 29);
+            this.label27.TabIndex = 0;
+            this.label27.Text = "Decaf executable";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox11.Location = new System.Drawing.Point(168, 92);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(149, 20);
+            this.textBox11.TabIndex = 1;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(323, 92);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(32, 23);
+            this.button9.TabIndex = 2;
+            this.button9.Text = "[...]";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label28.Location = new System.Drawing.Point(13, 118);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(149, 29);
+            this.label28.TabIndex = 0;
+            this.label28.Text = "mlc path";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label29.Location = new System.Drawing.Point(13, 147);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(149, 29);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "slc path";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label30.Location = new System.Drawing.Point(13, 176);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(149, 29);
+            this.label30.TabIndex = 0;
+            this.label30.Text = "Resource path";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // checkBox13
+            // 
+            this.checkBox13.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.checkBox13, 3);
+            this.checkBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox13.Location = new System.Drawing.Point(13, 3);
+            this.checkBox13.Name = "checkBox13";
+            this.checkBox13.Size = new System.Drawing.Size(342, 17);
+            this.checkBox13.TabIndex = 3;
+            this.checkBox13.Text = "Emulate with Decaf";
+            this.checkBox13.UseVisualStyleBackColor = true;
+            // 
+            // textBox12
+            // 
+            this.textBox12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox12.Location = new System.Drawing.Point(168, 121);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(149, 20);
+            this.textBox12.TabIndex = 1;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox13.Location = new System.Drawing.Point(168, 150);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(149, 20);
+            this.textBox13.TabIndex = 1;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox14.Location = new System.Drawing.Point(168, 179);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(149, 20);
+            this.textBox14.TabIndex = 1;
+            // 
+            // checkBox14
+            // 
+            this.checkBox14.AutoSize = true;
+            this.tableLayoutPanel13.SetColumnSpan(this.checkBox14, 3);
+            this.checkBox14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox14.Location = new System.Drawing.Point(13, 26);
+            this.checkBox14.Name = "checkBox14";
+            this.checkBox14.Size = new System.Drawing.Size(342, 17);
+            this.checkBox14.TabIndex = 3;
+            this.checkBox14.Text = "Enable sound";
+            this.checkBox14.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label31.Location = new System.Drawing.Point(13, 225);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(149, 27);
+            this.label31.TabIndex = 0;
+            this.label31.Text = "Layout";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label32.Location = new System.Drawing.Point(13, 252);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(149, 27);
+            this.label32.TabIndex = 0;
+            this.label32.Text = "Window Mode";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox10
+            // 
+            this.tableLayoutPanel13.SetColumnSpan(this.comboBox10, 2);
+            this.comboBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox10.FormattingEnabled = true;
+            this.comboBox10.Items.AddRange(new object[] {
+            "Toggle",
+            "Split"});
+            this.comboBox10.Location = new System.Drawing.Point(168, 228);
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(187, 21);
+            this.comboBox10.TabIndex = 4;
+            // 
+            // comboBox11
+            // 
+            this.tableLayoutPanel13.SetColumnSpan(this.comboBox11, 2);
+            this.comboBox11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox11.FormattingEnabled = true;
+            this.comboBox11.Items.AddRange(new object[] {
+            "Windowed",
+            "Maximised",
+            "Full Screen",
+            "Borderless Fullscreen"});
+            this.comboBox11.Location = new System.Drawing.Point(168, 255);
+            this.comboBox11.Name = "comboBox11";
+            this.comboBox11.Size = new System.Drawing.Size(187, 21);
+            this.comboBox11.TabIndex = 5;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(323, 121);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(32, 23);
+            this.button10.TabIndex = 2;
+            this.button10.Text = "[...]";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(323, 150);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(32, 23);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "[...]";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(323, 179);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(32, 23);
+            this.button12.TabIndex = 2;
+            this.button12.Text = "[...]";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // checkBox15
+            // 
+            this.checkBox15.AutoSize = true;
+            this.checkBox15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox15.Location = new System.Drawing.Point(13, 49);
+            this.checkBox15.Name = "checkBox15";
+            this.checkBox15.Size = new System.Drawing.Size(149, 17);
+            this.checkBox15.TabIndex = 3;
+            this.checkBox15.Text = "Enable logging";
+            this.checkBox15.UseVisualStyleBackColor = true;
             // 
             // FormEditConfiguration
             // 
@@ -1718,6 +2027,11 @@
             this.groupBox6.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1829,5 +2143,28 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox12;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.CheckBox checkBox13;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.CheckBox checkBox14;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox comboBox10;
+        private System.Windows.Forms.ComboBox comboBox11;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.CheckBox checkBox15;
     }
 }

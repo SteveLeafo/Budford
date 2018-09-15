@@ -92,6 +92,8 @@ namespace Budford.Model
 
         public bool HideWindowWhenCaching = true;
 
+        public DecafSettings Decaf = new DecafSettings();
+
         public int Monitor = 1;
 
         public int GamePadMonitor = 1;

@@ -40,7 +40,7 @@ namespace Budford.View
             checkBox9.Checked = settings.AutomaticallyDownloadLatestEverythingOnStart;
             checkBox10.Checked = settings.BorderlessFullScreen;
             checkBox11.Checked = settings.UpdateDiscordPresence;
-            checkBox12.Checked = settings.UseGraphicPacks;
+            checkBox12.Checked = settings.UseGraphicPacks;            
 
             textBox4.Text = settings.MlcFolder;
             textBox2.Text = settings.SavesFolder;
@@ -103,14 +103,7 @@ namespace Budford.View
             textBox9.Text = settings.Html5AppArgs;
             textBox10.Text = settings.HtmlServerPort.ToString();
 
-            if (modeIn == 1)
-            {
-                tabControl1.SelectTab(1);
-            }
-            else if (modeIn == 2)
-            {
-                tabControl1.SelectTab(2);
-            }
+            tabControl1.SelectTab(modeIn);
 
             comboBox2.SelectedIndex = (int)settings.ConsoleLanguage;
             switch (settings.ConsoleRegion)
@@ -142,6 +135,19 @@ namespace Budford.View
             comboBox4.SelectedIndex = settings.DualCorePriority;
             comboBox5.SelectedIndex = settings.TripleCorePriority;
             comboBox6.SelectedIndex = settings.ShaderPriority;
+
+            // Decaf
+            checkBox13.Checked = settings.Decaf.Enable;
+            checkBox14.Checked = settings.Decaf.Sound;
+            checkBox15.Checked = settings.Decaf.Logging;
+
+            textBox11.Text = settings.Decaf.Executable;
+            textBox12.Text = settings.Decaf.MlcPath;
+            textBox13.Text = settings.Decaf.SlcPath;
+            textBox14.Text = settings.Decaf.ResourcesPath;
+
+            comboBox10.SelectedIndex = settings.Decaf.Layout;
+            comboBox11.SelectedIndex = settings.Decaf.WindowMode;
         }
 
         /// <summary>
@@ -280,6 +286,19 @@ namespace Budford.View
                     settings.ConsoleRegion = Settings.ConsoleRegionType.Taiwan;
                     break;
             }
+
+            // Decaf
+            settings.Decaf.Enable = checkBox13.Checked;
+            settings.Decaf.Sound = checkBox14.Checked;
+            settings.Decaf.Logging = checkBox15.Checked;
+
+            settings.Decaf.Executable = textBox11.Text;
+            settings.Decaf.MlcPath = textBox12.Text;
+            settings.Decaf.SlcPath = textBox13.Text;
+            settings.Decaf.ResourcesPath = textBox14.Text;
+
+            settings.Decaf.Layout = comboBox10.SelectedIndex;
+            settings.Decaf.WindowMode = comboBox11.SelectedIndex;        
 
             base.OnClosing(e);
         }

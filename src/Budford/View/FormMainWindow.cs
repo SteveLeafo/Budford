@@ -1057,6 +1057,16 @@ namespace Budford.View
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+            LaunchConfigurationForm(4);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="tabPageIndex"></param>
         private void LaunchConfigurationForm(int tabPageIndex)
         {
@@ -1169,8 +1179,7 @@ namespace Budford.View
                     gi.GameSetting.ControllerOverride6 = 5;
                     gi.GameSetting.ControllerOverride7 = 5;
                     gi.GameSetting.ControllerOverride8 = 5;
-                }
-          
+                }          
             }
             PopulateListView();
         }

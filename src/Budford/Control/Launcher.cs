@@ -173,60 +173,169 @@ namespace Budford.Control
 
             if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx") && !game.LaunchFile.Contains("Sonic Boom"))
             {
-                string s = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\content\\app\\";
-                string startPage = GetStartPage(game);
-                s += Path.GetDirectoryName(startPage);
-                if (File.Exists(Path.Combine(s, "TV.html")))
-                {
-                    startPage = "TV.html";
-                }
-                myServer = new SimpleHTTPServer(s, modelIn.Settings.HtmlServerPort);        
-
-                start.FileName = modelIn.Settings.Html5App;
-                start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(startPage) + "\"";
-
-                startTime = DateTime.Now;
-                try
-                {
-                    runningProcess = Process.Start(start);
-                }
-                catch (Exception)
-                {
-                    TriggerEarlyExit();
-                }
-                if (runningProcess != null)
-                {
-                    runningProcess.EnableRaisingEvents = true;
-                    runningProcess.Exited += proc_Exited;
-                }
-
-                runningProcess.WaitForInputIdle();
+                LaunchWithWebBrowser(modelIn, game, start);
+            }
+            else if (modelIn.Settings.Decaf.Enable)
+            {
+                LaunchWithDecaf(modelIn, game, getSaveDir, cemuOnly, start);
             }
             else
             {
-                PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
+                LaunchWithCemu(modelIn, game, getSaveDir, cemuOnly, shiftUp, forceFullScreen, start);
+            }
+        }
 
-                // Required since 1.11.2
-                if (runningVersion != null)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelIn"></param>
+        /// <param name="game"></param>
+        /// <param name="getSaveDir"></param>
+        /// <param name="cemuOnly"></param>
+        /// <param name="shiftUp"></param>
+        /// <param name="forceFullScreen"></param>
+        /// <param name="start"></param>
+        private void LaunchWithCemu(Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, bool shiftUp, bool forceFullScreen, ProcessStartInfo start)
+        {
+            PopulateStartInfo(game, getSaveDir, cemuOnly, CemuFeatures.Cemu, start, shiftUp, forceFullScreen);
+
+            // Required since 1.11.2
+            if (runningVersion != null)
+            {
+                start.WorkingDirectory = runningVersion.Folder;
+            }
+
+            // Run the external process & wait for it to finish
+            var parentProcess = Process.GetCurrentProcess();
+            var original = parentProcess.PriorityClass;
+
+            parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+
+            startTime = DateTime.Now;
+            if (runningVersion != null && File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
+            {
+                StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+            }
+            else
+            {
+                TriggerEarlyExit();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelIn"></param>
+        /// <param name="game"></param>
+        /// <param name="getSaveDir"></param>
+        /// <param name="cemuOnly"></param>
+        /// <param name="start"></param>
+        private void LaunchWithDecaf(Model.Model modelIn, GameInformation game, bool getSaveDir, bool cemuOnly, ProcessStartInfo start)
+        {
+            start.FileName = modelIn.Settings.Decaf.Executable;
+
+            UpdateDecafSettings();
+
+            start.Arguments = "play \"" + game.LaunchFile + "\"";
+
+            if (modelIn.Settings.Decaf.Sound)
+            {
+                start.Arguments += " --sound";
+            }
+            // Do you want to show a console window?
+            start.CreateNoWindow = true;
+
+            // Required since 1.11.2
+            if (runningVersion != null)
+            {
+                start.WorkingDirectory = Path.GetDirectoryName(start.FileName);
+            }
+
+            // Run the external process & wait for it to finish
+            var parentProcess = Process.GetCurrentProcess();
+            var original = parentProcess.PriorityClass;
+
+            parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
+
+            startTime = DateTime.Now;
+            if (File.Exists(start.FileName))
+            {
+                StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+            }
+            else
+            {
+                TriggerEarlyExit();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelIn"></param>
+        /// <param name="game"></param>
+        /// <param name="start"></param>
+        private void LaunchWithWebBrowser(Model.Model modelIn, GameInformation game, ProcessStartInfo start)
+        {
+            string s = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\" + Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(game.LaunchFile))) + "\\content\\app\\";
+            string startPage = GetStartPage(game);
+            s += Path.GetDirectoryName(startPage);
+            if (File.Exists(Path.Combine(s, "TV.html")))
+            {
+                startPage = "TV.html";
+            }
+            myServer = new SimpleHTTPServer(s, modelIn.Settings.HtmlServerPort);
+
+            start.FileName = modelIn.Settings.Html5App;
+            start.Arguments = modelIn.Settings.Html5AppArgs + " \"http://localhost:" + modelIn.Settings.HtmlServerPort + "/" + Path.GetFileName(startPage) + "\"";
+
+            startTime = DateTime.Now;
+            try
+            {
+                runningProcess = Process.Start(start);
+            }
+            catch (Exception)
+            {
+                TriggerEarlyExit();
+            }
+            if (runningProcess != null)
+            {
+                runningProcess.EnableRaisingEvents = true;
+                runningProcess.Exited += proc_Exited;
+            }
+
+            runningProcess.WaitForInputIdle();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateDecafSettings()
+        {
+            string decafConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "decaf", "config.toml");
+            string backupConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "decaf", "config.budf");
+            if (File.Exists(decafConfigFile))
+            {
+                if (!File.Exists(backupConfigFile))
                 {
-                    start.WorkingDirectory = runningVersion.Folder;
+                    File.Copy(decafConfigFile, backupConfigFile);
                 }
-
-                // Run the external process & wait for it to finish
-                var parentProcess = Process.GetCurrentProcess();
-                var original = parentProcess.PriorityClass;
-
-                parentProcess.PriorityClass = GetProcessPriority(modelIn.Settings.ShaderPriority);
-
-                startTime = DateTime.Now;
-                if (runningVersion != null && File.Exists(Path.Combine(runningVersion.Folder, start.FileName)))
+                string[] lines = File.ReadAllLines(decafConfigFile);
+                for (int i = 0; i < lines.Length; ++i)
                 {
-                    StartCemuProcess(modelIn, game, getSaveDir, cemuOnly, start, parentProcess, original);
+                    if (lines[i].Contains("layout ="))
+                    {
+                        lines[i] = "    layout = " + (Model.Settings.Decaf.Layout == 0 ? "\"toggle\"" : "\"split\"");
+                    }
+                    if (lines[i].Contains("mode ="))
+                    {
+                        lines[i] = "    mode = " + (Model.Settings.Decaf.WindowMode == 2 ? "\"fullscreen\"" : "\"windowed\"");
+                    }
+                    if (lines[i].Contains("to_file ="))
+                    {
+                        lines[i] = "    to_file = " + (Model.Settings.Decaf.Logging ? "true" : "false");
+                    }
                 }
-                else
-                {
-                    TriggerEarlyExit();
-                }
+                File.WriteAllLines(decafConfigFile, lines);
             }
         }
 
@@ -1114,6 +1223,8 @@ namespace Budford.Control
 
                 SetGamePadViewIfDesired(game);
 
+                NativeMethods.SetForegroundWindow(runningProcess.MainWindowHandle);
+
                 Logger.Log("Cemu process is up and running");
 
                 if (parent != null)
@@ -1384,6 +1495,7 @@ namespace Budford.Control
 
             Rectangle rect = Screen.FromHandle(handle).Bounds;
             NativeMethods.SetWindowPos(handle, 0, rect.X, rect.Y, rect.Width, rect.Height, NativeMethods.SetWindowPosTypes.ShowWindow | NativeMethods.SetWindowPosTypes.NoOwnerZOrder | NativeMethods.SetWindowPosTypes.NoSendChanging);
+            NativeMethods.SetForegroundWindow(handle);
         }
 
         private void HideMenu(IntPtr handle)
