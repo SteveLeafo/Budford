@@ -206,8 +206,15 @@ namespace Budford.View
 
         void DoTheGraphicPack2()
         {
-            string packName = Path.GetFileNameWithoutExtension(uris[5]);
-            unpacker.Unpack(fileNames[5], Path.Combine("graphicsPacks", packName));            
+            try
+            {
+                string packName = Path.GetFileNameWithoutExtension(uris[5]);
+                unpacker.Unpack(fileNames[5], Path.Combine("graphicsPacks", packName));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+            }
         }
 
         private void DoTheCemuHook()

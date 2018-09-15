@@ -34,7 +34,7 @@ namespace Budford.Model
                 if (!game.Value.SaveDir.StartsWith("??"))
                 {
                     if (GameSettings.IsPlayable(game.Value.GameSetting.EmulationState) ||
-                        GameSettings.IsPlayable(game.Value.GameSetting.OfficialEmulationState) && game.Value.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet)
+                        (GameSettings.IsPlayable(game.Value.GameSetting.OfficialEmulationState) && game.Value.GameSetting.EmulationState == GameSettings.EmulationStateType.NotSet))
                     {
                         if (game.Value.GameSetting.PreferedVersion == "Latest")
                         {
