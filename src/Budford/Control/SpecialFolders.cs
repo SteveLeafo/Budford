@@ -48,14 +48,17 @@ namespace Budford.Control
         /// <param name="version"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static string CommonUserFolderCemu(InstalledVersion version, GameInformation game)
+        internal static string CommonUserFolderCemu(Model.Model model, InstalledVersion version, GameInformation game)
         {
             string gameId = game.TitleId.Replace("00050000", "");
-            if (version.VersionNumber >= 1110)
+            string emulatorFolder = model.Settings.Decaf.Enable ? Path.GetDirectoryName(model.Settings.Decaf.Executable) : version.Folder;
+            string mlcFolder = model.Settings.Decaf.Enable ? "mlc" : "mlc01";
+
+            if (version.VersionNumber >= 1110 || model.Settings.Decaf.Enable)
             {
-                return Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user", "common");
+                return Path.Combine(emulatorFolder, "mlc01", "usr", "save", "00050000", gameId, "user", "common");
             }
-            return Path.Combine(version.Folder, "mlc01", "emulatorSave", game.SaveDir + "_255");
+            return Path.Combine(emulatorFolder, "mlc01", "emulatorSave", game.SaveDir + "_255");
         }
 
         /// <summary>
@@ -64,14 +67,18 @@ namespace Budford.Control
         /// <param name="version"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        internal static string CurrentUserSaveDirCemu(InstalledVersion version, GameInformation game)
+        internal static string CurrentUserSaveDirCemu(Model.Model model, InstalledVersion version, GameInformation game)
         {
             string gameId = game.TitleId.Replace("00050000", "");
-            if (version.VersionNumber >= 1110)
+
+            string emulatorFolder = model.Settings.Decaf.Enable ? Path.GetDirectoryName(model.Settings.Decaf.Executable) : version.Folder;
+            string mlcFolder = model.Settings.Decaf.Enable ? "mlc" : "mlc01";
+
+            if (version.VersionNumber >= 1110 || model.Settings.Decaf.Enable)
             {
-                return Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user", "80000001");
+                return Path.Combine(emulatorFolder, mlcFolder, "usr", "save", "00050000", gameId, "user", "80000001");
             }
-            return Path.Combine(version.Folder, "mlc01", "emulatorSave", game.SaveDir);
+            return Path.Combine(emulatorFolder, "mlc01", "emulatorSave", game.SaveDir);
         }
 
         #endregion

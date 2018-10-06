@@ -156,6 +156,10 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.checkBox15 = new System.Windows.Forms.CheckBox();
+            this.comboBox12 = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.comboBox13 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -1723,8 +1727,8 @@
             this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 3;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(391, 485);
             this.tableLayoutPanel12.TabIndex = 0;
@@ -1735,7 +1739,7 @@
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(8, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(375, 303);
+            this.groupBox10.Size = new System.Drawing.Size(375, 389);
             this.groupBox10.TabIndex = 0;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Options";
@@ -1767,10 +1771,14 @@
             this.tableLayoutPanel13.Controls.Add(this.button11, 3, 6);
             this.tableLayoutPanel13.Controls.Add(this.button12, 3, 7);
             this.tableLayoutPanel13.Controls.Add(this.checkBox15, 1, 2);
+            this.tableLayoutPanel13.Controls.Add(this.comboBox12, 2, 13);
+            this.tableLayoutPanel13.Controls.Add(this.label33, 1, 13);
+            this.tableLayoutPanel13.Controls.Add(this.label34, 1, 11);
+            this.tableLayoutPanel13.Controls.Add(this.comboBox13, 2, 11);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 12;
+            this.tableLayoutPanel13.RowCount = 15;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1783,7 +1791,10 @@
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(369, 284);
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(369, 370);
             this.tableLayoutPanel13.TabIndex = 0;
             // 
             // label27
@@ -1813,6 +1824,7 @@
             this.button9.TabIndex = 2;
             this.button9.Text = "[...]";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label28
             // 
@@ -1982,6 +1994,54 @@
             this.checkBox15.TabIndex = 3;
             this.checkBox15.Text = "Enable logging";
             this.checkBox15.UseVisualStyleBackColor = true;
+            // 
+            // comboBox12
+            // 
+            this.tableLayoutPanel13.SetColumnSpan(this.comboBox12, 2);
+            this.comboBox12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox12.FormattingEnabled = true;
+            this.comboBox12.Items.AddRange(new object[] {
+            "Keyboard",
+            "Controller"});
+            this.comboBox12.Location = new System.Drawing.Point(168, 329);
+            this.comboBox12.Name = "comboBox12";
+            this.comboBox12.Size = new System.Drawing.Size(187, 21);
+            this.comboBox12.TabIndex = 5;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label33.Location = new System.Drawing.Point(13, 326);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(149, 27);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "Input";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label34.Location = new System.Drawing.Point(13, 279);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(149, 27);
+            this.label34.TabIndex = 0;
+            this.label34.Text = "Backend";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox13
+            // 
+            this.tableLayoutPanel13.SetColumnSpan(this.comboBox13, 2);
+            this.comboBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox13.FormattingEnabled = true;
+            this.comboBox13.Items.AddRange(new object[] {
+            "Vulkan",
+            "OpenGL"});
+            this.comboBox13.Location = new System.Drawing.Point(168, 282);
+            this.comboBox13.Name = "comboBox13";
+            this.comboBox13.Size = new System.Drawing.Size(187, 21);
+            this.comboBox13.TabIndex = 5;
             // 
             // FormEditConfiguration
             // 
@@ -2166,5 +2226,9 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.CheckBox checkBox15;
+        private System.Windows.Forms.ComboBox comboBox12;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox comboBox13;
     }
 }

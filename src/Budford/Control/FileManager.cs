@@ -405,6 +405,28 @@ namespace Budford.Control
             return true;
         }
 
+        internal static bool SafeDeleteDirectory(string newDirectory, bool recurse)
+        {
+            if (newDirectory == null)
+            {
+                return false;
+            }
+            try
+            {
+                Logger.Log("Deleting directory: " + newDirectory);
+                if (Directory.Exists(newDirectory))
+                {
+                    Directory.Delete(newDirectory, true);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
         internal static void OpenSaveFileLocation(Model.Model model, InstalledVersion version)
         {
             if (version.VersionNumber < 1110)

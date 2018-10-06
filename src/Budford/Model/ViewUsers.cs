@@ -250,7 +250,7 @@ namespace Budford.Model
             {
                 foreach (var version in model.Settings.InstalledVersions)
                 {
-                    DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game.Value));
+                    DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(model, version, game.Value));
 
                     string lockFileName = Path.Combine(dest.FullName, "Budford.lck");
                     FileManager.SafeDelete(lockFileName);

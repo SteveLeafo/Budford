@@ -14,6 +14,8 @@ namespace Budford.Model
 
         public int WindowMode = 0;
         public int Layout = 0;
+        public int Input = 0;
+        public int Backend = 1;
 
         public string Executable = "";
         public string MlcPath = "mlc";

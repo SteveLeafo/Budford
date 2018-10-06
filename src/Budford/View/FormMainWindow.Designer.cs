@@ -163,6 +163,16 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.showDecafStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.perfectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.playableToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.runsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.unplayableToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.notSetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.allToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new Budford.View.CustomToolStripButton();
             this.toolStripButton3 = new Budford.View.CustomToolStripButton();
             this.toolStripButton4 = new Budford.View.CustomToolStripButton();
@@ -478,6 +488,7 @@
             this.ratingToolStripMenuItem,
             this.showOfficialStatusToolStripMenuItem,
             this.showStatusToolStripMenuItem,
+            this.showDecafStatusToolStripMenuItem,
             this.fixToolStripMenuItem,
             this.showTypeToolStripMenuItem,
             this.wiiUNativeToolStripMenuItem});
@@ -658,55 +669,55 @@
             // perfectToolStripMenuItem
             // 
             this.perfectToolStripMenuItem.Name = "perfectToolStripMenuItem";
-            this.perfectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.perfectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.perfectToolStripMenuItem.Text = "Perfect";
             // 
             // playableToolStripMenuItem
             // 
             this.playableToolStripMenuItem.Name = "playableToolStripMenuItem";
-            this.playableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.playableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.playableToolStripMenuItem.Text = "Playable";
             // 
             // runsToolStripMenuItem
             // 
             this.runsToolStripMenuItem.Name = "runsToolStripMenuItem";
-            this.runsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.runsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.runsToolStripMenuItem.Text = "Runs";
             // 
             // loadsToolStripMenuItem
             // 
             this.loadsToolStripMenuItem.Name = "loadsToolStripMenuItem";
-            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.loadsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadsToolStripMenuItem.Text = "Loads";
             // 
             // unplayableToolStripMenuItem
             // 
             this.unplayableToolStripMenuItem.Name = "unplayableToolStripMenuItem";
-            this.unplayableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.unplayableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.unplayableToolStripMenuItem.Text = "Unplayable";
             // 
             // notSetToolStripMenuItem
             // 
             this.notSetToolStripMenuItem.Name = "notSetToolStripMenuItem";
-            this.notSetToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.notSetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.notSetToolStripMenuItem.Text = "Not Set";
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(149, 6);
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.allToolStripMenuItem.Text = "All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
             // 
@@ -1207,6 +1218,77 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Budford is running in the background.";
             // 
+            // showDecafStatusToolStripMenuItem
+            // 
+            this.showDecafStatusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.perfectToolStripMenuItem1,
+            this.playableToolStripMenuItem1,
+            this.runsToolStripMenuItem1,
+            this.loadsToolStripMenuItem1,
+            this.unplayableToolStripMenuItem1,
+            this.notSetToolStripMenuItem1,
+            this.toolStripSeparator20,
+            this.allToolStripMenuItem6,
+            this.noneToolStripMenuItem6});
+            this.showDecafStatusToolStripMenuItem.Name = "showDecafStatusToolStripMenuItem";
+            this.showDecafStatusToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.showDecafStatusToolStripMenuItem.Text = "Show Decaf Status";
+            // 
+            // perfectToolStripMenuItem1
+            // 
+            this.perfectToolStripMenuItem1.Name = "perfectToolStripMenuItem1";
+            this.perfectToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.perfectToolStripMenuItem1.Text = "Perfect";
+            // 
+            // playableToolStripMenuItem1
+            // 
+            this.playableToolStripMenuItem1.Name = "playableToolStripMenuItem1";
+            this.playableToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.playableToolStripMenuItem1.Text = "Playable";
+            // 
+            // runsToolStripMenuItem1
+            // 
+            this.runsToolStripMenuItem1.Name = "runsToolStripMenuItem1";
+            this.runsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.runsToolStripMenuItem1.Text = "Runs";
+            // 
+            // loadsToolStripMenuItem1
+            // 
+            this.loadsToolStripMenuItem1.Name = "loadsToolStripMenuItem1";
+            this.loadsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.loadsToolStripMenuItem1.Text = "Loads";
+            // 
+            // unplayableToolStripMenuItem1
+            // 
+            this.unplayableToolStripMenuItem1.Name = "unplayableToolStripMenuItem1";
+            this.unplayableToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.unplayableToolStripMenuItem1.Text = "Unplayable";
+            // 
+            // notSetToolStripMenuItem1
+            // 
+            this.notSetToolStripMenuItem1.Name = "notSetToolStripMenuItem1";
+            this.notSetToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.notSetToolStripMenuItem1.Text = "Not Set";
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(149, 6);
+            // 
+            // allToolStripMenuItem6
+            // 
+            this.allToolStripMenuItem6.Name = "allToolStripMenuItem6";
+            this.allToolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.allToolStripMenuItem6.Text = "All";
+            this.allToolStripMenuItem6.Click += new System.EventHandler(this.allToolStripMenuItem6_Click);
+            // 
+            // noneToolStripMenuItem6
+            // 
+            this.noneToolStripMenuItem6.Name = "noneToolStripMenuItem6";
+            this.noneToolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem6.Text = "None";
+            this.noneToolStripMenuItem6.Click += new System.EventHandler(this.noneToolStripMenuItem6_Click);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisbledImage = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.DisbledImage")));
@@ -1435,6 +1517,16 @@
         private System.Windows.Forms.ToolStripMenuItem decafToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private System.Windows.Forms.ToolStripMenuItem showDecafStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem perfectToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem playableToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem runsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem loadsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem unplayableToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem notSetToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem6;
     }
 }
 

@@ -36,7 +36,7 @@ namespace Budford.Tools
         {
             foreach (var version in model.Settings.InstalledVersions)
             {
-                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(version, game));
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(model, version, game));
                 FileInfo fi = GetNewestFile(src);
                 if (fi != null)
                 {
@@ -63,8 +63,8 @@ namespace Budford.Tools
 
         private void CopySaveFolder(Model.GameInformation game, Model.InstalledVersion latest)
         {
-            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(latest, game));
-            DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(latest, game));
+            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(model, latest, game));
+            DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(model, latest, game));
 
             DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, model.CurrentUser, game, ""));
             DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(model, game, ""));

@@ -180,6 +180,8 @@ namespace Budford.Control
                 {"1.12.2", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.13.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.13.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.13.2", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.13.3", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.14.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.14.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"12.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) }

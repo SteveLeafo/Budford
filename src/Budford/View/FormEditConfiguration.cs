@@ -148,6 +148,8 @@ namespace Budford.View
 
             comboBox10.SelectedIndex = settings.Decaf.Layout;
             comboBox11.SelectedIndex = settings.Decaf.WindowMode;
+            comboBox12.SelectedIndex = settings.Decaf.Input;
+            comboBox13.SelectedIndex = settings.Decaf.Backend;
         }
 
         /// <summary>
@@ -298,7 +300,9 @@ namespace Budford.View
             settings.Decaf.ResourcesPath = textBox14.Text;
 
             settings.Decaf.Layout = comboBox10.SelectedIndex;
-            settings.Decaf.WindowMode = comboBox11.SelectedIndex;        
+            settings.Decaf.WindowMode = comboBox11.SelectedIndex;
+            settings.Decaf.Backend = comboBox13.SelectedIndex;
+            settings.Decaf.Input = comboBox12.SelectedIndex;
 
             base.OnClosing(e);
         }
@@ -401,6 +405,19 @@ namespace Budford.View
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     textBox3.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    textBox11.Text = fbd.SelectedPath;
                 }
             }
         }

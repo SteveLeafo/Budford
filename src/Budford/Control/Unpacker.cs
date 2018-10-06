@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Budford.Properties;
 using Budford.Utilities;
 using Budford.View;
+using System;
 
 namespace Budford.Control
 {
@@ -67,39 +68,46 @@ namespace Budford.Control
         /// <param name="overwrite"></param>
         static public void ExtractToDirectory(string archive, string destinationDirectoryName, bool overwrite)
         {
-            if (!overwrite)
+            try
             {
-                ZipFile.ExtractToDirectory(archive, destinationDirectoryName);
-                return;
-            }
-
-            if (!File.Exists(archive))
-            {
-                return;
-            }
-
-            if (destinationDirectoryName == null)
-            {
-                return;
-            }
-
-            if (archive == null)
-            {
-                return;
-            }
-
-            ZipArchive zipArchive = ZipFile.OpenRead(archive);
-            foreach (ZipArchiveEntry file in zipArchive.Entries)
-            {
-                string completeFileName = Path.Combine(destinationDirectoryName, file.FullName);
-                string directory = Path.GetDirectoryName(completeFileName);
-
-                FileManager.SafeCreateDirectory(directory);
-
-                if (file.Name != "")
+                if (!overwrite)
                 {
-                    ExtractFile(file, completeFileName);
+                    ZipFile.ExtractToDirectory(archive, destinationDirectoryName);
+                    return;
                 }
+
+                if (!File.Exists(archive))
+                {
+                    return;
+                }
+
+                if (destinationDirectoryName == null)
+                {
+                    return;
+                }
+
+                if (archive == null)
+                {
+                    return;
+                }
+
+                ZipArchive zipArchive = ZipFile.OpenRead(archive);
+                foreach (ZipArchiveEntry file in zipArchive.Entries)
+                {
+                    string completeFileName = Path.Combine(destinationDirectoryName, file.FullName);
+                    string directory = Path.GetDirectoryName(completeFileName);
+
+                    FileManager.SafeCreateDirectory(directory);
+
+                    if (file.Name != "")
+                    {
+                        ExtractFile(file, completeFileName);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Log(e.Message);
             }
         }
 

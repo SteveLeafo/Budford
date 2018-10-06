@@ -18,14 +18,17 @@ namespace Budford.Control
                 {
                     if (CheckStatusFilter(model, game))
                     {
-                        if (CheckOfficialStatusFilter(model, game))
+                        if (CheckDecafStatusFilter(model, game))
                         {
-                            if (CheckRatingFilter(model, game))
+                            if (CheckOfficialStatusFilter(model, game))
                             {
-                                if (CheckTypeFilter(model, game))
+                                if (CheckRatingFilter(model, game))
                                 {
-                                    //if (game.GameSetting.EmulationState != game.GameSetting.OfficialEmulationState)
+                                    if (CheckTypeFilter(model, game))
+                                    {
+                                        //if (game.GameSetting.EmulationState != game.GameSetting.OfficialEmulationState)
                                         return true;
+                                    }
                                 }
                             }
                         }
@@ -89,6 +92,38 @@ namespace Budford.Control
                     break;
                 case GameSettings.EmulationStateType.Unplayable:
                     if (!model.Filters.ViewStatusUnplayable) return false;
+                    break;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        internal static bool CheckDecafStatusFilter(Model.Model model, GameInformation game)
+        {
+            switch (game.GameSetting.DecafEmulationState)
+            {
+                case GameSettings.EmulationStateType.NotSet:
+                    if (!model.Filters.ViewDecafStatusNotSet) return false;
+                    break;
+                case GameSettings.EmulationStateType.Perfect:
+                    if (!model.Filters.ViewDecafStatusPerfect) return false;
+                    break;
+                case GameSettings.EmulationStateType.Playable:
+                    if (!model.Filters.ViewDecafStatusPlayable) return false;
+                    break;
+                case GameSettings.EmulationStateType.Runs:
+                    if (!model.Filters.ViewDecafStatusRuns) return false;
+                    break;
+                case GameSettings.EmulationStateType.Loads:
+                    if (!model.Filters.ViewDecafStatusLoads) return false;
+                    break;
+                case GameSettings.EmulationStateType.Unplayable:
+                    if (!model.Filters.ViewDecafStatusUnplayable) return false;
                     break;
             }
             return true;

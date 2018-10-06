@@ -32,6 +32,14 @@ namespace Budford.Model
         public bool ViewStatusLoads = true;
         public bool ViewStatusUnplayable = true;
 
+        // Decaf Status
+        public bool ViewDecafStatusNotSet = true;
+        public bool ViewDecafStatusPerfect = true;
+        public bool ViewDecafStatusPlayable = true;
+        public bool ViewDecafStatusRuns = true;
+        public bool ViewDecafStatusLoads = true;
+        public bool ViewDecafStatusUnplayable = true;
+
         // Official Status
         public bool ViewOfficialStatusNotSet = true;
         public bool ViewOfficialStatusPerfect = true;
@@ -282,6 +290,54 @@ namespace Budford.Model
         /// </summary>
         /// <param name="model"></param>
         /// <param name="mainWindow"></param>
+        internal static void AllDecafStatus(Model model, FormMainWindow mainWindow)
+        {
+            model.Filters.ViewDecafStatusPerfect = true;
+            model.Filters.ViewDecafStatusPlayable = true;
+            model.Filters.ViewDecafStatusRuns = true;
+            model.Filters.ViewDecafStatusLoads = true;
+            model.Filters.ViewDecafStatusUnplayable = true;
+            model.Filters.ViewDecafStatusNotSet = true;
+
+            mainWindow.DecafPerfectToolStripMenuItem.Checked = model.Filters.ViewDecafStatusPerfect;
+            mainWindow.DecafPlayableToolStripMenuItem.Checked = model.Filters.ViewDecafStatusPlayable;
+            mainWindow.DecafRunsToolStripMenuItem.Checked = model.Filters.ViewDecafStatusRuns;
+            mainWindow.DecafLoadsToolStripMenuItem.Checked = model.Filters.ViewDecafStatusLoads;
+            mainWindow.DecafUnplayableToolStripMenuItem.Checked = model.Filters.ViewDecafStatusUnplayable;
+            mainWindow.DecafNotSetToolStripMenuItem.Checked = model.Filters.ViewDecafStatusNotSet;
+
+            mainWindow.PopulateListView();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="mainWindow"></param>
+        internal static void NoDecafStatus(Model model, FormMainWindow mainWindow)
+        {
+            model.Filters.ViewDecafStatusPerfect = false;
+            model.Filters.ViewDecafStatusPlayable = false;
+            model.Filters.ViewDecafStatusRuns = false;
+            model.Filters.ViewDecafStatusLoads = false;
+            model.Filters.ViewDecafStatusUnplayable = false;
+            model.Filters.ViewDecafStatusNotSet = false;
+
+            mainWindow.DecafPerfectToolStripMenuItem.Checked = model.Filters.ViewDecafStatusPerfect;
+            mainWindow.DecafPlayableToolStripMenuItem.Checked = model.Filters.ViewDecafStatusPlayable;
+            mainWindow.DecafRunsToolStripMenuItem.Checked = model.Filters.ViewDecafStatusRuns;
+            mainWindow.DecafLoadsToolStripMenuItem.Checked = model.Filters.ViewDecafStatusLoads;
+            mainWindow.DecafUnplayableToolStripMenuItem.Checked = model.Filters.ViewDecafStatusUnplayable;
+            mainWindow.DecafNotSetToolStripMenuItem.Checked = model.Filters.ViewDecafStatusNotSet;
+
+            mainWindow.PopulateListView();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="mainWindow"></param>
         internal static void NoStatus(Model model, FormMainWindow mainWindow)
         {
             model.Filters.ViewStatusPerfect = false;
@@ -334,6 +390,13 @@ namespace Budford.Model
             mainWindow.UnplayableToolStripMenuItem.Checked = model.Filters.ViewStatusUnplayable;
             mainWindow.NotSetToolStripMenuItem.Checked = model.Filters.ViewStatusNotSet;
 
+            mainWindow.DecafPerfectToolStripMenuItem.Checked = model.Filters.ViewDecafStatusPerfect;
+            mainWindow.DecafPlayableToolStripMenuItem.Checked = model.Filters.ViewDecafStatusPlayable;
+            mainWindow.DecafRunsToolStripMenuItem.Checked = model.Filters.ViewDecafStatusRuns;
+            mainWindow.DecafLoadsToolStripMenuItem.Checked = model.Filters.ViewDecafStatusLoads;
+            mainWindow.DecafUnplayableToolStripMenuItem.Checked = model.Filters.ViewDecafStatusUnplayable;
+            mainWindow.DecafNotSetToolStripMenuItem.Checked = model.Filters.ViewDecafStatusNotSet;
+
             mainWindow.OfficiallyPerfectToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPerfect;
             mainWindow.OfficiallyPlayableToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusPlayable;
             mainWindow.OfficiallyRunsToolStripMenuItem.Checked = model.Filters.ViewOfficialStatusRuns;
@@ -377,6 +440,13 @@ namespace Budford.Model
             model.Filters.ViewStatusLoads = mainWindow.LoadsToolStripMenuItem.Checked;
             model.Filters.ViewStatusUnplayable = mainWindow.UnplayableToolStripMenuItem.Checked;
             model.Filters.ViewStatusNotSet = mainWindow.NotSetToolStripMenuItem.Checked;
+
+            model.Filters.ViewDecafStatusPerfect = mainWindow.DecafPerfectToolStripMenuItem.Checked;
+            model.Filters.ViewDecafStatusPlayable = mainWindow.DecafPlayableToolStripMenuItem.Checked;
+            model.Filters.ViewDecafStatusRuns = mainWindow.DecafRunsToolStripMenuItem.Checked;
+            model.Filters.ViewDecafStatusLoads = mainWindow.DecafLoadsToolStripMenuItem.Checked;
+            model.Filters.ViewDecafStatusUnplayable = mainWindow.DecafUnplayableToolStripMenuItem.Checked;
+            model.Filters.ViewDecafStatusNotSet = mainWindow.DecafNotSetToolStripMenuItem.Checked;
 
             model.Filters.ViewOfficialStatusPerfect = mainWindow.OfficiallyPerfectToolStripMenuItem.Checked;
             model.Filters.ViewOfficialStatusPlayable = mainWindow.OfficiallyPlayableToolStripMenuItem.Checked;

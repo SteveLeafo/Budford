@@ -16,7 +16,6 @@ namespace Budford.Control
 {
     internal class Launcher
     {
-
         /// <summary>
         /// 
         /// </summary>
@@ -115,7 +114,7 @@ namespace Budford.Control
                 return;
             }
 
-            if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe))
+            if (File.Exists(cemu) || File.Exists(modelIn.Settings.WineExe) || modelIn.Settings.Decaf.Enable)
             {
                 if (modelIn.Settings.UpdateDiscordPresence)
                 {
@@ -175,7 +174,7 @@ namespace Budford.Control
             {
                 LaunchWithWebBrowser(modelIn, game, start);
             }
-            else if (modelIn.Settings.Decaf.Enable)
+            else if (game != null && modelIn.Settings.Decaf.Enable)
             {
                 LaunchWithDecaf(modelIn, game, getSaveDir, cemuOnly, start);
             }
@@ -333,6 +332,14 @@ namespace Budford.Control
                     if (lines[i].Contains("to_file ="))
                     {
                         lines[i] = "    to_file = " + (Model.Settings.Decaf.Logging ? "true" : "false");
+                    }
+                    if (lines[i].Contains("backend ="))
+                    {
+                        lines[i] = "    backend = " + (Model.Settings.Decaf.Backend == 1 ? "\"opengl\"" : "\"vulkan\"");
+                    }
+                    if (lines[i].Contains("vpad0 ="))
+                    {
+                        lines[i] = "    vpad0 = " + (Model.Settings.Decaf.Input == 0 ? "\"default_keyboard\"" : "\"default_joystick\"");
                     }
                 }
                 File.WriteAllLines(decafConfigFile, lines);
@@ -525,7 +532,7 @@ namespace Budford.Control
             if (!game.SaveDir.StartsWith("??"))
             {
                 DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, game, ""));
-                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(runningVersion, game));
+                DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(Model, runningVersion, game));
 
                 string lockFileName = Path.Combine(dest.FullName, "Budford.lck");
                 if (File.Exists(lockFileName))
@@ -539,7 +546,7 @@ namespace Budford.Control
                 UpdateFolder(src, dest, true);
 
                 src = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, game, ""));
-                dest = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
+                dest = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(Model, runningVersion, game));
                 UpdateFolder(src, dest);
 
                 CreateLockFile(lockFileName);
@@ -569,11 +576,8 @@ namespace Budford.Control
         {
             if (smashIt)
             {
-                if (Directory.Exists(dest.FullName))
-                {
-                    dest.Delete(true);
-                }
-                dest.Create();
+                FileManager.SafeDeleteDirectory(dest.FullName, true);
+                FileManager.SafeCreateDirectory(dest.FullName);
             }
 
             if (Directory.Exists(src.FullName))
@@ -705,9 +709,10 @@ namespace Budford.Control
         private void CopySaves()
         {
             // Copy saves
-            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(runningVersion, runningGame));
+            DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(Model, runningVersion, runningGame));
             DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(Model, Model.CurrentUser, runningGame, ""));
-            DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, runningGame));
+
+            DirectoryInfo src255 = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(Model, runningVersion, runningGame));
             DirectoryInfo dest255 = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(Model, runningGame, ""));
             if (Directory.Exists(src.FullName))
             {
@@ -1448,11 +1453,11 @@ namespace Budford.Control
                 DirectoryInfo saveDir = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, "", game, ""));
                 string snapShotDir = "S_" + saveDir.EnumerateDirectories().Count();
 
-                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(runningVersion, game));
+                DirectoryInfo src = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirCemu(model, runningVersion, game));
                 DirectoryInfo dest = new DirectoryInfo(SpecialFolders.CurrentUserSaveDirBudford(model, model.CurrentUser, game, snapShotDir));
                 UpdateFolder(src, dest);
 
-                src = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(runningVersion, game));
+                src = new DirectoryInfo(SpecialFolders.CommonUserFolderCemu(model, runningVersion, game));
                 dest = new DirectoryInfo(SpecialFolders.CommonSaveDirBudford(model, game, snapShotDir));
 
                 UpdateFolder(src, dest);

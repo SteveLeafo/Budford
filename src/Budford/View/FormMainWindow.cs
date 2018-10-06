@@ -51,6 +51,13 @@ namespace Budford.View
         internal ToolStripMenuItem UnplayableToolStripMenuItem { get { return unplayableToolStripMenuItem; } }
         internal ToolStripMenuItem NotSetToolStripMenuItem { get { return notSetToolStripMenuItem; } }
 
+        internal ToolStripMenuItem DecafPerfectToolStripMenuItem { get { return perfectToolStripMenuItem1; } }
+        internal ToolStripMenuItem DecafPlayableToolStripMenuItem { get { return playableToolStripMenuItem1; } }
+        internal ToolStripMenuItem DecafRunsToolStripMenuItem { get { return runsToolStripMenuItem1; } }
+        internal ToolStripMenuItem DecafLoadsToolStripMenuItem { get { return loadsToolStripMenuItem1; } }
+        internal ToolStripMenuItem DecafUnplayableToolStripMenuItem { get { return unplayableToolStripMenuItem1; } }
+        internal ToolStripMenuItem DecafNotSetToolStripMenuItem { get { return notSetToolStripMenuItem1; } }
+
         // ReSharper disable once InconsistentNaming
         public string launchGame = "";
         public bool LaunchFull = true;
@@ -327,7 +334,16 @@ namespace Budford.View
             }
             else
             {
-                e.Handled = FindMyString(keyChar);
+                //if (keyChar == "U" && listView1.SelectedItems.Count == 1)
+                //{
+                //    GameInformation game = Model.GameData[listView1.SelectedItems[0].SubItems[4].Text.TrimEnd(' ')];
+                //    game.GameSetting.DecafEmulationState = GameSettings.EmulationStateType.Unplayable;
+                //    RefreshList(game);
+                //}
+                //else
+                {
+                    e.Handled = FindMyString(keyChar);
+                }
             }
         }
 
@@ -536,6 +552,13 @@ namespace Budford.View
             unplayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             notSetToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
 
+            perfectToolStripMenuItem1.Click += UsaToolStripMenuItem_Click;
+            playableToolStripMenuItem1.Click += UsaToolStripMenuItem_Click;
+            runsToolStripMenuItem1.Click += UsaToolStripMenuItem_Click;
+            loadsToolStripMenuItem1.Click += UsaToolStripMenuItem_Click;
+            unplayableToolStripMenuItem1.Click += UsaToolStripMenuItem_Click;
+            notSetToolStripMenuItem1.Click += UsaToolStripMenuItem_Click;
+
             officiallyPerfectToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             officiallyPlayableToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
             officiallyRunsToolStripMenuItem.Click += UsaToolStripMenuItem_Click;
@@ -672,6 +695,7 @@ namespace Budford.View
                 lvi.SubItems.Add(game.Value.GameSetting.OfficialEmulationState + " <- " + game.Value.GameSetting.PreviousOfficialEmulationState);
             }
             lvi.SubItems.Add(game.Value.GameSetting.EmulationState + "        ");
+            lvi.SubItems.Add(game.Value.GameSetting.DecafEmulationState + "        ");
             lvi.SubItems.Add(game.Value.SaveDir.Trim());
             lvi.SubItems.Add(game.Value.Type.Trim() + " ");
             lvi.SubItems.Add(game.Value.LastPlayed != DateTime.MinValue ? game.Value.LastPlayed.ToShortDateString() + " " : "                    ");
@@ -699,6 +723,7 @@ namespace Budford.View
             listView1.Columns.Add("Cemu Version", 100);
             listView1.Columns.Add("Official Status", 100);
             listView1.Columns.Add("Status", 100);
+            listView1.Columns.Add("Decaf Status", 100);
             listView1.Columns.Add("SaveDir", 75);
             listView1.Columns.Add("Type", 50);
             listView1.Columns.Add("Last Played", 50);
@@ -784,7 +809,7 @@ namespace Budford.View
                 ListViewItem lvi =  listView1.FindItemWithText(Model.CurrentId, true, 0);
                 if (lvi != null)
                 { 
-                    lvi.SubItems[10].Text = savedDir;
+                    lvi.SubItems[11].Text = savedDir;
                     ResizeColumnHeaders();
                 }
             }
@@ -806,10 +831,11 @@ namespace Budford.View
                     listView1.SelectedItems[0].SubItems[7].Text = game.GameSetting.PreferedVersion;
                     listView1.SelectedItems[0].SubItems[8].Text = game.GameSetting.OfficialEmulationState.ToString();
                     listView1.SelectedItems[0].SubItems[9].Text = game.GameSetting.EmulationState.ToString();
-                    listView1.SelectedItems[0].SubItems[12].Text = game.LastPlayed != DateTime.MinValue ? game.LastPlayed.ToShortDateString() + " " : "                    ";
-                    listView1.SelectedItems[0].SubItems[13].Text = game.PlayCount != 0 ? game.PlayCount + "                 " : "                 ";
-                    listView1.SelectedItems[0].SubItems[15].Text = game.Rating + Resources.FormMainWindow_RefreshList__________________;
-                    listView1.SelectedItems[0].SubItems[16].Text = game.Comments + Resources.FormMainWindow_RefreshList__________________;
+                    listView1.SelectedItems[0].SubItems[10].Text = game.GameSetting.DecafEmulationState.ToString();
+                    listView1.SelectedItems[0].SubItems[13].Text = game.LastPlayed != DateTime.MinValue ? game.LastPlayed.ToShortDateString() + " " : "                    ";
+                    listView1.SelectedItems[0].SubItems[14].Text = game.PlayCount != 0 ? game.PlayCount + "                 " : "                 ";
+                    listView1.SelectedItems[0].SubItems[16].Text = game.Rating + Resources.FormMainWindow_RefreshList__________________;
+                    listView1.SelectedItems[0].SubItems[17].Text = game.Comments + Resources.FormMainWindow_RefreshList__________________;
                 }
             }
         }      
@@ -1668,6 +1694,16 @@ namespace Budford.View
         private void FormMainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Logger.Log("Closed");
+        }
+
+        private void allToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            ViewFilters.AllDecafStatus(Model, this);
+        }
+
+        private void noneToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            ViewFilters.NoDecafStatus(Model, this);
         }
     }
 }

@@ -138,6 +138,7 @@ namespace Budford.View
             SetPreferedVersion(information.GameSetting.PreferedVersion);
             comboBox2.SelectedIndex = (int)information.GameSetting.OfficialEmulationState;
             comboBox19.SelectedIndex = (int)information.GameSetting.EmulationState;
+            comboBox64.SelectedIndex = (int)information.GameSetting.DecafEmulationState;
             comboBox20.SelectedIndex = (information.Rating - 5) * -1;
 
             comboBox3.SelectedIndex = information.GameSetting.FullScreen;
@@ -239,6 +240,7 @@ namespace Budford.View
             information.GameSetting.PreferedVersion = comboBox1.Text;
             information.GameSetting.OfficialEmulationState = (GameSettings.EmulationStateType)comboBox2.SelectedIndex;
             information.GameSetting.EmulationState = (GameSettings.EmulationStateType)comboBox19.SelectedIndex;
+            information.GameSetting.DecafEmulationState = (GameSettings.EmulationStateType)comboBox64.SelectedIndex;
             information.Rating = (comboBox20.SelectedIndex - 5) * -1;
 
             information.GameSetting.FullScreen = (byte)comboBox3.SelectedIndex;

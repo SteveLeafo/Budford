@@ -7,6 +7,7 @@ namespace Budford.Model
         public string PreferedVersion  = "Latest";
 
         public EmulationStateType EmulationState = EmulationStateType.NotSet;
+        public EmulationStateType DecafEmulationState = EmulationStateType.NotSet;
         public EmulationStateType OfficialEmulationState = EmulationStateType.NotSet;
         internal EmulationStateType PreviousOfficialEmulationState;
         public string CompatibilityUrl = "";

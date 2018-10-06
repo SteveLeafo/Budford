@@ -200,6 +200,7 @@
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.label69 = new System.Windows.Forms.Label();
@@ -223,12 +224,13 @@
             this.comboBox61 = new System.Windows.Forms.ComboBox();
             this.comboBox62 = new System.Windows.Forms.ComboBox();
             this.comboBox63 = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label79 = new System.Windows.Forms.Label();
+            this.comboBox64 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -261,9 +263,9 @@
             this.groupBox7.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.tableLayoutPanel15.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
-            this.tableLayoutPanel15.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tableLayoutPanel16.SuspendLayout();
             this.SuspendLayout();
@@ -308,8 +310,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 502);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -319,7 +321,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(8, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(421, 229);
+            this.groupBox1.Size = new System.Drawing.Size(421, 245);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Preferences";
@@ -335,19 +337,22 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label33, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.comboBox19, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label34, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.textBox14, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label35, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox20, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label36, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.trackBar1, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label51, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox31, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label34, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.textBox14, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label35, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox20, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label36, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.trackBar1, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label51, 0, 8);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox31, 1, 8);
+            this.tableLayoutPanel2.Controls.Add(this.label79, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox64, 1, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowCount = 10;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -356,7 +361,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 210);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 226);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -419,7 +424,6 @@
             // 
             // comboBox19
             // 
-            this.comboBox19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox19.FormattingEnabled = true;
             this.comboBox19.Items.AddRange(new object[] {
             "Not Set",
@@ -437,9 +441,9 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label34.Location = new System.Drawing.Point(3, 143);
+            this.label34.Location = new System.Drawing.Point(3, 170);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(116, 35);
+            this.label34.Size = new System.Drawing.Size(116, 24);
             this.label34.TabIndex = 0;
             this.label34.Text = "Comments";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -447,17 +451,17 @@
             // textBox14
             // 
             this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox14.Location = new System.Drawing.Point(125, 146);
+            this.textBox14.Location = new System.Drawing.Point(125, 173);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(287, 29);
+            this.textBox14.Size = new System.Drawing.Size(287, 18);
             this.textBox14.TabIndex = 2;
             // 
             // label35
             // 
             this.label35.AutoSize = true;
             this.label35.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label35.Location = new System.Drawing.Point(3, 86);
+            this.label35.Location = new System.Drawing.Point(3, 113);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(116, 27);
             this.label35.TabIndex = 0;
@@ -474,7 +478,7 @@
             "3",
             "2",
             "1"});
-            this.comboBox20.Location = new System.Drawing.Point(125, 89);
+            this.comboBox20.Location = new System.Drawing.Point(125, 116);
             this.comboBox20.Name = "comboBox20";
             this.comboBox20.Size = new System.Drawing.Size(287, 21);
             this.comboBox20.TabIndex = 1;
@@ -483,7 +487,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label36.Location = new System.Drawing.Point(3, 113);
+            this.label36.Location = new System.Drawing.Point(3, 140);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(116, 30);
             this.label36.TabIndex = 0;
@@ -493,7 +497,7 @@
             // trackBar1
             // 
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.Location = new System.Drawing.Point(125, 116);
+            this.trackBar1.Location = new System.Drawing.Point(125, 143);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(287, 24);
             this.trackBar1.TabIndex = 3;
@@ -503,7 +507,7 @@
             // 
             this.label51.AutoSize = true;
             this.label51.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label51.Location = new System.Drawing.Point(3, 178);
+            this.label51.Location = new System.Drawing.Point(3, 194);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(116, 27);
             this.label51.TabIndex = 0;
@@ -517,7 +521,7 @@
             this.comboBox31.Items.AddRange(new object[] {
             "TV Screen",
             "Gamepad"});
-            this.comboBox31.Location = new System.Drawing.Point(125, 181);
+            this.comboBox31.Location = new System.Drawing.Point(125, 197);
             this.comboBox31.Name = "comboBox31";
             this.comboBox31.Size = new System.Drawing.Size(287, 21);
             this.comboBox31.TabIndex = 1;
@@ -526,9 +530,9 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(8, 238);
+            this.groupBox2.Location = new System.Drawing.Point(8, 254);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 261);
+            this.groupBox2.Size = new System.Drawing.Size(421, 245);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CEMU Options";
@@ -568,7 +572,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 242);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(415, 226);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // label3
@@ -2540,6 +2544,21 @@
             this.tabPage7.Text = "Debug";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel15
+            // 
+            this.tableLayoutPanel15.ColumnCount = 1;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel15.Controls.Add(this.groupBox8, 0, 0);
+            this.tableLayoutPanel15.Controls.Add(this.groupBox9, 0, 1);
+            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+            this.tableLayoutPanel15.RowCount = 2;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(443, 508);
+            this.tableLayoutPanel15.TabIndex = 1;
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.tableLayoutPanel14);
@@ -2837,21 +2856,6 @@
             this.comboBox63.Size = new System.Drawing.Size(242, 21);
             this.comboBox63.TabIndex = 5;
             // 
-            // tableLayoutPanel15
-            // 
-            this.tableLayoutPanel15.ColumnCount = 1;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Controls.Add(this.groupBox8, 0, 0);
-            this.tableLayoutPanel15.Controls.Add(this.groupBox9, 0, 1);
-            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 2;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(443, 508);
-            this.tableLayoutPanel15.TabIndex = 1;
-            // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.tableLayoutPanel16);
@@ -2904,6 +2908,33 @@
             this.checkBox4.Text = "Shaders";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label79.Location = new System.Drawing.Point(3, 86);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(116, 27);
+            this.label79.TabIndex = 0;
+            this.label79.Text = "Decaf Emulation State";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox64
+            // 
+            this.comboBox64.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox64.FormattingEnabled = true;
+            this.comboBox64.Items.AddRange(new object[] {
+            "Not Set",
+            "Perfect",
+            "Playable",
+            "Runs",
+            "Loads",
+            "Unplayable"});
+            this.comboBox64.Location = new System.Drawing.Point(125, 89);
+            this.comboBox64.Name = "comboBox64";
+            this.comboBox64.Size = new System.Drawing.Size(287, 21);
+            this.comboBox64.TabIndex = 1;
+            // 
             // FormEditGameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2955,10 +2986,10 @@
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
             this.tabPage7.ResumeLayout(false);
+            this.tableLayoutPanel15.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
-            this.tableLayoutPanel15.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.tableLayoutPanel16.ResumeLayout(false);
             this.tableLayoutPanel16.PerformLayout();
@@ -3169,5 +3200,7 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.ComboBox comboBox64;
     }
 }
