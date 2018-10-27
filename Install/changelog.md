@@ -1,5 +1,9 @@
 # Budford Change Log
 
+## V1.0.118
+ - Added support for Decaf
+ - Added support for new graphic packs
+
 ## V1.0.112
  - Added the ability to turn on some logging
  - Added an option to disable all graphic packs
