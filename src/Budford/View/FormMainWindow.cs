@@ -159,10 +159,16 @@ namespace Budford.View
              var toolStripMenuItem = sender as ToolStripMenuItem;
              if (toolStripMenuItem != null)
              {
+                 EnableControlsForGameRunning();
                  GameInformation game = toolStripMenuItem.Tag as GameInformation;
                  game.Exists = true;
                  game.GameSetting.Online = 1;
+                 Text = Resources.fMainWindow_fMainWindow_CEMU_Game_DB______Current_User__ + Model.CurrentUser + "\t        Running: " + game.Name;
+
+                 RegisterStopHotKey(Model);
+
                  Launcher.LaunchCemu(this, Model, game, false, false, ModifierKeys == Keys.Shift);
+
                  if (Model.Settings.CloseCemuOnExit)
                  {
                      if (File.Exists("BudfordsAssassin.exe"))

@@ -87,29 +87,17 @@ namespace Budford.View
         private void UpdateGraphicsPackCombo(bool useLatest = false)
         {
             comboBox1.Items.Clear();
-            string pack = "";
             if (Directory.Exists("graphicsPacks"))
             {
                 foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                 {
                     string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                    if (folder.StartsWith("graphicPacks_2-"))
+                    comboBox1.Items.Add(folder);
+                    if (folder == model.Settings.GraphicsPackRevision)
                     {
-                        pack = folder.Replace("graphicPacks_2-", "");
-                        comboBox1.Items.Add(pack);
-                        if (pack == model.Settings.GraphicsPackRevision)
-                        {
-                            comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-                        }
+                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
                     }
                 }
-            }
-
-            if (useLatest && pack != "")
-            {
-                comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-                model.Settings.GraphicsPackRevision = pack;
-                Logger.Log("Graphics pack revision changed to: " + pack);
             }
         }
 

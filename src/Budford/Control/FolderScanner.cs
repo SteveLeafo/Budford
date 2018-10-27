@@ -1,5 +1,6 @@
 ﻿using Budford.Model;
 using Budford.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,24 +54,20 @@ namespace Budford.Control
         /// <param name="Model"></param>
         internal static void SearchForInstalledGraphicPacks(Model.Model Model)
         {
+            Model.GraphicsPacks.Clear();
             FileManager.SafeCreateDirectory("graphicsPacks");
-            int packRevision = 0;
             string packFolder = "";
+            DateTime latest = DateTime.MinValue;
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = Path.GetFileName(dir);
-                if (folder != null && folder.StartsWith("graphicPacks"))
+                if (folder != null)
                 {
-                    string tempfolder = folder.Replace("graphicPacks", "").Replace("_Uncommon", "").Replace("_2", "").Replace("_Common", "").Replace("-", "");
-                    int tempRevision;
-                    if (int.TryParse(tempfolder, out tempRevision))
+                    DateTime dirDate = Directory.GetCreationTime(dir);
+                    if (dirDate > latest)
                     {
-                        if (tempRevision > packRevision)
-                        {
-                            packRevision = tempRevision;
-                            Model.Settings.GraphicsPackRevision = tempfolder;
-                            packFolder = folder;
-                        }
+                        latest = dirDate;
+                        Model.Settings.GraphicsPackRevision = folder;
                     }
                 }
             }
@@ -277,7 +274,14 @@ namespace Budford.Control
             string[] toks = line.Split('=');
             if (toks.Length > 0)
             {
-                pack.Title = toks[1].Trim().TrimEnd('\"').TrimStart('\"');
+                if (pack.Title == null || pack.Title.Length < 1)
+                {
+                    pack.Title = toks[1].Trim().TrimEnd('\"').TrimStart('\"');
+                }
+                else
+                {
+                    pack.Presets.Add(toks[1].Trim().TrimEnd('\"').TrimStart('\"'));
+                }
             }
         }
 

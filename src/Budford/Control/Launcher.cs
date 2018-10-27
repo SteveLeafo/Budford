@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using Budford.Utilities;
 using System.Xml.Linq;
+using Budford.Model.Cemu;
 
 namespace Budford.Control
 {
@@ -170,7 +171,7 @@ namespace Budford.Control
                 }
             }
 
-            if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx") && !game.LaunchFile.Contains("Sonic Boom"))
+            if (game != null && game.LaunchFile.Contains("WiiULauncher.rpx") && !game.LaunchFile.Contains("Sonic Boom") && !modelIn.Settings.Decaf.Enable)
             {
                 LaunchWithWebBrowser(modelIn, game, start);
             }
@@ -310,39 +311,62 @@ namespace Budford.Control
         /// </summary>
         private void UpdateDecafSettings()
         {
-            string decafConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "decaf", "config.toml");
-            string backupConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "decaf", "config.budf");
-            if (File.Exists(decafConfigFile))
+            try
             {
-                if (!File.Exists(backupConfigFile))
+                string decafConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "decaf", "config.toml");
+                string backupConfigFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "decaf", "config.budf");
+                if (File.Exists(decafConfigFile))
                 {
-                    File.Copy(decafConfigFile, backupConfigFile);
+                    if (!File.Exists(backupConfigFile))
+                    {
+                        File.Copy(decafConfigFile, backupConfigFile);
+                    }
+                    string[] lines = File.ReadAllLines(decafConfigFile);
+                    int wpadLine = -1;
+                    for (int i = 0; i < lines.Length; ++i)
+                    {
+                        if (lines[i].Contains("layout ="))
+                        {
+                            lines[i] = "    layout = " + (Model.Settings.Decaf.Layout == 0 ? "\"toggle\"" : "\"split\"");
+                        }
+                        if (lines[i].Contains("mode ="))
+                        {
+                            lines[i] = "    mode = " + (Model.Settings.Decaf.WindowMode == 2 ? "\"fullscreen\"" : "\"windowed\"");
+                        }
+                        if (lines[i].Contains("to_file ="))
+                        {
+                            lines[i] = "    to_file = " + (Model.Settings.Decaf.Logging ? "true" : "false");
+                        }
+                        if (lines[i].Contains("backend ="))
+                        {
+                            lines[i] = "    backend = " + (Model.Settings.Decaf.Backend == 1 ? "\"opengl\"" : "\"vulkan\"");
+                        }
+                        if (lines[i].Contains("vpad0 ="))
+                        {
+                            lines[i] = "    vpad0 = " + (Model.Settings.Decaf.Input == 0 ? "\"default_keyboard\"" : "\"default_joystick\"");
+                            if (Model.Settings.Decaf.Input0 != 2)
+                            {
+                                if (Model.Settings.Decaf.Input != Model.Settings.Decaf.Input0)
+                                {
+                                    lines[i] += "\r\n    wpad0 = " + (Model.Settings.Decaf.Input0 == 0 ? "\"default_keyboard\"" : "\"default_joystick\"");
+                                }
+                            }
+                        }
+                        else if (lines[i].Contains("wpad0 ="))
+                        {
+                            wpadLine = i;
+                        }
+                    }
+                    if (wpadLine != -1)
+                    {
+                        lines = lines.Where((val, idx) => idx != wpadLine).ToArray();
+                    }
+                    File.WriteAllLines(decafConfigFile, lines);
                 }
-                string[] lines = File.ReadAllLines(decafConfigFile);
-                for (int i = 0; i < lines.Length; ++i)
-                {
-                    if (lines[i].Contains("layout ="))
-                    {
-                        lines[i] = "    layout = " + (Model.Settings.Decaf.Layout == 0 ? "\"toggle\"" : "\"split\"");
-                    }
-                    if (lines[i].Contains("mode ="))
-                    {
-                        lines[i] = "    mode = " + (Model.Settings.Decaf.WindowMode == 2 ? "\"fullscreen\"" : "\"windowed\"");
-                    }
-                    if (lines[i].Contains("to_file ="))
-                    {
-                        lines[i] = "    to_file = " + (Model.Settings.Decaf.Logging ? "true" : "false");
-                    }
-                    if (lines[i].Contains("backend ="))
-                    {
-                        lines[i] = "    backend = " + (Model.Settings.Decaf.Backend == 1 ? "\"opengl\"" : "\"vulkan\"");
-                    }
-                    if (lines[i].Contains("vpad0 ="))
-                    {
-                        lines[i] = "    vpad0 = " + (Model.Settings.Decaf.Input == 0 ? "\"default_keyboard\"" : "\"default_joystick\"");
-                    }
-                }
-                File.WriteAllLines(decafConfigFile, lines);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
             }
         }
 
@@ -912,7 +936,7 @@ namespace Budford.Control
             {
                 CemuSettings cs = new CemuSettings(model, game.GameSetting, game);
                 cs.WriteSettingsBinFile();
-                WriteCemuHookIniFile.WriteIni(model, game);
+                WriteCemuHookIniFile.WriteIni(model, game);            
             }
         }
 

@@ -14,7 +14,15 @@ namespace Budford.Model
 
         public int WindowMode = 0;
         public int Layout = 0;
+
         public int Input = 0;
+        public int Input0 = 2;
+
+        public int Input1 = 2;
+        public int Input2 = 2;
+        public int Input3 = 2;
+        public int Input4 = 2;
+
         public int Backend = 1;
 
         public string Executable = "";

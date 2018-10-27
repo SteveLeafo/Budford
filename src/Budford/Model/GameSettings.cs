@@ -12,7 +12,7 @@ namespace Budford.Model
         internal EmulationStateType PreviousOfficialEmulationState;
         public string CompatibilityUrl = "";
         // ReSharper disable once InconsistentNaming
-        public HashSet<GraphicsPack> graphicsPacks = new HashSet<GraphicsPack>();
+        public List<GraphicsPack> graphicsPacks = new List<GraphicsPack>();
         internal HashSet<string> GraphicsPacksFolders = new HashSet<string>();
 
         // CEMU Options

@@ -1,13 +1,17 @@
-﻿namespace Budford.Model
+﻿using System.Collections.Generic;
+namespace Budford.Model
 {
     public class GraphicsPack
     {
         public string File;
         public string Title ;
         public string Folder ;
+        public List<string> Presets = new List<string>();
         public string Gui ;
         public bool Active  = false;
         internal int PackId = -1;
+        public int ActivePreset = -1;
+        internal string CemuFileName;
         internal static readonly string[][] GraphicPackHashes =
         {
             new[]{"Budford_0", "8bac731eec57d053"},

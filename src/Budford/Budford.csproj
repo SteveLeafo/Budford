@@ -95,6 +95,10 @@
     <Compile Include="Control\WindowsOS.cs" />
     <Compile Include="Control\WriteCemuHookIniFile.cs" />
     <Compile Include="Model\CemuHookSettings.cs" />
+    <Compile Include="Model\Cemu\Audio.cs" />
+    <Compile Include="Model\Cemu\content.cs" />
+    <Compile Include="Model\Cemu\Graphic.cs" />
+    <Compile Include="Model\Cemu\GraphicPack.cs" />
     <Compile Include="Model\DecafSettings.cs" />
     <Compile Include="Model\LaunchPad.cs" />
     <Compile Include="Model\PlugIns\File.cs" />

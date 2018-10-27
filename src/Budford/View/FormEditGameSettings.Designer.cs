@@ -47,6 +47,8 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label51 = new System.Windows.Forms.Label();
             this.comboBox31 = new System.Windows.Forms.ComboBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.comboBox64 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -229,8 +231,6 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label79 = new System.Windows.Forms.Label();
-            this.comboBox64 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -526,6 +526,33 @@
             this.comboBox31.Size = new System.Drawing.Size(287, 21);
             this.comboBox31.TabIndex = 1;
             // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label79.Location = new System.Drawing.Point(3, 86);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(116, 27);
+            this.label79.TabIndex = 0;
+            this.label79.Text = "Decaf Emulation State";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboBox64
+            // 
+            this.comboBox64.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox64.FormattingEnabled = true;
+            this.comboBox64.Items.AddRange(new object[] {
+            "Not Set",
+            "Perfect",
+            "Playable",
+            "Runs",
+            "Loads",
+            "Unplayable"});
+            this.comboBox64.Location = new System.Drawing.Point(125, 89);
+            this.comboBox64.Name = "comboBox64";
+            this.comboBox64.Size = new System.Drawing.Size(287, 21);
+            this.comboBox64.TabIndex = 1;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
@@ -796,19 +823,27 @@
             // 
             // listView1
             // 
+            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView1.CheckBoxes = true;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
             this.tableLayoutPanel10.SetColumnSpan(this.listView1, 2);
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
+            this.listView1.HotTracking = true;
+            this.listView1.HoverSelection = true;
             this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(431, 443);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -829,13 +864,12 @@
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(86, 27);
             this.label52.TabIndex = 1;
-            this.label52.Text = "Clarity Preset";
+            this.label52.Text = "Preset";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox32
             // 
             this.comboBox32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox32.Enabled = false;
             this.comboBox32.FormattingEnabled = true;
             this.comboBox32.Items.AddRange(new object[] {
             "User Defined",
@@ -2907,33 +2941,6 @@
             this.checkBox4.TabIndex = 1;
             this.checkBox4.Text = "Shaders";
             this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label79.Location = new System.Drawing.Point(3, 86);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(116, 27);
-            this.label79.TabIndex = 0;
-            this.label79.Text = "Decaf Emulation State";
-            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // comboBox64
-            // 
-            this.comboBox64.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox64.FormattingEnabled = true;
-            this.comboBox64.Items.AddRange(new object[] {
-            "Not Set",
-            "Perfect",
-            "Playable",
-            "Runs",
-            "Loads",
-            "Unplayable"});
-            this.comboBox64.Location = new System.Drawing.Point(125, 89);
-            this.comboBox64.Name = "comboBox64";
-            this.comboBox64.Size = new System.Drawing.Size(287, 21);
-            this.comboBox64.TabIndex = 1;
             // 
             // FormEditGameSettings
             // 

@@ -14,6 +14,8 @@ namespace Budford.View
         // The active game
         readonly GameInformation information;
 
+        GraphicsPack activePack = null;
+
         /// <summary>
         /// 
         /// </summary>
@@ -37,12 +39,24 @@ namespace Budford.View
             PopulateGameInformation();
 
             Text = information.Name;
+
             if (information.Name != "The Legend of Zelda Breath of the Wild")
             {
-                label52.Visible = false;
-                comboBox32.Visible = false;
                 checkBox1.Visible = false;
                 numericUpDown1.Visible = false;
+            }
+
+            comboBox32.SelectedIndexChanged += comboBox32_SelectedIndexChanged;
+        }
+
+        void comboBox32_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (activePack != null)
+            {
+                if (comboBox32.SelectedItem != null)
+                {
+                    activePack.ActivePreset = comboBox32.SelectedIndex;
+                }
             }
         }
 
@@ -117,7 +131,7 @@ namespace Budford.View
             if (information.TitleId != "")
             {
                 listView1.Items.Clear();
-                information.GameSetting.graphicsPacks = new HashSet<GraphicsPack>(information.GameSetting.graphicsPacks.OrderBy(p => p.Folder));
+                information.GameSetting.graphicsPacks = new List<GraphicsPack>(information.GameSetting.graphicsPacks.OrderBy(p => p.Folder));
                 foreach (var pack in information.GameSetting.graphicsPacks)
                 {
                     ListViewItem lvi = new ListViewItem();
@@ -127,7 +141,7 @@ namespace Budford.View
                     lvi.Tag = pack;
                 }
             }
-            listView1.Sort();
+            //listView1.Sort();
         }
 
         /// <summary>
@@ -167,7 +181,10 @@ namespace Budford.View
             comboBox30.SelectedIndex = information.GameSetting.Online;
             comboBox31.SelectedIndex = information.GameSetting.DefaultView;
 
-            comboBox32.SelectedIndex = information.GameSetting.ClarityPreset;
+            if (information.GameSetting.ClarityPreset < comboBox32.Items.Count)
+            {
+                comboBox32.SelectedIndex = information.GameSetting.ClarityPreset;
+            }
             comboBox33.SelectedIndex = information.GameSetting.UseCafeLibs;
 
             comboBox21.SelectedIndex = information.CemuHookSetting.CustomTimerMode;
@@ -345,10 +362,6 @@ namespace Budford.View
 
         private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            label52.Enabled = false;
-            checkBox1.Enabled = false;
-
-            comboBox32.Enabled = false;
             numericUpDown1.Enabled = false;
 
             foreach (ListViewItem v in listView1.Items)
@@ -362,14 +375,6 @@ namespace Budford.View
                         {
                             numericUpDown1.Enabled = true;
                         }
-                    }
-                }
-                if (((GraphicsPack)v.Tag).Folder.Contains("Clarity"))
-                {
-                    if (v.Checked)
-                    {
-                        comboBox32.Enabled = true;
-                        label52.Enabled = true;
                     }
                 }
             }
@@ -411,5 +416,31 @@ namespace Budford.View
         }
 
         bool noise = false;
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox32.SelectedItem = null;
+            comboBox32.Items.Clear();
+            if (listView1.SelectedIndices.Count == 1)
+            {
+                activePack = information.GameSetting.graphicsPacks[listView1.SelectedIndices[0]];
+
+                for (int i = 0; i < information.GameSetting.graphicsPacks[listView1.SelectedIndices[0]].Presets.Count; ++i)
+                {
+                    comboBox32.Items.Add(information.GameSetting.graphicsPacks[listView1.SelectedIndices[0]].Presets[i]);
+                    if (information.GameSetting.graphicsPacks[listView1.SelectedIndices[0]].Presets[i].Contains("efault"))
+                    {
+                        if (activePack.ActivePreset == -1)
+                        {
+                            comboBox32.SelectedIndex = i;
+                        }
+                    }
+                }
+                if (information.GameSetting.graphicsPacks[listView1.SelectedIndices[0]].ActivePreset != -1)
+                {
+                    comboBox32.SelectedIndex = activePack.ActivePreset;
+                }
+            }
+        }
     }
 }

@@ -136,11 +136,10 @@ namespace Budford.Control
         {
             Unpacker unpacker = new Unpacker(form);
 
-            PopulateBudfordDataBase(model);
-            PopulateBudfordVersions(model);
-
             foreach (var v in model.Settings.InstalledVersions)
             {
+                RepairUpdateFolder(model, v);
+
                 RepairPatch(model, v);
 
                 RepairFonts(unpacker, v);
@@ -152,9 +151,10 @@ namespace Budford.Control
                 CopyLargestKeysDotText(model, v);
 
                 RepairOnlineFiles(model, v);
-
-                RepairUpdateFolder(model, v);
             }
+
+            PopulateBudfordDataBase(model);
+            PopulateBudfordVersions(model);
 
             UpdateFeaturesForInstalledVersions(model);
         }
@@ -172,6 +172,7 @@ namespace Budford.Control
                         try
                         {
                             JunctionPoint.Create(Path.Combine(dlcSource.Folder, "mlc01", "usr", "title"), Path.Combine(v.Folder, "mlc01", "usr", "title"), true);
+                            JunctionPoint.Create(Path.Combine(dlcSource.Folder, "mlc01", "sys", "title"), Path.Combine(v.Folder, "mlc01", "sys", "title"), true);
                         }
                         catch (Exception)
                         {
@@ -926,11 +927,6 @@ namespace Budford.Control
 
                 string packName = Path.GetFileNameWithoutExtension(uri);
 
-                if (packName.Contains("_Uncommon"))
-                {
-                    packName = packName.Replace("graphicPacks", "graphicPacks_2-10").Replace("_Uncommon", "");
-                }
-
                 if (!IsGraphicPackInstalled(packName))
                 {
                     try
@@ -962,7 +958,7 @@ namespace Budford.Control
             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
             {
                 string folder = Path.GetFileName(dir);
-                if (folder != null && folder.StartsWith("graphicPacks_2-"))
+                if (folder != null)
                 {
                     if (pack == folder)
                     {
@@ -988,18 +984,14 @@ namespace Budford.Control
                             foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                             {
                                 string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                                if (folder.StartsWith("graphicPacks_2-"))
-                                {
-                                    pack = folder.Replace("graphicPacks_2-", "");
-                                }
+                                pack = folder;
                             }
 
                             if (pack != "")
                             {
                                 Logger.Log("Graphics pack revision changed to: " + pack);
                                 modelIn.Settings.GraphicsPackRevision = pack;
-                                FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);
-                            }
+                                FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", modelIn.Settings.GraphicsPackRevision)), modelIn.GraphicsPacks);                            }
                         }
                     }
                 }

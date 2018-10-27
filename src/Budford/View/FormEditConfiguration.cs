@@ -150,6 +150,7 @@ namespace Budford.View
             comboBox11.SelectedIndex = settings.Decaf.WindowMode;
             comboBox12.SelectedIndex = settings.Decaf.Input;
             comboBox13.SelectedIndex = settings.Decaf.Backend;
+            comboBox14.SelectedIndex = settings.Decaf.Input0;
         }
 
         /// <summary>
@@ -303,6 +304,7 @@ namespace Budford.View
             settings.Decaf.WindowMode = comboBox11.SelectedIndex;
             settings.Decaf.Backend = comboBox13.SelectedIndex;
             settings.Decaf.Input = comboBox12.SelectedIndex;
+            settings.Decaf.Input0 = comboBox14.SelectedIndex;
 
             base.OnClosing(e);
         }

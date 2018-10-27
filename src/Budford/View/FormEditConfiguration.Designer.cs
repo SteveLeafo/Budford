@@ -160,6 +160,8 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.comboBox13 = new System.Windows.Forms.ComboBox();
+            this.comboBox14 = new System.Windows.Forms.ComboBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -1727,8 +1729,8 @@
             this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 3;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(391, 485);
             this.tableLayoutPanel12.TabIndex = 0;
@@ -1739,7 +1741,7 @@
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(8, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(375, 389);
+            this.groupBox10.Size = new System.Drawing.Size(375, 412);
             this.groupBox10.TabIndex = 0;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Options";
@@ -1775,10 +1777,12 @@
             this.tableLayoutPanel13.Controls.Add(this.label33, 1, 13);
             this.tableLayoutPanel13.Controls.Add(this.label34, 1, 11);
             this.tableLayoutPanel13.Controls.Add(this.comboBox13, 2, 11);
+            this.tableLayoutPanel13.Controls.Add(this.comboBox14, 2, 14);
+            this.tableLayoutPanel13.Controls.Add(this.label35, 1, 14);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 15;
+            this.tableLayoutPanel13.RowCount = 16;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1794,7 +1798,8 @@
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(369, 370);
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(369, 393);
             this.tableLayoutPanel13.TabIndex = 0;
             // 
             // label27
@@ -1998,7 +2003,6 @@
             // comboBox12
             // 
             this.tableLayoutPanel13.SetColumnSpan(this.comboBox12, 2);
-            this.comboBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox12.FormattingEnabled = true;
             this.comboBox12.Items.AddRange(new object[] {
             "Keyboard",
@@ -2016,7 +2020,7 @@
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(149, 27);
             this.label33.TabIndex = 0;
-            this.label33.Text = "Input";
+            this.label33.Text = "Gamepad";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label34
@@ -2042,6 +2046,31 @@
             this.comboBox13.Name = "comboBox13";
             this.comboBox13.Size = new System.Drawing.Size(187, 21);
             this.comboBox13.TabIndex = 5;
+            // 
+            // comboBox14
+            // 
+            this.tableLayoutPanel13.SetColumnSpan(this.comboBox14, 2);
+            this.comboBox14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox14.FormattingEnabled = true;
+            this.comboBox14.Items.AddRange(new object[] {
+            "Keyboard",
+            "Controller",
+            "None"});
+            this.comboBox14.Location = new System.Drawing.Point(168, 356);
+            this.comboBox14.Name = "comboBox14";
+            this.comboBox14.Size = new System.Drawing.Size(187, 21);
+            this.comboBox14.TabIndex = 5;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label35.Location = new System.Drawing.Point(13, 353);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(149, 27);
+            this.label35.TabIndex = 0;
+            this.label35.Text = "Pro Controller";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormEditConfiguration
             // 
@@ -2230,5 +2259,7 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.ComboBox comboBox13;
+        private System.Windows.Forms.ComboBox comboBox14;
+        private System.Windows.Forms.Label label35;
     }
 }

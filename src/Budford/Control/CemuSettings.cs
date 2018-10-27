@@ -8,12 +8,14 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Budford.Properties;
 using System.Text;
+using Budford.Model.Cemu;
 
 namespace Budford.Control
 {
     internal class CemuSettings
     {
         int packIndex;
+        bool generatedPack = false;
 
         readonly GameSettings settings;
 
@@ -352,6 +354,36 @@ namespace Budford.Control
             return version;
         }
 
+        internal void WriteCemuXmlSettings(InstalledVersion version)
+        {
+            content content = new content();
+
+            content.Graphic.DisablePrecompiledShaders = information.CemuHookSetting.IgnorePrecompiledShaderCache;
+            content.Graphic.FullscreenScaling = (int)information.GameSetting.FullScreenScaling;
+            content.Graphic.GX2DrawdoneSync = information.GameSetting.FullSyncAtGx2DrawDone != 0;
+            content.Graphic.SeparableShaders = information.GameSetting.UseSeperableShaders != 0;
+            content.Graphic.UpscaleFilter = (int)information.GameSetting.UpscaleFilter;
+            content.Graphic.VSync = information.GameSetting.EnableVSync != 0;
+
+            content.Audio.TVVolume = information.GameSetting.Volume;
+
+            if (generatedPack)
+            {
+                content.GraphicPack.Add(new Entry() { filename = "graphicPacks\\Budford_0\\rules.txt", preset = "Budford Resolution" });
+            }
+            else
+            {
+                foreach (var pack in settings.graphicsPacks)
+                {
+                    if (pack.Active)
+                    {
+                        content.GraphicPack.Add(new Entry() { filename = pack.CemuFileName, preset = pack.ActivePreset != -1 ? pack.Presets[pack.ActivePreset] : string.Empty });
+                    }
+                }
+            }
+            Persistence.Save(content, Path.Combine(version.Folder, "settings.xml"));
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -375,6 +407,8 @@ namespace Budford.Control
                     CreateSettingsFile(version);
                 }
             }
+            WriteCemuXmlSettings(version);
+
         }
 
         private void CreateSettingsFile(InstalledVersion version)
@@ -652,43 +686,43 @@ namespace Budford.Control
 
         private void CreateCustomGraphicPack(InstalledVersion version, ref int packs)
         {
+            generatedPack = true;
+
             string width;
             string height;
+            string gameWidth = "1280";
+            string gameHeight = "720";
+
+            //if (IsTen80(information.TitleId))
+            //{
+            //    gameWidth = "1920";
+            //    gameHeight = "1080";
+            //}
+
             SetResolution(model.Settings.DefaultResolution, out width, out height);
+
             StringBuilder sb = new StringBuilder();
             sb.Append("[Definition]\r\n");
             sb.Append("titleIds = " + information.TitleId + "\r\n");
-            sb.Append("name = \"" + information.Name + " - " + width + "x" + height + " \"\r\n");
-            sb.Append("version = 2\r\n");
+            sb.Append("name = Resolution\r\n");
+            sb.Append("path = \"" + information.Name + "/Graphics/Resolution\"\r\n");
+            sb.Append("description = Changes the resolution of the game.\r\n");
+            sb.Append("version = 3\r\n");
             sb.Append("\r\n");
-            sb.Append("[TextureRedefine] # tv\r\n");
 
-            if (IsTen80(information.TitleId))
-            {
-                sb.Append("width = 1920\r\n");
-                sb.Append("height = 1080\r\n");
-            }
-            else
-            {
-                sb.Append("width = 1280\r\n");
-                sb.Append("height = 720\r\n");
-            }
-            sb.Append("overwriteWidth = " + width + "\r\n");
-            sb.Append("overwriteHeight = " + height + "\r\n");
-            sb.Append("	\r\n");
-            sb.Append("[TextureRedefine] # gamepad\r\n");
-            if (IsTen80(information.TitleId))
-            {
-                sb.Append("width = 960\r\n");
-                sb.Append("height = 540\r\n");
-            }
-            else
-            {
-                sb.Append("width = 854\r\n");
-                sb.Append("height = 480\r\n");
-            }
-            sb.Append("overwriteWidth = " + width + "\r\n");
-            sb.Append("overwriteHeight = " + height + "\r\n");
+            sb.Append("[Preset]\r\n");
+            sb.Append("name = Budford Resolution\r\n");
+            sb.Append("$width = " + width + "\r\n");
+            sb.Append("$height = " + height + "\r\n");
+            sb.Append("$gameWidth = " + gameWidth + "\r\n");
+            sb.Append("$gameHeight = " + gameHeight + "\r\n");
+
+            sb.Append("[TextureRedefine]\r\n");
+            sb.Append("width = " + gameWidth + "\r\n");
+            sb.Append("height = " + gameHeight + "\r\n");
+            sb.Append("overwriteWidth = ($width/$gameWidth) * " + gameWidth + "\r\n");
+            sb.Append("overwriteHeight = ($height/$gameHeight) * " + gameHeight + "\r\n");
+
             string folderName = Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs);
             string fileName = Path.Combine(folderName, "rules.txt");
             FileManager.SafeCreateDirectory(folderName);
@@ -717,6 +751,7 @@ namespace Budford.Control
                 case "0005000010149100":
                 case "0005000010193300":
                 case "000500001016a200":
+                case "0005000010202E00":
                 return true;
             }
             return false;
@@ -782,7 +817,7 @@ namespace Budford.Control
             int packs = 0;
             if (resolutionPack != null)
             {
-                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
+                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
                         new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
                 resolutionPack.PackId = packs;
                 packs++;
@@ -792,7 +827,7 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, pack.Folder)),
+                    FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, pack.Folder)),
                         new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
                     pack.PackId = packs;
                     packs++;
@@ -821,22 +856,19 @@ namespace Budford.Control
 
         private void EnsureGraphicPackExists()
         {
-            if (!Directory.Exists(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)))
+            if (!Directory.Exists(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision)))
             {
                 string pack = "";
                 foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
                 {
                     string folder = dir.Replace("graphicsPacks" + Path.DirectorySeparatorChar, "");
-                    if (folder.StartsWith("graphicPacks_2-"))
-                    {
-                        pack = folder.Replace("graphicPacks_2-", "");
-                    }
+                    pack = folder;
                 }
                 if (pack != "")
                 {
                     model.Settings.GraphicsPackRevision = pack;
                     Logger.Log("Graphics pack revision changed to: " + pack);
-                    FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision)), model.GraphicsPacks);
+                    FolderScanner.FindGraphicsPacks(new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision)), model.GraphicsPacks);
                 }
             }
         }
@@ -846,7 +878,7 @@ namespace Budford.Control
         /// </summary>
         private void SetClarityPreset()
         {
-            string clarityShader = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_Clarity", "37040a485a29d54e_00000000000003c9_ps.txt");
+            string clarityShader = Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, "BreathOfTheWild_Clarity", "37040a485a29d54e_00000000000003c9_ps.txt");
             if (File.Exists(clarityShader))
             {
                 string text = File.ReadAllText(clarityShader);
@@ -880,7 +912,7 @@ namespace Budford.Control
 
         private void SetFpsRules()
         {
-            string fpsRules = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
+            string fpsRules = Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, "BreathOfTheWild_StaticFPS_30", "rules.txt");
             if (!File.Exists(fpsRules + ".bak"))
             {
                 if (File.Exists(fpsRules))
@@ -901,7 +933,7 @@ namespace Budford.Control
             string[] fpsPatches = new[] { "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30", "BreathOfTheWild_StaticFPS_30" };
             foreach (var fpsPatchSpeed in fpsPatches)
             {
-                string fpsPatch = Path.Combine("graphicsPacks", "graphicPacks_2-" + model.Settings.GraphicsPackRevision, fpsPatchSpeed, "patches.txt");
+                string fpsPatch = Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, fpsPatchSpeed, "patches.txt");
                 if (!File.Exists(fpsPatch + ".bak"))
                 {
                     if (File.Exists(fpsPatch))
@@ -1006,6 +1038,7 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
+                    pack.CemuFileName = Path.Combine("graphicPacks", "Budford_" + packIndex, "rules.txt");
                     fn.Seek(gfxPackStartOffset + (packIndex++ * 9), SeekOrigin.Begin);
                     string gui = GraphicsPack.GraphicPackHashes[pack.PackId][1];
                     fn.Write(StringToByteArray(gui), 0, 8);

@@ -163,6 +163,21 @@ namespace Budford.Control
                 modelSerializer.Serialize(writer, saveDirs);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void Save(Budford.Model.Cemu.content content, string fileName)
+        {
+            XmlSerializer modelSerializer = new XmlSerializer(typeof(Budford.Model.Cemu.content));
+
+            using (var sww = new StreamWriter(fileName))
+            {
+                XmlWriterSettings xws = new XmlWriterSettings() { Indent = true, NewLineHandling = NewLineHandling.Entitize };
+                XmlWriter writer = XmlWriter.Create(sww, xws);
+                modelSerializer.Serialize(writer, content);
+            }
+        }
     
         /// <summary>
         /// 
