@@ -817,14 +817,7 @@ namespace Budford.Control
         private int CopyBudfordPacks(InstalledVersion version)
         {
             int packs = 0;
-            if (resolutionPack != null)
-            {
-                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
-                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
-                resolutionPack.PackId = packs;
-                packs++;
-            }
-
+           
             foreach (var pack in settings.graphicsPacks)
             {
                 if (pack.Active)
@@ -849,6 +842,15 @@ namespace Budford.Control
                     }
                 }
             }
+
+            if (packs == 0 && resolutionPack != null)
+            {
+                FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, resolutionPack.Folder)),
+                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
+                resolutionPack.PackId = packs;
+                packs++;
+            }
+
             return packs;
         }
 
@@ -975,21 +977,34 @@ namespace Budford.Control
         /// </summary>
         void EnableDefaultGraphicsPack()
         {
-            resolutionPack = null;
-            foreach (var pack in settings.graphicsPacks)
+            InstalledVersion version;
+            try
             {
-                if (IsResolutionPack(pack.Title))
+                version = GetVersion();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Resources.CemuSettings_WriteSettingsBinFile_Unable_to_get_version, Resources.CemuSettings_WriteSettingsBinFile_Error_);
+                return;
+            }
+            if (version.VersionNumber < 1114)
+            {
+                resolutionPack = null;
+                foreach (var pack in settings.graphicsPacks)
                 {
-                    if (pack.Title.Contains(model.Settings.DefaultResolution.Replace("p","")))
+                    if (IsResolutionPack(pack.Title))
                     {
-                        resolutionPack = new GraphicsPack()
+                        if (pack.Title.Contains(model.Settings.DefaultResolution.Replace("p", "")))
                         {
-                            Active = true,
-                            File = pack.File,
-                            Folder = pack.Folder,
-                            Title = pack.Title,
-                        };
-                        break;
+                            resolutionPack = new GraphicsPack()
+                            {
+                                Active = true,
+                                File = pack.File,
+                                Folder = pack.Folder,
+                                Title = pack.Title,
+                            };
+                            break;
+                        }
                     }
                 }
             }
@@ -1054,11 +1069,14 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    pack.CemuFileName = Path.Combine("graphicPacks", "Budford_" + packIndex, "rules.txt");
-                    fn.Seek(gfxPackStartOffset + (packIndex++ * 9), SeekOrigin.Begin);
-                    string gui = GraphicsPack.GraphicPackHashes[pack.PackId][1];
-                    fn.Write(StringToByteArray(gui), 0, 8);
-                    fn.WriteByte(1);
+                    if (pack.PackId != -1)
+                    {
+                        pack.CemuFileName = Path.Combine("graphicPacks", "Budford_" + packIndex, "rules.txt");
+                        fn.Seek(gfxPackStartOffset + (packIndex++ * 9), SeekOrigin.Begin);
+                        string gui = GraphicsPack.GraphicPackHashes[pack.PackId][1];
+                        fn.Write(StringToByteArray(gui), 0, 8);
+                        fn.WriteByte(1);
+                    }
                 }
             }
         }
