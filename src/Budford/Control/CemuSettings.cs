@@ -716,8 +716,10 @@ namespace Budford.Control
             sb.Append("$height = " + height + "\r\n");
             sb.Append("$gameWidth = " + gameWidth + "\r\n");
             sb.Append("$gameHeight = " + gameHeight + "\r\n");
+            sb.Append("\r\n");
 
             sb.Append("[TextureRedefine]\r\n");
+            sb.Append("tileModesExcluded = 0x001\r\n");
             sb.Append("width = " + gameWidth + "\r\n");
             sb.Append("height = " + gameHeight + "\r\n");
             sb.Append("overwriteWidth = ($width/$gameWidth) * " + gameWidth + "\r\n");
@@ -827,10 +829,24 @@ namespace Budford.Control
             {
                 if (pack.Active)
                 {
-                    FileManager.CopyFilesRecursively(new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, pack.Folder)),
-                        new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
-                    pack.PackId = packs;
-                    packs++;
+                    DirectoryInfo src = new DirectoryInfo(Path.Combine("graphicsPacks", model.Settings.GraphicsPackRevision, pack.Folder));
+                    if (!src.Exists)
+                    {
+                        foreach (var dir in Directory.EnumerateDirectories("graphicsPacks"))
+                        {
+                            src = new DirectoryInfo(Path.Combine(dir, pack.Folder));
+                            if (src.Exists)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (src.Exists)
+                    {
+                        FileManager.CopyFilesRecursively(src, new DirectoryInfo(Path.Combine(version.Folder, "graphicPacks", "Budford_" + packs)), false, true);
+                        pack.PackId = packs;
+                        packs++;
+                    }
                 }
             }
             return packs;
