@@ -198,7 +198,7 @@ Function InstallBudfordFiles
 	System::Call "shell32::SHGetFolderPath(0, i ${CSIDL_COMMON_APPDATA}, 0, 0, t .r1)"  
 	StrCpy $AppDataPath "$1"
 
-	AccessControl::GrantOnFile "$AppDataPath\Budford" "(BU)" "GenericRead + GenericWrite"
+	;AccessControl::GrantOnFile "$AppDataPath\Budford" "(BU)" "GenericRead + GenericWrite"
 	SetOutPath "$AppDataPath\Budford"
 	File "default.bin"
 	File "OldVersions.xml"
@@ -208,13 +208,13 @@ Function InstallBudfordFiles
 	;File "graphicsPacks.zip"
 	;File "controllerProfiles.zip"
 	File "wiiutdb.xml"
-	AccessControl::GrantOnFile "$AppDataPath\Budford\SaveDirDatabase.xml" "(BU)" "GenericRead + GenericWrite"
-	AccessControl::GrantOnFile "$AppDataPath\Budford\OldVersions.xml" "(BU)" "GenericRead + GenericWrite"
+	;AccessControl::GrantOnFile "$AppDataPath\Budford\SaveDirDatabase.xml" "(BU)" "GenericRead + GenericWrite"
+	;AccessControl::GrantOnFile "$AppDataPath\Budford\OldVersions.xml" "(BU)" "GenericRead + GenericWrite"
 	
 
 	
 	CreateDirectory "$AppDataPath\Budford\Users"
-	AccessControl::GrantOnFile "$AppDataPath\Budford\Users" "(BU)" "GenericRead + GenericWrite"
+	;AccessControl::GrantOnFile "$AppDataPath\Budford\Users" "(BU)" "GenericRead + GenericWrite"
 	SetOutPath "$AppDataPath\Budford\Users"
 	File "Users\*.*"
 
