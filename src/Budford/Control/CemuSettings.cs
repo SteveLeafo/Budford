@@ -186,6 +186,9 @@ namespace Budford.Control
                 {"1.13.3", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.14.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"1.14.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.15.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.15.1", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
+                {"1.16.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) },
                 {"12.0.0", new Tuple<int[], int[]>(CemuSettingsFiles.Settings1121Bin, v1121Settings) }
             };
 
@@ -243,7 +246,10 @@ namespace Budford.Control
                 {1130, 0xb3 },
                 {1131, 0xb3 },
                 {1140, 0xb3 },
-                {1141, 0xb3 }
+                {1141, 0xb3 },
+                {1150, 0xb3 },
+                {1151, 0xb3 },
+                {1160, 0xb3 },
             };
         }
 
@@ -405,10 +411,12 @@ namespace Budford.Control
                 if (version.Folder != null)
                 {
                     CreateSettingsFile(version);
+                    if (version.VersionNumber < 1150)
+                    {
+                        WriteCemuXmlSettings(version);
+                    }
                 }
             }
-            WriteCemuXmlSettings(version);
-
         }
 
         private void CreateSettingsFile(InstalledVersion version)
@@ -460,10 +468,13 @@ namespace Budford.Control
             {
                 try
                 {
-                    if (model.Settings.UseGraphicPacks)
-                    {
+                  if (version.VersionNumber < 1150)
+                  {
+                     if (model.Settings.UseGraphicPacks)
+                     {
                         WriteGraphicsPacks(version);
-                    }
+                     }
+                   }
                 }
                 catch (Exception ex)
                 {
@@ -473,7 +484,10 @@ namespace Budford.Control
                 try
                 {
                     WriteGameProfile(version.Folder);
-                    WriteSettings(version.Folder);
+                    if (version.VersionNumber < 1150)
+                    {
+                       WriteSettings(version.Folder);
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -135,7 +135,7 @@ namespace Budford.Control
                     FileManager.DeleteShaderCache(runningVersion);
                 }
 
-                if (!getSaveDir)
+                if (!getSaveDir && !modelIn.Settings.Decaf.Enable)
                 {
                     UpdateControllers(runningVersion, game);
 

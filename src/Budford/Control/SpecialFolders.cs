@@ -54,11 +54,18 @@ namespace Budford.Control
             string emulatorFolder = model.Settings.Decaf.Enable ? Path.GetDirectoryName(model.Settings.Decaf.Executable) : version.Folder;
             string mlcFolder = model.Settings.Decaf.Enable ? "mlc" : "mlc01";
 
-            if (version.VersionNumber >= 1110 || model.Settings.Decaf.Enable)
+            if (model.Settings.MlcFolder != string.Empty)
             {
-                return Path.Combine(emulatorFolder, "mlc01", "usr", "save", "00050000", gameId, "user", "common");
+               return Path.Combine(model.Settings.MlcFolder, "usr", "save", "00050000", gameId, "user", "common");
             }
-            return Path.Combine(emulatorFolder, "mlc01", "emulatorSave", game.SaveDir + "_255");
+            else
+            {
+               if (version.VersionNumber >= 1110 || model.Settings.Decaf.Enable)
+               {
+                  return Path.Combine(emulatorFolder, "mlc01", "usr", "save", "00050000", gameId, "user", "common");
+               }
+               return Path.Combine(emulatorFolder, "mlc01", "emulatorSave", game.SaveDir + "_255");
+            }
         }
 
         /// <summary>
@@ -71,14 +78,25 @@ namespace Budford.Control
         {
             string gameId = game.TitleId.Replace("00050000", "");
 
-            string emulatorFolder = model.Settings.Decaf.Enable ? Path.GetDirectoryName(model.Settings.Decaf.Executable) : version.Folder;
-            string mlcFolder = model.Settings.Decaf.Enable ? "mlc" : "mlc01";
-
-            if (version.VersionNumber >= 1110 || model.Settings.Decaf.Enable)
+            if (File.Exists(model.Settings.Decaf.Executable) || model.Settings.MlcFolder != string.Empty)
             {
-                return Path.Combine(emulatorFolder, mlcFolder, "usr", "save", "00050000", gameId, "user", "80000001");
+               string emulatorFolder = model.Settings.Decaf.Enable ? Path.GetDirectoryName(model.Settings.Decaf.Executable) : version.Folder;
+               string mlcFolder = model.Settings.Decaf.Enable ? "mlc" : "mlc01";
+
+               if (model.Settings.MlcFolder != string.Empty)
+               {
+                  return Path.Combine(model.Settings.MlcFolder, "usr", "save", "00050000", gameId, "user", "80000001");
+               }
+               else
+               {
+                  if (version.VersionNumber >= 1110 || model.Settings.Decaf.Enable)
+                  {
+                     return Path.Combine(emulatorFolder, mlcFolder, "usr", "save", "00050000", gameId, "user", "80000001");
+                  }
+               }
+               return Path.Combine(emulatorFolder, "mlc01", "emulatorSave", game.SaveDir);
             }
-            return Path.Combine(emulatorFolder, "mlc01", "emulatorSave", game.SaveDir);
+            return string.Empty;
         }
 
         #endregion

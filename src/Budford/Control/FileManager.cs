@@ -429,17 +429,9 @@ namespace Budford.Control
 
         internal static void OpenSaveFileLocation(Model.Model model, InstalledVersion version)
         {
-            if (version.VersionNumber < 1110)
-            {
-                FileManager.SafeCreateDirectory(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
-                Process.Start(Path.Combine(version.Folder, "mlc01", "emulatorSave", model.GameData[model.CurrentId].SaveDir));
-            }
-            else
-            {
-                string gameId = model.GameData[model.CurrentId].TitleId.Replace("00050000", "");
-                FileManager.SafeCreateDirectory(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
-                Process.Start(Path.Combine(version.Folder, "mlc01", "usr", "save", "00050000", gameId, "user"));
-            }
+           string folder = SpecialFolders.CurrentUserSaveDirCemu(model, version, model.GameData[model.CurrentId]);
+           FileManager.SafeCreateDirectory(folder);
+           Process.Start(folder);
         }
 
         internal static void OpenShaderCacheFolder(Model.Model model, InstalledVersion version)
